@@ -1,0 +1,32 @@
+name: Daily Tender Sync
+
+on:
+  schedule:
+    # Runs at 00:00 UTC (8:00 AM Taipei Time) every day
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Allows pushing the updated data.json back to the repo
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run Crawler Script
+        run: python update_tenders.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git commit -m "Auto-sync daily tenders: $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
+          git push
