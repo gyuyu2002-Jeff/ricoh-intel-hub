@@ -39,41 +39,83 @@
   </script>
 
   <style>
-    /* Custom styling matching premium aesthetics */
+    /* Sage Eye-Care Theme (Option C) Style System Overrides */
+    body, .bg-slate-50 {
+      background-color: #eff3f0 !important; /* Muted sage background */
+    }
+    
+    .bg-slate-100 {
+      background-color: #e2eae4 !important; /* Moss-gray highlight */
+    }
+
     .glass-panel {
-      background: #ffffff;
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      background: #f7faf8;
+      border: 1px solid #cdd8d0;
+      box-shadow: 0 4px 6px -1px rgba(25, 45, 30, 0.03), 0 2px 4px -2px rgba(25, 45, 30, 0.03);
     }
     
     .glass-card {
       background: #ffffff;
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+      border: 1px solid #dbe2dd;
+      box-shadow: 0 1px 3px 0 rgba(25, 45, 30, 0.02), 0 1px 2px -1px rgba(25, 45, 30, 0.02);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .glass-card:hover {
-      background: #ffffff;
-      border-color: rgba(209, 26, 42, 0.4);
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+      background: #fbfcfb;
+      border-color: rgba(209, 26, 42, 0.3);
+      box-shadow: 0 10px 15px -3px rgba(25, 45, 30, 0.05), 0 4px 6px -4px rgba(25, 45, 30, 0.05);
       transform: translateY(-2px);
     }
 
+    /* Muted Forest Green Typography Overrides */
+    .text-slate-900 {
+      color: #1a2f23 !important; /* Deepest forest green */
+    }
+    .text-slate-800 {
+      color: #243e2f !important; /* Deep forest green */
+    }
+    .text-slate-700 {
+      color: #3b5243 !important; /* Dark sage */
+    }
+    .text-slate-650 {
+      color: #405648 !important;
+    }
+    .text-slate-600 {
+      color: #4c6253 !important; /* Muted sage text */
+    }
+    .text-slate-500 {
+      color: #63776a !important; /* Muted slate-green */
+    }
+    .text-slate-400 {
+      color: #7fa08b !important;
+    }
+    .text-slate-300 {
+      color: #9cb1a4 !important;
+    }
+
+    /* Borders */
+    .border-slate-200, .border-slate-200\/80 {
+      border-color: #d2dbd5 !important;
+    }
+    .border-slate-100 {
+      border-color: #e5ece7 !important;
+    }
+    
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: rgba(241, 245, 249, 0.5);
+      background: #eff3f0;
     }
     ::-webkit-scrollbar-thumb {
-      background: rgba(209, 26, 42, 0.2);
+      background: rgba(26, 47, 35, 0.15);
       border-radius: 3px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(209, 26, 42, 0.6);
+      background: rgba(26, 47, 35, 0.35);
     }
 
     /* Print Styles */
