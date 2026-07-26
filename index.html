@@ -253,6 +253,11 @@
 
     <!-- Live clock & dynamic DB update time -->
     <div class="flex items-center gap-6 text-xs text-slate-400 w-full lg:w-auto justify-between lg:justify-end">
+      <!-- Manual Sync Button -->
+      <button onclick="triggerManualSync(event)" class="no-print bg-slate-100 hover:bg-ricoh-red hover:text-white border border-slate-200/80 hover:border-ricoh-red rounded-full px-3 py-1.5 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all shadow-sm">
+        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+        <span>手動更新</span>
+      </button>
       <div class="flex items-center gap-2 bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -1011,6 +1016,50 @@
                       String(now.getSeconds()).padStart(2, '0');
       printTimeSpans.forEach(span => span.textContent = timeStr);
       window.print();
+    }
+
+    // Trigger GitHub Action to update tenders database in real-time
+    function triggerManualSync(event) {
+      let pat = localStorage.getItem('gh_pat');
+      if (!pat) {
+        pat = prompt("【首次更新設定】\n\n為了觸發 GitHub 雲端爬蟲更新，請輸入您的 GitHub 個人存取權杖 (Personal Access Token，具有 repo 與 workflow 權限)：\n\n(此 Token 將安全地儲存於您本地瀏覽器的 LocalStorage 中，不會對外傳送)");
+        if (!pat) return;
+        localStorage.setItem('gh_pat', pat.trim());
+      }
+
+      // Show temporary loading state on button
+      const btn = event.currentTarget || document.activeElement;
+      const originalHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i><span>發送中...</span>`;
+      lucide.createIcons();
+
+      fetch('https://api.github.com/repos/gyuyu2002-Jeff/ricoh-intel-hub/actions/workflows/sync_tenders.yml/dispatches', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'token ' + pat,
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify({ ref: 'main' })
+      })
+      .then(res => {
+        if (res.status === 204) {
+          alert("🎉 雲端即時更新指令發送成功！\n\nGitHub 伺服器正在背景爬取政府電子採購網的最新數據。\n預計 30-40 秒後完成同步，屆時請重新整理此網頁。");
+        } else if (res.status === 401) {
+          localStorage.removeItem('gh_pat');
+          alert("❌ 認證失敗！Token 可能無效或已過期，請重新整理網頁並重新點擊按鈕輸入。");
+        } else {
+          alert("⚠️ 更新發送失敗，錯誤代碼: " + res.status + "\n\n請檢查您的 Token 權限是否包含 repo 與 workflow 範圍。");
+        }
+      })
+      .catch(err => {
+        alert("❌ 連線異常: " + err.message);
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+        lucide.createIcons();
+      });
     }
 
     // Initializer

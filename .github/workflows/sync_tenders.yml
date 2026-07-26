@@ -2,9 +2,9 @@ name: Daily Tender Sync
 
 on:
   schedule:
-    # Runs at 00:00 UTC (8:00 AM Taipei Time) every day
-    - cron: '0 0 * * *'
-  workflow_dispatch: # Allows manual trigger from GitHub UI
+    # Runs every 2 hours
+    - cron: '0 */2 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI / API
 
 jobs:
   sync:
