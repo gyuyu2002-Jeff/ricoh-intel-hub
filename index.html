@@ -1129,6 +1129,13 @@
       filterSelect.addEventListener("change", (e) => {
         renderTenders(e.target.value);
       });
+
+      // 3. Escape Key Modal Closer
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closePatModal();
+        }
+      });
     });
   </script>
   <!-- PAT Guide Modal -->
