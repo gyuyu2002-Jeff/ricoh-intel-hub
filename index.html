@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>互盛 RICOH 戰場情報中樞 (v3.3)</title>
+  <meta name="description" content="專屬互盛 RICOH 業務精英的戰術情報控制台，整合全台標案雷達與即時競業攻防話術庫。">
+  
+  <!-- Google Fonts: Outfit, Inter, Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+            display: ['Outfit', 'Noto Sans TC', 'sans-serif'],
+          },
+          colors: {
+            ricoh: {
+              red: '#D11A2A',
+              hoverRed: '#B01220',
+              darkBg: '#0F172A', /* Slate-900 equivalent */
+              panelBg: '#1E293B', /* Slate-800 equivalent */
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom styling matching premium aesthetics */
+    .glass-panel {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    }
+    
+    .glass-card {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .glass-card:hover {
+      background: #ffffff;
+      border-color: rgba(209, 26, 42, 0.4);
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+      transform: translateY(-2px);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(241, 245, 249, 0.5);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(209, 26, 42, 0.2);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(209, 26, 42, 0.6);
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt !important;
+      }
+      
+      header,
+      #left-panel-sidebar,
+      #brand-selector-sidebar,
+      #brand-tabs-container,
+      .no-print,
+      button,
+      .bg-gradient-to-tr,
+      .bg-gradient-to-bl,
+      footer {
+        display: none !important;
+      }
+      
+      #page-tender-radar,
+      #page-competitor-pitch {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      
+      #left-panel,
+      #right-panel {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+      }
+      
+      #tenders-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        overflow: visible !important;
+        max-height: none !important;
+      }
+      
+      #battle-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .print-confidential {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #D11A2A;
+        padding-bottom: 8px;
+        margin-bottom: 20px;
+      }
+      
+      .print-block {
+        background: #f8fafc !important;
+        color: #0f172a !important;
+        border: 1px solid #e2e8f0 !important;
+        border-left: 5px solid #475569 !important;
+        border-radius: 4px !important;
+        padding: 15px !important;
+        margin-bottom: 18px !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+
+      .print-block-red { border-left-color: #D11A2A !important; }
+      .print-block-amber { border-left-color: #d97706 !important; }
+      .print-block-emerald { border-left-color: #059669 !important; }
+
+      .print-block h3, .print-block h4 {
+        color: #0f172a !important;
+        margin-bottom: 6px !important;
+        font-weight: bold !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen font-sans relative overflow-x-hidden">
+
+  <!-- Glow effects -->
+  <div class="bg-gradient-to-tr from-ricoh-red/5 to-transparent w-[500px] h-[500px] rounded-full blur-[100px] absolute -top-40 -left-40 pointer-events-none z-0"></div>
+  <div class="bg-gradient-to-bl from-emerald-500/5 to-transparent w-[600px] h-[600px] rounded-full blur-[120px] absolute -bottom-40 -right-40 pointer-events-none z-0"></div>
+
+  <!-- Print Only Header -->
+  <div class="hidden print-confidential w-full">
+    <div>
+      <h1 class="text-2xl font-bold text-slate-900 font-display">互盛 RICOH 各廠牌業務應對重點卡</h1>
+      <p class="text-xs text-slate-500 mt-1">業務現場實戰對戰指南 • 互盛機密請勿外流</p>
+    </div>
+    <div class="text-right">
+      <span class="text-xs text-slate-500">列印時間: <span class="print-time-stamp"></span></span>
+    </div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-ricoh-red px-6 py-4 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-4 shadow-lg z-10">
+    <div class="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-start">
+      <div class="flex items-center gap-3">
+        <!-- RICOH Logo Mark -->
+        <div class="w-10 h-10 bg-ricoh-red flex items-center justify-center rounded-lg shadow-md shadow-ricoh-red/20">
+          <span class="font-display font-black text-xl text-white tracking-tighter">R</span>
+        </div>
+        <div>
+          <h1 class="font-display font-extrabold text-lg sm:text-xl tracking-wider text-slate-900 flex items-center gap-2">
+            互盛 RICOH <span class="text-xs font-semibold bg-red-600/10 border border-red-500/20 text-ricoh-red px-2.5 py-0.5 rounded-full">戰場情報中樞 (v3.3)</span>
+          </h1>
+          <p class="text-[10px] text-slate-500 font-semibold tracking-widest mt-0.5">TACTICAL INTELLIGENCE COMMAND CONSOLE</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs (Page SPA Switcher) -->
+    <div class="no-print flex bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1 my-2 lg:my-0 w-full sm:w-auto justify-center">
+      <button onclick="navigateToPage('radar')" id="nav-radar" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-ricoh-red text-white shadow-md shadow-ricoh-red/20">
+        <i data-lucide="radar" class="w-4 h-4"></i>
+        <span>📊 標案情報監控雷達</span>
+      </button>
+      <button onclick="navigateToPage('pitch')" id="nav-pitch" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-800">
+        <i data-lucide="shield-alert" class="w-4 h-4"></i>
+        <span>🎯 各廠牌產品與市場資訊</span>
+      </button>
+    </div>
+
+    <!-- Live clock & dynamic DB update time -->
+    <div class="flex items-center gap-6 text-xs text-slate-400 w-full lg:w-auto justify-between lg:justify-end">
+      <div class="flex items-center gap-2 bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span class="font-medium text-emerald-400 font-mono">LIVE 連線正常</span>
+      </div>
+      <div class="flex items-center gap-2 font-mono bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5">
+        <i data-lucide="clock" class="w-3.5 h-3.5 text-ricoh-red"></i>
+        <span>情報發布時間: </span>
+        <span id="data-updated-time" class="text-slate-700">----- --:--</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <main class="max-w-7xl mx-auto px-4 py-8 relative z-10">
+
+    <!-- Page 1: 標案情報監控雷達 -->
+    <div id="page-tender-radar" class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
+      <!-- Left Sidebar: Filters (佔比 3 欄) -->
+      <section id="left-panel-sidebar" class="lg:col-span-3 flex flex-col gap-6">
+        <div class="glass-panel rounded-2xl p-6 shadow-2xl flex flex-col gap-6">
+          <div class="flex items-start gap-3 border-b border-slate-200 pb-5">
+            <div class="p-2 bg-red-600/10 rounded-lg text-ricoh-red mt-0.5">
+              <i data-lucide="radar" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">標案雷達</h2>
+              <p class="text-xs text-slate-400 mt-0.5">動態監控全台事務機招標案件</p>
+            </div>
+          </div>
+
+          <!-- County Selector -->
+          <div id="city-filter-container">
+            <label for="city-filter" class="block text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1.5">選擇過濾區域</label>
+            <div class="relative">
+              <select id="city-filter" class="w-full bg-white border border-slate-200 text-slate-700 rounded-xl pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ricoh-red focus:border-transparent transition-all cursor-pointer appearance-none">
+                <option value="all">全台灣 (顯示所有標案)</option>
+                <option value="台北市">台北市</option>
+                <option value="新北市">新北市</option>
+                <option value="桃園市">桃園市</option>
+                <option value="台中市">台中市</option>
+                <option value="台南市">台南市</option>
+                <option value="高雄市">高雄市</option>
+                <option value="基隆市">基隆市</option>
+                <option value="新竹市">新竹市</option>
+                <option value="嘉義市">嘉義市</option>
+                <option value="新竹縣">新竹縣</option>
+                <option value="苗栗縣">苗栗縣</option>
+                <option value="彰化縣">彰化縣</option>
+                <option value="南投縣">南投縣</option>
+                <option value="雲林縣">雲林縣</option>
+                <option value="嘉義縣">嘉義縣</option>
+                <option value="屏東縣">屏東縣</option>
+                <option value="宜蘭縣">宜蘭縣</option>
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="台東縣">台東縣</option>
+                <option value="澎湖縣">澎湖縣</option>
+                <option value="金門縣">金門縣</option>
+                <option value="連江縣">連江縣</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Radar Status & Tenders Count -->
+          <div class="flex flex-col gap-2.5 text-xs bg-slate-50 rounded-xl p-4 border border-slate-200/80">
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">雷達狀態：</span>
+              <span class="text-emerald-400 font-semibold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>連線監控中</span>
+            </div>
+            <div class="h-px bg-slate-200/60 my-1"></div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">進行中標案：</span>
+              <span id="tenders-count" class="text-slate-800 font-extrabold">資料載入中...</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Main: Tenders cards (佔比 9 欄) -->
+      <section id="left-panel" class="lg:col-span-9 flex flex-col gap-6">
+        <div id="tenders-container" class="flex flex-col gap-6 max-h-[850px] overflow-y-auto pr-1">
+          <!-- Dynamic cards injected here -->
+        </div>
+      </section>
+    </div>
+
+    <!-- Page 2: 各廠牌業務應對重點 -->
+    <div id="page-competitor-pitch" class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full hidden">
+      <!-- Left Sidebar: Brand Selection (佔比 3 欄) -->
+      <section id="brand-selector-sidebar" class="lg:col-span-3 flex flex-col gap-6">
+        <div class="glass-panel rounded-2xl p-6 shadow-2xl flex flex-col gap-6">
+          <div class="flex items-start gap-3 border-b border-slate-200 pb-5">
+            <div class="p-2 bg-red-600/10 rounded-lg text-ricoh-red mt-0.5">
+              <i data-lucide="shield-alert" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h2 class="text-lg font-bold text-white">應對重點</h2>
+              <p class="text-xs text-slate-400 mt-0.5">解構競對品牌主力機型與市場新聞</p>
+            </div>
+          </div>
+
+          <!-- Brand selector list -->
+          <div id="brand-tabs-container" class="flex flex-col gap-2">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">選擇競對品牌</span>
+            <div class="flex flex-col gap-2">
+              <button onclick="switchBrand('FUJIFILM')" id="tab-FUJIFILM" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
+                <span>FUJIFILM</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="switchBrand('Canon')" id="tab-Canon" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
+                <span>Canon</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="switchBrand('Konica Minolta')" id="tab-KonicaMinolta" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
+                <span>Konica M.</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="switchBrand('SHARP')" id="tab-SHARP" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
+                <span>SHARP</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="switchBrand('Kyocera')" id="tab-Kyocera" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
+                <span>Kyocera</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="switchBrand('Epson')" id="tab-Epson" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
+                <span>Epson</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="switchBrand('HP')" id="tab-HP" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
+                <span>HP</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="switchBrand('Brother')" id="tab-Brother" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
+                <span>Brother</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="switchBrand('其他廠牌')" id="tab-Other" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
+                <span>其他廠牌</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Main: Strategy Details Card (佔比 9 欄) -->
+      <section id="right-panel" class="lg:col-span-9 flex flex-col gap-6">
+        <div class="glass-panel rounded-2xl p-6 shadow-2xl flex flex-col gap-6">
+          <div id="battle-card" class="bg-white rounded-xl p-5 border border-slate-200/80 flex flex-col gap-6 relative">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-ricoh-red animate-pulse"></span>
+                <span id="active-brand-title" class="font-display font-extrabold text-base text-slate-800 tracking-wider">載入中...</span>
+              </div>
+              <button onclick="printBattleCard()" class="no-print bg-slate-50 hover:bg-ricoh-red border border-slate-200 hover:border-ricoh-red text-slate-600 hover:text-white rounded-lg px-3 py-1.5 text-xs font-semibold flex items-center gap-1.5 transition-all shadow-md">
+                <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                一鍵列印資訊卡
+              </button>
+            </div>
+
+            <!-- Two Column Grid for News and Specs -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              
+              <!-- Column 1: News (佔比 5 欄) -->
+              <div class="lg:col-span-5 flex flex-col gap-4">
+                <div class="flex items-center gap-2 text-slate-800 border-b border-slate-100 pb-2">
+                  <i data-lucide="newspaper" class="w-4 h-4 text-ricoh-red"></i>
+                  <h3 class="text-xs uppercase font-extrabold tracking-wider">品牌市場與資安動態 (News)</h3>
+                </div>
+                <div id="brand-news-container" class="flex flex-col gap-3.5">
+                  <!-- Dynamically populated news cards -->
+                </div>
+              </div>
+
+              <!-- Column 2: Specs & Comparison (佔比 7 欄) -->
+              <div class="lg:col-span-7 flex flex-col gap-4">
+                <div class="flex items-center gap-2 text-slate-800 border-b border-slate-100 pb-2">
+                  <i data-lucide="cpu" class="w-4 h-4 text-emerald-600"></i>
+                  <h3 class="text-xs uppercase font-extrabold tracking-wider">主力機種與規格剖析 (Product Specs)</h3>
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                  <!-- Match Card: Recommended RICOH machine -->
+                  <div class="bg-emerald-50 border border-emerald-200/60 rounded-xl p-4 flex items-center justify-between shadow-sm">
+                    <div>
+                      <span class="text-[9px] uppercase font-bold tracking-wider text-emerald-700 block">互盛推薦對標機型</span>
+                      <span id="ricoh-match-model" class="text-sm font-extrabold text-emerald-900 mt-1 block">---</span>
+                    </div>
+                    <span class="bg-emerald-500 text-white font-extrabold text-[10px] px-3 py-1 rounded-full uppercase shadow-sm">推薦機種</span>
+                  </div>
+
+                  <!-- Table Grid -->
+                  <div class="flex flex-col gap-3 text-xs bg-slate-50 border border-slate-200/80 rounded-xl p-4">
+                    <div class="flex flex-col gap-1 border-b border-slate-200 pb-2">
+                      <span class="text-[9px] uppercase font-bold tracking-wider text-slate-400">主力競對機型</span>
+                      <span id="competitor-models" class="text-slate-800 font-bold">---</span>
+                    </div>
+                    
+                    <div class="flex flex-col gap-1 border-b border-slate-200 pb-2">
+                      <span class="text-[9px] uppercase font-bold tracking-wider text-slate-400">核心規格參數</span>
+                      <span id="product-specs" class="text-slate-700 leading-relaxed font-medium">---</span>
+                    </div>
+                    
+                    <div class="flex flex-col gap-1.5 border-b border-slate-200 pb-2">
+                      <span class="text-[9px] uppercase font-bold tracking-wider text-emerald-700 font-semibold">產品競爭優勢 (Strengths)</span>
+                      <ul id="product-strengths" class="text-slate-700 leading-relaxed font-medium list-disc pl-4 space-y-1.5">
+                        <!-- Dynamically populated strengths -->
+                      </ul>
+                    </div>
+                    
+                    <div class="flex flex-col gap-1.5">
+                      <span class="text-[9px] uppercase font-bold tracking-wider text-red-700 font-semibold">產品競爭劣勢 (Weaknesses)</span>
+                      <ul id="product-weaknesses" class="text-slate-700 leading-relaxed font-medium list-disc pl-4 space-y-1.5">
+                        <!-- Dynamically populated weaknesses -->
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="no-print border-t border-slate-200 bg-slate-100 py-8 text-center text-xs text-slate-500 font-sans mt-12 flex flex-col gap-1.5 justify-center items-center">
+    <p class="font-semibold text-slate-600">網站資訊僅供評估參考，投標前請以政府電子採購網公告為準。</p>
+    <p class="text-slate-400 font-mono text-[10px]">製作 - 漢君 Antigravity</p>
+  </footer>
+
+  <script>
+    // System Data State
+    let tendersData = [];
+    let currentFilteredTenders = [];
+    let selectedBrand = "FUJIFILM";
+
+    // Brand News and Specs Database - Curated copier market data in Taiwan
+    const brandDatabase = {
+      "FUJIFILM": {
+        title: "FUJIFILM (富士軟片資訊)",
+        news: [
+          {
+            title: "富士軟片資訊發布 A3 複合機安全韌體更新以修補重要漏洞",
+            date: "2026-06-15",
+            source: "IT資安通報",
+            brief: "針對近期發現的網路通訊埠緩衝區溢位弱點，原廠釋出最新安全性韌體補丁，強烈建議企業IT管理員儘速排程更新以防範勒索軟體攻擊。"
+          },
+          {
+            title: "台灣富士軟片加強推廣雲端智慧辦公室與 Apeos 整合解決方案",
+            date: "2026-04-10",
+            source: "經濟日報",
+            brief: "因應混合辦公趨勢，富士展示全新 Apeos 雲端連結服務，主打免建伺服器即時完成行動列印與無紙化電子歸檔整合流程。"
+          }
+        ],
+        product: {
+          main_models: "Apeos C3070 / C3570 / C4570 系列 (彩色 A3 複合機)",
+          key_specs: "真實列印解析度 1200 x 2400 dpi，配備 LED 曝光印字頭，掃描速度最高達 270 ipm (雙面同步)，搭載 10.1 吋智慧操作面板。",
+          strengths: "<li><strong>影像色彩品質優異：</strong>高解析度與色彩鮮明度在業界享有極高口碑，適合設計業與精緻文件印刷。</li><li><strong>市佔率優勢：</strong>於中大型企業與公務機關裝機量大，使用者對介面習慣度高。</li>",
+          weaknesses: "<li><strong>系統整合授權費用高：</strong>原廠面板 App 生態系較封閉，若需與企業 AD / OneDrive 等進行深度雲端對接，通常需額外加購昂貴的中介軟體授權。</li><li><strong>PS3 列印標準配備不齊：</strong>標案機型常僅提供 PCL 相機模擬，向量 PDF 與 CAD 圖檔列印易出錯，Genuine Adobe PS3 多列為高價選配件。</li>",
+          ricoh_match: "RICOH IM C2510 / C3010 / C4510"
+        }
+      },
+      "Canon": {
+        title: "Canon (台灣佳能)",
+        news: [
+          {
+            title: "Canon 商用影印機供應鏈受阻，亞太區多功能事務機出貨週期延長",
+            date: "2026-05-22",
+            source: "電子時報",
+            brief: "受關鍵控制晶片缺料影響，台灣佳能發布公告調整部分 imageRUNNER ADVANCE 系列機種的交期，影響合約客戶更換進度。"
+          },
+          {
+            title: "台灣佳能攜手系統整合商推廣 imageRUNNER DX 智慧防護功能",
+            date: "2026-03-08",
+            source: "科技新報",
+            brief: "強調與 McAfee 合作內建系統開機引導保護 (Sure Start 同級功能)，保障文件輸出時不會成為網路資安駭客跳板。"
+          }
+        ],
+        product: {
+          main_models: "imageRUNNER ADVANCE DX C3930i / C5840i 系列",
+          key_specs: "真實解析度 1200 x 1200 dpi，雙核處理器，最高掃描速度 270 ipm，配備高耐久聚合物進紙道滾輪。",
+          strengths: "<li><strong>單機採購預算低：</strong>硬體價格親民，標案與短期租賃月租報價極具價格優勢。</li><li><strong>雙面同步掃描速度快：</strong>DX 高階機種標配高速雙面同步進紙器，掃描性能佳。</li>",
+          weaknesses: "<li><strong>售後服務通路依賴經銷商：</strong>在非都會區多無直營維修站，委外代理商維護之效率與零配件備料狀況易有起伏。</li><li><strong>機身防潮性能較弱：</strong>機紙道彎角弧度較陡，在台灣潮濕氣候下，若使用吸濕紙張，其卡紙率相較理光等日系平直紙道機種明顯偏高。</li>",
+          ricoh_match: "RICOH IM C3010 / C4510"
+        }
+      },
+      "Konica Minolta": {
+        title: "Konica Minolta (金儀)",
+        news: [
+          {
+            title: "金儀發表全新 bizhub i 系列彩色多功能影印機搶攻中小企業",
+            date: "2026-06-01",
+            source: "商工時報",
+            brief: "主打全新 UI 操作體驗、高安全性 SSD 硬碟與高階防毒引擎，並積極整合遠端抄表系統提供智慧合約維護服務。"
+          },
+          {
+            title: "Konica Minolta 於歐洲推動智能辦公遠端維護系統升級",
+            date: "2026-02-18",
+            source: "全球科技日報",
+            brief: "原廠升級物聯網維修系統，可主動預測碳粉與感光鼓壽命，大幅減少客戶叫修停機時間。"
+          }
+        ],
+        product: {
+          main_models: "bizhub C250i / C300i / C360i (彩色 A3 複合機)",
+          key_specs: "10.1 吋懸浮操作面板，真實 1200 dpi 列印，內建 MicroSD / SSD 加密硬碟，支援防毒軟體擴充。",
+          strengths: "<li><strong>操作介面反應流暢：</strong>新一代 i 系列面板作業系統改版，滑動觸控體驗好，IT 設定選項豐富。</li><li><strong>基本單機成本較低：</strong>與代理商金儀的價格彈性高，在一般商務辦公租賃案中殺價力道強。</li>",
+          weaknesses: "<li><strong>掃描 PDF 壓縮率較低：</strong>缺乏專利高壓縮引擎，產生的彩色掃描 PDF 檔案體積偏大，易佔用電子郵件頻寬與伺服器硬碟容量。</li><li><strong>面板操作選單較為繁瑣：</strong>功能選單層級較多，一般同仁初次上手需要較長適應期。</li>",
+          ricoh_match: "RICOH IM C2510 / C3010 / C3510"
+        }
+      },
+      "SHARP": {
+        title: "SHARP (震旦行)",
+        news: [
+          {
+            title: "震旦行獨家代理引進 SHARP BP-70C 系列高效彩機",
+            date: "2026-07-02",
+            source: "工商時報",
+            brief: "新一代 BP 系列主打極簡外觀、大字體面板與高產能。配備接近式傳感器，人走近即自動從休眠喚醒以節省等待時間。"
+          },
+          {
+            title: "SHARP 多功能複合機系列榮獲 Buyers Lab (BLI) 年度傑出大獎",
+            date: "2026-03-12",
+            source: "印表機專業評測網",
+            brief: "BP-70C 系列在可靠性、列印速度與雲端應用相容性上獲得國際評測機構高度推薦。"
+          }
+        ],
+        product: {
+          main_models: "SHARP BP-70C31 / BP-70C36 / BP-70C45 系列",
+          key_specs: "真實 1200 dpi，標配無邊框滿版列印，內建人體接近感應器，最高列印速度 45 ppm，支援微軟雲端對接。",
+          strengths: "<li><strong>大字體與直覺面板：</strong>夏普面板字體大且支援圖示自訂，年長員工或一般公務員使用習慣度極佳。</li><li><strong>服務網點綿密：</strong>由震旦行全台直營維護，中南部鄉鎮網點覆蓋率高。</li>",
+          weaknesses: "<li><strong>定影構造防潮力較弱：</strong>進紙路徑在定影器前彎折度高，若遇到台灣冬季受潮紙張，卡紙頻率較高，需要常備乾燥箱。</li><li><strong>韌體改版適應慢：</strong>針對 Windows 11 或 macOS 的系統重大更新，驅動與原廠軟體修正發布時程較慢。</li>",
+          ricoh_match: "RICOH IM C3010 / C3510 / C4510"
+        }
+      },
+      "Kyocera": {
+        title: "Kyocera (台灣京瓷)",
+        news: [
+          {
+            title: "台灣京瓷宣示於南部科學園區設立直營高產能設備展示中心",
+            date: "2026-05-15",
+            source: "自由時報",
+            brief: "京瓷引進高階 TASKalfa 系列，強調以超長壽命非晶矽 (a-Si) 感光鼓大幅減少企業電子廢棄物，吸引高印量傳產業客戶。"
+          },
+          {
+            title: "Kyocera 發表全新碳平衡節能黑白/彩色複合機搶占 ESG 市場",
+            date: "2026-01-20",
+            source: "綠色科技論壇",
+            brief: "京瓷複合機透過低溫熔化碳粉與超低待機功耗，協助中小企業完成減碳政策目標。"
+          }
+        ],
+        product: {
+          main_models: "TASKalfa 2554ci / 3554ci / 4054ci 系列",
+          key_specs: "標配 30 萬張非晶矽感光鼓，極速回溫技術，真實 1200 dpi，內建高效防夾進紙偵測傳感器。",
+          strengths: "<li><strong>耗材使用壽命極長：</strong>感光鼓與主要齒輪折舊週期長，在長合約租賃期內能維持較低的耗材更換頻率。</li><li><strong>印量承載力強：</strong>適合工廠、營造業等大印量、高粉塵的惡劣辦公環境。</li>",
+          weaknesses: "<li><strong>感光鼓人為損壞排除困難：</strong>原廠陶瓷鼓單價極高，合約多註明『人為刮傷（如複印夾帶訂書針）需客戶自費數萬元更換』，造成客戶非預期成本增加。</li><li><strong>彩色成色層次單薄：</strong>採用硬質節能碳粉，彩色圖表與相片列印易出現條紋或成色偏乾蒼白。</li>",
+          ricoh_match: "RICOH IM C2510 / C3010 / C4510"
+        }
+      },
+      "Epson": {
+        title: "Epson (台灣愛普生)",
+        news: [
+          {
+            title: "Epson 宣示於 2026 年底前全球全面終止雷射印表機研發",
+            date: "2026-06-25",
+            source: "日經新聞",
+            brief: "愛普生宣布退出雷射影印機市場，未來重心 100% 移轉至 Heat-Free 免加熱微噴墨影印機，宣稱可減少 85% 電能消耗與碳足跡。"
+          },
+          {
+            title: "台灣愛普生協助台積電供應鏈廠商導入免加熱影印機落實 ESG",
+            date: "2026-04-12",
+            source: "科技人",
+            brief: "噴墨技術無粉塵且省電，符合各大高科技半導體廠區無塵室或辦公室之嚴格空氣品質與節能規章。"
+          }
+        ],
+        product: {
+          main_models: "WorkForce Enterprise AM-C3000 / AM-C4000 (免加熱噴墨複合機)",
+          key_specs: "微壓電噴墨技術，最高列印速度 40 ppm，運行功耗低於 190W，免加熱冷印技術。",
+          strengths: "<li><strong>極低運行用電量：</strong>免加熱技術運行耗電極低，可直接協助企業申報範疇二減碳。</li><li><strong>內部耗材件極少：</strong>無加熱器、無轉寫帶，碳粉粉塵污染為零，運轉安靜。</li>",
+          weaknesses: "<li><strong>噴嘴阻塞維護率高：</strong>若遇長假或冷氣房高蒸發環境，墨水易乾涸造成噴嘴阻塞，清洗噴頭耗費大量墨水且影響列印進度。</li><li><strong>字跡防水性不佳：</strong>水分或酒精潑灑時墨水仍易暈開，無法滿足公務機關或金融合約『公文歸檔保存 30-50 年』之法律標準。</li>",
+          ricoh_match: "RICOH IM C3010 / C4510"
+        }
+      },
+      "HP": {
+        title: "HP (惠普)",
+        news: [
+          {
+            title: "HP 商用印表機內建 Wolf Security 通過國防級滲透測試",
+            date: "2026-07-10",
+            source: "資安日報",
+            brief: "HP 發表最新印表機韌體自我修復技術，當設備主機板遭竄改時可自動載入乾淨 Golden Copy，保障內網安全。"
+          },
+          {
+            title: "惠普調整亞太區 A3 複合機分銷策略，聚焦 IT 代理商通路",
+            date: "2026-03-15",
+            source: "3C通路週刊",
+            brief: "HP 強化與大聯大等通路商合作，在台灣市場主推 IT 系統整合商搭售影印機租賃，將列印設備納入 IT 管理服務中。"
+          }
+        ],
+        product: {
+          main_models: "Color LaserJet Managed MFP E78630 / E87740 系列",
+          key_specs: "HP Wolf Security 防禦晶片，三星 A3 貼牌引擎架構，高容量智慧粉匣，最高速度 40 ppm。",
+          strengths: "<li><strong>資安防護規格完整：</strong> Sure Start、TPM 晶片與韌體動態檢測功能在 IT 評分中常拿高分。</li><li><strong>IT 整合管理便利：</strong>HP Web Jetadmin 提供大規模印表機群組控管，適合跨國企業 IT 總部集中控管。</li>",
+          weaknesses: "<li><strong>售後實體叫修委外：</strong>售後多委任 IT 電腦維修經銷商，無專職影印機直營服務體系，工程師硬體維修經驗參差不齊。</li><li><strong>機械結構大量採用塑料：</strong>三星引擎平台大量使用輕型塑料件與塑料齒輪，長期大印量使用折舊快、異音發生率高。</li>",
+          ricoh_match: "RICOH IM C3010 / C4510"
+        }
+      },
+      "Brother": {
+        title: "Brother (台灣兄弟)",
+        news: [
+          {
+            title: "Brother 在台發表全新商用彩色桌上型複合機系列",
+            date: "2026-06-20",
+            source: "壹科技",
+            brief: "主打體積精巧、每分鐘 30 頁高速彩色輸出，鎖定中小企業分處與 SOHO 工作室租賃市場。"
+          },
+          {
+            title: "日本兄弟工業宣布加強東南亞與台灣租賃包月耗材整合銷售",
+            date: "2026-02-28",
+            source: "日經流通新聞",
+            brief: "以「耗材訂閱制」結合智慧管理，當客戶剩餘碳粉低於 20% 時自動將新碳粉配送至辦公室。"
+          }
+        ],
+        product: {
+          main_models: "MFC-L8390CDW / MFC-L9630CDN 系列 (A4 桌上型複合機)",
+          key_specs: "桌上型 footprint，最高列印速度 40 ppm，高容量碳粉匣，內建 Wi-Fi 6 與安全鎖定功能。",
+          strengths: "<li><strong>體積小巧不佔空間：</strong>適合寸土寸金的小型處室或櫃檯旁，價格極具優勢。</li><li><strong>安裝設定簡單：</strong>支援全面 Wi-Fi 連結，員工自行操作安裝驅動便利性極高。</li>",
+          weaknesses: "<li><strong>單張列印成本 (張費) 昂貴：</strong>A4 小型機因碳粉匣容量小，單張碳粉成本是 A3 大型複合機的 3 倍以上，印量稍大即會使開支暴增。</li><li><strong>無法列印 A3 且無後端裝訂：</strong>無法列印公文標準 A3 尺寸，且不支援自動釘針、摺頁、打孔等商務印後作業。</li>",
+          ricoh_match: "RICOH IM C2010 (A3) / IM 350F (A4)"
+        }
+      },
+      "其他廠牌": {
+        title: "其他副廠 / 二手機品牌",
+        news: [
+          {
+            title: "消基會抽查副廠碳粉釋放苯與甲苯，警告危害辦公同仁健康",
+            date: "2026-07-05",
+            source: "消費者日報",
+            brief: "市售廉價拼裝機所使用的非原廠碳粉高溫定影時易釋放有害氣體與超細微粉塵，呼籲企業採購認證之環保無毒耗材。"
+          },
+          {
+            title: "台灣中古影印機資安外洩通報，退租硬碟未清理風險高",
+            date: "2026-04-18",
+            source: "國家資安會報",
+            brief: "二手機商回收舊型機台常無硬體銷毀流程，導致舊機內藏的企業機密公文、個資直接流入二手市場造成外洩。"
+          }
+        ],
+        product: {
+          main_models: "二手機 (如舊型 Fuji Xerox IV / V 系列) 或白牌拼裝設備",
+          key_specs: "規格老舊且零散，通常使用舊型主機板，缺乏最新安全加密協定，無原廠安全防禦補丁。",
+          strengths: "<li><strong>極其低廉的租金：</strong>以二手機拼裝，機器折舊已近零，月租甚至低於 1,000 元。</li><li><strong>適合短期工地使用：</strong>毀損亦無大礙，適合臨時工寮或短期活動使用。</li>",
+          weaknesses: "<li><strong>網路資安跳板漏洞：</strong>晶片無安全認證，韌體長年停止更新，極易成為勒索軟體入侵內網的後門。</li><li><strong>零配件停產斷料：</strong>非原廠供應鏈，故障叫修時常面臨無零件可換或長時間停機，長期運作成本極高。</li>",
+          ricoh_match: "RICOH IM C2510 (全新機租賃保障)"
+        }
+      }
+    };
+
+    // SPA Navigation Router
+    function navigateToPage(pageId) {
+      const radarPage = document.getElementById("page-tender-radar");
+      const pitchPage = document.getElementById("page-competitor-pitch");
+      const navRadar = document.getElementById("nav-radar");
+      const navPitch = document.getElementById("nav-pitch");
+
+      if (pageId === 'radar') {
+        radarPage.classList.remove("hidden");
+        pitchPage.classList.add("hidden");
+        
+        navRadar.className = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-ricoh-red text-white shadow-md shadow-ricoh-red/20";
+        navPitch.className = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200/60";
+      } else {
+        radarPage.classList.add("hidden");
+        pitchPage.classList.remove("hidden");
+        
+        navRadar.className = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200/60";
+        navPitch.className = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-ricoh-red text-white shadow-md shadow-ricoh-red/20";
+      }
+      
+      // Re-initialize Lucide Icons for dynamic content
+      lucide.createIcons();
+    }
+
+    // Switch active competitor brand card
+    function switchBrand(brandName) {
+      selectedBrand = brandName;
+      
+      // Update Active Tab Button Styles
+      document.querySelectorAll('.brand-tab').forEach(tab => {
+        tab.classList.remove('bg-ricoh-red', 'text-white', 'border-ricoh-red', 'shadow-md', 'shadow-ricoh-red/20');
+        tab.classList.add('bg-white', 'text-slate-600', 'border-slate-200', 'hover:bg-slate-50', 'hover:text-slate-800', 'hover:border-slate-300');
+      });
+
+      // Map dynamic IDs
+      const mappedId = brandName === "Konica Minolta" ? "KonicaMinolta" : brandName === "其他廠牌" ? "Other" : brandName;
+      const activeTab = document.getElementById(`tab-${mappedId}`);
+      if (activeTab) {
+        activeTab.classList.remove('bg-white', 'text-slate-600', 'border-slate-200', 'hover:bg-slate-50', 'hover:text-slate-800', 'hover:border-slate-300');
+        activeTab.classList.add('bg-ricoh-red', 'text-white', 'border-ricoh-red', 'shadow-md', 'shadow-ricoh-red/20');
+      }
+
+      // Populate Strategy Card Content
+      const data = brandDatabase[brandName];
+      if (data) {
+        document.getElementById("active-brand-title").textContent = data.title;
+        
+        // Render News
+        const newsContainer = document.getElementById("brand-news-container");
+        newsContainer.innerHTML = "";
+        data.news.forEach(n => {
+          const newsCard = document.createElement("div");
+          newsCard.className = "bg-slate-50 border border-slate-200/60 rounded-xl p-3.5 flex flex-col gap-1.5 shadow-sm";
+          newsCard.innerHTML = `
+            <div class="flex items-center justify-between gap-2 text-[9px] font-mono text-slate-400">
+              <span class="bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded leading-none font-bold">${n.source}</span>
+              <span>${n.date}</span>
+            </div>
+            <h4 class="text-xs font-bold text-slate-800 leading-snug">${n.title}</h4>
+            <p class="text-[10.5px] text-slate-500 leading-relaxed font-medium">${n.brief}</p>
+          `;
+          newsContainer.appendChild(newsCard);
+        });
+
+        // Render Specs & Match
+        document.getElementById("ricoh-match-model").textContent = data.product.ricoh_match;
+        document.getElementById("competitor-models").textContent = data.product.main_models;
+        document.getElementById("product-specs").textContent = data.product.key_specs;
+        
+        // Render Strengths & Weaknesses lists
+        document.getElementById("product-strengths").innerHTML = data.product.strengths;
+        document.getElementById("product-weaknesses").innerHTML = data.product.weaknesses;
+      }
+      
+      lucide.createIcons();
+    }
+
+    // Render Tenders List Based on City Filter
+    function renderTenders(city) {
+      const container = document.getElementById("tenders-container");
+      container.innerHTML = "";
+
+      if (city === "all") {
+        currentFilteredTenders = tendersData;
+      } else {
+        currentFilteredTenders = tendersData.filter(t => t.city === city);
+      }
+
+      // Update Tenders Counter UI
+      const countEl = document.getElementById("tenders-count");
+      countEl.textContent = `偵測到 ${currentFilteredTenders.length} 筆進行中招標案件`;
+
+      // Check Empty State
+      if (currentFilteredTenders.length === 0) {
+        container.innerHTML = `
+          <div class="flex flex-col items-center justify-center text-center py-16 px-4 bg-slate-950/20 border border-dashed border-slate-800 rounded-xl">
+            <div class="p-4 bg-slate-900 rounded-full text-slate-600 mb-4 animate-pulse">
+              <i data-lucide="inbox" class="w-10 h-10"></i>
+            </div>
+            <h3 class="text-sm font-bold text-slate-300">該縣市目前無進行中之招標案件</h3>
+            <p class="text-xs text-slate-500 max-w-sm mt-2 leading-relaxed font-light">
+              「${city}」此區域查無標案記錄。您可以選取其他行政區，或切換至「全台灣」以宏觀掌握情報。
+            </p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      // Build Tender Cards
+      currentFilteredTenders.forEach(t => {
+        const card = document.createElement("div");
+        card.className = "glass-card rounded-xl p-5 shadow-sm hover:shadow-md border border-slate-200/80 flex flex-col gap-4";
+
+        // Generate History Stats Bars
+        // Since values are percentages (e.g. 98, 97, etc.), let's scale the heights nicely so they look proportionate in an 80px container
+        const historyHtml = t.history_stats.map(item => {
+          const isReal = item.type === "real";
+          const barBg = isReal 
+            ? "bg-emerald-500/40 border-emerald-500/30 group-hover:bg-emerald-500 group-hover:border-emerald-400" 
+            : "bg-slate-300/30 border-slate-300/40 border-dashed group-hover:bg-slate-400/40 group-hover:border-slate-400";
+          
+          // Calculate scaled height for visual contrast (range 70% to 100%)
+          const heightPercent = Math.max(10, Math.min(100, (item.val - 70) * 3.3));
+          const barStyle = `height: ${heightPercent}%`;
+          
+          // Format winner name to be shorter (e.g. "本公司" or "佳能" or "SHARP")
+          let shortWinner = item.winner || "";
+          if (shortWinner.includes("互盛")) shortWinner = "互盛 RICOH";
+          else if (shortWinner.includes("富士")) shortWinner = "富士";
+          else if (shortWinner.includes("佳能")) shortWinner = "佳能";
+          else if (shortWinner.includes("金儀")) shortWinner = "金儀";
+          else if (shortWinner.includes("震旦")) shortWinner = "震旦";
+          else if (shortWinner.includes("愛普生")) shortWinner = "Epson";
+          else if (shortWinner.includes("京瓷")) shortWinner = "京瓷";
+          else if (shortWinner.includes("市場")) shortWinner = "市場均價";
+          else if (shortWinner.length > 6) shortWinner = shortWinner.substring(0, 5) + "..";
+
+          const badgeClass = isReal 
+            ? "bg-emerald-50 text-emerald-700 border-emerald-200/60 font-semibold" 
+            : "bg-slate-50 text-slate-400 border-slate-200/40";
+
+          return `
+            <div class="flex flex-col items-center flex-1 h-full group pt-5 justify-end relative">
+              <!-- Bar Container (Explicit height context) -->
+              <div class="w-8 h-12 flex items-end justify-center relative">
+                <!-- Direct Value Label Above Bar -->
+                <span class="absolute -top-4 text-[9px] font-bold text-slate-700 font-mono tracking-tighter">${item.val}%</span>
+                
+                <!-- Bar -->
+                <div class="w-full border transition-all rounded-t-sm duration-300 ${barBg}" style="${barStyle}"></div>
+              </div>
+              
+              <!-- Year Label -->
+              <span class="text-[9px] text-slate-500 mt-1 font-mono leading-none">${item.year}</span>
+              
+              <!-- Winner / Market Info Tag -->
+              <span class="text-[8px] border rounded px-1 mt-1 leading-none font-sans whitespace-nowrap overflow-hidden text-ellipsis max-w-[80px] text-center ${badgeClass}" title="${item.winner}">
+                ${shortWinner}
+              </span>
+            </div>
+          `;
+        }).join('');
+
+        const tagClass = t.tag === "重點攻堅"
+          ? "bg-red-50 border-red-200 text-red-700 font-extrabold"
+          : "bg-slate-100 border-slate-200 text-slate-700 font-semibold";
+
+        const stageClass = t.stage === "公開徵求價單"
+          ? "bg-amber-50 border-amber-200 text-amber-800 font-extrabold"
+          : t.stage === "已決標"
+            ? "bg-emerald-50 border-emerald-200 text-emerald-800 font-extrabold"
+            : "bg-blue-50 border-blue-200 text-blue-800 font-extrabold";
+
+        card.innerHTML = `
+          <!-- Card Top Row -->
+          <div class="flex flex-col gap-1.5">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] bg-red-50 border border-red-200 text-ricoh-red font-bold px-2 py-0.5 rounded-md">
+                  ${t.city}
+                </span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] border ${tagClass}">
+                  ${t.tag}
+                </span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] border ${stageClass}">
+                  ${t.stage || '正式開標'}
+                </span>
+              </div>
+              <span class="text-[10px] text-slate-500 font-mono flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-slate-500"></i>
+                截止日期: ${t.deadline}
+              </span>
+            </div>
+            
+            <!-- Clickable Link to Tender url -->
+            <a href="${t.tender_url}" target="_blank" class="group/link text-sm sm:text-base font-bold text-slate-800 tracking-wide leading-snug hover:text-red-600 transition-colors duration-200 flex items-start gap-1.5">
+              <span>${t.title}</span>
+              <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover/link:text-red-400 flex-shrink-0 mt-1 transition-colors"></i>
+            </a>
+            
+            <div class="flex items-center gap-1.5 text-xs text-slate-500">
+              <i data-lucide="building" class="w-3.5 h-3.5 text-slate-500"></i>
+              <span>${t.unit}</span>
+            </div>
+          </div>
+
+          <!-- Stage-specific Alert Reminder -->
+          ${t.stage === '公開徵求價單' ? `
+            <div class="flex items-center gap-2 bg-amber-50 border border-amber-200/80 text-amber-800 rounded-lg py-2 px-3 text-xs font-bold">
+              <i data-lucide="alert-circle" class="w-4 h-4 text-amber-400 flex-shrink-0 animate-pulse"></i>
+              <span>⚠️ 本案目前正處於【公開徵求價單】階段</span>
+            </div>
+          ` : t.stage === '已決標' ? `
+            <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200/80 text-emerald-800 rounded-lg py-2 px-3 text-xs font-bold">
+              <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+              <span>✅ 本案目前已正式【決標公告】</span>
+            </div>
+          ` : `
+            <div class="flex items-center gap-2 bg-indigo-50 border border-indigo-200/80 text-indigo-800 rounded-lg py-2 px-3 text-xs font-bold">
+              <i data-lucide="info" class="w-4 h-4 text-indigo-400 flex-shrink-0"></i>
+              <span>⚡ 本案目前已正式【上架公告開標】</span>
+            </div>
+          `}
+
+          <!-- Three Grid Data Module -->
+          <div class="grid grid-cols-3 gap-3 bg-slate-50 rounded-xl p-3 border border-slate-200/60 text-xs">
+            <!-- Col 1: Avg Discount & Source -->
+            <div class="flex flex-col gap-1 border-r border-slate-200/80 pr-1.5">
+              <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">近5年平均折率</span>
+              <span class="text-sm font-extrabold text-emerald-600 font-display font-mono flex items-center gap-0.5">
+                ${t.avg_discount}
+                <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-400"></i>
+              </span>
+              <span class="text-[8px] text-slate-500 leading-tight font-medium truncate" title="${t.discount_source}">${t.discount_source}</span>
+            </div>
+            <!-- Col 2: Dominant Competitor -->
+            <div class="flex flex-col gap-1 border-r border-slate-200/80 px-1.5 justify-between">
+              <div>
+                <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider block">
+                  ${t.stage === '已決標' ? '本案得標廠商' : '歷史得標/優勢商'}
+                </span>
+                <span class="text-xs font-bold text-slate-700 mt-1 block truncate" title="${t.main_competitor}">${t.main_competitor}</span>
+              </div>
+            </div>
+            <!-- Col 3: AI Price Estimate -->
+            <div class="flex flex-col gap-1 pl-1.5">
+              <span class="text-[9px] text-red-400 uppercase font-bold tracking-wider flex items-center gap-0.5">
+                <i data-lucide="sparkles" class="w-2.5 h-2.5 text-red-400"></i>
+                AI 評估報價
+              </span>
+              <span class="text-sm font-extrabold text-slate-800 font-mono">${t.suggested_price}</span>
+              <span class="text-[8px] text-slate-500 font-mono">預算: ${t.budget}</span>
+            </div>
+          </div>
+
+          <!-- Historical Trend Histogram -->
+          <div class="pt-2 border-t border-slate-200/60">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-[10px] text-slate-500 uppercase font-bold tracking-wider flex items-center gap-1">
+                <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+                近 5 年折率走勢 (${t.duration_years}年定期合約標)
+              </span>
+              <span class="text-[9px] text-slate-500 font-mono">（基準：%）</span>
+            </div>
+             <!-- Histogram container -->
+             <div class="flex items-end justify-between h-24 px-2 pt-2 bg-slate-50 rounded-lg border border-slate-200 relative">
+               ${historyHtml}
+             </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    // Call Print Dialog and format timestamp
+    function printBattleCard() {
+      const printTimeSpans = document.querySelectorAll('.print-time-stamp');
+      const now = new Date();
+      const timeStr = now.getFullYear() + '-' + 
+                      String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                      String(now.getDate()).padStart(2, '0') + ' ' + 
+                      String(now.getHours()).padStart(2, '0') + ':' + 
+                      String(now.getMinutes()).padStart(2, '0') + ':' + 
+                      String(now.getSeconds()).padStart(2, '0');
+      printTimeSpans.forEach(span => span.textContent = timeStr);
+      window.print();
+    }
+
+    // Initializer
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Fetch & Bind data from data.json
+      fetch('data.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          tendersData = data.tenders;
+          
+          // Set release time from JSON metadata
+          document.getElementById("data-updated-time").textContent = data.last_updated;
+
+          // Render initial tenders (default all)
+          renderTenders("all");
+          
+          // Setup competitor strategy tabs
+          switchBrand("FUJIFILM");
+        })
+        .catch(err => {
+          console.error("Error loading database: ", err);
+          document.getElementById("tenders-count").textContent = "連線失敗";
+          document.getElementById("tenders-container").innerHTML = `
+            <div class="flex flex-col items-center justify-center text-center py-16 px-4 bg-red-950/10 border border-red-500/20 rounded-xl">
+              <div class="p-3 bg-red-600/10 rounded-full text-ricoh-red mb-3">
+                <i data-lucide="alert-triangle" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-sm font-bold text-red-200">資料庫連線異常</h3>
+              <p class="text-xs text-red-400 max-w-sm mt-2">
+                無法從同目錄下載入 <code>data.json</code>。請確認 JSON 檔案是否存在且格式無誤。
+              </p>
+            </div>
+          `;
+          lucide.createIcons();
+        });
+
+      // 2. Dropdown Filter Listener
+      const filterSelect = document.getElementById("city-filter");
+      filterSelect.addEventListener("change", (e) => {
+        renderTenders(e.target.value);
+      });
+    });
+  </script>
+</body>
+</html>
