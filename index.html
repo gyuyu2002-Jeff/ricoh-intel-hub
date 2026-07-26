@@ -1015,8 +1015,8 @@
 
     // Initializer
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Fetch & Bind data from data.json
-      fetch('data.json')
+      // 1. Fetch & Bind data from data.json (with cache busting to ensure fresh morning sync data)
+      fetch('data.json?t=' + new Date().getTime())
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
