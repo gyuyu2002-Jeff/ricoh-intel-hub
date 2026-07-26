@@ -252,12 +252,11 @@
     </div>
 
     <!-- Live clock & dynamic DB update time -->
-    <div class="flex items-center gap-6 text-xs text-slate-400 w-full lg:w-auto justify-between lg:justify-end">
-      <!-- Manual Sync Button -->
-      <button onclick="triggerManualSync(event)" class="no-print bg-slate-100 hover:bg-ricoh-red hover:text-white border border-slate-200/80 hover:border-ricoh-red rounded-full px-3 py-1.5 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all shadow-sm">
-        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-        <span>手動更新</span>
-      </button>
+    <div class="flex items-center gap-4 text-xs text-slate-400 w-full lg:w-auto justify-between lg:justify-end">
+      <div class="flex items-center gap-2 font-mono bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5">
+        <i data-lucide="clock" class="w-3.5 h-3.5 text-ricoh-red"></i>
+        <span>情報發布時間: <span id="data-updated-time" class="font-bold text-slate-700">---</span> <span class="text-[10px] text-slate-400 font-sans font-semibold">(每2小時自動更新)</span></span>
+      </div>
       <div class="flex items-center gap-2 bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -265,11 +264,11 @@
         </span>
         <span class="font-medium text-emerald-400 font-mono">LIVE 連線正常</span>
       </div>
-      <div class="flex items-center gap-2 font-mono bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5">
-        <i data-lucide="clock" class="w-3.5 h-3.5 text-ricoh-red"></i>
-        <span>情報發布時間: </span>
-        <span id="data-updated-time" class="text-slate-700">----- --:--</span>
-      </div>
+      <!-- Manual Sync Button -->
+      <button onclick="triggerManualSync(event)" class="no-print bg-slate-100 hover:bg-ricoh-red hover:text-white border border-slate-200/80 hover:border-ricoh-red rounded-full px-3.5 py-1.5 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all shadow-sm">
+        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+        <span>手動更新</span>
+      </button>
     </div>
   </header>
 
@@ -1018,17 +1017,41 @@
       window.print();
     }
 
-    // Trigger GitHub Action to update tenders database in real-time
+    // Trigger GitHub Action to update tenders database in real-time (with Modal guidance)
     function triggerManualSync(event) {
       let pat = localStorage.getItem('gh_pat');
       if (!pat) {
-        pat = prompt("【首次更新設定】\n\n為了觸發 GitHub 雲端爬蟲更新，請輸入您的 GitHub 個人存取權杖 (Personal Access Token，具有 repo 與 workflow 權限)：\n\n(此 Token 將安全地儲存於您本地瀏覽器的 LocalStorage 中，不會對外傳送)");
-        if (!pat) return;
-        localStorage.setItem('gh_pat', pat.trim());
+        openPatModal();
+        return;
       }
+      executeSync(pat);
+    }
+    
+    function openPatModal() {
+      const modal = document.getElementById("pat-modal");
+      modal.classList.remove("hidden");
+      document.getElementById("pat-input").value = "";
+      lucide.createIcons();
+    }
+    
+    function closePatModal() {
+      const modal = document.getElementById("pat-modal");
+      modal.classList.add("hidden");
+    }
+    
+    function savePatAndSync() {
+      const input = document.getElementById("pat-input").value.trim();
+      if (!input) {
+        alert("請輸入有效的金鑰！");
+        return;
+      }
+      localStorage.setItem('gh_pat', input);
+      closePatModal();
+      executeSync(input);
+    }
 
-      // Show temporary loading state on button
-      const btn = event.currentTarget || document.activeElement;
+    function executeSync(pat) {
+      const btn = document.querySelector('button[onclick="triggerManualSync(event)"]');
       const originalHtml = btn.innerHTML;
       btn.disabled = true;
       btn.innerHTML = `<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i><span>發送中...</span>`;
@@ -1047,7 +1070,7 @@
           alert("🎉 雲端即時更新指令發送成功！\n\nGitHub 伺服器正在背景爬取政府電子採購網的最新數據。\n預計 30-40 秒後完成同步，屆時請重新整理此網頁。");
         } else if (res.status === 401) {
           localStorage.removeItem('gh_pat');
-          alert("❌ 認證失敗！Token 可能無效或已過期，請重新整理網頁並重新點擊按鈕輸入。");
+          alert("❌ 認證失敗！Token 可能無效或已過期，請點擊按鈕重新輸入金鑰。");
         } else {
           alert("⚠️ 更新發送失敗，錯誤代碼: " + res.status + "\n\n請檢查您的 Token 權限是否包含 repo 與 workflow 範圍。");
         }
@@ -1108,5 +1131,46 @@
       });
     });
   </script>
+  <!-- PAT Guide Modal -->
+  <div id="pat-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-900/60 backdrop-blur-sm no-print">
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-2xl max-w-md w-full mx-4 flex flex-col gap-4 text-slate-800">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2 text-ricoh-red">
+          <i data-lucide="key" class="w-5 h-5"></i>
+          <h3 class="font-display font-extrabold text-sm tracking-wider">GitHub 雲端更新金鑰設定</h3>
+        </div>
+        <button onclick="closePatModal()" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      
+      <div class="text-xs flex flex-col gap-3 leading-relaxed">
+        <p class="font-semibold text-slate-700">為什麼需要設定金鑰？</p>
+        <p class="text-slate-500">本網站託管於 GitHub，需要您的 GitHub 個人權限 (PAT) 金鑰才能觸發雲端的自動更新爬蟲。請注意：<b>Google 帳號金鑰無法控制 GitHub 服務，因此無法使用 Google 金鑰。</b></p>
+        
+        <p class="font-semibold text-slate-700 mt-1">金鑰申請 4 步驟：</p>
+        <ol class="list-decimal pl-4 flex flex-col gap-1.5 text-slate-500 font-medium">
+          <li>點選開啟 <a href="https://github.com/settings/tokens" target="_blank" class="text-ricoh-red underline font-bold hover:text-red-700">GitHub Token 設定網頁 (點此打開)</a></li>
+          <li>點擊右上角 <span class="bg-slate-100 px-1 border rounded text-slate-700 font-mono">Generate new token (classic)</span></li>
+          <li>名稱 (Note) 輸入 <span class="font-mono text-slate-700 bg-slate-100 px-1">ricoh-sync</span>，並<b>勾選 [repo] 與 [workflow] 權限</b></li>
+          <li>拉到頁面最下方點擊綠色按鈕，複製生成的金鑰（格式如 <span class="font-mono text-slate-600 bg-slate-100 px-1">ghp_xxxx...</span>）</li>
+        </ol>
+        
+        <div class="mt-2 flex flex-col gap-1.5">
+          <label class="font-bold text-slate-700">貼上您的 GitHub 金鑰 (PAT)：</label>
+          <input type="password" id="pat-input" placeholder="請貼上以 ghp_ 開頭的權杖金鑰" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono focus:outline-none focus:border-ricoh-red transition-all">
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-2.5 justify-end border-t border-slate-100 pt-3 mt-1">
+        <button onclick="closePatModal()" class="px-4 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all">取消</button>
+        <button onclick="savePatAndSync()" class="px-4 py-2 bg-ricoh-red text-white rounded-lg text-xs font-bold hover:bg-red-700 shadow-md shadow-ricoh-red/20 transition-all flex items-center gap-1.5">
+          <i data-lucide="check" class="w-3.5 h-3.5"></i>
+          儲存並開始更新
+        </button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
