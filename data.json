@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-27 10:10",
+  "last_updated": "2026-07-27 10:12",
   "tenders": [
     {
       "city": "台北市",
@@ -253,52 +253,52 @@
     },
     {
       "city": "桃園市",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "tag": "重點攻堅",
+      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
       "title": "多功能影印機租賃採購(開口契約)",
       "unit": "桃園大眾捷運股份有限公司",
       "deadline": "2026-07-07",
-      "budget": "NT$ 1,630,000",
-      "award_price": "",
-      "avg_discount": "97.0%",
-      "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "台灣愛普生 (Epson)",
-      "suggested_price": "NT$ 1,551,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260706&fn=NAI-1-71223492.xml",
+      "budget": "NT$ 3,495,303",
+      "award_price": "NT$ 3,014,382",
+      "avg_discount": "86.2%",
+      "discount_source": "政府電子採購網 (本案歷史真實決標)",
+      "main_competitor": "耑維科技股份有限公司",
+      "suggested_price": "NT$ 2,950,000",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260720&fn=BDM-1-71235033.xml",
       "history_stats": [
         {
           "year": 2021,
-          "val": 97,
+          "val": 86,
           "type": "market",
           "winner": "市場同業平均"
         },
         {
           "year": 2022,
-          "val": 95,
+          "val": 84,
           "type": "market",
           "winner": "市場同業平均"
         },
         {
           "year": 2023,
-          "val": 98,
+          "val": 87,
           "type": "real",
-          "winner": "台灣愛普生 (Epson)"
+          "winner": "耑維科技股份有限公司"
         },
         {
           "year": 2024,
-          "val": 98,
+          "val": 87,
           "type": "market",
           "winner": "市場同業平均"
         },
         {
           "year": 2025,
-          "val": 99,
+          "val": 88,
           "type": "market",
           "winner": "市場同業平均"
         }
       ],
-      "stage": "無法決標",
-      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 3
     },
     {

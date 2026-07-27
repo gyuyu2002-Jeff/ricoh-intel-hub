@@ -279,17 +279,21 @@ def main():
             records = detail_data["records"]
             
             # Check if this tender has already been resolved/awarded or failed
+            # Scan entire list to ensure successful awards take absolute precedence over historical failures
             award_record = None
             failed_record = None
             for r in records:
                 r_type = r.get("brief", {}).get("type", "")
                 if "無法決標" in r_type:
-                    failed_record = r
-                    break
+                    if not failed_record:
+                        failed_record = r
                 elif "決標" in r_type:
-                    award_record = r
-                    break
+                    if not award_record:
+                        award_record = r
             
+            if award_record:
+                failed_record = None
+                
             if failed_record:
                 # Bidding failed (流標/廢標)
                 stage = "無法決標"
