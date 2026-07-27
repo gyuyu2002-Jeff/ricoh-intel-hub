@@ -321,6 +321,38 @@ def fetch_json_with_retry(url, label, max_retries=5):
 
 def main():
     print("Starting automated tender data updater with real stats...")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_path = os.path.join(script_dir, "data.json")
+    existing_history_by_unit = {}
+    history_unit_names = {}
+
+    try:
+        with open(output_path, "r", encoding="utf-8") as existing_file:
+            existing_data = json.load(existing_file)
+
+        cached_records = list(existing_data.get("history_cache", []))
+        for tender in existing_data.get("tenders", []):
+            unit_id = tender.get("unit_id", "")
+            unit_name = tender.get("unit", "")
+            for record in tender.get("history_records", []):
+                cached_records.append({"unit_id": unit_id, "unit_name": unit_name, **record})
+
+        for cached in cached_records:
+            unit_id = cached.get("unit_id", "")
+            unit_name = cached.get("unit_name", "")
+            job_number = cached.get("job_number", "")
+            if not unit_id or not job_number or cached.get("official_verified") is not True:
+                continue
+            history_unit_names[unit_id] = unit_name
+            history_record = {
+                key: value for key, value in cached.items()
+                if key not in ("unit_id", "unit_name")
+            }
+            existing_history_by_unit.setdefault(unit_id, {})[job_number] = history_record
+        print(f"Loaded {sum(len(records) for records in existing_history_by_unit.values())} verified cached histories.")
+    except (FileNotFoundError, json.JSONDecodeError) as error:
+        print(f"No usable history cache found: {error}")
+
     keywords = ["影印機", "複合機", "事務機", "印表機", "複印機"]
     raw_active_tenders = []
     
@@ -401,6 +433,7 @@ def main():
     # Fetch every successful equipment award returned for each monitored agency.
     # Keep one record per procurement job instead of collapsing records by year.
     raw_history_tenders = []
+    failed_history_units = []
     print("Querying complete award history for all active agencies...")
     for h_unit, h_unit_id in active_units_dict.items():
         if not h_unit_id:
@@ -408,8 +441,9 @@ def main():
         url_unit = f"https://pcc-api.openfun.app/api/listbyunit?unit_id={h_unit_id}"
         data_unit = fetch_json_with_retry(url_unit, f"listbyunit for '{h_unit}' ({h_unit_id})")
         if data_unit is None:
-            print("Award history query was incomplete. Keeping the existing data file unchanged.")
-            return
+            failed_history_units.append(h_unit)
+            print(f"Keeping cached award history for '{h_unit}' and continuing.")
+            continue
         for record in data_unit.get("records", []):
             if not isinstance(record, dict):
                 continue
@@ -423,7 +457,10 @@ def main():
             raw_history_tenders.append(record)
         time.sleep(1)
 
-    history_pool = {unit: [] for unit in active_units_dict}
+    history_pool = {
+        unit: list(existing_history_by_unit.get(unit_id, {}).values())
+        for unit, unit_id in active_units_dict.items()
+    }
     seen_history_jobs = set()
     for h_item in sorted(raw_history_tenders, key=lambda item: int(item.get("date", 0)), reverse=True):
         h_unit = h_item.get("unit_name", "")
@@ -433,6 +470,9 @@ def main():
         if not h_unit_id or not h_job or job_key in seen_history_jobs:
             continue
         seen_history_jobs.add(job_key)
+
+        if h_job in existing_history_by_unit.get(h_unit_id, {}):
+            continue
 
         h_details = fetch_tender_detail_with_retry(h_unit_id, h_job)
         if not h_details or not h_details.get("records"):
@@ -457,7 +497,7 @@ def main():
             print(f"Skipped unverified history: {h_unit} | {h_date} | {h_job}")
             continue
         discount_rate = (h_award / h_budget) * 100
-        history_pool[h_unit].append({
+        history_record = {
             "award_date": h_date,
             "year": int(h_date[:4]) if h_date else None,
             "title": h_award_record.get("brief", {}).get("title", h_item.get("brief", {}).get("title", "")),
@@ -469,11 +509,16 @@ def main():
             "source_url": h_detail_obj.get("url", ""),
             "official_verified": True,
             "verification_source": "政府電子採購網決標查詢"
-        })
+        }
+        history_pool[h_unit].append(history_record)
+        existing_history_by_unit.setdefault(h_unit_id, {})[h_job] = history_record
+        history_unit_names[h_unit_id] = h_unit
         print(f"Saved verified history: {h_unit} | {h_date} | {h_job} | Budget {h_budget} | Award {h_award}")
 
     for records in history_pool.values():
         records.sort(key=lambda record: record["award_date"], reverse=True)
+    if failed_history_units:
+        print(f"Deferred history refresh for {len(failed_history_units)} units; cached records were preserved.")
                         
     # Process, filter, and deduplicate active tenders
     seen_ids = set()
@@ -729,11 +774,21 @@ def main():
     
     output_data = {
         "last_updated": last_updated_str,
-        "tenders": processed_tenders
+        "tenders": processed_tenders,
+        "history_cache": sorted(
+            [
+                {
+                    "unit_id": unit_id,
+                    "unit_name": history_unit_names.get(unit_id, ""),
+                    **record
+                }
+                for unit_id, records in existing_history_by_unit.items()
+                for record in records.values()
+            ],
+            key=lambda record: record.get("award_date", ""),
+            reverse=True
+        )
     }
-    
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    output_path = os.path.join(script_dir, "data.json")
     
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
