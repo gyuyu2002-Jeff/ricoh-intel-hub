@@ -3,7 +3,6 @@ import urllib.request
 import urllib.parse
 import json
 import re
-import hashlib
 from datetime import datetime, timezone, timedelta
 import os
 import time
@@ -197,11 +196,27 @@ def parse_contract_duration(title):
         return 3
     return 1
 
-def generate_fallback_stats(title_unit):
-    h = hashlib.md5(title_unit.encode('utf-8')).hexdigest()
-    budget_raw = 800000 + (int(h[0:4], 16) % 400) * 10000
-    avg_discount_raw = 93.5 + (int(h[4:8], 16) % 48) * 0.1
-    return budget_raw, avg_discount_raw
+def is_relevant_equipment_title(title):
+    normalized = title.replace("臺", "台")
+    excluded = ["耗材", "碳粉", "墨水", "色帶", "零件", "影印裝訂", "藍晒"]
+    equipment = ["影印機", "複合機", "事務機", "多功能機", "印表機"]
+    return not any(word in normalized for word in excluded) and any(word in normalized for word in equipment)
+
+def date_to_iso(raw_date):
+    value = str(raw_date or "")
+    if len(value) == 8:
+        try:
+            return datetime.strptime(value, "%Y%m%d").strftime("%Y-%m-%d")
+        except ValueError:
+            pass
+    return ""
+
+def median(values):
+    ordered = sorted(values)
+    middle = len(ordered) // 2
+    if len(ordered) % 2:
+        return ordered[middle]
+    return (ordered[middle - 1] + ordered[middle]) / 2
 
 def fetch_tender_detail_with_retry(unit_id, job_number, max_retries=3):
     encoded_job = urllib.parse.quote(job_number)
@@ -252,7 +267,7 @@ def main():
     # Filter and identify active tenders and their units
     active_tenders = []
     seen_active_projects = set()
-    active_units = set()
+    active_units_dict = {}
     
     raw_active_sorted = sorted(
         raw_active_tenders, 
@@ -270,6 +285,7 @@ def main():
         brief_type = brief.get("type", "")
         unit_name = item.get("unit_name", "")
         date_raw = str(item.get("date", ""))
+        unit_id = item.get("unit_id", "")
         
         # 1. STRICT ACTIVE FILTER: Exclude resolved/failed from active list
         if "\u6c7a\u6a19" in brief_type or "\u7121\u6cd5\u6c7a\u6a19" in brief_type:
@@ -294,87 +310,89 @@ def main():
         if project_key in seen_active_projects:
             continue
             
-        # 6. Filter relevant equipment tenders
-        filter_kws = ["\u79df", "\u8cb7", "\u63a1\u8cfc", "\u5f71\u5370", "\u8907\u5408", "\u4e8b\u52d9"]
-        is_relevant = any(k in title_norm for k in filter_kws) or ("\u516c\u958b\u5fb5\u6c42" in brief_type)
-        if not is_relevant:
+        # 6. Keep office equipment; exclude machine-tool titles such as 車銑複合機.
+        if not is_relevant_equipment_title(title_norm):
             continue
             
         seen_active_projects.add(project_key)
         active_tenders.append(item)
-        active_units.add(unit_name)
+        active_units_dict[unit_name] = unit_id
         
-    print(f"Identified {len(active_tenders)} active/recent tenders from {len(active_units)} units.")
+    print(f"Identified {len(active_tenders)} active/recent tenders from {len(active_units_dict)} units.")
     
-    # 2. Fetch historical raw tenders for preceding ROC years (114, 113, 112)
-    history_queries = ["114 影印機", "114 複合機", "113 影印機", "113 複合機", "112 影印機", "112 複合機"]
+    # Fetch every successful equipment award returned for each monitored agency.
+    # Keep one record per procurement job instead of collapsing records by year.
     raw_history_tenders = []
-    
-    for hq in history_queries:
-        encoded_hq = urllib.parse.quote(hq)
-        url = f"https://pcc-api.openfun.app/api/searchbytitle?query={encoded_hq}"
+    print("Querying complete award history for all active agencies...")
+    for h_unit, h_unit_id in active_units_dict.items():
+        if not h_unit_id:
+            continue
+        url_unit = f"https://pcc-api.openfun.app/api/listbyunit?unit_id={h_unit_id}"
         try:
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req) as response:
-                data = json.loads(response.read().decode('utf-8'))
-                if isinstance(data, dict) and "records" in data:
-                    recs = data["records"]
-                    # Keep only records from units we are actively monitoring to save detail API calls
-                    filtered_recs = [r for r in recs if isinstance(r, dict) and r.get("unit_name") in active_units]
-                    raw_history_tenders.extend(filtered_recs)
-                    print(f"History query '{hq}' | Found: {len(recs)} | Matching active units: {len(filtered_recs)}")
-            time.sleep(0.5)
+            req_unit = urllib.request.Request(url_unit, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req_unit) as res_unit:
+                data_unit = json.loads(res_unit.read().decode('utf-8'))
+                for record in data_unit.get("records", []):
+                    if not isinstance(record, dict):
+                        continue
+                    brief = record.get("brief", {})
+                    notice_type = brief.get("type", "")
+                    if "決標" not in notice_type or "無法決標" in notice_type:
+                        continue
+                    if not is_relevant_equipment_title(brief.get("title", "")):
+                        continue
+                    record["unit_name"] = h_unit
+                    raw_history_tenders.append(record)
+            time.sleep(0.2)
         except Exception as e:
-            print(f"Error fetching history for '{hq}': {e}")
-            
-    # Query details of historical tenders to populate our verified history pool
-    history_pool = {} # format: { unit_name: { year: { "winner": winner, "budget": budget, "award": award } } }
+            print(f"listbyunit failed for '{h_unit}' ({h_unit_id}): {e}")
+
+    history_pool = {unit: [] for unit in active_units_dict}
     seen_history_jobs = set()
-    
-    for h_item in raw_history_tenders:
-        h_unit = h_item.get("unit_name")
-        h_unit_id = h_item.get("unit_id")
-        h_job = h_item.get("job_number")
-        h_brief = h_item.get("brief", {})
-        h_title = h_brief.get("title", "")
-        
+    for h_item in sorted(raw_history_tenders, key=lambda item: int(item.get("date", 0)), reverse=True):
+        h_unit = h_item.get("unit_name", "")
+        h_unit_id = h_item.get("unit_id", "")
+        h_job = h_item.get("job_number", "")
         job_key = (h_unit_id, h_job)
-        if job_key in seen_history_jobs:
+        if not h_unit_id or not h_job or job_key in seen_history_jobs:
             continue
         seen_history_jobs.add(job_key)
-        
+
         h_details = fetch_tender_detail_with_retry(h_unit_id, h_job)
-        if h_details and h_details.get("records"):
-            h_records = h_details["records"]
-            h_award_record = None
-            for r in h_records:
-                r_type = r.get("brief", {}).get("type", "")
-                if "決標" in r_type and "無法決標" not in r_type:
-                    h_award_record = r
-                    break
-            
-            if h_award_record:
-                h_detail_obj = h_award_record.get("detail", {})
-                h_winner = extract_winning_competitor(h_detail_obj)
-                h_budget, h_award = extract_budget_and_award(h_detail_obj)
-                h_date_str = str(h_award_record.get("date", ""))
-                h_year = 2026
-                if len(h_date_str) == 8:
-                    try:
-                        h_year = datetime.strptime(h_date_str, "%Y%m%d").year
-                    except:
-                        pass
-                        
-                if h_winner and h_award > 0 and h_budget > 0:
-                    if h_unit not in history_pool:
-                        history_pool[h_unit] = {}
-                    if h_year not in history_pool[h_unit] or h_budget > history_pool[h_unit][h_year]["budget"]:
-                        history_pool[h_unit][h_year] = {
-                            "winner": h_winner,
-                            "budget": h_budget,
-                            "award": h_award
-                        }
-                        print(f"Saved verified history: {h_unit} | Year {h_year} | Winner: {h_winner} | Price: {h_award}")
+        if not h_details or not h_details.get("records"):
+            continue
+
+        award_records = [
+            record for record in h_details["records"]
+            if "決標" in record.get("brief", {}).get("type", "")
+            and "無法決標" not in record.get("brief", {}).get("type", "")
+        ]
+        if not award_records:
+            continue
+        h_award_record = max(award_records, key=lambda record: int(record.get("date", 0)))
+        h_detail_obj = h_award_record.get("detail", {})
+        h_budget, h_award = extract_budget_and_award(h_detail_obj)
+        if h_budget <= 0 or h_award <= 0:
+            continue
+
+        h_winner = extract_winning_competitor(h_detail_obj)
+        h_date = date_to_iso(h_award_record.get("date"))
+        discount_rate = (h_award / h_budget) * 100
+        history_pool[h_unit].append({
+            "award_date": h_date,
+            "year": int(h_date[:4]) if h_date else None,
+            "title": h_award_record.get("brief", {}).get("title", h_item.get("brief", {}).get("title", "")),
+            "job_number": h_job,
+            "budget": h_budget,
+            "award_price": h_award,
+            "discount_rate": round(discount_rate, 1) if 0 < discount_rate <= 100 else None,
+            "winner": map_competitor_name(h_winner) if h_winner else "未公開",
+            "source_url": h_detail_obj.get("url", "")
+        })
+        print(f"Saved verified history: {h_unit} | {h_date} | {h_job} | Budget {h_budget} | Award {h_award}")
+
+    for records in history_pool.values():
+        records.sort(key=lambda record: record["award_date"], reverse=True)
                         
     # Process, filter, and deduplicate active tenders
     seen_ids = set()
@@ -503,83 +521,50 @@ def main():
                 stage_color = "bg-rose-950/45 border-rose-500/40 text-rose-400"
             
         # Determine budget and discount stats
-        fallback_budget, fallback_discount = generate_fallback_stats(title + unit_name)
+        final_budget_val = real_budget
         
-        final_budget_val = real_budget if real_budget > 0 else fallback_budget
-        budget_str = f"NT$ {final_budget_val:,}"
+        budget_str = f"NT$ {final_budget_val:,}" if final_budget_val > 0 else "無公開數據"
         
-        # Determine average discount rate based on historical award or fallback
-        discount_source = "無公開決標紀錄"
-        avg_discount_str = "無公開數據"
-        avg_discount_num = fallback_discount
-        
-        if real_award > 0 and real_budget > 0:
-            final_discount_val = (real_award / real_budget) * 100
-            if 70.0 <= final_discount_val <= 100.0:
-                avg_discount_str = f"{final_discount_val:.1f}%"
-                avg_discount_num = final_discount_val
-                discount_source = "政府電子採購網 (本案真實決標)"
-            
-        # Compute AI Suggested Price
-        target_discount = avg_discount_num - 1.8
-        suggested_price_val = int(final_budget_val * (target_discount / 100))
-        suggested_price_val = (suggested_price_val // 1000) * 1000
-        suggested_price_str = f"NT$ {suggested_price_val:,}"
-        
-        # Determine Bidding Frequency and Bidding Years
-        h = hashlib.md5((title + unit_name).encode('utf-8')).hexdigest()
-        current_year = 2026
-        if len(date_raw) == 8:
-            try:
-                current_year = datetime.strptime(date_raw, "%Y%m%d").year
-            except:
-                pass
-                
         duration = parse_contract_duration(title)
-        
-        history_stats = []
-        is_resolved = (stage == "已決標")
-        
-        # If resolved, trend ends at current_year (2026). If active, it ends at current_year - 1 (2025).
-        max_trend_year = current_year if is_resolved else (current_year - 1)
-        
-        for i in range(5):
-            year = max_trend_year - 4 + i
-            
-            # Assign winner name for history point
-            is_point_real = False
-            year_winner = "無公開數據"
-            year_val = 0
-            
-            if is_resolved and year == current_year and raw_winner:
-                # If it is the current resolved year, we use the parsed winner
-                is_point_real = True
-                year_winner = map_competitor_name(raw_winner)
-                year_val = int(avg_discount_num)
-            else:
-                # Check if we have this year in our historical lookup pool for this unit!
-                if unit_name in history_pool and year in history_pool[unit_name]:
-                    entry = history_pool[unit_name][year]
-                    is_point_real = True
-                    year_winner = map_competitor_name(entry["winner"])
-                    year_val = int((entry["award"] / entry["budget"]) * 100)
-                
-            history_stats.append({
-                "year": year,
-                "val": year_val,
-                "type": "real" if is_point_real else "none",
-                "winner": year_winner
-            })
-            
-        # Determine main competitor (default to current winner, otherwise look up the most recent entry in history pool)
+
+        history_records = [
+            record for record in history_pool.get(unit_name, [])
+            if record["job_number"] != job_number
+        ]
+        usable_rates = [
+            record["discount_rate"] for record in history_records
+            if record["discount_rate"] is not None and 50 <= record["discount_rate"] <= 100
+        ]
+        historical_median = median(usable_rates) if usable_rates else None
+        avg_discount_str = f"{historical_median:.1f}%" if historical_median is not None else "資料不足"
+        discount_source = (
+            f"政府電子採購網 {len(usable_rates)} 筆有效歷史決標折扣中位數"
+            if usable_rates else "查無可比較的歷史預算與決標價"
+        )
+        if final_budget_val > 0 and historical_median is not None:
+            suggested_price_val = int(final_budget_val * historical_median / 100)
+            suggested_price_val = (suggested_price_val // 1000) * 1000
+            suggested_price_str = f"NT$ {suggested_price_val:,}"
+        else:
+            suggested_price_str = "資料不足"
+
+        history_stats = [
+            {
+                "year": record["year"],
+                "val": int(record["discount_rate"]) if record["discount_rate"] is not None else 0,
+                "type": "real",
+                "winner": record["winner"]
+            }
+            for record in reversed(history_records)
+        ]
+
         if raw_winner:
             main_competitor = map_competitor_name(raw_winner)
         else:
-            # Look up the most recent year in our history pool for this unit
-            main_competitor = "無公開數據"
-            if unit_name in history_pool and history_pool[unit_name]:
-                sorted_years = sorted(history_pool[unit_name].keys(), reverse=True)
-                main_competitor = map_competitor_name(history_pool[unit_name][sorted_years[0]]["winner"])
+            main_competitor = next(
+                (record["winner"] for record in history_records if record["winner"] != "未公開"),
+                "無公開數據"
+            )
             
         # Extract real publication date and bidding deadline from detail records
         publish_date_str = ""
@@ -608,7 +593,7 @@ def main():
             except:
                 pass
         if not deadline_str:
-            deadline_str = "2026-08-15"
+            deadline_str = "未公開"
             
         city = get_city(unit_name)
         tag = "重點攻堅" if final_budget_val >= 2500000 else "一般監控"
@@ -627,6 +612,8 @@ def main():
             "tag_color": tag_color,
             "title": title,
             "unit": unit_name,
+            "unit_id": unit_id,
+            "job_number": job_number,
             "publish_date": publish_date_str,
             "deadline": deadline_str,
             "budget": budget_str,
@@ -635,8 +622,14 @@ def main():
             "discount_source": discount_source,
             "main_competitor": main_competitor,
             "suggested_price": suggested_price_str,
+            "suggestion_basis": {
+                "method": "歷史決標折扣中位數",
+                "record_count": len(usable_rates),
+                "discount_rate": round(historical_median, 1) if historical_median is not None else None
+            },
             "tender_url": tender_url,
             "history_stats": history_stats,
+            "history_records": history_records,
             "stage": stage,
             "stage_color": stage_color,
             "duration_years": duration

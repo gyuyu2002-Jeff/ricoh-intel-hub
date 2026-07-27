@@ -1,106 +1,79 @@
 {
-  "last_updated": "2026-07-27 11:06",
+  "last_updated": "2026-07-27 13:33",
   "tenders": [
-    {
-      "city": "台北市",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "116年度影印機租賃採購案",
-      "unit": "臺北市政府捷運工程局機電系統工程處",
-      "publish_date": "2026-07-23",
-      "deadline": "2026-08-06",
-      "budget": "NT$ 1,200,000",
-      "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
-      "main_competitor": "無公開數據",
-      "suggested_price": "NT$ 1,122,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=PPW-1-70110178.xml",
-      "history_stats": [
-        {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        }
-      ],
-      "stage": "公開徵求價單",
-      "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
-      "duration_years": 3
-    },
     {
       "city": "台北市",
       "tag": "重點攻堅",
       "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
       "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
       "unit": "國立臺灣大學醫學院附設醫院",
+      "unit_id": "3.9.20.1",
+      "job_number": "UH150060",
       "publish_date": "2026-07-27",
       "deadline": "2026-08-10",
       "budget": "NT$ 40,482,150",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
+      "avg_discount": "資料不足",
+      "discount_source": "查無可比較的歷史預算與決標價",
       "main_competitor": "無公開數據",
-      "suggested_price": "NT$ 37,203,000",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 0,
+        "discount_rate": null
+      },
       "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyODQ2MzA",
-      "history_stats": [
-        {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        }
-      ],
+      "history_stats": [],
+      "history_records": [],
       "stage": "正式開標",
       "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 3
+    },
+    {
+      "city": "台北市",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "116年度影印機租賃採購案",
+      "unit": "臺北市政府捷運工程局機電系統工程處",
+      "unit_id": "3.79.51.10",
+      "job_number": "YG11505",
+      "publish_date": "2026-07-23",
+      "deadline": "2026-08-06",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "62.8%",
+      "discount_source": "政府電子採購網 1 筆有效歷史決標折扣中位數",
+      "main_competitor": "震旦 SHARP",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 1,
+        "discount_rate": 62.8
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=PPW-1-70110178.xml",
+      "history_stats": [
+        {
+          "year": 2016,
+          "val": 62,
+          "type": "real",
+          "winner": "震旦 SHARP"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2016-10-07",
+          "year": 2016,
+          "title": "105年度影印機租賃採購案",
+          "job_number": "YG10511",
+          "budget": 12544661,
+          "award_price": 7882229,
+          "discount_rate": 62.8,
+          "winner": "震旦 SHARP",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20161007&fn=BDM-1-51955070.xml"
+        }
+      ],
+      "stage": "公開徵求價單",
+      "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
       "duration_years": 3
     },
     {
@@ -109,45 +82,58 @@
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "115年高速影印機採購案",
       "unit": "臺灣高雄少年及家事法院",
+      "unit_id": "5.4.61",
+      "job_number": "11502A05",
       "publish_date": "2026-07-23",
       "deadline": "2026-07-29",
       "budget": "NT$ 968,000",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
-      "main_competitor": "無公開數據",
-      "suggested_price": "NT$ 914,000",
+      "avg_discount": "81.2%",
+      "discount_source": "政府電子採購網 1 筆有效歷史決標折扣中位數",
+      "main_competitor": "台灣佳能 (Canon)",
+      "suggested_price": "NT$ 786,000",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 1,
+        "discount_rate": 81.2
+      },
       "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyODI3Mjk",
       "history_stats": [
         {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "year": 2014,
+          "val": 42,
+          "type": "real",
+          "winner": "富士軟片 (FUJIFILM)"
         },
         {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "year": 2014,
+          "val": 81,
+          "type": "real",
+          "winner": "台灣佳能 (Canon)"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2014-05-02",
+          "year": 2014,
+          "title": "臺灣高雄少年及家事法院103年度第二次影印機採購案",
+          "job_number": "10302A02",
+          "budget": 320000,
+          "award_price": 260000,
+          "discount_rate": 81.2,
+          "winner": "台灣佳能 (Canon)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20140502&fn=BDM-1-51243724.xml"
         },
         {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "award_date": "2014-04-11",
+          "year": 2014,
+          "title": "臺灣高雄少年及家事法院103年度影印機採購案",
+          "job_number": "10302A01",
+          "budget": 658000,
+          "award_price": 281000,
+          "discount_rate": 42.7,
+          "winner": "富士軟片 (FUJIFILM)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20140411&fn=BDM-1-51225879.xml"
         }
       ],
       "stage": "正式開標",
@@ -156,51 +142,28 @@
     },
     {
       "city": "台北市",
-      "tag": "重點攻堅",
-      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "總管理處數位式多功能影印機租賃共61台",
       "unit": "台灣電力股份有限公司",
+      "unit_id": "3.13.31",
+      "job_number": "TPC-014-1150721-01",
       "publish_date": "2026-07-22",
       "deadline": "2026-08-05",
-      "budget": "NT$ 4,670,000",
+      "budget": "無公開數據",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
+      "avg_discount": "資料不足",
+      "discount_source": "查無可比較的歷史預算與決標價",
       "main_competitor": "無公開數據",
-      "suggested_price": "NT$ 4,436,000",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 0,
+        "discount_rate": null
+      },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260722&fn=PPW-1-70109888.xml",
-      "history_stats": [
-        {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        }
-      ],
+      "history_stats": [],
+      "history_records": [],
       "stage": "公開徵求價單",
       "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
       "duration_years": 3
@@ -211,47 +174,24 @@
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "115年數位式多功能影印機財物採購案",
       "unit": "臺灣臺中地方檢察署",
+      "unit_id": "A.11.10.12",
+      "job_number": "11508",
       "publish_date": "2026-06-22",
       "deadline": "2026-07-06",
       "budget": "NT$ 1,000,000",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
+      "avg_discount": "資料不足",
+      "discount_source": "查無可比較的歷史預算與決標價",
       "main_competitor": "無公開數據",
-      "suggested_price": "NT$ 954,000",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 0,
+        "discount_rate": null
+      },
       "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyNTM3MDk",
-      "history_stats": [
-        {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        }
-      ],
+      "history_stats": [],
+      "history_records": [],
       "stage": "正式開標",
       "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
       "duration_years": 1
@@ -262,47 +202,24 @@
       "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
       "title": "多功能影印機租賃採購(開口契約)",
       "unit": "桃園大眾捷運股份有限公司",
+      "unit_id": "3.76.73.72",
+      "job_number": "2B15A520006",
       "publish_date": "2026-04-23",
       "deadline": "2026-05-07",
       "budget": "NT$ 3,495,303",
       "award_price": "NT$ 3,014,382",
-      "avg_discount": "86.2%",
-      "discount_source": "政府電子採購網 (本案真實決標)",
+      "avg_discount": "資料不足",
+      "discount_source": "查無可比較的歷史預算與決標價",
       "main_competitor": "耑維科技股份有限公司",
-      "suggested_price": "NT$ 2,951,000",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 0,
+        "discount_rate": null
+      },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260720&fn=BDM-1-71235033.xml",
-      "history_stats": [
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2026,
-          "val": 86,
-          "type": "real",
-          "winner": "耑維科技股份有限公司"
-        }
-      ],
+      "history_stats": [],
+      "history_records": [],
       "stage": "已決標",
       "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 3
@@ -313,45 +230,75 @@
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "114年度國家同步輻射中心影印機租賃",
       "unit": "國家同步輻射研究中心",
+      "unit_id": "05601093",
+      "job_number": "SRPO-1140189",
       "publish_date": "2025-04-14",
       "deadline": "2025-04-28",
       "budget": "NT$ 591,600",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
+      "avg_discount": "56.9%",
+      "discount_source": "政府電子採購網 3 筆有效歷史決標折扣中位數",
       "main_competitor": "本公司 (互盛 RICOH)",
-      "suggested_price": "NT$ 556,000",
+      "suggested_price": "NT$ 336,000",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 3,
+        "discount_rate": 56.9
+      },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250414&fn=BDM-3-70851213.xml",
       "history_stats": [
         {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 52,
+          "year": 2016,
+          "val": 93,
           "type": "real",
           "winner": "本公司 (互盛 RICOH)"
         },
         {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "year": 2017,
+          "val": 56,
+          "type": "real",
+          "winner": "金儀 Konica Minolta"
         },
         {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "year": 2024,
+          "val": 52,
+          "type": "real",
+          "winner": "本公司 (互盛 RICOH)"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2024-08-01",
+          "year": 2024,
+          "title": "112年度國家同步輻射中心影印機租賃",
+          "job_number": "SRPO-1120088",
+          "budget": 1322448,
+          "award_price": 696000,
+          "discount_rate": 52.6,
+          "winner": "本公司 (互盛 RICOH)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240801&fn=BDM-2-70247349.xml"
+        },
+        {
+          "award_date": "2017-01-05",
+          "year": 2017,
+          "title": "中心影印機租賃(二年)",
+          "job_number": "SRPO-1060018",
+          "budget": 1200000,
+          "award_price": 682800,
+          "discount_rate": 56.9,
+          "winner": "金儀 Konica Minolta",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170105&fn=BDM-1-52040997.xml"
+        },
+        {
+          "award_date": "2016-01-27",
+          "year": 2016,
+          "title": "影印機租賃費(TPS控制室)",
+          "job_number": "SRPO-1040376",
+          "budget": 192000,
+          "award_price": 180000,
+          "discount_rate": 93.8,
+          "winner": "本公司 (互盛 RICOH)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20160127&fn=BDM-2-51631218.xml"
         }
       ],
       "stage": "正式開標",
@@ -364,45 +311,41 @@
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "115-116年影印機租賃案 (額外項) 第1次契約變更",
       "unit": "經濟部產業發展署",
+      "unit_id": "A.13.2",
+      "job_number": "1150913-1",
       "publish_date": "2026-07-07",
       "deadline": "2026-07-21",
       "budget": "NT$ 1,200,000",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
-      "main_competitor": "無公開數據",
-      "suggested_price": "NT$ 1,131,000",
+      "avg_discount": "95.0%",
+      "discount_source": "政府電子採購網 1 筆有效歷史決標折扣中位數",
+      "main_competitor": "富士軟片 (FUJIFILM)",
+      "suggested_price": "NT$ 1,140,000",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 1,
+        "discount_rate": 95.0
+      },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=BDM-3-71224779.xml",
       "history_stats": [
         {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
+          "year": 2026,
+          "val": 95,
+          "type": "real",
+          "winner": "富士軟片 (FUJIFILM)"
+        }
+      ],
+      "history_records": [
         {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "award_date": "2026-01-12",
+          "year": 2026,
+          "title": "115-116年度「影印機租賃」(額外項)",
+          "job_number": "1150913",
+          "budget": 284160,
+          "award_price": 270000,
+          "discount_rate": 95.0,
+          "winner": "富士軟片 (FUJIFILM)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260112&fn=BDM-1-71083742.xml"
         }
       ],
       "stage": "正式開標",
@@ -415,47 +358,24 @@
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "影印機租賃採購",
       "unit": "臺北大眾捷運股份有限公司",
+      "unit_id": "3.79.62",
+      "job_number": "C15A00157",
       "publish_date": "2026-07-02",
       "deadline": "2026-07-16",
-      "budget": "NT$ 1,000,000",
+      "budget": "無公開數據",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
+      "avg_discount": "資料不足",
+      "discount_source": "查無可比較的歷史預算與決標價",
       "main_competitor": "無公開數據",
-      "suggested_price": "NT$ 962,000",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 0,
+        "discount_rate": null
+      },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260702&fn=PPW-1-70107807.xml",
-      "history_stats": [
-        {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        }
-      ],
+      "history_stats": [],
+      "history_records": [],
       "stage": "公開徵求價單",
       "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
       "duration_years": 3
@@ -466,45 +386,92 @@
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "115學年度北大國小影印機租賃",
       "unit": "新北市三峽區北大國民小學",
+      "unit_id": "3.82.9.5",
+      "job_number": "BDES1150615",
       "publish_date": "2026-06-18",
       "deadline": "2026-06-24",
       "budget": "NT$ 552,000",
       "award_price": "NT$ 480,060",
-      "avg_discount": "87.0%",
-      "discount_source": "政府電子採購網 (本案真實決標)",
+      "avg_discount": "82.1%",
+      "discount_source": "政府電子採購網 4 筆有效歷史決標折扣中位數",
       "main_competitor": "四海事務機器有限公司",
-      "suggested_price": "NT$ 470,000",
+      "suggested_price": "NT$ 453,000",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 4,
+        "discount_rate": 82.1
+      },
       "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEyMTUyNDk=",
       "history_stats": [
         {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "year": 2018,
+          "val": 72,
+          "type": "real",
+          "winner": "四海事務機器有限公司"
         },
         {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "year": 2020,
+          "val": 78,
+          "type": "real",
+          "winner": "四海事務機器有限公司"
+        },
+        {
+          "year": 2022,
+          "val": 86,
+          "type": "real",
+          "winner": "四海事務機器有限公司"
         },
         {
           "year": 2024,
           "val": 90,
           "type": "real",
           "winner": "四海事務機器有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2024-06-25",
+          "year": 2024,
+          "title": "113學年度北大國小影印機租賃",
+          "job_number": "BDES1130612",
+          "budget": 607800,
+          "award_price": 552300,
+          "discount_rate": 90.9,
+          "winner": "四海事務機器有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA2MTE2MzQ="
         },
         {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "award_date": "2022-06-16",
+          "year": 2022,
+          "title": "111學年度北大國小影印機租賃",
+          "job_number": "BDES1110616",
+          "budget": 480000,
+          "award_price": 414000,
+          "discount_rate": 86.2,
+          "winner": "四海事務機器有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzAwMTExOTg="
         },
         {
-          "year": 2026,
-          "val": 86,
-          "type": "real",
-          "winner": "四海事務機器有限公司"
+          "award_date": "2020-07-21",
+          "year": 2020,
+          "title": "109學年度北大國小影印機租賃",
+          "job_number": "BDES1090630",
+          "budget": 480600,
+          "award_price": 375000,
+          "discount_rate": 78.0,
+          "winner": "四海事務機器有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200721&fn=BDM-1-53145617.xml"
+        },
+        {
+          "award_date": "2018-09-07",
+          "year": 2018,
+          "title": "北大國小影印機租賃",
+          "job_number": "BDES1070702",
+          "budget": 480600,
+          "award_price": 350000,
+          "discount_rate": 72.8,
+          "winner": "四海事務機器有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20180907&fn=BDM-2-52525677.xml"
         }
       ],
       "stage": "已決標",
@@ -517,47 +484,24 @@
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "休士頓華僑文教服務中心2台影印機租賃維護採購",
       "unit": "僑務委員會",
+      "unit_id": "3.19",
+      "job_number": "1152504",
       "publish_date": "2026-06-08",
       "deadline": "2026-06-15",
       "budget": "NT$ 800,989",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
+      "avg_discount": "資料不足",
+      "discount_source": "查無可比較的歷史預算與決標價",
       "main_competitor": "無公開數據",
-      "suggested_price": "NT$ 742,000",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 0,
+        "discount_rate": null
+      },
       "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyNDEzNjk",
-      "history_stats": [
-        {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        }
-      ],
+      "history_stats": [],
+      "history_records": [],
       "stage": "正式開標",
       "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
       "duration_years": 3
@@ -568,47 +512,24 @@
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "115年度行政區影印機租賃採購案",
       "unit": "國立臺灣圖書館",
+      "unit_id": "A.9.12",
+      "job_number": "NTL-ycc115012",
       "publish_date": "2026-04-17",
       "deadline": "2026-04-22",
       "budget": "NT$ 1,474,500",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
+      "avg_discount": "資料不足",
+      "discount_source": "查無可比較的歷史預算與決標價",
       "main_competitor": "無公開數據",
-      "suggested_price": "NT$ 1,390,000",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 0,
+        "discount_rate": null
+      },
       "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzExOTg1MTk",
-      "history_stats": [
-        {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        }
-      ],
+      "history_stats": [],
+      "history_records": [],
       "stage": "正式開標",
       "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
       "duration_years": 3
@@ -619,34 +540,23 @@
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "二手影印機租賃",
       "unit": "台灣電力股份有限公司雲林區營業處",
+      "unit_id": "3.13.31.14",
+      "job_number": "12015000021",
       "publish_date": "2026-03-11",
       "deadline": "2026-03-25",
-      "budget": "NT$ 1,420,000",
+      "budget": "無公開數據",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
+      "avg_discount": "75.0%",
+      "discount_source": "政府電子採購網 2 筆有效歷史決標折扣中位數",
       "main_competitor": "台灣佳能 (Canon)",
-      "suggested_price": "NT$ 1,320,000",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 2,
+        "discount_rate": 75.0
+      },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260311&fn=PPW-1-70095466.xml",
       "history_stats": [
-        {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
         {
           "year": 2024,
           "val": 84,
@@ -654,10 +564,34 @@
           "winner": "台灣佳能 (Canon)"
         },
         {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "year": 2026,
+          "val": 66,
+          "type": "real",
+          "winner": "台灣佳能 (Canon)"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2026-05-12",
+          "year": 2026,
+          "title": "115年度二手影印機租賃案",
+          "job_number": "1201500018",
+          "budget": 2577506,
+          "award_price": 1703268,
+          "discount_rate": 66.1,
+          "winner": "台灣佳能 (Canon)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260512&fn=BDM-1-71175324.xml"
+        },
+        {
+          "award_date": "2024-04-26",
+          "year": 2024,
+          "title": "雲林區處113年度二手影印機租賃案",
+          "job_number": "1201300007",
+          "budget": 2204559,
+          "award_price": 1851898,
+          "discount_rate": 84.0,
+          "winner": "台灣佳能 (Canon)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240426&fn=BDM-1-70564535.xml"
         }
       ],
       "stage": "公開徵求價單",
@@ -670,47 +604,24 @@
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "115年度影印機租賃(開口契約)案",
       "unit": "國家運動訓練中心",
+      "unit_id": "08254189",
+      "job_number": "115-01-006",
       "publish_date": "2026-02-06",
       "deadline": "2026-02-11",
       "budget": "NT$ 852,500",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
+      "avg_discount": "資料不足",
+      "discount_source": "查無可比較的歷史預算與決標價",
       "main_competitor": "無公開數據",
-      "suggested_price": "NT$ 797,000",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 0,
+        "discount_rate": null
+      },
       "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzExNDU2NTc",
-      "history_stats": [
-        {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        }
-      ],
+      "history_stats": [],
+      "history_records": [],
       "stage": "正式開標",
       "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
       "duration_years": 3
@@ -721,47 +632,24 @@
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "115年影印機租賃",
       "unit": "國立虎尾高級中學",
+      "unit_id": "3.92.1.26",
+      "job_number": "11416-2",
       "publish_date": "2026-01-02",
       "deadline": "2026-01-07",
       "budget": "NT$ 273,135",
       "award_price": "",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
+      "avg_discount": "資料不足",
+      "discount_source": "查無可比較的歷史預算與決標價",
       "main_competitor": "無公開數據",
-      "suggested_price": "NT$ 259,000",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "歷史決標折扣中位數",
+        "record_count": 0,
+        "discount_rate": null
+      },
       "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzExMTI0NDc",
-      "history_stats": [
-        {
-          "year": 2021,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2022,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        },
-        {
-          "year": 2025,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
-        }
-      ],
+      "history_stats": [],
+      "history_records": [],
       "stage": "正式開標",
       "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
       "duration_years": 3

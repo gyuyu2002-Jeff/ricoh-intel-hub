@@ -834,75 +834,38 @@
         return;
       }
 
+      const escapeHtml = (value) => String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+      const formatCurrency = (value) => Number.isFinite(Number(value))
+        ? `NT$ ${Number(value).toLocaleString('zh-TW')}`
+        : '未公開';
+
       // Build Tender Cards
       currentFilteredTenders.forEach(t => {
         const card = document.createElement("div");
         card.className = "glass-card rounded-xl p-5 shadow-sm hover:shadow-md border border-slate-200/80 flex flex-col gap-4";
 
-        // Generate History Stats Bars
-        // Since values are percentages (e.g. 98, 97, etc.), let's scale the heights nicely so they look proportionate in an 80px container
-        const historyHtml = t.history_stats.map(item => {
-          const isReal = item.type === "real";
-          const val = item.val;
-          const hasData = isReal && val > 0;
-          
-          let barBg = "bg-slate-200/40 border-slate-300/30";
-          let barStyle = "height: 4px; width: 100%; border-radius: 2px;"; // Flat line
-          
-          if (hasData) {
-            barBg = "bg-emerald-500/50 border-emerald-500/40 group-hover:bg-emerald-500 group-hover:border-emerald-400 transition-colors";
-            const heightPercent = Math.max(10, Math.min(100, (val - 70) * 3.3));
-            barStyle = `height: ${heightPercent}%`;
-          }
-          
-          const displayVal = hasData ? `${val}%` : "—";
-          
-          // Format winner name to be shorter (e.g. "本公司" or "佳能" or "SHARP")
-          let shortWinner = item.winner || "";
-          if (shortWinner.includes("互盛")) shortWinner = "互盛 RICOH";
-          else if (shortWinner.includes("富士")) shortWinner = "富士";
-          else if (shortWinner.includes("佳能")) shortWinner = "佳能";
-          else if (shortWinner.includes("金儀")) shortWinner = "金儀";
-          else if (shortWinner.includes("震旦")) shortWinner = "震旦";
-          else if (shortWinner.includes("愛普生")) shortWinner = "Epson";
-          else if (shortWinner.includes("京瓷")) shortWinner = "京瓷";
-          else if (shortWinner.includes("市場")) shortWinner = "市場均價";
-          else if (shortWinner.length > 6) shortWinner = shortWinner.substring(0, 5) + "..";
-
-          let winnerHtml = "";
-          if (hasData) {
-            winnerHtml = `
-              <span class="text-[8px] border rounded px-1 mt-1 leading-none font-sans bg-emerald-50 text-emerald-700 border-emerald-200/60 font-semibold whitespace-nowrap overflow-hidden text-ellipsis max-w-[80px] text-center" title="${item.winner}">
-                ${shortWinner}
-              </span>
-            `;
-          } else {
-            winnerHtml = `
-              <a href="${t.tender_url}" target="_blank" class="no-print text-[8px] border rounded px-1 mt-1 leading-none font-sans bg-slate-50 text-slate-400 border-slate-200 hover:text-ricoh-red hover:border-red-300 transition-colors text-center max-w-[80px]" title="無公開歷史決標數據，點此前往政府採購網查閱公告紀錄">
-                無決標資訊 🔗
-              </a>
-            `;
-          }
-
-          return `
-            <div class="flex flex-col items-center flex-1 h-full group pt-5 justify-end relative">
-              <!-- Bar Container (Explicit height context) -->
-              <div class="w-8 h-12 flex items-end justify-center relative">
-                <!-- Direct Value Label Above Bar -->
-                <span class="absolute -top-4 text-[9px] font-bold text-slate-700 font-mono tracking-tighter">${displayVal}</span>
-                
-                <!-- Bar -->
-                <div class="w-full border transition-all rounded-t-sm duration-300 ${barBg}" style="${barStyle}"></div>
-              </div>
-              
-              <!-- Year Label -->
-              <span class="text-[9px] text-slate-500 mt-1 font-mono leading-none">${item.year}</span>
-              
-              <!-- Winner / Market Info Tag -->
-              ${winnerHtml}
-            </div>
-          `;
-        }).join('');
+        const historyRecords = Array.isArray(t.history_records) ? t.history_records : [];
+        const historyRowsHtml = historyRecords.map(record => `
+          <tr class="border-b border-slate-200/70 last:border-0 align-top">
+            <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] text-slate-600">${escapeHtml(record.award_date || '—')}</td>
+            <td class="py-2 pr-3 min-w-[220px]">
+              <div class="font-semibold text-slate-700 leading-snug">${escapeHtml(record.title || '未提供案名')}</div>
+              <div class="mt-1 font-mono text-[9px] text-slate-400">案號 ${escapeHtml(record.job_number || '—')}</div>
+            </td>
+            <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] text-slate-600">${formatCurrency(record.budget)}</td>
+            <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] font-bold text-slate-800">${formatCurrency(record.award_price)}</td>
+            <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] text-emerald-700">${record.discount_rate == null ? '口徑不適用' : `${escapeHtml(record.discount_rate)}%`}</td>
+            <td class="py-2 pr-3 min-w-[140px] text-[10px] text-slate-700">${escapeHtml(record.winner || '未公開')}</td>
+            <td class="py-2 text-right whitespace-nowrap">
+              ${record.source_url ? `<a href="${escapeHtml(record.source_url)}" target="_blank" rel="noopener noreferrer" class="text-[10px] font-bold text-ricoh-red hover:underline">原始公告 ↗</a>` : '<span class="text-[10px] text-slate-400">無連結</span>'}
+            </td>
+          </tr>
+        `).join('');
 
         const today = new Date();
         const todayStr = today.getFullYear() + '-' + 
@@ -1018,7 +981,7 @@
           <div class="grid grid-cols-3 gap-3 bg-slate-50 rounded-xl p-3 border border-slate-200/60 text-xs">
             <!-- Col 1: Avg Discount & Source -->
             <div class="flex flex-col gap-1 border-r border-slate-200/80 pr-1.5">
-              <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">近5年平均折率</span>
+              <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">歷史決標折率中位數</span>
               <span class="text-sm font-extrabold text-emerald-600 font-display font-mono flex items-center gap-0.5">
                 ${t.avg_discount}
                 <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-400"></i>
@@ -1034,7 +997,7 @@
                 <span class="text-xs font-bold text-slate-700 mt-1 block truncate" title="${t.main_competitor}">${t.main_competitor}</span>
               </div>
             </div>
-            <!-- Col 3: AI Price Estimate / Actual Award Price -->
+            <!-- Col 3: History-based Price Estimate / Actual Award Price -->
             <div class="flex flex-col gap-1 pl-1.5">
               ${displayStage === '已決標' ? `
                 <span class="text-[9px] text-emerald-600 uppercase font-bold tracking-wider flex items-center gap-0.5 font-semibold">
@@ -1046,7 +1009,7 @@
               ` : `
                 <span class="text-[9px] text-red-400 uppercase font-bold tracking-wider flex items-center gap-0.5">
                   <i data-lucide="sparkles" class="w-2.5 h-2.5 text-red-400"></i>
-                  AI 評估報價
+                  歷史數據推估價
                 </span>
                 <span class="text-sm font-extrabold text-slate-800 font-mono">${t.suggested_price}</span>
                 <span class="text-[8px] text-slate-500 font-mono">預算: ${t.budget}</span>
@@ -1054,20 +1017,38 @@
             </div>
           </div>
 
-          <!-- Historical Trend Histogram -->
-          <div class="pt-2 border-t border-slate-200/60">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-[10px] text-slate-500 uppercase font-bold tracking-wider flex items-center gap-1">
-                <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-emerald-400"></i>
-                近 5 年折率走勢 (${t.duration_years}年定期合約標)
+          <!-- Complete verified award history -->
+          <details class="pt-2 border-t border-slate-200/60" ${historyRecords.length ? 'open' : ''}>
+            <summary class="flex justify-between items-center gap-3 cursor-pointer list-none rounded-lg px-3 py-2 bg-slate-50 border border-slate-200 hover:border-emerald-300 transition-colors">
+              <span class="text-[10px] text-slate-600 uppercase font-bold tracking-wider flex items-center gap-1.5">
+                <i data-lucide="database" class="w-3.5 h-3.5 text-emerald-500"></i>
+                完整歷史決標紀錄
               </span>
-              <span class="text-[9px] text-slate-500 font-mono">（基準：%）</span>
-            </div>
-             <!-- Histogram container -->
-             <div class="flex items-end justify-between h-24 px-2 pt-2 bg-slate-50 rounded-lg border border-slate-200 relative">
-               ${historyHtml}
-             </div>
-          </div>
+              <span class="text-[10px] font-bold ${historyRecords.length ? 'text-emerald-700' : 'text-slate-400'}">${historyRecords.length} 筆可驗證資料</span>
+            </summary>
+            ${historyRecords.length ? `
+              <div class="mt-2 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+                <table class="w-full text-left">
+                  <thead class="bg-slate-50 text-[9px] uppercase tracking-wider text-slate-500">
+                    <tr>
+                      <th class="py-2 px-3">決標日</th>
+                      <th class="py-2 pr-3">歷史案件</th>
+                      <th class="py-2 pr-3">預算</th>
+                      <th class="py-2 pr-3">決標價</th>
+                      <th class="py-2 pr-3">決標折率</th>
+                      <th class="py-2 pr-3">得標廠商</th>
+                      <th class="py-2 pr-3 text-right">來源</th>
+                    </tr>
+                  </thead>
+                  <tbody class="px-3">${historyRowsHtml}</tbody>
+                </table>
+              </div>
+            ` : `
+              <div class="mt-2 rounded-lg border border-dashed border-slate-200 bg-slate-50 px-4 py-4 text-[11px] text-slate-500">
+                此機關目前查無同類設備且同時公開「預算金額」與「決標金額」的成功決標紀錄，因此不產生推估價。
+              </div>
+            `}
+          </details>
         `;
 
         container.appendChild(card);
