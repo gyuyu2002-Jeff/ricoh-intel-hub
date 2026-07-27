@@ -889,15 +889,30 @@
           `;
         }).join('');
 
+        const today = new Date();
+        const todayStr = today.getFullYear() + '-' + 
+                         String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+                         String(today.getDate()).padStart(2, '0');
+                         
+        let displayStage = t.stage || '正式開標';
+        let isEvaluation = false;
+        
+        if (t.deadline && todayStr > t.deadline && t.stage !== "已決標") {
+          displayStage = "結果評選中";
+          isEvaluation = true;
+        }
+
         const tagClass = t.tag === "重點攻堅"
           ? "bg-red-50 border-red-200 text-red-700 font-extrabold"
           : "bg-slate-100 border-slate-200 text-slate-700 font-semibold";
 
-        const stageClass = t.stage === "公開徵求價單"
-          ? "bg-amber-50 border-amber-200 text-amber-800 font-extrabold"
-          : t.stage === "已決標"
-            ? "bg-emerald-50 border-emerald-200 text-emerald-800 font-extrabold"
-            : "bg-blue-50 border-blue-200 text-blue-800 font-extrabold";
+        const stageClass = isEvaluation
+          ? "bg-amber-50 border-amber-200 text-amber-800 font-extrabold animate-pulse"
+          : displayStage === "公開徵求價單"
+            ? "bg-amber-50 border-amber-200 text-amber-800 font-extrabold"
+            : displayStage === "已決標"
+              ? "bg-emerald-50 border-emerald-200 text-emerald-800 font-extrabold"
+              : "bg-blue-50 border-blue-200 text-blue-800 font-extrabold";
 
         card.innerHTML = `
           <!-- Card Top Row -->
@@ -911,7 +926,7 @@
                   ${t.tag}
                 </span>
                 <span class="px-2 py-0.5 rounded-md text-[10px] border ${stageClass}">
-                  ${t.stage || '正式開標'}
+                  ${displayStage}
                 </span>
               </div>
               <span class="text-[10px] text-slate-500 font-mono flex items-center gap-1">
@@ -930,15 +945,35 @@
               <i data-lucide="building" class="w-3.5 h-3.5 text-slate-500"></i>
               <span>${t.unit}</span>
             </div>
+
+            <!-- If in evaluation phase, show action guidance -->
+            ${isEvaluation ? `
+            <div class="no-print bg-amber-50/40 border border-amber-200/40 rounded-xl p-3.5 mt-2 flex items-start gap-2.5">
+              <i data-lucide="compass" class="w-4 h-4 text-amber-600 mt-0.5 shrink-0 animate-pulse"></i>
+              <div class="text-[11px] text-amber-900 leading-relaxed font-medium">
+                <span class="font-extrabold block text-amber-950">💡 投標已截止！目前處於評選/議價階段，建議業務採取：</span>
+                <ul class="list-disc pl-4 mt-1 space-y-1 text-amber-800">
+                  <li><b>致電承辦人</b>：致電機關採購窗口，詢問評選委員會或議價會議召開時程。</li>
+                  <li><b>查詢官網</b>：許多機關（如捷運局、公立大學）會先在官網「最新消息」公告評選最優勝廠商，比採購網發布決標公告快。</li>
+                  <li><b>領投標系統</b>：以公司憑證登入電子採購網領投標系統，確認是否收到澄清要求或議價通知。</li>
+                </ul>
+              </div>
+            </div>
+            ` : ''}
           </div>
 
           <!-- Stage-specific Alert Reminder -->
-          ${t.stage === '公開徵求價單' ? `
+          ${isEvaluation ? `
+            <div class="flex items-center gap-2 bg-amber-50 border border-amber-200/80 text-amber-850 rounded-lg py-2 px-3 text-xs font-bold">
+              <i data-lucide="alert-circle" class="w-4 h-4 text-amber-500 flex-shrink-0 animate-pulse"></i>
+              <span>📢 本案已截止投標，目前正在進行結果評選與議價</span>
+            </div>
+          ` : displayStage === '公開徵求價單' ? `
             <div class="flex items-center gap-2 bg-amber-50 border border-amber-200/80 text-amber-800 rounded-lg py-2 px-3 text-xs font-bold">
               <i data-lucide="alert-circle" class="w-4 h-4 text-amber-400 flex-shrink-0 animate-pulse"></i>
               <span>⚠️ 本案目前正處於【公開徵求價單】階段</span>
             </div>
-          ` : t.stage === '已決標' ? `
+          ` : displayStage === '已決標' ? `
             <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200/80 text-emerald-800 rounded-lg py-2 px-3 text-xs font-bold">
               <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
               <span>✅ 本案目前已正式【決標公告】</span>
