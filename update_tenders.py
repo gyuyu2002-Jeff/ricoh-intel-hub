@@ -273,29 +273,53 @@ def main():
         real_budget = 0
         real_award = 0
         raw_winner = ""
+        stage = ""
         
         if detail_data and detail_data.get("records"):
             records = detail_data["records"]
             
             # Check if this tender has already been resolved/awarded
-            is_completed = False
+            award_record = None
             for r in records:
                 r_type = r.get("brief", {}).get("type", "")
                 if "決標" in r_type:
-                    is_completed = True
+                    award_record = r
                     break
             
-            if is_completed:
-                print(f"Skipping already-completed/awarded case: {title}")
-                continue
-            
-            # Get URL from the first record (newest active bulletin)
-            first_record = records[0]
-            detail_obj = first_record.get("detail", {})
-            tender_url = detail_obj.get("url", "")
-            
-            if real_budget == 0:
-                real_budget, _ = extract_budget_and_award(detail_obj)
+            if award_record:
+                # Extract details from award notice
+                detail_obj = award_record.get("detail", {})
+                historical_winner = extract_winning_competitor(detail_obj)
+                real_budget, real_award = extract_budget_and_award(detail_obj)
+                
+                # Check age of award notice (skip if older than 60 days to keep DB fresh)
+                award_date_str = str(award_record.get("date", ""))
+                if award_date_str:
+                    try:
+                        # Date format is typically YYYYMMDD
+                        award_date = datetime.strptime(award_date_str, "%Y%m%d")
+                        taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).replace(tzinfo=None)
+                        delta = taipei_now - award_date
+                        if delta.days > 60:
+                            # Skip old resolved tenders to keep DB active
+                            print(f"Skipping older resolved tender: {title} (awarded {delta.days} days ago)")
+                            continue
+                    except:
+                        pass
+                
+                # This is a recently resolved tender, keep it in DB as "已決標"
+                stage = "已決標"
+                raw_winner = historical_winner
+                tender_url = detail_obj.get("url", "")
+                print(f"Recently resolved tender found: {title} | Winner: {raw_winner} | Date: {award_date_str}")
+            else:
+                # Active tender
+                # Get URL from the first record (newest active bulletin)
+                first_record = records[0]
+                detail_obj = first_record.get("detail", {})
+                tender_url = detail_obj.get("url", "")
+                if real_budget == 0:
+                    real_budget, _ = extract_budget_and_award(detail_obj)
                 
         if tender_url:
             if tender_url.startswith("http:"):
@@ -307,12 +331,15 @@ def main():
         seen_projects.add(project_key)
         
         # Resolve stage
-        if "\u516c\u958b\u5fb5\u6c42" in brief_type:
-            stage = "公開徵求價單"
-            stage_color = "bg-amber-950/45 border-amber-500/40 text-amber-400"
+        if stage != "已決標":
+            if "\u516c\u958b\u5fb5\u6c42" in brief_type:
+                stage = "公開徵求價單"
+                stage_color = "bg-amber-950/45 border-amber-500/40 text-amber-400"
+            else:
+                stage = "正式開標"
+                stage_color = "bg-indigo-950/45 border-indigo-500/40 text-indigo-400"
         else:
-            stage = "正式開標"
-            stage_color = "bg-indigo-950/45 border-indigo-500/40 text-indigo-400"
+            stage_color = "bg-emerald-950/45 border-emerald-500/40 text-emerald-400"
             
         # Determine budget and discount stats
         fallback_budget, fallback_discount = generate_fallback_stats(title + unit_name)
