@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-27 10:33",
+  "last_updated": "2026-07-27 10:59",
   "tenders": [
     {
       "city": "台北市",
@@ -312,7 +312,7 @@
       "award_price": "",
       "avg_discount": "無公開數據",
       "discount_source": "無公開決標紀錄",
-      "main_competitor": "無公開數據",
+      "main_competitor": "本公司 (互盛 RICOH)",
       "suggested_price": "NT$ 556,000",
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250414&fn=BDM-3-70851213.xml",
       "history_stats": [
@@ -330,9 +330,9 @@
         },
         {
           "year": 2023,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "val": 52,
+          "type": "real",
+          "winner": "本公司 (互盛 RICOH)"
         },
         {
           "year": 2024,
@@ -459,11 +459,11 @@
       "unit": "新北市三峽區北大國民小學",
       "deadline": "2026-06-18",
       "budget": "NT$ 552,000",
-      "award_price": "NT$ 12 (單價決標)",
-      "avg_discount": "無公開數據",
-      "discount_source": "無公開決標紀錄",
+      "award_price": "NT$ 480,060",
+      "avg_discount": "87.0%",
+      "discount_source": "政府電子採購網 (本案真實決標)",
       "main_competitor": "四海事務機器有限公司",
-      "suggested_price": "NT$ 526,000",
+      "suggested_price": "NT$ 470,000",
       "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEyMTUyNDk=",
       "history_stats": [
         {
@@ -480,9 +480,9 @@
         },
         {
           "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "val": 90,
+          "type": "real",
+          "winner": "四海事務機器有限公司"
         },
         {
           "year": 2025,
@@ -492,7 +492,7 @@
         },
         {
           "year": 2026,
-          "val": 97,
+          "val": 86,
           "type": "real",
           "winner": "四海事務機器有限公司"
         }
@@ -612,7 +612,7 @@
       "award_price": "",
       "avg_discount": "無公開數據",
       "discount_source": "無公開決標紀錄",
-      "main_competitor": "無公開數據",
+      "main_competitor": "台灣佳能 (Canon)",
       "suggested_price": "NT$ 1,320,000",
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260311&fn=PPW-1-70095466.xml",
       "history_stats": [
@@ -636,9 +636,9 @@
         },
         {
           "year": 2024,
-          "val": 0,
-          "type": "none",
-          "winner": "無公開數據"
+          "val": 84,
+          "type": "real",
+          "winner": "台灣佳能 (Canon)"
         },
         {
           "year": 2025,

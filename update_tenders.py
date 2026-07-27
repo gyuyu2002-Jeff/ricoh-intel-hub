@@ -31,14 +31,14 @@ def extract_budget_and_award(detail):
     award_val = 0
     
     for k, v in detail.items():
-        if ("預算" in k or "採購金額" in k) and "金額" in k:
+        if ("預算" in k or "採購金額" in k) and "金額" in k and "remind" not in k:
             digits = re.findall(r'\d+', str(v).replace(',', ''))
             if digits:
                 budget_val = int(digits[0])
                 break
                 
     for k, v in detail.items():
-        if "決標" in k and "總決標金額" in k:
+        if "決標" in k and "總決標金額" in k and "remind" not in k:
             digits = re.findall(r'\d+', str(v).replace(',', ''))
             if digits:
                 award_val = int(digits[0])
@@ -46,7 +46,7 @@ def extract_budget_and_award(detail):
                 
     if budget_val == 0:
         for k, v in detail.items():
-            if "預算" in k or "採購金額" in k:
+            if ("預算" in k or "採購金額" in k) and "remind" not in k:
                 digits = re.findall(r'\d+', str(v).replace(',', ''))
                 if digits:
                     budget_val = int(digits[0])
@@ -54,7 +54,7 @@ def extract_budget_and_award(detail):
                     
     if award_val == 0:
         for k, v in detail.items():
-            if "決標金額" in k or "中標金額" in k:
+            if ("決標金額" in k or "中標金額" in k) and "remind" not in k:
                 digits = re.findall(r'\d+', str(v).replace(',', ''))
                 if digits:
                     award_val = int(digits[0])
@@ -180,41 +180,38 @@ def fetch_tender_detail_with_retry(unit_id, job_number, max_retries=3):
 def main():
     print("Starting automated tender data updater with real stats...")
     keywords = ["\u5f71\u5370\u6a5f", "\u8907\u5408\u6a5f"]
-    raw_tenders = []
+    raw_active_tenders = []
     
     for kw in keywords:
         encoded_kw = urllib.parse.quote(kw)
         url = f"https://pcc-api.openfun.app/api/searchbytitle?query={encoded_kw}"
         try:
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
             with urllib.request.urlopen(req) as response:
                 content = response.read().decode('utf-8')
                 data = json.loads(content)
                 if isinstance(data, dict) and "records" in data:
-                    records = data["records"]
-                    raw_tenders.extend(records)
-                    print(f"Fetched {len(records)} items for keyword '{kw.encode('ascii', 'backslashreplace').decode()}'")
-                else:
-                    print(f"Unexpected response structure or empty data from API for '{kw}'")
+                    raw_active_tenders.extend(data["records"])
+                    print(f"Fetched {len(data['records'])} items for active search '{kw}'")
         except Exception as e:
-            print(f"Error fetching data for keyword '{kw}': {e}")
+            print(f"Error fetching active data for '{kw}': {e}")
             
-    if not raw_tenders:
+    if not raw_active_tenders:
         print("No tender data received from API. Aborting update.")
         return
         
-    # Process, filter, and deduplicate
-    seen_ids = set()
-    seen_projects = set()
-    processed_tenders = []
+    # Filter and identify active tenders and their units
+    active_tenders = []
+    seen_active_projects = set()
+    active_units = set()
     
-    raw_tenders_sorted = sorted(
-        raw_tenders, 
+    raw_active_sorted = sorted(
+        raw_active_tenders, 
         key=lambda x: int(x.get("date", 0)) if isinstance(x, dict) and x.get("date") else 0, 
         reverse=True
     )
     
-    for item in raw_tenders_sorted:
+    for item in raw_active_sorted:
         if not isinstance(item, dict):
             continue
             
@@ -224,17 +221,12 @@ def main():
         brief_type = brief.get("type", "")
         unit_name = item.get("unit_name", "")
         date_raw = str(item.get("date", ""))
-        unit_id = item.get("unit_id", "")
-        job_number = item.get("job_number", "")
         
-        # 1. STRICT ACTIVE FILTER: The Radar must only show ACTIVE bidding opportunities (進行中).
-        # We must exclude all completed award notices (決標公告, 無法決標公告).
+        # 1. STRICT ACTIVE FILTER: Exclude resolved/failed from active list
         if "\u6c7a\u6a19" in brief_type or "\u7121\u6cd5\u6c7a\u6a19" in brief_type:
             continue
             
-        # 2. STRICT TIMELINESS FILTER:
-        # Tenders must be recently published in 2026 (ROC 115/116).
-        # Exclude historical tenders from 2025 (ROC 114) or older to keep the active Radar fresh.
+        # 2. STRICT TIMELINESS FILTER: 2026 onwards
         if int(date_raw) < 20260101:
             continue
             
@@ -250,7 +242,7 @@ def main():
             
         # 5. Skip duplicates
         project_key = (unit_name, title)
-        if project_key in seen_projects:
+        if project_key in seen_active_projects:
             continue
             
         # 6. Filter relevant equipment tenders
@@ -259,6 +251,98 @@ def main():
         if not is_relevant:
             continue
             
+        seen_active_projects.add(project_key)
+        active_tenders.append(item)
+        active_units.add(unit_name)
+        
+    print(f"Identified {len(active_tenders)} active/recent tenders from {len(active_units)} units.")
+    
+    # 2. Fetch historical raw tenders for preceding ROC years (114, 113, 112)
+    history_queries = ["114 影印機", "114 複合機", "113 影印機", "113 複合機", "112 影印機", "112 複合機"]
+    raw_history_tenders = []
+    
+    for hq in history_queries:
+        encoded_hq = urllib.parse.quote(hq)
+        url = f"https://pcc-api.openfun.app/api/searchbytitle?query={encoded_hq}"
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req) as response:
+                data = json.loads(response.read().decode('utf-8'))
+                if isinstance(data, dict) and "records" in data:
+                    recs = data["records"]
+                    # Keep only records from units we are actively monitoring to save detail API calls
+                    filtered_recs = [r for r in recs if isinstance(r, dict) and r.get("unit_name") in active_units]
+                    raw_history_tenders.extend(filtered_recs)
+                    print(f"History query '{hq}' | Found: {len(recs)} | Matching active units: {len(filtered_recs)}")
+            time.sleep(0.5)
+        except Exception as e:
+            print(f"Error fetching history for '{hq}': {e}")
+            
+    # Query details of historical tenders to populate our verified history pool
+    history_pool = {} # format: { unit_name: { year: { "winner": winner, "budget": budget, "award": award } } }
+    seen_history_jobs = set()
+    
+    for h_item in raw_history_tenders:
+        h_unit = h_item.get("unit_name")
+        h_unit_id = h_item.get("unit_id")
+        h_job = h_item.get("job_number")
+        h_brief = h_item.get("brief", {})
+        h_title = h_brief.get("title", "")
+        
+        job_key = (h_unit_id, h_job)
+        if job_key in seen_history_jobs:
+            continue
+        seen_history_jobs.add(job_key)
+        
+        h_details = fetch_tender_detail_with_retry(h_unit_id, h_job)
+        if h_details and h_details.get("records"):
+            h_records = h_details["records"]
+            h_award_record = None
+            for r in h_records:
+                r_type = r.get("brief", {}).get("type", "")
+                if "決標" in r_type and "無法決標" not in r_type:
+                    h_award_record = r
+                    break
+            
+            if h_award_record:
+                h_detail_obj = h_award_record.get("detail", {})
+                h_winner = extract_winning_competitor(h_detail_obj)
+                h_budget, h_award = extract_budget_and_award(h_detail_obj)
+                h_date_str = str(h_award_record.get("date", ""))
+                h_year = 2026
+                if len(h_date_str) == 8:
+                    try:
+                        h_year = datetime.strptime(h_date_str, "%Y%m%d").year
+                    except:
+                        pass
+                        
+                if h_winner and h_award > 0 and h_budget > 0:
+                    if h_unit not in history_pool:
+                        history_pool[h_unit] = {}
+                    if h_year not in history_pool[h_unit] or h_budget > history_pool[h_unit][h_year]["budget"]:
+                        history_pool[h_unit][h_year] = {
+                            "winner": h_winner,
+                            "budget": h_budget,
+                            "award": h_award
+                        }
+                        print(f"Saved verified history: {h_unit} | Year {h_year} | Winner: {h_winner} | Price: {h_award}")
+                        
+    # Process, filter, and deduplicate active tenders
+    seen_ids = set()
+    seen_projects = set()
+    processed_tenders = []
+    
+    for item in active_tenders:
+        filename = item.get("filename", "")
+        brief = item.get("brief", {})
+        title = brief.get("title", "")
+        brief_type = brief.get("type", "")
+        unit_name = item.get("unit_name", "")
+        date_raw = str(item.get("date", ""))
+        unit_id = item.get("unit_id", "")
+        job_number = item.get("job_number", "")
+        project_key = (unit_name, title)
+        
         digits = re.findall(r'\d+', filename)
         if not digits:
             continue
@@ -267,7 +351,6 @@ def main():
         if tender_id in seen_ids:
             continue
             
-        # Query detailed API to get verified URL and real budget/award data
         detail_data = fetch_tender_detail_with_retry(unit_id, job_number)
         tender_url = ""
         real_budget = 0
@@ -419,18 +502,18 @@ def main():
             year_winner = "無公開數據"
             year_val = 0
             
-            if is_resolved:
+            if is_resolved and year == current_year and raw_winner:
                 # If it is the current resolved year, we use the parsed winner
-                if year == current_year and raw_winner:
-                    is_point_real = True
-                    year_winner = map_competitor_name(raw_winner)
-                    year_val = int(avg_discount_num)
+                is_point_real = True
+                year_winner = map_competitor_name(raw_winner)
+                year_val = int(avg_discount_num)
             else:
-                # If active, the parsed winner is the winner of the previous cycle
-                if year == current_year - duration and raw_winner:
+                # Check if we have this year in our historical lookup pool for this unit!
+                if unit_name in history_pool and year in history_pool[unit_name]:
+                    entry = history_pool[unit_name][year]
                     is_point_real = True
-                    year_winner = map_competitor_name(raw_winner)
-                    year_val = int(avg_discount_num)
+                    year_winner = map_competitor_name(entry["winner"])
+                    year_val = int((entry["award"] / entry["budget"]) * 100)
                 
             history_stats.append({
                 "year": year,
@@ -439,11 +522,15 @@ def main():
                 "winner": year_winner
             })
             
-        # Determine main competitor
+        # Determine main competitor (default to current winner, otherwise look up the most recent entry in history pool)
         if raw_winner:
             main_competitor = map_competitor_name(raw_winner)
         else:
+            # Look up the most recent year in our history pool for this unit
             main_competitor = "無公開數據"
+            if unit_name in history_pool and history_pool[unit_name]:
+                sorted_years = sorted(history_pool[unit_name].keys(), reverse=True)
+                main_competitor = map_competitor_name(history_pool[unit_name][sorted_years[0]]["winner"])
             
         city = get_city(unit_name)
         deadline_str = "2026-08-15"
