@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-27 10:18",
+  "last_updated": "2026-07-27 10:31",
   "tenders": [
     {
       "city": "台北市",
@@ -12,9 +12,9 @@
       "award_price": "",
       "avg_discount": "95.3%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "震旦 SHARP",
+      "main_competitor": "同業競爭 (估算)",
       "suggested_price": "NT$ 1,122,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260727&fn=PPW-2-70110282.xml",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=PPW-1-70110178.xml",
       "history_stats": [
         {
           "year": 2021,
@@ -32,7 +32,7 @@
           "year": 2023,
           "val": 97,
           "type": "real",
-          "winner": "震旦 SHARP"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
@@ -58,13 +58,13 @@
       "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
       "unit": "國立臺灣大學醫學院附設醫院",
       "deadline": "2026-07-27",
-      "budget": "NT$ 2,570,000",
+      "budget": "NT$ 40,482,150",
       "award_price": "",
       "avg_discount": "93.7%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "富士軟片 (FUJIFILM)",
-      "suggested_price": "NT$ 2,361,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260727&fn=TIQ-1-71078731.xml",
+      "main_competitor": "同業競爭 (估算)",
+      "suggested_price": "NT$ 37,203,000",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyODQ2MzA",
       "history_stats": [
         {
           "year": 2021,
@@ -82,7 +82,7 @@
           "year": 2023,
           "val": 91,
           "type": "real",
-          "winner": "富士軟片 (FUJIFILM)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
@@ -108,43 +108,43 @@
       "title": "115年高速影印機採購案",
       "unit": "臺灣高雄少年及家事法院",
       "deadline": "2026-07-23",
-      "budget": "NT$ 1,450,000",
+      "budget": "NT$ 968,000",
       "award_price": "",
       "avg_discount": "96.3%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "富士軟片 (FUJIFILM)",
-      "suggested_price": "NT$ 1,370,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=ttd-71282729.xml",
+      "main_competitor": "同業競爭 (估算)",
+      "suggested_price": "NT$ 914,000",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyODI3Mjk",
       "history_stats": [
         {
           "year": 2021,
           "val": 97,
           "type": "real",
-          "winner": "富士軟片 (FUJIFILM)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2022,
           "val": 98,
           "type": "real",
-          "winner": "富士軟片 (FUJIFILM)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2023,
           "val": 97,
           "type": "real",
-          "winner": "金儀 Konica Minolta"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
           "val": 95,
           "type": "real",
-          "winner": "台灣佳能 (Canon)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2025,
           "val": 95,
           "type": "real",
-          "winner": "震旦 SHARP"
+          "winner": "同業競爭 (估算)"
         }
       ],
       "stage": "正式開標",
@@ -162,7 +162,7 @@
       "award_price": "",
       "avg_discount": "96.8%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "台灣佳能 (Canon)",
+      "main_competitor": "同業競爭 (估算)",
       "suggested_price": "NT$ 4,436,000",
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260722&fn=PPW-1-70109888.xml",
       "history_stats": [
@@ -182,7 +182,7 @@
           "year": 2023,
           "val": 94,
           "type": "real",
-          "winner": "台灣佳能 (Canon)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
@@ -203,48 +203,48 @@
     },
     {
       "city": "台中市",
-      "tag": "重點攻堅",
-      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "115年數位式多功能影印機財物採購案",
       "unit": "臺灣臺中地方檢察署",
       "deadline": "2026-07-15",
-      "budget": "NT$ 3,170,000",
+      "budget": "NT$ 1,000,000",
       "award_price": "",
       "avg_discount": "97.2%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "台灣愛普生 (Epson)",
-      "suggested_price": "NT$ 3,024,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260715&fn=BDM-3-71231827.xml",
+      "main_competitor": "同業競爭 (估算)",
+      "suggested_price": "NT$ 954,000",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyNTM3MDk",
       "history_stats": [
         {
           "year": 2021,
           "val": 95,
           "type": "real",
-          "winner": "台灣佳能 (Canon)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2022,
           "val": 95,
           "type": "real",
-          "winner": "金儀 Konica Minolta"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2023,
           "val": 96,
           "type": "real",
-          "winner": "本公司 (互盛 RICOH)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
           "val": 98,
           "type": "real",
-          "winner": "富士軟片 (FUJIFILM)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2025,
           "val": 95,
           "type": "real",
-          "winner": "台灣愛普生 (Epson)"
+          "winner": "同業競爭 (估算)"
         }
       ],
       "stage": "正式開標",
@@ -253,52 +253,52 @@
     },
     {
       "city": "桃園市",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "tag": "重點攻堅",
+      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
       "title": "多功能影印機租賃採購(開口契約)",
       "unit": "桃園大眾捷運股份有限公司",
       "deadline": "2026-07-07",
-      "budget": "NT$ 1,630,000",
-      "award_price": "",
-      "avg_discount": "97.0%",
-      "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "台灣愛普生 (Epson)",
-      "suggested_price": "NT$ 1,551,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=TIQ-1-71064206.xml",
+      "budget": "NT$ 3,495,303",
+      "award_price": "NT$ 3,014,382",
+      "avg_discount": "86.2%",
+      "discount_source": "政府電子採購網 (本案歷史真實決標)",
+      "main_competitor": "耑維科技股份有限公司",
+      "suggested_price": "NT$ 2,950,000",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260720&fn=BDM-1-71235033.xml",
       "history_stats": [
         {
-          "year": 2021,
-          "val": 97,
-          "type": "market",
-          "winner": "市場同業平均"
-        },
-        {
           "year": 2022,
-          "val": 95,
+          "val": 86,
           "type": "market",
           "winner": "市場同業平均"
         },
         {
           "year": 2023,
-          "val": 98,
+          "val": 84,
           "type": "real",
-          "winner": "台灣愛普生 (Epson)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
-          "val": 98,
+          "val": 87,
           "type": "market",
           "winner": "市場同業平均"
         },
         {
           "year": 2025,
-          "val": 99,
+          "val": 87,
           "type": "market",
           "winner": "市場同業平均"
+        },
+        {
+          "year": 2026,
+          "val": 88,
+          "type": "real",
+          "winner": "耑維科技股份有限公司"
         }
       ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 3
     },
     {
@@ -308,13 +308,13 @@
       "title": "114年度國家同步輻射中心影印機租賃",
       "unit": "國家同步輻射研究中心",
       "deadline": "2026-07-07",
-      "budget": "NT$ 1,990,000",
+      "budget": "NT$ 591,600",
       "award_price": "",
       "avg_discount": "95.8%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "震旦 SHARP",
-      "suggested_price": "NT$ 1,870,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=BDM-4-70851213.xml",
+      "main_competitor": "同業競爭 (估算)",
+      "suggested_price": "NT$ 556,000",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250414&fn=BDM-3-70851213.xml",
       "history_stats": [
         {
           "year": 2021,
@@ -332,7 +332,7 @@
           "year": 2023,
           "val": 96,
           "type": "real",
-          "winner": "震旦 SHARP"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
@@ -358,12 +358,12 @@
       "title": "115-116年影印機租賃案 (額外項) 第1次契約變更",
       "unit": "經濟部產業發展署",
       "deadline": "2026-07-07",
-      "budget": "NT$ 1,770,000",
+      "budget": "NT$ 1,200,000",
       "award_price": "",
       "avg_discount": "96.1%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "震旦 SHARP",
-      "suggested_price": "NT$ 1,669,000",
+      "main_competitor": "同業競爭 (估算)",
+      "suggested_price": "NT$ 1,131,000",
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=BDM-3-71224779.xml",
       "history_stats": [
         {
@@ -376,7 +376,7 @@
           "year": 2022,
           "val": 94,
           "type": "real",
-          "winner": "台灣佳能 (Canon)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2023,
@@ -388,7 +388,7 @@
           "year": 2024,
           "val": 95,
           "type": "real",
-          "winner": "震旦 SHARP"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2025,
@@ -412,7 +412,7 @@
       "award_price": "",
       "avg_discount": "98.0%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "富士軟片 (FUJIFILM)",
+      "main_competitor": "同業競爭 (估算)",
       "suggested_price": "NT$ 962,000",
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260702&fn=PPW-1-70107807.xml",
       "history_stats": [
@@ -432,7 +432,7 @@
           "year": 2023,
           "val": 96,
           "type": "real",
-          "winner": "富士軟片 (FUJIFILM)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
@@ -458,31 +458,25 @@
       "title": "115學年度北大國小影印機租賃",
       "unit": "新北市三峽區北大國民小學",
       "deadline": "2026-06-18",
-      "budget": "NT$ 2,490,000",
-      "award_price": "",
+      "budget": "NT$ 552,000",
+      "award_price": "NT$ 12 (單價決標)",
       "avg_discount": "97.2%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "台灣愛普生 (Epson)",
-      "suggested_price": "NT$ 2,375,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260618&fn=ttd-71251889.xml",
+      "main_competitor": "四海事務機器有限公司",
+      "suggested_price": "NT$ 526,000",
+      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEyMTUyNDk=",
       "history_stats": [
         {
-          "year": 2021,
+          "year": 2022,
           "val": 95,
           "type": "market",
           "winner": "市場同業平均"
         },
         {
-          "year": 2022,
-          "val": 99,
-          "type": "market",
-          "winner": "市場同業平均"
-        },
-        {
           "year": 2023,
-          "val": 97,
+          "val": 99,
           "type": "real",
-          "winner": "台灣愛普生 (Epson)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
@@ -492,29 +486,35 @@
         },
         {
           "year": 2025,
-          "val": 98,
+          "val": 97,
           "type": "market",
           "winner": "市場同業平均"
+        },
+        {
+          "year": 2026,
+          "val": 98,
+          "type": "real",
+          "winner": "四海事務機器有限公司"
         }
       ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 3
     },
     {
       "city": "台北市",
-      "tag": "重點攻堅",
-      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "休士頓華僑文教服務中心2台影印機租賃維護採購",
       "unit": "僑務委員會",
       "deadline": "2026-06-08",
-      "budget": "NT$ 3,670,000",
+      "budget": "NT$ 800,989",
       "award_price": "",
       "avg_discount": "94.5%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "富士軟片 (FUJIFILM)",
-      "suggested_price": "NT$ 3,402,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260608&fn=TIQ-11-71041971.xml",
+      "main_competitor": "同業競爭 (估算)",
+      "suggested_price": "NT$ 742,000",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyNDEzNjk",
       "history_stats": [
         {
           "year": 2021,
@@ -532,7 +532,7 @@
           "year": 2023,
           "val": 93,
           "type": "real",
-          "winner": "富士軟片 (FUJIFILM)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
@@ -558,13 +558,13 @@
       "title": "115年度行政區影印機租賃採購案",
       "unit": "國立臺灣圖書館",
       "deadline": "2026-05-11",
-      "budget": "NT$ 2,010,000",
+      "budget": "NT$ 1,474,500",
       "award_price": "",
       "avg_discount": "96.1%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "震旦 SHARP",
-      "suggested_price": "NT$ 1,895,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260511&fn=BDM-3-71174889.xml",
+      "main_competitor": "同業競爭 (估算)",
+      "suggested_price": "NT$ 1,390,000",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzExOTg1MTk",
       "history_stats": [
         {
           "year": 2021,
@@ -582,7 +582,7 @@
           "year": 2023,
           "val": 95,
           "type": "real",
-          "winner": "震旦 SHARP"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
@@ -602,147 +602,147 @@
       "duration_years": 3
     },
     {
-      "city": "台中市",
-      "tag": "重點攻堅",
-      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
-      "title": "115年機械科CNC車床(車銑複合機)採購案",
-      "unit": "臺中市立大甲工業高級中等學校",
-      "deadline": "2026-05-06",
-      "budget": "NT$ 4,210,000",
+      "city": "雲林縣",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "二手影印機租賃",
+      "unit": "台灣電力股份有限公司雲林區營業處",
+      "deadline": "2026-03-11",
+      "budget": "NT$ 1,420,000",
       "award_price": "",
-      "avg_discount": "96.7%",
+      "avg_discount": "94.8%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "台灣佳能 (Canon)",
-      "suggested_price": "NT$ 3,995,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260506&fn=TIQ-1-71016767.xml",
+      "main_competitor": "同業競爭 (估算)",
+      "suggested_price": "NT$ 1,320,000",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260311&fn=PPW-1-70095466.xml",
       "history_stats": [
         {
           "year": 2021,
           "val": 96,
-          "type": "real",
-          "winner": "台灣佳能 (Canon)"
+          "type": "market",
+          "winner": "市場同業平均"
         },
         {
           "year": 2022,
-          "val": 95,
-          "type": "real",
-          "winner": "台灣愛普生 (Epson)"
+          "val": 94,
+          "type": "market",
+          "winner": "市場同業平均"
         },
         {
           "year": 2023,
-          "val": 95,
+          "val": 96,
           "type": "real",
-          "winner": "台灣佳能 (Canon)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
-          "val": 97,
-          "type": "real",
-          "winner": "富士軟片 (FUJIFILM)"
+          "val": 93,
+          "type": "market",
+          "winner": "市場同業平均"
         },
         {
           "year": 2025,
-          "val": 98,
-          "type": "real",
-          "winner": "台灣佳能 (Canon)"
+          "val": 96,
+          "type": "market",
+          "winner": "市場同業平均"
         }
       ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 1
+      "stage": "公開徵求價單",
+      "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
+      "duration_years": 3
     },
     {
       "city": "台北市",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "CNC車銑複合機2台採購案",
-      "unit": "勞動部勞動力發展署中彰投分署",
-      "deadline": "2026-04-07",
-      "budget": "NT$ 1,650,000",
+      "title": "115年度影印機租賃(開口契約)案",
+      "unit": "國家運動訓練中心",
+      "deadline": "2026-02-06",
+      "budget": "NT$ 852,500",
       "award_price": "",
-      "avg_discount": "96.3%",
+      "avg_discount": "95.3%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "台灣愛普生 (Epson)",
-      "suggested_price": "NT$ 1,559,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260407&fn=TIQ-1-70995098.xml",
+      "main_competitor": "同業競爭 (估算)",
+      "suggested_price": "NT$ 797,000",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzExNDU2NTc",
       "history_stats": [
         {
           "year": 2021,
-          "val": 98,
-          "type": "real",
-          "winner": "金儀 Konica Minolta"
+          "val": 96,
+          "type": "market",
+          "winner": "市場同業平均"
         },
         {
           "year": 2022,
-          "val": 94,
-          "type": "real",
-          "winner": "台灣佳能 (Canon)"
+          "val": 97,
+          "type": "market",
+          "winner": "市場同業平均"
         },
         {
           "year": 2023,
-          "val": 97,
+          "val": 93,
           "type": "real",
-          "winner": "台灣京瓷 (Kyocera)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
-          "val": 98,
-          "type": "real",
-          "winner": "震旦 SHARP"
+          "val": 97,
+          "type": "market",
+          "winner": "市場同業平均"
         },
         {
           "year": 2025,
-          "val": 98,
-          "type": "real",
-          "winner": "台灣愛普生 (Epson)"
+          "val": 93,
+          "type": "market",
+          "winner": "市場同業平均"
         }
       ],
       "stage": "正式開標",
       "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 1
+      "duration_years": 3
     },
     {
-      "city": "雲林縣",
+      "city": "台北市",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "115年度二手影印機租賃案",
-      "unit": "台灣電力股份有限公司雲林區營業處",
-      "deadline": "2026-04-02",
-      "budget": "NT$ 940,000",
+      "title": "115年影印機租賃",
+      "unit": "國立虎尾高級中學",
+      "deadline": "2026-01-02",
+      "budget": "NT$ 273,135",
       "award_price": "",
-      "avg_discount": "93.8%",
+      "avg_discount": "96.7%",
       "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "富士軟片 (FUJIFILM)",
-      "suggested_price": "NT$ 864,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260402&fn=TIQ-1-70994218.xml",
+      "main_competitor": "同業競爭 (估算)",
+      "suggested_price": "NT$ 259,000",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzExMTI0NDc",
       "history_stats": [
         {
           "year": 2021,
-          "val": 92,
+          "val": 94,
           "type": "market",
           "winner": "市場同業平均"
         },
         {
           "year": 2022,
-          "val": 91,
+          "val": 97,
           "type": "market",
           "winner": "市場同業平均"
         },
         {
           "year": 2023,
-          "val": 92,
+          "val": 96,
           "type": "real",
-          "winner": "富士軟片 (FUJIFILM)"
+          "winner": "同業競爭 (估算)"
         },
         {
           "year": 2024,
-          "val": 92,
+          "val": 96,
           "type": "market",
           "winner": "市場同業平均"
         },
         {
           "year": 2025,
-          "val": 95,
+          "val": 98,
           "type": "market",
           "winner": "市場同業平均"
         }
