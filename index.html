@@ -933,20 +933,6 @@
               <span>${t.unit}</span>
             </div>
 
-            <!-- If in evaluation phase, show action guidance -->
-            ${isEvaluation ? `
-            <div class="no-print bg-amber-50/40 border border-amber-200/40 rounded-xl p-3.5 mt-2 flex items-start gap-2.5">
-              <i data-lucide="compass" class="w-4 h-4 text-amber-600 mt-0.5 shrink-0 animate-pulse"></i>
-              <div class="text-[11px] text-amber-900 leading-relaxed font-medium">
-                <span class="font-extrabold block text-amber-950">💡 投標已截止！目前處於評選/議價階段，建議業務採取：</span>
-                <ul class="list-disc pl-4 mt-1 space-y-1 text-amber-800">
-                  <li><b>致電承辦人</b>：致電機關採購窗口，詢問評選委員會或議價會議召開時程。</li>
-                  <li><b>查詢官網</b>：許多機關（如捷運局、公立大學）會先在官網「最新消息」公告評選最優勝廠商，比採購網發布決標公告快。</li>
-                  <li><b>領投標系統</b>：以公司憑證登入電子採購網領投標系統，確認是否收到澄清要求或議價通知。</li>
-                </ul>
-              </div>
-            </div>
-            ` : ''}
           </div>
 
           <!-- Stage-specific Alert Reminder -->
