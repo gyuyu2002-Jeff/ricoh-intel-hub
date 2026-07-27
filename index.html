@@ -976,7 +976,7 @@
           ` : displayStage === '已決標' ? `
             <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200/80 text-emerald-800 rounded-lg py-2 px-3 text-xs font-bold">
               <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-              <span>✅ 本案目前已正式【決標公告】</span>
+              <span>✅ 本案已決標公告！得標廠商：${t.main_competitor} | 決標金額：${t.award_price || '未知'}</span>
             </div>
           ` : `
             <div class="flex items-center gap-2 bg-indigo-50 border border-indigo-200/80 text-indigo-800 rounded-lg py-2 px-3 text-xs font-bold">
@@ -1005,14 +1005,23 @@
                 <span class="text-xs font-bold text-slate-700 mt-1 block truncate" title="${t.main_competitor}">${t.main_competitor}</span>
               </div>
             </div>
-            <!-- Col 3: AI Price Estimate -->
+            <!-- Col 3: AI Price Estimate / Actual Award Price -->
             <div class="flex flex-col gap-1 pl-1.5">
-              <span class="text-[9px] text-red-400 uppercase font-bold tracking-wider flex items-center gap-0.5">
-                <i data-lucide="sparkles" class="w-2.5 h-2.5 text-red-400"></i>
-                AI 評估報價
-              </span>
-              <span class="text-sm font-extrabold text-slate-800 font-mono">${t.suggested_price}</span>
-              <span class="text-[8px] text-slate-500 font-mono">預算: ${t.budget}</span>
+              ${displayStage === '已決標' ? `
+                <span class="text-[9px] text-emerald-600 uppercase font-bold tracking-wider flex items-center gap-0.5 font-semibold">
+                  <i data-lucide="check-circle" class="w-2.5 h-2.5 text-emerald-500"></i>
+                  真實決標金額
+                </span>
+                <span class="text-sm font-extrabold text-slate-800 font-mono">${t.award_price || t.suggested_price}</span>
+                <span class="text-[8px] text-slate-500 font-mono">預算: ${t.budget}</span>
+              ` : `
+                <span class="text-[9px] text-red-400 uppercase font-bold tracking-wider flex items-center gap-0.5">
+                  <i data-lucide="sparkles" class="w-2.5 h-2.5 text-red-400"></i>
+                  AI 評估報價
+                </span>
+                <span class="text-sm font-extrabold text-slate-800 font-mono">${t.suggested_price}</span>
+                <span class="text-[8px] text-slate-500 font-mono">預算: ${t.budget}</span>
+              `}
             </div>
           </div>
 

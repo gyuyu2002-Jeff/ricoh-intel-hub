@@ -31,7 +31,7 @@ def extract_budget_and_award(detail):
     award_val = 0
     
     for k, v in detail.items():
-        if "預算" in k and "金額" in k:
+        if ("預算" in k or "採購金額" in k) and "金額" in k:
             digits = re.findall(r'\d+', str(v).replace(',', ''))
             if digits:
                 budget_val = int(digits[0])
@@ -46,7 +46,7 @@ def extract_budget_and_award(detail):
                 
     if budget_val == 0:
         for k, v in detail.items():
-            if "預算" in k:
+            if "預算" in k or "採購金額" in k:
                 digits = re.findall(r'\d+', str(v).replace(',', ''))
                 if digits:
                     budget_val = int(digits[0])
@@ -461,6 +461,7 @@ def main():
             "unit": unit_name,
             "deadline": deadline_str,
             "budget": budget_str,
+            "award_price": f"NT$ {real_award:,}" if real_award > 0 else "",
             "avg_discount": avg_discount_str,
             "discount_source": discount_source,
             "main_competitor": main_competitor,
