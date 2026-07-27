@@ -3,9 +3,16 @@ import urllib.request
 import urllib.parse
 import json
 import re
+import html
+import ssl
 from datetime import datetime, timezone, timedelta
 import os
 import time
+
+OFFICIAL_AWARD_SEARCH_URL = "https://web.pcc.gov.tw/prkms/tender/common/agent/readTenderAgent"
+OFFICIAL_SSL_CONTEXT = ssl.create_default_context()
+if hasattr(ssl, "VERIFY_X509_STRICT"):
+    OFFICIAL_SSL_CONTEXT.verify_flags &= ~ssl.VERIFY_X509_STRICT
 
 def get_city(unit_name):
     cities = ["台北市", "新北市", "桃園市", "台中市", "台南市", "高雄市", 
@@ -198,7 +205,7 @@ def parse_contract_duration(title):
 
 def is_relevant_equipment_title(title):
     normalized = title.replace("臺", "台")
-    excluded = ["耗材", "碳粉", "墨水", "色帶", "零件", "影印裝訂", "藍晒"]
+    excluded = ["耗材", "碳粉", "墨水", "色帶", "零件", "影印裝訂", "藍晒", "車銑", "鑽銑", "CNC", "機械科"]
     equipment = ["影印機", "複合機", "事務機", "多功能機", "印表機"]
     return not any(word in normalized for word in excluded) and any(word in normalized for word in equipment)
 
@@ -218,6 +225,55 @@ def median(values):
         return ordered[middle]
     return (ordered[middle - 1] + ordered[middle]) / 2
 
+def verify_official_award_notice(unit_id, job_number, award_date, max_retries=2):
+    if not unit_id or not job_number or len(award_date) < 4:
+        return False
+
+    year = award_date[:4]
+    params = {
+        "pageSize": "10",
+        "firstSearch": "false",
+        "isQuery": "true",
+        "isBinding": "N",
+        "isLogIn": "N",
+        "orgName": "",
+        "orgId": unit_id,
+        "tenderName": "",
+        "tenderId": job_number,
+        "tenderStatus": "TENDER_STATUS_1",
+        "tenderWay": "TENDER_WAY_ALL_DECLARATION",
+        "awardAnnounceStartDate": f"{year}/01/01",
+        "awardAnnounceEndDate": f"{year}/12/31",
+        "radProctrgCate": "",
+        "tenderRange": "",
+        "item": "",
+        "gottenVendorName": "",
+        "gottenVendorId": "",
+        "submitVendorName": "",
+        "submitVendorId": "",
+        "execLocation": "",
+        "priorityCate": "",
+        "radReConstruct": "",
+        "policyAdvocacy": "",
+        "isCpp": ""
+    }
+    query_url = f"{OFFICIAL_AWARD_SEARCH_URL}?{urllib.parse.urlencode(params)}"
+    request = urllib.request.Request(query_url, headers={"User-Agent": "Mozilla/5.0"})
+
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(request, timeout=30, context=OFFICIAL_SSL_CONTEXT) as response:
+                page = html.unescape(response.read().decode("utf-8", errors="replace"))
+            no_results = re.search(r'共有\s*<span[^>]*>\s*0\s*</span>\s*筆資料', page)
+            return not no_results and job_number in page
+        except Exception as error:
+            if attempt + 1 == max_retries:
+                print(f"Official award verification failed for {unit_id}/{job_number}: {error}")
+                return False
+            time.sleep(2)
+
+    return False
+
 def fetch_tender_detail_with_retry(unit_id, job_number, max_retries=3):
     encoded_job = urllib.parse.quote(job_number)
     detail_api_url = f"https://pcc-api.openfun.app/api/tender?unit_id={unit_id}&job_number={encoded_job}"
@@ -236,8 +292,12 @@ def fetch_tender_detail_with_retry(unit_id, job_number, max_retries=3):
                 print(f"HTTP Error {e.code} when fetching detail: {e}")
                 break
         except Exception as e:
-            print(f"Error fetching detail: {e}")
-            break
+            if attempt + 1 < max_retries:
+                wait_time = (attempt + 1) * 2
+                print(f"Detail request failed. Retrying in {wait_time} seconds: {e}")
+                time.sleep(wait_time)
+            else:
+                print(f"Error fetching detail after {max_retries} attempts: {e}")
             
     return None
 
@@ -377,6 +437,9 @@ def main():
 
         h_winner = extract_winning_competitor(h_detail_obj)
         h_date = date_to_iso(h_award_record.get("date"))
+        if not verify_official_award_notice(h_unit_id, h_job, h_date):
+            print(f"Skipped unverified history: {h_unit} | {h_date} | {h_job}")
+            continue
         discount_rate = (h_award / h_budget) * 100
         history_pool[h_unit].append({
             "award_date": h_date,
@@ -387,7 +450,9 @@ def main():
             "award_price": h_award,
             "discount_rate": round(discount_rate, 1) if 0 < discount_rate <= 100 else None,
             "winner": map_competitor_name(h_winner) if h_winner else "未公開",
-            "source_url": h_detail_obj.get("url", "")
+            "source_url": h_detail_obj.get("url", ""),
+            "official_verified": True,
+            "verification_source": "政府電子採購網決標查詢"
         })
         print(f"Saved verified history: {h_unit} | {h_date} | {h_job} | Budget {h_budget} | Award {h_award}")
 
