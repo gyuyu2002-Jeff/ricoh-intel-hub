@@ -278,15 +278,37 @@ def main():
         if detail_data and detail_data.get("records"):
             records = detail_data["records"]
             
-            # Check if this tender has already been resolved/awarded
+            # Check if this tender has already been resolved/awarded or failed
             award_record = None
+            failed_record = None
             for r in records:
                 r_type = r.get("brief", {}).get("type", "")
-                if "決標" in r_type:
+                if "無法決標" in r_type:
+                    failed_record = r
+                    break
+                elif "決標" in r_type:
                     award_record = r
                     break
             
-            if award_record:
+            if failed_record:
+                # Bidding failed (流標/廢標)
+                stage = "無法決標"
+                detail_obj = failed_record.get("detail", {})
+                tender_url = detail_obj.get("url", "")
+                award_date_str = str(failed_record.get("date", ""))
+                if award_date_str:
+                    try:
+                        # Check age (skip if older than 60 days)
+                        award_date = datetime.strptime(award_date_str, "%Y%m%d")
+                        taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).replace(tzinfo=None)
+                        delta = taipei_now - award_date
+                        if delta.days > 60:
+                            print(f"Skipping older failed tender: {title} (failed {delta.days} days ago)")
+                            continue
+                    except:
+                        pass
+                print(f"Failed tender found: {title} | Date: {award_date_str}")
+            elif award_record:
                 # Extract details from award notice
                 detail_obj = award_record.get("detail", {})
                 historical_winner = extract_winning_competitor(detail_obj)
@@ -331,7 +353,7 @@ def main():
         seen_projects.add(project_key)
         
         # Resolve stage
-        if stage != "已決標":
+        if stage not in ["已決標", "無法決標"]:
             if "\u516c\u958b\u5fb5\u6c42" in brief_type:
                 stage = "公開徵求價單"
                 stage_color = "bg-amber-950/45 border-amber-500/40 text-amber-400"
@@ -339,7 +361,10 @@ def main():
                 stage = "正式開標"
                 stage_color = "bg-indigo-950/45 border-indigo-500/40 text-indigo-400"
         else:
-            stage_color = "bg-emerald-950/45 border-emerald-500/40 text-emerald-400"
+            if stage == "已決標":
+                stage_color = "bg-emerald-950/45 border-emerald-500/40 text-emerald-400"
+            else:
+                stage_color = "bg-rose-950/45 border-rose-500/40 text-rose-400"
             
         # Determine budget and discount stats
         fallback_budget, fallback_discount = generate_fallback_stats(title + unit_name)

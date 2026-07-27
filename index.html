@@ -897,7 +897,7 @@
         let displayStage = t.stage || '正式開標';
         let isEvaluation = false;
         
-        if (t.deadline && todayStr > t.deadline && t.stage !== "已決標") {
+        if (t.deadline && todayStr > t.deadline && t.stage !== "已決標" && t.stage !== "無法決標") {
           displayStage = "結果評選中";
           isEvaluation = true;
         }
@@ -912,7 +912,9 @@
             ? "bg-amber-50 border-amber-200 text-amber-800 font-extrabold"
             : displayStage === "已決標"
               ? "bg-emerald-50 border-emerald-200 text-emerald-800 font-extrabold"
-              : "bg-blue-50 border-blue-200 text-blue-800 font-extrabold";
+              : displayStage === "無法決標"
+                ? "bg-rose-50 border-rose-200 text-rose-800 font-extrabold"
+                : "bg-blue-50 border-blue-200 text-blue-800 font-extrabold";
 
         card.innerHTML = `
           <!-- Card Top Row -->
@@ -977,6 +979,11 @@
             <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200/80 text-emerald-800 rounded-lg py-2 px-3 text-xs font-bold">
               <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
               <span>✅ 本案已決標公告！得標廠商：${t.main_competitor} | 決標金額：${t.award_price || '未知'}</span>
+            </div>
+          ` : displayStage === '無法決標' ? `
+            <div class="flex items-center gap-2 bg-rose-50 border border-rose-200/80 text-rose-800 rounded-lg py-2 px-3 text-xs font-bold">
+              <i data-lucide="x-circle" class="w-4 h-4 text-rose-500 flex-shrink-0"></i>
+              <span>❌ 本案已公告【無法決標】(流標或廢標)！請密切注意後續重新招標。</span>
             </div>
           ` : `
             <div class="flex items-center gap-2 bg-indigo-50 border border-indigo-200/80 text-indigo-800 rounded-lg py-2 px-3 text-xs font-bold">
