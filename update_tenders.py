@@ -119,27 +119,25 @@ def extract_dates(detail, publish_fallback_str):
 
 def extract_winning_competitor(detail):
     winner = ""
+    companies = {}
     for k, v in detail.items():
-        if "得標廠商" in k and not any(x in k for x in ["國家", "金額", "地址", "電話", "統編", "序號"]) and v:
-            val = str(v).strip()
-            if val and len(val) > 2 and "中華民國" not in val:
-                winner = val
+        match_name = re.fullmatch(r'投標廠商:投標廠商(\d+):廠商名稱', k)
+        if match_name:
+            companies[match_name.group(1)] = str(v).strip()
+
+    for k, v in detail.items():
+        match_won = re.fullmatch(r'投標廠商:投標廠商(\d+):是否得標', k)
+        if match_won and str(v).strip() in ["是", "得標"]:
+            winner = companies.get(match_won.group(1), "")
+            if winner:
                 break
-                
+
     if not winner:
-        companies = {}
         for k, v in detail.items():
-            match_name = re.match(r'投標廠商:投標廠商(\d+):廠商名稱', k)
-            if match_name:
-                idx = match_name.group(1)
-                companies[idx] = str(v).strip()
-                
-        for k, v in detail.items():
-            match_won = re.match(r'投標廠商:投標廠商(\d+):是否得標', k)
-            if match_won and str(v).strip() in ["是", "得標"]:
-                idx = match_won.group(1)
-                if idx in companies:
-                    winner = companies[idx]
+            if (k.endswith(":得標廠商") or k.endswith(":得標廠商名稱")) and v:
+                val = str(v).strip()
+                if val and len(val) > 2 and "中華民國" not in val:
+                    winner = val
                     break
                     
     return winner
@@ -208,6 +206,41 @@ def is_relevant_equipment_title(title):
     excluded = ["耗材", "碳粉", "墨水", "色帶", "零件", "影印裝訂", "藍晒", "車銑", "鑽銑", "CNC", "機械科"]
     equipment = ["影印機", "複合機", "事務機", "多功能機", "印表機", "複印機"]
     return not any(word in normalized for word in excluded) and any(word in normalized for word in equipment)
+
+def classify_equipment(title):
+    normalized = title.replace("臺", "台")
+    if any(word in normalized for word in ["點陣式印表機", "點矩陣印表機"]):
+        return "dot_matrix_printer"
+    if any(word in normalized for word in ["影印機", "複印機", "複合機", "多功能機"]):
+        return "copier"
+    if "印表機" in normalized:
+        mixed_it_words = ["電腦", "螢幕", "監視器", "軟體", "網路", "伺服器"]
+        return "mixed_it_equipment" if any(word in normalized for word in mixed_it_words) else "printer"
+    if "事務機" in normalized:
+        return "office_machine"
+    return ""
+
+def classify_contract(title):
+    if any(word in title for word in ["租賃", "租用", "出租"]):
+        return "rental"
+    if any(word in title for word in ["維護", "維修", "保養"]):
+        return "maintenance"
+    if any(word in title for word in ["採購", "購置", "汰換", "新購", "更新"]):
+        return "purchase"
+    return "unspecified"
+
+def is_comparable_history(current_title, history_title):
+    current_equipment = classify_equipment(current_title)
+    history_equipment = classify_equipment(history_title)
+    return (
+        bool(current_equipment)
+        and current_equipment == history_equipment
+        and classify_contract(current_title) == classify_contract(history_title)
+    )
+
+def looks_like_country(value):
+    country_names = ["美國", "新加坡", "日本", "德國", "英國", "中國", "加拿大", "法國", "澳大利亞", "韓國"]
+    return any(str(value).startswith(country) for country in country_names)
 
 def date_to_iso(raw_date):
     value = str(raw_date or "")
@@ -471,7 +504,8 @@ def main():
             continue
         seen_history_jobs.add(job_key)
 
-        if h_job in existing_history_by_unit.get(h_unit_id, {}):
+        cached_history = existing_history_by_unit.get(h_unit_id, {}).get(h_job)
+        if cached_history and not looks_like_country(cached_history.get("winner", "")):
             continue
 
         h_details = fetch_tender_detail_with_retry(h_unit_id, h_job)
@@ -510,6 +544,10 @@ def main():
             "official_verified": True,
             "verification_source": "政府電子採購網決標查詢"
         }
+        history_pool[h_unit] = [
+            record for record in history_pool[h_unit]
+            if record.get("job_number") != h_job
+        ]
         history_pool[h_unit].append(history_record)
         existing_history_by_unit.setdefault(h_unit_id, {})[h_job] = history_record
         history_unit_names[h_unit_id] = h_unit
@@ -656,6 +694,7 @@ def main():
         history_records = [
             record for record in history_pool.get(unit_name, [])
             if record["job_number"] != job_number
+            and is_comparable_history(title, record.get("title", ""))
         ]
         usable_rates = [
             record["discount_rate"] for record in history_records
@@ -664,8 +703,8 @@ def main():
         historical_median = median(usable_rates) if usable_rates else None
         avg_discount_str = f"{historical_median:.1f}%" if historical_median is not None else "資料不足"
         discount_source = (
-            f"政府電子採購網 {len(usable_rates)} 筆有效歷史決標折扣中位數"
-            if usable_rates else "查無可比較的歷史預算與決標價"
+            f"政府電子採購網 {len(usable_rates)} 筆同設備、同契約型態決標折扣中位數"
+            if usable_rates else "查無同設備、同契約型態且具完整金額的歷史決標"
         )
         if final_budget_val > 0 and historical_median is not None:
             suggested_price_val = int(final_budget_val * historical_median / 100)
@@ -749,7 +788,7 @@ def main():
             "main_competitor": main_competitor,
             "suggested_price": suggested_price_str,
             "suggestion_basis": {
-                "method": "歷史決標折扣中位數",
+                "method": "同設備與同契約型態歷史決標折扣中位數",
                 "record_count": len(usable_rates),
                 "discount_rate": round(historical_median, 1) if historical_median is not None else None
             },

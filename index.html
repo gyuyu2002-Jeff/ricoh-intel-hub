@@ -119,6 +119,20 @@
       background: rgba(26, 47, 35, 0.35);
     }
 
+    @media (max-width: 639px) {
+      .mobile-filter-panel.is-collapsed {
+        display: none;
+      }
+
+      .tender-card:hover {
+        transform: none;
+      }
+
+      .tender-card summary {
+        min-height: 44px;
+      }
+    }
+
     /* Print Styles */
     @media print {
       body {
@@ -223,7 +237,7 @@
   </div>
 
   <!-- Top Navigation Bar -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-ricoh-red px-6 py-4 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-4 shadow-lg z-10">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-ricoh-red px-3 sm:px-6 py-3 sm:py-4 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4 shadow-lg z-10">
     <div class="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-start">
       <div class="flex items-center gap-3">
         <!-- RICOH Logo Mark -->
@@ -232,32 +246,32 @@
         </div>
         <div>
           <h1 class="font-display font-extrabold text-lg sm:text-xl tracking-wider text-slate-900 flex items-center gap-2">
-            互盛 RICOH <span class="text-xs font-semibold bg-red-600/10 border border-red-500/20 text-ricoh-red px-2.5 py-0.5 rounded-full">戰場情報中樞 (v3.3)</span>
+            互盛 RICOH <span class="hidden sm:inline text-xs font-semibold bg-red-600/10 border border-red-500/20 text-ricoh-red px-2.5 py-0.5 rounded-full">戰場情報中樞 (v3.3)</span>
           </h1>
-          <p class="text-[10px] text-slate-500 font-semibold tracking-widest mt-0.5">TACTICAL INTELLIGENCE COMMAND CONSOLE</p>
+          <p class="hidden sm:block text-[10px] text-slate-500 font-semibold tracking-widest mt-0.5">TACTICAL INTELLIGENCE COMMAND CONSOLE</p>
         </div>
       </div>
     </div>
 
     <!-- Navigation Tabs (Page SPA Switcher) -->
-    <div class="no-print flex bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1 my-2 lg:my-0 w-full sm:w-auto justify-center">
-      <button onclick="navigateToPage('radar')" id="nav-radar" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-ricoh-red text-white shadow-md shadow-ricoh-red/20">
+    <div class="no-print flex bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1 my-1 lg:my-0 w-full sm:w-auto justify-center">
+      <button onclick="navigateToPage('radar')" id="nav-radar" class="flex-1 sm:flex-none justify-center min-h-11 flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-ricoh-red text-white shadow-md shadow-ricoh-red/20">
         <i data-lucide="radar" class="w-4 h-4"></i>
         <span>📊 標案情報監控雷達</span>
       </button>
-      <button onclick="navigateToPage('pitch')" id="nav-pitch" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-200 hover:bg-slate-800">
+      <button onclick="navigateToPage('pitch')" id="nav-pitch" class="flex-1 sm:flex-none justify-center min-h-11 flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-white">
         <i data-lucide="shield-alert" class="w-4 h-4"></i>
         <span>🎯 各廠牌產品與市場資訊</span>
       </button>
     </div>
 
     <!-- Live clock & dynamic DB update time -->
-    <div class="flex items-center gap-4 text-xs text-slate-400 w-full lg:w-auto justify-between lg:justify-end">
+    <div class="flex items-center gap-2 sm:gap-4 text-xs text-slate-400 w-full lg:w-auto justify-between lg:justify-end overflow-x-auto pb-0.5">
       <div class="flex items-center gap-2 font-mono bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5">
         <i data-lucide="clock" class="w-3.5 h-3.5 text-ricoh-red"></i>
         <span>情報發布時間: <span id="data-updated-time" class="font-bold text-slate-700">---</span> <span class="text-[10px] text-slate-400 font-sans font-semibold">(每2小時自動更新)</span></span>
       </div>
-      <div class="flex items-center gap-2 bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5">
+      <div class="hidden sm:flex items-center gap-2 bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -273,13 +287,17 @@
   </header>
 
   <!-- Main Layout -->
-  <main class="max-w-7xl mx-auto px-4 py-8 relative z-10">
+  <main class="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-8 relative z-10">
 
     <!-- Page 1: 標案情報監控雷達 -->
-    <div id="page-tender-radar" class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
+    <div id="page-tender-radar" class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 w-full">
       <!-- Left Sidebar: Filters (佔比 3 欄) -->
-      <section id="left-panel-sidebar" class="lg:col-span-3 flex flex-col gap-6">
-        <div class="glass-panel rounded-2xl p-6 shadow-2xl flex flex-col gap-6">
+      <section id="left-panel-sidebar" class="lg:col-span-3 flex flex-col gap-6 lg:sticky lg:top-32 self-start">
+        <button type="button" onclick="toggleMobileFilters()" class="sm:hidden min-h-11 w-full rounded-xl bg-white border border-slate-200 px-4 py-2.5 flex items-center justify-between text-sm font-bold text-slate-800 shadow-sm" aria-controls="mobile-filter-panel" aria-expanded="false" id="mobile-filter-toggle">
+          <span class="flex items-center gap-2"><i data-lucide="sliders-horizontal" class="w-4 h-4 text-ricoh-red"></i>篩選標案</span>
+          <span id="mobile-filter-label" class="text-xs font-semibold text-ricoh-red">全台灣</span>
+        </button>
+        <div id="mobile-filter-panel" class="mobile-filter-panel is-collapsed flex glass-panel rounded-2xl p-4 sm:p-6 shadow-sm sm:shadow-2xl flex-col gap-5 sm:gap-6">
           <div class="flex items-start gap-3 border-b border-slate-200 pb-5">
             <div class="p-2 bg-red-600/10 rounded-lg text-ricoh-red mt-0.5">
               <i data-lucide="radar" class="w-6 h-6"></i>
@@ -342,7 +360,7 @@
 
       <!-- Right Main: Tenders cards (佔比 9 欄) -->
       <section id="left-panel" class="lg:col-span-9 flex flex-col gap-6">
-        <div id="tenders-container" class="flex flex-col gap-6 max-h-[850px] overflow-y-auto pr-1">
+        <div id="tenders-container" class="flex flex-col gap-4 sm:gap-6">
           <!-- Dynamic cards injected here -->
         </div>
       </section>
@@ -803,6 +821,15 @@
     }
 
     // Render Tenders List Based on City Filter
+    function toggleMobileFilters(forceClose = false) {
+      const panel = document.getElementById("mobile-filter-panel");
+      const button = document.getElementById("mobile-filter-toggle");
+      if (!panel || !button) return;
+      const shouldCollapse = forceClose || !panel.classList.contains("is-collapsed");
+      panel.classList.toggle("is-collapsed", shouldCollapse);
+      button.setAttribute("aria-expanded", String(!shouldCollapse));
+    }
+
     function renderTenders(city) {
       const container = document.getElementById("tenders-container");
       container.innerHTML = "";
@@ -847,7 +874,7 @@
       // Build Tender Cards
       currentFilteredTenders.forEach(t => {
         const card = document.createElement("div");
-        card.className = "glass-card rounded-xl p-5 shadow-sm hover:shadow-md border border-slate-200/80 flex flex-col gap-4";
+        card.className = "tender-card glass-card rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md border border-slate-200/80 flex flex-col gap-4";
 
         const historyRecords = Array.isArray(t.history_records) ? t.history_records : [];
         const historyRowsHtml = historyRecords.map(record => `
@@ -865,6 +892,25 @@
               ${record.source_url ? `<a href="${escapeHtml(record.source_url)}" target="_blank" rel="noopener noreferrer" class="text-[10px] font-bold text-ricoh-red hover:underline">原始公告 ↗</a>` : '<span class="text-[10px] text-slate-400">無連結</span>'}
             </td>
           </tr>
+        `).join('');
+        const historyCardsHtml = historyRecords.map(record => `
+          <article class="rounded-xl border border-slate-200 bg-white p-3.5 space-y-3">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="text-sm font-bold text-slate-800 leading-snug">${escapeHtml(record.title || '未提供案名')}</div>
+                <div class="mt-1 text-xs text-slate-500">${escapeHtml(record.award_date || '—')} · 案號 ${escapeHtml(record.job_number || '—')}</div>
+              </div>
+              <span class="shrink-0 rounded-full bg-emerald-50 px-2 py-1 text-xs font-bold text-emerald-700">${record.discount_rate == null ? '折率不適用' : `${escapeHtml(record.discount_rate)}%`}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 text-xs">
+              <div><span class="block text-slate-500">預算</span><strong class="mt-0.5 block text-slate-800">${formatCurrency(record.budget)}</strong></div>
+              <div><span class="block text-slate-500">決標價</span><strong class="mt-0.5 block text-slate-800">${formatCurrency(record.award_price)}</strong></div>
+            </div>
+            <div class="flex items-center justify-between gap-3 border-t border-slate-100 pt-3 text-xs">
+              <span class="text-slate-600">${escapeHtml(record.winner || '未公開')}</span>
+              ${record.source_url ? `<a href="${escapeHtml(record.source_url)}" target="_blank" rel="noopener noreferrer" class="min-h-11 inline-flex items-center font-bold text-ricoh-red">原始公告 ↗</a>` : '<span class="text-slate-400">無連結</span>'}
+            </div>
+          </article>
         `).join('');
 
         const today = new Date();
@@ -897,8 +943,8 @@
         card.innerHTML = `
           <!-- Card Top Row -->
           <div class="flex flex-col gap-1.5">
-            <div class="flex items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
+              <div class="flex items-center gap-2 flex-wrap">
                 <span class="text-[10px] bg-red-50 border border-red-200 text-ricoh-red font-bold px-2 py-0.5 rounded-md">
                   ${t.city}
                 </span>
@@ -909,7 +955,7 @@
                   ${displayStage}
                 </span>
               </div>
-              <span class="text-[10px] text-slate-500 font-mono flex items-center gap-2">
+              <span class="text-xs text-slate-500 font-mono flex items-center gap-2 flex-wrap">
                 <span class="flex items-center gap-1">
                   <i data-lucide="calendar" class="w-3 h-3 text-slate-400"></i>
                   公告日: ${t.publish_date || '—'}
@@ -964,27 +1010,27 @@
           `}
 
           <!-- Three Grid Data Module -->
-          <div class="grid grid-cols-3 gap-3 bg-slate-50 rounded-xl p-3 border border-slate-200/60 text-xs">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-50 rounded-xl p-3 border border-slate-200/60 text-xs">
             <!-- Col 1: Avg Discount & Source -->
-            <div class="flex flex-col gap-1 border-r border-slate-200/80 pr-1.5">
-              <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">歷史決標折率中位數</span>
+            <div class="flex flex-col gap-1 sm:border-r border-slate-200/80 sm:pr-1.5 pb-3 sm:pb-0 border-b sm:border-b-0">
+              <span class="text-[11px] text-slate-500 uppercase font-bold tracking-wider">同類決標折率中位數</span>
               <span class="text-sm font-extrabold text-emerald-600 font-display font-mono flex items-center gap-0.5">
                 ${t.avg_discount}
                 <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-400"></i>
               </span>
-              <span class="text-[8px] text-slate-500 leading-tight font-medium truncate" title="${t.discount_source}">${t.discount_source}</span>
+              <span class="text-[11px] text-slate-500 leading-tight font-medium" title="${t.discount_source}">${t.discount_source}</span>
             </div>
             <!-- Col 2: Dominant Competitor -->
-            <div class="flex flex-col gap-1 border-r border-slate-200/80 px-1.5 justify-between">
+            <div class="flex flex-col gap-1 sm:border-r border-slate-200/80 sm:px-1.5 justify-between pb-3 sm:pb-0 border-b sm:border-b-0">
               <div>
-                <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider block">
+                <span class="text-[11px] text-slate-500 uppercase font-bold tracking-wider block">
                   ${t.stage === '已決標' ? '本案得標廠商' : '歷史得標/優勢商'}
                 </span>
                 <span class="text-xs font-bold text-slate-700 mt-1 block truncate" title="${t.main_competitor}">${t.main_competitor}</span>
               </div>
             </div>
             <!-- Col 3: History-based Price Estimate / Actual Award Price -->
-            <div class="flex flex-col gap-1 pl-1.5">
+            <div class="flex flex-col gap-1 sm:pl-1.5">
               ${displayStage === '已決標' ? `
                 <span class="text-[9px] text-emerald-600 uppercase font-bold tracking-wider flex items-center gap-0.5 font-semibold">
                   <i data-lucide="check-circle" class="w-2.5 h-2.5 text-emerald-500"></i>
@@ -1004,16 +1050,16 @@
           </div>
 
           <!-- Complete verified award history -->
-          <details class="pt-2 border-t border-slate-200/60" ${historyRecords.length ? 'open' : ''}>
+          <details class="pt-2 border-t border-slate-200/60" ${historyRecords.length && window.innerWidth >= 640 ? 'open' : ''}>
             <summary class="flex justify-between items-center gap-3 cursor-pointer list-none rounded-lg px-3 py-2 bg-slate-50 border border-slate-200 hover:border-emerald-300 transition-colors">
               <span class="text-[10px] text-slate-600 uppercase font-bold tracking-wider flex items-center gap-1.5">
                 <i data-lucide="database" class="w-3.5 h-3.5 text-emerald-500"></i>
-                完整歷史決標紀錄
+                同類型歷史決標紀錄
               </span>
-              <span class="text-[10px] font-bold ${historyRecords.length ? 'text-emerald-700' : 'text-slate-400'}">${historyRecords.length} 筆可驗證資料</span>
+              <span class="text-[10px] font-bold ${historyRecords.length ? 'text-emerald-700' : 'text-slate-400'}">${historyRecords.length} 筆可比資料</span>
             </summary>
             ${historyRecords.length ? `
-              <div class="mt-2 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+              <div class="hidden sm:block mt-2 overflow-x-auto rounded-lg border border-slate-200 bg-white">
                 <table class="w-full text-left">
                   <thead class="bg-slate-50 text-[9px] uppercase tracking-wider text-slate-500">
                     <tr>
@@ -1029,9 +1075,10 @@
                   <tbody class="px-3">${historyRowsHtml}</tbody>
                 </table>
               </div>
+              <div class="sm:hidden mt-2 space-y-3">${historyCardsHtml}</div>
             ` : `
               <div class="mt-2 rounded-lg border border-dashed border-slate-200 bg-slate-50 px-4 py-4 text-[11px] text-slate-500">
-                此機關目前查無同類設備且同時公開「預算金額」與「決標金額」的成功決標紀錄，因此不產生推估價。
+                此機關目前查無「相同設備類型、相同契約型態」且同時公開預算與決標金額的紀錄，因此不產生推估價。
               </div>
             `}
           </details>
@@ -1168,6 +1215,8 @@
       const filterSelect = document.getElementById("city-filter");
       filterSelect.addEventListener("change", (e) => {
         renderTenders(e.target.value);
+        document.getElementById("mobile-filter-label").textContent = e.target.value === "all" ? "全台灣" : e.target.value;
+        if (window.innerWidth < 640) toggleMobileFilters(true);
       });
 
       // 3. Escape Key Modal Closer

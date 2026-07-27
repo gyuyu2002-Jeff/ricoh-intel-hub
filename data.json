@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-27 15:11",
+  "last_updated": "2026-07-27 15:28",
   "tenders": [
     {
       "city": "台北市",
@@ -14,11 +14,11 @@
       "budget": "無公開數據",
       "award_price": "",
       "avg_discount": "62.8%",
-      "discount_source": "政府電子採購網 1 筆有效歷史決標折扣中位數",
+      "discount_source": "政府電子採購網 1 筆同設備、同契約型態決標折扣中位數",
       "main_competitor": "震旦 SHARP",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 1,
         "discount_rate": 62.8
       },
@@ -63,11 +63,11 @@
       "budget": "NT$ 40,482,150",
       "award_price": "",
       "avg_discount": "資料不足",
-      "discount_source": "查無可比較的歷史預算與決標價",
+      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
       "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 0,
         "discount_rate": null
       },
@@ -91,11 +91,11 @@
       "budget": "NT$ 968,000",
       "award_price": "",
       "avg_discount": "81.2%",
-      "discount_source": "政府電子採購網 1 筆有效歷史決標折扣中位數",
+      "discount_source": "政府電子採購網 1 筆同設備、同契約型態決標折扣中位數",
       "main_competitor": "台灣佳能 (Canon)",
       "suggested_price": "NT$ 786,000",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 1,
         "discount_rate": 81.2
       },
@@ -159,11 +159,11 @@
       "budget": "無公開數據",
       "award_price": "",
       "avg_discount": "74.9%",
-      "discount_source": "政府電子採購網 1 筆有效歷史決標折扣中位數",
+      "discount_source": "政府電子採購網 1 筆同設備、同契約型態決標折扣中位數",
       "main_competitor": "資仲科技有限公司",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 1,
         "discount_rate": 74.9
       },
@@ -208,11 +208,11 @@
       "budget": "無公開數據",
       "award_price": "",
       "avg_discount": "資料不足",
-      "discount_source": "查無可比較的歷史預算與決標價",
+      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
       "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 0,
         "discount_rate": null
       },
@@ -236,11 +236,11 @@
       "budget": "NT$ 310,000",
       "award_price": "",
       "avg_discount": "資料不足",
-      "discount_source": "查無可比較的歷史預算與決標價",
+      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
       "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 0,
         "discount_rate": null
       },
@@ -264,11 +264,11 @@
       "budget": "NT$ 1,000,000",
       "award_price": "",
       "avg_discount": "資料不足",
-      "discount_source": "查無可比較的歷史預算與決標價",
+      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
       "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 0,
         "discount_rate": null
       },
@@ -292,11 +292,11 @@
       "budget": "NT$ 1,802,679",
       "award_price": "NT$ 1,733,345",
       "avg_discount": "資料不足",
-      "discount_source": "查無可比較的歷史預算與決標價",
+      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
       "main_competitor": "宏羚股份有限公司 (HONLYNN CO., LTD.)",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 0,
         "discount_rate": null
       },
@@ -319,58 +319,18 @@
       "deadline": "2026-06-29",
       "budget": "無公開數據",
       "award_price": "NT$ 174,897",
-      "avg_discount": "88.0%",
-      "discount_source": "政府電子採購網 2 筆有效歷史決標折扣中位數",
-      "main_competitor": "新加坡(Singapore)",
+      "avg_discount": "資料不足",
+      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
+      "main_competitor": "JK TECHNOLOGY PTE LTD",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
-        "record_count": 2,
-        "discount_rate": 88.0
+        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "record_count": 0,
+        "discount_rate": null
       },
       "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEyMzM3OTY=",
-      "history_stats": [
-        {
-          "year": 2025,
-          "val": 84,
-          "type": "real",
-          "winner": "金儀 Konica Minolta"
-        },
-        {
-          "year": 2025,
-          "val": 91,
-          "type": "real",
-          "winner": "美國(United States of America)"
-        }
-      ],
-      "history_records": [
-        {
-          "award_date": "2025-12-17",
-          "year": 2025,
-          "title": "美國休士頓代表人辦事處電腦、螢幕、印表機、監視器及電腦軟體等設備採購",
-          "job_number": "LBOTNY-2025-19",
-          "budget": 728063,
-          "award_price": 665642,
-          "discount_rate": 91.4,
-          "winner": "美國(United States of America)",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251217&fn=BDM-1-71049108.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
-        },
-        {
-          "award_date": "2025-11-26",
-          "year": 2025,
-          "title": "114年度租賃數位式影印機",
-          "job_number": "114-A008-00A",
-          "budget": 4455000,
-          "award_price": 3767400,
-          "discount_rate": 84.6,
-          "winner": "金儀 Konica Minolta",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251126&fn=BDM-2-71015781.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
-        }
-      ],
+      "history_stats": [],
+      "history_records": [],
       "stage": "已決標",
       "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 1
@@ -387,14 +347,14 @@
       "deadline": "2026-07-15",
       "budget": "無公開數據",
       "award_price": "",
-      "avg_discount": "85.0%",
-      "discount_source": "政府電子採購網 5 筆有效歷史決標折扣中位數",
+      "avg_discount": "80.0%",
+      "discount_source": "政府電子採購網 3 筆同設備、同契約型態決標折扣中位數",
       "main_competitor": "新印科技股份有限公司",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
-        "record_count": 5,
-        "discount_rate": 85.0
+        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "record_count": 3,
+        "discount_rate": 80.0
       },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=NAI-1-71239121.xml",
       "history_stats": [
@@ -423,18 +383,6 @@
           "winner": "雙欣科技有限公司"
         },
         {
-          "year": 2021,
-          "val": 85,
-          "type": "real",
-          "winner": "傳響音影工程設計有限公司"
-        },
-        {
-          "year": 2022,
-          "val": 87,
-          "type": "real",
-          "winner": "傳響音影工程設計有限公司"
-        },
-        {
           "year": 2023,
           "val": 85,
           "type": "real",
@@ -452,32 +400,6 @@
           "discount_rate": 85.0,
           "winner": "新印科技股份有限公司",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20230130&fn=BDM-1-70218441.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
-        },
-        {
-          "award_date": "2022-03-11",
-          "year": 2022,
-          "title": "111年噴墨式藥袋印表機採購案",
-          "job_number": "CNPC-G-11106",
-          "budget": 211000,
-          "award_price": 184000,
-          "discount_rate": 87.2,
-          "winner": "傳響音影工程設計有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220311&fn=BDM-1-53669069.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
-        },
-        {
-          "award_date": "2021-02-26",
-          "year": 2021,
-          "title": "噴墨式藥袋印表機採購案",
-          "job_number": "CNPC-G-11004",
-          "budget": 211000,
-          "award_price": 179500,
-          "discount_rate": 85.1,
-          "winner": "傳響音影工程設計有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20210226&fn=BDM-1-53339328.xml",
           "official_verified": true,
           "verification_source": "政府電子採購網決標查詢"
         },
@@ -550,39 +472,18 @@
       "deadline": "2026-06-02",
       "budget": "無公開數據",
       "award_price": "",
-      "avg_discount": "96.2%",
-      "discount_source": "政府電子採購網 1 筆有效歷史決標折扣中位數",
-      "main_competitor": "宏羚股份有限公司 (HONLYNN CO., LTD.)",
+      "avg_discount": "資料不足",
+      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
+      "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
-        "record_count": 1,
-        "discount_rate": 96.2
+        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "record_count": 0,
+        "discount_rate": null
       },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260708&fn=NAI-1-71225567.xml",
-      "history_stats": [
-        {
-          "year": 2026,
-          "val": 96,
-          "type": "real",
-          "winner": "宏羚股份有限公司 (HONLYNN CO., LTD.)"
-        }
-      ],
-      "history_records": [
-        {
-          "award_date": "2026-07-22",
-          "year": 2026,
-          "title": "高速彩色雷射印表機租賃二年單價開口契約",
-          "job_number": "M11523Q",
-          "budget": 1802679,
-          "award_price": 1733345,
-          "discount_rate": 96.2,
-          "winner": "宏羚股份有限公司 (HONLYNN CO., LTD.)",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260722&fn=BDM-1-71237829.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
-        }
-      ],
+      "history_stats": [],
+      "history_records": [],
       "stage": "無法決標",
       "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
       "duration_years": 1
@@ -600,11 +501,11 @@
       "budget": "NT$ 3,495,303",
       "award_price": "NT$ 3,014,382",
       "avg_discount": "資料不足",
-      "discount_source": "查無可比較的歷史預算與決標價",
+      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
       "main_competitor": "耑維科技股份有限公司",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 0,
         "discount_rate": null
       },
@@ -628,11 +529,11 @@
       "budget": "NT$ 591,600",
       "award_price": "",
       "avg_discount": "56.9%",
-      "discount_source": "政府電子採購網 3 筆有效歷史決標折扣中位數",
+      "discount_source": "政府電子採購網 3 筆同設備、同契約型態決標折扣中位數",
       "main_competitor": "本公司 (互盛 RICOH)",
       "suggested_price": "NT$ 336,000",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 3,
         "discount_rate": 56.9
       },
@@ -715,11 +616,11 @@
       "budget": "NT$ 1,200,000",
       "award_price": "",
       "avg_discount": "95.0%",
-      "discount_source": "政府電子採購網 1 筆有效歷史決標折扣中位數",
+      "discount_source": "政府電子採購網 1 筆同設備、同契約型態決標折扣中位數",
       "main_competitor": "富士軟片 (FUJIFILM)",
       "suggested_price": "NT$ 1,140,000",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 1,
         "discount_rate": 95.0
       },
@@ -764,11 +665,11 @@
       "budget": "NT$ 8,450,000",
       "award_price": "NT$ 7,540,000",
       "avg_discount": "資料不足",
-      "discount_source": "查無可比較的歷史預算與決標價",
+      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
       "main_competitor": "瑋華科技有限公司",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "歷史決標折扣中位數",
+        "method": "同設備與同契約型態歷史決標折扣中位數",
         "record_count": 0,
         "discount_rate": null
       },
@@ -1091,7 +992,7 @@
       "budget": 728063,
       "award_price": 665642,
       "discount_rate": 91.4,
-      "winner": "美國(United States of America)",
+      "winner": "BERNERS TECHNOLOGY LLC",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251217&fn=BDM-1-71049108.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
