@@ -431,25 +431,13 @@ def main():
                     if year == current_year and raw_winner:
                         year_winner = map_competitor_name(raw_winner)
                     else:
-                        competitors_history = [
-                            "台灣佳能 (Canon)", "富士軟片 (FUJIFILM)", "震旦 SHARP", 
-                            "金儀 Konica Minolta", "台灣京瓷 (Kyocera)", "台灣愛普生 (Epson)",
-                            "本公司 (互盛 RICOH)"
-                        ]
-                        winner_idx = (int(h[12+i:14+i], 16) + year) % len(competitors_history)
-                        year_winner = competitors_history[winner_idx]
+                        year_winner = "同業競爭 (估算)"
                 else:
                     # If active, the parsed winner is the winner of the previous cycle
                     if year == current_year - duration and raw_winner:
                         year_winner = map_competitor_name(raw_winner)
                     else:
-                        competitors_history = [
-                            "台灣佳能 (Canon)", "富士軟片 (FUJIFILM)", "震旦 SHARP", 
-                            "金儀 Konica Minolta", "台灣京瓷 (Kyocera)", "台灣愛普生 (Epson)",
-                            "本公司 (互盛 RICOH)"
-                        ]
-                        winner_idx = (int(h[12+i:14+i], 16) + year) % len(competitors_history)
-                        year_winner = competitors_history[winner_idx]
+                        year_winner = "同業競爭 (估算)"
             else:
                 year_winner = "市場同業平均"
                 
