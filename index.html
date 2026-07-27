@@ -237,8 +237,8 @@
   </div>
 
   <!-- Top Navigation Bar -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-ricoh-red px-3 sm:px-6 py-3 sm:py-4 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4 shadow-lg z-10">
-    <div class="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-start">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-ricoh-red px-3 sm:px-6 py-3 sm:py-4 shadow-sm flex flex-col xl:grid xl:grid-cols-[auto_1fr] 2xl:flex 2xl:flex-row items-center justify-between gap-3 2xl:gap-4 shadow-lg z-10">
+    <div class="flex items-center gap-3 w-full xl:w-auto xl:col-start-1 xl:row-start-1 justify-between xl:justify-start 2xl:shrink-0">
       <div class="flex items-center gap-3">
         <!-- RICOH Logo Mark -->
         <div class="w-10 h-10 bg-ricoh-red flex items-center justify-center rounded-lg shadow-md shadow-ricoh-red/20">
@@ -246,7 +246,7 @@
         </div>
         <div>
           <h1 class="font-display font-extrabold text-lg sm:text-xl tracking-wider text-slate-900 flex items-center gap-2">
-            互盛 RICOH <span class="hidden sm:inline text-xs font-semibold bg-red-600/10 border border-red-500/20 text-ricoh-red px-2.5 py-0.5 rounded-full">戰場情報中樞 (v3.3)</span>
+            互盛 RICOH <span class="hidden sm:inline text-xs font-semibold bg-red-600/10 border border-red-500/20 text-ricoh-red px-2.5 py-0.5 rounded-full whitespace-nowrap">情報中樞 v3.3</span>
           </h1>
           <p class="hidden sm:block text-[10px] text-slate-500 font-semibold tracking-widest mt-0.5">TACTICAL INTELLIGENCE COMMAND CONSOLE</p>
         </div>
@@ -254,24 +254,24 @@
     </div>
 
     <!-- Navigation Tabs (Page SPA Switcher) -->
-    <div class="no-print flex bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1 my-1 lg:my-0 w-full sm:w-auto justify-center">
+    <div class="no-print flex bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1 my-1 xl:my-0 w-full sm:w-auto xl:col-span-2 xl:row-start-2 xl:justify-self-center 2xl:col-auto 2xl:shrink-0 justify-center">
       <button onclick="navigateToPage('radar')" id="nav-radar" class="flex-1 sm:flex-none justify-center min-h-11 flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-ricoh-red text-white shadow-md shadow-ricoh-red/20">
         <i data-lucide="radar" class="w-4 h-4"></i>
-        <span>📊 標案情報監控雷達</span>
+        <span class="whitespace-nowrap">標案情報監控雷達</span>
       </button>
       <button onclick="navigateToPage('pitch')" id="nav-pitch" class="flex-1 sm:flex-none justify-center min-h-11 flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-white">
         <i data-lucide="shield-alert" class="w-4 h-4"></i>
-        <span>🎯 各廠牌產品與市場資訊</span>
+        <span class="whitespace-nowrap">各廠牌產品與市場資訊</span>
       </button>
     </div>
 
     <!-- Live clock & dynamic DB update time -->
-    <div class="flex items-center gap-2 sm:gap-4 text-xs text-slate-400 w-full lg:w-auto justify-between lg:justify-end overflow-x-auto pb-0.5">
-      <div class="flex items-center gap-2 font-mono bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5">
+    <div class="flex items-center gap-2 2xl:gap-3 text-xs text-slate-400 w-full xl:w-auto xl:col-start-2 xl:row-start-1 xl:justify-self-end justify-between 2xl:justify-end overflow-x-auto pb-0.5 2xl:shrink-0">
+      <div class="flex shrink-0 items-center gap-2 font-mono bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5 whitespace-nowrap">
         <i data-lucide="clock" class="w-3.5 h-3.5 text-ricoh-red"></i>
-        <span>情報發布時間: <span id="data-updated-time" class="font-bold text-slate-700">---</span> <span class="text-[10px] text-slate-400 font-sans font-semibold">(每2小時自動更新)</span></span>
+        <span>情報發布時間: <span id="data-updated-time" class="font-bold text-slate-700">---</span> <span class="hidden sm:inline text-[10px] text-slate-400 font-sans font-semibold">(每2小時自動更新)</span></span>
       </div>
-      <div class="hidden sm:flex items-center gap-2 bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5">
+      <div class="hidden sm:flex shrink-0 items-center gap-2 bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5 whitespace-nowrap">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -279,7 +279,7 @@
         <span class="font-medium text-emerald-400 font-mono">LIVE 連線正常</span>
       </div>
       <!-- Manual Sync Button -->
-      <button onclick="triggerManualSync(event)" class="no-print bg-slate-100 hover:bg-ricoh-red hover:text-white border border-slate-200/80 hover:border-ricoh-red rounded-full px-3.5 py-1.5 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all shadow-sm">
+      <button onclick="triggerManualSync(event)" class="no-print shrink-0 bg-slate-100 hover:bg-ricoh-red hover:text-white border border-slate-200/80 hover:border-ricoh-red rounded-full px-3.5 py-1.5 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all shadow-sm whitespace-nowrap">
         <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
         <span>手動更新</span>
       </button>
@@ -748,19 +748,22 @@
       const pitchPage = document.getElementById("page-competitor-pitch");
       const navRadar = document.getElementById("nav-radar");
       const navPitch = document.getElementById("nav-pitch");
+      const navBaseClass = "flex-1 sm:flex-none justify-center min-h-11 flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200";
+      const navActiveClass = `${navBaseClass} bg-ricoh-red text-white shadow-md shadow-ricoh-red/20`;
+      const navInactiveClass = `${navBaseClass} text-slate-600 hover:text-slate-900 hover:bg-white`;
 
       if (pageId === 'radar') {
         radarPage.classList.remove("hidden");
         pitchPage.classList.add("hidden");
         
-        navRadar.className = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-ricoh-red text-white shadow-md shadow-ricoh-red/20";
-        navPitch.className = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200/60";
+        navRadar.className = navActiveClass;
+        navPitch.className = navInactiveClass;
       } else {
         radarPage.classList.add("hidden");
         pitchPage.classList.remove("hidden");
         
-        navRadar.className = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200/60";
-        navPitch.className = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-ricoh-red text-white shadow-md shadow-ricoh-red/20";
+        navRadar.className = navInactiveClass;
+        navPitch.className = navActiveClass;
       }
       
       // Re-initialize Lucide Icons for dynamic content
