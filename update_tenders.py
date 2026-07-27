@@ -408,8 +408,13 @@ def main():
         duration = parse_contract_duration(title)
         
         history_stats = []
+        is_resolved = (stage == "已決標")
+        
+        # If resolved, trend ends at current_year (2026). If active, it ends at current_year - 1 (2025).
+        max_trend_year = current_year if is_resolved else (current_year - 1)
+        
         for i in range(5):
-            year = current_year - 5 + i
+            year = max_trend_year - 4 + i
             offset = (int(h[10+i:12+i], 16) % 5) - 2
             val = int(avg_discount_num + offset)
             val = max(80, min(100, val))
@@ -421,17 +426,30 @@ def main():
                 
             # Assign winner name for history point
             if is_real:
-                # If it's a previous real bidding year and we have a real historical winner, use it!
-                if year == current_year - duration and raw_winner:
-                    year_winner = map_competitor_name(raw_winner)
+                if is_resolved:
+                    # If it is the current resolved year, we use the parsed winner
+                    if year == current_year and raw_winner:
+                        year_winner = map_competitor_name(raw_winner)
+                    else:
+                        competitors_history = [
+                            "台灣佳能 (Canon)", "富士軟片 (FUJIFILM)", "震旦 SHARP", 
+                            "金儀 Konica Minolta", "台灣京瓷 (Kyocera)", "台灣愛普生 (Epson)",
+                            "本公司 (互盛 RICOH)"
+                        ]
+                        winner_idx = (int(h[12+i:14+i], 16) + year) % len(competitors_history)
+                        year_winner = competitors_history[winner_idx]
                 else:
-                    competitors_history = [
-                        "台灣佳能 (Canon)", "富士軟片 (FUJIFILM)", "震旦 SHARP", 
-                        "金儀 Konica Minolta", "台灣京瓷 (Kyocera)", "台灣愛普生 (Epson)",
-                        "本公司 (互盛 RICOH)"
-                    ]
-                    winner_idx = (int(h[12+i:14+i], 16) + year) % len(competitors_history)
-                    year_winner = competitors_history[winner_idx]
+                    # If active, the parsed winner is the winner of the previous cycle
+                    if year == current_year - duration and raw_winner:
+                        year_winner = map_competitor_name(raw_winner)
+                    else:
+                        competitors_history = [
+                            "台灣佳能 (Canon)", "富士軟片 (FUJIFILM)", "震旦 SHARP", 
+                            "金儀 Konica Minolta", "台灣京瓷 (Kyocera)", "台灣愛普生 (Epson)",
+                            "本公司 (互盛 RICOH)"
+                        ]
+                        winner_idx = (int(h[12+i:14+i], 16) + year) % len(competitors_history)
+                        year_winner = competitors_history[winner_idx]
             else:
                 year_winner = "市場同業平均"
                 
@@ -482,6 +500,13 @@ def main():
         tag = "重點攻堅" if final_budget_val >= 2500000 else "一般監控"
         tag_color = "bg-red-950/45 border-red-500/40 text-red-400" if tag == "重點攻堅" else "bg-slate-900 border-slate-700 text-slate-400"
         
+        award_price_str = ""
+        if real_award > 0:
+            if real_award < 2000 or (real_budget > 0 and (real_award / real_budget) < 0.02):
+                award_price_str = f"NT$ {real_award:,} (單價決標)"
+            else:
+                award_price_str = f"NT$ {real_award:,}"
+
         processed_tenders.append({
             "city": city,
             "tag": tag,
@@ -490,7 +515,7 @@ def main():
             "unit": unit_name,
             "deadline": deadline_str,
             "budget": budget_str,
-            "award_price": f"NT$ {real_award:,}" if real_award > 0 else "",
+            "award_price": award_price_str,
             "avg_discount": avg_discount_str,
             "discount_source": discount_source,
             "main_competitor": main_competitor,
