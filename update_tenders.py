@@ -8,6 +8,7 @@ import ssl
 from datetime import datetime, timezone, timedelta
 import os
 import time
+from concurrent.futures import ThreadPoolExecutor
 
 OFFICIAL_AWARD_SEARCH_URL = "https://web.pcc.gov.tw/prkms/tender/common/agent/readTenderAgent"
 OFFICIAL_SSL_CONTEXT = ssl.create_default_context()
@@ -238,6 +239,67 @@ def is_comparable_history(current_title, history_title):
         and classify_contract(current_title) == classify_contract(history_title)
     )
 
+def history_cutoff_date(years=5):
+    today = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).date()
+    try:
+        return today.replace(year=today.year - years)
+    except ValueError:
+        return today.replace(year=today.year - years, day=28)
+
+def is_recent_history(record, years=5):
+    try:
+        return datetime.strptime(record.get("award_date", ""), "%Y-%m-%d").date() >= history_cutoff_date(years)
+    except (TypeError, ValueError):
+        return False
+
+def exclude_contract_changes(records):
+    explicit_change_words = ["契約變更", "變更案", "後續擴充", "追加採購"]
+    base_records = {
+        record.get("job_number", ""): record
+        for record in records
+        if record.get("job_number")
+    }
+    filtered = []
+    for record in records:
+        title = record.get("title", "")
+        if any(word in title for word in explicit_change_words):
+            continue
+        variant_match = re.fullmatch(r'(.+)-\d+', record.get("job_number", ""))
+        if variant_match:
+            base_record = base_records.get(variant_match.group(1))
+            if base_record and is_comparable_history(title, base_record.get("title", "")):
+                continue
+        filtered.append(record)
+    return filtered
+
+def get_related_units(unit_id, unit_name, unit_map):
+    if not unit_id or "." not in unit_id or not isinstance(unit_map, dict):
+        return {}
+    parent_id = unit_id.rsplit(".", 1)[0]
+    parent_name = unit_map.get(parent_id, "")
+    normalized_unit = unit_name.replace("臺", "台")
+    normalized_parent = parent_name.replace("臺", "台")
+    if (
+        not parent_name
+        or not normalized_unit.startswith(normalized_parent)
+        or normalized_unit == normalized_parent
+        or normalized_parent.endswith(("政府", "行政院", "司法院", "監察院", "考試院", "立法院", "部"))
+    ):
+        return {}
+
+    parent_depth = parent_id.count(".")
+    return {
+        candidate_id: candidate_name
+        for candidate_id, candidate_name in unit_map.items()
+        if (
+            (candidate_id == parent_id or (
+                candidate_id.startswith(parent_id + ".")
+                and candidate_id.count(".") == parent_depth + 1
+            ))
+            and candidate_name.replace("臺", "台").startswith(normalized_parent)
+        )
+    }
+
 def looks_like_country(value):
     country_names = ["美國", "新加坡", "日本", "德國", "英國", "中國", "加拿大", "法國", "澳大利亞", "韓國"]
     return any(str(value).startswith(country) for country in country_names)
@@ -358,17 +420,23 @@ def main():
     output_path = os.path.join(script_dir, "data.json")
     existing_history_by_unit = {}
     history_unit_names = {}
+    history_unit_refresh = {}
 
     try:
         with open(output_path, "r", encoding="utf-8") as existing_file:
             existing_data = json.load(existing_file)
+        history_unit_refresh = dict(existing_data.get("history_unit_refresh", {}))
 
         cached_records = list(existing_data.get("history_cache", []))
         for tender in existing_data.get("tenders", []):
             unit_id = tender.get("unit_id", "")
             unit_name = tender.get("unit", "")
             for record in tender.get("history_records", []):
-                cached_records.append({"unit_id": unit_id, "unit_name": unit_name, **record})
+                cached_records.append({
+                    "unit_id": record.get("source_unit_id", unit_id),
+                    "unit_name": record.get("source_unit", unit_name),
+                    **record
+                })
 
         for cached in cached_records:
             unit_id = cached.get("unit_id", "")
@@ -379,7 +447,7 @@ def main():
             history_unit_names[unit_id] = unit_name
             history_record = {
                 key: value for key, value in cached.items()
-                if key not in ("unit_id", "unit_name")
+                if key not in ("unit_id", "unit_name", "source_unit_id", "source_unit", "relation_scope", "is_stale")
             }
             existing_history_by_unit.setdefault(unit_id, {})[job_number] = history_record
         print(f"Loaded {sum(len(records) for records in existing_history_by_unit.values())} verified cached histories.")
@@ -463,20 +531,20 @@ def main():
         
     print(f"Identified {len(active_tenders)} active/recent tenders from {len(active_units_dict)} units.")
     
-    # Fetch every successful equipment award returned for each monitored agency.
-    # Keep one record per procurement job instead of collapsing records by year.
-    raw_history_tenders = []
     failed_history_units = []
-    print("Querying complete award history for all active agencies...")
-    for h_unit, h_unit_id in active_units_dict.items():
+    queried_history_unit_ids = set()
+
+    def fetch_unit_history(h_unit_id, h_unit, comparable_titles=None, recent_only=False, request_delay=1):
         if not h_unit_id:
-            continue
+            return []
+        queried_history_unit_ids.add(h_unit_id)
         url_unit = f"https://pcc-api.openfun.app/api/listbyunit?unit_id={h_unit_id}"
         data_unit = fetch_json_with_retry(url_unit, f"listbyunit for '{h_unit}' ({h_unit_id})")
         if data_unit is None:
             failed_history_units.append(h_unit)
             print(f"Keeping cached award history for '{h_unit}' and continuing.")
-            continue
+            return []
+        results = []
         for record in data_unit.get("records", []):
             if not isinstance(record, dict):
                 continue
@@ -484,74 +552,144 @@ def main():
             notice_type = brief.get("type", "")
             if "決標" not in notice_type or "無法決標" in notice_type:
                 continue
-            if not is_relevant_equipment_title(brief.get("title", "")):
+            history_title = brief.get("title", "")
+            if not is_relevant_equipment_title(history_title):
+                continue
+            if comparable_titles and not any(is_comparable_history(title, history_title) for title in comparable_titles):
+                continue
+            if recent_only and str(record.get("date", "")) < history_cutoff_date().strftime("%Y%m%d"):
                 continue
             record["unit_name"] = h_unit
-            raw_history_tenders.append(record)
-        time.sleep(1)
+            results.append(record)
+        history_unit_refresh[h_unit_id] = datetime.now(timezone.utc).astimezone(
+            timezone(timedelta(hours=8))
+        ).strftime("%Y-%m-%d")
+        time.sleep(request_delay)
+        return results
 
     history_pool = {
         unit: list(existing_history_by_unit.get(unit_id, {}).values())
         for unit, unit_id in active_units_dict.items()
     }
     seen_history_jobs = set()
-    for h_item in sorted(raw_history_tenders, key=lambda item: int(item.get("date", 0)), reverse=True):
-        h_unit = h_item.get("unit_name", "")
-        h_unit_id = h_item.get("unit_id", "")
-        h_job = h_item.get("job_number", "")
-        job_key = (h_unit_id, h_job)
-        if not h_unit_id or not h_job or job_key in seen_history_jobs:
-            continue
-        seen_history_jobs.add(job_key)
 
-        cached_history = existing_history_by_unit.get(h_unit_id, {}).get(h_job)
-        if cached_history and not looks_like_country(cached_history.get("winner", "")):
-            continue
+    def process_history_items(raw_items):
+        for h_item in sorted(raw_items, key=lambda item: int(item.get("date", 0)), reverse=True):
+            h_unit = h_item.get("unit_name", "")
+            h_unit_id = h_item.get("unit_id", "")
+            h_job = h_item.get("job_number", "")
+            job_key = (h_unit_id, h_job)
+            if not h_unit_id or not h_job or job_key in seen_history_jobs:
+                continue
+            seen_history_jobs.add(job_key)
 
-        h_details = fetch_tender_detail_with_retry(h_unit_id, h_job)
-        if not h_details or not h_details.get("records"):
-            continue
+            cached_history = existing_history_by_unit.get(h_unit_id, {}).get(h_job)
+            if cached_history and not looks_like_country(cached_history.get("winner", "")):
+                continue
 
-        award_records = [
-            record for record in h_details["records"]
-            if "決標" in record.get("brief", {}).get("type", "")
-            and "無法決標" not in record.get("brief", {}).get("type", "")
+            h_details = fetch_tender_detail_with_retry(h_unit_id, h_job)
+            if not h_details or not h_details.get("records"):
+                continue
+            award_records = [
+                record for record in h_details["records"]
+                if "決標" in record.get("brief", {}).get("type", "")
+                and "無法決標" not in record.get("brief", {}).get("type", "")
+            ]
+            if not award_records:
+                continue
+            h_award_record = max(award_records, key=lambda record: int(record.get("date", 0)))
+            h_detail_obj = h_award_record.get("detail", {})
+            h_budget, h_award = extract_budget_and_award(h_detail_obj)
+            if h_budget <= 0 or h_award <= 0:
+                continue
+
+            h_winner = extract_winning_competitor(h_detail_obj)
+            h_date = date_to_iso(h_award_record.get("date"))
+            if not verify_official_award_notice(h_unit_id, h_job, h_date):
+                print(f"Skipped unverified history: {h_unit} | {h_date} | {h_job}")
+                continue
+            discount_rate = (h_award / h_budget) * 100
+            history_record = {
+                "award_date": h_date,
+                "year": int(h_date[:4]) if h_date else None,
+                "title": h_award_record.get("brief", {}).get("title", h_item.get("brief", {}).get("title", "")),
+                "job_number": h_job,
+                "budget": h_budget,
+                "award_price": h_award,
+                "discount_rate": round(discount_rate, 1) if 0 < discount_rate <= 100 else None,
+                "winner": map_competitor_name(h_winner) if h_winner else "未公開",
+                "source_url": h_detail_obj.get("url", ""),
+                "official_verified": True,
+                "verification_source": "政府電子採購網決標查詢"
+            }
+            history_pool.setdefault(h_unit, [])
+            history_pool[h_unit] = [
+                record for record in history_pool[h_unit]
+                if record.get("job_number") != h_job
+            ]
+            history_pool[h_unit].append(history_record)
+            existing_history_by_unit.setdefault(h_unit_id, {})[h_job] = history_record
+            history_unit_names[h_unit_id] = h_unit
+            print(f"Saved verified history: {h_unit} | {h_date} | {h_job} | Budget {h_budget} | Award {h_award}")
+
+    print("Querying complete award history for all active agencies...")
+    direct_history_items = []
+    for h_unit, h_unit_id in active_units_dict.items():
+        direct_history_items.extend(fetch_unit_history(h_unit_id, h_unit))
+    process_history_items(direct_history_items)
+
+    unit_map = fetch_json_with_retry("https://pcc-api.openfun.app/api/unit", "procurement unit directory") or {}
+    refresh_date = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).strftime("%Y-%m-%d")
+    related_units_by_active_id = {}
+    hierarchy_units_to_fetch = {}
+    titles_by_unit_id = {}
+    for item in active_tenders:
+        titles_by_unit_id.setdefault(item.get("unit_id", ""), []).append(item.get("brief", {}).get("title", ""))
+
+    for h_unit, h_unit_id in active_units_dict.items():
+        direct_records = list(existing_history_by_unit.get(h_unit_id, {}).values())
+        needs_hierarchy = any(
+            len([
+                record for record in exclude_contract_changes(direct_records)
+                if is_recent_history(record) and is_comparable_history(title, record.get("title", ""))
+            ]) < 2
+            for title in titles_by_unit_id.get(h_unit_id, [])
+        )
+        if not needs_hierarchy:
+            continue
+        related_units = get_related_units(h_unit_id, h_unit, unit_map)
+        if not related_units:
+            continue
+        related_units_by_active_id[h_unit_id] = related_units
+        for related_id, related_name in related_units.items():
+            history_unit_names.setdefault(related_id, related_name)
+            if (
+                related_id not in queried_history_unit_ids
+                and history_unit_refresh.get(related_id) != refresh_date
+            ):
+                hierarchy_units_to_fetch[related_id] = related_name
+
+    if hierarchy_units_to_fetch:
+        print(f"Direct history was insufficient; checking {len(hierarchy_units_to_fetch)} related units.")
+        hierarchy_history_items = []
+        all_active_titles = [
+            item.get("brief", {}).get("title", "")
+            for item in active_tenders
         ]
-        if not award_records:
-            continue
-        h_award_record = max(award_records, key=lambda record: int(record.get("date", 0)))
-        h_detail_obj = h_award_record.get("detail", {})
-        h_budget, h_award = extract_budget_and_award(h_detail_obj)
-        if h_budget <= 0 or h_award <= 0:
-            continue
+        def fetch_related_unit(unit_item):
+            related_id, related_name = unit_item
+            return fetch_unit_history(
+                related_id,
+                related_name,
+                comparable_titles=all_active_titles,
+                recent_only=True,
+                request_delay=0.2
+            )
 
-        h_winner = extract_winning_competitor(h_detail_obj)
-        h_date = date_to_iso(h_award_record.get("date"))
-        if not verify_official_award_notice(h_unit_id, h_job, h_date):
-            print(f"Skipped unverified history: {h_unit} | {h_date} | {h_job}")
-            continue
-        discount_rate = (h_award / h_budget) * 100
-        history_record = {
-            "award_date": h_date,
-            "year": int(h_date[:4]) if h_date else None,
-            "title": h_award_record.get("brief", {}).get("title", h_item.get("brief", {}).get("title", "")),
-            "job_number": h_job,
-            "budget": h_budget,
-            "award_price": h_award,
-            "discount_rate": round(discount_rate, 1) if 0 < discount_rate <= 100 else None,
-            "winner": map_competitor_name(h_winner) if h_winner else "未公開",
-            "source_url": h_detail_obj.get("url", ""),
-            "official_verified": True,
-            "verification_source": "政府電子採購網決標查詢"
-        }
-        history_pool[h_unit] = [
-            record for record in history_pool[h_unit]
-            if record.get("job_number") != h_job
-        ]
-        history_pool[h_unit].append(history_record)
-        existing_history_by_unit.setdefault(h_unit_id, {})[h_job] = history_record
-        history_unit_names[h_unit_id] = h_unit
-        print(f"Saved verified history: {h_unit} | {h_date} | {h_job} | Budget {h_budget} | Award {h_award}")
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            for related_items in executor.map(fetch_related_unit, hierarchy_units_to_fetch.items()):
+                hierarchy_history_items.extend(related_items)
+        process_history_items(hierarchy_history_items)
 
     for records in history_pool.values():
         records.sort(key=lambda record: record["award_date"], reverse=True)
@@ -691,21 +829,36 @@ def main():
         
         duration = parse_contract_duration(title)
 
-        history_records = [
-            record for record in history_pool.get(unit_name, [])
-            if record["job_number"] != job_number
-            and is_comparable_history(title, record.get("title", ""))
-        ]
+        candidate_unit_ids = list(related_units_by_active_id.get(unit_id, {unit_id: unit_name}))
+        candidate_history_records = []
+        for source_unit_id in candidate_unit_ids:
+            for record in existing_history_by_unit.get(source_unit_id, {}).values():
+                if record.get("job_number") == job_number or not is_comparable_history(title, record.get("title", "")):
+                    continue
+                candidate_history_records.append({
+                    **record,
+                    "source_unit_id": source_unit_id,
+                    "source_unit": history_unit_names.get(source_unit_id, unit_name),
+                    "relation_scope": "same_unit" if source_unit_id == unit_id else "same_parent_org"
+                })
+        history_records = exclude_contract_changes(candidate_history_records)
+        for record in history_records:
+            record["is_stale"] = not is_recent_history(record)
+        history_records.sort(key=lambda record: record.get("award_date", ""), reverse=True)
+        history_records.sort(key=lambda record: record["is_stale"])
+        recent_history_records = [record for record in history_records if not record["is_stale"]]
         usable_rates = [
-            record["discount_rate"] for record in history_records
+            record["discount_rate"] for record in recent_history_records
             if record["discount_rate"] is not None and 50 <= record["discount_rate"] <= 100
         ]
-        historical_median = median(usable_rates) if usable_rates else None
+        historical_median = median(usable_rates) if len(usable_rates) >= 2 else None
         avg_discount_str = f"{historical_median:.1f}%" if historical_median is not None else "資料不足"
-        discount_source = (
-            f"政府電子採購網 {len(usable_rates)} 筆同設備、同契約型態決標折扣中位數"
-            if usable_rates else "查無同設備、同契約型態且具完整金額的歷史決標"
-        )
+        if len(usable_rates) >= 2:
+            discount_source = f"近 5 年 {len(usable_rates)} 筆同設備、同契約型態決標折扣中位數"
+        elif usable_rates:
+            discount_source = "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估"
+        else:
+            discount_source = "近 5 年查無同設備、同契約型態且具完整金額的決標"
         if final_budget_val > 0 and historical_median is not None:
             suggested_price_val = int(final_budget_val * historical_median / 100)
             suggested_price_val = (suggested_price_val // 1000) * 1000
@@ -720,14 +873,15 @@ def main():
                 "type": "real",
                 "winner": record["winner"]
             }
-            for record in reversed(history_records)
+            for record in reversed(recent_history_records)
+            if record["discount_rate"] is not None and 50 <= record["discount_rate"] <= 100
         ]
 
         if raw_winner:
             main_competitor = map_competitor_name(raw_winner)
         else:
             main_competitor = next(
-                (record["winner"] for record in history_records if record["winner"] != "未公開"),
+                (record["winner"] for record in recent_history_records if record["winner"] != "未公開"),
                 "無公開數據"
             )
             
@@ -788,7 +942,7 @@ def main():
             "main_competitor": main_competitor,
             "suggested_price": suggested_price_str,
             "suggestion_basis": {
-                "method": "同設備與同契約型態歷史決標折扣中位數",
+                "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
                 "record_count": len(usable_rates),
                 "discount_rate": round(historical_median, 1) if historical_median is not None else None
             },
@@ -826,7 +980,8 @@ def main():
             ],
             key=lambda record: record.get("award_date", ""),
             reverse=True
-        )
+        ),
+        "history_unit_refresh": history_unit_refresh
     }
     
     with open(output_path, "w", encoding="utf-8") as f:

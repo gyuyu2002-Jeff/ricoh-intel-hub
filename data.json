@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-27 15:28",
+  "last_updated": "2026-07-27 16:19",
   "tenders": [
     {
       "city": "台北市",
@@ -13,25 +13,65 @@
       "deadline": "2026-08-06",
       "budget": "無公開數據",
       "award_price": "",
-      "avg_discount": "62.8%",
-      "discount_source": "政府電子採購網 1 筆同設備、同契約型態決標折扣中位數",
-      "main_competitor": "震旦 SHARP",
+      "avg_discount": "95.2%",
+      "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
+      "main_competitor": "新印科技股份有限公司",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
-        "record_count": 1,
-        "discount_rate": 62.8
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 2,
+        "discount_rate": 95.2
       },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=PPW-1-70110178.xml",
       "history_stats": [
         {
-          "year": 2016,
-          "val": 62,
+          "year": 2022,
+          "val": 94,
           "type": "real",
-          "winner": "震旦 SHARP"
+          "winner": "新印科技股份有限公司"
+        },
+        {
+          "year": 2025,
+          "val": 96,
+          "type": "real",
+          "winner": "新印科技股份有限公司"
         }
       ],
       "history_records": [
+        {
+          "award_date": "2025-01-23",
+          "year": 2025,
+          "title": "114年度影印機租賃採購案",
+          "job_number": "113KG005",
+          "budget": 5411684,
+          "award_price": 5195200,
+          "discount_rate": 96.0,
+          "winner": "新印科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250123&fn=BDM-1-70793685.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.51.6",
+          "source_unit": "臺北市政府捷運工程局第二區工程處",
+          "relation_scope": "same_parent_org",
+          "is_stale": false
+        },
+        {
+          "award_date": "2022-12-19",
+          "year": 2022,
+          "title": "112年度影印機租賃採購案",
+          "job_number": "FDPO11107",
+          "budget": 5839192,
+          "award_price": 5514792,
+          "discount_rate": 94.4,
+          "winner": "新印科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221219&fn=BDM-1-70177240.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.51.5",
+          "source_unit": "臺北市政府捷運工程局第一區工程處",
+          "relation_scope": "same_parent_org",
+          "is_stale": false
+        },
         {
           "award_date": "2016-10-07",
           "year": 2016,
@@ -43,7 +83,11 @@
           "winner": "震旦 SHARP",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20161007&fn=BDM-1-51955070.xml",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.51.10",
+          "source_unit": "臺北市政府捷運工程局機電系統工程處",
+          "relation_scope": "same_unit",
+          "is_stale": true
         }
       ],
       "stage": "公開徵求價單",
@@ -63,11 +107,11 @@
       "budget": "NT$ 40,482,150",
       "award_price": "",
       "avg_discount": "資料不足",
-      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
       "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
@@ -90,30 +134,17 @@
       "deadline": "2026-07-29",
       "budget": "NT$ 968,000",
       "award_price": "",
-      "avg_discount": "81.2%",
-      "discount_source": "政府電子採購網 1 筆同設備、同契約型態決標折扣中位數",
-      "main_competitor": "台灣佳能 (Canon)",
-      "suggested_price": "NT$ 786,000",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
-        "record_count": 1,
-        "discount_rate": 81.2
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
       },
       "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyODI3Mjk",
-      "history_stats": [
-        {
-          "year": 2014,
-          "val": 42,
-          "type": "real",
-          "winner": "富士軟片 (FUJIFILM)"
-        },
-        {
-          "year": 2014,
-          "val": 81,
-          "type": "real",
-          "winner": "台灣佳能 (Canon)"
-        }
-      ],
+      "history_stats": [],
       "history_records": [
         {
           "award_date": "2014-05-02",
@@ -126,7 +157,11 @@
           "winner": "台灣佳能 (Canon)",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20140502&fn=BDM-1-51243724.xml",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "5.4.61",
+          "source_unit": "臺灣高雄少年及家事法院",
+          "relation_scope": "same_unit",
+          "is_stale": true
         },
         {
           "award_date": "2014-04-11",
@@ -139,7 +174,11 @@
           "winner": "富士軟片 (FUJIFILM)",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20140411&fn=BDM-1-51225879.xml",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "5.4.61",
+          "source_unit": "臺灣高雄少年及家事法院",
+          "relation_scope": "same_unit",
+          "is_stale": true
         }
       ],
       "stage": "正式開標",
@@ -158,14 +197,14 @@
       "deadline": "2026-07-09",
       "budget": "無公開數據",
       "award_price": "",
-      "avg_discount": "74.9%",
-      "discount_source": "政府電子採購網 1 筆同設備、同契約型態決標折扣中位數",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
       "main_competitor": "資仲科技有限公司",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 1,
-        "discount_rate": 74.9
+        "discount_rate": null
       },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260713&fn=NAI-1-71229408.xml",
       "history_stats": [
@@ -188,7 +227,11 @@
           "winner": "資仲科技有限公司",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240711&fn=BDM-1-70624473.xml",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.13.31.13",
+          "source_unit": "台灣電力股份有限公司彰化區營業處",
+          "relation_scope": "same_unit",
+          "is_stale": false
         }
       ],
       "stage": "無法決標",
@@ -208,11 +251,11 @@
       "budget": "無公開數據",
       "award_price": "",
       "avg_discount": "資料不足",
-      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
       "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
@@ -236,11 +279,11 @@
       "budget": "NT$ 310,000",
       "award_price": "",
       "avg_discount": "資料不足",
-      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
       "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
@@ -264,11 +307,11 @@
       "budget": "NT$ 1,000,000",
       "award_price": "",
       "avg_discount": "資料不足",
-      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
       "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
@@ -292,11 +335,11 @@
       "budget": "NT$ 1,802,679",
       "award_price": "NT$ 1,733,345",
       "avg_discount": "資料不足",
-      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
       "main_competitor": "宏羚股份有限公司 (HONLYNN CO., LTD.)",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
@@ -320,11 +363,11 @@
       "budget": "無公開數據",
       "award_price": "NT$ 174,897",
       "avg_discount": "資料不足",
-      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
       "main_competitor": "JK TECHNOLOGY PTE LTD",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
@@ -347,41 +390,17 @@
       "deadline": "2026-07-15",
       "budget": "無公開數據",
       "award_price": "",
-      "avg_discount": "80.0%",
-      "discount_source": "政府電子採購網 3 筆同設備、同契約型態決標折扣中位數",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
       "main_competitor": "新印科技股份有限公司",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
-        "record_count": 3,
-        "discount_rate": 80.0
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
       },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=NAI-1-71239121.xml",
       "history_stats": [
-        {
-          "year": 2015,
-          "val": 80,
-          "type": "real",
-          "winner": "一心國際科技有限公司"
-        },
-        {
-          "year": 2015,
-          "val": 51,
-          "type": "real",
-          "winner": "正中資訊科技有限公司"
-        },
-        {
-          "year": 2017,
-          "val": 45,
-          "type": "real",
-          "winner": "正行科技有限公司"
-        },
-        {
-          "year": 2020,
-          "val": 40,
-          "type": "real",
-          "winner": "雙欣科技有限公司"
-        },
         {
           "year": 2023,
           "val": 85,
@@ -401,7 +420,11 @@
           "winner": "新印科技股份有限公司",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20230130&fn=BDM-1-70218441.xml",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": false
         },
         {
           "award_date": "2020-01-09",
@@ -414,7 +437,11 @@
           "winner": "雙欣科技有限公司",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200109&fn=BDM-1-52989542.xml",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": true
         },
         {
           "award_date": "2017-09-19",
@@ -427,7 +454,11 @@
           "winner": "正行科技有限公司",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170919&fn=BDM-1-52239253.xml",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": true
         },
         {
           "award_date": "2015-12-24",
@@ -440,20 +471,11 @@
           "winner": "正中資訊科技有限公司",
           "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTE3MzU3NTg=",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
-        },
-        {
-          "award_date": "2015-10-05",
-          "year": 2015,
-          "title": "103年度印表機租賃採購案-後續擴充",
-          "job_number": "CNPC-G-10323-1",
-          "budget": 175000,
-          "award_price": 140000,
-          "discount_rate": 80.0,
-          "winner": "一心國際科技有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTE2NTY0ODE=",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": true
         }
       ],
       "stage": "無法決標",
@@ -473,11 +495,11 @@
       "budget": "無公開數據",
       "award_price": "",
       "avg_discount": "資料不足",
-      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
       "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
@@ -501,11 +523,11 @@
       "budget": "NT$ 3,495,303",
       "award_price": "NT$ 3,014,382",
       "avg_discount": "資料不足",
-      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
       "main_competitor": "耑維科技股份有限公司",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
@@ -528,29 +550,17 @@
       "deadline": "2025-04-28",
       "budget": "NT$ 591,600",
       "award_price": "",
-      "avg_discount": "56.9%",
-      "discount_source": "政府電子採購網 3 筆同設備、同契約型態決標折扣中位數",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
       "main_competitor": "本公司 (互盛 RICOH)",
-      "suggested_price": "NT$ 336,000",
+      "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
-        "record_count": 3,
-        "discount_rate": 56.9
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
       },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250414&fn=BDM-3-70851213.xml",
       "history_stats": [
-        {
-          "year": 2016,
-          "val": 93,
-          "type": "real",
-          "winner": "本公司 (互盛 RICOH)"
-        },
-        {
-          "year": 2017,
-          "val": 56,
-          "type": "real",
-          "winner": "金儀 Konica Minolta"
-        },
         {
           "year": 2024,
           "val": 52,
@@ -570,7 +580,11 @@
           "winner": "本公司 (互盛 RICOH)",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240801&fn=BDM-2-70247349.xml",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "05601093",
+          "source_unit": "國家同步輻射研究中心",
+          "relation_scope": "same_unit",
+          "is_stale": false
         },
         {
           "award_date": "2017-01-05",
@@ -583,7 +597,11 @@
           "winner": "金儀 Konica Minolta",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170105&fn=BDM-1-52040997.xml",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "05601093",
+          "source_unit": "國家同步輻射研究中心",
+          "relation_scope": "same_unit",
+          "is_stale": true
         },
         {
           "award_date": "2016-01-27",
@@ -596,7 +614,11 @@
           "winner": "本公司 (互盛 RICOH)",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20160127&fn=BDM-2-51631218.xml",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "05601093",
+          "source_unit": "國家同步輻射研究中心",
+          "relation_scope": "same_unit",
+          "is_stale": true
         }
       ],
       "stage": "正式開標",
@@ -615,14 +637,14 @@
       "deadline": "2026-07-21",
       "budget": "NT$ 1,200,000",
       "award_price": "",
-      "avg_discount": "95.0%",
-      "discount_source": "政府電子採購網 1 筆同設備、同契約型態決標折扣中位數",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
       "main_competitor": "富士軟片 (FUJIFILM)",
-      "suggested_price": "NT$ 1,140,000",
+      "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 1,
-        "discount_rate": 95.0
+        "discount_rate": null
       },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=BDM-3-71224779.xml",
       "history_stats": [
@@ -645,7 +667,11 @@
           "winner": "富士軟片 (FUJIFILM)",
           "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260112&fn=BDM-1-71083742.xml",
           "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢"
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.13.2",
+          "source_unit": "經濟部產業發展署",
+          "relation_scope": "same_unit",
+          "is_stale": false
         }
       ],
       "stage": "正式開標",
@@ -665,11 +691,11 @@
       "budget": "NT$ 8,450,000",
       "award_price": "NT$ 7,540,000",
       "avg_discount": "資料不足",
-      "discount_source": "查無同設備、同契約型態且具完整金額的歷史決標",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
       "main_competitor": "瑋華科技有限公司",
       "suggested_price": "資料不足",
       "suggestion_basis": {
-        "method": "同設備與同契約型態歷史決標折扣中位數",
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
@@ -923,6 +949,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.13.31.10",
+      "unit_name": "台灣電力股份有限公司台中區營業處",
+      "award_date": "2026-03-11",
+      "year": 2026,
+      "title": "台電台中區處影印機租賃案-後續擴充",
+      "job_number": "1051400012-CCO",
+      "budget": 4344920,
+      "award_price": 4344920,
+      "discount_rate": 100.0,
+      "winner": "億雙企業有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260311&fn=BDM-1-71127558.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.82.8.41",
       "unit_name": "新北市板橋區信義國民小學",
       "award_date": "2026-03-10",
@@ -1043,6 +1084,96 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.13.31.10",
+      "unit_name": "台灣電力股份有限公司台中區營業處",
+      "award_date": "2025-07-01",
+      "year": 2025,
+      "title": "台電台中區處影印機租賃案增購",
+      "job_number": "1051200007-CC02",
+      "budget": 26328,
+      "award_price": 26328,
+      "discount_rate": 100.0,
+      "winner": "新印科技股份有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250701&fn=BDM-1-70915346.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.13.31.10",
+      "unit_name": "台灣電力股份有限公司台中區營業處",
+      "award_date": "2025-04-16",
+      "year": 2025,
+      "title": "台電台中區處影印機租賃案",
+      "job_number": "1051400012",
+      "budget": 3827406,
+      "award_price": 3103514,
+      "discount_rate": 81.1,
+      "winner": "億雙企業有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250416&fn=BDM-1-70853990.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.79.51.6",
+      "unit_name": "臺北市政府捷運工程局第二區工程處",
+      "award_date": "2025-01-23",
+      "year": 2025,
+      "title": "114年度影印機租賃採購案",
+      "job_number": "113KG005",
+      "budget": 5411684,
+      "award_price": 5195200,
+      "discount_rate": 96.0,
+      "winner": "新印科技股份有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250123&fn=BDM-1-70793685.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.79.51.5",
+      "unit_name": "臺北市政府捷運工程局第一區工程處",
+      "award_date": "2024-12-11",
+      "year": 2024,
+      "title": "112年度影印機租賃採購案",
+      "job_number": "FDPO11107-01",
+      "budget": 486600,
+      "award_price": 486600,
+      "discount_rate": 100.0,
+      "winner": "新印科技股份有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA3NDI3MzU=",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.7.8.2",
+      "unit_name": "財政部關務署臺北關",
+      "award_date": "2024-10-15",
+      "year": 2024,
+      "title": "114年至115年度數位式影印機租賃採購案",
+      "job_number": "113019",
+      "budget": 1764000,
+      "award_price": 1640554,
+      "discount_rate": 93.0,
+      "winner": "知億有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241015&fn=BDM-1-70689873.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.7.8",
+      "unit_name": "財政部關務署",
+      "award_date": "2024-10-11",
+      "year": 2024,
+      "title": "「113-115年影印機租賃」採購案",
+      "job_number": "IG113033",
+      "budget": 2400000,
+      "award_price": 2281600,
+      "discount_rate": 95.1,
+      "winner": "國碩資訊科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241011&fn=BDM-1-70687939.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "A.7.3",
       "unit_name": "財政部臺北國稅局",
       "award_date": "2024-08-05",
@@ -1118,6 +1249,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.13.31.10",
+      "unit_name": "台灣電力股份有限公司台中區營業處",
+      "award_date": "2024-05-24",
+      "year": 2024,
+      "title": "台電台中區處影印機租賃案後續擴充",
+      "job_number": "1051200007-CCO",
+      "budget": 2642929,
+      "award_price": 2642929,
+      "discount_rate": 100.0,
+      "winner": "新印科技股份有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240524&fn=BDM-1-70585907.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.13.31.14",
       "unit_name": "台灣電力股份有限公司雲林區營業處",
       "award_date": "2024-04-26",
@@ -1129,6 +1275,21 @@
       "discount_rate": 84.0,
       "winner": "台灣佳能 (Canon)",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240426&fn=BDM-1-70564535.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.13.31.24",
+      "unit_name": "台灣電力股份有限公司屏東區營業處",
+      "award_date": "2024-04-03",
+      "year": 2024,
+      "title": "租用複印機1套",
+      "job_number": "1101300003",
+      "budget": 1858500,
+      "award_price": 1766940,
+      "discount_rate": 95.1,
+      "winner": "旭德資訊有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240403&fn=BDM-1-70547246.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -1358,6 +1519,36 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "A.7.8.2",
+      "unit_name": "財政部關務署臺北關",
+      "award_date": "2022-12-22",
+      "year": 2022,
+      "title": "112年至113年度數位式影印機租賃採購案",
+      "job_number": "111070",
+      "budget": 1860000,
+      "award_price": 1727679,
+      "discount_rate": 92.9,
+      "winner": "金儀 Konica Minolta",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221222&fn=BDM-1-70182368.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.79.51.5",
+      "unit_name": "臺北市政府捷運工程局第一區工程處",
+      "award_date": "2022-12-19",
+      "year": 2022,
+      "title": "112年度影印機租賃採購案",
+      "job_number": "FDPO11107",
+      "budget": 5839192,
+      "award_price": 5514792,
+      "discount_rate": 94.4,
+      "winner": "新印科技股份有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221219&fn=BDM-1-70177240.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.82.8.41",
       "unit_name": "新北市板橋區信義國民小學",
       "award_date": "2022-12-12",
@@ -1369,6 +1560,21 @@
       "discount_rate": 100.0,
       "winner": "頂能企業股份有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221212&fn=BDM-1-70167863.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.7.8",
+      "unit_name": "財政部關務署",
+      "award_date": "2022-09-06",
+      "year": 2022,
+      "title": "「111-113年影印機租賃」採購案",
+      "job_number": "IG111033",
+      "budget": 2400000,
+      "award_price": 2200000,
+      "discount_rate": 91.7,
+      "winner": "國碩資訊科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220906&fn=BDM-2-70073389.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -2137,5 +2343,6 @@
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     }
-  ]
+  ],
+  "history_unit_refresh": {}
 }

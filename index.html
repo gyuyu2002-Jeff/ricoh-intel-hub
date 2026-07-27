@@ -883,6 +883,10 @@
             <td class="py-2 pr-3 min-w-[220px]">
               <div class="font-semibold text-slate-700 leading-snug">${escapeHtml(record.title || '未提供案名')}</div>
               <div class="mt-1 font-mono text-[9px] text-slate-400">案號 ${escapeHtml(record.job_number || '—')}</div>
+              <div class="mt-1 text-[9px] ${record.relation_scope === 'same_parent_org' ? 'text-blue-600' : 'text-slate-500'}">
+                ${record.relation_scope === 'same_parent_org' ? '同體系單位' : '同一採購單位'} · ${escapeHtml(record.source_unit || t.unit)}
+                ${record.is_stale ? '<span class="ml-1 rounded bg-amber-50 px-1.5 py-0.5 font-bold text-amber-700">超過 5 年，僅供參考</span>' : ''}
+              </div>
             </td>
             <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] text-slate-600">${formatCurrency(record.budget)}</td>
             <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] font-bold text-slate-800">${formatCurrency(record.award_price)}</td>
@@ -899,8 +903,11 @@
               <div>
                 <div class="text-sm font-bold text-slate-800 leading-snug">${escapeHtml(record.title || '未提供案名')}</div>
                 <div class="mt-1 text-xs text-slate-500">${escapeHtml(record.award_date || '—')} · 案號 ${escapeHtml(record.job_number || '—')}</div>
+                <div class="mt-1 text-[11px] ${record.relation_scope === 'same_parent_org' ? 'text-blue-600' : 'text-slate-500'}">
+                  ${record.relation_scope === 'same_parent_org' ? '同體系單位' : '同一採購單位'} · ${escapeHtml(record.source_unit || t.unit)}
+                </div>
               </div>
-              <span class="shrink-0 rounded-full bg-emerald-50 px-2 py-1 text-xs font-bold text-emerald-700">${record.discount_rate == null ? '折率不適用' : `${escapeHtml(record.discount_rate)}%`}</span>
+              <span class="shrink-0 rounded-full ${record.is_stale ? 'bg-amber-50 text-amber-700' : 'bg-emerald-50 text-emerald-700'} px-2 py-1 text-xs font-bold">${record.is_stale ? '逾 5 年參考' : record.discount_rate == null ? '折率不適用' : `${escapeHtml(record.discount_rate)}%`}</span>
             </div>
             <div class="grid grid-cols-2 gap-3 text-xs">
               <div><span class="block text-slate-500">預算</span><strong class="mt-0.5 block text-slate-800">${formatCurrency(record.budget)}</strong></div>
@@ -1056,7 +1063,7 @@
                 <i data-lucide="database" class="w-3.5 h-3.5 text-emerald-500"></i>
                 同類型歷史決標紀錄
               </span>
-              <span class="text-[10px] font-bold ${historyRecords.length ? 'text-emerald-700' : 'text-slate-400'}">${historyRecords.length} 筆可比資料</span>
+              <span class="text-[10px] font-bold ${historyRecords.length ? 'text-emerald-700' : 'text-slate-400'}">${t.suggestion_basis?.record_count || 0} 筆納入計算 · ${historyRecords.length} 筆紀錄</span>
             </summary>
             ${historyRecords.length ? `
               <div class="hidden sm:block mt-2 overflow-x-auto rounded-lg border border-slate-200 bg-white">
