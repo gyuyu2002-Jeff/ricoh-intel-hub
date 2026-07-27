@@ -1151,21 +1151,51 @@
         </button>
       </div>
       
-      <div class="text-xs flex flex-col gap-3 leading-relaxed">
-        <p class="font-semibold text-slate-700">為什麼需要設定金鑰？</p>
-        <p class="text-slate-500">本網站託管於 GitHub，需要您的 GitHub 個人權限 (PAT) 金鑰才能觸發雲端的自動更新爬蟲。請注意：<b>Google 帳號金鑰無法控制 GitHub 服務，因此無法使用 Google 金鑰。</b></p>
+      <div class="text-xs flex flex-col gap-4 leading-relaxed">
+        <!-- Info notice -->
+        <div class="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl p-3 flex gap-2">
+          <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600 mt-0.5 shrink-0"></i>
+          <p><b>安全說明</b>：本系統資料庫託管於 GitHub 雲端，<b>Google 帳號金鑰無法控制 GitHub 服務，因此請勿輸入 Google 金鑰</b>。金鑰僅安全儲存在您本機瀏覽器中，不用擔心外洩。</p>
+        </div>
+
+        <!-- Path A: General Colleagues -->
+        <div class="border-b border-slate-100 pb-3">
+          <p class="font-extrabold text-slate-800 flex items-center gap-1">
+            <span class="bg-ricoh-red text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">A</span>
+            一般同仁（最簡單：使用管理員提供的共用金鑰）
+          </p>
+          <p class="text-slate-500 mt-1.5 pl-5">
+            如果您是一般業務同仁，<b>不需要註冊 GitHub 帳號</b>。請直接向系統管理員（如：漢君）索取已經產生的<b>「共用更新金鑰」</b>，複製並直接貼在最下方的輸入框即可！
+          </p>
+        </div>
+
+        <!-- Path B: Admins / Owner -->
+        <div>
+          <p class="font-extrabold text-slate-800 flex items-center gap-1">
+            <span class="bg-slate-500 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">B</span>
+            管理員/擁有者（自行註冊並申請全新金鑰）
+          </p>
+          <p class="text-slate-500 mt-1.5 pl-5">
+            如果您是系統管理員，或希望使用自己的帳號申請全新金鑰，請依循以下步驟：
+          </p>
+          <ol class="list-decimal pl-9 flex flex-col gap-2 mt-2 text-slate-500 font-medium">
+            <li><b>註冊 GitHub 帳號</b>：若無帳號，請至 <a href="https://github.com/signup" target="_blank" class="text-ricoh-red underline font-bold hover:text-red-700">GitHub 註冊頁面 (點此註冊)</a> 建立免費帳號並完成信箱驗證。</li>
+            <li><b>進入金鑰頁面</b>：點選開啟 <a href="https://github.com/settings/tokens" target="_blank" class="text-ricoh-red underline font-bold hover:text-red-700">GitHub Token 設定網頁 (點此開啟)</a>。</li>
+            <li><b>選擇經典版</b>：點擊畫面中的 <span class="bg-slate-100 px-1 border rounded text-slate-700 font-mono">產生新令牌 (Generate new token) ▾</span> 按鈕，並選取<b>「經典版 (classic)」</b>選項。</li>
+            <li><b>填寫設定參數</b>：
+              <ul class="list-disc pl-4 mt-1 flex flex-col gap-1 text-[11px] text-slate-600">
+                <li><b>Note (名稱)</b>：輸入 <span class="bg-slate-100 px-1 font-mono">ricoh-sync</span></li>
+                <li><b>Expiration (期限)</b>：下拉選單改選為 <span class="font-bold">No expiration (永不過期)</span></li>
+                <li><b>Scopes (權限)</b>：勾選最上方的 <span class="font-bold">[✓] repo</span> 以及列表下方的 <span class="font-bold">[✓] workflow</span> 複選框。</li>
+              </ul>
+            </li>
+            <li><b>產生並複製</b>：拉到最下方點擊綠色按鈕，將產生一串以 <span class="font-mono bg-slate-100 px-1">ghp_</span> 開頭的金鑰，複製並貼在下方即可。</li>
+          </ol>
+        </div>
         
-        <p class="font-semibold text-slate-700 mt-1">金鑰申請 4 步驟：</p>
-        <ol class="list-decimal pl-4 flex flex-col gap-1.5 text-slate-500 font-medium">
-          <li>點選開啟 <a href="https://github.com/settings/tokens" target="_blank" class="text-ricoh-red underline font-bold hover:text-red-700">GitHub Token 設定網頁 (點此打開)</a></li>
-          <li>點擊右上角 <span class="bg-slate-100 px-1 border rounded text-slate-700 font-mono">Generate new token (classic)</span></li>
-          <li>名稱 (Note) 輸入 <span class="font-mono text-slate-700 bg-slate-100 px-1">ricoh-sync</span>，並<b>勾選 [repo] 與 [workflow] 權限</b></li>
-          <li>拉到頁面最下方點擊綠色按鈕，複製生成的金鑰（格式如 <span class="font-mono text-slate-600 bg-slate-100 px-1">ghp_xxxx...</span>）</li>
-        </ol>
-        
-        <div class="mt-2 flex flex-col gap-1.5">
-          <label class="font-bold text-slate-700">貼上您的 GitHub 金鑰 (PAT)：</label>
-          <input type="password" id="pat-input" placeholder="請貼上以 ghp_ 開頭的權杖金鑰" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono focus:outline-none focus:border-ricoh-red transition-all">
+        <div class="mt-2 flex flex-col gap-1.5 border-t border-slate-100 pt-3">
+          <label class="font-bold text-slate-700">貼上您的金鑰 (PAT)：</label>
+          <input type="password" id="pat-input" placeholder="請貼上管理員提供的共用金鑰，或您自己申請的 ghp_ 金鑰" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono focus:outline-none focus:border-ricoh-red transition-all">
         </div>
       </div>
       
