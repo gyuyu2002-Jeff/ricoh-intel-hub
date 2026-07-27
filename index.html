@@ -843,13 +843,19 @@
         // Since values are percentages (e.g. 98, 97, etc.), let's scale the heights nicely so they look proportionate in an 80px container
         const historyHtml = t.history_stats.map(item => {
           const isReal = item.type === "real";
-          const barBg = isReal 
-            ? "bg-emerald-500/40 border-emerald-500/30 group-hover:bg-emerald-500 group-hover:border-emerald-400" 
-            : "bg-slate-300/30 border-slate-300/40 border-dashed group-hover:bg-slate-400/40 group-hover:border-slate-400";
+          const val = item.val;
+          const hasData = isReal && val > 0;
           
-          // Calculate scaled height for visual contrast (range 70% to 100%)
-          const heightPercent = Math.max(10, Math.min(100, (item.val - 70) * 3.3));
-          const barStyle = `height: ${heightPercent}%`;
+          let barBg = "bg-slate-200/40 border-slate-300/30";
+          let barStyle = "height: 4px; width: 100%; border-radius: 2px;"; // Flat line
+          
+          if (hasData) {
+            barBg = "bg-emerald-500/50 border-emerald-500/40 group-hover:bg-emerald-500 group-hover:border-emerald-400 transition-colors";
+            const heightPercent = Math.max(10, Math.min(100, (val - 70) * 3.3));
+            barStyle = `height: ${heightPercent}%`;
+          }
+          
+          const displayVal = hasData ? `${val}%` : "—";
           
           // Format winner name to be shorter (e.g. "本公司" or "佳能" or "SHARP")
           let shortWinner = item.winner || "";
@@ -863,16 +869,27 @@
           else if (shortWinner.includes("市場")) shortWinner = "市場均價";
           else if (shortWinner.length > 6) shortWinner = shortWinner.substring(0, 5) + "..";
 
-          const badgeClass = isReal 
-            ? "bg-emerald-50 text-emerald-700 border-emerald-200/60 font-semibold" 
-            : "bg-slate-50 text-slate-400 border-slate-200/40";
+          let winnerHtml = "";
+          if (hasData) {
+            winnerHtml = `
+              <span class="text-[8px] border rounded px-1 mt-1 leading-none font-sans bg-emerald-50 text-emerald-700 border-emerald-200/60 font-semibold whitespace-nowrap overflow-hidden text-ellipsis max-w-[80px] text-center" title="${item.winner}">
+                ${shortWinner}
+              </span>
+            `;
+          } else {
+            winnerHtml = `
+              <a href="${t.tender_url}" target="_blank" class="no-print text-[8px] border rounded px-1 mt-1 leading-none font-sans bg-slate-50 text-slate-400 border-slate-200 hover:text-ricoh-red hover:border-red-300 transition-colors text-center max-w-[80px]" title="無公開歷史決標數據，點此前往政府採購網查閱公告紀錄">
+                無決標資訊 🔗
+              </a>
+            `;
+          }
 
           return `
             <div class="flex flex-col items-center flex-1 h-full group pt-5 justify-end relative">
               <!-- Bar Container (Explicit height context) -->
               <div class="w-8 h-12 flex items-end justify-center relative">
                 <!-- Direct Value Label Above Bar -->
-                <span class="absolute -top-4 text-[9px] font-bold text-slate-700 font-mono tracking-tighter">${item.val}%</span>
+                <span class="absolute -top-4 text-[9px] font-bold text-slate-700 font-mono tracking-tighter">${displayVal}</span>
                 
                 <!-- Bar -->
                 <div class="w-full border transition-all rounded-t-sm duration-300 ${barBg}" style="${barStyle}"></div>
@@ -882,9 +899,7 @@
               <span class="text-[9px] text-slate-500 mt-1 font-mono leading-none">${item.year}</span>
               
               <!-- Winner / Market Info Tag -->
-              <span class="text-[8px] border rounded px-1 mt-1 leading-none font-sans whitespace-nowrap overflow-hidden text-ellipsis max-w-[80px] text-center ${badgeClass}" title="${item.winner}">
-                ${shortWinner}
-              </span>
+              ${winnerHtml}
             </div>
           `;
         }).join('');

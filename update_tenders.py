@@ -377,19 +377,17 @@ def main():
         budget_str = f"NT$ {final_budget_val:,}"
         
         # Determine average discount rate based on historical award or fallback
-        discount_source = "政府電子採購網 (歷年同類型估算)"
+        discount_source = "無公開決標紀錄"
+        avg_discount_str = "無公開數據"
+        avg_discount_num = fallback_discount
+        
         if real_award > 0 and real_budget > 0:
             final_discount_val = (real_award / real_budget) * 100
             if 70.0 <= final_discount_val <= 100.0:
                 avg_discount_str = f"{final_discount_val:.1f}%"
-                discount_source = "政府電子採購網 (本案歷史真實決標)"
-            else:
-                avg_discount_str = f"{fallback_discount:.1f}%"
-        else:
-            avg_discount_str = f"{fallback_discount:.1f}%"
+                avg_discount_num = final_discount_val
+                discount_source = "政府電子採購網 (本案真實決標)"
             
-        avg_discount_num = float(avg_discount_str.replace("%", ""))
-        
         # Compute AI Suggested Price
         target_discount = avg_discount_num - 1.8
         suggested_price_val = int(final_budget_val * (target_discount / 100))
@@ -415,66 +413,37 @@ def main():
         
         for i in range(5):
             year = max_trend_year - 4 + i
-            offset = (int(h[10+i:12+i], 16) % 5) - 2
-            val = int(avg_discount_num + offset)
-            val = max(80, min(100, val))
             
-            if duration == 1:
-                is_real = True
-            else:
-                is_real = ((current_year - year) % duration == 0)
-                
             # Assign winner name for history point
-            if is_real:
-                if is_resolved:
-                    # If it is the current resolved year, we use the parsed winner
-                    if year == current_year and raw_winner:
-                        year_winner = map_competitor_name(raw_winner)
-                    else:
-                        year_winner = "同業競爭 (估算)"
-                else:
-                    # If active, the parsed winner is the winner of the previous cycle
-                    if year == current_year - duration and raw_winner:
-                        year_winner = map_competitor_name(raw_winner)
-                    else:
-                        year_winner = "同業競爭 (估算)"
+            is_point_real = False
+            year_winner = "無公開數據"
+            year_val = 0
+            
+            if is_resolved:
+                # If it is the current resolved year, we use the parsed winner
+                if year == current_year and raw_winner:
+                    is_point_real = True
+                    year_winner = map_competitor_name(raw_winner)
+                    year_val = int(avg_discount_num)
             else:
-                year_winner = "市場同業平均"
+                # If active, the parsed winner is the winner of the previous cycle
+                if year == current_year - duration and raw_winner:
+                    is_point_real = True
+                    year_winner = map_competitor_name(raw_winner)
+                    year_val = int(avg_discount_num)
                 
             history_stats.append({
                 "year": year,
-                "val": val,
-                "type": "real" if is_real else "market",
+                "val": year_val,
+                "type": "real" if is_point_real else "none",
                 "winner": year_winner
             })
             
-        # Competitor determination based strictly on history_stats
-        competitor_counts = {}
-        for item in history_stats:
-            winner_name = item["winner"]
-            if winner_name not in ["市場同業平均", "市場均價", "市場"]:
-                competitor_counts[winner_name] = competitor_counts.get(winner_name, 0) + 1
-        
-        if competitor_counts:
-            # Find max win count
-            max_wins = max(competitor_counts.values())
-            # Find all candidates with max wins
-            candidates = [comp for comp, count in competitor_counts.items() if count == max_wins]
-            
-            if len(candidates) == 1:
-                main_competitor = candidates[0]
-            else:
-                # If tie, traverse backwards from recent years to find the most recent winner among candidates
-                main_competitor = None
-                for item in reversed(history_stats):
-                    winner_name = item["winner"]
-                    if winner_name in candidates:
-                        main_competitor = winner_name
-                        break
-                if not main_competitor:
-                    main_competitor = candidates[0]
+        # Determine main competitor
+        if raw_winner:
+            main_competitor = map_competitor_name(raw_winner)
         else:
-            main_competitor = "未明 (市場均勢)"
+            main_competitor = "無公開數據"
             
         city = get_city(unit_name)
         deadline_str = "2026-08-15"
