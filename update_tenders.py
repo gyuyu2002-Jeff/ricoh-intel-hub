@@ -239,6 +239,20 @@ def is_comparable_history(current_title, history_title):
         and classify_contract(current_title) == classify_contract(history_title)
     )
 
+def history_scope_key(unit_id, title):
+    return (
+        f"{unit_id}|{classify_equipment(title)}|{classify_contract(title)}|"
+        f"{build_history_title_query(title)}"
+    )
+
+def build_history_title_query(title):
+    normalized = re.sub(r'[「」『』【】()]', '', title).strip()
+    year_suffix = re.split(r'(?:\d{2,3}(?:\s*[-~至]\s*\d{2,3})?\s*)?年度', normalized, maxsplit=1)
+    if len(year_suffix) > 1 and year_suffix[-1].strip():
+        normalized = year_suffix[-1].strip()
+    normalized = re.sub(r'\d+\s*(?:式|台|臺|部|組|套|批)$', '', normalized).strip()
+    return normalized
+
 def history_cutoff_date(years=5):
     today = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).date()
     try:
@@ -421,11 +435,14 @@ def main():
     existing_history_by_unit = {}
     history_unit_names = {}
     history_unit_refresh = {}
+    history_deep_refresh = {}
+    refresh_date = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).strftime("%Y-%m-%d")
 
     try:
         with open(output_path, "r", encoding="utf-8") as existing_file:
             existing_data = json.load(existing_file)
         history_unit_refresh = dict(existing_data.get("history_unit_refresh", {}))
+        history_deep_refresh = dict(existing_data.get("history_deep_refresh", {}))
 
         cached_records = list(existing_data.get("history_cache", []))
         for tender in existing_data.get("tenders", []):
@@ -533,39 +550,107 @@ def main():
     
     failed_history_units = []
     queried_history_unit_ids = set()
+    unit_total_pages = {}
 
-    def fetch_unit_history(h_unit_id, h_unit, comparable_titles=None, recent_only=False, request_delay=1):
+    def fetch_unit_history(
+        h_unit_id,
+        h_unit,
+        comparable_titles=None,
+        recent_only=False,
+        request_delay=1,
+        start_page=1,
+        scan_all_pages=False,
+        deep_refresh_keys=None
+    ):
         if not h_unit_id:
             return []
         queried_history_unit_ids.add(h_unit_id)
-        url_unit = f"https://pcc-api.openfun.app/api/listbyunit?unit_id={h_unit_id}"
-        data_unit = fetch_json_with_retry(url_unit, f"listbyunit for '{h_unit}' ({h_unit_id})")
-        if data_unit is None:
-            failed_history_units.append(h_unit)
-            print(f"Keeping cached award history for '{h_unit}' and continuing.")
-            return []
         results = []
-        for record in data_unit.get("records", []):
-            if not isinstance(record, dict):
-                continue
-            brief = record.get("brief", {})
-            notice_type = brief.get("type", "")
-            if "決標" not in notice_type or "無法決標" in notice_type:
-                continue
-            history_title = brief.get("title", "")
-            if not is_relevant_equipment_title(history_title):
-                continue
-            if comparable_titles and not any(is_comparable_history(title, history_title) for title in comparable_titles):
-                continue
-            if recent_only and str(record.get("date", "")) < history_cutoff_date().strftime("%Y%m%d"):
-                continue
-            record["unit_name"] = h_unit
-            results.append(record)
-        history_unit_refresh[h_unit_id] = datetime.now(timezone.utc).astimezone(
-            timezone(timedelta(hours=8))
-        ).strftime("%Y-%m-%d")
+        page = start_page
+        scan_completed = True
+        while True:
+            url_unit = f"https://pcc-api.openfun.app/api/listbyunit?unit_id={h_unit_id}&page={page}"
+            data_unit = fetch_json_with_retry(
+                url_unit,
+                f"listbyunit page {page} for '{h_unit}' ({h_unit_id})"
+            )
+            if data_unit is None:
+                failed_history_units.append(h_unit)
+                scan_completed = False
+                print(f"Keeping cached award history for '{h_unit}' and continuing.")
+                break
+
+            total_pages = max(1, int(data_unit.get("total_page", 1) or 1))
+            unit_total_pages[h_unit_id] = total_pages
+            for record in data_unit.get("records", []):
+                if not isinstance(record, dict):
+                    continue
+                brief = record.get("brief", {})
+                notice_type = brief.get("type", "")
+                if "決標" not in notice_type or "無法決標" in notice_type:
+                    continue
+                history_title = brief.get("title", "")
+                if not is_relevant_equipment_title(history_title):
+                    continue
+                if comparable_titles and not any(is_comparable_history(title, history_title) for title in comparable_titles):
+                    continue
+                if recent_only and str(record.get("date", "")) < history_cutoff_date().strftime("%Y%m%d"):
+                    continue
+                record["unit_name"] = h_unit
+                results.append(record)
+
+            if not scan_all_pages or page >= total_pages:
+                break
+            page += 1
+            time.sleep(request_delay)
+
+        if scan_completed:
+            history_unit_refresh[h_unit_id] = refresh_date
+            if scan_all_pages:
+                for scope_key in deep_refresh_keys or [h_unit_id]:
+                    history_deep_refresh[scope_key] = refresh_date
         time.sleep(request_delay)
         return results
+
+    def fetch_title_history(h_unit_id, h_unit, title):
+        query = build_history_title_query(title)
+        if len(query) < 6:
+            print(f"Skipped overly broad history title search '{query}' for '{h_unit}'.")
+            return [], False
+        results = []
+        page = 1
+        scan_completed = True
+        while True:
+            encoded_query = urllib.parse.quote(query)
+            url = f"https://pcc-api.openfun.app/api/searchbytitle?query={encoded_query}&page={page}"
+            data = fetch_json_with_retry(url, f"history title search '{query}' page {page}")
+            if data is None:
+                scan_completed = False
+                break
+            total_pages = max(1, int(data.get("total_pages", 1) or 1))
+            for record in data.get("records", []):
+                if not isinstance(record, dict) or record.get("unit_id") != h_unit_id:
+                    continue
+                brief = record.get("brief", {})
+                notice_type = brief.get("type", "")
+                history_title = brief.get("title", "")
+                if (
+                    "決標" not in notice_type
+                    or "無法決標" in notice_type
+                    or not is_comparable_history(title, history_title)
+                ):
+                    continue
+                record["unit_name"] = h_unit
+                results.append(record)
+            if page >= total_pages:
+                break
+            if page >= 15:
+                print(f"Stopped broad history title search '{query}' after 15 pages; cached results were preserved.")
+                scan_completed = False
+                break
+            page += 1
+            time.sleep(1)
+        return results, scan_completed
 
     history_pool = {
         unit: list(existing_history_by_unit.get(unit_id, {}).values())
@@ -638,13 +723,52 @@ def main():
         direct_history_items.extend(fetch_unit_history(h_unit_id, h_unit))
     process_history_items(direct_history_items)
 
-    unit_map = fetch_json_with_retry("https://pcc-api.openfun.app/api/unit", "procurement unit directory") or {}
-    refresh_date = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).strftime("%Y-%m-%d")
-    related_units_by_active_id = {}
-    hierarchy_units_to_fetch = {}
     titles_by_unit_id = {}
     for item in active_tenders:
         titles_by_unit_id.setdefault(item.get("unit_id", ""), []).append(item.get("brief", {}).get("title", ""))
+
+    deep_history_items = []
+    for h_unit, h_unit_id in active_units_dict.items():
+        if unit_total_pages.get(h_unit_id, 1) <= 1:
+            continue
+        missing_scope_titles = [
+            title for title in titles_by_unit_id.get(h_unit_id, [])
+            if history_scope_key(h_unit_id, title) not in history_deep_refresh
+        ]
+        if not missing_scope_titles:
+            continue
+        direct_records = exclude_contract_changes(list(existing_history_by_unit.get(h_unit_id, {}).values()))
+        needs_deep_scan = any(
+            len([
+                record for record in direct_records
+                if is_recent_history(record) and is_comparable_history(title, record.get("title", ""))
+            ]) < 2
+            for title in missing_scope_titles
+        )
+        if not needs_deep_scan:
+            continue
+        if unit_total_pages[h_unit_id] <= 15:
+            print(f"Scanning all {unit_total_pages[h_unit_id]} history pages for '{h_unit}'.")
+            deep_history_items.extend(fetch_unit_history(
+                h_unit_id,
+                h_unit,
+                comparable_titles=missing_scope_titles,
+                start_page=2,
+                scan_all_pages=True,
+                deep_refresh_keys=[history_scope_key(h_unit_id, title) for title in missing_scope_titles]
+            ))
+        else:
+            print(f"Using focused title history search for high-volume agency '{h_unit}'.")
+            for title in missing_scope_titles:
+                title_items, title_scan_completed = fetch_title_history(h_unit_id, h_unit, title)
+                deep_history_items.extend(title_items)
+                if title_scan_completed:
+                    history_deep_refresh[history_scope_key(h_unit_id, title)] = refresh_date
+    process_history_items(deep_history_items)
+
+    unit_map = fetch_json_with_retry("https://pcc-api.openfun.app/api/unit", "procurement unit directory") or {}
+    related_units_by_active_id = {}
+    hierarchy_units_to_fetch = {}
 
     for h_unit, h_unit_id in active_units_dict.items():
         direct_records = list(existing_history_by_unit.get(h_unit_id, {}).values())
@@ -981,7 +1105,8 @@ def main():
             key=lambda record: record.get("award_date", ""),
             reverse=True
         ),
-        "history_unit_refresh": history_unit_refresh
+        "history_unit_refresh": history_unit_refresh,
+        "history_deep_refresh": history_deep_refresh
     }
     
     with open(output_path, "w", encoding="utf-8") as f:
