@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-27 08:08",
+  "last_updated": "2026-07-27 08:45",
   "tenders": [
     {
       "city": "台北市",
@@ -247,55 +247,6 @@
       "duration_years": 1
     },
     {
-      "city": "台北市",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "114年度國家同步輻射中心影印機租賃",
-      "unit": "國家同步輻射研究中心",
-      "deadline": "2026-07-07",
-      "budget": "NT$ 1,990,000",
-      "avg_discount": "95.8%",
-      "discount_source": "政府電子採購網 (歷年同類型估算)",
-      "main_competitor": "震旦 SHARP",
-      "suggested_price": "NT$ 1,870,000",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=BDM-4-70851213.xml",
-      "history_stats": [
-        {
-          "year": 2021,
-          "val": 96,
-          "type": "market",
-          "winner": "市場同業平均"
-        },
-        {
-          "year": 2022,
-          "val": 95,
-          "type": "market",
-          "winner": "市場同業平均"
-        },
-        {
-          "year": 2023,
-          "val": 96,
-          "type": "real",
-          "winner": "震旦 SHARP"
-        },
-        {
-          "year": 2024,
-          "val": 96,
-          "type": "market",
-          "winner": "市場同業平均"
-        },
-        {
-          "year": 2025,
-          "val": 97,
-          "type": "market",
-          "winner": "市場同業平均"
-        }
-      ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 3
-    },
-    {
       "city": "桃園市",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
@@ -336,6 +287,55 @@
         {
           "year": 2025,
           "val": 99,
+          "type": "market",
+          "winner": "市場同業平均"
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 3
+    },
+    {
+      "city": "台北市",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "114年度國家同步輻射中心影印機租賃",
+      "unit": "國家同步輻射研究中心",
+      "deadline": "2026-07-07",
+      "budget": "NT$ 1,990,000",
+      "avg_discount": "95.8%",
+      "discount_source": "政府電子採購網 (歷年同類型估算)",
+      "main_competitor": "震旦 SHARP",
+      "suggested_price": "NT$ 1,870,000",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=BDM-4-70851213.xml",
+      "history_stats": [
+        {
+          "year": 2021,
+          "val": 96,
+          "type": "market",
+          "winner": "市場同業平均"
+        },
+        {
+          "year": 2022,
+          "val": 95,
+          "type": "market",
+          "winner": "市場同業平均"
+        },
+        {
+          "year": 2023,
+          "val": 96,
+          "type": "real",
+          "winner": "震旦 SHARP"
+        },
+        {
+          "year": 2024,
+          "val": 96,
+          "type": "market",
+          "winner": "市場同業平均"
+        },
+        {
+          "year": 2025,
+          "val": 97,
           "type": "market",
           "winner": "市場同業平均"
         }
