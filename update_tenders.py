@@ -206,7 +206,7 @@ def parse_contract_duration(title):
 def is_relevant_equipment_title(title):
     normalized = title.replace("臺", "台")
     excluded = ["耗材", "碳粉", "墨水", "色帶", "零件", "影印裝訂", "藍晒", "車銑", "鑽銑", "CNC", "機械科"]
-    equipment = ["影印機", "複合機", "事務機", "多功能機", "印表機"]
+    equipment = ["影印機", "複合機", "事務機", "多功能機", "印表機", "複印機"]
     return not any(word in normalized for word in excluded) and any(word in normalized for word in equipment)
 
 def date_to_iso(raw_date):
@@ -301,9 +301,27 @@ def fetch_tender_detail_with_retry(unit_id, job_number, max_retries=3):
             
     return None
 
+def fetch_json_with_retry(url, label, max_retries=5):
+    request = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                return json.loads(response.read().decode('utf-8'))
+        except urllib.error.HTTPError as error:
+            if error.code != 429 or attempt + 1 == max_retries:
+                print(f"{label} failed: {error}")
+                return None
+            wait_time = (attempt + 1) * 5
+            print(f"{label} rate limited. Retrying in {wait_time} seconds...")
+            time.sleep(wait_time)
+        except Exception as error:
+            print(f"{label} failed: {error}")
+            return None
+    return None
+
 def main():
     print("Starting automated tender data updater with real stats...")
-    keywords = ["\u5f71\u5370\u6a5f", "\u8907\u5408\u6a5f"]
+    keywords = ["影印機", "複合機", "事務機", "印表機", "複印機"]
     raw_active_tenders = []
     
     for kw in keywords:
@@ -388,24 +406,22 @@ def main():
         if not h_unit_id:
             continue
         url_unit = f"https://pcc-api.openfun.app/api/listbyunit?unit_id={h_unit_id}"
-        try:
-            req_unit = urllib.request.Request(url_unit, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req_unit) as res_unit:
-                data_unit = json.loads(res_unit.read().decode('utf-8'))
-                for record in data_unit.get("records", []):
-                    if not isinstance(record, dict):
-                        continue
-                    brief = record.get("brief", {})
-                    notice_type = brief.get("type", "")
-                    if "決標" not in notice_type or "無法決標" in notice_type:
-                        continue
-                    if not is_relevant_equipment_title(brief.get("title", "")):
-                        continue
-                    record["unit_name"] = h_unit
-                    raw_history_tenders.append(record)
-            time.sleep(0.2)
-        except Exception as e:
-            print(f"listbyunit failed for '{h_unit}' ({h_unit_id}): {e}")
+        data_unit = fetch_json_with_retry(url_unit, f"listbyunit for '{h_unit}' ({h_unit_id})")
+        if data_unit is None:
+            print("Award history query was incomplete. Keeping the existing data file unchanged.")
+            return
+        for record in data_unit.get("records", []):
+            if not isinstance(record, dict):
+                continue
+            brief = record.get("brief", {})
+            notice_type = brief.get("type", "")
+            if "決標" not in notice_type or "無法決標" in notice_type:
+                continue
+            if not is_relevant_equipment_title(brief.get("title", "")):
+                continue
+            record["unit_name"] = h_unit
+            raw_history_tenders.append(record)
+        time.sleep(1)
 
     history_pool = {unit: [] for unit in active_units_dict}
     seen_history_jobs = set()
