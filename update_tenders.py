@@ -4,7 +4,7 @@ import urllib.parse
 import json
 import re
 import hashlib
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import os
 import time
 
@@ -452,8 +452,12 @@ def main():
         if len(processed_tenders) >= 15:
             break
             
+    # Force last_updated to be in Taipei Time (UTC+8) regardless of runner timezone
+    taipei_time = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
+    last_updated_str = taipei_time.strftime("%Y-%m-%d %H:%M")
+    
     output_data = {
-        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "last_updated": last_updated_str,
         "tenders": processed_tenders
     }
     
