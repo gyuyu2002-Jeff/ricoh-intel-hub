@@ -946,9 +946,16 @@
                   ${displayStage}
                 </span>
               </div>
-              <span class="text-[10px] text-slate-500 font-mono flex items-center gap-1">
-                <i data-lucide="calendar" class="w-3 h-3 text-slate-500"></i>
-                截止日期: ${t.deadline}
+              <span class="text-[10px] text-slate-500 font-mono flex items-center gap-2">
+                <span class="flex items-center gap-1">
+                  <i data-lucide="calendar" class="w-3 h-3 text-slate-400"></i>
+                  公告日: ${t.publish_date || '—'}
+                </span>
+                <span class="text-slate-300">|</span>
+                <span class="flex items-center gap-1">
+                  <i data-lucide="clock" class="w-3 h-3 text-slate-400"></i>
+                  截止日: ${t.deadline || '—'}
+                </span>
               </span>
             </div>
             

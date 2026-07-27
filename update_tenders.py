@@ -62,6 +62,55 @@ def extract_budget_and_award(detail):
                     
     return budget_val, award_val
 
+def extract_dates(detail, publish_fallback_str):
+    publish_date = ""
+    deadline_date = ""
+    
+    # 1. Look for Notice Date (公告日期)
+    for k, v in detail.items():
+        if "公告日" in k and "remind" not in k and v:
+            val = str(v).strip()
+            digits = re.findall(r'\d+', val)
+            if len(digits) >= 3:
+                try:
+                    roc_year = int(digits[0])
+                    ad_year = roc_year + 1911 if roc_year < 1911 else roc_year
+                    publish_date = f"{ad_year}-{int(digits[1]):02d}-{int(digits[2]):02d}"
+                    break
+                except:
+                    pass
+                    
+    # 2. Look for Bidding Deadline (截止投標)
+    for k, v in detail.items():
+        if ("截止" in k or "收件" in k) and ("投標" in k or "收件" in k) and "remind" not in k and v:
+            val = str(v).strip()
+            digits = re.findall(r'\d+', val)
+            if len(digits) >= 3:
+                try:
+                    roc_year = int(digits[0])
+                    ad_year = roc_year + 1911 if roc_year < 1911 else roc_year
+                    deadline_date = f"{ad_year}-{int(digits[1]):02d}-{int(digits[2]):02d}"
+                    break
+                except:
+                    pass
+                    
+    if not publish_date and publish_fallback_str:
+        if len(publish_fallback_str) == 8:
+            try:
+                dt = datetime.strptime(publish_fallback_str, "%Y%m%d")
+                publish_date = dt.strftime("%Y-%m-%d")
+            except:
+                pass
+                
+    if not deadline_date and publish_date:
+        try:
+            dt = datetime.strptime(publish_date, "%Y-%m-%d")
+            deadline_date = (dt + timedelta(days=14)).strftime("%Y-%m-%d")
+        except:
+            pass
+            
+    return publish_date, deadline_date
+
 def extract_winning_competitor(detail):
     winner = ""
     for k, v in detail.items():
@@ -532,15 +581,36 @@ def main():
                 sorted_years = sorted(history_pool[unit_name].keys(), reverse=True)
                 main_competitor = map_competitor_name(history_pool[unit_name][sorted_years[0]]["winner"])
             
-        city = get_city(unit_name)
-        deadline_str = "2026-08-15"
-        if len(date_raw) == 8:
+        # Extract real publication date and bidding deadline from detail records
+        publish_date_str = ""
+        deadline_str = ""
+        if detail_data and detail_data.get("records"):
+            for r in detail_data["records"]:
+                r_detail = r.get("detail", {})
+                if r_detail:
+                    p_date, d_date = extract_dates(r_detail, date_raw)
+                    if p_date:
+                        publish_date_str = p_date
+                    if d_date:
+                        deadline_str = d_date
+                    if publish_date_str and deadline_str:
+                        break
+                        
+        if not publish_date_str:
+            if len(date_raw) == 8:
+                try:
+                    publish_date_str = datetime.strptime(date_raw, "%Y%m%d").strftime("%Y-%m-%d")
+                except:
+                    pass
+        if not deadline_str and publish_date_str:
             try:
-                date_obj = datetime.strptime(date_raw, "%Y%m%d")
-                deadline_str = date_obj.strftime("%Y-%m-%d")
+                deadline_str = (datetime.strptime(publish_date_str, "%Y-%m-%d") + timedelta(days=14)).strftime("%Y-%m-%d")
             except:
                 pass
-                
+        if not deadline_str:
+            deadline_str = "2026-08-15"
+            
+        city = get_city(unit_name)
         tag = "重點攻堅" if final_budget_val >= 2500000 else "一般監控"
         tag_color = "bg-red-950/45 border-red-500/40 text-red-400" if tag == "重點攻堅" else "bg-slate-900 border-slate-700 text-slate-400"
         
@@ -557,6 +627,7 @@ def main():
             "tag_color": tag_color,
             "title": title,
             "unit": unit_name,
+            "publish_date": publish_date_str,
             "deadline": deadline_str,
             "budget": budget_str,
             "award_price": award_price_str,
