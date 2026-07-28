@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-28 18:07",
+  "last_updated": "2026-07-28 18:10",
   "tenders": [
     {
       "city": "台北市",
@@ -710,20 +710,20 @@
     "latest_attempt_at": "2026-07-28 17:46",
     "source_records": 2056,
     "candidate_records": 7,
-    "review_records": 23,
+    "review_records": 25,
     "successful_dates": [
       "2026-07-28",
       "2026-07-27",
       "2026-07-22"
     ],
     "failed_dates": [],
-    "backfill_remaining_days": 53,
+    "backfill_remaining_days": 52,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-07-28 18:07",
+      "last_run_at": "2026-07-28 18:10",
       "backfill_dates": [
-        "2026-07-21"
+        "2026-07-20"
       ],
       "failed_dates": []
     }
@@ -784,6 +784,13 @@
       "candidate_records": 8,
       "review_records": 8,
       "checked_at": "2026-07-28 18:06"
+    },
+    "2026-07-20": {
+      "status": "complete",
+      "source_records": 1979,
+      "candidate_records": 4,
+      "review_records": 2,
+      "checked_at": "2026-07-28 18:08"
     }
   },
   "candidate_cache": [
@@ -2875,6 +2882,204 @@
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
+    },
+    {
+      "date": 20260720,
+      "filename": "BDM-1-71235033",
+      "brief": {
+        "type": "決標公告",
+        "title": "多功能影印機租賃採購(開口契約)",
+        "companies": {
+          "ids": [
+            "01517124",
+            "12941935"
+          ],
+          "names": [
+            "國眾電腦股份有限公司",
+            "耑維科技股份有限公司"
+          ],
+          "id_key": {
+            "01517124": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ],
+            "12941935": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "國眾電腦股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ],
+            "耑維科技股份有限公司": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "2B15A520006",
+      "unit_id": "3.76.73.72",
+      "unit_name": "桃園大眾捷運股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.73.72",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.73.72&job_number=2B15A520006",
+      "unit_url": "/index/unit/3.76.73.72",
+      "url": "/index/case/3.76.73.72/2B15A520006/20260720/BDM-1-71235033",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "多功能影印",
+          "採購",
+          "租賃",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260720,
+      "filename": "BDM-1-71235569",
+      "brief": {
+        "type": "決標公告",
+        "title": "「影印機租賃採購案」第1次後續擴充採購案",
+        "companies": {
+          "ids": [
+            "59120451"
+          ],
+          "names": [
+            "共帝企業有限公司"
+          ],
+          "id_key": {
+            "59120451": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "共帝企業有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商",
+              "決標品項:第2品項:得標廠商1:得標廠商",
+              "決標品項:第3品項:得標廠商1:得標廠商",
+              "決標品項:第4品項:得標廠商1:得標廠商",
+              "決標品項:第5品項:得標廠商1:得標廠商",
+              "決標品項:第6品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "RP09050-1",
+      "unit_id": "3.32.82",
+      "unit_name": "高雄榮民總醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.82",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.82&job_number=RP09050-1",
+      "unit_url": "/index/unit/3.32.82",
+      "url": "/index/case/3.32.82/RP09050-1/20260720/BDM-1-71235569",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "採購",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260720,
+      "filename": "BDM-3-71235447",
+      "brief": {
+        "type": "定期彙送",
+        "title": "駐菲律賓代表處增租辦公空間之辦公設備購置契約變更案",
+        "companies": {
+          "ids": [
+            "001"
+          ],
+          "names": [
+            "Novelle Office Furniture, Inc."
+          ],
+          "id_key": {
+            "001": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "Novelle Office Furniture, Inc.": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "PHL202612",
+      "unit_id": "A.3.3",
+      "unit_name": "駐外機構",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.3.3",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.3.3&job_number=PHL202612",
+      "unit_url": "/index/unit/A.3.3",
+      "url": "/index/case/A.3.3/PHL202612/20260720/BDM-3-71235447",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "購置"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260720,
+      "filename": "TIQ-11-71074023",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "臺東縣金峰鄉衛生所--115年度花東基金衛生局所辦公設備採購--智慧藥櫃採購計畫",
+        "category": "財物類449-其他特殊用途之機具及其零件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115404420204",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115404420204",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115404420204/20260720/TIQ-11-71074023",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
     }
   ],
   "review_candidates": [
@@ -3452,6 +3657,56 @@
           "汰換",
           "維護",
           "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-20",
+      "title": "駐菲律賓代表處增租辦公空間之辦公設備購置契約變更案",
+      "unit": "駐外機構",
+      "unit_id": "A.3.3",
+      "job_number": "PHL202612",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260720&fn=BDM-3-71235447.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "傳真",
+          "採購",
+          "購置"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-20",
+      "title": "臺東縣金峰鄉衛生所--115年度花東基金衛生局所辦公設備採購--智慧藥櫃採購計畫",
+      "unit": "臺東縣政府",
+      "unit_id": "3.76.54",
+      "job_number": "115404420204",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260720&fn=TIQ-11-71074023.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "傳真",
+          "A3",
+          "採購"
         ],
         "matched_fields": [
           "title",
