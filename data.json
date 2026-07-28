@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-29 05:38",
+  "last_updated": "2026-07-29 07:19",
   "tenders": [
     {
       "city": "台北市",
@@ -707,14 +707,13 @@
     "today": "2026-07-29",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-07-28 17:46",
-    "source_records": 2056,
-    "candidate_records": 7,
-    "review_records": 36,
+    "latest_attempt_at": "2026-07-29 07:19",
+    "source_records": 2476,
+    "candidate_records": 9,
+    "review_records": 39,
     "successful_dates": [
-      "2026-07-28",
-      "2026-07-27",
-      "2026-07-22"
+      "2026-07-29",
+      "2026-07-28"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 47,
@@ -731,10 +730,10 @@
   "collection_days": {
     "2026-07-28": {
       "status": "complete",
-      "source_records": 2056,
+      "source_records": 2075,
       "candidate_records": 7,
       "review_records": 6,
-      "checked_at": "2026-07-28 17:44"
+      "checked_at": "2026-07-29 07:16"
     },
     "2026-07-27": {
       "status": "complete",
@@ -819,9 +818,357 @@
       "candidate_records": 6,
       "review_records": 5,
       "checked_at": "2026-07-29 05:35"
+    },
+    "2026-07-29": {
+      "status": "complete",
+      "source_records": 2476,
+      "candidate_records": 9,
+      "review_records": 8,
+      "checked_at": "2026-07-29 07:16"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260729,
+      "filename": "TIQ-1-71081118",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "臺南-文化中心機房資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "TC115B015",
+      "unit_id": "3.95.33",
+      "unit_name": "臺南市政府文化局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.95.33",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.95.33&job_number=TC115B015",
+      "unit_url": "/index/unit/3.95.33",
+      "url": "/index/case/3.95.33/TC115B015/20260729/TIQ-1-71081118",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260729,
+      "filename": "TIQ-1-71081544",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "無線網路資訊設備壹式",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-03-043",
+      "unit_id": "3.9.26",
+      "unit_name": "國立成功大學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.26",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.26&job_number=115-03-043",
+      "unit_url": "/index/unit/3.9.26",
+      "url": "/index/case/3.9.26/115-03-043/20260729/TIQ-1-71081544",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260729,
+      "filename": "BDM-1-71243595",
+      "brief": {
+        "type": "決標公告",
+        "title": "興中國小115年資訊設備暨教室智慧顯示器與視聽多媒體系統採購案",
+        "companies": {
+          "ids": [
+            "09623372"
+          ],
+          "names": [
+            "金昊工程行"
+          ],
+          "id_key": {
+            "09623372": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "金昊工程行": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "szu11506",
+      "unit_id": "3.97.9.7",
+      "unit_name": "高雄市桃源區興中國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.9.7",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.9.7&job_number=szu11506",
+      "unit_url": "/index/unit/3.97.9.7",
+      "url": "/index/case/3.97.9.7/szu11506/20260729/BDM-1-71243595",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260729,
+      "filename": "BDM-1-71243846",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年度個人電腦及印表機設備維護工作",
+        "companies": {
+          "ids": [
+            "24732504"
+          ],
+          "names": [
+            "方恩科技有限公司"
+          ],
+          "id_key": {
+            "24732504": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "方恩科技有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "1061500035",
+      "unit_id": "3.13.31.13",
+      "unit_name": "台灣電力股份有限公司彰化區營業處",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.31.13",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.31.13&job_number=1061500035",
+      "unit_url": "/index/unit/3.13.31.13",
+      "url": "/index/case/3.13.31.13/1061500035/20260729/BDM-1-71243846",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "印表機",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260729,
+      "filename": "NAI-1-71243537",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "臺南-文化中心機房資訊設備採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "TC115B015",
+      "unit_id": "3.95.33",
+      "unit_name": "臺南市政府文化局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.95.33",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.95.33&job_number=TC115B015",
+      "unit_url": "/index/unit/3.95.33",
+      "url": "/index/case/3.95.33/TC115B015/20260729/NAI-1-71243537",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260729,
+      "filename": "NAI-1-71244208",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "無線網路資訊設備壹式",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-03-043",
+      "unit_id": "3.9.26",
+      "unit_name": "國立成功大學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.26",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.26&job_number=115-03-043",
+      "unit_url": "/index/unit/3.9.26",
+      "url": "/index/case/3.9.26/115-03-043/20260729/NAI-1-71244208",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260729,
+      "filename": "NAI-1-71244542",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "臺東縣金峰鄉衛生所--115年度花東基金衛生局所辦公設備採購--智慧藥櫃採購計畫",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115404420204",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115404420204",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115404420204/20260729/NAI-1-71244542",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260729,
+      "filename": "NAI-1-71244552",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "115年資訊設備汰舊換新",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11581NT",
+      "unit_id": "A.19.1",
+      "unit_name": "農業部農糧署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.19.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.19.1&job_number=11581NT",
+      "unit_url": "/index/unit/A.19.1",
+      "url": "/index/case/A.19.1/11581NT/20260729/NAI-1-71244552",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260729,
+      "filename": "TIQ-11-71082060",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "臺東縣金峰鄉衛生所--115年度花東基金衛生局所辦公設備採購--智慧藥櫃採購計畫",
+        "category": "財物類449-其他特殊用途之機具及其零件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115404420204",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115404420204",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115404420204/20260729/TIQ-11-71082060",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260728,
       "filename": "TIQ-1-71077734",
@@ -3707,6 +4054,79 @@
     }
   ],
   "review_candidates": [
+    {
+      "date": "2026-07-29",
+      "title": "臺南-文化中心機房資訊設備採購案",
+      "unit": "臺南市政府文化局",
+      "unit_id": "3.95.33",
+      "job_number": "TC115B015",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260729&fn=TIQ-1-71081118.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-29",
+      "title": "無線網路資訊設備壹式",
+      "unit": "國立成功大學",
+      "unit_id": "3.9.26",
+      "job_number": "115-03-043",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260729&fn=TIQ-1-71081544.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-29",
+      "title": "臺東縣金峰鄉衛生所--115年度花東基金衛生局所辦公設備採購--智慧藥櫃採購計畫",
+      "unit": "臺東縣政府",
+      "unit_id": "3.76.54",
+      "job_number": "115404420204",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260729&fn=TIQ-11-71082060.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "傳真",
+          "A3",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": "2026-07-28",
       "title": "香港分行2026年度資訊設備採購案",
