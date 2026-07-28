@@ -2,8 +2,9 @@ name: Daily Tender Sync
 
 on:
   schedule:
-    # Taipei 06:10-18:10: current and previous-day announcements
-    - cron: '10 0,2,4,6,8,10,22 * * *'
+    # Taipei 06:10-16:10 every two hours, plus a final 17:50 sync
+    - cron: '10 0,2,4,6,8,22 * * *'
+    - cron: '50 9 * * *'
     # Taipei 20:30-04:30: backfill, history verification and matching
     - cron: '30 12,14,16,18,20 * * *'
   workflow_dispatch:
