@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-29 01:56",
+  "last_updated": "2026-07-29 04:00",
   "tenders": [
     {
       "city": "台北市",
@@ -710,20 +710,20 @@
     "latest_attempt_at": "2026-07-28 17:46",
     "source_records": 2056,
     "candidate_records": 7,
-    "review_records": 25,
+    "review_records": 33,
     "successful_dates": [
       "2026-07-28",
       "2026-07-27",
       "2026-07-22"
     ],
     "failed_dates": [],
-    "backfill_remaining_days": 49,
+    "backfill_remaining_days": 48,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-07-29 01:56",
+      "last_run_at": "2026-07-29 04:00",
       "backfill_dates": [
-        "2026-07-18"
+        "2026-07-17"
       ],
       "failed_dates": []
     }
@@ -805,6 +805,13 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-07-29 01:49"
+    },
+    "2026-07-17": {
+      "status": "complete",
+      "source_records": 2699,
+      "candidate_records": 10,
+      "review_records": 10,
+      "checked_at": "2026-07-29 03:58"
     }
   },
   "candidate_cache": [
@@ -3094,6 +3101,376 @@
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
+    },
+    {
+      "date": 20260717,
+      "filename": "TIQ-1-71072780",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "新竹縣竹北市嘉豐國民小學115年增班設備資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "JF1150615",
+      "unit_id": "3.76.44.98.2",
+      "unit_name": "新竹縣竹北市嘉豐國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.44.98.2",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.44.98.2&job_number=JF1150615",
+      "unit_url": "/index/unit/3.76.44.98.2",
+      "url": "/index/case/3.76.44.98.2/JF1150615/20260717/TIQ-1-71072780",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260717,
+      "filename": "TIQ-1-71072997",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "無線網路資訊設備壹式",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-03-043",
+      "unit_id": "3.9.26",
+      "unit_name": "國立成功大學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.26",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.26&job_number=115-03-043",
+      "unit_url": "/index/unit/3.9.26",
+      "url": "/index/case/3.9.26/115-03-043/20260717/TIQ-1-71072997",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260717,
+      "filename": "TIQ-1-71073179",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "115年度國民中小學資訊設備更新採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115014",
+      "unit_id": "3.76.44.27",
+      "unit_name": "新竹縣教育研究發展暨網路中心",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.44.27",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.44.27&job_number=115014",
+      "unit_url": "/index/unit/3.76.44.27",
+      "url": "/index/case/3.76.44.27/115014/20260717/TIQ-1-71073179",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260717,
+      "filename": "TIQ-2-71069612",
+      "brief": {
+        "type": "公開招標更正公告",
+        "title": "115年資訊設備及網路管理強化",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11547T",
+      "unit_id": "A.19",
+      "unit_name": "農業部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.19",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.19&job_number=11547T",
+      "unit_url": "/index/unit/A.19",
+      "url": "/index/case/A.19/11547T/20260717/TIQ-2-71069612",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260717,
+      "filename": "TIQ-2-71071050",
+      "brief": {
+        "type": "公開招標更正公告",
+        "title": "臺南-文化中心機房資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "TC115B015",
+      "unit_id": "3.95.33",
+      "unit_name": "臺南市政府文化局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.95.33",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.95.33&job_number=TC115B015",
+      "unit_url": "/index/unit/3.95.33",
+      "url": "/index/case/3.95.33/TC115B015/20260717/TIQ-2-71071050",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260717,
+      "filename": "NAI-1-71234735",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "無線網路資訊設備壹式",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-03-043",
+      "unit_id": "3.9.26",
+      "unit_name": "國立成功大學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.26",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.26&job_number=115-03-043",
+      "unit_url": "/index/unit/3.9.26",
+      "url": "/index/case/3.9.26/115-03-043/20260717/NAI-1-71234735",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260717,
+      "filename": "ttd-71278085",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "楠梓國小附幼115年度資訊設備財務採購",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115M05",
+      "unit_id": "3.97.7.51",
+      "unit_name": "高雄市楠梓區楠梓國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.7.51",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.7.51&job_number=115M05",
+      "unit_url": "/index/unit/3.97.7.51",
+      "url": "/index/case/3.97.7.51/115M05/20260717/ttd-71278085",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260717,
+      "filename": "ttd-71277661",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年度資訊(科技)教室電腦暨平板電腦及網路資訊週邊設備財物採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "ZS1150203",
+      "unit_id": "3.79.8.78",
+      "unit_name": "臺北市文山區志清國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.8.78",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.8.78&job_number=ZS1150203",
+      "unit_url": "/index/unit/3.79.8.78",
+      "url": "/index/case/3.79.8.78/ZS1150203/20260717/ttd-71277661",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊週邊",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260717,
+      "filename": "ttd-71273039",
+      "brief": {
+        "type": "公開取得報價單或企劃書更正公告",
+        "title": "115年度資訊設備及教室設備更新採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115031",
+      "unit_id": "3.79.6.60",
+      "unit_name": "臺北市立三民國民中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.6.60",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.6.60&job_number=115031",
+      "unit_url": "/index/unit/3.79.6.60",
+      "url": "/index/case/3.79.6.60/115031/20260717/ttd-71273039",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260717,
+      "filename": "aaa-71235575",
+      "brief": {
+        "type": "決標公告",
+        "title": "114學年度提升特教品質與專業支持經費-資訊設備採購案",
+        "companies": {
+          "ids": [
+            "13120176"
+          ],
+          "names": [
+            "仕揚科技股份有限公司"
+          ],
+          "id_key": {
+            "13120176": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "仕揚科技股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "FH11514",
+      "unit_id": "3.79.5.77",
+      "unit_name": "臺北市芳和實驗中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.5.77",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.5.77&job_number=FH11514",
+      "unit_url": "/index/unit/3.79.5.77",
+      "url": "/index/case/3.79.5.77/FH11514/20260717/aaa-71235575",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
     }
   ],
   "review_candidates": [
@@ -3728,9 +4105,231 @@
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
+    },
+    {
+      "date": "2026-07-17",
+      "title": "新竹縣竹北市嘉豐國民小學115年增班設備資訊設備採購案",
+      "unit": "新竹縣竹北市嘉豐國民小學",
+      "unit_id": "3.76.44.98.2",
+      "job_number": "JF1150615",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260717&fn=TIQ-1-71072780.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "title": "無線網路資訊設備壹式",
+      "unit": "國立成功大學",
+      "unit_id": "3.9.26",
+      "job_number": "115-03-043",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260717&fn=TIQ-1-71072997.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "title": "115年度國民中小學資訊設備更新採購案",
+      "unit": "新竹縣教育研究發展暨網路中心",
+      "unit_id": "3.76.44.27",
+      "job_number": "115014",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260717&fn=TIQ-1-71073179.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購",
+          "更新",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "title": "115年資訊設備及網路管理強化",
+      "unit": "農業部",
+      "unit_id": "A.19",
+      "job_number": "11547T",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260717&fn=TIQ-2-71069612.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "列印",
+          "傳真",
+          "雙面列印",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "title": "臺南-文化中心機房資訊設備採購案",
+      "unit": "臺南市政府文化局",
+      "unit_id": "3.95.33",
+      "job_number": "TC115B015",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260717&fn=TIQ-2-71071050.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "title": "楠梓國小附幼115年度資訊設備財務採購",
+      "unit": "高雄市楠梓區楠梓國民小學",
+      "unit_id": "3.97.7.51",
+      "job_number": "115M05",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260717&fn=ttd-71278085.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "title": "115年度資訊(科技)教室電腦暨平板電腦及網路資訊週邊設備財物採購案",
+      "unit": "臺北市文山區志清國民小學",
+      "unit_id": "3.79.8.78",
+      "job_number": "ZS1150203",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260717&fn=ttd-71277661.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊週邊",
+          "傳真",
+          "採購",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "title": "115年度資訊設備及教室設備更新採購案",
+      "unit": "臺北市立三民國民中學",
+      "unit_id": "3.79.6.60",
+      "job_number": "115031",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260717&fn=ttd-71273039.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "cpm",
+          "採購",
+          "更新",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
     }
   ],
   "history_cache": [
+    {
+      "unit_id": "3.13.31.13",
+      "unit_name": "台灣電力股份有限公司彰化區營業處",
+      "award_date": "2026-07-29",
+      "year": 2026,
+      "title": "115年度個人電腦及印表機設備維護工作",
+      "job_number": "1061500035",
+      "budget": 840000,
+      "award_price": 766500,
+      "discount_rate": 91.2,
+      "winner": "方恩科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260729&fn=BDM-1-71243846.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
     {
       "unit_id": "3.32.80",
       "unit_name": "臺北榮民總醫院",
