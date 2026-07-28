@@ -1,6 +1,143 @@
 {
-  "last_updated": "2026-07-28 17:35",
+  "last_updated": "2026-07-28 17:39",
   "tenders": [
+    {
+      "city": "台北市",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "115-118年度印表機租賃開口契約採購案",
+      "unit": "衛生福利部嘉南療養院",
+      "unit_id": "A.21.100.75",
+      "job_number": "CNPC-G-11510",
+      "publish_date": "2026-07-28",
+      "deadline": "2026-08-11",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
+      "main_competitor": "新印科技股份有限公司",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=TIQ-1-71077734.xml",
+      "history_stats": [
+        {
+          "year": 2023,
+          "val": 85,
+          "type": "real",
+          "winner": "新印科技股份有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2023-01-30",
+          "year": 2023,
+          "title": "112-115年度印表機租賃開口契約採購案",
+          "job_number": "CNPC-G-11209",
+          "budget": 2845712,
+          "award_price": 2418855,
+          "discount_rate": 85.0,
+          "winner": "新印科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20230130&fn=BDM-1-70218441.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2020-01-09",
+          "year": 2020,
+          "title": "109年度雷射印表機租賃採購案",
+          "job_number": "CNPC-G-10907",
+          "budget": 2347200,
+          "award_price": 939600,
+          "discount_rate": 40.0,
+          "winner": "雙欣科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200109&fn=BDM-1-52989542.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2017-09-19",
+          "year": 2017,
+          "title": "106年度雷射印表機租賃採購案",
+          "job_number": "CNPC-G-10626",
+          "budget": 992000,
+          "award_price": 448000,
+          "discount_rate": 45.2,
+          "winner": "正行科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170919&fn=BDM-1-52239253.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2015-12-24",
+          "year": 2015,
+          "title": "104年度雷射印表機租賃採購",
+          "job_number": "CNPC-G-10425",
+          "budget": 876000,
+          "award_price": 446400,
+          "discount_rate": 51.0,
+          "winner": "正中資訊科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTE3MzU3NTg=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2014-12-26",
+          "year": 2014,
+          "title": "103年度印表機租賃採購",
+          "job_number": "CNPC-G-10323",
+          "budget": 350000,
+          "award_price": 280000,
+          "discount_rate": 80.0,
+          "winner": "一心國際科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTE0NTMzNjk=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 4,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "印表機",
+          "採購",
+          "租賃",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "city": "台北市",
       "tag": "一般監控",
@@ -51,69 +188,22 @@
       "unit": "臺北市政府捷運工程局機電系統工程處",
       "unit_id": "3.79.51.10",
       "job_number": "YG11505",
-      "publish_date": "2026-07-23",
-      "deadline": "2026-08-06",
+      "publish_date": "2026-07-27",
+      "deadline": "2026-08-10",
       "budget": "無公開數據",
       "award_price": "",
-      "avg_discount": "95.2%",
-      "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
-      "main_competitor": "新印科技股份有限公司",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 2,
-        "discount_rate": 95.2
+        "record_count": 0,
+        "discount_rate": null
       },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260727&fn=PPW-2-70110282.xml",
-      "history_stats": [
-        {
-          "year": 2022,
-          "val": 94,
-          "type": "real",
-          "winner": "新印科技股份有限公司"
-        },
-        {
-          "year": 2025,
-          "val": 96,
-          "type": "real",
-          "winner": "新印科技股份有限公司"
-        }
-      ],
+      "history_stats": [],
       "history_records": [
-        {
-          "award_date": "2025-01-23",
-          "year": 2025,
-          "title": "114年度影印機租賃採購案",
-          "job_number": "113KG005",
-          "budget": 5411684,
-          "award_price": 5195200,
-          "discount_rate": 96.0,
-          "winner": "新印科技股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250123&fn=BDM-1-70793685.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.79.51.6",
-          "source_unit": "臺北市政府捷運工程局第二區工程處",
-          "relation_scope": "same_parent_org",
-          "is_stale": false
-        },
-        {
-          "award_date": "2022-12-19",
-          "year": 2022,
-          "title": "112年度影印機租賃採購案",
-          "job_number": "FDPO11107",
-          "budget": 5839192,
-          "award_price": 5514792,
-          "discount_rate": 94.4,
-          "winner": "新印科技股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221219&fn=BDM-1-70177240.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.79.51.5",
-          "source_unit": "臺北市政府捷運工程局第一區工程處",
-          "relation_scope": "same_parent_org",
-          "is_stale": false
-        },
         {
           "award_date": "2016-10-07",
           "year": 2016,
@@ -372,143 +462,6 @@
       "duration_years": 2
     },
     {
-      "city": "台北市",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "115-118年度印表機租賃開口契約採購案",
-      "unit": "衛生福利部嘉南療養院",
-      "unit_id": "A.21.100.75",
-      "job_number": "CNPC-G-11510",
-      "publish_date": "2026-07-03",
-      "deadline": "2026-07-15",
-      "budget": "無公開數據",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
-      "main_competitor": "新印科技股份有限公司",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 1,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=TIQ-1-71077734.xml",
-      "history_stats": [
-        {
-          "year": 2023,
-          "val": 85,
-          "type": "real",
-          "winner": "新印科技股份有限公司"
-        }
-      ],
-      "history_records": [
-        {
-          "award_date": "2023-01-30",
-          "year": 2023,
-          "title": "112-115年度印表機租賃開口契約採購案",
-          "job_number": "CNPC-G-11209",
-          "budget": 2845712,
-          "award_price": 2418855,
-          "discount_rate": 85.0,
-          "winner": "新印科技股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20230130&fn=BDM-1-70218441.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "A.21.100.75",
-          "source_unit": "衛生福利部嘉南療養院",
-          "relation_scope": "same_unit",
-          "is_stale": false
-        },
-        {
-          "award_date": "2020-01-09",
-          "year": 2020,
-          "title": "109年度雷射印表機租賃採購案",
-          "job_number": "CNPC-G-10907",
-          "budget": 2347200,
-          "award_price": 939600,
-          "discount_rate": 40.0,
-          "winner": "雙欣科技有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200109&fn=BDM-1-52989542.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "A.21.100.75",
-          "source_unit": "衛生福利部嘉南療養院",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        },
-        {
-          "award_date": "2017-09-19",
-          "year": 2017,
-          "title": "106年度雷射印表機租賃採購案",
-          "job_number": "CNPC-G-10626",
-          "budget": 992000,
-          "award_price": 448000,
-          "discount_rate": 45.2,
-          "winner": "正行科技有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170919&fn=BDM-1-52239253.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "A.21.100.75",
-          "source_unit": "衛生福利部嘉南療養院",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        },
-        {
-          "award_date": "2015-12-24",
-          "year": 2015,
-          "title": "104年度雷射印表機租賃採購",
-          "job_number": "CNPC-G-10425",
-          "budget": 876000,
-          "award_price": 446400,
-          "discount_rate": 51.0,
-          "winner": "正中資訊科技有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTE3MzU3NTg=",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "A.21.100.75",
-          "source_unit": "衛生福利部嘉南療養院",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        },
-        {
-          "award_date": "2014-12-26",
-          "year": 2014,
-          "title": "103年度印表機租賃採購",
-          "job_number": "CNPC-G-10323",
-          "budget": 350000,
-          "award_price": 280000,
-          "discount_rate": 80.0,
-          "winner": "一心國際科技有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTE0NTMzNjk=",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "A.21.100.75",
-          "source_unit": "衛生福利部嘉南療養院",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        }
-      ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 4,
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "印表機",
-          "採購",
-          "租賃",
-          "開口契約"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
-      }
-    },
-    {
       "city": "彰化縣",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
@@ -648,33 +601,33 @@
   ],
   "collection_status": {
     "today": "2026-07-28",
-    "status": "complete",
-    "source_records": 2056,
-    "candidate_records": 7,
+    "status": "incomplete",
+    "source_records": 0,
+    "candidate_records": 0,
     "review_records": 6,
-    "successful_dates": [
+    "successful_dates": [],
+    "failed_dates": [
       "2026-07-28",
       "2026-07-27",
-      "2026-07-26"
+      "2026-07-24"
     ],
-    "failed_dates": [],
     "backfill_remaining_days": 57,
     "source": "政府電子採購網每日公告資料"
   },
   "collection_days": {
     "2026-07-28": {
-      "status": "complete",
-      "source_records": 2056,
-      "candidate_records": 7,
-      "review_records": 6,
-      "checked_at": "2026-07-28 17:35"
+      "status": "incomplete",
+      "source_records": 0,
+      "candidate_records": 0,
+      "review_records": 0,
+      "checked_at": "2026-07-28 17:39"
     },
     "2026-07-27": {
-      "status": "complete",
-      "source_records": 1808,
-      "candidate_records": 10,
-      "review_records": 8,
-      "checked_at": "2026-07-28 17:35"
+      "status": "incomplete",
+      "source_records": 0,
+      "candidate_records": 0,
+      "review_records": 0,
+      "checked_at": "2026-07-28 17:39"
     },
     "2026-07-26": {
       "status": "complete",
@@ -689,6 +642,13 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-07-28 17:34"
+    },
+    "2026-07-24": {
+      "status": "incomplete",
+      "source_records": 0,
+      "candidate_records": 0,
+      "review_records": 0,
+      "checked_at": "2026-07-28 17:39"
     }
   },
   "candidate_cache": [
@@ -1377,16 +1337,14 @@
       "relevance": {
         "status": "review",
         "confidence": "low",
-        "score": 3,
+        "score": 2,
         "category": "needs_review",
         "matched_terms": [
           "資訊設備",
-          "傳真",
           "採購"
         ],
         "matched_fields": [
-          "title",
-          "detail"
+          "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
@@ -1401,18 +1359,14 @@
       "relevance": {
         "status": "review",
         "confidence": "low",
-        "score": 3,
+        "score": 2,
         "category": "needs_review",
         "matched_terms": [
           "資訊設備",
-          "傳真",
-          "採購",
-          "維護",
-          "維修"
+          "採購"
         ],
         "matched_fields": [
-          "title",
-          "detail"
+          "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
@@ -1427,18 +1381,14 @@
       "relevance": {
         "status": "review",
         "confidence": "low",
-        "score": 3,
+        "score": 2,
         "category": "needs_review",
         "matched_terms": [
           "資訊設備",
-          "傳真",
-          "採購",
-          "維護",
-          "維修"
+          "採購"
         ],
         "matched_fields": [
-          "title",
-          "detail"
+          "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
@@ -1453,17 +1403,14 @@
       "relevance": {
         "status": "review",
         "confidence": "low",
-        "score": 3,
+        "score": 2,
         "category": "needs_review",
         "matched_terms": [
           "辦公設備",
-          "傳真",
-          "A3",
           "採購"
         ],
         "matched_fields": [
-          "title",
-          "detail"
+          "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
@@ -1478,16 +1425,13 @@
       "relevance": {
         "status": "review",
         "confidence": "low",
-        "score": 3,
+        "score": 1,
         "category": "needs_review",
         "matched_terms": [
-          "辦公設備",
-          "傳真",
-          "採購"
+          "辦公設備"
         ],
         "matched_fields": [
-          "title",
-          "detail"
+          "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
@@ -1502,17 +1446,14 @@
       "relevance": {
         "status": "review",
         "confidence": "low",
-        "score": 3,
+        "score": 2,
         "category": "needs_review",
         "matched_terms": [
           "辦公設備",
-          "傳真",
-          "A3",
           "採購"
         ],
         "matched_fields": [
-          "title",
-          "detail"
+          "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
