@@ -331,7 +331,7 @@
               <span id="source-records-count" class="text-slate-700 font-bold text-right">讀取中</span>
             </div>
             <div class="flex items-center justify-between gap-3">
-              <span class="text-slate-400">待複核：</span>
+              <span class="text-slate-400">複核中：</span>
               <span id="review-records-count" class="text-amber-600 font-bold text-right">讀取中</span>
             </div>
             <div class="h-px bg-slate-200/60 my-1"></div>
@@ -347,10 +347,10 @@
       <section id="left-panel" class="lg:col-span-9 flex flex-col gap-6">
         <details id="review-candidates-panel" class="hidden rounded-2xl border border-amber-200 bg-amber-50/80 p-4 sm:p-5">
           <summary class="cursor-pointer list-none flex items-center justify-between gap-3 text-sm font-bold text-amber-900">
-            <span class="flex items-center gap-2"><i data-lucide="clipboard-check" class="w-4 h-4"></i>名稱較廣泛，待人工複核</span>
+            <span class="flex items-center gap-2"><i data-lucide="clipboard-check" class="w-4 h-4"></i>複核機制處理中・隔日更新</span>
             <span id="review-candidates-badge" class="rounded-full bg-amber-200 px-2.5 py-1 text-xs text-amber-900"></span>
           </summary>
-          <p class="mt-3 text-xs leading-relaxed text-amber-800">這些公告含「辦公設備、資訊設備、輸出設備」等廣義名稱，但明細尚不足以確認為影印或列印設備；保留供複核，不會混入正式清單。</p>
+          <p class="mt-3 text-xs leading-relaxed text-amber-800">這些公告含「辦公設備、資訊設備、輸出設備」等廣義名稱，系統會在夜間自動讀取明細並重新判斷，最晚隔日更新結果；確認前不會混入正式標案清單。</p>
           <div id="review-candidates-list" class="mt-3 grid gap-2 sm:grid-cols-2"></div>
         </details>
         <div id="tenders-container" class="flex flex-col gap-4 sm:gap-6">
