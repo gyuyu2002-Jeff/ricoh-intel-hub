@@ -1,143 +1,6 @@
 {
-  "last_updated": "2026-07-28 17:39",
+  "last_updated": "2026-07-28 17:44",
   "tenders": [
-    {
-      "city": "台北市",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "115-118年度印表機租賃開口契約採購案",
-      "unit": "衛生福利部嘉南療養院",
-      "unit_id": "A.21.100.75",
-      "job_number": "CNPC-G-11510",
-      "publish_date": "2026-07-28",
-      "deadline": "2026-08-11",
-      "budget": "無公開數據",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
-      "main_competitor": "新印科技股份有限公司",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 1,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=TIQ-1-71077734.xml",
-      "history_stats": [
-        {
-          "year": 2023,
-          "val": 85,
-          "type": "real",
-          "winner": "新印科技股份有限公司"
-        }
-      ],
-      "history_records": [
-        {
-          "award_date": "2023-01-30",
-          "year": 2023,
-          "title": "112-115年度印表機租賃開口契約採購案",
-          "job_number": "CNPC-G-11209",
-          "budget": 2845712,
-          "award_price": 2418855,
-          "discount_rate": 85.0,
-          "winner": "新印科技股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20230130&fn=BDM-1-70218441.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "A.21.100.75",
-          "source_unit": "衛生福利部嘉南療養院",
-          "relation_scope": "same_unit",
-          "is_stale": false
-        },
-        {
-          "award_date": "2020-01-09",
-          "year": 2020,
-          "title": "109年度雷射印表機租賃採購案",
-          "job_number": "CNPC-G-10907",
-          "budget": 2347200,
-          "award_price": 939600,
-          "discount_rate": 40.0,
-          "winner": "雙欣科技有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200109&fn=BDM-1-52989542.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "A.21.100.75",
-          "source_unit": "衛生福利部嘉南療養院",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        },
-        {
-          "award_date": "2017-09-19",
-          "year": 2017,
-          "title": "106年度雷射印表機租賃採購案",
-          "job_number": "CNPC-G-10626",
-          "budget": 992000,
-          "award_price": 448000,
-          "discount_rate": 45.2,
-          "winner": "正行科技有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170919&fn=BDM-1-52239253.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "A.21.100.75",
-          "source_unit": "衛生福利部嘉南療養院",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        },
-        {
-          "award_date": "2015-12-24",
-          "year": 2015,
-          "title": "104年度雷射印表機租賃採購",
-          "job_number": "CNPC-G-10425",
-          "budget": 876000,
-          "award_price": 446400,
-          "discount_rate": 51.0,
-          "winner": "正中資訊科技有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTE3MzU3NTg=",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "A.21.100.75",
-          "source_unit": "衛生福利部嘉南療養院",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        },
-        {
-          "award_date": "2014-12-26",
-          "year": 2014,
-          "title": "103年度印表機租賃採購",
-          "job_number": "CNPC-G-10323",
-          "budget": 350000,
-          "award_price": 280000,
-          "discount_rate": 80.0,
-          "winner": "一心國際科技有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTE0NTMzNjk=",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "A.21.100.75",
-          "source_unit": "衛生福利部嘉南療養院",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        }
-      ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 4,
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "印表機",
-          "採購",
-          "租賃",
-          "開口契約"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
-      }
-    },
     {
       "city": "台北市",
       "tag": "一般監控",
@@ -188,22 +51,69 @@
       "unit": "臺北市政府捷運工程局機電系統工程處",
       "unit_id": "3.79.51.10",
       "job_number": "YG11505",
-      "publish_date": "2026-07-27",
-      "deadline": "2026-08-10",
+      "publish_date": "2026-07-23",
+      "deadline": "2026-08-06",
       "budget": "無公開數據",
       "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
+      "avg_discount": "95.2%",
+      "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
+      "main_competitor": "新印科技股份有限公司",
       "suggested_price": "資料不足",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
+        "record_count": 2,
+        "discount_rate": 95.2
       },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260727&fn=PPW-2-70110282.xml",
-      "history_stats": [],
+      "history_stats": [
+        {
+          "year": 2022,
+          "val": 94,
+          "type": "real",
+          "winner": "新印科技股份有限公司"
+        },
+        {
+          "year": 2025,
+          "val": 96,
+          "type": "real",
+          "winner": "新印科技股份有限公司"
+        }
+      ],
       "history_records": [
+        {
+          "award_date": "2025-01-23",
+          "year": 2025,
+          "title": "114年度影印機租賃採購案",
+          "job_number": "113KG005",
+          "budget": 5411684,
+          "award_price": 5195200,
+          "discount_rate": 96.0,
+          "winner": "新印科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250123&fn=BDM-1-70793685.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.51.6",
+          "source_unit": "臺北市政府捷運工程局第二區工程處",
+          "relation_scope": "same_parent_org",
+          "is_stale": false
+        },
+        {
+          "award_date": "2022-12-19",
+          "year": 2022,
+          "title": "112年度影印機租賃採購案",
+          "job_number": "FDPO11107",
+          "budget": 5839192,
+          "award_price": 5514792,
+          "discount_rate": 94.4,
+          "winner": "新印科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221219&fn=BDM-1-70177240.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.51.5",
+          "source_unit": "臺北市政府捷運工程局第一區工程處",
+          "relation_scope": "same_parent_org",
+          "is_stale": false
+        },
         {
           "award_date": "2016-10-07",
           "year": 2016,
@@ -251,7 +161,7 @@
       "job_number": "11502A05",
       "publish_date": "2026-07-23",
       "deadline": "2026-07-29",
-      "budget": "NT$ 968,000",
+      "budget": "無公開數據",
       "award_price": "",
       "avg_discount": "資料不足",
       "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
@@ -262,7 +172,7 @@
         "record_count": 0,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyODI3Mjk",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=ttd-71282729.xml",
       "history_stats": [],
       "history_records": [
         {
@@ -302,7 +212,21 @@
       ],
       "stage": "正式開標",
       "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 1
+      "duration_years": 1,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
     },
     {
       "city": "台北市",
@@ -462,6 +386,143 @@
       "duration_years": 2
     },
     {
+      "city": "台北市",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "115-118年度印表機租賃開口契約採購案",
+      "unit": "衛生福利部嘉南療養院",
+      "unit_id": "A.21.100.75",
+      "job_number": "CNPC-G-11510",
+      "publish_date": "2026-07-03",
+      "deadline": "2026-07-15",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
+      "main_competitor": "新印科技股份有限公司",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=TIQ-1-71077734.xml",
+      "history_stats": [
+        {
+          "year": 2023,
+          "val": 85,
+          "type": "real",
+          "winner": "新印科技股份有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2023-01-30",
+          "year": 2023,
+          "title": "112-115年度印表機租賃開口契約採購案",
+          "job_number": "CNPC-G-11209",
+          "budget": 2845712,
+          "award_price": 2418855,
+          "discount_rate": 85.0,
+          "winner": "新印科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20230130&fn=BDM-1-70218441.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2020-01-09",
+          "year": 2020,
+          "title": "109年度雷射印表機租賃採購案",
+          "job_number": "CNPC-G-10907",
+          "budget": 2347200,
+          "award_price": 939600,
+          "discount_rate": 40.0,
+          "winner": "雙欣科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200109&fn=BDM-1-52989542.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2017-09-19",
+          "year": 2017,
+          "title": "106年度雷射印表機租賃採購案",
+          "job_number": "CNPC-G-10626",
+          "budget": 992000,
+          "award_price": 448000,
+          "discount_rate": 45.2,
+          "winner": "正行科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170919&fn=BDM-1-52239253.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2015-12-24",
+          "year": 2015,
+          "title": "104年度雷射印表機租賃採購",
+          "job_number": "CNPC-G-10425",
+          "budget": 876000,
+          "award_price": 446400,
+          "discount_rate": 51.0,
+          "winner": "正中資訊科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTE3MzU3NTg=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2014-12-26",
+          "year": 2014,
+          "title": "103年度印表機租賃採購",
+          "job_number": "CNPC-G-10323",
+          "budget": 350000,
+          "award_price": 280000,
+          "discount_rate": 80.0,
+          "winner": "一心國際科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTE0NTMzNjk=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.75",
+          "source_unit": "衛生福利部嘉南療養院",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 4,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "印表機",
+          "採購",
+          "租賃",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
       "city": "彰化縣",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
@@ -482,7 +543,7 @@
         "record_count": 1,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260713&fn=NAI-1-71229408.xml",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=TIQ-1-71076265.xml",
       "history_stats": [
         {
           "year": 2024,
@@ -510,9 +571,23 @@
           "is_stale": false
         }
       ],
-      "stage": "無法決標",
-      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
-      "duration_years": 1
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 1,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "印表機",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
     },
     {
       "city": "台北市",
@@ -601,33 +676,35 @@
   ],
   "collection_status": {
     "today": "2026-07-28",
-    "status": "incomplete",
-    "source_records": 0,
-    "candidate_records": 0,
-    "review_records": 6,
-    "successful_dates": [],
-    "failed_dates": [
+    "status": "complete",
+    "latest_attempt_status": "complete",
+    "latest_attempt_at": "2026-07-28 17:44",
+    "source_records": 2056,
+    "candidate_records": 7,
+    "review_records": 14,
+    "successful_dates": [
       "2026-07-28",
       "2026-07-27",
-      "2026-07-24"
+      "2026-07-23"
     ],
-    "backfill_remaining_days": 57,
+    "failed_dates": [],
+    "backfill_remaining_days": 55,
     "source": "政府電子採購網每日公告資料"
   },
   "collection_days": {
     "2026-07-28": {
-      "status": "incomplete",
-      "source_records": 0,
-      "candidate_records": 0,
-      "review_records": 0,
-      "checked_at": "2026-07-28 17:39"
+      "status": "complete",
+      "source_records": 2056,
+      "candidate_records": 7,
+      "review_records": 6,
+      "checked_at": "2026-07-28 17:42"
     },
     "2026-07-27": {
-      "status": "incomplete",
-      "source_records": 0,
-      "candidate_records": 0,
-      "review_records": 0,
-      "checked_at": "2026-07-28 17:39"
+      "status": "complete",
+      "source_records": 1808,
+      "candidate_records": 10,
+      "review_records": 8,
+      "checked_at": "2026-07-28 17:42"
     },
     "2026-07-26": {
       "status": "complete",
@@ -644,11 +721,18 @@
       "checked_at": "2026-07-28 17:34"
     },
     "2026-07-24": {
-      "status": "incomplete",
-      "source_records": 0,
-      "candidate_records": 0,
-      "review_records": 0,
-      "checked_at": "2026-07-28 17:39"
+      "status": "complete",
+      "source_records": 2669,
+      "candidate_records": 4,
+      "review_records": 2,
+      "checked_at": "2026-07-28 17:41"
+    },
+    "2026-07-23": {
+      "status": "complete",
+      "source_records": 2635,
+      "candidate_records": 13,
+      "review_records": 8,
+      "checked_at": "2026-07-28 17:42"
     }
   },
   "candidate_cache": [
@@ -1324,16 +1408,98 @@
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
-    }
-  ],
-  "review_candidates": [
+    },
     {
-      "date": "2026-07-28",
-      "title": "香港分行2026年度資訊設備採購案",
-      "unit": "臺灣土地銀行股份有限公司",
-      "unit_id": "A.7.32",
-      "job_number": "LBOTHK2026-18",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=PPW-1-70110649.xml",
+      "date": 20260724,
+      "filename": "PPW-1-70110282",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "116年度影印機租賃採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "YG11505",
+      "unit_id": "3.79.51.10",
+      "unit_name": "臺北市政府捷運工程局機電系統工程處",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.51.10",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.51.10&job_number=YG11505",
+      "unit_url": "/index/unit/3.79.51.10",
+      "url": "/index/case/3.79.51.10/YG11505/20260724/PPW-1-70110282",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "採購",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260724,
+      "filename": "PPW-1-70110306",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "3D列印機乙項",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "PE15532",
+      "unit_id": "3.5.48",
+      "unit_name": "國防部海軍司令部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.5.48",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.5.48&job_number=PE15532",
+      "unit_url": "/index/unit/3.5.48",
+      "url": "/index/case/3.5.48/PE15532/20260724/PPW-1-70110306",
+      "relevance": {
+        "status": "review",
+        "confidence": "medium",
+        "score": 1,
+        "category": "specialized_printing",
+        "matched_terms": [
+          "3D列印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "3D 或特殊列印設備，不直接歸入辦公輸出設備"
+      }
+    },
+    {
+      "date": 20260724,
+      "filename": "ttd-71281638",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年度資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-09",
+      "unit_id": "3.79.6.5",
+      "unit_name": "臺北市立興雅國民中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.6.5",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.6.5&job_number=115-09",
+      "unit_url": "/index/unit/3.79.6.5",
+      "url": "/index/case/3.79.6.5/115-09/20260724/ttd-71281638",
       "relevance": {
         "status": "review",
         "confidence": "low",
@@ -1350,20 +1516,33 @@
       }
     },
     {
-      "date": "2026-07-28",
-      "title": "「115年度資訊設備-電腦軟體」財物採購案",
-      "unit": "臺北市立內湖高級工業職業學校",
-      "unit_id": "3.79.5.36",
-      "job_number": "115233",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=TIQ-11-71080234.xml",
+      "date": 20260724,
+      "filename": "ttd-71283620",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "校園網路及資訊設備一批",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115A17",
+      "unit_id": "3.79.5.34",
+      "unit_name": "臺北市立南港高級工業職業學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.5.34",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.5.34&job_number=115A17",
+      "unit_url": "/index/unit/3.79.5.34",
+      "url": "/index/case/3.79.5.34/115A17/20260724/ttd-71283620",
       "relevance": {
         "status": "review",
         "confidence": "low",
-        "score": 2,
+        "score": 1,
         "category": "needs_review",
         "matched_terms": [
-          "資訊設備",
-          "採購"
+          "資訊設備"
         ],
         "matched_fields": [
           "title"
@@ -1372,34 +1551,62 @@
       }
     },
     {
-      "date": "2026-07-28",
-      "title": "「115年度資訊設備-機房交換器」財物採購案",
-      "unit": "臺北市立內湖高級工業職業學校",
-      "unit_id": "3.79.5.36",
-      "job_number": "115234",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=TIQ-11-71080246.xml",
+      "date": 20260723,
+      "filename": "TIQ-1-71076265",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "115年度個人電腦及印表機設備維護工作",
+        "category": "勞務類849-其他電腦服務",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1061500035",
+      "unit_id": "3.13.31.13",
+      "unit_name": "台灣電力股份有限公司彰化區營業處",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.31.13",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.31.13&job_number=1061500035",
+      "unit_url": "/index/unit/3.13.31.13",
+      "url": "/index/case/3.13.31.13/1061500035/20260723/TIQ-1-71076265",
       "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
         "matched_terms": [
-          "資訊設備",
-          "採購"
+          "印表機",
+          "維護"
         ],
         "matched_fields": [
           "title"
         ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
+        "reason": "命中設備名稱或公告規格"
       }
     },
     {
-      "date": "2026-07-28",
-      "title": "臺東縣達仁鄉衛生所--115年度花東基金衛生局所辦公設備採購--智慧藥櫃採購計畫",
-      "unit": "臺東縣政府",
-      "unit_id": "3.76.54",
-      "job_number": "115404220218",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=TIQ-11-71080733.xml",
+      "date": 20260723,
+      "filename": "TIQ-3-71076128",
+      "brief": {
+        "type": "經公開評選或公開徵求之限制性招標公告",
+        "title": "智慧化資通信設施工程暨採購辦公設備工程(A、E棟)委託規劃、設計及監造技術服務",
+        "category": "勞務類8671-建築服務",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115HK04012650100200",
+      "unit_id": "3.5",
+      "unit_name": "國防部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.5",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.5&job_number=115HK04012650100200",
+      "unit_url": "/index/unit/3.5",
+      "url": "/index/case/3.5/115HK04012650100200/20260723/TIQ-3-71076128",
       "relevance": {
         "status": "review",
         "confidence": "low",
@@ -1416,12 +1623,324 @@
       }
     },
     {
-      "date": "2026-07-27",
-      "title": "巴楠花改制國高中新校舍設施設備－教學及辦公設備(含系統整合)",
-      "unit": "高雄市立巴楠花部落國民中小學",
-      "unit_id": "3.97.6.34",
-      "job_number": "padan115005",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260727&fn=TIQ-1-71078354.xml",
+      "date": 20260723,
+      "filename": "BDM-1-71239850",
+      "brief": {
+        "type": "決標公告",
+        "title": "中央研究院院本部大樓行政辦公室設備採購案",
+        "companies": {
+          "ids": [
+            "83513195"
+          ],
+          "names": [
+            "萇寬高有限公司"
+          ],
+          "id_key": {
+            "83513195": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "萇寬高有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115-D04",
+      "unit_id": "2.1",
+      "unit_name": "中央研究院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=2.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=2.1&job_number=115-D04",
+      "unit_url": "/index/unit/2.1",
+      "url": "/index/case/2.1/115-D04/20260723/BDM-1-71239850",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公室設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260723,
+      "filename": "NAI-1-71238803",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "115年度個人電腦及印表機設備維護工作",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1061500035",
+      "unit_id": "3.13.31.13",
+      "unit_name": "台灣電力股份有限公司彰化區營業處",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.31.13",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.31.13&job_number=1061500035",
+      "unit_url": "/index/unit/3.13.31.13",
+      "url": "/index/case/3.13.31.13/1061500035/20260723/NAI-1-71238803",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "印表機",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260723,
+      "filename": "NAI-1-71239121",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "115-118年度印表機租賃開口契約採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "CNPC-G-11510",
+      "unit_id": "A.21.100.75",
+      "unit_name": "衛生福利部嘉南療養院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.100.75",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.100.75&job_number=CNPC-G-11510",
+      "unit_url": "/index/unit/A.21.100.75",
+      "url": "/index/case/A.21.100.75/CNPC-G-11510/20260723/NAI-1-71239121",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "印表機",
+          "採購",
+          "租賃",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260723,
+      "filename": "NAI-1-71239365",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "臺東縣大武鄉衛生所--115年度（花東基金）衛生局所辦公設備-DR數位影像系統採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115404920189",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115404920189",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115404920189/20260723/NAI-1-71239365",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260723,
+      "filename": "PPW-1-70110178",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "116年度影印機租賃採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "YG11505",
+      "unit_id": "3.79.51.10",
+      "unit_name": "臺北市政府捷運工程局機電系統工程處",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.51.10",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.51.10&job_number=YG11505",
+      "unit_url": "/index/unit/3.79.51.10",
+      "url": "/index/case/3.79.51.10/YG11505/20260723/PPW-1-70110178",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "採購",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260723,
+      "filename": "DTG-1-70014365",
+      "brief": {
+        "type": "招標文件公開閱覽公告資料公告",
+        "title": "臺中市政府115年度各機關資訊設備暨Windows 10老舊個人電腦設備汰舊換新採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115A-25",
+      "unit_id": "",
+      "unit_name": null,
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=&job_number=115A-25",
+      "unit_url": "/index/unit/",
+      "url": "/index/case//115A-25/20260723/DTG-1-70014365",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260723,
+      "filename": "TIQ-11-71076798",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "臺東縣大武鄉衛生所--115年度（花東基金）衛生局所辦公設備-DR數位影像系統採購案",
+        "category": "財物類481-醫療,外科及矯形設備",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115404920189",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115404920189",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115404920189/20260723/TIQ-11-71076798",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260723,
+      "filename": "TIQ-11-71076955",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年度大興國小資訊設備採購",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "DS11507",
+      "unit_id": "3.76.55.97.50",
+      "unit_name": "花蓮縣光復鄉大興國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.55.97.50",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.55.97.50&job_number=DS11507",
+      "unit_url": "/index/unit/3.76.55.97.50",
+      "url": "/index/case/3.76.55.97.50/DS11507/20260723/TIQ-11-71076955",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260723,
+      "filename": "TIQ-12-71074647",
+      "brief": {
+        "type": "公開取得報價單或企劃書更正公告",
+        "title": "臺南市大社國小115年度行政辦公設備及校長室收納櫃改善",
+        "category": "財物類381-傢具",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "dashe115006",
+      "unit_id": "3.95.7.76",
+      "unit_name": "臺南市新市區大社國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.95.7.76",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.95.7.76&job_number=dashe115006",
+      "unit_url": "/index/unit/3.95.7.76",
+      "url": "/index/case/3.95.7.76/dashe115006/20260723/TIQ-12-71074647",
       "relevance": {
         "status": "review",
         "confidence": "low",
@@ -1437,6 +1956,234 @@
       }
     },
     {
+      "date": 20260723,
+      "filename": "ttd-71282729",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年高速影印機採購案",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11502A05",
+      "unit_id": "5.4.61",
+      "unit_name": "臺灣高雄少年及家事法院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=5.4.61",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=5.4.61&job_number=11502A05",
+      "unit_url": "/index/unit/5.4.61",
+      "url": "/index/case/5.4.61/11502A05/20260723/ttd-71282729",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260723,
+      "filename": "aaa-71240360",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年檢驗科資訊設備乙批",
+        "companies": {
+          "ids": [
+            "62241481",
+            "13130651",
+            "28282753"
+          ],
+          "names": [
+            "天乙貴人資通科技有限公司",
+            "魯迅科技有限公司",
+            "鵬鈞科技有限公司"
+          ],
+          "id_key": {
+            "13130651": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ],
+            "28282753": [
+              "投標廠商:投標廠商3:廠商代碼"
+            ],
+            "62241481": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "魯迅科技有限公司": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:未得標廠商2:未得標廠商"
+            ],
+            "鵬鈞科技有限公司": [
+              "投標廠商:投標廠商3:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ],
+            "天乙貴人資通科技有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "KMSH15142",
+      "unit_id": "3.97.14.1",
+      "unit_name": "高雄市立民生醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.14.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.14.1&job_number=KMSH15142",
+      "unit_url": "/index/unit/3.97.14.1",
+      "url": "/index/case/3.97.14.1/KMSH15142/20260723/aaa-71240360",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    }
+  ],
+  "review_candidates": [
+    {
+      "date": "2026-07-28",
+      "title": "香港分行2026年度資訊設備採購案",
+      "unit": "臺灣土地銀行股份有限公司",
+      "unit_id": "A.7.32",
+      "job_number": "LBOTHK2026-18",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=PPW-1-70110649.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-28",
+      "title": "「115年度資訊設備-電腦軟體」財物採購案",
+      "unit": "臺北市立內湖高級工業職業學校",
+      "unit_id": "3.79.5.36",
+      "job_number": "115233",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=TIQ-11-71080234.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-28",
+      "title": "「115年度資訊設備-機房交換器」財物採購案",
+      "unit": "臺北市立內湖高級工業職業學校",
+      "unit_id": "3.79.5.36",
+      "job_number": "115234",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=TIQ-11-71080246.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-28",
+      "title": "臺東縣達仁鄉衛生所--115年度花東基金衛生局所辦公設備採購--智慧藥櫃採購計畫",
+      "unit": "臺東縣政府",
+      "unit_id": "3.76.54",
+      "job_number": "115404220218",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=TIQ-11-71080733.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "傳真",
+          "A3",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-27",
+      "title": "巴楠花改制國高中新校舍設施設備－教學及辦公設備(含系統整合)",
+      "unit": "高雄市立巴楠花部落國民中小學",
+      "unit_id": "3.97.6.34",
+      "job_number": "padan115005",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260727&fn=TIQ-1-71078354.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
       "date": "2026-07-27",
       "title": "臺東縣鹿野鄉衛生所--115年度（花東基金）衛生局所辦公設備補助計畫-高階微電腦高頻診斷X光機採購",
       "unit": "臺東縣政府",
@@ -1446,14 +2193,213 @@
       "relevance": {
         "status": "review",
         "confidence": "low",
-        "score": 2,
+        "score": 3,
         "category": "needs_review",
         "matched_terms": [
           "辦公設備",
+          "傳真",
+          "A3",
           "採購"
         ],
         "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-24",
+      "title": "3D列印機乙項",
+      "unit": "國防部海軍司令部",
+      "unit_id": "3.5.48",
+      "job_number": "PE15532",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260724&fn=PPW-1-70110306.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "medium",
+        "score": 1,
+        "category": "specialized_printing",
+        "matched_terms": [
+          "3D列印機"
+        ],
+        "matched_fields": [
           "title"
+        ],
+        "reason": "3D 或特殊列印設備，不直接歸入辦公輸出設備"
+      }
+    },
+    {
+      "date": "2026-07-24",
+      "title": "115年度資訊設備採購案",
+      "unit": "臺北市立興雅國民中學",
+      "unit_id": "3.79.6.5",
+      "job_number": "115-09",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260724&fn=ttd-71281638.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-24",
+      "title": "校園網路及資訊設備一批",
+      "unit": "臺北市立南港高級工業職業學校",
+      "unit_id": "3.79.5.34",
+      "job_number": "115A17",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260724&fn=ttd-71283620.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-23",
+      "title": "智慧化資通信設施工程暨採購辦公設備工程(A、E棟)委託規劃、設計及監造技術服務",
+      "unit": "國防部",
+      "unit_id": "3.5",
+      "job_number": "115HK04012650100200",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=TIQ-3-71076128.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "複印",
+          "傳真",
+          "採購",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-23",
+      "title": "臺中市政府115年度各機關資訊設備暨Windows 10老舊個人電腦設備汰舊換新採購案",
+      "unit": "",
+      "unit_id": "",
+      "job_number": "115A-25",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=DTG-1-70014365.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "汰換"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-23",
+      "title": "臺東縣大武鄉衛生所--115年度（花東基金）衛生局所辦公設備-DR數位影像系統採購案",
+      "unit": "臺東縣政府",
+      "unit_id": "3.76.54",
+      "job_number": "115404920189",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=TIQ-11-71076798.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "傳真",
+          "A3",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-23",
+      "title": "115年度大興國小資訊設備採購",
+      "unit": "花蓮縣光復鄉大興國民小學",
+      "unit_id": "3.76.55.97.50",
+      "job_number": "DS11507",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=TIQ-11-71076955.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-23",
+      "title": "臺南市大社國小115年度行政辦公設備及校長室收納櫃改善",
+      "unit": "臺南市新市區大社國民小學",
+      "unit_id": "3.95.7.76",
+      "job_number": "dashe115006",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=TIQ-12-71074647.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
@@ -3990,7 +4936,7 @@
     "3.13.31.96": "2026-07-28",
     "3.13.31.2": "2026-07-28",
     "3.13.31.15": "2026-07-28",
-    "3.13.31.3": "2026-07-27",
+    "3.13.31.3": "2026-07-28",
     "3.13.31.64": "2026-07-28",
     "3.13.31.23": "2026-07-28",
     "3.13.31.43": "2026-07-28",
@@ -4005,7 +4951,7 @@
     "3.13.31.62": "2026-07-28",
     "3.13.31.18": "2026-07-28",
     "3.13.31.90": "2026-07-28",
-    "3.13.31.72": "2026-07-27",
+    "3.13.31.72": "2026-07-28",
     "3.13.31.44": "2026-07-28",
     "3.13.31.69": "2026-07-28",
     "3.13.31.56": "2026-07-28",
@@ -4015,7 +4961,7 @@
     "3.13.31.67": "2026-07-28",
     "3.13.31.4": "2026-07-28",
     "3.13.31.54": "2026-07-28",
-    "3.13.31.61": "2026-07-27",
+    "3.13.31.61": "2026-07-28",
     "3.13.31.46": "2026-07-28",
     "3.13.31.68": "2026-07-28",
     "3.13.31.63": "2026-07-28",
@@ -4064,7 +5010,8 @@
     "3.79.51": "2026-07-28",
     "3.79.5.36": "2026-07-28",
     "3.76.54": "2026-07-28",
-    "3.97.6.34": "2026-07-28"
+    "3.97.6.34": "2026-07-28",
+    "3.5.48": "2026-07-28"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
@@ -4114,6 +5061,7 @@
     "3.79.5.36||purchase|資訊設備-電腦軟體財物採購案": "2026-07-28",
     "3.79.5.36||purchase|資訊設備-機房交換器財物採購案": "2026-07-28",
     "3.76.54||purchase|花東基金衛生局所辦公設備採購--智慧藥櫃採購計畫": "2026-07-28",
-    "3.76.54||purchase|（花東基金）衛生局所辦公設備補助計畫-高階微電腦高頻診斷X光機採購": "2026-07-28"
+    "3.76.54||purchase|（花東基金）衛生局所辦公設備補助計畫-高階微電腦高頻診斷X光機採購": "2026-07-28",
+    "3.5.48||unspecified|3D列印機乙項": "2026-07-28"
   }
 }

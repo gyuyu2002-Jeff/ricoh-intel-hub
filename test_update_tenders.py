@@ -41,6 +41,11 @@ class TenderRelevanceTests(unittest.TestCase):
         result = classify_tender_relevance(announcement("年度文宣印製及海報輸出服務"))
         self.assertEqual(result["category"], "printing_service")
 
+    def test_3d_printer_requires_separate_review(self):
+        result = classify_tender_relevance(announcement("3D列印機乙項"))
+        self.assertEqual(result["category"], "specialized_printing")
+        self.assertEqual(result["status"], "review")
+
 
 if __name__ == "__main__":
     unittest.main()

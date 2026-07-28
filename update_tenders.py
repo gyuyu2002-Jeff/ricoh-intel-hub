@@ -11,6 +11,12 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 OFFICIAL_AWARD_SEARCH_URL = "https://web.pcc.gov.tw/prkms/tender/common/agent/readTenderAgent"
+API_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/138.0 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.7",
+    "Referer": "https://pcc-api.openfun.app/"
+}
 OFFICIAL_SSL_CONTEXT = ssl.create_default_context()
 if hasattr(ssl, "VERIFY_X509_STRICT"):
     OFFICIAL_SSL_CONTEXT.verify_flags &= ~ssl.VERIFY_X509_STRICT
@@ -225,6 +231,7 @@ CONTRACT_TERMS = ["採購", "購置", "汰換", "更新", "租賃", "租用", "�
 MACHINE_TOOL_TERMS = ["車銑複合機", "複合加工機", "車銑", "鑽銑", "CNC", "工具機", "機床", "機械科"]
 SUPPLY_TERMS = ["耗材", "碳粉", "墨水", "色帶", "感光鼓", "轉寫帶", "零件"]
 PRINT_SERVICE_TERMS = ["印刷服務", "文宣印製", "海報輸出", "影印裝訂", "印刷品製作", "藍晒"]
+SPECIALIZED_PRINTING_TERMS = ["3D列印機", "3D印表機", "積層製造設備"]
 
 
 def _matched_terms(text, terms):
@@ -254,6 +261,7 @@ def classify_tender_relevance(item, detail=None):
     contract_terms = _matched_terms(combined, CONTRACT_TERMS)
     supply_terms = _matched_terms(title, SUPPLY_TERMS)
     service_terms = _matched_terms(title, PRINT_SERVICE_TERMS)
+    specialized_terms = _matched_terms(title, SPECIALIZED_PRINTING_TERMS)
 
     if machine_terms:
         return {"status": "excluded", "confidence": "high", "score": -4, "category": "industrial_machine", "matched_terms": machine_terms, "reason": "工業機械誤判"}
@@ -261,6 +269,8 @@ def classify_tender_relevance(item, detail=None):
         return {"status": "excluded", "confidence": "high", "score": -3, "category": "supplies", "matched_terms": supply_terms, "reason": "耗材或零件"}
     if service_terms and not direct_title:
         return {"status": "excluded", "confidence": "high", "score": -3, "category": "printing_service", "matched_terms": service_terms, "reason": "純印務服務"}
+    if specialized_terms:
+        return {"status": "review", "confidence": "medium", "score": 1, "category": "specialized_printing", "matched_terms": specialized_terms, "matched_fields": ["title"], "reason": "3D 或特殊列印設備，不直接歸入辦公輸出設備"}
 
     score = (3 if direct_title else 0) + (2 if direct_detail else 0) + (1 if broad_terms else 0) + (1 if detail_signals else 0) + (1 if contract_terms else 0)
     matched = list(dict.fromkeys(direct_title + direct_detail + broad_terms + detail_signals + contract_terms))
@@ -456,7 +466,7 @@ def verify_official_award_notice(unit_id, job_number, award_date, max_retries=2)
 def fetch_tender_detail_with_retry(unit_id, job_number, max_retries=3):
     encoded_job = urllib.parse.quote(job_number)
     detail_api_url = f"https://pcc-api.openfun.app/api/tender?unit_id={unit_id}&job_number={encoded_job}"
-    req_detail = urllib.request.Request(detail_api_url, headers={'User-Agent': 'Mozilla/5.0'})
+    req_detail = urllib.request.Request(detail_api_url, headers=API_HEADERS)
     
     for attempt in range(max_retries):
         try:
@@ -481,7 +491,7 @@ def fetch_tender_detail_with_retry(unit_id, job_number, max_retries=3):
     return None
 
 def fetch_json_with_retry(url, label, max_retries=5):
-    request = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    request = urllib.request.Request(url, headers=API_HEADERS)
     for attempt in range(max_retries):
         try:
             with urllib.request.urlopen(request, timeout=30) as response:
@@ -582,10 +592,11 @@ def main():
             day_data = {"records": []}
         if not isinstance(day_data, dict) or not isinstance(day_data.get("records"), list):
             failed_dates.append(iso_date)
-            collection_days[iso_date] = {
-                "status": "incomplete", "source_records": 0, "candidate_records": 0,
-                "review_records": 0, "checked_at": taipei_now.strftime("%Y-%m-%d %H:%M")
-            }
+            if collection_days.get(iso_date, {}).get("status") != "complete":
+                collection_days[iso_date] = {
+                    "status": "incomplete", "source_records": 0, "candidate_records": 0,
+                    "review_records": 0, "checked_at": taipei_now.strftime("%Y-%m-%d %H:%M")
+                }
             continue
 
         day_records = day_data["records"]
@@ -619,8 +630,18 @@ def main():
         if day >= (today - timedelta(days=60)).strftime("%Y-%m-%d")
     }
 
-    if not raw_active_tenders and failed_dates:
-        print("No cached candidates and the daily census failed. Preserving the existing database.")
+    today_iso = today.strftime("%Y-%m-%d")
+    if today_iso in failed_dates:
+        print("Today's census failed. Preserving the last verified database and recording the failed attempt.")
+        existing_status = dict(existing_data.get("collection_status", {}))
+        existing_status.update({
+            "latest_attempt_status": "failed",
+            "latest_attempt_at": taipei_now.strftime("%Y-%m-%d %H:%M"),
+            "failed_dates": failed_dates
+        })
+        existing_data["collection_status"] = existing_status
+        with open(output_path, "w", encoding="utf-8") as output_file:
+            json.dump(existing_data, output_file, ensure_ascii=False, indent=2)
         return
         
     # Filter and identify active tenders and their units
@@ -662,11 +683,13 @@ def main():
             
         # 4. Use an explainable multi-layer classification.
         title_norm = title.replace("\u81fa", "\u53f0")
-        relevance = item.get("relevance") or classify_tender_relevance(item)
+        relevance = classify_tender_relevance(item)
+        item["relevance"] = relevance
             
         # 5. Skip duplicates
         project_key = (unit_id, item.get("job_number", ""), date_raw, filename)
-        if project_key in seen_active_projects:
+        lifecycle_key = (unit_id, item.get("job_number", ""))
+        if lifecycle_key in seen_active_projects:
             continue
             
         # 6. Keep definite matches and broad terms that still need detail inspection.
@@ -693,7 +716,7 @@ def main():
             item["relevance"] = relevance
             prefetched_details[project_key] = detail_data
             
-        seen_active_projects.add(project_key)
+        seen_active_projects.add(lifecycle_key)
         active_tenders.append(item)
         active_units_dict[unit_name] = unit_id
         
@@ -975,6 +998,10 @@ def main():
     seen_ids = set()
     seen_projects = set()
     processed_tenders = []
+    previous_tenders_by_project = {
+        (tender.get("unit_id", ""), tender.get("job_number", "")): tender
+        for tender in existing_data.get("tenders", [])
+    }
     
     for item in active_tenders:
         filename = item.get("filename", "")
@@ -998,6 +1025,14 @@ def main():
         raw_winner = ""
         stage = ""
         relevance = item.get("relevance") or classify_tender_relevance(item)
+
+        previous_tender = previous_tenders_by_project.get((unit_id, job_number))
+        if detail_data is None and previous_tender:
+            processed_tenders.append(previous_tender)
+            seen_ids.add(tender_id)
+            seen_projects.add(project_key)
+            print(f"Detail unavailable; preserved previous verified record: {title}")
+            continue
         
         if detail_data and detail_data.get("records"):
             records = detail_data["records"]
@@ -1301,6 +1336,8 @@ def main():
         "collection_status": {
             "today": today.strftime("%Y-%m-%d"),
             "status": today_summary.get("status", "incomplete"),
+            "latest_attempt_status": "complete" if not failed_dates else "partial",
+            "latest_attempt_at": last_updated_str,
             "source_records": today_summary.get("source_records", 0),
             "candidate_records": today_summary.get("candidate_records", 0),
             "review_records": len(review_candidates),
