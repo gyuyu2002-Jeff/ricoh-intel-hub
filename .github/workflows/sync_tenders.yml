@@ -20,6 +20,14 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Validate Crawler Rules
+        env:
+          PYTHONIOENCODING: utf-8
+          PYTHONUTF8: 1
+          LC_ALL: C.UTF-8
+          LANG: C.UTF-8
+        run: python -m unittest -v test_update_tenders.py
+
       - name: Run Crawler Script
         env:
           PYTHONIOENCODING: utf-8

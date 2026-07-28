@@ -203,10 +203,80 @@ def parse_contract_duration(title):
     return 1
 
 def is_relevant_equipment_title(title):
-    normalized = title.replace("臺", "台")
-    excluded = ["耗材", "碳粉", "墨水", "色帶", "零件", "影印裝訂", "藍晒", "車銑", "鑽銑", "CNC", "機械科"]
-    equipment = ["影印機", "複合機", "事務機", "多功能機", "印表機", "複印機", "數位複合", "多功能影印"]
-    return not any(word in normalized for word in excluded) and any(word in normalized for word in equipment)
+    return classify_tender_relevance({"brief": {"title": title}})["status"] == "included"
+
+
+DIRECT_EQUIPMENT_TERMS = [
+    "影印機", "複印機", "複合機", "數位複合", "彩色複合機", "多功能機", "多功機",
+    "多功能複合機", "多功能事務機", "多功能影印", "事務機", "辦公事務機", "印表機",
+    "列印機", "雷射印表機", "噴墨印表機", "點陣式印表機", "標籤印表機", "條碼印表機",
+    "繪圖機", "大圖輸出機", "數位印刷機", "生產型印刷機", "MFP", "copier", "printer"
+]
+BROAD_EQUIPMENT_TERMS = [
+    "輸出設備", "列印設備", "文件輸出", "辦公設備", "辦公室設備", "事務設備", "資訊設備",
+    "電腦週邊", "資訊週邊", "辦公自動化", "文件處理設備", "圖文輸出", "輸出系統",
+    "列印系統", "文件管理", "列印管理"
+]
+DETAIL_SIGNAL_TERMS = [
+    "列印", "複印", "影印", "掃描", "傳真", "自動送稿", "網路列印", "雙面列印",
+    "每分鐘張數", "基本張數", "計張", "ppm", "cpm", "A3", "A4"
+]
+CONTRACT_TERMS = ["採購", "購置", "汰換", "更新", "租賃", "租用", "維護", "維修", "保養", "計張", "全包服務", "開口契約"]
+MACHINE_TOOL_TERMS = ["車銑複合機", "複合加工機", "車銑", "鑽銑", "CNC", "工具機", "機床", "機械科"]
+SUPPLY_TERMS = ["耗材", "碳粉", "墨水", "色帶", "感光鼓", "轉寫帶", "零件"]
+PRINT_SERVICE_TERMS = ["印刷服務", "文宣印製", "海報輸出", "影印裝訂", "印刷品製作", "藍晒"]
+
+
+def _matched_terms(text, terms):
+    lowered = str(text or "").lower()
+    return [term for term in terms if term.lower() in lowered]
+
+
+def _flatten_detail(detail):
+    if not isinstance(detail, dict):
+        return ""
+    return " ".join(f"{key} {value}" for key, value in detail.items() if value is not None)
+
+
+def classify_tender_relevance(item, detail=None):
+    """Return an explainable high-recall classification for an announcement."""
+    brief = item.get("brief", {}) if isinstance(item, dict) else {}
+    title = str(brief.get("title", "")).replace("臺", "台")
+    category = str(brief.get("category", ""))
+    detail_text = _flatten_detail(detail)
+    combined = f"{title} {category} {detail_text}"
+
+    machine_terms = _matched_terms(combined, MACHINE_TOOL_TERMS)
+    direct_title = _matched_terms(title, DIRECT_EQUIPMENT_TERMS)
+    direct_detail = _matched_terms(f"{category} {detail_text}", DIRECT_EQUIPMENT_TERMS)
+    broad_terms = _matched_terms(combined, BROAD_EQUIPMENT_TERMS)
+    detail_signals = _matched_terms(f"{category} {detail_text}", DETAIL_SIGNAL_TERMS)
+    contract_terms = _matched_terms(combined, CONTRACT_TERMS)
+    supply_terms = _matched_terms(title, SUPPLY_TERMS)
+    service_terms = _matched_terms(title, PRINT_SERVICE_TERMS)
+
+    if machine_terms:
+        return {"status": "excluded", "confidence": "high", "score": -4, "category": "industrial_machine", "matched_terms": machine_terms, "reason": "工業機械誤判"}
+    if supply_terms:
+        return {"status": "excluded", "confidence": "high", "score": -3, "category": "supplies", "matched_terms": supply_terms, "reason": "耗材或零件"}
+    if service_terms and not direct_title:
+        return {"status": "excluded", "confidence": "high", "score": -3, "category": "printing_service", "matched_terms": service_terms, "reason": "純印務服務"}
+
+    score = (3 if direct_title else 0) + (2 if direct_detail else 0) + (1 if broad_terms else 0) + (1 if detail_signals else 0) + (1 if contract_terms else 0)
+    matched = list(dict.fromkeys(direct_title + direct_detail + broad_terms + detail_signals + contract_terms))
+    matched_fields = []
+    if direct_title or _matched_terms(title, BROAD_EQUIPMENT_TERMS):
+        matched_fields.append("title")
+    if category and (_matched_terms(category, DIRECT_EQUIPMENT_TERMS) or _matched_terms(category, BROAD_EQUIPMENT_TERMS)):
+        matched_fields.append("category")
+    if detail_text and (direct_detail or detail_signals):
+        matched_fields.append("detail")
+
+    if direct_title or direct_detail:
+        return {"status": "included", "confidence": "high" if direct_title else "medium", "score": score, "category": "office_output_equipment", "matched_terms": matched, "matched_fields": matched_fields, "reason": "命中設備名稱或公告規格"}
+    if broad_terms:
+        return {"status": "review", "confidence": "low", "score": score, "category": "needs_review", "matched_terms": matched, "matched_fields": matched_fields, "reason": "名稱較廣泛，需檢查公告品項或規格"}
+    return {"status": "excluded", "confidence": "high", "score": 0, "category": "unrelated", "matched_terms": [], "matched_fields": [], "reason": "未命中設備範圍"}
 
 def classify_equipment(title):
     normalized = title.replace("臺", "台")
@@ -415,7 +485,16 @@ def fetch_json_with_retry(url, label, max_retries=5):
     for attempt in range(max_retries):
         try:
             with urllib.request.urlopen(request, timeout=30) as response:
-                return json.loads(response.read().decode('utf-8'))
+                payload = response.read().decode('utf-8')
+            try:
+                return json.loads(payload)
+            except json.JSONDecodeError:
+                # The source sometimes emits PHP warnings before a valid empty
+                # JSON object on dates with no announcements.
+                json_start = payload.rfind("\n{")
+                if json_start >= 0:
+                    return json.loads(payload[json_start + 1:])
+                raise
         except urllib.error.HTTPError as error:
             if error.code != 429 or attempt + 1 == max_retries:
                 print(f"{label} failed: {error}")
@@ -424,18 +503,25 @@ def fetch_json_with_retry(url, label, max_retries=5):
             print(f"{label} rate limited. Retrying in {wait_time} seconds...")
             time.sleep(wait_time)
         except Exception as error:
-            print(f"{label} failed: {error}")
-            return None
+            if attempt + 1 == max_retries:
+                print(f"{label} failed after {max_retries} attempts: {error}")
+                return None
+            wait_time = (attempt + 1) * 3
+            print(f"{label} failed. Retrying in {wait_time} seconds: {error}")
+            time.sleep(wait_time)
     return None
 
 def main():
     print("Starting automated tender data updater with real stats...")
     script_dir = os.path.dirname(os.path.abspath(__file__))
     output_path = os.path.join(script_dir, "data.json")
+    existing_data = {}
     existing_history_by_unit = {}
     history_unit_names = {}
     history_unit_refresh = {}
     history_deep_refresh = {}
+    candidate_cache = []
+    collection_days = {}
     refresh_date = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).strftime("%Y-%m-%d")
 
     try:
@@ -443,6 +529,8 @@ def main():
             existing_data = json.load(existing_file)
         history_unit_refresh = dict(existing_data.get("history_unit_refresh", {}))
         history_deep_refresh = dict(existing_data.get("history_deep_refresh", {}))
+        candidate_cache = list(existing_data.get("candidate_cache", []))
+        collection_days = dict(existing_data.get("collection_days", {}))
 
         cached_records = list(existing_data.get("history_cache", []))
         for tender in existing_data.get("tenders", []):
@@ -471,45 +559,76 @@ def main():
     except (FileNotFoundError, json.JSONDecodeError) as error:
         print(f"No usable history cache found: {error}")
 
-    # 關鍵字清單：高命中率的前3個會額外抓第2頁（方案B）
-    # 附加關鍵字「數位複合」「多功能影印」補充罕見命名（方案A）
-    keywords_page2 = ["影印機", "複合機", "事務機"]  # 抓 page 1 + page 2
-    keywords_page1 = ["印表機", "複印機", "數位複合", "多功能影印"]  # 只抓 page 1
-    raw_active_tenders = []
+    taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
+    today = taipei_now.date()
+    required_dates = [today, today - timedelta(days=1)]
+    for days_ago in range(2, 61):
+        backfill_date = today - timedelta(days=days_ago)
+        if collection_days.get(backfill_date.strftime("%Y-%m-%d"), {}).get("status") != "complete":
+            required_dates.append(backfill_date)
+            break
 
-    def fetch_keyword_page(kw, page=1):
-        encoded_kw = urllib.parse.quote(kw)
-        url = f"https://pcc-api.openfun.app/api/searchbytitle?query={encoded_kw}&page={page}"
-        try:
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req, timeout=30) as response:
-                data = json.loads(response.read().decode('utf-8'))
-                if isinstance(data, dict) and "records" in data:
-                    records = data["records"]
-                    print(f"Fetched {len(records)} items for '{kw}' page {page}")
-                    return records
-        except Exception as e:
-            print(f"Error fetching '{kw}' page {page}: {e}")
-        return []
+    # The date endpoint returns the day's entire announcement set. Keep every
+    # potentially relevant record so later classification rules can re-evaluate it.
+    raw_active_tenders = list(candidate_cache)
+    successful_dates = []
+    failed_dates = []
+    for scan_date in required_dates:
+        compact_date = scan_date.strftime("%Y%m%d")
+        iso_date = scan_date.strftime("%Y-%m-%d")
+        url = f"https://pcc-api.openfun.app/api/listbydate?date={compact_date}"
+        day_data = fetch_json_with_retry(url, f"daily announcement census {iso_date}")
+        if day_data == {} and scan_date < today:
+            day_data = {"records": []}
+        if not isinstance(day_data, dict) or not isinstance(day_data.get("records"), list):
+            failed_dates.append(iso_date)
+            collection_days[iso_date] = {
+                "status": "incomplete", "source_records": 0, "candidate_records": 0,
+                "review_records": 0, "checked_at": taipei_now.strftime("%Y-%m-%d %H:%M")
+            }
+            continue
 
-    for kw in keywords_page2:
-        raw_active_tenders.extend(fetch_keyword_page(kw, 1))
-        time.sleep(0.5)  # 避免 429
-        raw_active_tenders.extend(fetch_keyword_page(kw, 2))
-        time.sleep(0.5)
+        day_records = day_data["records"]
+        day_candidates = []
+        review_count = 0
+        for record in day_records:
+            classification = classify_tender_relevance(record)
+            if classification["status"] not in ("included", "review"):
+                continue
+            day_candidates.append({**record, "relevance": classification})
+            if classification["status"] == "review":
+                review_count += 1
 
-    for kw in keywords_page1:
-        raw_active_tenders.extend(fetch_keyword_page(kw, 1))
-        time.sleep(0.5)
+        raw_active_tenders = [record for record in raw_active_tenders if str(record.get("date", "")) != compact_date]
+        raw_active_tenders.extend(day_candidates)
+        collection_days[iso_date] = {
+            "status": "complete",
+            "source_records": len(day_records),
+            "candidate_records": len(day_candidates),
+            "review_records": review_count,
+            "checked_at": taipei_now.strftime("%Y-%m-%d %H:%M")
+        }
+        successful_dates.append(iso_date)
+        print(f"Census {iso_date}: {len(day_records)} announcements, {len(day_candidates)} equipment candidates, {review_count} need review.")
+        time.sleep(1)
 
-    if not raw_active_tenders:
-        print("No tender data received from API. Aborting update.")
+    cutoff_compact = (today - timedelta(days=60)).strftime("%Y%m%d")
+    raw_active_tenders = [record for record in raw_active_tenders if str(record.get("date", "")) >= cutoff_compact]
+    collection_days = {
+        day: summary for day, summary in collection_days.items()
+        if day >= (today - timedelta(days=60)).strftime("%Y-%m-%d")
+    }
+
+    if not raw_active_tenders and failed_dates:
+        print("No cached candidates and the daily census failed. Preserving the existing database.")
         return
         
     # Filter and identify active tenders and their units
     active_tenders = []
     seen_active_projects = set()
     active_units_dict = {}
+    review_candidates = []
+    prefetched_details = {}
     
     raw_active_sorted = sorted(
         raw_active_tenders, 
@@ -523,9 +642,9 @@ def main():
             
         filename = item.get("filename", "")
         brief = item.get("brief", {})
-        title = brief.get("title", "")
-        brief_type = brief.get("type", "")
-        unit_name = item.get("unit_name", "")
+        title = brief.get("title", "") or ""
+        brief_type = brief.get("type", "") or ""
+        unit_name = item.get("unit_name", "") or ""
         date_raw = str(item.get("date", ""))
         unit_id = item.get("unit_id", "")
         
@@ -533,28 +652,46 @@ def main():
         if "\u6c7a\u6a19" in brief_type or "\u7121\u6cd5\u6c7a\u6a19" in brief_type:
             continue
             
-        # 2. STRICT TIMELINESS FILTER: 2026 onwards
-        if int(date_raw) < 20260101:
+        # 2. Keep a rolling 60-day opportunity window.
+        if not date_raw.isdigit() or date_raw < cutoff_compact:
             continue
             
         # 3. Skip Bank of Taiwan central procurement
         if "\u81fa\u7063\u9280\u884c" in unit_name or "\u53f0\u7063\u9280\u884c" in unit_name:
             continue
             
-        # 4. Skip consumables, toners, inks, ribbons, and parts
+        # 4. Use an explainable multi-layer classification.
         title_norm = title.replace("\u81fa", "\u53f0")
-        skip_kws = ["\u8017\u6750", "\u78b3\u7c89", "\u58a8\u6c34", "\u8272\u5e36", "\u96f6\u4ef6"]
-        if any(sk in title_norm for sk in skip_kws):
-            continue
+        relevance = item.get("relevance") or classify_tender_relevance(item)
             
         # 5. Skip duplicates
-        project_key = (unit_name, title)
+        project_key = (unit_id, item.get("job_number", ""), date_raw, filename)
         if project_key in seen_active_projects:
             continue
             
-        # 6. Keep office equipment; exclude machine-tool titles such as 車銑複合機.
-        if not is_relevant_equipment_title(title_norm):
+        # 6. Keep definite matches and broad terms that still need detail inspection.
+        if relevance["status"] not in ("included", "review"):
             continue
+
+        if relevance["status"] == "review":
+            detail_data = fetch_tender_detail_with_retry(unit_id, item.get("job_number", ""))
+            merged_detail = {}
+            if detail_data and detail_data.get("records"):
+                for record_index, record in enumerate(detail_data["records"]):
+                    for key, value in record.get("detail", {}).items():
+                        merged_detail[f"{record_index}:{key}"] = value
+            detailed_relevance = classify_tender_relevance(item, merged_detail)
+            if detailed_relevance["status"] != "included":
+                review_candidates.append({
+                    "date": date_to_iso(date_raw), "title": title, "unit": unit_name,
+                    "unit_id": unit_id, "job_number": item.get("job_number", ""),
+                    "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
+                    "relevance": detailed_relevance
+                })
+                continue
+            relevance = detailed_relevance
+            item["relevance"] = relevance
+            prefetched_details[project_key] = detail_data
             
         seen_active_projects.add(project_key)
         active_tenders.append(item)
@@ -848,25 +985,46 @@ def main():
         date_raw = str(item.get("date", ""))
         unit_id = item.get("unit_id", "")
         job_number = item.get("job_number", "")
-        project_key = (unit_name, title)
-        
-        digits = re.findall(r'\d+', filename)
-        if not digits:
-            continue
-        tender_id = digits[-1]
+        project_key = (unit_id, job_number, date_raw, filename)
+        tender_id = project_key
         
         if tender_id in seen_ids:
             continue
             
-        detail_data = fetch_tender_detail_with_retry(unit_id, job_number)
+        detail_data = prefetched_details.get(project_key) or fetch_tender_detail_with_retry(unit_id, job_number)
         tender_url = ""
         real_budget = 0
         real_award = 0
         raw_winner = ""
         stage = ""
+        relevance = item.get("relevance") or classify_tender_relevance(item)
         
         if detail_data and detail_data.get("records"):
             records = detail_data["records"]
+            merged_detail = {}
+            for record_index, record in enumerate(records):
+                for key, value in record.get("detail", {}).items():
+                    merged_detail[f"{record_index}:{key}"] = value
+            detailed_relevance = classify_tender_relevance(item, merged_detail)
+            if relevance.get("status") == "review":
+                if detailed_relevance["status"] == "included":
+                    relevance = detailed_relevance
+                else:
+                    review_candidates.append({
+                        "date": date_to_iso(date_raw), "title": title, "unit": unit_name,
+                        "unit_id": unit_id, "job_number": job_number,
+                        "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
+                        "relevance": detailed_relevance
+                    })
+                    continue
+        elif relevance.get("status") == "review":
+            review_candidates.append({
+                "date": date_to_iso(date_raw), "title": title, "unit": unit_name,
+                "unit_id": unit_id, "job_number": job_number,
+                "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
+                "relevance": relevance
+            })
+            continue
             
             # Check if this tender has already been resolved/awarded or failed
             # Scan entire list to ensure successful awards take absolute precedence over historical failures
@@ -1089,16 +1247,50 @@ def main():
             "history_records": history_records,
             "stage": stage,
             "stage_color": stage_color,
-            "duration_years": duration
+            "duration_years": duration,
+            "relevance": relevance
         })
         
         print(f"Processed: {title} | Date: {date_raw} | Winner: {main_competitor} | Budget: {budget_str}")
         
         time.sleep(1.2)
         
-        if len(processed_tenders) >= 15:
-            break
-            
+    # Keep still-recent records from the previous successful run while the
+    # date-based backfill is being completed incrementally.
+    current_project_keys = {
+        (tender.get("unit_id", ""), tender.get("job_number", ""))
+        for tender in processed_tenders
+    }
+    reviewed_project_keys = {
+        (candidate.get("unit_id", ""), candidate.get("job_number", ""))
+        for candidate in review_candidates
+    }
+    cutoff_iso = (today - timedelta(days=60)).strftime("%Y-%m-%d")
+    for previous in existing_data.get("tenders", []):
+        previous_key = (previous.get("unit_id", ""), previous.get("job_number", ""))
+        if previous_key in current_project_keys or previous_key in reviewed_project_keys or previous.get("publish_date", "") < cutoff_iso:
+            continue
+        processed_tenders.append(previous)
+        current_project_keys.add(previous_key)
+    processed_tenders.sort(key=lambda tender: tender.get("publish_date", ""), reverse=True)
+
+    candidate_by_id = {}
+    for candidate in raw_active_tenders:
+        candidate_id = (
+            candidate.get("unit_id", ""), candidate.get("job_number", ""),
+            str(candidate.get("date", "")), candidate.get("filename", "")
+        )
+        candidate_by_id[candidate_id] = candidate
+    candidate_cache = sorted(
+        candidate_by_id.values(), key=lambda candidate: str(candidate.get("date", "")), reverse=True
+    )
+
+    backfill_remaining = sum(
+        1 for days_ago in range(2, 61)
+        if collection_days.get((today - timedelta(days=days_ago)).strftime("%Y-%m-%d"), {}).get("status") != "complete"
+    )
+    today_summary = collection_days.get(today.strftime("%Y-%m-%d"), {})
+
     # Force last_updated to be in Taipei Time (UTC+8) regardless of runner timezone
     taipei_time = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
     last_updated_str = taipei_time.strftime("%Y-%m-%d %H:%M")
@@ -1106,6 +1298,20 @@ def main():
     output_data = {
         "last_updated": last_updated_str,
         "tenders": processed_tenders,
+        "collection_status": {
+            "today": today.strftime("%Y-%m-%d"),
+            "status": today_summary.get("status", "incomplete"),
+            "source_records": today_summary.get("source_records", 0),
+            "candidate_records": today_summary.get("candidate_records", 0),
+            "review_records": len(review_candidates),
+            "successful_dates": successful_dates,
+            "failed_dates": failed_dates,
+            "backfill_remaining_days": backfill_remaining,
+            "source": "政府電子採購網每日公告資料"
+        },
+        "collection_days": collection_days,
+        "candidate_cache": candidate_cache,
+        "review_candidates": review_candidates,
         "history_cache": sorted(
             [
                 {
