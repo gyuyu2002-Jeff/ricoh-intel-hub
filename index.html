@@ -308,38 +308,14 @@
             </div>
           </div>
 
-          <!-- County Selector -->
+          <!-- County Tender Counts -->
           <div id="city-filter-container">
-            <label for="city-filter" class="block text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1.5">選擇過濾區域</label>
-            <div class="relative">
-              <select id="city-filter" class="w-full bg-white border border-slate-200 text-slate-700 rounded-xl pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ricoh-red focus:border-transparent transition-all cursor-pointer appearance-none">
-                <option value="all">全台灣 (顯示所有標案)</option>
-                <option value="台北市">台北市</option>
-                <option value="新北市">新北市</option>
-                <option value="桃園市">桃園市</option>
-                <option value="台中市">台中市</option>
-                <option value="台南市">台南市</option>
-                <option value="高雄市">高雄市</option>
-                <option value="基隆市">基隆市</option>
-                <option value="新竹市">新竹市</option>
-                <option value="嘉義市">嘉義市</option>
-                <option value="新竹縣">新竹縣</option>
-                <option value="苗栗縣">苗栗縣</option>
-                <option value="彰化縣">彰化縣</option>
-                <option value="南投縣">南投縣</option>
-                <option value="雲林縣">雲林縣</option>
-                <option value="嘉義縣">嘉義縣</option>
-                <option value="屏東縣">屏東縣</option>
-                <option value="宜蘭縣">宜蘭縣</option>
-                <option value="花蓮縣">花蓮縣</option>
-                <option value="台東縣">台東縣</option>
-                <option value="澎湖縣">澎湖縣</option>
-                <option value="金門縣">金門縣</option>
-                <option value="連江縣">連江縣</option>
-              </select>
-              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
-                <i data-lucide="chevron-down" class="w-4 h-4"></i>
-              </div>
+            <div class="flex items-center justify-between gap-3 mb-2">
+              <span class="block text-[10px] uppercase font-bold tracking-wider text-slate-400">有標案的縣市</span>
+              <span class="text-[10px] text-slate-400">點選即可篩選</span>
+            </div>
+            <div id="city-filter-list" class="grid grid-cols-2 gap-2 sm:grid-cols-1" role="list" aria-label="依縣市篩選標案">
+              <span class="col-span-full py-3 text-center text-xs text-slate-400">縣市統計載入中...</span>
             </div>
           </div>
 
@@ -537,6 +513,7 @@
     // System Data State
     let tendersData = [];
     let currentFilteredTenders = [];
+    let activeCityFilter = "all";
     let selectedBrand = "FUJIFILM";
 
     // Brand News and Specs Database - Curated copier market data in Taiwan
@@ -848,6 +825,49 @@
       const shouldCollapse = forceClose || !panel.classList.contains("is-collapsed");
       panel.classList.toggle("is-collapsed", shouldCollapse);
       button.setAttribute("aria-expanded", String(!shouldCollapse));
+    }
+
+    function renderCityFilters() {
+      const list = document.getElementById("city-filter-list");
+      if (!list) return;
+
+      const counts = tendersData.reduce((result, tender) => {
+        const city = tender.city || "未分類";
+        result[city] = (result[city] || 0) + 1;
+        return result;
+      }, {});
+      const filters = [
+        { city: "all", label: "全台灣", count: tendersData.length },
+        ...Object.entries(counts)
+          .map(([city, count]) => ({ city, label: city, count }))
+          .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, "zh-TW"))
+      ];
+
+      list.replaceChildren();
+      filters.forEach(filter => {
+        const isActive = filter.city === activeCityFilter;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.dataset.city = filter.city;
+        button.setAttribute("aria-pressed", String(isActive));
+        button.className = `min-h-11 w-full rounded-xl border px-3 py-2.5 flex items-center justify-between gap-2 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-ricoh-red/40 ${isActive ? "border-ricoh-red bg-red-50 text-ricoh-red shadow-sm" : "border-slate-200 bg-white text-slate-700 hover:border-red-200 hover:bg-red-50/40"}`;
+
+        const label = document.createElement("span");
+        label.textContent = filter.label;
+        const count = document.createElement("span");
+        count.className = `min-w-7 rounded-full px-2 py-0.5 text-center text-xs ${isActive ? "bg-ricoh-red text-white" : "bg-slate-100 text-slate-600"}`;
+        count.textContent = filter.count;
+        button.append(label, count);
+        list.appendChild(button);
+      });
+    }
+
+    function selectCityFilter(city) {
+      activeCityFilter = city;
+      renderCityFilters();
+      renderTenders(city);
+      document.getElementById("mobile-filter-label").textContent = city === "all" ? "全台灣" : city;
+      if (window.innerWidth < 640) toggleMobileFilters(true);
     }
 
     function renderTenders(city) {
@@ -1239,8 +1259,9 @@
             `).join('');
           }
 
-          // Render initial tenders (default all)
-          renderTenders("all");
+          // Render city counts and initial tenders (default all)
+          renderCityFilters();
+          renderTenders(activeCityFilter);
           
           // Setup competitor strategy tabs
           switchBrand("FUJIFILM");
@@ -1262,12 +1283,10 @@
           lucide.createIcons();
         });
 
-      // 2. Dropdown Filter Listener
-      const filterSelect = document.getElementById("city-filter");
-      filterSelect.addEventListener("change", (e) => {
-        renderTenders(e.target.value);
-        document.getElementById("mobile-filter-label").textContent = e.target.value === "all" ? "全台灣" : e.target.value;
-        if (window.innerWidth < 640) toggleMobileFilters(true);
+      // 2. City Count Filter Listener
+      document.getElementById("city-filter-list").addEventListener("click", (event) => {
+        const button = event.target.closest("button[data-city]");
+        if (button) selectCityFilter(button.dataset.city);
       });
 
       // 3. Escape Key Modal Closer
