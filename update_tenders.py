@@ -205,7 +205,7 @@ def parse_contract_duration(title):
 def is_relevant_equipment_title(title):
     normalized = title.replace("臺", "台")
     excluded = ["耗材", "碳粉", "墨水", "色帶", "零件", "影印裝訂", "藍晒", "車銑", "鑽銑", "CNC", "機械科"]
-    equipment = ["影印機", "複合機", "事務機", "多功能機", "印表機", "複印機"]
+    equipment = ["影印機", "複合機", "事務機", "多功能機", "印表機", "複印機", "數位複合", "多功能影印"]
     return not any(word in normalized for word in excluded) and any(word in normalized for word in equipment)
 
 def classify_equipment(title):
@@ -471,23 +471,37 @@ def main():
     except (FileNotFoundError, json.JSONDecodeError) as error:
         print(f"No usable history cache found: {error}")
 
-    keywords = ["影印機", "複合機", "事務機", "印表機", "複印機"]
+    # 關鍵字清單：高命中率的前3個會額外抓第2頁（方案B）
+    # 附加關鍵字「數位複合」「多功能影印」補充罕見命名（方案A）
+    keywords_page2 = ["影印機", "複合機", "事務機"]  # 抓 page 1 + page 2
+    keywords_page1 = ["印表機", "複印機", "數位複合", "多功能影印"]  # 只抓 page 1
     raw_active_tenders = []
-    
-    for kw in keywords:
+
+    def fetch_keyword_page(kw, page=1):
         encoded_kw = urllib.parse.quote(kw)
-        url = f"https://pcc-api.openfun.app/api/searchbytitle?query={encoded_kw}"
+        url = f"https://pcc-api.openfun.app/api/searchbytitle?query={encoded_kw}&page={page}"
         try:
             req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req) as response:
-                content = response.read().decode('utf-8')
-                data = json.loads(content)
+            with urllib.request.urlopen(req, timeout=30) as response:
+                data = json.loads(response.read().decode('utf-8'))
                 if isinstance(data, dict) and "records" in data:
-                    raw_active_tenders.extend(data["records"])
-                    print(f"Fetched {len(data['records'])} items for active search '{kw}'")
+                    records = data["records"]
+                    print(f"Fetched {len(records)} items for '{kw}' page {page}")
+                    return records
         except Exception as e:
-            print(f"Error fetching active data for '{kw}': {e}")
-            
+            print(f"Error fetching '{kw}' page {page}: {e}")
+        return []
+
+    for kw in keywords_page2:
+        raw_active_tenders.extend(fetch_keyword_page(kw, 1))
+        time.sleep(0.5)  # 避免 429
+        raw_active_tenders.extend(fetch_keyword_page(kw, 2))
+        time.sleep(0.5)
+
+    for kw in keywords_page1:
+        raw_active_tenders.extend(fetch_keyword_page(kw, 1))
+        time.sleep(0.5)
+
     if not raw_active_tenders:
         print("No tender data received from API. Aborting update.")
         return
