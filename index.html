@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>互�? RICOH ?�場?�報中�? (v3.3)</title>
-  <meta name="description" content="專屬互�? RICOH 業�?精英?�戰術�??�控?�台，整?�全?��?案雷?��??��?競業?�防話�?庫�?>
+  <title>互盛 RICOH 戰場情報中樞 (v3.3)</title>
+  <meta name="description" content="專屬互盛 RICOH 業務精英的戰術情報控制台，整合全台標案雷達與即時競業攻防話術庫。">
   <link rel="icon" type="image/png" href="favicon.png">
   
   <!-- Google Fonts: Outfit, Inter, Noto Sans TC -->
@@ -228,11 +228,11 @@
   <!-- Print Only Header -->
   <div class="hidden print-confidential w-full">
     <div>
-      <h1 class="text-2xl font-bold text-slate-900 font-display">互�? RICOH ?��??�業?��?對�?點卡</h1>
-      <p class="text-xs text-slate-500 mt-1">業�??�場實戰對戰?��? ??互�?機�?請勿外�?</p>
+      <h1 class="text-2xl font-bold text-slate-900 font-display">互盛 RICOH 各廠牌業務應對重點卡</h1>
+      <p class="text-xs text-slate-500 mt-1">業務現場實戰對戰指南 • 互盛機密請勿外流</p>
     </div>
     <div class="text-right">
-      <span class="text-xs text-slate-500">?�印?��?: <span class="print-time-stamp"></span></span>
+      <span class="text-xs text-slate-500">列印時間: <span class="print-time-stamp"></span></span>
     </div>
   </div>
 
@@ -246,7 +246,7 @@
         </div>
         <div>
           <h1 class="font-display font-extrabold text-lg sm:text-xl tracking-wider text-slate-900 flex items-center gap-2">
-            互�? RICOH <span class="hidden sm:inline text-xs font-semibold bg-red-600/10 border border-red-500/20 text-ricoh-red px-2.5 py-0.5 rounded-full whitespace-nowrap">?�報中�? v3.3</span>
+            互盛 RICOH <span class="hidden sm:inline text-xs font-semibold bg-red-600/10 border border-red-500/20 text-ricoh-red px-2.5 py-0.5 rounded-full whitespace-nowrap">情報中樞 v3.3</span>
           </h1>
           <p class="hidden sm:block text-[10px] text-slate-500 font-semibold tracking-widest mt-0.5">TACTICAL INTELLIGENCE COMMAND CONSOLE</p>
         </div>
@@ -257,11 +257,11 @@
     <div class="no-print flex bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1 my-1 xl:my-0 w-full sm:w-auto xl:col-span-2 xl:row-start-2 xl:justify-self-center 2xl:col-auto 2xl:shrink-0 justify-center">
       <button onclick="navigateToPage('radar')" id="nav-radar" class="flex-1 sm:flex-none justify-center min-h-11 flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-ricoh-red text-white shadow-md shadow-ricoh-red/20">
         <i data-lucide="radar" class="w-4 h-4"></i>
-        <span class="whitespace-nowrap">標�??�報??��?��?</span>
+        <span class="whitespace-nowrap">標案情報監控雷達</span>
       </button>
       <button onclick="navigateToPage('pitch')" id="nav-pitch" class="flex-1 sm:flex-none justify-center min-h-11 flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-white">
         <i data-lucide="shield-alert" class="w-4 h-4"></i>
-        <span class="whitespace-nowrap">?��??�產?��?市場資�?</span>
+        <span class="whitespace-nowrap">各廠牌產品與市場資訊</span>
       </button>
     </div>
 
@@ -269,19 +269,19 @@
     <div class="flex items-center gap-2 2xl:gap-3 text-xs text-slate-400 w-full xl:w-auto xl:col-start-2 xl:row-start-1 xl:justify-self-end justify-between 2xl:justify-end overflow-x-auto pb-0.5 2xl:shrink-0">
       <div class="flex shrink-0 items-center gap-2 font-mono bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5 whitespace-nowrap">
         <i data-lucide="clock" class="w-3.5 h-3.5 text-ricoh-red"></i>
-        <span>?�報?��??��?: <span id="data-updated-time" class="font-bold text-slate-700">---</span> <span class="hidden sm:inline text-[10px] text-slate-400 font-sans font-semibold">(�?小�??��??�新)</span></span>
+        <span>情報發布時間: <span id="data-updated-time" class="font-bold text-slate-700">---</span> <span class="hidden sm:inline text-[10px] text-slate-400 font-sans font-semibold">(每2小時自動更新)</span></span>
       </div>
       <div class="hidden sm:flex shrink-0 items-center gap-2 bg-slate-100 border border-slate-200/80 rounded-full px-3 py-1.5 whitespace-nowrap">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
-        <span class="font-medium text-emerald-400 font-mono">LIVE ???�?��</span>
+        <span class="font-medium text-emerald-400 font-mono">LIVE 連線正常</span>
       </div>
       <!-- Manual Sync Button -->
       <button onclick="triggerManualSync(event)" class="no-print shrink-0 bg-slate-100 hover:bg-ricoh-red hover:text-white border border-slate-200/80 hover:border-ricoh-red rounded-full px-3.5 py-1.5 text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-all shadow-sm whitespace-nowrap">
         <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-        <span>?��??�新</span>
+        <span>手動更新</span>
       </button>
     </div>
   </header>
@@ -289,13 +289,13 @@
   <!-- Main Layout -->
   <main class="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-8 relative z-10">
 
-    <!-- Page 1: 標�??�報??��?��? -->
+    <!-- Page 1: 標案情報監控雷達 -->
     <div id="page-tender-radar" class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 w-full">
-      <!-- Left Sidebar: Filters (佔�? 3 �? -->
+      <!-- Left Sidebar: Filters (佔比 3 欄) -->
       <section id="left-panel-sidebar" class="lg:col-span-3 flex flex-col gap-6 lg:sticky lg:top-32 self-start">
         <button type="button" onclick="toggleMobileFilters()" class="sm:hidden min-h-11 w-full rounded-xl bg-white border border-slate-200 px-4 py-2.5 flex items-center justify-between text-sm font-bold text-slate-800 shadow-sm" aria-controls="mobile-filter-panel" aria-expanded="false" id="mobile-filter-toggle">
-          <span class="flex items-center gap-2"><i data-lucide="sliders-horizontal" class="w-4 h-4 text-ricoh-red"></i>篩選標�?</span>
-          <span id="mobile-filter-label" class="text-xs font-semibold text-ricoh-red">?�台??/span>
+          <span class="flex items-center gap-2"><i data-lucide="sliders-horizontal" class="w-4 h-4 text-ricoh-red"></i>篩選標案</span>
+          <span id="mobile-filter-label" class="text-xs font-semibold text-ricoh-red">全台灣</span>
         </button>
         <div id="mobile-filter-panel" class="mobile-filter-panel is-collapsed flex glass-panel rounded-2xl p-4 sm:p-6 shadow-sm sm:shadow-2xl flex-col gap-5 sm:gap-6">
           <div class="flex items-start gap-3 border-b border-slate-200 pb-5">
@@ -303,39 +303,39 @@
               <i data-lucide="radar" class="w-6 h-6"></i>
             </div>
             <div>
-              <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">標�??��?</h2>
-              <p class="text-xs text-slate-400 mt-0.5">?��???��?�台事�?機�?標�?�?/p>
+              <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">標案雷達</h2>
+              <p class="text-xs text-slate-400 mt-0.5">動態監控全台事務機招標案件</p>
             </div>
           </div>
 
           <!-- County Selector -->
           <div id="city-filter-container">
-            <label for="city-filter" class="block text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1.5">?��??�濾?�??/label>
+            <label for="city-filter" class="block text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1.5">選擇過濾區域</label>
             <div class="relative">
               <select id="city-filter" class="w-full bg-white border border-slate-200 text-slate-700 rounded-xl pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ricoh-red focus:border-transparent transition-all cursor-pointer appearance-none">
-                <option value="all">?�台??(顯示?�?��?�?</option>
-                <option value="?��?�?>?��?�?/option>
-                <option value="?��?�?>?��?�?/option>
-                <option value="桃�?�?>桃�?�?/option>
-                <option value="?�中�?>?�中�?/option>
-                <option value="?��?�?>?��?�?/option>
-                <option value="高�?�?>高�?�?/option>
-                <option value="?��?�?>?��?�?/option>
-                <option value="?�竹�?>?�竹�?/option>
-                <option value="?�義�?>?�義�?/option>
-                <option value="?�竹�?>?�竹�?/option>
-                <option value="?��?�?>?��?�?/option>
-                <option value="彰�?�?>彰�?�?/option>
-                <option value="?��?�?>?��?�?/option>
-                <option value="?��?�?>?��?�?/option>
-                <option value="?�義�?>?�義�?/option>
-                <option value="屏東�?>屏東�?/option>
-                <option value="宜蘭�?>宜蘭�?/option>
-                <option value="?�蓮�?>?�蓮�?/option>
-                <option value="?�東�?>?�東�?/option>
-                <option value="澎�?�?>澎�?�?/option>
-                <option value="?��?�?>?��?�?/option>
-                <option value="???�?>???�?/option>
+                <option value="all">全台灣 (顯示所有標案)</option>
+                <option value="台北市">台北市</option>
+                <option value="新北市">新北市</option>
+                <option value="桃園市">桃園市</option>
+                <option value="台中市">台中市</option>
+                <option value="台南市">台南市</option>
+                <option value="高雄市">高雄市</option>
+                <option value="基隆市">基隆市</option>
+                <option value="新竹市">新竹市</option>
+                <option value="嘉義市">嘉義市</option>
+                <option value="新竹縣">新竹縣</option>
+                <option value="苗栗縣">苗栗縣</option>
+                <option value="彰化縣">彰化縣</option>
+                <option value="南投縣">南投縣</option>
+                <option value="雲林縣">雲林縣</option>
+                <option value="嘉義縣">嘉義縣</option>
+                <option value="屏東縣">屏東縣</option>
+                <option value="宜蘭縣">宜蘭縣</option>
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="台東縣">台東縣</option>
+                <option value="澎湖縣">澎湖縣</option>
+                <option value="金門縣">金門縣</option>
+                <option value="連江縣">連江縣</option>
               </select>
               <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
                 <i data-lucide="chevron-down" class="w-4 h-4"></i>
@@ -346,19 +346,19 @@
           <!-- Radar Status & Tenders Count -->
           <div class="flex flex-col gap-2.5 text-xs bg-slate-50 rounded-xl p-4 border border-slate-200/80">
             <div class="flex items-center justify-between">
-              <span class="text-slate-400">?��??�?��?</span>
-              <span class="text-emerald-400 font-semibold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>?????���?/span>
+              <span class="text-slate-400">雷達狀態：</span>
+              <span class="text-emerald-400 font-semibold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>連線監控中</span>
             </div>
             <div class="h-px bg-slate-200/60 my-1"></div>
             <div class="flex items-center justify-between">
-              <span class="text-slate-400">?��?中�?案�?</span>
-              <span id="tenders-count" class="text-slate-800 font-extrabold">資�?載入�?..</span>
+              <span class="text-slate-400">進行中標案：</span>
+              <span id="tenders-count" class="text-slate-800 font-extrabold">資料載入中...</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Right Main: Tenders cards (佔�? 9 �? -->
+      <!-- Right Main: Tenders cards (佔比 9 欄) -->
       <section id="left-panel" class="lg:col-span-9 flex flex-col gap-6">
         <div id="tenders-container" class="flex flex-col gap-4 sm:gap-6">
           <!-- Dynamic cards injected here -->
@@ -366,9 +366,9 @@
       </section>
     </div>
 
-    <!-- Page 2: ?��??�業?��?對�?�?-->
+    <!-- Page 2: 各廠牌業務應對重點 -->
     <div id="page-competitor-pitch" class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full hidden">
-      <!-- Left Sidebar: Brand Selection (佔�? 3 �? -->
+      <!-- Left Sidebar: Brand Selection (佔比 3 欄) -->
       <section id="brand-selector-sidebar" class="lg:col-span-3 flex flex-col gap-6">
         <div class="glass-panel rounded-2xl p-6 shadow-2xl flex flex-col gap-6">
           <div class="flex items-start gap-3 border-b border-slate-200 pb-5">
@@ -376,14 +376,14 @@
               <i data-lucide="shield-alert" class="w-6 h-6"></i>
             </div>
             <div>
-              <h2 class="text-lg font-bold text-white">?��??��?</h2>
-              <p class="text-xs text-slate-400 mt-0.5">�??競�??��?主�?機�??��??�新??/p>
+              <h2 class="text-lg font-bold text-white">應對重點</h2>
+              <p class="text-xs text-slate-400 mt-0.5">解構競對品牌主力機型與市場新聞</p>
             </div>
           </div>
 
           <!-- Brand selector list -->
           <div id="brand-tabs-container" class="flex flex-col gap-2">
-            <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">?��?競�??��?</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">選擇競對品牌</span>
             <div class="flex flex-col gap-2">
               <button onclick="switchBrand('FUJIFILM')" id="tab-FUJIFILM" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
                 <span>FUJIFILM</span>
@@ -417,8 +417,8 @@
                 <span>Brother</span>
                 <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
               </button>
-              <button onclick="switchBrand('?��?廠�?')" id="tab-Other" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
-                <span>?��?廠�?</span>
+              <button onclick="switchBrand('其他廠牌')" id="tab-Other" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
+                <span>其他廠牌</span>
                 <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
@@ -426,73 +426,73 @@
         </div>
       </section>
 
-      <!-- Right Main: Strategy Details Card (佔�? 9 �? -->
+      <!-- Right Main: Strategy Details Card (佔比 9 欄) -->
       <section id="right-panel" class="lg:col-span-9 flex flex-col gap-6">
         <div class="glass-panel rounded-2xl p-6 shadow-2xl flex flex-col gap-6">
           <div id="battle-card" class="bg-white rounded-xl p-5 border border-slate-200/80 flex flex-col gap-6 relative">
             <div class="flex items-center justify-between border-b border-slate-200 pb-4">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-ricoh-red animate-pulse"></span>
-                <span id="active-brand-title" class="font-display font-extrabold text-base text-slate-800 tracking-wider">載入�?..</span>
+                <span id="active-brand-title" class="font-display font-extrabold text-base text-slate-800 tracking-wider">載入中...</span>
               </div>
               <button onclick="printBattleCard()" class="no-print bg-slate-50 hover:bg-ricoh-red border border-slate-200 hover:border-ricoh-red text-slate-600 hover:text-white rounded-lg px-3 py-1.5 text-xs font-semibold flex items-center gap-1.5 transition-all shadow-md">
                 <i data-lucide="printer" class="w-3.5 h-3.5"></i>
-                一?��??��?訊卡
+                一鍵列印資訊卡
               </button>
             </div>
 
             <!-- Two Column Grid for News and Specs -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
               
-              <!-- Column 1: News (佔�? 5 �? -->
+              <!-- Column 1: News (佔比 5 欄) -->
               <div class="lg:col-span-5 flex flex-col gap-4">
                 <div class="flex items-center gap-2 text-slate-800 border-b border-slate-100 pb-2">
                   <i data-lucide="newspaper" class="w-4 h-4 text-ricoh-red"></i>
-                  <h3 class="text-xs uppercase font-extrabold tracking-wider">?��?市場?��?安�???(News)</h3>
+                  <h3 class="text-xs uppercase font-extrabold tracking-wider">品牌市場與資安動態 (News)</h3>
                 </div>
                 <div id="brand-news-container" class="flex flex-col gap-3.5">
                   <!-- Dynamically populated news cards -->
                 </div>
               </div>
 
-              <!-- Column 2: Specs & Comparison (佔�? 7 �? -->
+              <!-- Column 2: Specs & Comparison (佔比 7 欄) -->
               <div class="lg:col-span-7 flex flex-col gap-4">
                 <div class="flex items-center gap-2 text-slate-800 border-b border-slate-100 pb-2">
                   <i data-lucide="cpu" class="w-4 h-4 text-emerald-600"></i>
-                  <h3 class="text-xs uppercase font-extrabold tracking-wider">主�?機種?��??��???(Product Specs)</h3>
+                  <h3 class="text-xs uppercase font-extrabold tracking-wider">主力機種與規格剖析 (Product Specs)</h3>
                 </div>
                 
                 <div class="flex flex-col gap-4">
                   <!-- Match Card: Recommended RICOH machine -->
                   <div class="bg-emerald-50 border border-emerald-200/60 rounded-xl p-4 flex items-center justify-between shadow-sm">
                     <div>
-                      <span class="text-[9px] uppercase font-bold tracking-wider text-emerald-700 block">互�??�薦對�?機�?</span>
+                      <span class="text-[9px] uppercase font-bold tracking-wider text-emerald-700 block">互盛推薦對標機型</span>
                       <span id="ricoh-match-model" class="text-sm font-extrabold text-emerald-900 mt-1 block">---</span>
                     </div>
-                    <span class="bg-emerald-500 text-white font-extrabold text-[10px] px-3 py-1 rounded-full uppercase shadow-sm">?�薦機種</span>
+                    <span class="bg-emerald-500 text-white font-extrabold text-[10px] px-3 py-1 rounded-full uppercase shadow-sm">推薦機種</span>
                   </div>
 
                   <!-- Table Grid -->
                   <div class="flex flex-col gap-3 text-xs bg-slate-50 border border-slate-200/80 rounded-xl p-4">
                     <div class="flex flex-col gap-1 border-b border-slate-200 pb-2">
-                      <span class="text-[9px] uppercase font-bold tracking-wider text-slate-400">主�?競�?機�?</span>
+                      <span class="text-[9px] uppercase font-bold tracking-wider text-slate-400">主力競對機型</span>
                       <span id="competitor-models" class="text-slate-800 font-bold">---</span>
                     </div>
                     
                     <div class="flex flex-col gap-1 border-b border-slate-200 pb-2">
-                      <span class="text-[9px] uppercase font-bold tracking-wider text-slate-400">?��?規格?�數</span>
+                      <span class="text-[9px] uppercase font-bold tracking-wider text-slate-400">核心規格參數</span>
                       <span id="product-specs" class="text-slate-700 leading-relaxed font-medium">---</span>
                     </div>
                     
                     <div class="flex flex-col gap-1.5 border-b border-slate-200 pb-2">
-                      <span class="text-[9px] uppercase font-bold tracking-wider text-emerald-700 font-semibold">?��?競爭?�勢 (Strengths)</span>
+                      <span class="text-[9px] uppercase font-bold tracking-wider text-emerald-700 font-semibold">產品競爭優勢 (Strengths)</span>
                       <ul id="product-strengths" class="text-slate-700 leading-relaxed font-medium list-disc pl-4 space-y-1.5">
                         <!-- Dynamically populated strengths -->
                       </ul>
                     </div>
                     
                     <div class="flex flex-col gap-1.5">
-                      <span class="text-[9px] uppercase font-bold tracking-wider text-red-700 font-semibold">?��?競爭??�� (Weaknesses)</span>
+                      <span class="text-[9px] uppercase font-bold tracking-wider text-red-700 font-semibold">產品競爭劣勢 (Weaknesses)</span>
                       <ul id="product-weaknesses" class="text-slate-700 leading-relaxed font-medium list-disc pl-4 space-y-1.5">
                         <!-- Dynamically populated weaknesses -->
                       </ul>
@@ -512,8 +512,8 @@
 
   <!-- Footer -->
   <footer class="no-print border-t border-slate-200 bg-slate-100 py-8 text-center text-xs text-slate-500 font-sans mt-12 flex flex-col gap-1.5 justify-center items-center">
-    <p class="font-semibold text-slate-600">網�?資�??��?評估?�考�??��??��?以政府電子採購網?��??��???/p>
-    <p class="text-slate-400 font-mono text-[10px]">製�? - 漢�? Antigravity</p>
+    <p class="font-semibold text-slate-600">網站資訊僅供評估參考，投標前請以政府電子採購網公告為準。</p>
+    <p class="text-slate-400 font-mono text-[10px]">製作 - 漢君 Antigravity</p>
   </footer>
 
   <script>
@@ -525,219 +525,219 @@
     // Brand News and Specs Database - Curated copier market data in Taiwan
     const brandDatabase = {
       "FUJIFILM": {
-        title: "FUJIFILM (富士軟�?資�?)",
+        title: "FUJIFILM (富士軟片資訊)",
         news: [
           {
-            title: "富士軟�?資�??��? A3 複�?機�??��?體更?�以修�??��?漏�?",
+            title: "富士軟片資訊發布 A3 複合機安全韌體更新以修補重要漏洞",
             date: "2026-06-15",
-            source: "IT資�??�報",
-            brief: "?��?近�??�現?�網路通�??�緩衝�?溢�?弱�?，�?廠�??��??��??�性�?體�?丁�?強�?建議企業IT管�??��??��?程更?�以?��??�索軟�??��???
+            source: "IT資安通報",
+            brief: "針對近期發現的網路通訊埠緩衝區溢位弱點，原廠釋出最新安全性韌體補丁，強烈建議企業IT管理員儘速排程更新以防範勒索軟體攻擊。"
           },
           {
-            title: "?�灣富士軟�??�強?�廣?�端?�慧辦公室�? Apeos ?��?�?��?��?",
+            title: "台灣富士軟片加強推廣雲端智慧辦公室與 Apeos 整合解決方案",
             date: "2026-04-10",
-            source: "經�??�報",
-            brief: "?��?混�?辦公趨勢，�?士�?示全??Apeos ?�端????��?，主?��?建伺?�器?��?完�?行�??�印?�無紙�??��?歸�??��?流�???
+            source: "經濟日報",
+            brief: "因應混合辦公趨勢，富士展示全新 Apeos 雲端連結服務，主打免建伺服器即時完成行動列印與無紙化電子歸檔整合流程。"
           }
         ],
         product: {
-          main_models: "Apeos C3070 / C3570 / C4570 系�? (彩色 A3 複�?�?",
-          key_specs: "?�實?�印�??�?1200 x 2400 dpi，�???LED ?��??��??��??��??�度?�高�? 270 ipm (?�面?�步)，搭�?10.1 ?�智?��?作面?��?,
-          strengths: "<li><strong>影�??�彩?�質?�異�?/strong>高解?�度?�色彩鮮?�度?�業?�享?�極高口碑�??��?設�?業�?精緻?�件?�刷??/li><li><strong>市�??�優?��?</strong>?�中大�?企業?�公?��??��?機�?大�?使用?��?介面習慣度�???/li>",
-          weaknesses: "<li><strong>系統?��??��?費用高�?</strong>?��??�板 App ?��?系�?封�?，若?�?��?�?AD / OneDrive 等進�?深度?�端對接，通常?�額�??�購?�貴?�中介�?體�?權�?/li><li><strong>PS3 ?�印標�??��?不�?�?/strong>標�?機�?常�??��? PCL ?��?模擬，�???PDF ??CAD ?��??�印?�出?��?Genuine Adobe PS3 多�??��??�選?�件??/li>",
+          main_models: "Apeos C3070 / C3570 / C4570 系列 (彩色 A3 複合機)",
+          key_specs: "真實列印解析度 1200 x 2400 dpi，配備 LED 曝光印字頭，掃描速度最高達 270 ipm (雙面同步)，搭載 10.1 吋智慧操作面板。",
+          strengths: "<li><strong>影像色彩品質優異：</strong>高解析度與色彩鮮明度在業界享有極高口碑，適合設計業與精緻文件印刷。</li><li><strong>市佔率優勢：</strong>於中大型企業與公務機關裝機量大，使用者對介面習慣度高。</li>",
+          weaknesses: "<li><strong>系統整合授權費用高：</strong>原廠面板 App 生態系較封閉，若需與企業 AD / OneDrive 等進行深度雲端對接，通常需額外加購昂貴的中介軟體授權。</li><li><strong>PS3 列印標準配備不齊：</strong>標案機型常僅提供 PCL 相機模擬，向量 PDF 與 CAD 圖檔列印易出錯，Genuine Adobe PS3 多列為高價選配件。</li>",
           ricoh_match: "RICOH IM C2510 / C3010 / C4510"
         }
       },
       "Canon": {
-        title: "Canon (?�灣佳能)",
+        title: "Canon (台灣佳能)",
         news: [
           {
-            title: "Canon ?�用影印機�??��??�阻，�?太�?多�??��??��??�貨?��?延長",
+            title: "Canon 商用影印機供應鏈受阻，亞太區多功能事務機出貨週期延長",
             date: "2026-05-22",
-            source: "?��??�報",
-            brief: "?��??�控?�晶?�缺?�影?��??�灣佳能?��??��?調整?��? imageRUNNER ADVANCE 系�?機種?�交?��?影響?��?客戶?��??�度??
+            source: "電子時報",
+            brief: "受關鍵控制晶片缺料影響，台灣佳能發布公告調整部分 imageRUNNER ADVANCE 系列機種的交期，影響合約客戶更換進度。"
           },
           {
-            title: "?�灣佳能?��?系統?��??�推�?imageRUNNER DX ?�慧?�護?�能",
+            title: "台灣佳能攜手系統整合商推廣 imageRUNNER DX 智慧防護功能",
             date: "2026-03-08",
-            source: "科�??�報",
-            brief: "強調??McAfee ?��??�建系統?��?引�?保護 (Sure Start ?��??�能)，�??��?件輸?��?不�??�為網路資�?駭客跳板??
+            source: "科技新報",
+            brief: "強調與 McAfee 合作內建系統開機引導保護 (Sure Start 同級功能)，保障文件輸出時不會成為網路資安駭客跳板。"
           }
         ],
         product: {
-          main_models: "imageRUNNER ADVANCE DX C3930i / C5840i 系�?",
-          key_specs: "?�實�??�?1200 x 1200 dpi，�??��??�器，�?高�??�速度 270 ipm，�??��??��??��??�進�??�滾輪�?,
-          strengths: "<li><strong>?��??�購?��?低�?</strong>硬�??�格親�?，�?案�??��?租�??��??�價極具?�格?�勢??/li><li><strong>?�面?�步?��??�度快�?</strong>DX 高�?機種標�?高速�??��?步進�??��??��??�能佳�?/li>",
-          weaknesses: "<li><strong>?��??��??�路依賴經銷?��?</strong>?��??��??�多無?��?維修站�?委�?�???�維護�??��??�零?�件?��??�況�??�起伏�?/li><li><strong>機身?�潮?�能較弱�?/strong>機�??��?角弧度�??��??�台??��濕氣?��?，若使用?��?紙張，其?��??�相較�??��??�系平直紙�?機種?�顯?��???/li>",
+          main_models: "imageRUNNER ADVANCE DX C3930i / C5840i 系列",
+          key_specs: "真實解析度 1200 x 1200 dpi，雙核處理器，最高掃描速度 270 ipm，配備高耐久聚合物進紙道滾輪。",
+          strengths: "<li><strong>單機採購預算低：</strong>硬體價格親民，標案與短期租賃月租報價極具價格優勢。</li><li><strong>雙面同步掃描速度快：</strong>DX 高階機種標配高速雙面同步進紙器，掃描性能佳。</li>",
+          weaknesses: "<li><strong>售後服務通路依賴經銷商：</strong>在非都會區多無直營維修站，委外代理商維護之效率與零配件備料狀況易有起伏。</li><li><strong>機身防潮性能較弱：</strong>機紙道彎角弧度較陡，在台灣潮濕氣候下，若使用吸濕紙張，其卡紙率相較理光等日系平直紙道機種明顯偏高。</li>",
           ricoh_match: "RICOH IM C3010 / C4510"
         }
       },
       "Konica Minolta": {
-        title: "Konica Minolta (?��?)",
+        title: "Konica Minolta (金儀)",
         news: [
           {
-            title: "?��??�表?�新 bizhub i 系�?彩色多�??�影?��??�攻中�?企業",
+            title: "金儀發表全新 bizhub i 系列彩色多功能影印機搶攻中小企業",
             date: "2026-06-01",
-            source: "?�工?�報",
-            brief: "主�??�新 UI ?��?體�??��?安全??SSD 硬�??��??�防毒�??��?並�?極整?��?端�?表系統�?供智?��?約維護�??��?
+            source: "商工時報",
+            brief: "主打全新 UI 操作體驗、高安全性 SSD 硬碟與高階防毒引擎，並積極整合遠端抄表系統提供智慧合約維護服務。"
           },
           {
-            title: "Konica Minolta ?��?洲推?�智?�辦?��?端維護系統�?�?,
+            title: "Konica Minolta 於歐洲推動智能辦公遠端維護系統升級",
             date: "2026-02-18",
-            source: "?��?科�??�報",
-            brief: "?��??��??�聯網維修系統�??�主?��?測碳粉�??��?鼓壽?��?大�?減�?客戶?�修?��??��???
+            source: "全球科技日報",
+            brief: "原廠升級物聯網維修系統，可主動預測碳粉與感光鼓壽命，大幅減少客戶叫修停機時間。"
           }
         ],
         product: {
-          main_models: "bizhub C250i / C300i / C360i (彩色 A3 複�?�?",
-          key_specs: "10.1 ?�懸浮�?作面?��??�實 1200 dpi ?�印，內�?MicroSD / SSD ?��?硬�?，支?�防毒�?體擴?��?,
-          strengths: "<li><strong>?��?介面?��?流暢�?/strong>?��?�?i 系�??�板作業系統?��?，�??�觸?��?驗好，IT 設�??��?豐�???/li><li><strong>?�本?��??�本較�?�?/strong>?�代?��??��??�價?��??��?，在一?��??�辦?��?賃�?中殺?��??�強??/li>",
-          weaknesses: "<li><strong>?��? PDF 壓縮?��?低�?</strong>缺�?專利高�?縮�??��??��??�彩?��???PDF 檔�?體�??�大，�?佔用?��??�件?�寬?�伺?�器硬�?容�???/li><li><strong>?�板?��??�單較為繁瑣�?/strong>?�能?�單層�?較�?，�??��?仁�?次�??��?要�??�適?��???/li>",
+          main_models: "bizhub C250i / C300i / C360i (彩色 A3 複合機)",
+          key_specs: "10.1 吋懸浮操作面板，真實 1200 dpi 列印，內建 MicroSD / SSD 加密硬碟，支援防毒軟體擴充。",
+          strengths: "<li><strong>操作介面反應流暢：</strong>新一代 i 系列面板作業系統改版，滑動觸控體驗好，IT 設定選項豐富。</li><li><strong>基本單機成本較低：</strong>與代理商金儀的價格彈性高，在一般商務辦公租賃案中殺價力道強。</li>",
+          weaknesses: "<li><strong>掃描 PDF 壓縮率較低：</strong>缺乏專利高壓縮引擎，產生的彩色掃描 PDF 檔案體積偏大，易佔用電子郵件頻寬與伺服器硬碟容量。</li><li><strong>面板操作選單較為繁瑣：</strong>功能選單層級較多，一般同仁初次上手需要較長適應期。</li>",
           ricoh_match: "RICOH IM C2510 / C3010 / C3510"
         }
       },
       "SHARP": {
-        title: "SHARP (?�旦�?",
+        title: "SHARP (震旦行)",
         news: [
           {
-            title: "?�旦行獨家代?��???SHARP BP-70C 系�?高�?彩�?",
+            title: "震旦行獨家代理引進 SHARP BP-70C 系列高效彩機",
             date: "2026-07-02",
-            source: "工�??�報",
-            brief: "?��?�?BP 系�?主�?極簡外�??�大字�??�板?��??�能?��??�接近�??��??��?人走近即?��?從�??��??�以節?��?待�??��?
+            source: "工商時報",
+            brief: "新一代 BP 系列主打極簡外觀、大字體面板與高產能。配備接近式傳感器，人走近即自動從休眠喚醒以節省等待時間。"
           },
           {
-            title: "SHARP 多�??��??��?系�?榮獲 Buyers Lab (BLI) 年度?�出大�?",
+            title: "SHARP 多功能複合機系列榮獲 Buyers Lab (BLI) 年度傑出大獎",
             date: "2026-03-12",
-            source: "?�表機�?業�?測網",
-            brief: "BP-70C 系�??�可?�性、�??�速度?�雲端�??�相容性�??��??��?評測機�?高度?�薦??
+            source: "印表機專業評測網",
+            brief: "BP-70C 系列在可靠性、列印速度與雲端應用相容性上獲得國際評測機構高度推薦。"
           }
         ],
         product: {
-          main_models: "SHARP BP-70C31 / BP-70C36 / BP-70C45 系�?",
-          key_specs: "?�實 1200 dpi，�??�無?��?滿�??�印，內建人體接近�??�器，�?高�??�速度 45 ppm，支?�微軟雲端�??��?,
-          strengths: "<li><strong>大�?體�??�覺?�板�?/strong>夏普?�板字�?大�??�援?�示?��?，年?�員工�?一?�公?�員使用習慣度極佳�?/li><li><strong>?��?網�?綿�?�?/strong>?��??��??�台?��?維護，中?�部?�鎮網�?覆�??��???/li>",
-          weaknesses: "<li><strong>定影構造防潮�?較弱�?/strong>?��?路�??��?影器?��??�度高�??��??�台??���??潮�?張�??��??��?較�?，�?要常?�乾?�箱??/li><li><strong>?��??��??��??��?</strong>?��? Windows 11 ??macOS ?�系統�?大更?��?驅�??��?廠�?體修�?��布�?程�??��?/li>",
+          main_models: "SHARP BP-70C31 / BP-70C36 / BP-70C45 系列",
+          key_specs: "真實 1200 dpi，標配無邊框滿版列印，內建人體接近感應器，最高列印速度 45 ppm，支援微軟雲端對接。",
+          strengths: "<li><strong>大字體與直覺面板：</strong>夏普面板字體大且支援圖示自訂，年長員工或一般公務員使用習慣度極佳。</li><li><strong>服務網點綿密：</strong>由震旦行全台直營維護，中南部鄉鎮網點覆蓋率高。</li>",
+          weaknesses: "<li><strong>定影構造防潮力較弱：</strong>進紙路徑在定影器前彎折度高，若遇到台灣冬季受潮紙張，卡紙頻率較高，需要常備乾燥箱。</li><li><strong>韌體改版適應慢：</strong>針對 Windows 11 或 macOS 的系統重大更新，驅動與原廠軟體修正發布時程較慢。</li>",
           ricoh_match: "RICOH IM C3010 / C3510 / C4510"
         }
       },
       "Kyocera": {
-        title: "Kyocera (?�灣京瓷)",
+        title: "Kyocera (台灣京瓷)",
         news: [
           {
-            title: "?�灣京瓷�?��?��??��?學�??�設�??��?高產?�設?��?示中�?,
+            title: "台灣京瓷宣示於南部科學園區設立直營高產能設備展示中心",
             date: "2026-05-15",
-            source: "?�由?�報",
-            brief: "京瓷引進�???TASKalfa 系�?，強調以超長壽命?�晶??(a-Si) ?��?鼓大幅�?少�?業電子廢棄物，吸引�??��??�產業客?��?
+            source: "自由時報",
+            brief: "京瓷引進高階 TASKalfa 系列，強調以超長壽命非晶矽 (a-Si) 感光鼓大幅減少企業電子廢棄物，吸引高印量傳產業客戶。"
           },
           {
-            title: "Kyocera ?�表?�新碳平衡�??��???彩色複�?機搶??ESG 市場",
+            title: "Kyocera 發表全新碳平衡節能黑白/彩色複合機搶占 ESG 市場",
             date: "2026-01-20",
-            source: "綠色科�?論�?",
-            brief: "京瓷複�?機透�?低溫?��?碳�??��?低�?機�??��??�助中�?企業完�?減碳?��??��???
+            source: "綠色科技論壇",
+            brief: "京瓷複合機透過低溫熔化碳粉與超低待機功耗，協助中小企業完成減碳政策目標。"
           }
         ],
         product: {
-          main_models: "TASKalfa 2554ci / 3554ci / 4054ci 系�?",
-          key_specs: "標�? 30 ?�張?�晶?��??��?，極?��?溫�?術�??�實 1200 dpi，內建�??�防夾進�??�測?��??��?,
-          strengths: "<li><strong>?��?使用壽命極長�?/strong>?��?鼓�?主�?齒輪?��??��??��??�長?��?租�??�內?�維?��?低�??��??��??��???/li><li><strong>?��??��??�強�?/strong>?��?工�??��??�業等大?��??��?粉塵?�惡??��?�環境�?/li>",
-          weaknesses: "<li><strong>?��?鼓人?��?壞�??�困???</strong>?��??�瓷鼓單?�極高�??��?多註?�『人?�刮?��?如�??�夾帶�??��?）�?客戶?�費?�萬?�更?�』�??��?客戶?��??��??��??��?/li><li><strong>彩色?�色層次?��?�?/strong>?�用硬質節?�碳粉�?彩色?�表?�相?��??��??�現條�??��??��?乾蒼?��?/li>",
+          main_models: "TASKalfa 2554ci / 3554ci / 4054ci 系列",
+          key_specs: "標配 30 萬張非晶矽感光鼓，極速回溫技術，真實 1200 dpi，內建高效防夾進紙偵測傳感器。",
+          strengths: "<li><strong>耗材使用壽命極長：</strong>感光鼓與主要齒輪折舊週期長，在長合約租賃期內能維持較低的耗材更換頻率。</li><li><strong>印量承載力強：</strong>適合工廠、營造業等大印量、高粉塵的惡劣辦公環境。</li>",
+          weaknesses: "<li><strong>感光鼓人為損壞排除困難：</strong>原廠陶瓷鼓單價極高，合約多註明『人為刮傷（如複印夾帶訂書針）需客戶自費數萬元更換』，造成客戶非預期成本增加。</li><li><strong>彩色成色層次單薄：</strong>採用硬質節能碳粉，彩色圖表與相片列印易出現條紋或成色偏乾蒼白。</li>",
           ricoh_match: "RICOH IM C2510 / C3010 / C4510"
         }
       },
       "Epson": {
-        title: "Epson (?�灣?�普??",
+        title: "Epson (台灣愛普生)",
         news: [
           {
-            title: "Epson �?��??2026 年�??�全?�全?��?止雷射印表�??�發",
+            title: "Epson 宣示於 2026 年底前全球全面終止雷射印表機研發",
             date: "2026-06-25",
-            source: "?��??��?",
-            brief: "?�普?�宣布退?�雷射影?��?市場，未來�?�?100% 移�???Heat-Free ?��??�微?�墨影印機�?�?��?��?�?85% ?�能消耗�?碳足跡�?
+            source: "日經新聞",
+            brief: "愛普生宣布退出雷射影印機市場，未來重心 100% 移轉至 Heat-Free 免加熱微噴墨影印機，宣稱可減少 85% 電能消耗與碳足跡。"
           },
           {
-            title: "?�灣?�普?��??�台積電供�??��??��??��??�熱影印機落�?ESG",
+            title: "台灣愛普生協助台積電供應鏈廠商導入免加熱影印機落實 ESG",
             date: "2026-04-12",
-            source: "科�?�?,
-            brief: "?�墨?�術無粉塵且�??��?符�??�大高�??�?��?體�??�?�塵室�?辦公室�??�格空氣?�質?��??��?章�?
+            source: "科技人",
+            brief: "噴墨技術無粉塵且省電，符合各大高科技半導體廠區無塵室或辦公室之嚴格空氣品質與節能規章。"
           }
         ],
         product: {
-          main_models: "WorkForce Enterprise AM-C3000 / AM-C4000 (?��??�噴墨�??��?)",
-          key_specs: "微�??�噴墨�?術�??�高�??�速度 40 ppm，�?行�??��???190W，�??�熱?�印?�術�?,
-          strengths: "<li><strong>極�??��??�電?��?</strong>?��??��?術�?行耗電極�?，可?�接?�助企業?�報範�?二�?碳�?/li><li><strong>?�部?��?件極少�?</strong>?��??�器?�無轉寫帶�?碳�?粉塵污�??�零，�?轉�??��?/li>",
-          weaknesses: "<li><strong>?�嘴?��?維護?��?�?/strong>?��??��??�冷�?��高蒸?�環境�?墨水?�乾涸造�??�嘴?��?，�?洗噴?�耗費大�?墨水且影?��??�進度??/li><li><strong>字跡?�水?��?佳�?</strong>水�??��?精�??��?墨水仍�??��?，無法滿足公?��??��??��??��??�公?�歸檔�?�?30-50 年』�?法�?標�???/li>",
+          main_models: "WorkForce Enterprise AM-C3000 / AM-C4000 (免加熱噴墨複合機)",
+          key_specs: "微壓電噴墨技術，最高列印速度 40 ppm，運行功耗低於 190W，免加熱冷印技術。",
+          strengths: "<li><strong>極低運行用電量：</strong>免加熱技術運行耗電極低，可直接協助企業申報範疇二減碳。</li><li><strong>內部耗材件極少：</strong>無加熱器、無轉寫帶，碳粉粉塵污染為零，運轉安靜。</li>",
+          weaknesses: "<li><strong>噴嘴阻塞維護率高：</strong>若遇長假或冷氣房高蒸發環境，墨水易乾涸造成噴嘴阻塞，清洗噴頭耗費大量墨水且影響列印進度。</li><li><strong>字跡防水性不佳：</strong>水分或酒精潑灑時墨水仍易暈開，無法滿足公務機關或金融合約『公文歸檔保存 30-50 年』之法律標準。</li>",
           ricoh_match: "RICOH IM C3010 / C4510"
         }
       },
       "HP": {
-        title: "HP (?�普)",
+        title: "HP (惠普)",
         news: [
           {
-            title: "HP ?�用?�表機內�?Wolf Security ?��??�防級滲?�測�?,
+            title: "HP 商用印表機內建 Wolf Security 通過國防級滲透測試",
             date: "2026-07-10",
-            source: "資�??�報",
-            brief: "HP ?�表?�?�印表�??��??��?修復?�術�??�設?�主機板?��??��??�自?��??�乾�?Golden Copy，�??�內網�??��?
+            source: "資安日報",
+            brief: "HP 發表最新印表機韌體自我修復技術，當設備主機板遭竄改時可自動載入乾淨 Golden Copy，保障內網安全。"
           },
           {
-            title: "?�普調整亞太?� A3 複�?機�??��??��??�焦 IT �???�通路",
+            title: "惠普調整亞太區 A3 複合機分銷策略，聚焦 IT 代理商通路",
             date: "2026-03-15",
-            source: "3C?�路?��?",
-            brief: "HP 強�??�大?�大等通路?��?作�??�台????�主??IT 系統?��??�搭?�影?��?租�?，�??�印設�?納入 IT 管�??��?中�?
+            source: "3C通路週刊",
+            brief: "HP 強化與大聯大等通路商合作，在台灣市場主推 IT 系統整合商搭售影印機租賃，將列印設備納入 IT 管理服務中。"
           }
         ],
         product: {
-          main_models: "Color LaserJet Managed MFP E78630 / E87740 系�?",
-          key_specs: "HP Wolf Security ?�禦?��?，�???A3 貼�?引�??��?，�?容�??�慧粉匣，�?高速度 40 ppm??,
-          strengths: "<li><strong>資�??�護規格完整�?/strong> Sure Start?�TPM ?��??��?體�??�檢測�??�在 IT 評�?中常?��??��?/li><li><strong>IT ?��?管�?便利�?/strong>HP Web Jetadmin ?��?大�?模印表�?群�??�管，適?�跨?��?�?IT 總部?�中?�管??/li>",
-          weaknesses: "<li><strong>?��?實�??�修委�?�?/strong>?��?多�?�?IT ?�腦維修經銷?��??��??�影?��??��??��?體系，工程師硬�?維修經�??�差不�???/li><li><strong>機械結�?大�??�用塑�?�?/strong>三�?引�?平台大�?使用輕�?塑�?件�?塑�?齒輪，長?�大?��?使用?��?快、異?�發?��?高�?/li>",
+          main_models: "Color LaserJet Managed MFP E78630 / E87740 系列",
+          key_specs: "HP Wolf Security 防禦晶片，三星 A3 貼牌引擎架構，高容量智慧粉匣，最高速度 40 ppm。",
+          strengths: "<li><strong>資安防護規格完整：</strong> Sure Start、TPM 晶片與韌體動態檢測功能在 IT 評分中常拿高分。</li><li><strong>IT 整合管理便利：</strong>HP Web Jetadmin 提供大規模印表機群組控管，適合跨國企業 IT 總部集中控管。</li>",
+          weaknesses: "<li><strong>售後實體叫修委外：</strong>售後多委任 IT 電腦維修經銷商，無專職影印機直營服務體系，工程師硬體維修經驗參差不齊。</li><li><strong>機械結構大量採用塑料：</strong>三星引擎平台大量使用輕型塑料件與塑料齒輪，長期大印量使用折舊快、異音發生率高。</li>",
           ricoh_match: "RICOH IM C3010 / C4510"
         }
       },
       "Brother": {
-        title: "Brother (?�灣?��?)",
+        title: "Brother (台灣兄弟)",
         news: [
           {
-            title: "Brother ?�台?�表?�新?�用彩色桌�??��??��?系�?",
+            title: "Brother 在台發表全新商用彩色桌上型複合機系列",
             date: "2026-06-20",
-            source: "壹�??�",
-            brief: "主�?體�?精巧?��??��? 30 ?��??�彩?�輸?��??��?中�?企業?��???SOHO 工�?室�?賃�??��?
+            source: "壹科技",
+            brief: "主打體積精巧、每分鐘 30 頁高速彩色輸出，鎖定中小企業分處與 SOHO 工作室租賃市場。"
           },
           {
-            title: "?�本?��?工業�???�強?��?亞�??�灣租�??��??��??��??�售",
+            title: "日本兄弟工業宣布加強東南亞與台灣租賃包月耗材整合銷售",
             date: "2026-02-28",
-            source: "?��?流通新??,
-            brief: "以「耗�?訂閱?�」�??�智?�管?��??�客?�剩餘碳粉�???20% ?�自?��??�碳粉�??�至辦公室�?
+            source: "日經流通新聞",
+            brief: "以「耗材訂閱制」結合智慧管理，當客戶剩餘碳粉低於 20% 時自動將新碳粉配送至辦公室。"
           }
         ],
         product: {
-          main_models: "MFC-L8390CDW / MFC-L9630CDN 系�? (A4 桌�??��??��?)",
-          key_specs: "桌�???footprint，�?高�??�速度 40 ppm，�?容�?碳�?????�建 Wi-Fi 6 ?��??��?定�??��?,
-          strengths: "<li><strong>體�?小巧不�?空�?�?/strong>?��?寸�?寸�??��??��?室�?櫃檯?��??�格極具?�勢??/li><li><strong>安�?設�?簡單�?/strong>?�援?�面 Wi-Fi ???，員工自行�?作�?裝�??�便?�性極高�?/li>",
-          weaknesses: "<li><strong>?�張?�印?�本 (張費) ?�貴�?/strong>A4 小�?機�?碳�???��?��?，單張碳粉�??�是 A3 大�?複�?機�? 3 ?�以上�??��?稍大?��?使�??�暴增�?/li><li><strong>?��??�印 A3 且無後端裝�?�?/strong>?��??�印?��?標�? A3 尺寸，�?不支?�自?��??�、摺?�、�?孔�??��??��?作業??/li>",
+          main_models: "MFC-L8390CDW / MFC-L9630CDN 系列 (A4 桌上型複合機)",
+          key_specs: "桌上型 footprint，最高列印速度 40 ppm，高容量碳粉匣，內建 Wi-Fi 6 與安全鎖定功能。",
+          strengths: "<li><strong>體積小巧不佔空間：</strong>適合寸土寸金的小型處室或櫃檯旁，價格極具優勢。</li><li><strong>安裝設定簡單：</strong>支援全面 Wi-Fi 連結，員工自行操作安裝驅動便利性極高。</li>",
+          weaknesses: "<li><strong>單張列印成本 (張費) 昂貴：</strong>A4 小型機因碳粉匣容量小，單張碳粉成本是 A3 大型複合機的 3 倍以上，印量稍大即會使開支暴增。</li><li><strong>無法列印 A3 且無後端裝訂：</strong>無法列印公文標準 A3 尺寸，且不支援自動釘針、摺頁、打孔等商務印後作業。</li>",
           ricoh_match: "RICOH IM C2010 (A3) / IM 350F (A4)"
         }
       },
-      "?��?廠�?": {
-        title: "?��??��? / 二�?機�???,
+      "其他廠牌": {
+        title: "其他副廠 / 二手機品牌",
         news: [
           {
-            title: "消基?�抽?�副廠碳粉�??�苯?�甲?��?警�??�害辦公?��??�康",
+            title: "消基會抽查副廠碳粉釋放苯與甲苯，警告危害辦公同仁健康",
             date: "2026-07-05",
-            source: "消費?�日??,
-            brief: "市售廉價?��?機�?使用?��??��?碳�?高溫定影?��??�放?�害�???��?細微粉塵，呼籲�?業採購�?證�??��??��??��???
+            source: "消費者日報",
+            brief: "市售廉價拼裝機所使用的非原廠碳粉高溫定影時易釋放有害氣體與超細微粉塵，呼籲企業採購認證之環保無毒耗材。"
           },
           {
-            title: "?�灣中古影印機�?安�?洩通報，退租硬碟未清�?風險�?,
+            title: "台灣中古影印機資安外洩通報，退租硬碟未清理風險高",
             date: "2026-04-18",
-            source: "?�家資�??�報",
-            brief: "二�?機�??�收?��?機台常無硬�??��?流�?，�??��?機內?��?企業機�??��??�個�??�接流入二�?市場?��?外洩??
+            source: "國家資安會報",
+            brief: "二手機商回收舊型機台常無硬體銷毀流程，導致舊機內藏的企業機密公文、個資直接流入二手市場造成外洩。"
           }
         ],
         product: {
-          main_models: "二�?�?(如�???Fuji Xerox IV / V 系�?) ?�白?�拼裝設??,
-          key_specs: "規格?��?且零????�常使用?��?主�??��?缺�??�?��??��?密�?定�??��?廠�??�防禦�?丁�?,
-          strengths: "<li><strong>極其低�??��??��?</strong>以�??��??��?，�??��??�已近零，�?租�??��???1,000 ?��?/li><li><strong>?��??��?工地使用�?/strong>毀?�亦?�大礙�??��??��?工寮?�短?�活?�使?��?/li>",
-          weaknesses: "<li><strong>網路資�?跳板漏�?�?/strong>?��??��??��?證�??��??�年?�止?�新，極?��??��?索�?體入侵內網�?後�???/li><li><strong>?��?件�??�斷?��?</strong>?��?廠�??��?，�??�叫修�?常面?�無?�件?��??�長?��??��?，長?��?作�??�極高�?/li>",
-          ricoh_match: "RICOH IM C2510 (?�新機�?賃�???"
+          main_models: "二手機 (如舊型 Fuji Xerox IV / V 系列) 或白牌拼裝設備",
+          key_specs: "規格老舊且零散，通常使用舊型主機板，缺乏最新安全加密協定，無原廠安全防禦補丁。",
+          strengths: "<li><strong>極其低廉的租金：</strong>以二手機拼裝，機器折舊已近零，月租甚至低於 1,000 元。</li><li><strong>適合短期工地使用：</strong>毀損亦無大礙，適合臨時工寮或短期活動使用。</li>",
+          weaknesses: "<li><strong>網路資安跳板漏洞：</strong>晶片無安全認證，韌體長年停止更新，極易成為勒索軟體入侵內網的後門。</li><li><strong>零配件停產斷料：</strong>非原廠供應鏈，故障叫修時常面臨無零件可換或長時間停機，長期運作成本極高。</li>",
+          ricoh_match: "RICOH IM C2510 (全新機租賃保障)"
         }
       }
     };
@@ -781,7 +781,7 @@
       });
 
       // Map dynamic IDs
-      const mappedId = brandName === "Konica Minolta" ? "KonicaMinolta" : brandName === "?��?廠�?" ? "Other" : brandName;
+      const mappedId = brandName === "Konica Minolta" ? "KonicaMinolta" : brandName === "其他廠牌" ? "Other" : brandName;
       const activeTab = document.getElementById(`tab-${mappedId}`);
       if (activeTab) {
         activeTab.classList.remove('bg-white', 'text-slate-600', 'border-slate-200', 'hover:bg-slate-50', 'hover:text-slate-800', 'hover:border-slate-300');
@@ -845,7 +845,7 @@
 
       // Update Tenders Counter UI
       const countEl = document.getElementById("tenders-count");
-      countEl.textContent = `?�測??${currentFilteredTenders.length} 筆進�?中�?標�?件`;
+      countEl.textContent = `偵測到 ${currentFilteredTenders.length} 筆進行中招標案件`;
 
       // Check Empty State
       if (currentFilteredTenders.length === 0) {
@@ -854,9 +854,9 @@
             <div class="p-4 bg-slate-900 rounded-full text-slate-600 mb-4 animate-pulse">
               <i data-lucide="inbox" class="w-10 h-10"></i>
             </div>
-            <h3 class="text-sm font-bold text-slate-300">該縣市目?�無?��?中�??��?案件</h3>
+            <h3 class="text-sm font-bold text-slate-300">該縣市目前無進行中之招標案件</h3>
             <p class="text-xs text-slate-500 max-w-sm mt-2 leading-relaxed font-light">
-              ??{city}?�此?�?�查?��?案�??�。您?�以?��??��?行政?�，�??��??�「全?�灣?�以宏�??�握?�報??
+              「${city}」此區域查無標案記錄。您可以選取其他行政區，或切換至「全台灣」以宏觀掌握情報。
             </p>
           </div>
         `;
@@ -872,7 +872,7 @@
         .replaceAll("'", '&#039;');
       const formatCurrency = (value) => Number.isFinite(Number(value))
         ? `NT$ ${Number(value).toLocaleString('zh-TW')}`
-        : '?�公??;
+        : '未公開';
 
       // Build Tender Cards
       currentFilteredTenders.forEach(t => {
@@ -882,21 +882,21 @@
         const historyRecords = Array.isArray(t.history_records) ? t.history_records : [];
         const historyRowsHtml = historyRecords.map(record => `
           <tr class="border-b border-slate-200/70 last:border-0 align-top">
-            <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] text-slate-600">${escapeHtml(record.award_date || '??)}</td>
+            <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] text-slate-600">${escapeHtml(record.award_date || '—')}</td>
             <td class="py-2 pr-3 min-w-[220px]">
-              <div class="font-semibold text-slate-700 leading-snug">${escapeHtml(record.title || '?��?供�???)}</div>
-              <div class="mt-1 font-mono text-[9px] text-slate-400">案�? ${escapeHtml(record.job_number || '??)}</div>
+              <div class="font-semibold text-slate-700 leading-snug">${escapeHtml(record.title || '未提供案名')}</div>
+              <div class="mt-1 font-mono text-[9px] text-slate-400">案號 ${escapeHtml(record.job_number || '—')}</div>
               <div class="mt-1 text-[9px] ${record.relation_scope === 'same_parent_org' ? 'text-blue-600' : 'text-slate-500'}">
-                ${record.relation_scope === 'same_parent_org' ? '?��?系單�? : '?��??�購?��?'} · ${escapeHtml(record.source_unit || t.unit)}
-                ${record.is_stale ? '<span class="ml-1 rounded bg-amber-50 px-1.5 py-0.5 font-bold text-amber-700">超�? 5 年�??��??��?/span>' : ''}
+                ${record.relation_scope === 'same_parent_org' ? '同體系單位' : '同一採購單位'} · ${escapeHtml(record.source_unit || t.unit)}
+                ${record.is_stale ? '<span class="ml-1 rounded bg-amber-50 px-1.5 py-0.5 font-bold text-amber-700">超過 5 年，僅供參考</span>' : ''}
               </div>
             </td>
             <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] text-slate-600">${formatCurrency(record.budget)}</td>
             <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] font-bold text-slate-800">${formatCurrency(record.award_price)}</td>
-            <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] text-emerald-700">${record.discount_rate == null ? '???不適?? : `${escapeHtml(record.discount_rate)}%`}</td>
-            <td class="py-2 pr-3 min-w-[140px] text-[10px] text-slate-700">${escapeHtml(record.winner || '?�公??)}</td>
+            <td class="py-2 pr-3 whitespace-nowrap font-mono text-[10px] text-emerald-700">${record.discount_rate == null ? '口徑不適用' : `${escapeHtml(record.discount_rate)}%`}</td>
+            <td class="py-2 pr-3 min-w-[140px] text-[10px] text-slate-700">${escapeHtml(record.winner || '未公開')}</td>
             <td class="py-2 text-right whitespace-nowrap">
-              ${record.source_url ? `<a href="${escapeHtml(record.source_url)}" target="_blank" rel="noopener noreferrer" class="text-[10px] font-bold text-ricoh-red hover:underline">?��??��? ??/a>` : '<span class="text-[10px] text-slate-400">?��??</span>'}
+              ${record.source_url ? `<a href="${escapeHtml(record.source_url)}" target="_blank" rel="noopener noreferrer" class="text-[10px] font-bold text-ricoh-red hover:underline">原始公告 ↗</a>` : '<span class="text-[10px] text-slate-400">無連結</span>'}
             </td>
           </tr>
         `).join('');
@@ -904,21 +904,21 @@
           <article class="rounded-xl border border-slate-200 bg-white p-3.5 space-y-3">
             <div class="flex items-start justify-between gap-3">
               <div>
-                <div class="text-sm font-bold text-slate-800 leading-snug">${escapeHtml(record.title || '?��?供�???)}</div>
-                <div class="mt-1 text-xs text-slate-500">${escapeHtml(record.award_date || '??)} · 案�? ${escapeHtml(record.job_number || '??)}</div>
+                <div class="text-sm font-bold text-slate-800 leading-snug">${escapeHtml(record.title || '未提供案名')}</div>
+                <div class="mt-1 text-xs text-slate-500">${escapeHtml(record.award_date || '—')} · 案號 ${escapeHtml(record.job_number || '—')}</div>
                 <div class="mt-1 text-[11px] ${record.relation_scope === 'same_parent_org' ? 'text-blue-600' : 'text-slate-500'}">
-                  ${record.relation_scope === 'same_parent_org' ? '?��?系單�? : '?��??�購?��?'} · ${escapeHtml(record.source_unit || t.unit)}
+                  ${record.relation_scope === 'same_parent_org' ? '同體系單位' : '同一採購單位'} · ${escapeHtml(record.source_unit || t.unit)}
                 </div>
               </div>
-              <span class="shrink-0 rounded-full ${record.is_stale ? 'bg-amber-50 text-amber-700' : 'bg-emerald-50 text-emerald-700'} px-2 py-1 text-xs font-bold">${record.is_stale ? '??5 年�??? : record.discount_rate == null ? '?��?不適?? : `${escapeHtml(record.discount_rate)}%`}</span>
+              <span class="shrink-0 rounded-full ${record.is_stale ? 'bg-amber-50 text-amber-700' : 'bg-emerald-50 text-emerald-700'} px-2 py-1 text-xs font-bold">${record.is_stale ? '逾 5 年參考' : record.discount_rate == null ? '折率不適用' : `${escapeHtml(record.discount_rate)}%`}</span>
             </div>
             <div class="grid grid-cols-2 gap-3 text-xs">
-              <div><span class="block text-slate-500">?��?</span><strong class="mt-0.5 block text-slate-800">${formatCurrency(record.budget)}</strong></div>
-              <div><span class="block text-slate-500">決�???/span><strong class="mt-0.5 block text-slate-800">${formatCurrency(record.award_price)}</strong></div>
+              <div><span class="block text-slate-500">預算</span><strong class="mt-0.5 block text-slate-800">${formatCurrency(record.budget)}</strong></div>
+              <div><span class="block text-slate-500">決標價</span><strong class="mt-0.5 block text-slate-800">${formatCurrency(record.award_price)}</strong></div>
             </div>
             <div class="flex items-center justify-between gap-3 border-t border-slate-100 pt-3 text-xs">
-              <span class="text-slate-600">${escapeHtml(record.winner || '?�公??)}</span>
-              ${record.source_url ? `<a href="${escapeHtml(record.source_url)}" target="_blank" rel="noopener noreferrer" class="min-h-11 inline-flex items-center font-bold text-ricoh-red">?��??��? ??/a>` : '<span class="text-slate-400">?��??</span>'}
+              <span class="text-slate-600">${escapeHtml(record.winner || '未公開')}</span>
+              ${record.source_url ? `<a href="${escapeHtml(record.source_url)}" target="_blank" rel="noopener noreferrer" class="min-h-11 inline-flex items-center font-bold text-ricoh-red">原始公告 ↗</a>` : '<span class="text-slate-400">無連結</span>'}
             </div>
           </article>
         `).join('');
@@ -928,25 +928,25 @@
                          String(today.getMonth() + 1).padStart(2, '0') + '-' + 
                          String(today.getDate()).padStart(2, '0');
                          
-        let displayStage = t.stage || '�???��?';
+        let displayStage = t.stage || '正式開標';
         let isEvaluation = false;
         
-        if (t.deadline && todayStr > t.deadline && t.stage !== "已決�? && t.stage !== "?��?決�?") {
-          displayStage = "結�?評選�?;
+        if (t.deadline && todayStr > t.deadline && t.stage !== "已決標" && t.stage !== "無法決標") {
+          displayStage = "結果評選中";
           isEvaluation = true;
         }
 
-        const tagClass = t.tag === "?��??��?"
+        const tagClass = t.tag === "重點攻堅"
           ? "bg-red-50 border-red-200 text-red-700 font-extrabold"
           : "bg-slate-100 border-slate-200 text-slate-700 font-semibold";
 
         const stageClass = isEvaluation
           ? "bg-amber-50 border-amber-200 text-amber-800 font-extrabold animate-pulse"
-          : displayStage === "?��?徵�??�單"
+          : displayStage === "公開徵求價單"
             ? "bg-amber-50 border-amber-200 text-amber-800 font-extrabold"
-            : displayStage === "已決�?
+            : displayStage === "已決標"
               ? "bg-emerald-50 border-emerald-200 text-emerald-800 font-extrabold"
-              : displayStage === "?��?決�?"
+              : displayStage === "無法決標"
                 ? "bg-rose-50 border-rose-200 text-rose-800 font-extrabold"
                 : "bg-blue-50 border-blue-200 text-blue-800 font-extrabold";
 
@@ -968,12 +968,12 @@
               <span class="text-xs text-slate-500 font-mono flex items-center gap-2 flex-wrap">
                 <span class="flex items-center gap-1">
                   <i data-lucide="calendar" class="w-3 h-3 text-slate-400"></i>
-                  ?��??? ${t.publish_date || '??}
+                  公告日: ${t.publish_date || '—'}
                 </span>
                 <span class="text-slate-300">|</span>
                 <span class="flex items-center gap-1">
                   <i data-lucide="clock" class="w-3 h-3 text-slate-400"></i>
-                  ?�止?? ${t.deadline || '??}
+                  截止日: ${t.deadline || '—'}
                 </span>
               </span>
             </div>
@@ -995,72 +995,27 @@
           ${isEvaluation ? `
             <div class="flex items-center gap-2 bg-amber-50 border border-amber-200/80 text-amber-850 rounded-lg py-2 px-3 text-xs font-bold">
               <i data-lucide="alert-circle" class="w-4 h-4 text-amber-500 flex-shrink-0 animate-pulse"></i>
-              <span>?�� ?��?已截止�?標�??��?�?��?��?結�?評選?�議??/span>
+              <span>📢 本案已截止投標，目前正在進行結果評選與議價</span>
             </div>
-          ` : displayStage === '?��?徵�??�單' ? `
+          ` : displayStage === '公開徵求價單' ? `
             <div class="flex items-center gap-2 bg-amber-50 border border-amber-200/80 text-amber-800 rounded-lg py-2 px-3 text-xs font-bold">
               <i data-lucide="alert-circle" class="w-4 h-4 text-amber-400 flex-shrink-0 animate-pulse"></i>
-              <span>?��? ?��??��?�???�【公?�徵求價?�】�?�?/span>
+              <span>⚠️ 本案目前正處於【公開徵求價單】階段</span>
             </div>
-          ` : displayStage === '已決�? ? `
+          ` : displayStage === '已決標' ? `
             <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200/80 text-emerald-800 rounded-lg py-2 px-3 text-xs font-bold">
               <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-              <span>???��?已決標公?��?得�?廠�?�?{t.main_competitor} | 決�??��?�?{t.award_price || '?�知'}</span>
+              <span>✅ 本案已決標公告！得標廠商：${t.main_competitor} | 決標金額：${t.award_price || '未知'}</span>
             </div>
-          ` : displayStage === '?��?決�?' ? `
+          ` : displayStage === '無法決標' ? `
             <div class="flex items-center gap-2 bg-rose-50 border border-rose-200/80 text-rose-800 rounded-lg py-2 px-3 text-xs font-bold">
               <i data-lucide="x-circle" class="w-4 h-4 text-rose-500 flex-shrink-0"></i>
-              <span>???��?已公?�【無法決標�?流�??�廢�?！�?密�?注�?後�??�新?��???/span>
-                <span class="flex items-center gap-1">
-                  <i data-lucide="calendar" class="w-3 h-3 text-slate-400"></i>
-                  ?��??? ${t.publish_date || '??}
-                </span>
-                <span class="text-slate-300">|</span>
-                <span class="flex items-center gap-1">
-                  <i data-lucide="clock" class="w-3 h-3 text-slate-400"></i>
-                  ?�止?? ${t.deadline || '??}
-                </span>
-              </span>
-            </div>
-            
-            <!-- Clickable Link to Tender url -->
-            <a href="${t.tender_url}" target="_blank" class="group/link text-sm sm:text-base font-bold text-slate-800 tracking-wide leading-snug hover:text-red-600 transition-colors duration-200 flex items-start gap-1.5">
-              <span>${t.title}</span>
-              <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover/link:text-red-400 flex-shrink-0 mt-1 transition-colors"></i>
-            </a>
-            
-            <div class="flex items-center gap-1.5 text-xs text-slate-500">
-              <i data-lucide="building" class="w-3.5 h-3.5 text-slate-500"></i>
-              <span>${t.unit}</span>
-            </div>
-
-          </div>
-
-          <!-- Stage-specific Alert Reminder -->
-          ${isEvaluation ? `
-            <div class="flex items-center gap-2 bg-amber-50 border border-amber-200/80 text-amber-850 rounded-lg py-2 px-3 text-xs font-bold">
-              <i data-lucide="alert-circle" class="w-4 h-4 text-amber-500 flex-shrink-0 animate-pulse"></i>
-              <span>?�� ?��?已截止�?標�??��?�?��?��?結�?評選?�議??/span>
-            </div>
-          ` : displayStage === '?��?徵�??�單' ? `
-            <div class="flex items-center gap-2 bg-amber-50 border border-amber-200/80 text-amber-800 rounded-lg py-2 px-3 text-xs font-bold">
-              <i data-lucide="alert-circle" class="w-4 h-4 text-amber-400 flex-shrink-0 animate-pulse"></i>
-              <span>?��? ?��??��?�???�【公?�徵求價?�】�?�?/span>
-            </div>
-          ` : displayStage === '已決�? ? `
-            <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200/80 text-emerald-800 rounded-lg py-2 px-3 text-xs font-bold">
-              <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-              <span>???��?已決標公?��?得�?廠�?�?{t.main_competitor} | 決�??��?�?{t.award_price || '?�知'}</span>
-            </div>
-          ` : displayStage === '?��?決�?' ? `
-            <div class="flex items-center gap-2 bg-rose-50 border border-rose-200/80 text-rose-800 rounded-lg py-2 px-3 text-xs font-bold">
-              <i data-lucide="x-circle" class="w-4 h-4 text-rose-500 flex-shrink-0"></i>
-              <span>???��?已公?�【無法決標�?流�??�廢�?！�?密�?注�?後�??�新?��???/span>
+              <span>❌ 本案已公告【無法決標】(流標或廢標)！請密切注意後續重新招標。</span>
             </div>
           ` : `
             <div class="flex items-center gap-2 bg-indigo-50 border border-indigo-200/80 text-indigo-800 rounded-lg py-2 px-3 text-xs font-bold">
               <i data-lucide="info" class="w-4 h-4 text-indigo-400 flex-shrink-0"></i>
-              <span>???��??��?已正式【�??�公?��?標�?/span>
+              <span>⚡ 本案目前已正式【上架公告開標】</span>
             </div>
           `}
 
@@ -1068,7 +1023,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-50 rounded-xl p-3 border border-slate-200/60 text-xs">
             <!-- Col 1: Avg Discount & Source -->
             <div class="flex flex-col gap-1 sm:border-r border-slate-200/80 sm:pr-1.5 pb-3 sm:pb-0 border-b sm:border-b-0">
-              <span class="text-[11px] text-slate-500 uppercase font-bold tracking-wider">?��?決�??��?中�???/span>
+              <span class="text-[11px] text-slate-500 uppercase font-bold tracking-wider">同類決標折率中位數</span>
               <span class="text-sm font-extrabold text-emerald-600 font-display font-mono flex items-center gap-0.5">
                 ${t.avg_discount}
                 <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-400"></i>
@@ -1079,26 +1034,27 @@
             <div class="flex flex-col gap-1 sm:border-r border-slate-200/80 sm:px-1.5 justify-between pb-3 sm:pb-0 border-b sm:border-b-0">
               <div>
                 <span class="text-[11px] text-slate-500 uppercase font-bold tracking-wider block">
-                  ${t.stage === '已決�? ? '?��?得�?廠�?' : '歷史得�?/?�勢??}
+                  ${t.stage === '已決標' ? '本案得標廠商' : '歷史得標/優勢商'}
                 </span>
                 <span class="text-xs font-bold text-slate-700 mt-1 block truncate" title="${t.main_competitor}">${t.main_competitor}</span>
               </div>
             </div>
             <!-- Col 3: History-based Price Estimate / Actual Award Price -->
             <div class="flex flex-col gap-1 sm:pl-1.5">
-              ${displayStage === '已決�? ? `
+              ${displayStage === '已決標' ? `
                 <span class="text-[9px] text-emerald-600 uppercase font-bold tracking-wider flex items-center gap-0.5 font-semibold">
                   <i data-lucide="check-circle" class="w-2.5 h-2.5 text-emerald-500"></i>
-                  ?�實決�??��?
+                  真實決標金額
                 </span>
                 <span class="text-sm font-extrabold text-slate-800 font-mono">${t.award_price || t.suggested_price}</span>
-                <span class="text-[8px] text-slate-500 font-mono">?��?: ${t.budget}</span>
+                <span class="text-[8px] text-slate-500 font-mono">預算: ${t.budget}</span>
               ` : `
                 <span class="text-[9px] text-red-400 uppercase font-bold tracking-wider flex items-center gap-0.5">
                   <i data-lucide="sparkles" class="w-2.5 h-2.5 text-red-400"></i>
-                  歷史?��??�估??                </span>
+                  歷史數據推估價
+                </span>
                 <span class="text-sm font-extrabold text-slate-800 font-mono">${t.suggested_price}</span>
-                <span class="text-[8px] text-slate-500 font-mono">?��?: ${t.budget}</span>
+                <span class="text-[8px] text-slate-500 font-mono">預算: ${t.budget}</span>
               `}
             </div>
           </div>
@@ -1108,21 +1064,22 @@
             <summary class="flex justify-between items-center gap-3 cursor-pointer list-none rounded-lg px-3 py-2 bg-slate-50 border border-slate-200 hover:border-emerald-300 transition-colors">
               <span class="text-[10px] text-slate-600 uppercase font-bold tracking-wider flex items-center gap-1.5">
                 <i data-lucide="database" class="w-3.5 h-3.5 text-emerald-500"></i>
-                ?��??�歷?�決標�???              </span>
-              <span class="text-[10px] font-bold ${historyRecords.length ? 'text-emerald-700' : 'text-slate-400'}">${t.suggestion_basis?.record_count || 0} 筆�??��?�?· ${historyRecords.length} 筆�???/span>
+                同類型歷史決標紀錄
+              </span>
+              <span class="text-[10px] font-bold ${historyRecords.length ? 'text-emerald-700' : 'text-slate-400'}">${t.suggestion_basis?.record_count || 0} 筆納入計算 · ${historyRecords.length} 筆紀錄</span>
             </summary>
             ${historyRecords.length ? `
               <div class="hidden sm:block mt-2 overflow-x-auto rounded-lg border border-slate-200 bg-white">
                 <table class="w-full text-left">
                   <thead class="bg-slate-50 text-[9px] uppercase tracking-wider text-slate-500">
                     <tr>
-                      <th class="py-2 px-3">決�???/th>
+                      <th class="py-2 px-3">決標日</th>
                       <th class="py-2 pr-3">歷史案件</th>
-                      <th class="py-2 pr-3">?��?</th>
-                      <th class="py-2 pr-3">決�???/th>
-                      <th class="py-2 pr-3">決�??��?</th>
-                      <th class="py-2 pr-3">得�?廠�?</th>
-                      <th class="py-2 pr-3 text-right">來�?</th>
+                      <th class="py-2 pr-3">預算</th>
+                      <th class="py-2 pr-3">決標價</th>
+                      <th class="py-2 pr-3">決標折率</th>
+                      <th class="py-2 pr-3">得標廠商</th>
+                      <th class="py-2 pr-3 text-right">來源</th>
                     </tr>
                   </thead>
                   <tbody class="px-3">${historyRowsHtml}</tbody>
@@ -1131,7 +1088,8 @@
               <div class="sm:hidden mt-2 space-y-3">${historyCardsHtml}</div>
             ` : `
               <div class="mt-2 rounded-lg border border-dashed border-slate-200 bg-slate-50 px-4 py-4 text-[11px] text-slate-500">
-                此�??�目?�查?�「相?�設?��??�、相?��?約�??�」�??��??��??��??�決標�?額�?紀?��??�此不產?�推估價??              </div>
+                此機關目前查無「相同設備類型、相同契約型態」且同時公開預算與決標金額的紀錄，因此不產生推估價。
+              </div>
             `}
           </details>
         `;
@@ -1181,7 +1139,7 @@
     function savePatAndSync() {
       const input = document.getElementById("pat-input").value.trim();
       if (!input) {
-        alert("請輸?��??��??�鑰�?);
+        alert("請輸入有效的金鑰！");
         return;
       }
       localStorage.setItem('gh_pat', input);
@@ -1193,7 +1151,7 @@
       const btn = document.querySelector('button[onclick="triggerManualSync(event)"]');
       const originalHtml = btn.innerHTML;
       btn.disabled = true;
-      btn.innerHTML = `<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i><span>?�送中...</span>`;
+      btn.innerHTML = `<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i><span>發送中...</span>`;
       lucide.createIcons();
 
       fetch('https://api.github.com/repos/gyuyu2002-Jeff/ricoh-intel-hub/actions/workflows/sync_tenders.yml/dispatches', {
@@ -1206,16 +1164,16 @@
       })
       .then(res => {
         if (res.status === 204) {
-          alert("?? ?�端?��??�新?�令?�送�??��?\n\nGitHub 伺�??�正?��??�爬?�政府電子採購網?��??�數?�。\n?��? 30-40 秒�?完�??�步，�??��??�新?��?此網?��?);
+          alert("🎉 雲端即時更新指令發送成功！\n\nGitHub 伺服器正在背景爬取政府電子採購網的最新數據。\n預計 30-40 秒後完成同步，屆時請重新整理此網頁。");
         } else if (res.status === 401) {
           localStorage.removeItem('gh_pat');
-          alert("??認�?失�?！Token ?�能?��??�已?��?，�?點�??��??�新輸入?�鑰??);
+          alert("❌ 認證失敗！Token 可能無效或已過期，請點擊按鈕重新輸入金鑰。");
         } else {
-          alert("?��? ?�新?�送失?��??�誤�?��: " + res.status + "\n\n請檢?�您??Token 權�??�否?�含 repo ??workflow 範�???);
+          alert("⚠️ 更新發送失敗，錯誤代碼: " + res.status + "\n\n請檢查您的 Token 權限是否包含 repo 與 workflow 範圍。");
         }
       })
       .catch(err => {
-        alert("??????�常: " + err.message);
+        alert("❌ 連線異常: " + err.message);
       })
       .finally(() => {
         btn.disabled = false;
@@ -1248,15 +1206,15 @@
         })
         .catch(err => {
           console.error("Error loading database: ", err);
-          document.getElementById("tenders-count").textContent = "???失�?";
+          document.getElementById("tenders-count").textContent = "連線失敗";
           document.getElementById("tenders-container").innerHTML = `
             <div class="flex flex-col items-center justify-center text-center py-16 px-4 bg-red-950/10 border border-red-500/20 rounded-xl">
               <div class="p-3 bg-red-600/10 rounded-full text-ricoh-red mb-3">
                 <i data-lucide="alert-triangle" class="w-8 h-8"></i>
               </div>
-              <h3 class="text-sm font-bold text-red-200">資�?庫�???�常</h3>
+              <h3 class="text-sm font-bold text-red-200">資料庫連線異常</h3>
               <p class="text-xs text-red-400 max-w-sm mt-2">
-                ?��?從�??��?下�???<code>data.json</code>?��?確�? JSON 檔�??�否存在且格式無誤�?
+                無法從同目錄下載入 <code>data.json</code>。請確認 JSON 檔案是否存在且格式無誤。
               </p>
             </div>
           `;
@@ -1267,7 +1225,7 @@
       const filterSelect = document.getElementById("city-filter");
       filterSelect.addEventListener("change", (e) => {
         renderTenders(e.target.value);
-        document.getElementById("mobile-filter-label").textContent = e.target.value === "all" ? "?�台?? : e.target.value;
+        document.getElementById("mobile-filter-label").textContent = e.target.value === "all" ? "全台灣" : e.target.value;
         if (window.innerWidth < 640) toggleMobileFilters(true);
       });
 
@@ -1285,7 +1243,7 @@
       <div class="flex items-center justify-between border-b border-slate-100 pb-3">
         <div class="flex items-center gap-2 text-ricoh-red">
           <i data-lucide="key" class="w-5 h-5"></i>
-          <h3 class="font-display font-extrabold text-sm tracking-wider">GitHub ?�端?�新?�鑰設�?</h3>
+          <h3 class="font-display font-extrabold text-sm tracking-wider">GitHub 雲端更新金鑰設定</h3>
         </div>
         <button onclick="closePatModal()" class="text-slate-400 hover:text-slate-600">
           <i data-lucide="x" class="w-4 h-4"></i>
@@ -1296,17 +1254,17 @@
         <!-- Info notice -->
         <div class="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl p-3 flex gap-2">
           <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600 mt-0.5 shrink-0"></i>
-          <p><b>安全說�?</b>：本系統資�?庫�?管於 GitHub ?�端�?b>Google 帳�??�鑰?��??�制 GitHub ?��?，�?此�??�輸??Google ?�鑰</b>?��??��?安全?��??�您?��??�覽?�中，�??��?心�?洩�?/p>
+          <p><b>安全說明</b>：本系統資料庫託管於 GitHub 雲端，<b>Google 帳號金鑰無法控制 GitHub 服務，因此請勿輸入 Google 金鑰</b>。金鑰僅安全儲存在您本機瀏覽器中，不用擔心外洩。</p>
         </div>
 
         <!-- Path A: General Colleagues -->
         <div class="border-b border-slate-100 pb-3">
           <p class="font-extrabold text-slate-800 flex items-center gap-1">
             <span class="bg-ricoh-red text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">A</span>
-            一?��?仁�??�簡單：使?�管?�員?��??�共?��??��?
+            一般同仁（最簡單：使用管理員提供的共用金鑰）
           </p>
           <p class="text-slate-500 mt-1.5 pl-5">
-            如�??�是一?�業?��?仁�?<b>不�?要註??GitHub 帳�?</b>?��??�接?�系統管?�員（�?：漢?��?索�?已�??��???b>?�共?�更?��??��?/b>，�?製並?�接貼在?�下方?�輸?��??�可�?
+            如果您是一般業務同仁，<b>不需要註冊 GitHub 帳號</b>。請直接向系統管理員（如：漢君）索取已經產生的<b>「共用更新金鑰」</b>，複製並直接貼在最下方的輸入框即可！
           </p>
         </div>
 
@@ -1314,37 +1272,37 @@
         <div>
           <p class="font-extrabold text-slate-800 flex items-center gap-1">
             <span class="bg-slate-500 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">B</span>
-            管�????��??��??��?註�?並申請全?��??��?
+            管理員/擁有者（自行註冊並申請全新金鑰）
           </p>
           <p class="text-slate-500 mt-1.5 pl-5">
-            如�??�是系統管�??��??��??�使?�自己�?帳�??��??�新?�鑰，�?依循以�?步�?�?
+            如果您是系統管理員，或希望使用自己的帳號申請全新金鑰，請依循以下步驟：
           </p>
           <ol class="list-decimal pl-9 flex flex-col gap-2 mt-2 text-slate-500 font-medium">
-            <li><b>註�? GitHub 帳�?</b>：若?�帳?��?請至 <a href="https://github.com/signup" target="_blank" class="text-ricoh-red underline font-bold hover:text-red-700">GitHub 註�??�面 (點此註�?)</a> 建�??�費帳�?並�??�信箱�?證�?/li>
-            <li><b>?�入?�鑰?�面</b>：�??��???<a href="https://github.com/settings/tokens" target="_blank" class="text-ricoh-red underline font-bold hover:text-red-700">GitHub Token 設�?網�? (點此?��?)</a>??/li>
-            <li><b>?��?經典??/b>：�??�畫?�中??<span class="bg-slate-100 px-1 border rounded text-slate-700 font-mono">?��??�令??(Generate new token) ??/span> ?��?，並?��?<b>?��??��? (classic)??/b>?��???/li>
-            <li><b>填寫設�??�數</b>�?
+            <li><b>註冊 GitHub 帳號</b>：若無帳號，請至 <a href="https://github.com/signup" target="_blank" class="text-ricoh-red underline font-bold hover:text-red-700">GitHub 註冊頁面 (點此註冊)</a> 建立免費帳號並完成信箱驗證。</li>
+            <li><b>進入金鑰頁面</b>：點選開啟 <a href="https://github.com/settings/tokens" target="_blank" class="text-ricoh-red underline font-bold hover:text-red-700">GitHub Token 設定網頁 (點此開啟)</a>。</li>
+            <li><b>選擇經典版</b>：點擊畫面中的 <span class="bg-slate-100 px-1 border rounded text-slate-700 font-mono">產生新令牌 (Generate new token) ▾</span> 按鈕，並選取<b>「經典版 (classic)」</b>選項。</li>
+            <li><b>填寫設定參數</b>：
               <ul class="list-disc pl-4 mt-1 flex flex-col gap-1 text-[11px] text-slate-600">
-                <li><b>Note (?�稱)</b>：輸??<span class="bg-slate-100 px-1 font-mono">ricoh-sync</span></li>
-                <li><b>Expiration (?��?)</b>：�??�選?�改?�為 <span class="font-bold">No expiration (永�??��?)</span></li>
-                <li><b>Scopes (權�?)</b>：勾?��?上方??<span class="font-bold">[?�] repo</span> 以�??�表下方??<span class="font-bold">[?�] workflow</span> 複選框�?/li>
+                <li><b>Note (名稱)</b>：輸入 <span class="bg-slate-100 px-1 font-mono">ricoh-sync</span></li>
+                <li><b>Expiration (期限)</b>：下拉選單改選為 <span class="font-bold">No expiration (永不過期)</span></li>
+                <li><b>Scopes (權限)</b>：勾選最上方的 <span class="font-bold">[✓] repo</span> 以及列表下方的 <span class="font-bold">[✓] workflow</span> 複選框。</li>
               </ul>
             </li>
-            <li><b>?��?並�?�?/b>：�??��?下方點�?綠色?��?，�??��?一串以 <span class="font-mono bg-slate-100 px-1">ghp_</span> ?�頭?��??��?複製並貼?��??�即?��?/li>
+            <li><b>產生並複製</b>：拉到最下方點擊綠色按鈕，將產生一串以 <span class="font-mono bg-slate-100 px-1">ghp_</span> 開頭的金鑰，複製並貼在下方即可。</li>
           </ol>
         </div>
         
         <div class="mt-2 flex flex-col gap-1.5 border-t border-slate-100 pt-3">
-          <label class="font-bold text-slate-700">貼�??��??�鑰 (PAT)�?/label>
-          <input type="password" id="pat-input" placeholder="請貼上管?�員?��??�共?��??��??�您?�己?��???ghp_ ?�鑰" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono focus:outline-none focus:border-ricoh-red transition-all">
+          <label class="font-bold text-slate-700">貼上您的金鑰 (PAT)：</label>
+          <input type="password" id="pat-input" placeholder="請貼上管理員提供的共用金鑰，或您自己申請的 ghp_ 金鑰" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono focus:outline-none focus:border-ricoh-red transition-all">
         </div>
       </div>
       
       <div class="flex items-center gap-2.5 justify-end border-t border-slate-100 pt-3 mt-1">
-        <button onclick="closePatModal()" class="px-4 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all">?��?</button>
+        <button onclick="closePatModal()" class="px-4 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all">取消</button>
         <button onclick="savePatAndSync()" class="px-4 py-2 bg-ricoh-red text-white rounded-lg text-xs font-bold hover:bg-red-700 shadow-md shadow-ricoh-red/20 transition-all flex items-center gap-1.5">
           <i data-lucide="check" class="w-3.5 h-3.5"></i>
-          ?��?並�?始更??
+          儲存並開始更新
         </button>
       </div>
     </div>
