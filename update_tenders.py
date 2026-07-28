@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import urllib.request
 import urllib.parse
+import argparse
 import json
 import re
 import html
@@ -521,8 +522,20 @@ def fetch_json_with_retry(url, label, max_retries=5):
             time.sleep(wait_time)
     return None
 
-def main():
-    print("Starting automated tender data updater with real stats...")
+def build_required_dates(mode, today, collection_days):
+    if mode == "live":
+        return [today, today - timedelta(days=1)]
+    for days_ago in range(2, 61):
+        backfill_date = today - timedelta(days=days_ago)
+        if collection_days.get(backfill_date.strftime("%Y-%m-%d"), {}).get("status") != "complete":
+            return [backfill_date]
+    return []
+
+
+def main(mode="live"):
+    if mode not in ("live", "maintenance"):
+        raise ValueError(f"Unsupported update mode: {mode}")
+    print(f"Starting tender updater in {mode} mode...")
     script_dir = os.path.dirname(os.path.abspath(__file__))
     output_path = os.path.join(script_dir, "data.json")
     existing_data = {}
@@ -571,12 +584,7 @@ def main():
 
     taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
     today = taipei_now.date()
-    required_dates = [today, today - timedelta(days=1)]
-    for days_ago in range(2, 61):
-        backfill_date = today - timedelta(days=days_ago)
-        if collection_days.get(backfill_date.strftime("%Y-%m-%d"), {}).get("status") != "complete":
-            required_dates.append(backfill_date)
-            break
+    required_dates = build_required_dates(mode, today, collection_days)
 
     # The date endpoint returns the day's entire announcement set. Keep every
     # potentially relevant record so later classification rules can re-evaluate it.
@@ -631,7 +639,7 @@ def main():
     }
 
     today_iso = today.strftime("%Y-%m-%d")
-    if today_iso in failed_dates:
+    if mode == "live" and today_iso in failed_dates:
         print("Today's census failed. Preserving the last verified database and recording the failed attempt.")
         existing_status = dict(existing_data.get("collection_status", {}))
         existing_status.update({
@@ -1329,23 +1337,37 @@ def main():
     # Force last_updated to be in Taipei Time (UTC+8) regardless of runner timezone
     taipei_time = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
     last_updated_str = taipei_time.strftime("%Y-%m-%d %H:%M")
+
+    previous_collection_status = dict(existing_data.get("collection_status", {}))
+    collection_status = {
+        **previous_collection_status,
+        "today": today.strftime("%Y-%m-%d"),
+        "status": today_summary.get("status", previous_collection_status.get("status", "incomplete")),
+        "source_records": today_summary.get("source_records", previous_collection_status.get("source_records", 0)),
+        "candidate_records": today_summary.get("candidate_records", previous_collection_status.get("candidate_records", 0)),
+        "review_records": len(review_candidates),
+        "backfill_remaining_days": backfill_remaining,
+        "source": "政府電子採購網每日公告資料"
+    }
+    if mode == "live":
+        collection_status.update({
+            "latest_attempt_status": "complete" if not failed_dates else "partial",
+            "latest_attempt_at": last_updated_str,
+            "successful_dates": successful_dates,
+            "failed_dates": failed_dates
+        })
+    else:
+        collection_status["maintenance"] = {
+            "status": "complete" if not failed_dates else "partial",
+            "last_run_at": last_updated_str,
+            "backfill_dates": successful_dates,
+            "failed_dates": failed_dates
+        }
     
     output_data = {
         "last_updated": last_updated_str,
         "tenders": processed_tenders,
-        "collection_status": {
-            "today": today.strftime("%Y-%m-%d"),
-            "status": today_summary.get("status", "incomplete"),
-            "latest_attempt_status": "complete" if not failed_dates else "partial",
-            "latest_attempt_at": last_updated_str,
-            "source_records": today_summary.get("source_records", 0),
-            "candidate_records": today_summary.get("candidate_records", 0),
-            "review_records": len(review_candidates),
-            "successful_dates": successful_dates,
-            "failed_dates": failed_dates,
-            "backfill_remaining_days": backfill_remaining,
-            "source": "政府電子採購網每日公告資料"
-        },
+        "collection_status": collection_status,
         "collection_days": collection_days,
         "candidate_cache": candidate_cache,
         "review_candidates": review_candidates,
@@ -1372,4 +1394,7 @@ def main():
     print(f"Successfully updated database. Saved {len(processed_tenders)} tenders to {output_path}")
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Update tender intelligence data.")
+    parser.add_argument("--mode", choices=("live", "maintenance"), default="live")
+    arguments = parser.parse_args()
+    main(arguments.mode)

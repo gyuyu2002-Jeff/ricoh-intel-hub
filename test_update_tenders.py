@@ -1,6 +1,7 @@
 import unittest
+from datetime import date, timedelta
 
-from update_tenders import classify_tender_relevance
+from update_tenders import build_required_dates, classify_tender_relevance
 
 
 def announcement(title, category=""):
@@ -17,6 +18,8 @@ class TenderRelevanceTests(unittest.TestCase):
         result = classify_tender_relevance(announcement("辦公室設備更新採購案"))
         self.assertEqual(result["status"], "review")
 
+
+class TenderRelevanceAdditionalTests(unittest.TestCase):
     def test_procurement_word_alone_is_not_a_candidate(self):
         result = classify_tender_relevance(announcement("校舍修繕採購案"))
         self.assertEqual(result["status"], "excluded")
@@ -45,6 +48,26 @@ class TenderRelevanceTests(unittest.TestCase):
         result = classify_tender_relevance(announcement("3D列印機乙項"))
         self.assertEqual(result["category"], "specialized_printing")
         self.assertEqual(result["status"], "review")
+
+
+class UpdateModeTests(unittest.TestCase):
+    def test_live_mode_only_fetches_today_and_yesterday(self):
+        today = date(2026, 7, 28)
+        self.assertEqual(
+            build_required_dates("live", today, {}),
+            [today, today - timedelta(days=1)]
+        )
+
+    def test_maintenance_mode_fetches_one_missing_backfill_day(self):
+        today = date(2026, 7, 28)
+        collection_days = {
+            "2026-07-26": {"status": "complete"},
+            "2026-07-25": {"status": "incomplete"}
+        }
+        self.assertEqual(
+            build_required_dates("maintenance", today, collection_days),
+            [date(2026, 7, 25)]
+        )
 
 
 if __name__ == "__main__":
