@@ -233,6 +233,9 @@ MACHINE_TOOL_TERMS = ["車銑複合機", "複合加工機", "車銑", "鑽銑", 
 SUPPLY_TERMS = ["耗材", "碳粉", "墨水", "色帶", "感光鼓", "轉寫帶", "零件"]
 PRINT_SERVICE_TERMS = ["印刷服務", "文宣印製", "海報輸出", "影印裝訂", "印刷品製作", "藍晒"]
 SPECIALIZED_PRINTING_TERMS = ["3D列印機", "3D印表機", "積層製造設備"]
+DOT_MATRIX_PRINTER_TERMS = ["點陣式印表機", "點矩陣印表機"]
+PRINTER_TERMS = ["印表機", "列印機", "printer"]
+MAINTENANCE_TERMS = ["維護", "維修", "保養"]
 
 
 def _matched_terms(text, terms):
@@ -244,6 +247,26 @@ def _flatten_detail(detail):
     if not isinstance(detail, dict):
         return ""
     return " ".join(f"{key} {value}" for key, value in detail.items() if value is not None)
+
+
+def get_title_scope_exclusion(title):
+    dot_matrix_terms = _matched_terms(title, DOT_MATRIX_PRINTER_TERMS)
+    if dot_matrix_terms:
+        return {
+            "status": "excluded", "confidence": "high", "score": -4,
+            "category": "dot_matrix_printer", "matched_terms": dot_matrix_terms,
+            "reason": "點陣式印表機不在追蹤範圍"
+        }
+    printer_terms = _matched_terms(title, PRINTER_TERMS)
+    maintenance_terms = _matched_terms(title, MAINTENANCE_TERMS)
+    if printer_terms and maintenance_terms:
+        return {
+            "status": "excluded", "confidence": "high", "score": -4,
+            "category": "printer_maintenance",
+            "matched_terms": list(dict.fromkeys(printer_terms + maintenance_terms)),
+            "reason": "印表機維護、維修或保養不在追蹤範圍"
+        }
+    return None
 
 
 def classify_tender_relevance(item, detail=None):
@@ -263,6 +286,10 @@ def classify_tender_relevance(item, detail=None):
     supply_terms = _matched_terms(title, SUPPLY_TERMS)
     service_terms = _matched_terms(title, PRINT_SERVICE_TERMS)
     specialized_terms = _matched_terms(title, SPECIALIZED_PRINTING_TERMS)
+
+    title_exclusion = get_title_scope_exclusion(title)
+    if title_exclusion:
+        return title_exclusion
 
     if machine_terms:
         return {"status": "excluded", "confidence": "high", "score": -4, "category": "industrial_machine", "matched_terms": machine_terms, "reason": "工業機械誤判"}
@@ -633,6 +660,10 @@ def main(mode="live"):
 
     cutoff_compact = (today - timedelta(days=60)).strftime("%Y%m%d")
     raw_active_tenders = [record for record in raw_active_tenders if str(record.get("date", "")) >= cutoff_compact]
+    raw_active_tenders = [
+        record for record in raw_active_tenders
+        if classify_tender_relevance(record)["status"] in ("included", "review")
+    ]
     collection_days = {
         day: summary for day, summary in collection_days.items()
         if day >= (today - timedelta(days=60)).strftime("%Y-%m-%d")
@@ -1036,6 +1067,9 @@ def main(mode="live"):
 
         previous_tender = previous_tenders_by_project.get((unit_id, job_number))
         if detail_data is None and previous_tender:
+            if get_title_scope_exclusion(previous_tender.get("title", "")):
+                print(f"Excluded out-of-scope cached tender: {title}")
+                continue
             processed_tenders.append(previous_tender)
             seen_ids.add(tender_id)
             seen_projects.add(project_key)
@@ -1311,7 +1345,12 @@ def main(mode="live"):
     cutoff_iso = (today - timedelta(days=60)).strftime("%Y-%m-%d")
     for previous in existing_data.get("tenders", []):
         previous_key = (previous.get("unit_id", ""), previous.get("job_number", ""))
-        if previous_key in current_project_keys or previous_key in reviewed_project_keys or previous.get("publish_date", "") < cutoff_iso:
+        if (
+            previous_key in current_project_keys
+            or previous_key in reviewed_project_keys
+            or previous.get("publish_date", "") < cutoff_iso
+            or get_title_scope_exclusion(previous.get("title", ""))
+        ):
             continue
         processed_tenders.append(previous)
         current_project_keys.add(previous_key)

@@ -49,6 +49,20 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         self.assertEqual(result["category"], "specialized_printing")
         self.assertEqual(result["status"], "review")
 
+    def test_dot_matrix_printer_is_excluded(self):
+        result = classify_tender_relevance(announcement("點陣式印表機汰換"))
+        self.assertEqual(result["category"], "dot_matrix_printer")
+        self.assertEqual(result["status"], "excluded")
+
+    def test_printer_maintenance_is_excluded(self):
+        result = classify_tender_relevance(announcement("115年度個人電腦及印表機設備維護工作"))
+        self.assertEqual(result["category"], "printer_maintenance")
+        self.assertEqual(result["status"], "excluded")
+
+    def test_copier_maintenance_remains_in_scope(self):
+        result = classify_tender_relevance(announcement("數位影印機維護案"))
+        self.assertEqual(result["status"], "included")
+
 
 class UpdateModeTests(unittest.TestCase):
     def test_live_mode_only_fetches_today_and_yesterday(self):

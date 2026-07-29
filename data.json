@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-29 07:19",
+  "last_updated": "2026-07-29 08:26",
   "tenders": [
     {
       "city": "台北市",
@@ -552,73 +552,6 @@
       }
     },
     {
-      "city": "彰化縣",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "115年度個人電腦及印表機設備維護工作",
-      "unit": "台灣電力股份有限公司彰化區營業處",
-      "unit_id": "3.13.31.13",
-      "job_number": "1061500035",
-      "publish_date": "2026-06-29",
-      "deadline": "2026-07-09",
-      "budget": "無公開數據",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
-      "main_competitor": "資仲科技有限公司",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 1,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=TIQ-1-71076265.xml",
-      "history_stats": [
-        {
-          "year": 2024,
-          "val": 74,
-          "type": "real",
-          "winner": "資仲科技有限公司"
-        }
-      ],
-      "history_records": [
-        {
-          "award_date": "2024-07-11",
-          "year": 2024,
-          "title": "113年度個人電腦及印表機設備維護工作",
-          "job_number": "1061300023",
-          "budget": 840000,
-          "award_price": 628904,
-          "discount_rate": 74.9,
-          "winner": "資仲科技有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240711&fn=BDM-1-70624473.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.13.31.13",
-          "source_unit": "台灣電力股份有限公司彰化區營業處",
-          "relation_scope": "same_unit",
-          "is_stale": false
-        }
-      ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 1,
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "印表機",
-          "維護"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
-      }
-    },
-    {
       "city": "台北市",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
@@ -645,34 +578,6 @@
       "stage": "已決標",
       "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 3
-    },
-    {
-      "city": "台北市",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "點陣式印表機汰換",
-      "unit": "臺灣土地銀行股份有限公司",
-      "unit_id": "A.7.32",
-      "job_number": "LBOTSG-26-05",
-      "publish_date": "2026-06-23",
-      "deadline": "2026-06-29",
-      "budget": "無公開數據",
-      "award_price": "NT$ 174,897",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "JK TECHNOLOGY PTE LTD",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEyMzM3OTY=",
-      "history_stats": [],
-      "history_records": [],
-      "stage": "已決標",
-      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
-      "duration_years": 1
     },
     {
       "city": "台中市",
@@ -707,9 +612,9 @@
     "today": "2026-07-29",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-07-29 07:19",
-    "source_records": 2476,
-    "candidate_records": 9,
+    "latest_attempt_at": "2026-07-29 08:26",
+    "source_records": 2477,
+    "candidate_records": 8,
     "review_records": 39,
     "successful_dates": [
       "2026-07-29",
@@ -733,7 +638,7 @@
       "source_records": 2075,
       "candidate_records": 7,
       "review_records": 6,
-      "checked_at": "2026-07-29 07:16"
+      "checked_at": "2026-07-29 08:23"
     },
     "2026-07-27": {
       "status": "complete",
@@ -821,10 +726,10 @@
     },
     "2026-07-29": {
       "status": "complete",
-      "source_records": 2476,
-      "candidate_records": 9,
+      "source_records": 2477,
+      "candidate_records": 8,
       "review_records": 8,
-      "checked_at": "2026-07-29 07:16"
+      "checked_at": "2026-07-29 08:23"
     }
   },
   "candidate_cache": [
@@ -945,54 +850,6 @@
           "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260729,
-      "filename": "BDM-1-71243846",
-      "brief": {
-        "type": "決標公告",
-        "title": "115年度個人電腦及印表機設備維護工作",
-        "companies": {
-          "ids": [
-            "24732504"
-          ],
-          "names": [
-            "方恩科技有限公司"
-          ],
-          "id_key": {
-            "24732504": [
-              "投標廠商:投標廠商1:廠商代碼"
-            ]
-          },
-          "name_key": {
-            "方恩科技有限公司": [
-              "投標廠商:投標廠商1:廠商名稱",
-              "決標品項:第1品項:得標廠商1:得標廠商"
-            ]
-          }
-        }
-      },
-      "job_number": "1061500035",
-      "unit_id": "3.13.31.13",
-      "unit_name": "台灣電力股份有限公司彰化區營業處",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.31.13",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.31.13&job_number=1061500035",
-      "unit_url": "/index/unit/3.13.31.13",
-      "url": "/index/case/3.13.31.13/1061500035/20260729/BDM-1-71243846",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "印表機",
-          "維護"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
       }
     },
     {
@@ -1985,42 +1842,6 @@
     },
     {
       "date": 20260723,
-      "filename": "TIQ-1-71076265",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "115年度個人電腦及印表機設備維護工作",
-        "category": "勞務類849-其他電腦服務",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "1061500035",
-      "unit_id": "3.13.31.13",
-      "unit_name": "台灣電力股份有限公司彰化區營業處",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.31.13",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.31.13&job_number=1061500035",
-      "unit_url": "/index/unit/3.13.31.13",
-      "url": "/index/case/3.13.31.13/1061500035/20260723/TIQ-1-71076265",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "印表機",
-          "維護"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
-      }
-    },
-    {
-      "date": 20260723,
       "filename": "TIQ-3-71076128",
       "brief": {
         "type": "經公開評選或公開徵求之限制性招標公告",
@@ -2101,41 +1922,6 @@
           "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260723,
-      "filename": "NAI-1-71238803",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "115年度個人電腦及印表機設備維護工作",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "1061500035",
-      "unit_id": "3.13.31.13",
-      "unit_name": "台灣電力股份有限公司彰化區營業處",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.31.13",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.31.13&job_number=1061500035",
-      "unit_url": "/index/unit/3.13.31.13",
-      "url": "/index/case/3.13.31.13/1061500035/20260723/NAI-1-71238803",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "印表機",
-          "維護"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
       }
     },
     {
