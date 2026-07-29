@@ -331,8 +331,8 @@
               <span id="source-records-count" class="text-slate-700 font-bold text-right">讀取中</span>
             </div>
             <div class="flex items-center justify-between gap-3">
-              <span class="text-slate-400">複核中：</span>
-              <span id="review-records-count" class="text-amber-600 font-bold text-right">讀取中</span>
+              <span class="text-slate-400">今日確認相關：</span>
+              <span id="today-related-count" class="text-emerald-600 font-bold text-right">讀取中</span>
             </div>
             <div class="h-px bg-slate-200/60 my-1"></div>
             <div class="flex items-center justify-between">
@@ -347,7 +347,7 @@
       <section id="left-panel" class="lg:col-span-9 flex flex-col gap-6">
         <details id="review-candidates-panel" class="hidden rounded-2xl border border-amber-200 bg-amber-50/80 p-4 sm:p-5">
           <summary class="cursor-pointer list-none flex items-center justify-between gap-3 text-sm font-bold text-amber-900">
-            <span class="flex items-center gap-2"><i data-lucide="clipboard-check" class="w-4 h-4"></i>複核機制處理中・當次自動查驗</span>
+            <span class="flex items-center gap-2"><i data-lucide="clipboard-check" class="w-4 h-4"></i>部分資料暫時無法確認・系統將自動重試</span>
             <span id="review-candidates-badge" class="rounded-full bg-amber-200 px-2.5 py-1 text-xs text-amber-900"></span>
           </summary>
           <p class="mt-3 text-xs leading-relaxed text-amber-800">這些公告含「辦公設備、資訊設備、輸出設備」等廣義名稱，系統會在當次更新讀取明細並重新判斷；只有政府來源暫時無法取得時才會留在此處，確認前不會混入正式標案清單。</p>
@@ -1240,8 +1240,9 @@
           const isComplete = collection.status === "complete";
           statusEl.className = `${isComplete ? "text-emerald-600" : "text-amber-600"} font-semibold flex items-center gap-1`;
           statusEl.innerHTML = `<span class="w-1.5 h-1.5 rounded-full ${isComplete ? "bg-emerald-500" : "bg-amber-500"}"></span>${isComplete ? "今日來源已收齊" : "今日資料補抓中"}`;
-          document.getElementById("source-records-count").textContent = `${Number(collection.source_records || 0).toLocaleString()} 筆／候選 ${Number(collection.candidate_records || 0).toLocaleString()} 筆`;
-          document.getElementById("review-records-count").textContent = `${Number(collection.review_records || 0).toLocaleString()} 筆`;
+          document.getElementById("source-records-count").textContent = `${Number(collection.source_records || 0).toLocaleString()} 筆`;
+          const todayRelated = tendersData.filter(tender => tender.publish_date === collection.today).length;
+          document.getElementById("today-related-count").textContent = `${todayRelated.toLocaleString()} 筆`;
 
           const reviewCandidates = Array.isArray(data.review_candidates) ? data.review_candidates : [];
           const reviewPanel = document.getElementById("review-candidates-panel");
