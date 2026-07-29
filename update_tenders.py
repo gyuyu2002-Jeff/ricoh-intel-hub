@@ -236,6 +236,18 @@ SPECIALIZED_PRINTING_TERMS = ["3D列印機", "3D印表機", "積層製造設備"
 DOT_MATRIX_PRINTER_TERMS = ["點陣式印表機", "點矩陣印表機"]
 PRINTER_TERMS = ["印表機", "列印機", "printer"]
 MAINTENANCE_TERMS = ["維護", "維修", "保養"]
+CONTRACT_CHANGE_TERMS = ["契約變更", "變更案", "後續擴充", "追加採購"]
+NON_TARGET_TERM_GROUPS = {
+    "network_or_server": ["機房", "交換器", "無線網路", "網路設備", "網路管理", "伺服器", "儲存設備", "資通訊", "RFID", "課程管理平台"],
+    "computer_or_software": ["電腦軟體", "個人電腦", "平板電腦", "資訊科技教室", "電腦教室"],
+    "medical_equipment": ["智慧藥櫃", "X光機", "Ｘ光機", "DR數位影像", "醫療設備", "診斷設備"],
+    "construction_or_furniture": ["規劃設計監造", "設計監造", "監造技術服務", "輕鋼架", "收納櫃", "裝修工程", "辦公空間改善"],
+    "non_office_output": ["氣泡輸出設備", "水處理", "廣播設備", "音響設備", "城鎮韌性演習"],
+}
+RELEVANT_DETAIL_KEY_TERMS = [
+    "標案名稱", "標的名稱", "標的分類", "採購品項", "品項名稱", "品名",
+    "規格", "需求說明", "數量摘要", "工作內容", "附加說明"
+]
 
 
 def _matched_terms(text, terms):
@@ -246,10 +258,30 @@ def _matched_terms(text, terms):
 def _flatten_detail(detail):
     if not isinstance(detail, dict):
         return ""
-    return " ".join(f"{key} {value}" for key, value in detail.items() if value is not None)
+    relevant_values = []
+    for key, value in detail.items():
+        clean_key = re.sub(r"^\d+:", "", str(key))
+        if value is not None and any(term in clean_key for term in RELEVANT_DETAIL_KEY_TERMS):
+            relevant_values.append(f"{clean_key} {value}")
+    return " ".join(relevant_values)
+
+
+def _non_target_match(text):
+    for category, terms in NON_TARGET_TERM_GROUPS.items():
+        matched = _matched_terms(text, terms)
+        if matched:
+            return category, matched
+    return "", []
 
 
 def get_title_scope_exclusion(title):
+    contract_change_terms = _matched_terms(title, CONTRACT_CHANGE_TERMS)
+    if contract_change_terms:
+        return {
+            "status": "excluded", "confidence": "high", "score": -4,
+            "category": "contract_change", "matched_terms": contract_change_terms,
+            "reason": "契約變更或後續擴充不是新的投標機會"
+        }
     dot_matrix_terms = _matched_terms(title, DOT_MATRIX_PRINTER_TERMS)
     if dot_matrix_terms:
         return {
@@ -274,6 +306,7 @@ def classify_tender_relevance(item, detail=None):
     brief = item.get("brief", {}) if isinstance(item, dict) else {}
     title = str(brief.get("title", "")).replace("臺", "台")
     category = str(brief.get("category", ""))
+    announcement_type = str(brief.get("type", ""))
     detail_text = _flatten_detail(detail)
     combined = f"{title} {category} {detail_text}"
 
@@ -287,7 +320,7 @@ def classify_tender_relevance(item, detail=None):
     service_terms = _matched_terms(title, PRINT_SERVICE_TERMS)
     specialized_terms = _matched_terms(title, SPECIALIZED_PRINTING_TERMS)
 
-    title_exclusion = get_title_scope_exclusion(title)
+    title_exclusion = get_title_scope_exclusion(f"{title} {announcement_type}")
     if title_exclusion:
         return title_exclusion
 
@@ -298,7 +331,16 @@ def classify_tender_relevance(item, detail=None):
     if service_terms and not direct_title:
         return {"status": "excluded", "confidence": "high", "score": -3, "category": "printing_service", "matched_terms": service_terms, "reason": "純印務服務"}
     if specialized_terms:
-        return {"status": "review", "confidence": "medium", "score": 1, "category": "specialized_printing", "matched_terms": specialized_terms, "matched_fields": ["title"], "reason": "3D 或特殊列印設備，不直接歸入辦公輸出設備"}
+        return {"status": "excluded", "confidence": "high", "score": -4, "category": "specialized_printing", "matched_terms": specialized_terms, "matched_fields": ["title"], "reason": "3D 或特殊列印設備不在辦公輸出設備範圍"}
+
+    non_target_category, non_target_terms = _non_target_match(f"{title} {category} {detail_text}")
+    if non_target_terms and not direct_title and not direct_detail:
+        return {
+            "status": "excluded", "confidence": "high", "score": -3,
+            "category": non_target_category, "matched_terms": non_target_terms,
+            "matched_fields": ["title" if _matched_terms(title, non_target_terms) else "detail"],
+            "reason": "明確屬於非辦公輸出設備"
+        }
 
     score = (3 if direct_title else 0) + (2 if direct_detail else 0) + (1 if broad_terms else 0) + (1 if detail_signals else 0) + (1 if contract_terms else 0)
     matched = list(dict.fromkeys(direct_title + direct_detail + broad_terms + detail_signals + contract_terms))
@@ -315,6 +357,33 @@ def classify_tender_relevance(item, detail=None):
     if broad_terms:
         return {"status": "review", "confidence": "low", "score": score, "category": "needs_review", "matched_terms": matched, "matched_fields": matched_fields, "reason": "名稱較廣泛，需檢查公告品項或規格"}
     return {"status": "excluded", "confidence": "high", "score": 0, "category": "unrelated", "matched_terms": [], "matched_fields": [], "reason": "未命中設備範圍"}
+
+
+def deduplicate_announcements(records):
+    """Keep the newest announcement version for each agency and tender number."""
+    newest_first = sorted(
+        (record for record in records if isinstance(record, dict)),
+        key=lambda record: (str(record.get("date", "")), str(record.get("filename", ""))),
+        reverse=True
+    )
+    unique_records = []
+    seen = set()
+    for record in newest_first:
+        project_key = (record.get("unit_id", ""), record.get("job_number", ""))
+        announcement_type = str(record.get("brief", {}).get("type", ""))
+        lifecycle_bucket = "terminal" if "決標" in announcement_type else "active"
+        if not all(project_key):
+            project_key = (
+                record.get("unit_id", ""), record.get("job_number", ""),
+                str(record.get("date", "")), record.get("filename", "")
+            )
+        else:
+            project_key = (*project_key, lifecycle_bucket)
+        if project_key in seen:
+            continue
+        seen.add(project_key)
+        unique_records.append(record)
+    return unique_records
 
 def classify_equipment(title):
     normalized = title.replace("臺", "台")
@@ -636,14 +705,16 @@ def main(mode="live"):
 
         day_records = day_data["records"]
         day_candidates = []
-        review_count = 0
         for record in day_records:
             classification = classify_tender_relevance(record)
             if classification["status"] not in ("included", "review"):
                 continue
             day_candidates.append({**record, "relevance": classification})
-            if classification["status"] == "review":
-                review_count += 1
+        day_candidates = deduplicate_announcements(day_candidates)
+        review_count = sum(
+            1 for candidate in day_candidates
+            if candidate.get("relevance", {}).get("status") == "review"
+        )
 
         raw_active_tenders = [record for record in raw_active_tenders if str(record.get("date", "")) != compact_date]
         raw_active_tenders.extend(day_candidates)
@@ -664,6 +735,7 @@ def main(mode="live"):
         record for record in raw_active_tenders
         if classify_tender_relevance(record)["status"] in ("included", "review")
     ]
+    raw_active_tenders = deduplicate_announcements(raw_active_tenders)
     collection_days = {
         day: summary for day, summary in collection_days.items()
         if day >= (today - timedelta(days=60)).strftime("%Y-%m-%d")
@@ -735,6 +807,8 @@ def main(mode="live"):
         if relevance["status"] not in ("included", "review"):
             continue
 
+        seen_active_projects.add(lifecycle_key)
+
         if relevance["status"] == "review":
             detail_data = fetch_tender_detail_with_retry(unit_id, item.get("job_number", ""))
             merged_detail = {}
@@ -743,19 +817,19 @@ def main(mode="live"):
                     for key, value in record.get("detail", {}).items():
                         merged_detail[f"{record_index}:{key}"] = value
             detailed_relevance = classify_tender_relevance(item, merged_detail)
-            if detailed_relevance["status"] != "included":
+            if not detail_data or not detail_data.get("records"):
                 review_candidates.append({
                     "date": date_to_iso(date_raw), "title": title, "unit": unit_name,
                     "unit_id": unit_id, "job_number": item.get("job_number", ""),
                     "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
-                    "relevance": detailed_relevance
+                    "relevance": {**detailed_relevance, "reason": "政府公告明細暫時無法取得，等待下次自動查驗"}
                 })
+            if detailed_relevance["status"] != "included":
                 continue
             relevance = detailed_relevance
             item["relevance"] = relevance
             prefetched_details[project_key] = detail_data
             
-        seen_active_projects.add(lifecycle_key)
         active_tenders.append(item)
         active_units_dict[unit_name] = unit_id
         
@@ -1087,12 +1161,6 @@ def main(mode="live"):
                 if detailed_relevance["status"] == "included":
                     relevance = detailed_relevance
                 else:
-                    review_candidates.append({
-                        "date": date_to_iso(date_raw), "title": title, "unit": unit_name,
-                        "unit_id": unit_id, "job_number": job_number,
-                        "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
-                        "relevance": detailed_relevance
-                    })
                     continue
         elif relevance.get("status") == "review":
             review_candidates.append({

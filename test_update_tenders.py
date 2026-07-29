@@ -1,7 +1,11 @@
 import unittest
 from datetime import date, timedelta
 
-from update_tenders import build_required_dates, classify_tender_relevance
+from update_tenders import (
+    build_required_dates,
+    classify_tender_relevance,
+    deduplicate_announcements,
+)
 
 
 def announcement(title, category=""):
@@ -44,10 +48,10 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         result = classify_tender_relevance(announcement("年度文宣印製及海報輸出服務"))
         self.assertEqual(result["category"], "printing_service")
 
-    def test_3d_printer_requires_separate_review(self):
+    def test_3d_printer_is_excluded(self):
         result = classify_tender_relevance(announcement("3D列印機乙項"))
         self.assertEqual(result["category"], "specialized_printing")
-        self.assertEqual(result["status"], "review")
+        self.assertEqual(result["status"], "excluded")
 
     def test_dot_matrix_printer_is_excluded(self):
         result = classify_tender_relevance(announcement("點陣式印表機汰換"))
@@ -62,6 +66,42 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
     def test_copier_maintenance_remains_in_scope(self):
         result = classify_tender_relevance(announcement("數位影印機維護案"))
         self.assertEqual(result["status"], "included")
+
+    def test_contact_fax_does_not_confirm_broad_equipment(self):
+        result = classify_tender_relevance(
+            announcement("資訊設備採購案"),
+            {"機關資料:傳真號碼": "02-12345678", "其他:申訴受理單位": "電話及傳真"}
+        )
+        self.assertEqual(result["status"], "review")
+        self.assertNotIn("傳真", result["matched_terms"])
+
+    def test_network_equipment_is_excluded(self):
+        result = classify_tender_relevance(announcement("無線網路資訊設備壹式"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "network_or_server")
+
+    def test_medical_equipment_is_excluded(self):
+        result = classify_tender_relevance(announcement("衛生所辦公設備—智慧藥櫃"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "medical_equipment")
+
+    def test_explicit_printer_in_mixed_it_purchase_is_included(self):
+        result = classify_tender_relevance(announcement("電腦及雷射印表機採購案"))
+        self.assertEqual(result["status"], "included")
+
+    def test_contract_change_is_excluded(self):
+        result = classify_tender_relevance(announcement("影印機租賃契約變更"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "contract_change")
+
+    def test_duplicate_corrections_keep_newest_announcement(self):
+        records = [
+            {"unit_id": "1", "job_number": "A", "date": "20260728", "filename": "old"},
+            {"unit_id": "1", "job_number": "A", "date": "20260729", "filename": "new"},
+        ]
+        result = deduplicate_announcements(records)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["filename"], "new")
 
 
 class UpdateModeTests(unittest.TestCase):
