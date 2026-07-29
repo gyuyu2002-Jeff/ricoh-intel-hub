@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-30 01:48",
+  "last_updated": "2026-07-30 03:51",
   "tenders": [
     {
       "city": "台北市",
@@ -599,13 +599,13 @@
       "2026-07-28"
     ],
     "failed_dates": [],
-    "backfill_remaining_days": 44,
+    "backfill_remaining_days": 43,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-07-30 01:48",
+      "last_run_at": "2026-07-30 03:51",
       "backfill_dates": [
-        "2026-07-14"
+        "2026-07-13"
       ],
       "failed_dates": []
     }
@@ -722,6 +722,13 @@
       "candidate_records": 3,
       "review_records": 3,
       "checked_at": "2026-07-30 01:45"
+    },
+    "2026-07-13": {
+      "status": "complete",
+      "source_records": 1262,
+      "candidate_records": 8,
+      "review_records": 6,
+      "checked_at": "2026-07-30 03:50"
     }
   },
   "candidate_cache": [
@@ -2556,6 +2563,319 @@
           "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260713,
+      "filename": "ttd-71271641",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "臺中市烏日區旭光國民小學活動中心資訊設備採購",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "xkes1150710",
+      "unit_id": "3.87.7.71",
+      "unit_name": "臺中市烏日區旭光國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.87.7.71",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.87.7.71&job_number=xkes1150710",
+      "unit_url": "/index/unit/3.87.7.71",
+      "url": "/index/case/3.87.7.71/xkes1150710/20260713/ttd-71271641",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260713,
+      "filename": "aaa-71229982",
+      "brief": {
+        "type": "決標公告",
+        "title": "印表機租賃採購案(開口契約)",
+        "companies": {
+          "ids": [
+            "04822794"
+          ],
+          "names": [
+            "宏羚股份有限公司"
+          ],
+          "id_key": {
+            "04822794": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "宏羚股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "A11500028",
+      "unit_id": "3.87.40",
+      "unit_name": "臺中捷運股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.87.40",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.87.40&job_number=A11500028",
+      "unit_url": "/index/unit/3.87.40",
+      "url": "/index/case/3.87.40/A11500028/20260713/aaa-71229982",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "印表機",
+          "採購",
+          "租賃",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260713,
+      "filename": "BDM-1-71229398",
+      "brief": {
+        "type": "決標公告",
+        "title": "辦公室設備採購",
+        "companies": {
+          "ids": [
+            "90795233",
+            "00193880"
+          ],
+          "names": [
+            "舒心企業有限公司 (I Office limited company)",
+            "宸訊企業有限公司"
+          ],
+          "id_key": {
+            "00193880": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ],
+            "90795233": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "宸訊企業有限公司": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ],
+            "舒心企業有限公司 (I Office limited company)": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "DKES114C03",
+      "unit_id": "3.80.8.30",
+      "unit_name": "桃園市龜山區大坑國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.80.8.30",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.80.8.30&job_number=DKES114C03",
+      "unit_url": "/index/unit/3.80.8.30",
+      "url": "/index/case/3.80.8.30/DKES114C03/20260713/BDM-1-71229398",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公室設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260713,
+      "filename": "BDM-1-71229339",
+      "brief": {
+        "type": "決標公告",
+        "title": "教學行政環境改善工程及辦公設備更新",
+        "companies": {
+          "ids": [
+            "50909750",
+            "83058132"
+          ],
+          "names": [
+            "麗騰室內裝修工程有限公司",
+            "凱匠室內裝修設計有限公司"
+          ],
+          "id_key": {
+            "50909750": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ],
+            "83058132": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "凱匠室內裝修設計有限公司": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ],
+            "麗騰室內裝修工程有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "PH11504",
+      "unit_id": "3.80.8.60",
+      "unit_name": "桃園市新屋區北湖國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.80.8.60",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.80.8.60&job_number=PH11504",
+      "unit_url": "/index/unit/3.80.8.60",
+      "url": "/index/case/3.80.8.60/PH11504/20260713/BDM-1-71229339",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260713,
+      "filename": "BDM-1-71229143",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年度資訊設備及軟體採購",
+        "companies": {
+          "ids": [
+            "97428590",
+            "28946561",
+            "12741063"
+          ],
+          "names": [
+            "晉瑋資訊有限公司",
+            "威銘資訊有限公司",
+            "三佑科技有限公司"
+          ],
+          "id_key": {
+            "12741063": [
+              "投標廠商:投標廠商3:廠商代碼"
+            ],
+            "28946561": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ],
+            "97428590": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "三佑科技有限公司": [
+              "投標廠商:投標廠商3:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ],
+            "威銘資訊有限公司": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:未得標廠商2:未得標廠商"
+            ],
+            "晉瑋資訊有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115010",
+      "unit_id": "3.92.4.9",
+      "unit_name": "國立臺南高級商業職業學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.92.4.9",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.92.4.9&job_number=115010",
+      "unit_url": "/index/unit/3.92.4.9",
+      "url": "/index/case/3.92.4.9/115010/20260713/BDM-1-71229143",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260713,
+      "filename": "BDM-1-71229079",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年度桌上型UV數位印刷機",
+        "companies": {
+          "ids": [
+            "16398625"
+          ],
+          "names": [
+            "奕昇有限公司"
+          ],
+          "id_key": {
+            "16398625": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "奕昇有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "150204",
+      "unit_id": "3.92.6.18",
+      "unit_name": "國立和美實驗學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.92.6.18",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.92.6.18&job_number=150204",
+      "unit_url": "/index/unit/3.92.6.18",
+      "url": "/index/case/3.92.6.18/150204/20260713/BDM-1-71229079",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "數位印刷機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
       }
     }
   ],
