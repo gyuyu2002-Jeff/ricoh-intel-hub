@@ -1,6 +1,47 @@
 {
-  "last_updated": "2026-07-30 05:26",
+  "last_updated": "2026-07-30 07:10",
   "tenders": [
+    {
+      "city": "台北市",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "桌上型標籤條碼列印機",
+      "unit": "臺北市立聯合醫院",
+      "unit_id": "3.79.14.14",
+      "job_number": "F115041",
+      "publish_date": "2026-07-30",
+      "deadline": "2026-08-03",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260730&fn=TIQ-11-71083056.xml",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 1,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "列印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "city": "台北市",
       "tag": "一般監控",
@@ -590,13 +631,13 @@
     "today": "2026-07-30",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-07-29 19:51",
-    "source_records": 2680,
+    "latest_attempt_at": "2026-07-30 07:10",
+    "source_records": 3563,
     "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
-      "2026-07-29",
-      "2026-07-28"
+      "2026-07-30",
+      "2026-07-29"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 42,
@@ -704,10 +745,10 @@
     },
     "2026-07-29": {
       "status": "complete",
-      "source_records": 2680,
+      "source_records": 2682,
       "candidate_records": 3,
       "review_records": 3,
-      "checked_at": "2026-07-29 19:50"
+      "checked_at": "2026-07-30 07:08"
     },
     "2026-07-15": {
       "status": "complete",
@@ -736,9 +777,124 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-07-30 05:25"
+    },
+    "2026-07-30": {
+      "status": "complete",
+      "source_records": 3563,
+      "candidate_records": 3,
+      "review_records": 2,
+      "checked_at": "2026-07-30 07:08"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260730,
+      "filename": "TIQ-3-71083318",
+      "brief": {
+        "type": "經公開評選或公開徵求之限制性招標公告",
+        "title": "115年度健保資訊設備建置服務採購案",
+        "category": "勞務類849-其他電腦服務",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "W1150690249",
+      "unit_id": "A.21.3",
+      "unit_name": "衛生福利部中央健康保險署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.3",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.3&job_number=W1150690249",
+      "unit_url": "/index/unit/A.21.3",
+      "url": "/index/case/A.21.3/W1150690249/20260730/TIQ-3-71083318",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260730,
+      "filename": "TIQ-11-71083056",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "桌上型標籤條碼列印機",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "F115041",
+      "unit_id": "3.79.14.14",
+      "unit_name": "臺北市立聯合醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.14.14",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.14.14&job_number=F115041",
+      "unit_url": "/index/unit/3.79.14.14",
+      "url": "/index/case/3.79.14.14/F115041/20260730/TIQ-11-71083056",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "列印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260730,
+      "filename": "TIQ-11-71082514",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115-116年度資訊設備維護委外服務",
+        "category": "勞務類845-辦公室機器及設備(包括電腦)之維修服務",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "PCDH11510",
+      "unit_id": "A.11.10.8",
+      "unit_name": "臺灣新北地方檢察署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.11.10.8",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.11.10.8&job_number=PCDH11510",
+      "unit_url": "/index/unit/A.11.10.8",
+      "url": "/index/case/A.11.10.8/PCDH11510/20260730/TIQ-11-71082514",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260729,
       "filename": "aaa-71244723",
@@ -3035,6 +3191,21 @@
       "discount_rate": 99.8,
       "winner": "本公司 (互盛 RICOH)",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260610&fn=BDM-2-71199379.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.79.14.14",
+      "unit_name": "臺北市立聯合醫院",
+      "award_date": "2026-06-05",
+      "year": 2026,
+      "title": "條碼列印機(攜帶式)",
+      "job_number": "A115084",
+      "budget": 1530000,
+      "award_price": 1170000,
+      "discount_rate": 76.5,
+      "winner": "雅訊科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260605&fn=BDM-1-71197852.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -5508,7 +5679,8 @@
     "3.79.5.36": "2026-07-28",
     "3.76.54": "2026-07-28",
     "3.97.6.34": "2026-07-28",
-    "3.5.48": "2026-07-28"
+    "3.5.48": "2026-07-28",
+    "3.79.14.14": "2026-07-30"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
@@ -5559,6 +5731,7 @@
     "3.79.5.36||purchase|資訊設備-機房交換器財物採購案": "2026-07-28",
     "3.76.54||purchase|花東基金衛生局所辦公設備採購--智慧藥櫃採購計畫": "2026-07-28",
     "3.76.54||purchase|（花東基金）衛生局所辦公設備補助計畫-高階微電腦高頻診斷X光機採購": "2026-07-28",
-    "3.5.48||unspecified|3D列印機乙項": "2026-07-28"
+    "3.5.48||unspecified|3D列印機乙項": "2026-07-28",
+    "3.79.14.14||unspecified|桌上型標籤條碼列印機": "2026-07-30"
   }
 }
