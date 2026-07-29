@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-29 19:51",
+  "last_updated": "2026-07-29 22:39",
   "tenders": [
     {
       "city": "台北市",
@@ -508,23 +508,39 @@
       "job_number": "M11523Q",
       "publish_date": "2026-06-29",
       "deadline": "2026-07-13",
-      "budget": "NT$ 1,802,679",
-      "award_price": "NT$ 1,733,345",
+      "budget": "無公開數據",
+      "award_price": "",
       "avg_discount": "資料不足",
       "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "宏羚股份有限公司 (HONLYNN CO., LTD.)",
+      "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260722&fn=BDM-1-71237829.xml",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260715&fn=TIQ-1-71070104.xml",
       "history_stats": [],
       "history_records": [],
-      "stage": "已決標",
-      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
-      "duration_years": 3
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 3,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "印表機",
+          "雷射印表機",
+          "租賃",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
     },
     {
       "city": "台中市",
@@ -536,7 +552,7 @@
       "job_number": "11508",
       "publish_date": "2026-06-22",
       "deadline": "2026-07-06",
-      "budget": "NT$ 1,000,000",
+      "budget": "無公開數據",
       "award_price": "",
       "avg_discount": "資料不足",
       "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
@@ -547,12 +563,27 @@
         "record_count": 0,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyNTM3MDk",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260715&fn=BDM-3-71231827.xml",
       "history_stats": [],
       "history_records": [],
       "stage": "正式開標",
       "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 1
+      "duration_years": 1,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "多功能影印",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
     }
   ],
   "collection_status": {
@@ -568,13 +599,13 @@
       "2026-07-28"
     ],
     "failed_dates": [],
-    "backfill_remaining_days": 47,
+    "backfill_remaining_days": 46,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-07-29 05:38",
+      "last_run_at": "2026-07-29 22:39",
       "backfill_dates": [
-        "2026-07-16"
+        "2026-07-15"
       ],
       "failed_dates": []
     }
@@ -677,6 +708,13 @@
       "candidate_records": 3,
       "review_records": 3,
       "checked_at": "2026-07-29 19:50"
+    },
+    "2026-07-15": {
+      "status": "complete",
+      "source_records": 3076,
+      "candidate_records": 6,
+      "review_records": 3,
+      "checked_at": "2026-07-29 22:37"
     }
   },
   "candidate_cache": [
@@ -2298,6 +2336,183 @@
           "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260715,
+      "filename": "ttd-71268761",
+      "brief": {
+        "type": "公開取得報價單或企劃書更正公告",
+        "title": "115年度資訊設備財物採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "dhes11520",
+      "unit_id": "3.79.7.67",
+      "unit_name": "臺北市內湖區東湖國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.7.67",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.7.67&job_number=dhes11520",
+      "unit_url": "/index/unit/3.79.7.67",
+      "url": "/index/case/3.79.7.67/dhes11520/20260715/ttd-71268761",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260715,
+      "filename": "TIQ-1-71070586",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "115年度資訊設備及服務採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115B08-2",
+      "unit_id": "3.79.5.32",
+      "unit_name": "臺北市立士林高級商業職業學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.5.32",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.5.32&job_number=115B08-2",
+      "unit_url": "/index/unit/3.79.5.32",
+      "url": "/index/case/3.79.5.32/115B08-2/20260715/TIQ-1-71070586",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260715,
+      "filename": "TIQ-1-71070104",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "高速彩色雷射印表機租賃二年單價開口契約",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "M11523Q",
+      "unit_id": "3.32.80",
+      "unit_name": "臺北榮民總醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.80",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.80&job_number=M11523Q",
+      "unit_url": "/index/unit/3.32.80",
+      "url": "/index/case/3.32.80/M11523Q/20260715/TIQ-1-71070104",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "印表機",
+          "雷射印表機",
+          "租賃",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260715,
+      "filename": "BDM-3-71231827",
+      "brief": {
+        "type": "定期彙送",
+        "title": "115年數位式多功能影印機財物採購案",
+        "companies": {
+          "ids": [
+            "12516241",
+            "54106748",
+            "03028349"
+          ],
+          "names": [
+            "互盛股份有限公司",
+            "黃蘋科技實業有限公司",
+            "金儀股份有限公司"
+          ],
+          "id_key": {
+            "03028349": [
+              "投標廠商:投標廠商3:廠商代碼"
+            ],
+            "12516241": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ],
+            "54106748": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "互盛股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ],
+            "金儀股份有限公司": [
+              "投標廠商:投標廠商3:廠商名稱",
+              "決標品項:第1品項:未得標廠商2:未得標廠商"
+            ],
+            "黃蘋科技實業有限公司": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "11508",
+      "unit_id": "A.11.10.12",
+      "unit_name": "臺灣臺中地方檢察署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.11.10.12",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.11.10.12&job_number=11508",
+      "unit_url": "/index/unit/A.11.10.12",
+      "url": "/index/case/A.11.10.12/11508/20260715/BDM-3-71231827",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "多功能影印",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
       }
     }
   ],
@@ -4756,8 +4971,8 @@
     "3.13.31.13": "2026-07-29",
     "3.13.31": "2026-07-29",
     "55709324": "2026-07-29",
-    "A.11.10.12": "2026-07-28",
-    "3.32.80": "2026-07-28",
+    "A.11.10.12": "2026-07-29",
+    "3.32.80": "2026-07-29",
     "A.7.32": "2026-07-28",
     "A.21.100.75": "2026-07-29",
     "A.13.2": "2026-07-28",
