@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-31 04:01",
+  "last_updated": "2026-07-31 05:41",
   "tenders": [
     {
       "city": "台北市",
@@ -447,6 +447,47 @@
       "city": "台北市",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "Canon TX4000系列繪圖機專用噴頭等7項",
+      "unit": "國防部軍備局生產製造中心",
+      "unit_id": "3.5.10.100",
+      "job_number": "1150706-1",
+      "publish_date": "2026-07-08",
+      "deadline": "2026-07-22",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260708&fn=PPW-1-70108419.xml",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "公開徵求價單",
+      "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
+      "duration_years": 1,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "繪圖機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "city": "台北市",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "115-118年度印表機租賃開口契約採購案",
       "unit": "衛生福利部嘉南療養院",
       "unit_id": "A.21.100.75",
@@ -681,13 +722,13 @@
       "2026-07-29"
     ],
     "failed_dates": [],
-    "backfill_remaining_days": 38,
+    "backfill_remaining_days": 37,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-07-31 04:01",
+      "last_run_at": "2026-07-31 05:41",
       "backfill_dates": [
-        "2026-07-09"
+        "2026-07-08"
       ],
       "failed_dates": []
     }
@@ -846,6 +887,13 @@
       "candidate_records": 5,
       "review_records": 3,
       "checked_at": "2026-07-31 03:59"
+    },
+    "2026-07-08": {
+      "status": "complete",
+      "source_records": 2939,
+      "candidate_records": 12,
+      "review_records": 11,
+      "checked_at": "2026-07-31 05:39"
     }
   },
   "candidate_cache": [
@@ -3514,6 +3562,348 @@
         ],
         "reason": "命中設備名稱或公告規格"
       }
+    },
+    {
+      "date": 20260708,
+      "filename": "ttd-71268383",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "114學年度提升特教品質與專業支持經費-資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "FH11514",
+      "unit_id": "3.79.5.77",
+      "unit_name": "臺北市芳和實驗中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.5.77",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.5.77&job_number=FH11514",
+      "unit_url": "/index/unit/3.79.5.77",
+      "url": "/index/case/3.79.5.77/FH11514/20260708/ttd-71268383",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260708,
+      "filename": "aaa-71227769",
+      "brief": {
+        "type": "決標公告",
+        "title": "114年度校園雙語生活化計畫資訊設備",
+        "companies": {
+          "ids": [
+            "61005702"
+          ],
+          "names": [
+            "若淯有限公司"
+          ],
+          "id_key": {
+            "61005702": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "若淯有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115B004",
+      "unit_id": "3.92.4.11",
+      "unit_name": "國立花蓮高級商業職業學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.92.4.11",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.92.4.11&job_number=115B004",
+      "unit_url": "/index/unit/3.92.4.11",
+      "url": "/index/case/3.92.4.11/115B004/20260708/aaa-71227769",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260708,
+      "filename": "aaa-71227072",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年度資優班教室資訊設備採購",
+        "companies": {
+          "ids": [
+            "12798157"
+          ],
+          "names": [
+            "旗儀資訊有限公司"
+          ],
+          "id_key": {
+            "12798157": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "旗儀資訊有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "tces11505",
+      "unit_id": "3.87.7.2",
+      "unit_name": "臺中市東區臺中國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.87.7.2",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.87.7.2&job_number=tces11505",
+      "unit_url": "/index/unit/3.87.7.2",
+      "url": "/index/case/3.87.7.2/tces11505/20260708/aaa-71227072",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260708,
+      "filename": "TIQ-1-71065506",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "115年基隆市國民中小學資訊設備更新財物採購",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "CLPS-115B08",
+      "unit_id": "3.76.57.97.40",
+      "unit_name": "基隆市安樂區長樂國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.57.97.40",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.57.97.40&job_number=CLPS-115B08",
+      "unit_url": "/index/unit/3.76.57.97.40",
+      "url": "/index/case/3.76.57.97.40/CLPS-115B08/20260708/TIQ-1-71065506",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260708,
+      "filename": "PPW-1-70108419",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "Canon TX4000系列繪圖機專用噴頭等7項",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150706-1",
+      "unit_id": "3.5.10.100",
+      "unit_name": "國防部軍備局生產製造中心",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.5.10.100",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.5.10.100&job_number=1150706-1",
+      "unit_url": "/index/unit/3.5.10.100",
+      "url": "/index/case/3.5.10.100/1150706-1/20260708/PPW-1-70108419",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "繪圖機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260708,
+      "filename": "PPW-1-70108406",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "115年專用網路系統提升暨資訊設備採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "HK15073P",
+      "unit_id": "A.5.16",
+      "unit_name": "國防部資通電軍指揮部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.5.16",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.5.16&job_number=HK15073P",
+      "unit_url": "/index/unit/A.5.16",
+      "url": "/index/case/A.5.16/HK15073P/20260708/PPW-1-70108406",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260708,
+      "filename": "NAI-1-71226057",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "115年度資訊設備及服務採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115B08",
+      "unit_id": "3.79.5.32",
+      "unit_name": "臺北市立士林高級商業職業學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.5.32",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.5.32&job_number=115B08",
+      "unit_url": "/index/unit/3.79.5.32",
+      "url": "/index/case/3.79.5.32/115B08/20260708/NAI-1-71226057",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260708,
+      "filename": "NAI-1-71225415",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "115年基隆市國民中小學資訊設備更新財物採購",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "CLPS-115B08",
+      "unit_id": "3.76.57.97.40",
+      "unit_name": "基隆市安樂區長樂國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.57.97.40",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.57.97.40&job_number=CLPS-115B08",
+      "unit_url": "/index/unit/3.76.57.97.40",
+      "url": "/index/case/3.76.57.97.40/CLPS-115B08/20260708/NAI-1-71225415",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260708,
+      "filename": "FAS-1-70019941",
+      "brief": {
+        "type": "財物變賣公告",
+        "title": "115年第1次醫療儀器、機電設備、辦公設備、家具、病床及其他等報廢品標售案標售案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "TH115112",
+      "unit_id": "A.21.100.36",
+      "unit_name": "衛生福利部臺中醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.100.36",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.100.36&job_number=TH115112",
+      "unit_url": "/index/unit/A.21.100.36",
+      "url": "/index/case/A.21.100.36/TH115112/20260708/FAS-1-70019941",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
     }
   ],
   "review_candidates": [],
@@ -6004,7 +6394,7 @@
     "A.7.3": "2026-07-28",
     "3.97.13.3": "2026-07-28",
     "3.76.55.13": "2026-07-28",
-    "3.5.10.100": "2026-07-28",
+    "3.5.10.100": "2026-07-31",
     "3.76.42.14": "2026-07-28",
     "A.9.12": "2026-07-28",
     "3.95.13.3": "2026-07-28",
@@ -6115,8 +6505,8 @@
     "3.13.31.42": "2026-07-29",
     "3.13.31.52": "2026-07-29",
     "3.13.31.111": "2026-07-29",
-    "3.5.10.10": "2026-07-28",
-    "3.5.10.200": "2026-07-28",
+    "3.5.10.10": "2026-07-31",
+    "3.5.10.200": "2026-07-31",
     "3.13.31.99": "2026-07-29",
     "A.7.8.4": "2026-07-28",
     "A.7.8.3": "2026-07-28",
@@ -6132,7 +6522,7 @@
     "3.15.6.5": "2026-07-28",
     "3.15.6.10": "2026-07-28",
     "3.15.6.9": "2026-07-28",
-    "3.5.10": "2026-07-28",
+    "3.5.10": "2026-07-31",
     "3.15.6.16": "2026-07-28",
     "3.15.6.8": "2026-07-28",
     "3.15.6.54": "2026-07-28",
@@ -6206,6 +6596,7 @@
     "3.76.54||purchase|花東基金衛生局所辦公設備採購--智慧藥櫃採購計畫": "2026-07-28",
     "3.76.54||purchase|（花東基金）衛生局所辦公設備補助計畫-高階微電腦高頻診斷X光機採購": "2026-07-28",
     "3.5.48||unspecified|3D列印機乙項": "2026-07-28",
-    "3.79.14.14||unspecified|桌上型標籤條碼列印機": "2026-07-30"
+    "3.79.14.14||unspecified|桌上型標籤條碼列印機": "2026-07-30",
+    "3.5.10.100||unspecified|Canon TX4000系列繪圖機專用噴頭等7項": "2026-07-31"
   }
 }
