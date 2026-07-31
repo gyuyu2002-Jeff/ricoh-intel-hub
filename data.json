@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-31 19:51",
+  "last_updated": "2026-07-31 22:47",
   "tenders": [
     {
       "city": "台北市",
@@ -403,6 +403,285 @@
         ],
         "reason": "命中設備名稱或公告規格"
       }
+    },
+    {
+      "city": "桃園市",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "多功能影印機租賃採購(開口契約)",
+      "unit": "桃園大眾捷運股份有限公司",
+      "unit_id": "3.76.73.72",
+      "job_number": "2B15A520006",
+      "publish_date": "2026-04-23",
+      "deadline": "2026-05-07",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "97.3%",
+      "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
+      "main_competitor": "耑維科技股份有限公司",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 2,
+        "discount_rate": 97.3
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=TIQ-1-71064206.xml",
+      "history_stats": [
+        {
+          "year": 2022,
+          "val": 97,
+          "type": "real",
+          "winner": "耑維科技股份有限公司"
+        },
+        {
+          "year": 2024,
+          "val": 97,
+          "type": "real",
+          "winner": "耑維科技股份有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2024-05-24",
+          "year": 2024,
+          "title": "多功能影印機租賃採購(開口契約)",
+          "job_number": "2B13A520004",
+          "budget": 2564032,
+          "award_price": 2493435,
+          "discount_rate": 97.2,
+          "winner": "耑維科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240524&fn=BDM-1-70586204.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.73.72",
+          "source_unit": "桃園大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2022-04-14",
+          "year": 2022,
+          "title": "多功能影印機租賃採購(開口契約)",
+          "job_number": "2B11A520002",
+          "budget": 2718030,
+          "award_price": 2651187,
+          "discount_rate": 97.5,
+          "winner": "耑維科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220414&fn=BDM-1-53698100.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.73.72",
+          "source_unit": "桃園大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2020-03-11",
+          "year": 2020,
+          "title": "多功能影印機租賃採購(開口契約)",
+          "job_number": "2B09A500015",
+          "budget": 3232385,
+          "award_price": 2661047,
+          "discount_rate": 82.3,
+          "winner": "耑維科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200311&fn=BDM-1-53035498.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.73.72",
+          "source_unit": "桃園大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2019-03-21",
+          "year": 2019,
+          "title": "多功能影印機租賃採購(開口契約)",
+          "job_number": "2B08A500026",
+          "budget": 1742576,
+          "award_price": 1120121,
+          "discount_rate": 64.3,
+          "winner": "耑維科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20190321&fn=BDM-1-52727783.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.73.72",
+          "source_unit": "桃園大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2018-03-26",
+          "year": 2018,
+          "title": "車站暨機廠多功能影印機租賃案(開口合約)",
+          "job_number": "2B07A500045",
+          "budget": 1696000,
+          "award_price": 1225874,
+          "discount_rate": 72.3,
+          "winner": "高群企業股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20180326&fn=BDM-1-52404864.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.73.72",
+          "source_unit": "桃園大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2017-03-08",
+          "year": 2017,
+          "title": "車站暨機廠多功能影印機租賃採購(開口合約)",
+          "job_number": "2B06A500023",
+          "budget": 2040000,
+          "award_price": 1097250,
+          "discount_rate": 53.8,
+          "winner": "高群企業股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170308&fn=BDM-1-52085526.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.73.72",
+          "source_unit": "桃園大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2015-11-20",
+          "year": 2015,
+          "title": "車站暨機廠多功能影印機租賃採購(開口合約)",
+          "job_number": "2B04A500072",
+          "budget": 1901900,
+          "award_price": 1548435,
+          "discount_rate": 81.4,
+          "winner": "高群企業股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20151120&fn=BDM-1-51694778.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.73.72",
+          "source_unit": "桃園大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 3,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "多功能影印",
+          "採購",
+          "租賃",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "city": "台北市",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "114年度國家同步輻射中心影印機租賃",
+      "unit": "國家同步輻射研究中心",
+      "unit_id": "05601093",
+      "job_number": "SRPO-1140189",
+      "publish_date": "2025-04-14",
+      "deadline": "2025-04-28",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
+      "main_competitor": "本公司 (互盛 RICOH)",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=BDM-4-70851213.xml",
+      "history_stats": [
+        {
+          "year": 2024,
+          "val": 52,
+          "type": "real",
+          "winner": "本公司 (互盛 RICOH)"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2024-08-01",
+          "year": 2024,
+          "title": "112年度國家同步輻射中心影印機租賃",
+          "job_number": "SRPO-1120088",
+          "budget": 1322448,
+          "award_price": 696000,
+          "discount_rate": 52.6,
+          "winner": "本公司 (互盛 RICOH)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240801&fn=BDM-2-70247349.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "05601093",
+          "source_unit": "國家同步輻射研究中心",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2017-01-05",
+          "year": 2017,
+          "title": "中心影印機租賃(二年)",
+          "job_number": "SRPO-1060018",
+          "budget": 1200000,
+          "award_price": 682800,
+          "discount_rate": 56.9,
+          "winner": "金儀 Konica Minolta",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170105&fn=BDM-1-52040997.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "05601093",
+          "source_unit": "國家同步輻射研究中心",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2016-01-27",
+          "year": 2016,
+          "title": "影印機租賃費(TPS控制室)",
+          "job_number": "SRPO-1040376",
+          "budget": 192000,
+          "award_price": 180000,
+          "discount_rate": 93.8,
+          "winner": "本公司 (互盛 RICOH)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20160127&fn=BDM-2-51631218.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "05601093",
+          "source_unit": "國家同步輻射研究中心",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 3,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
     }
   ],
   "collection_status": {
@@ -418,13 +697,13 @@
       "2026-07-30"
     ],
     "failed_dates": [],
-    "backfill_remaining_days": 37,
+    "backfill_remaining_days": 36,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-07-31 05:41",
+      "last_run_at": "2026-07-31 22:47",
       "backfill_dates": [
-        "2026-07-08"
+        "2026-07-07"
       ],
       "failed_dates": []
     }
@@ -597,6 +876,13 @@
       "candidate_records": 11,
       "review_records": 11,
       "checked_at": "2026-07-31 19:49"
+    },
+    "2026-07-07": {
+      "status": "complete",
+      "source_records": 2210,
+      "candidate_records": 5,
+      "review_records": 3,
+      "checked_at": "2026-07-31 22:45"
     }
   },
   "candidate_cache": [
@@ -3565,6 +3851,177 @@
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
+    },
+    {
+      "date": 20260707,
+      "filename": "TIQ-11-71064804",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年度智慧學校數位學堂計畫資訊設備購置",
+        "category": "財物類469-其他電力設備及零件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "02115005",
+      "unit_id": "3.80.5.77",
+      "unit_name": "桃園市立大成國民中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.80.5.77",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.80.5.77&job_number=02115005",
+      "unit_url": "/index/unit/3.80.5.77",
+      "url": "/index/case/3.80.5.77/02115005/20260707/TIQ-11-71064804",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "購置"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260707,
+      "filename": "TIQ-1-71064206",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "多功能影印機租賃採購(開口契約)",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "2B15A520006",
+      "unit_id": "3.76.73.72",
+      "unit_name": "桃園大眾捷運股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.73.72",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.73.72&job_number=2B15A520006",
+      "unit_url": "/index/unit/3.76.73.72",
+      "url": "/index/case/3.76.73.72/2B15A520006/20260707/TIQ-1-71064206",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "多功能影印",
+          "採購",
+          "租賃",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260707,
+      "filename": "BDM-4-70851213",
+      "brief": {
+        "type": "更正定期彙送",
+        "title": "114年度國家同步輻射中心影印機租賃",
+        "companies": {
+          "ids": [
+            "22000047"
+          ],
+          "names": [
+            "互盛股份有限公司新竹分公司"
+          ],
+          "id_key": {
+            "22000047": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "互盛股份有限公司新竹分公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "SRPO-1140189",
+      "unit_id": "05601093",
+      "unit_name": "國家同步輻射研究中心",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=05601093",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=05601093&job_number=SRPO-1140189",
+      "unit_url": "/index/unit/05601093",
+      "url": "/index/case/05601093/SRPO-1140189/20260707/BDM-4-70851213",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260707,
+      "filename": "BDM-1-71224385",
+      "brief": {
+        "type": "決標公告",
+        "title": "彰化縣教育網路中心115年度資訊設備軟硬體維護案",
+        "companies": {
+          "ids": [
+            "00012558"
+          ],
+          "names": [
+            "群曜數位科技股份有限公司 (ChyunYao Digitalization Technology INC.)"
+          ],
+          "id_key": {
+            "00012558": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "群曜數位科技股份有限公司 (ChyunYao Digitalization Technology INC.)": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115-040-028-325",
+      "unit_id": "3.76.47",
+      "unit_name": "彰化縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.47",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.47&job_number=115-040-028-325",
+      "unit_url": "/index/unit/3.76.47",
+      "url": "/index/case/3.76.47/115-040-028-325/20260707/BDM-1-71224385",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
     }
   ],
   "review_candidates": [],
@@ -6042,8 +6499,8 @@
     "A.7.32": "2026-07-28",
     "A.21.100.75": "2026-07-31",
     "A.13.2": "2026-07-28",
-    "05601093": "2026-07-28",
-    "3.76.73.72": "2026-07-28",
+    "05601093": "2026-07-31",
+    "3.76.73.72": "2026-07-31",
     "3.5.11": "2026-07-28",
     "3.79.62": "2026-07-28",
     "02717206": "2026-07-28",
