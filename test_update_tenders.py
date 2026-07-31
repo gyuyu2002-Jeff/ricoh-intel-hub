@@ -85,8 +85,18 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         self.assertEqual(result["status"], "excluded")
         self.assertEqual(result["category"], "medical_equipment")
 
-    def test_explicit_printer_in_mixed_it_purchase_is_included(self):
+    def test_explicit_printer_in_mixed_it_purchase_is_excluded(self):
         result = classify_tender_relevance(announcement("電腦及雷射印表機採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "printer_or_plotter")
+
+    def test_plotter_is_excluded(self):
+        result = classify_tender_relevance(announcement("大型繪圖機採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "printer_or_plotter")
+
+    def test_copier_and_printer_mixed_purchase_remains_in_scope(self):
+        result = classify_tender_relevance(announcement("數位複合機及印表機採購案"))
         self.assertEqual(result["status"], "included")
 
     def test_contract_change_is_excluded(self):
