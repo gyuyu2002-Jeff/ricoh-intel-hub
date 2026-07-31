@@ -215,9 +215,8 @@ def is_relevant_equipment_title(title):
 
 DIRECT_EQUIPMENT_TERMS = [
     "影印機", "複印機", "複合機", "數位複合", "彩色複合機", "多功能機", "多功機",
-    "多功能複合機", "多功能事務機", "多功能影印", "事務機", "辦公事務機", "印表機",
-    "列印機", "雷射印表機", "噴墨印表機", "點陣式印表機", "標籤印表機", "條碼印表機",
-    "繪圖機", "大圖輸出機", "數位印刷機", "生產型印刷機", "MFP", "copier", "printer"
+    "多功能複合機", "多功能事務機", "多功能影印", "事務機", "辦公事務機",
+    "MFP", "copier"
 ]
 BROAD_EQUIPMENT_TERMS = [
     "輸出設備", "列印設備", "文件輸出", "辦公設備", "辦公室設備", "事務設備", "資訊設備",
@@ -235,6 +234,9 @@ PRINT_SERVICE_TERMS = ["印刷服務", "文宣印製", "海報輸出", "影印�
 SPECIALIZED_PRINTING_TERMS = ["3D列印機", "3D印表機", "積層製造設備"]
 DOT_MATRIX_PRINTER_TERMS = ["點陣式印表機", "點矩陣印表機"]
 PRINTER_TERMS = ["印表機", "列印機", "printer"]
+OUT_OF_SCOPE_PRINTER_TERMS = [
+    "印表機", "列印機", "繪圖機", "大圖輸出機", "數位印刷機", "生產型印刷機", "printer", "plotter"
+]
 MAINTENANCE_TERMS = ["維護", "維修", "保養"]
 CONTRACT_CHANGE_TERMS = ["契約變更", "變更案", "後續擴充", "追加採購"]
 NON_TARGET_TERM_GROUPS = {
@@ -297,6 +299,16 @@ def get_title_scope_exclusion(title):
             "category": "printer_maintenance",
             "matched_terms": list(dict.fromkeys(printer_terms + maintenance_terms)),
             "reason": "印表機維護、維修或保養不在追蹤範圍"
+        }
+    out_of_scope_printer_terms = _matched_terms(title, OUT_OF_SCOPE_PRINTER_TERMS)
+    copier_terms = _matched_terms(title, DIRECT_EQUIPMENT_TERMS)
+    specialized_terms = _matched_terms(title, SPECIALIZED_PRINTING_TERMS)
+    if out_of_scope_printer_terms and not copier_terms and not specialized_terms:
+        return {
+            "status": "excluded", "confidence": "high", "score": -4,
+            "category": "printer_or_plotter",
+            "matched_terms": out_of_scope_printer_terms,
+            "reason": "印表機、列印機或繪圖機不在追蹤範圍"
         }
     return None
 
