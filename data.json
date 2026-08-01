@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-02 01:33",
+  "last_updated": "2026-08-02 03:43",
   "tenders": [
     {
       "city": "台北市",
@@ -835,13 +835,13 @@
     "failed_dates": [
       "2026-08-01"
     ],
-    "backfill_remaining_days": 28,
+    "backfill_remaining_days": 27,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-02 01:33",
+      "last_run_at": "2026-08-02 03:43",
       "backfill_dates": [
-        "2026-07-01"
+        "2026-06-30"
       ],
       "failed_dates": []
     }
@@ -1063,6 +1063,13 @@
       "candidate_records": 4,
       "review_records": 4,
       "checked_at": "2026-08-02 01:29"
+    },
+    "2026-06-30": {
+      "status": "complete",
+      "source_records": 2367,
+      "candidate_records": 2,
+      "review_records": 2,
+      "checked_at": "2026-08-02 03:40"
     }
   },
   "candidate_cache": [
@@ -4664,6 +4671,99 @@
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
+    },
+    {
+      "date": 20260630,
+      "filename": "TIQ-11-71058619",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "臺西分局三條崙派出所辦公設備及待勤家具採購案",
+        "category": "財物類448-家用電器及其零件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "c11514",
+      "unit_id": "3.76.49.2",
+      "unit_name": "雲林縣警察局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.49.2",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.49.2&job_number=c11514",
+      "unit_url": "/index/unit/3.76.49.2",
+      "url": "/index/case/3.76.49.2/c11514/20260630/TIQ-11-71058619",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260630,
+      "filename": "BDM-3-71218125",
+      "brief": {
+        "type": "定期彙送",
+        "title": "115年度資訊設備採購案（固定金額給付）",
+        "companies": {
+          "ids": [
+            "53023474",
+            "90310836"
+          ],
+          "names": [
+            "巨舟電腦股份有限公司",
+            "天誠電腦資訊有限公司"
+          ],
+          "id_key": {
+            "53023474": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ],
+            "90310836": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "天誠電腦資訊有限公司": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ],
+            "巨舟電腦股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "N115210120101",
+      "unit_id": "3.71.2.63",
+      "unit_name": "金門縣採購招標所",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.71.2.63",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.71.2.63&job_number=N115210120101",
+      "unit_url": "/index/unit/3.71.2.63",
+      "url": "/index/case/3.71.2.63/N115210120101/20260630/BDM-3-71218125",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
     }
   ],
   "review_candidates": [],
@@ -7184,7 +7284,7 @@
     "3.79.51.22": "2026-08-02",
     "3.79.51.5": "2026-08-02",
     "3.9.20": "2026-08-02",
-    "3.9.20.11": "2026-08-01",
+    "3.9.20.11": "2026-08-02",
     "3.9.20.12": "2026-08-02",
     "3.9.20.13": "2026-08-02",
     "3.9.20.14": "2026-08-02",
