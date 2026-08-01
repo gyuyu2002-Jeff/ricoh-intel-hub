@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-01 05:36",
+  "last_updated": "2026-08-01 22:06",
   "tenders": [
     {
       "city": "台北市",
@@ -699,13 +699,13 @@
     "failed_dates": [
       "2026-08-01"
     ],
-    "backfill_remaining_days": 32,
+    "backfill_remaining_days": 31,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-01 05:36",
+      "last_run_at": "2026-08-01 22:06",
       "backfill_dates": [
-        "2026-07-04"
+        "2026-07-03"
       ],
       "failed_dates": []
     }
@@ -906,6 +906,13 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-08-01 05:34"
+    },
+    "2026-07-03": {
+      "status": "complete",
+      "source_records": 2723,
+      "candidate_records": 4,
+      "review_records": 4,
+      "checked_at": "2026-08-01 22:04"
     }
   },
   "candidate_cache": [
@@ -4110,6 +4117,159 @@
         "matched_terms": [
           "資訊設備",
           "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260703,
+      "filename": "ttd-71265196",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年度嘉義縣龍港國民小學偏遠地區學校及非山非市學校設施設備-資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "lges11502",
+      "unit_id": "3.76.50.97.48",
+      "unit_name": "嘉義縣東石鄉龍港國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.50.97.48",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.50.97.48&job_number=lges11502",
+      "unit_url": "/index/unit/3.76.50.97.48",
+      "url": "/index/case/3.76.50.97.48/lges11502/20260703/ttd-71265196",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260703,
+      "filename": "aaa-71223025",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年度竹圍高中優質化資訊設備採購案",
+        "companies": {
+          "ids": [
+            "20828393"
+          ],
+          "names": [
+            "宏碁股份有限公司 (Acer Incorporated)"
+          ],
+          "id_key": {
+            "20828393": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "宏碁股份有限公司 (Acer Incorporated)": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "zw1150525-1",
+      "unit_id": "3.82.5.12",
+      "unit_name": "新北市立竹圍高級中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.82.5.12",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.82.5.12&job_number=zw1150525-1",
+      "unit_url": "/index/unit/3.82.5.12",
+      "url": "/index/case/3.82.5.12/zw1150525-1/20260703/aaa-71223025",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260703,
+      "filename": "TIQ-1-71063156",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "機動資訊設備等9項",
+        "category": "財物類47-收音機、電視,通訊器材及儀器",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "TK15010L235",
+      "unit_id": "3.5",
+      "unit_name": "國防部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.5",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.5&job_number=TK15010L235",
+      "unit_url": "/index/unit/3.5",
+      "url": "/index/case/3.5/TK15010L235/20260703/TIQ-1-71063156",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260703,
+      "filename": "NAI-1-71221493",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "機動資訊設備等9項",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "TK15010L235",
+      "unit_id": "3.5",
+      "unit_name": "國防部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.5",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.5&job_number=TK15010L235",
+      "unit_url": "/index/unit/3.5",
+      "url": "/index/case/3.5/TK15010L235/20260703/NAI-1-71221493",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
         ],
         "matched_fields": [
           "title"
