@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-03 05:25",
+  "last_updated": "2026-08-03 07:07",
   "tenders": [
     {
       "city": "台北市",
@@ -823,18 +823,16 @@
   "collection_status": {
     "today": "2026-08-03",
     "status": "complete",
-    "latest_attempt_status": "failed",
-    "latest_attempt_at": "2026-08-02 19:07",
-    "source_records": 2614,
-    "candidate_records": 11,
+    "latest_attempt_status": "complete",
+    "latest_attempt_at": "2026-08-03 07:07",
+    "source_records": 1812,
+    "candidate_records": 2,
     "review_records": 0,
     "successful_dates": [
-      "2026-07-31",
-      "2026-07-30"
-    ],
-    "failed_dates": [
+      "2026-08-03",
       "2026-08-02"
     ],
+    "failed_dates": [],
     "backfill_remaining_days": 21,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
@@ -1112,9 +1110,119 @@
       "candidate_records": 11,
       "review_records": 10,
       "checked_at": "2026-08-03 05:22"
+    },
+    "2026-08-03": {
+      "status": "complete",
+      "source_records": 1812,
+      "candidate_records": 2,
+      "review_records": 2,
+      "checked_at": "2026-08-03 07:04"
+    },
+    "2026-08-02": {
+      "status": "complete",
+      "source_records": 0,
+      "candidate_records": 0,
+      "review_records": 0,
+      "checked_at": "2026-08-03 07:04"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260803,
+      "filename": "BDM-1-71248136",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年基隆市國民中小學資訊設備更新財物採購",
+        "companies": {
+          "ids": [
+            "27950876"
+          ],
+          "names": [
+            "中華電信股份有限公司企業客戶分公司"
+          ],
+          "id_key": {
+            "27950876": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "中華電信股份有限公司企業客戶分公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "CLPS-115B08",
+      "unit_id": "3.76.57.97.40",
+      "unit_name": "基隆市安樂區長樂國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.57.97.40",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.57.97.40&job_number=CLPS-115B08",
+      "unit_url": "/index/unit/3.76.57.97.40",
+      "url": "/index/case/3.76.57.97.40/CLPS-115B08/20260803/BDM-1-71248136",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260803,
+      "filename": "BDM-1-71247720",
+      "brief": {
+        "type": "決標公告",
+        "title": "岡山區公所辦公設備搬遷至岡山農會3樓裝修等相關工程第一次變更設計",
+        "companies": {
+          "ids": [
+            "25176173"
+          ],
+          "names": [
+            "禾豐室內裝修設計有限公司"
+          ],
+          "id_key": {
+            "25176173": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "禾豐室內裝修設計有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115007-1",
+      "unit_id": "3.97.63",
+      "unit_name": "高雄市岡山區公所",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.63",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.63&job_number=115007-1",
+      "unit_url": "/index/unit/3.97.63",
+      "url": "/index/case/3.97.63/115007-1/20260803/BDM-1-71247720",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260731,
       "filename": "TIQ-11-71084283",
@@ -4004,42 +4112,6 @@
         "matched_terms": [
           "資訊設備",
           "採購"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260708,
-      "filename": "NAI-1-71225415",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "115年基隆市國民中小學資訊設備更新財物採購",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "CLPS-115B08",
-      "unit_id": "3.76.57.97.40",
-      "unit_name": "基隆市安樂區長樂國民小學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.57.97.40",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.57.97.40&job_number=CLPS-115B08",
-      "unit_url": "/index/unit/3.76.57.97.40",
-      "url": "/index/case/3.76.57.97.40/CLPS-115B08/20260708/NAI-1-71225415",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備",
-          "採購",
-          "更新"
         ],
         "matched_fields": [
           "title"
