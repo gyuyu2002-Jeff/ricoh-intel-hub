@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-03 03:43",
+  "last_updated": "2026-08-03 05:25",
   "tenders": [
     {
       "city": "台北市",
@@ -835,13 +835,13 @@
     "failed_dates": [
       "2026-08-02"
     ],
-    "backfill_remaining_days": 22,
+    "backfill_remaining_days": 21,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-03 03:43",
+      "last_run_at": "2026-08-03 05:25",
       "backfill_dates": [
-        "2026-06-26"
+        "2026-06-25"
       ],
       "failed_dates": []
     }
@@ -1105,6 +1105,13 @@
       "candidate_records": 8,
       "review_records": 8,
       "checked_at": "2026-08-03 03:41"
+    },
+    "2026-06-25": {
+      "status": "complete",
+      "source_records": 2865,
+      "candidate_records": 11,
+      "review_records": 10,
+      "checked_at": "2026-08-03 05:22"
     }
   },
   "candidate_cache": [
@@ -5200,6 +5207,379 @@
       "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.92.1.24&job_number=115-T15-G05",
       "unit_url": "/index/unit/3.92.1.24",
       "url": "/index/case/3.92.1.24/115-T15-G05/20260626/BDM-1-71215162",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260625,
+      "filename": "ttd-71258277",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年臺北市STEAM學校認證實施計畫資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11516",
+      "unit_id": "3.79.8.46",
+      "unit_name": "臺北市信義區福德國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.8.46",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.8.46&job_number=11516",
+      "unit_url": "/index/unit/3.79.8.46",
+      "url": "/index/case/3.79.8.46/11516/20260625/ttd-71258277",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260625,
+      "filename": "ttd-71257495",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年度竹圍高中優質化資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "zw1150525-1",
+      "unit_id": "3.82.5.12",
+      "unit_name": "新北市立竹圍高級中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.82.5.12",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.82.5.12&job_number=zw1150525-1",
+      "unit_url": "/index/unit/3.82.5.12",
+      "url": "/index/case/3.82.5.12/zw1150525-1/20260625/ttd-71257495",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260625,
+      "filename": "aaa-71215249",
+      "brief": {
+        "type": "更正決標公告",
+        "title": "115學年度北大國小影印機租賃",
+        "companies": {
+          "ids": [
+            "22353013"
+          ],
+          "names": [
+            "四海事務機器有限公司"
+          ],
+          "id_key": {
+            "22353013": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "四海事務機器有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "BDES1150615",
+      "unit_id": "3.82.9.5",
+      "unit_name": "新北市三峽區北大國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.82.9.5",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.82.9.5&job_number=BDES1150615",
+      "unit_url": "/index/unit/3.82.9.5",
+      "url": "/index/case/3.82.9.5/BDES1150615/20260625/aaa-71215249",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260625,
+      "filename": "TIQ-12-71055044",
+      "brief": {
+        "type": "公開取得報價單或企劃書更正公告",
+        "title": "新北市政府警察局三重分局中興橋派出所新廳舍辦公設備採購案",
+        "category": "財物類381-傢具",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150601001",
+      "unit_id": "3.82.13.21",
+      "unit_name": "新北市政府警察局三重分局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.82.13.21",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.82.13.21&job_number=1150601001",
+      "unit_url": "/index/unit/3.82.13.21",
+      "url": "/index/case/3.82.13.21/1150601001/20260625/TIQ-12-71055044",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260625,
+      "filename": "TIQ-12-71054629",
+      "brief": {
+        "type": "公開取得報價單或企劃書更正公告",
+        "title": "115年中原國小藝才班資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "CY11505",
+      "unit_id": "3.76.55.98.20",
+      "unit_name": "花蓮縣花蓮市中原國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.55.98.20",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.55.98.20&job_number=CY11505",
+      "unit_url": "/index/unit/3.76.55.98.20",
+      "url": "/index/case/3.76.55.98.20/CY11505/20260625/TIQ-12-71054629",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260625,
+      "filename": "RML-1-70008347",
+      "brief": {
+        "type": "拒絕往來廠商名單公告",
+        "title": "111年度偵查及訊問相關資訊設備維護委外服務案",
+        "companies": {
+          "ids": [],
+          "names": [
+            "兆群科技有限公司"
+          ],
+          "id_key": {},
+          "name_key": {
+            "兆群科技有限公司": [
+              "標案內容:廠商名稱"
+            ]
+          }
+        }
+      },
+      "job_number": "無案號",
+      "unit_id": "",
+      "unit_name": null,
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=&job_number=%E7%84%A1%E6%A1%88%E8%99%9F",
+      "unit_url": "/index/unit/",
+      "url": "/index/case//%E7%84%A1%E6%A1%88%E8%99%9F/20260625/RML-1-70008347",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260625,
+      "filename": "PPW-1-70107095",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "116年憑證管理系統資訊設備維護",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "HI16002",
+      "unit_id": "A.5.5.1",
+      "unit_name": "國防部軍事情報局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.5.5.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.5.5.1&job_number=HI16002",
+      "unit_url": "/index/unit/A.5.5.1",
+      "url": "/index/case/A.5.5.1/HI16002/20260625/PPW-1-70107095",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260625,
+      "filename": "BDM-1-71214445",
+      "brief": {
+        "type": "決標公告",
+        "title": "校本部教室教學資訊設備購置案",
+        "companies": {
+          "ids": [
+            "70519490",
+            "93301804"
+          ],
+          "names": [
+            "南旲科技企業有限公司",
+            "豪桉科技"
+          ],
+          "id_key": {
+            "70519490": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ],
+            "93301804": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "豪桉科技": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ],
+            "南旲科技企業有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "11519",
+      "unit_id": "3.9.83",
+      "unit_name": "國立臺南護理專科學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.83",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.83&job_number=11519",
+      "unit_url": "/index/unit/3.9.83",
+      "url": "/index/case/3.9.83/11519/20260625/BDM-1-71214445",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "購置"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260625,
+      "filename": "BDM-1-71214222",
+      "brief": {
+        "type": "決標公告",
+        "title": "114學年度資訊設備採購",
+        "companies": {
+          "ids": [
+            "86370255"
+          ],
+          "names": [
+            "旭威電腦資訊有限公司"
+          ],
+          "id_key": {
+            "86370255": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "旭威電腦資訊有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "C0206-11424",
+      "unit_id": "3.80.7.39",
+      "unit_name": "桃園市中壢區信義國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.80.7.39",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.80.7.39&job_number=C0206-11424",
+      "unit_url": "/index/unit/3.80.7.39",
+      "url": "/index/case/3.80.7.39/C0206-11424/20260625/BDM-1-71214222",
       "relevance": {
         "status": "review",
         "confidence": "low",
