@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-04 02:19",
+  "last_updated": "2026-08-04 04:10",
   "tenders": [
     {
       "city": "台北市",
@@ -833,13 +833,13 @@
       "2026-08-02"
     ],
     "failed_dates": [],
-    "backfill_remaining_days": 18,
+    "backfill_remaining_days": 17,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-04 02:19",
+      "last_run_at": "2026-08-04 04:10",
       "backfill_dates": [
-        "2026-06-23"
+        "2026-06-22"
       ],
       "failed_dates": []
     }
@@ -1138,6 +1138,13 @@
       "candidate_records": 1,
       "review_records": 1,
       "checked_at": "2026-08-04 02:14"
+    },
+    "2026-06-22": {
+      "status": "complete",
+      "source_records": 2226,
+      "candidate_records": 4,
+      "review_records": 3,
+      "checked_at": "2026-08-04 04:07"
     }
   },
   "candidate_cache": [
@@ -5680,10 +5687,155 @@
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
+    },
+    {
+      "date": 20260622,
+      "filename": "aaa-71211202",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年資優教育資源中心資訊設備採購案",
+        "companies": {
+          "ids": [
+            "83080042"
+          ],
+          "names": [
+            "安德有限公司 (AND SERVICE CO., LTD.)"
+          ],
+          "id_key": {
+            "83080042": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "安德有限公司 (AND SERVICE CO., LTD.)": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115010",
+      "unit_id": "3.76.44.96.27",
+      "unit_name": "新竹縣立博愛國民中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.44.96.27",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.44.96.27&job_number=115010",
+      "unit_url": "/index/unit/3.76.44.96.27",
+      "url": "/index/case/3.76.44.96.27/115010/20260622/aaa-71211202",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260622,
+      "filename": "PPW-1-70106694",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "花蓮市明恥國民小學特教班智慧黑白板及電腦資訊設備採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "MCPS1150619",
+      "unit_id": "3.76.55.97.4",
+      "unit_name": "花蓮縣花蓮市明恥國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.55.97.4",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.55.97.4&job_number=MCPS1150619",
+      "unit_url": "/index/unit/3.76.55.97.4",
+      "url": "/index/case/3.76.55.97.4/MCPS1150619/20260622/PPW-1-70106694",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260622,
+      "filename": "BDM-1-71210591",
+      "brief": {
+        "type": "決標公告",
+        "title": "中正國小充實辦公設備及管線整修工程",
+        "companies": {
+          "ids": [
+            "56628264"
+          ],
+          "names": [
+            "柚子室內裝修設計有限公司"
+          ],
+          "id_key": {
+            "56628264": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "柚子室內裝修設計有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "CCES11416",
+      "unit_id": "3.76.44.97.84",
+      "unit_name": "新竹縣竹北市中正國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.44.97.84",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.44.97.84&job_number=CCES11416",
+      "unit_url": "/index/unit/3.76.44.97.84",
+      "url": "/index/case/3.76.44.97.84/CCES11416/20260622/BDM-1-71210591",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
     }
   ],
   "review_candidates": [],
   "history_cache": [
+    {
+      "unit_id": "55709324",
+      "unit_name": "臺中區漁會",
+      "award_date": "2026-08-04",
+      "year": 2026,
+      "title": "臺中區漁會漁民活動中心及辦事處設備購置-事務機器",
+      "job_number": "MND115072904",
+      "budget": 310000,
+      "award_price": 310000,
+      "discount_rate": 100.0,
+      "winner": "大甲事務資訊有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260804&fn=BDM-1-71248859.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
     {
       "unit_id": "3.13.31.13",
       "unit_name": "台灣電力股份有限公司彰化區營業處",
