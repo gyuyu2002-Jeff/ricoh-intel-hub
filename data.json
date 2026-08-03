@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-04 05:39",
+  "last_updated": "2026-08-04 07:17",
   "tenders": [
     {
       "city": "台北市",
@@ -824,13 +824,13 @@
     "today": "2026-08-04",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-03 20:49",
-    "source_records": 1929,
-    "candidate_records": 2,
+    "latest_attempt_at": "2026-08-04 07:17",
+    "source_records": 1762,
+    "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-03",
-      "2026-08-02"
+      "2026-08-04",
+      "2026-08-03"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 16,
@@ -1113,10 +1113,10 @@
     },
     "2026-08-03": {
       "status": "complete",
-      "source_records": 1929,
+      "source_records": 1930,
       "candidate_records": 2,
       "review_records": 2,
-      "checked_at": "2026-08-03 20:46"
+      "checked_at": "2026-08-04 07:14"
     },
     "2026-08-02": {
       "status": "complete",
@@ -1152,9 +1152,144 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-08-04 05:36"
+    },
+    "2026-08-04": {
+      "status": "complete",
+      "source_records": 1762,
+      "candidate_records": 3,
+      "review_records": 2,
+      "checked_at": "2026-08-04 07:14"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260804,
+      "filename": "TIQ-1-71085793",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "內政部警政署基隆港務警察總隊新建廳舍辦公設備搬遷案",
+        "category": "財物類381-傢具",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-08-01",
+      "unit_id": "A.1.1.21",
+      "unit_name": "內政部警政署基隆港務警察總隊",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.1.1.21",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.1.1.21&job_number=115-08-01",
+      "unit_url": "/index/unit/A.1.1.21",
+      "url": "/index/case/A.1.1.21/115-08-01/20260804/TIQ-1-71085793",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260804,
+      "filename": "TIQ-1-71084728",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "沉浸科技導入素養導向教學實施計畫資訊設備採購",
+        "category": "財物類47-收音機、電視,通訊器材及儀器",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115007",
+      "unit_id": "3.97.8.60",
+      "unit_name": "高雄市旗山區旗山國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.8.60",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.8.60&job_number=115007",
+      "unit_url": "/index/unit/3.97.8.60",
+      "url": "/index/case/3.97.8.60/115007/20260804/TIQ-1-71084728",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260804,
+      "filename": "BDM-1-71248859",
+      "brief": {
+        "type": "決標公告",
+        "title": "臺中區漁會漁民活動中心及辦事處設備購置-事務機器",
+        "companies": {
+          "ids": [
+            "27641416",
+            "80032172"
+          ],
+          "names": [
+            "大甲事務資訊有限公司",
+            "互盛股份有限公司中港分公司"
+          ],
+          "id_key": {
+            "27641416": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ],
+            "80032172": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "大甲事務資訊有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ],
+            "互盛股份有限公司中港分公司": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "MND115072904",
+      "unit_id": "55709324",
+      "unit_name": "臺中區漁會",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=55709324",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=55709324&job_number=MND115072904",
+      "unit_url": "/index/unit/55709324",
+      "url": "/index/case/55709324/MND115072904/20260804/BDM-1-71248859",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "事務機",
+          "購置"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "date": 20260803,
       "filename": "BDM-1-71248136",
