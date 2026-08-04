@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-04 14:40",
+  "last_updated": "2026-08-04 18:50",
   "tenders": [
     {
       "city": "台北市",
@@ -824,9 +824,9 @@
     "today": "2026-08-04",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-04 14:40",
-    "source_records": 1881,
-    "candidate_records": 3,
+    "latest_attempt_at": "2026-08-04 18:50",
+    "source_records": 1980,
+    "candidate_records": 4,
     "review_records": 0,
     "successful_dates": [
       "2026-08-04",
@@ -1116,7 +1116,7 @@
       "source_records": 1930,
       "candidate_records": 2,
       "review_records": 2,
-      "checked_at": "2026-08-04 14:36"
+      "checked_at": "2026-08-04 18:47"
     },
     "2026-08-02": {
       "status": "complete",
@@ -1155,13 +1155,61 @@
     },
     "2026-08-04": {
       "status": "complete",
-      "source_records": 1881,
-      "candidate_records": 3,
+      "source_records": 1980,
+      "candidate_records": 4,
       "review_records": 2,
-      "checked_at": "2026-08-04 14:36"
+      "checked_at": "2026-08-04 18:47"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260804,
+      "filename": "aaa-71250367",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年高速影印機採購案",
+        "companies": {
+          "ids": [
+            "82843583"
+          ],
+          "names": [
+            "台灣富士軟片系統整合股份有限公司 (FUJIFILM BI System Integration Taiwan Co., Ltd.)"
+          ],
+          "id_key": {
+            "82843583": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "台灣富士軟片系統整合股份有限公司 (FUJIFILM BI System Integration Taiwan Co., Ltd.)": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "11502A05",
+      "unit_id": "5.4.61",
+      "unit_name": "臺灣高雄少年及家事法院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=5.4.61",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=5.4.61&job_number=11502A05",
+      "unit_url": "/index/unit/5.4.61",
+      "url": "/index/case/5.4.61/11502A05/20260804/aaa-71250367",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "date": 20260804,
       "filename": "TIQ-1-71085793",
@@ -5975,6 +6023,21 @@
       "discount_rate": 100.0,
       "winner": "大甲事務資訊有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260804&fn=BDM-1-71248859.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "5.4.61",
+      "unit_name": "臺灣高雄少年及家事法院",
+      "award_date": "2026-08-04",
+      "year": 2026,
+      "title": "115年高速影印機採購案",
+      "job_number": "11502A05",
+      "budget": 968000,
+      "award_price": 948000,
+      "discount_rate": 97.9,
+      "winner": "富士軟片 (FUJIFILM)",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEyNTAzNjc=",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
