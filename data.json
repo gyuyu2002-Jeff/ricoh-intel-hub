@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-05 04:10",
+  "last_updated": "2026-08-05 05:49",
   "tenders": [
     {
       "city": "台北市",
@@ -957,13 +957,13 @@
       "2026-08-03"
     ],
     "failed_dates": [],
-    "backfill_remaining_days": 12,
+    "backfill_remaining_days": 11,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-05 04:10",
+      "last_run_at": "2026-08-05 05:49",
       "backfill_dates": [
-        "2026-06-18"
+        "2026-06-17"
       ],
       "failed_dates": []
     }
@@ -1304,6 +1304,13 @@
       "candidate_records": 8,
       "review_records": 7,
       "checked_at": "2026-08-05 04:06"
+    },
+    "2026-06-17": {
+      "status": "complete",
+      "source_records": 3221,
+      "candidate_records": 6,
+      "review_records": 5,
+      "checked_at": "2026-08-05 05:45"
     }
   },
   "candidate_cache": [
@@ -6422,6 +6429,135 @@
         "matched_terms": [
           "列印設備",
           "租用"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260617,
+      "filename": "ttd-71251328",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "114-2資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11506",
+      "unit_id": "3.87.5.2",
+      "unit_name": "臺中市立清水高級中等學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.87.5.2",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.87.5.2&job_number=11506",
+      "unit_url": "/index/unit/3.87.5.2",
+      "url": "/index/case/3.87.5.2/11506/20260617/ttd-71251328",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260617,
+      "filename": "TIQ-1-71049895",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "教學行政環境改善工程及辦公設備更新",
+        "category": "工程類5177-室內裝潢工程",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "PH11504",
+      "unit_id": "3.80.8.60",
+      "unit_name": "桃園市新屋區北湖國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.80.8.60",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.80.8.60&job_number=PH11504",
+      "unit_url": "/index/unit/3.80.8.60",
+      "url": "/index/case/3.80.8.60/PH11504/20260617/TIQ-1-71049895",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260617,
+      "filename": "BDM-1-71206264",
+      "brief": {
+        "type": "決標公告",
+        "title": "新港國中--新建大樓專科教室暨辦公室設備採購",
+        "companies": {
+          "ids": [
+            "94400063",
+            "14207235"
+          ],
+          "names": [
+            "曜誠文教事業企業社",
+            "怡美企業社"
+          ],
+          "id_key": {
+            "14207235": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ],
+            "94400063": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "怡美企業社": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ],
+            "曜誠文教事業企業社": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115201520102",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115201520102",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115201520102/20260617/BDM-1-71206264",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公室設備",
+          "採購"
         ],
         "matched_fields": [
           "title"
