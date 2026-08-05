@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-06 02:05",
+  "last_updated": "2026-08-06 04:06",
   "tenders": [
     {
       "city": "台北市",
@@ -957,13 +957,13 @@
       "2026-08-04"
     ],
     "failed_dates": [],
-    "backfill_remaining_days": 8,
+    "backfill_remaining_days": 7,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-06 02:05",
+      "last_run_at": "2026-08-06 04:06",
       "backfill_dates": [
-        "2026-06-15"
+        "2026-06-14"
       ],
       "failed_dates": []
     }
@@ -1332,6 +1332,13 @@
       "candidate_records": 4,
       "review_records": 4,
       "checked_at": "2026-08-06 02:00"
+    },
+    "2026-06-14": {
+      "status": "complete",
+      "source_records": 0,
+      "candidate_records": 0,
+      "review_records": 0,
+      "checked_at": "2026-08-06 04:02"
     }
   },
   "candidate_cache": [
@@ -9512,7 +9519,7 @@
     "3.9.20.50": "2026-08-06",
     "3.9.20.33": "2026-08-06",
     "3.9.20.60": "2026-08-06",
-    "3.9.20.5": "2026-08-05",
+    "3.9.20.5": "2026-08-06",
     "3.9.20.80": "2026-08-06",
     "3.9.20.6": "2026-08-06",
     "3.9.20.90": "2026-08-06",
