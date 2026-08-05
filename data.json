@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-06 05:45",
+  "last_updated": "2026-08-06 07:17",
   "tenders": [
     {
       "city": "台北市",
@@ -948,13 +948,13 @@
     "today": "2026-08-06",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-05 19:51",
-    "source_records": 2677,
-    "candidate_records": 4,
+    "latest_attempt_at": "2026-08-06 07:17",
+    "source_records": 2229,
+    "candidate_records": 2,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-05",
-      "2026-08-04"
+      "2026-08-06",
+      "2026-08-05"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 6,
@@ -1314,10 +1314,10 @@
     },
     "2026-08-05": {
       "status": "complete",
-      "source_records": 2677,
+      "source_records": 2680,
       "candidate_records": 4,
       "review_records": 4,
-      "checked_at": "2026-08-05 19:47"
+      "checked_at": "2026-08-06 07:12"
     },
     "2026-06-16": {
       "status": "complete",
@@ -1346,9 +1346,87 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-08-06 05:41"
+    },
+    "2026-08-06": {
+      "status": "complete",
+      "source_records": 2229,
+      "candidate_records": 2,
+      "review_records": 2,
+      "checked_at": "2026-08-06 07:12"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260806,
+      "filename": "TIQ-2-71084728",
+      "brief": {
+        "type": "公開招標更正公告",
+        "title": "沉浸科技導入素養導向教學實施計畫資訊設備採購",
+        "category": "財物類47-收音機、電視,通訊器材及儀器",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115007",
+      "unit_id": "3.97.8.60",
+      "unit_name": "高雄市旗山區旗山國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.8.60",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.8.60&job_number=115007",
+      "unit_url": "/index/unit/3.97.8.60",
+      "url": "/index/case/3.97.8.60/115007/20260806/TIQ-2-71084728",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260806,
+      "filename": "NAI-1-71251934",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "桃源國中--115年教學資訊設備採購",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115201020221",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115201020221",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115201020221/20260806/NAI-1-71251934",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260805,
       "filename": "TIQ-3-71086502",
@@ -1582,42 +1660,6 @@
         "category": "needs_review",
         "matched_terms": [
           "辦公設備"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260804,
-      "filename": "TIQ-1-71084728",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "沉浸科技導入素養導向教學實施計畫資訊設備採購",
-        "category": "財物類47-收音機、電視,通訊器材及儀器",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115007",
-      "unit_id": "3.97.8.60",
-      "unit_name": "高雄市旗山區旗山國民小學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.8.60",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.8.60&job_number=115007",
-      "unit_url": "/index/unit/3.97.8.60",
-      "url": "/index/case/3.97.8.60/115007/20260804/TIQ-1-71084728",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備",
-          "採購"
         ],
         "matched_fields": [
           "title"
