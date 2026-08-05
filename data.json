@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-05 19:51",
+  "last_updated": "2026-08-05 22:47",
   "tenders": [
     {
       "city": "台北市",
@@ -957,13 +957,13 @@
       "2026-08-04"
     ],
     "failed_dates": [],
-    "backfill_remaining_days": 11,
+    "backfill_remaining_days": 10,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-05 05:49",
+      "last_run_at": "2026-08-05 22:47",
       "backfill_dates": [
-        "2026-06-17"
+        "2026-06-16"
       ],
       "failed_dates": []
     }
@@ -1318,6 +1318,13 @@
       "candidate_records": 4,
       "review_records": 4,
       "checked_at": "2026-08-05 19:47"
+    },
+    "2026-06-16": {
+      "status": "complete",
+      "source_records": 2242,
+      "candidate_records": 4,
+      "review_records": 4,
+      "checked_at": "2026-08-05 22:43"
     }
   },
   "candidate_cache": [
@@ -6686,6 +6693,125 @@
         "matched_terms": [
           "辦公室設備",
           "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260616,
+      "filename": "aaa-71207951",
+      "brief": {
+        "type": "決標公告",
+        "title": "辦公室設備及地板施作",
+        "companies": {
+          "ids": [
+            "54130992"
+          ],
+          "names": [
+            "瑞傑室內裝修工程有限公司"
+          ],
+          "id_key": {
+            "54130992": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "瑞傑室內裝修工程有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115-0604-001A",
+      "unit_id": "3.76.48.97.74",
+      "unit_name": "南投縣中寮鄉中寮國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.48.97.74",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.48.97.74&job_number=115-0604-001A",
+      "unit_url": "/index/unit/3.76.48.97.74",
+      "url": "/index/case/3.76.48.97.74/115-0604-001A/20260616/aaa-71207951",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公室設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260616,
+      "filename": "TIQ-1-71048560",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "第二教學區教室教學資訊設備購置案",
+        "category": "財物類47-收音機、電視,通訊器材及儀器",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11518",
+      "unit_id": "3.9.83",
+      "unit_name": "國立臺南護理專科學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.83",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.83&job_number=11518",
+      "unit_url": "/index/unit/3.9.83",
+      "url": "/index/case/3.9.83/11518/20260616/TIQ-1-71048560",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "購置"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260616,
+      "filename": "TIQ-1-71048403",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "校本部教室教學資訊設備購置案",
+        "category": "財物類47-收音機、電視,通訊器材及儀器",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11519",
+      "unit_id": "3.9.83",
+      "unit_name": "國立臺南護理專科學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.83",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.83&job_number=11519",
+      "unit_url": "/index/unit/3.9.83",
+      "url": "/index/case/3.9.83/11519/20260616/TIQ-1-71048403",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "購置"
         ],
         "matched_fields": [
           "title"
