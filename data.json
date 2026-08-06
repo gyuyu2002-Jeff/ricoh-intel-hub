@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-06 07:17",
+  "last_updated": "2026-08-06 11:33",
   "tenders": [
     {
       "city": "台北市",
@@ -948,9 +948,9 @@
     "today": "2026-08-06",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-06 07:17",
-    "source_records": 2229,
-    "candidate_records": 2,
+    "latest_attempt_at": "2026-08-06 11:33",
+    "source_records": 2283,
+    "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
       "2026-08-06",
@@ -1317,7 +1317,7 @@
       "source_records": 2680,
       "candidate_records": 4,
       "review_records": 4,
-      "checked_at": "2026-08-06 07:12"
+      "checked_at": "2026-08-06 11:29"
     },
     "2026-06-16": {
       "status": "complete",
@@ -1349,13 +1349,60 @@
     },
     "2026-08-06": {
       "status": "complete",
-      "source_records": 2229,
-      "candidate_records": 2,
-      "review_records": 2,
-      "checked_at": "2026-08-06 07:12"
+      "source_records": 2283,
+      "candidate_records": 3,
+      "review_records": 3,
+      "checked_at": "2026-08-06 11:29"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260806,
+      "filename": "aaa-71252151",
+      "brief": {
+        "type": "決標公告",
+        "title": "校園網路及資訊設備一批",
+        "companies": {
+          "ids": [
+            "54795738"
+          ],
+          "names": [
+            "宸名資訊有限公司"
+          ],
+          "id_key": {
+            "54795738": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "宸名資訊有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115A17",
+      "unit_id": "3.79.5.34",
+      "unit_name": "臺北市立南港高級工業職業學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.5.34",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.5.34&job_number=115A17",
+      "unit_url": "/index/unit/3.79.5.34",
+      "url": "/index/case/3.79.5.34/115A17/20260806/aaa-71252151",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260806,
       "filename": "TIQ-2-71084728",
