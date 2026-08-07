@@ -1,17 +1,204 @@
 {
-  "last_updated": "2026-08-07 08:27",
+  "last_updated": "2026-08-07 08:40",
   "tenders": [
     {
       "city": "台北市",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "tag": "重點攻堅",
+      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
+      "title": "影印機租賃案",
+      "unit": "財政部臺北國稅局",
+      "unit_id": "A.7.3",
+      "job_number": "115-033",
+      "publish_date": "2026-08-07",
+      "deadline": "2026-09-07",
+      "budget": "NT$ 12,582,464",
+      "award_price": "",
+      "avg_discount": "83.8%",
+      "discount_source": "近 5 年 4 筆同設備、同契約型態決標折扣中位數",
+      "main_competitor": "宏羚股份有限公司",
+      "suggested_price": "NT$ 10,544,000",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 4,
+        "discount_rate": 83.8
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyOTY1ODE",
+      "history_stats": [
+        {
+          "year": 2021,
+          "val": 100,
+          "type": "real",
+          "winner": "新印科技股份有限公司"
+        },
+        {
+          "year": 2021,
+          "val": 100,
+          "type": "real",
+          "winner": "新印科技股份有限公司"
+        },
+        {
+          "year": 2023,
+          "val": 53,
+          "type": "real",
+          "winner": "金儀 Konica Minolta"
+        },
+        {
+          "year": 2024,
+          "val": 67,
+          "type": "real",
+          "winner": "宏羚股份有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2024-08-05",
+          "year": 2024,
+          "title": "28台影印機租賃案",
+          "job_number": "113-026",
+          "budget": 3875135,
+          "award_price": 2621415,
+          "discount_rate": 67.6,
+          "winner": "宏羚股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240805&fn=BDM-1-70641601.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2023-10-18",
+          "year": 2023,
+          "title": "113-115年影印機租賃案",
+          "job_number": "112-040",
+          "budget": 7283100,
+          "award_price": 3928460,
+          "discount_rate": 53.9,
+          "winner": "金儀 Konica Minolta",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20231018&fn=BDM-1-70402923.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2021-10-13",
+          "year": 2021,
+          "title": "23台數位式影印機租賃案",
+          "job_number": "107-027-2",
+          "budget": 5985,
+          "award_price": 5985,
+          "discount_rate": 100.0,
+          "winner": "新印科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20211013&fn=BDM-1-53524778.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2021-08-31",
+          "year": 2021,
+          "title": "23數位式影印機租賃案",
+          "job_number": "107-027-1",
+          "budget": 20000,
+          "award_price": 20000,
+          "discount_rate": 100.0,
+          "winner": "新印科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20210831&fn=BDM-1-53493033.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2021-07-23",
+          "year": 2021,
+          "title": "26台數位式影印機租賃案",
+          "job_number": "110-031",
+          "budget": 3600000,
+          "award_price": 2244000,
+          "discount_rate": 62.3,
+          "winner": "震旦 SHARP",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20210723&fn=BDM-1-53460970.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2020-11-04",
+          "year": 2020,
+          "title": "45台數位式影印機租賃案",
+          "job_number": "109-052",
+          "budget": 4147200,
+          "award_price": 2430000,
+          "discount_rate": 58.6,
+          "winner": "東磊資訊有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20201104&fn=BDM-1-53231063.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2020-07-20",
+          "year": 2020,
+          "title": "41台數位式影印機租賃案",
+          "job_number": "106-037-1",
+          "budget": 1080432,
+          "award_price": 1080432,
+          "discount_rate": 100.0,
+          "winner": "震旦 SHARP",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200720&fn=BDM-1-53144945.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 3,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "city": "台北市",
+      "tag": "重點攻堅",
+      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
       "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
       "unit": "國立臺灣大學醫學院附設醫院",
       "unit_id": "3.9.20.1",
       "job_number": "UH150060",
       "publish_date": "2026-07-27",
       "deadline": "2026-08-10",
-      "budget": "無公開數據",
+      "budget": "NT$ 40,482,150",
       "award_price": "",
       "avg_discount": "資料不足",
       "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
@@ -22,7 +209,7 @@
         "record_count": 0,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260727&fn=TIQ-1-71078731.xml",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyODQ2MzA",
       "history_stats": [],
       "history_records": [],
       "stage": "正式開標",
@@ -64,7 +251,7 @@
         "record_count": 2,
         "discount_rate": 95.2
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260727&fn=PPW-2-70110282.xml",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=PPW-1-70110178.xml",
       "history_stats": [
         {
           "year": 2022,
@@ -161,18 +348,18 @@
       "job_number": "11502A05",
       "publish_date": "2026-07-23",
       "deadline": "2026-07-29",
-      "budget": "無公開數據",
-      "award_price": "",
+      "budget": "NT$ 968,000",
+      "award_price": "NT$ 948,000",
       "avg_discount": "資料不足",
       "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
+      "main_competitor": "富士軟片 (FUJIFILM)",
       "suggested_price": "資料不足",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=ttd-71282729.xml",
+      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEyNTAzNjc=",
       "history_stats": [],
       "history_records": [
         {
@@ -210,8 +397,8 @@
           "is_stale": true
         }
       ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 1,
       "relevance": {
         "status": "included",
@@ -238,22 +425,22 @@
       "job_number": "MND115072904",
       "publish_date": "2026-07-22",
       "deadline": "2026-07-28",
-      "budget": "無公開數據",
-      "award_price": "",
+      "budget": "NT$ 310,000",
+      "award_price": "NT$ 310,000",
       "avg_discount": "資料不足",
       "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
+      "main_competitor": "大甲事務資訊有限公司",
       "suggested_price": "資料不足",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260722&fn=TIQ-11-71075737.xml",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260804&fn=BDM-1-71248859.xml",
       "history_stats": [],
       "history_records": [],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 1,
       "relevance": {
         "status": "included",
@@ -507,7 +694,7 @@
       "job_number": "11508",
       "publish_date": "2026-06-22",
       "deadline": "2026-07-06",
-      "budget": "無公開數據",
+      "budget": "NT$ 1,000,000",
       "award_price": "",
       "avg_discount": "資料不足",
       "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
@@ -518,7 +705,7 @@
         "record_count": 0,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260715&fn=BDM-3-71231827.xml",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyNTM3MDk",
       "history_stats": [],
       "history_records": [],
       "stage": "正式開標",
@@ -550,18 +737,18 @@
       "job_number": "BDES1150615",
       "publish_date": "2026-06-18",
       "deadline": "2026-06-24",
-      "budget": "無公開數據",
-      "award_price": "",
+      "budget": "NT$ 552,000",
+      "award_price": "NT$ 480,060",
       "avg_discount": "88.6%",
       "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
       "main_competitor": "四海事務機器有限公司",
-      "suggested_price": "資料不足",
+      "suggested_price": "NT$ 488,000",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 2,
         "discount_rate": 88.6
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260618&fn=ttd-71251889.xml",
+      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEyMTUyNDk=",
       "history_stats": [
         {
           "year": 2022,
@@ -646,8 +833,8 @@
           "is_stale": true
         }
       ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 3,
       "relevance": {
         "status": "included",
@@ -666,26 +853,26 @@
     },
     {
       "city": "桃園市",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "tag": "重點攻堅",
+      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
       "title": "多功能影印機租賃採購(開口契約)",
       "unit": "桃園大眾捷運股份有限公司",
       "unit_id": "3.76.73.72",
       "job_number": "2B15A520006",
       "publish_date": "2026-04-23",
       "deadline": "2026-05-07",
-      "budget": "無公開數據",
-      "award_price": "",
+      "budget": "NT$ 3,495,303",
+      "award_price": "NT$ 3,014,382",
       "avg_discount": "97.3%",
       "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
       "main_competitor": "耑維科技股份有限公司",
-      "suggested_price": "資料不足",
+      "suggested_price": "NT$ 3,402,000",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 2,
         "discount_rate": 97.3
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=TIQ-1-71064206.xml",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260720&fn=BDM-1-71235033.xml",
       "history_stats": [
         {
           "year": 2022,
@@ -821,8 +1008,8 @@
           "is_stale": true
         }
       ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 3,
       "relevance": {
         "status": "included",
@@ -852,7 +1039,7 @@
       "job_number": "SRPO-1140189",
       "publish_date": "2025-04-14",
       "deadline": "2025-04-28",
-      "budget": "無公開數據",
+      "budget": "NT$ 591,600",
       "award_price": "",
       "avg_discount": "資料不足",
       "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
@@ -863,7 +1050,7 @@
         "record_count": 1,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=BDM-4-70851213.xml",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250414&fn=BDM-3-70851213.xml",
       "history_stats": [
         {
           "year": 2024,
@@ -948,13 +1135,13 @@
     "today": "2026-08-07",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-06 19:56",
-    "source_records": 2409,
-    "candidate_records": 3,
+    "latest_attempt_at": "2026-08-07 08:40",
+    "source_records": 2469,
+    "candidate_records": 5,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-06",
-      "2026-08-05"
+      "2026-08-07",
+      "2026-08-06"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 3,
@@ -1349,10 +1536,10 @@
     },
     "2026-08-06": {
       "status": "complete",
-      "source_records": 2409,
+      "source_records": 2410,
       "candidate_records": 3,
       "review_records": 3,
-      "checked_at": "2026-08-06 19:52"
+      "checked_at": "2026-08-07 08:36"
     },
     "2026-06-12": {
       "status": "complete",
@@ -1367,9 +1554,195 @@
       "candidate_records": 3,
       "review_records": 3,
       "checked_at": "2026-08-07 08:21"
+    },
+    "2026-08-07": {
+      "status": "complete",
+      "source_records": 2469,
+      "candidate_records": 5,
+      "review_records": 4,
+      "checked_at": "2026-08-07 08:36"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260807,
+      "filename": "ttd-71296544",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "⺠族國⼩115年資訊設備財物採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11513",
+      "unit_id": "3.79.8.8",
+      "unit_name": "臺北市松山區民族國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.8.8",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.8.8&job_number=11513",
+      "unit_url": "/index/unit/3.79.8.8",
+      "url": "/index/case/3.79.8.8/11513/20260807/ttd-71296544",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260807,
+      "filename": "TIQ-12-71086639",
+      "brief": {
+        "type": "公開取得報價單或企劃書更正公告",
+        "title": "西門國小115年新世代學習空間資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "XM1150703",
+      "unit_id": "3.79.8.66",
+      "unit_name": "臺北市萬華區西門國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.8.66",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.8.66&job_number=XM1150703",
+      "unit_url": "/index/unit/3.79.8.66",
+      "url": "/index/case/3.79.8.66/XM1150703/20260807/TIQ-12-71086639",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260807,
+      "filename": "TIQ-1-71088852",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "影印機租賃案",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-033",
+      "unit_id": "A.7.3",
+      "unit_name": "財政部臺北國稅局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.3",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.3&job_number=115-033",
+      "unit_url": "/index/unit/A.7.3",
+      "url": "/index/case/A.7.3/115-033/20260807/TIQ-1-71088852",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260807,
+      "filename": "TIQ-1-71087799",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "115年度區營運管理處資訊設備",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "GF5-115067",
+      "unit_id": "A.7.31.1",
+      "unit_name": "臺灣銀行股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.31.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.31.1&job_number=GF5-115067",
+      "unit_url": "/index/unit/A.7.31.1",
+      "url": "/index/case/A.7.31.1/GF5-115067/20260807/TIQ-1-71087799",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260807,
+      "filename": "TIQ-1-71087291",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "115年度嘉義縣地政資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11505",
+      "unit_id": "3.76.50.6",
+      "unit_name": "嘉義縣水上地政事務所",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.50.6",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.50.6&job_number=11505",
+      "unit_url": "/index/unit/3.76.50.6",
+      "url": "/index/case/3.76.50.6/11505/20260807/TIQ-1-71087291",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260806,
       "filename": "aaa-71252151",
@@ -1518,42 +1891,6 @@
           "資訊設備",
           "維護",
           "維修"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260805,
-      "filename": "TIQ-11-71086639",
-      "brief": {
-        "type": "公開取得報價單或企劃書公告",
-        "title": "西門國小115年新世代學習空間資訊設備採購案",
-        "category": "財物類452-計算機及其零件與配件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "XM1150703",
-      "unit_id": "3.79.8.66",
-      "unit_name": "臺北市萬華區西門國民小學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.8.66",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.8.66&job_number=XM1150703",
-      "unit_url": "/index/unit/3.79.8.66",
-      "url": "/index/case/3.79.8.66/XM1150703/20260805/TIQ-11-71086639",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備",
-          "採購"
         ],
         "matched_fields": [
           "title"
@@ -9788,7 +10125,7 @@
     "3.82.9.5": "2026-08-07",
     "3.32.82": "2026-07-28",
     "3.19": "2026-07-28",
-    "A.7.3": "2026-07-28",
+    "A.7.3": "2026-08-07",
     "3.97.13.3": "2026-07-28",
     "3.76.55.13": "2026-07-28",
     "3.5.10.100": "2026-07-31",
