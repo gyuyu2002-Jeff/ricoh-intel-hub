@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-07 09:37",
+  "last_updated": "2026-08-07 11:32",
   "tenders": [
     {
       "city": "台北市",
@@ -852,184 +852,6 @@
       }
     },
     {
-      "city": "桃園市",
-      "tag": "重點攻堅",
-      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
-      "title": "多功能影印機租賃採購(開口契約)",
-      "unit": "桃園大眾捷運股份有限公司",
-      "unit_id": "3.76.73.72",
-      "job_number": "2B15A520006",
-      "publish_date": "2026-04-23",
-      "deadline": "2026-05-07",
-      "budget": "NT$ 3,495,303",
-      "award_price": "NT$ 3,014,382",
-      "avg_discount": "97.3%",
-      "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
-      "main_competitor": "耑維科技股份有限公司",
-      "suggested_price": "NT$ 3,402,000",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 2,
-        "discount_rate": 97.3
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260720&fn=BDM-1-71235033.xml",
-      "history_stats": [
-        {
-          "year": 2022,
-          "val": 97,
-          "type": "real",
-          "winner": "耑維科技股份有限公司"
-        },
-        {
-          "year": 2024,
-          "val": 97,
-          "type": "real",
-          "winner": "耑維科技股份有限公司"
-        }
-      ],
-      "history_records": [
-        {
-          "award_date": "2024-05-24",
-          "year": 2024,
-          "title": "多功能影印機租賃採購(開口契約)",
-          "job_number": "2B13A520004",
-          "budget": 2564032,
-          "award_price": 2493435,
-          "discount_rate": 97.2,
-          "winner": "耑維科技股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240524&fn=BDM-1-70586204.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.76.73.72",
-          "source_unit": "桃園大眾捷運股份有限公司",
-          "relation_scope": "same_unit",
-          "is_stale": false
-        },
-        {
-          "award_date": "2022-04-14",
-          "year": 2022,
-          "title": "多功能影印機租賃採購(開口契約)",
-          "job_number": "2B11A520002",
-          "budget": 2718030,
-          "award_price": 2651187,
-          "discount_rate": 97.5,
-          "winner": "耑維科技股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220414&fn=BDM-1-53698100.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.76.73.72",
-          "source_unit": "桃園大眾捷運股份有限公司",
-          "relation_scope": "same_unit",
-          "is_stale": false
-        },
-        {
-          "award_date": "2020-03-11",
-          "year": 2020,
-          "title": "多功能影印機租賃採購(開口契約)",
-          "job_number": "2B09A500015",
-          "budget": 3232385,
-          "award_price": 2661047,
-          "discount_rate": 82.3,
-          "winner": "耑維科技股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200311&fn=BDM-1-53035498.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.76.73.72",
-          "source_unit": "桃園大眾捷運股份有限公司",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        },
-        {
-          "award_date": "2019-03-21",
-          "year": 2019,
-          "title": "多功能影印機租賃採購(開口契約)",
-          "job_number": "2B08A500026",
-          "budget": 1742576,
-          "award_price": 1120121,
-          "discount_rate": 64.3,
-          "winner": "耑維科技股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20190321&fn=BDM-1-52727783.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.76.73.72",
-          "source_unit": "桃園大眾捷運股份有限公司",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        },
-        {
-          "award_date": "2018-03-26",
-          "year": 2018,
-          "title": "車站暨機廠多功能影印機租賃案(開口合約)",
-          "job_number": "2B07A500045",
-          "budget": 1696000,
-          "award_price": 1225874,
-          "discount_rate": 72.3,
-          "winner": "高群企業股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20180326&fn=BDM-1-52404864.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.76.73.72",
-          "source_unit": "桃園大眾捷運股份有限公司",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        },
-        {
-          "award_date": "2017-03-08",
-          "year": 2017,
-          "title": "車站暨機廠多功能影印機租賃採購(開口合約)",
-          "job_number": "2B06A500023",
-          "budget": 2040000,
-          "award_price": 1097250,
-          "discount_rate": 53.8,
-          "winner": "高群企業股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170308&fn=BDM-1-52085526.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.76.73.72",
-          "source_unit": "桃園大眾捷運股份有限公司",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        },
-        {
-          "award_date": "2015-11-20",
-          "year": 2015,
-          "title": "車站暨機廠多功能影印機租賃採購(開口合約)",
-          "job_number": "2B04A500072",
-          "budget": 1901900,
-          "award_price": 1548435,
-          "discount_rate": 81.4,
-          "winner": "高群企業股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20151120&fn=BDM-1-51694778.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.76.73.72",
-          "source_unit": "桃園大眾捷運股份有限公司",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        }
-      ],
-      "stage": "已決標",
-      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
-      "duration_years": 3,
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "影印機",
-          "多功能影印",
-          "採購",
-          "租賃",
-          "開口契約"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
-      }
-    },
-    {
       "city": "台北市",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
@@ -1135,8 +957,8 @@
     "today": "2026-08-07",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-07 09:37",
-    "source_records": 2479,
+    "latest_attempt_at": "2026-08-07 11:32",
+    "source_records": 2507,
     "candidate_records": 5,
     "review_records": 0,
     "successful_dates": [
@@ -1539,7 +1361,7 @@
       "source_records": 2410,
       "candidate_records": 3,
       "review_records": 3,
-      "checked_at": "2026-08-07 09:32"
+      "checked_at": "2026-08-07 11:27"
     },
     "2026-06-12": {
       "status": "complete",
@@ -1557,10 +1379,10 @@
     },
     "2026-08-07": {
       "status": "complete",
-      "source_records": 2479,
+      "source_records": 2507,
       "candidate_records": 5,
       "review_records": 4,
-      "checked_at": "2026-08-07 09:32"
+      "checked_at": "2026-08-07 11:27"
     }
   },
   "candidate_cache": [
