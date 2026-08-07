@@ -1174,15 +1174,7 @@ def main(mode="live"):
                     relevance = detailed_relevance
                 else:
                     continue
-        elif relevance.get("status") == "review":
-            review_candidates.append({
-                "date": date_to_iso(date_raw), "title": title, "unit": unit_name,
-                "unit_id": unit_id, "job_number": job_number,
-                "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
-                "relevance": relevance
-            })
-            continue
-            
+
             # Check if this tender has already been resolved/awarded or failed
             # Scan entire list to ensure successful awards take absolute precedence over historical failures
             award_record = None
@@ -1251,6 +1243,14 @@ def main(mode="live"):
                 tender_url = detail_obj.get("url", "")
                 if real_budget == 0:
                     real_budget, _ = extract_budget_and_award(detail_obj)
+        elif relevance.get("status") == "review":
+            review_candidates.append({
+                "date": date_to_iso(date_raw), "title": title, "unit": unit_name,
+                "unit_id": unit_id, "job_number": job_number,
+                "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
+                "relevance": relevance
+            })
+            continue
                 
         if tender_url:
             if tender_url.startswith("http:"):
