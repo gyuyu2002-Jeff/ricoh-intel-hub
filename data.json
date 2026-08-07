@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-07 12:36",
+  "last_updated": "2026-08-07 15:41",
   "tenders": [
     {
       "city": "台北市",
@@ -957,9 +957,9 @@
     "today": "2026-08-07",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-07 12:36",
-    "source_records": 2529,
-    "candidate_records": 5,
+    "latest_attempt_at": "2026-08-07 15:41",
+    "source_records": 2557,
+    "candidate_records": 6,
     "review_records": 0,
     "successful_dates": [
       "2026-08-07",
@@ -1361,7 +1361,7 @@
       "source_records": 2410,
       "candidate_records": 3,
       "review_records": 3,
-      "checked_at": "2026-08-07 12:31"
+      "checked_at": "2026-08-07 15:37"
     },
     "2026-06-12": {
       "status": "complete",
@@ -1379,10 +1379,10 @@
     },
     "2026-08-07": {
       "status": "complete",
-      "source_records": 2529,
-      "candidate_records": 5,
-      "review_records": 4,
-      "checked_at": "2026-08-07 12:31"
+      "source_records": 2557,
+      "candidate_records": 6,
+      "review_records": 5,
+      "checked_at": "2026-08-07 15:37"
     }
   },
   "candidate_cache": [
@@ -1415,6 +1415,55 @@
         "matched_terms": [
           "資訊設備",
           "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260807,
+      "filename": "aaa-71253747",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年度資訊設備及教室設備更新採購案",
+        "companies": {
+          "ids": [
+            "13120176"
+          ],
+          "names": [
+            "仕揚科技股份有限公司"
+          ],
+          "id_key": {
+            "13120176": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "仕揚科技股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115031",
+      "unit_id": "3.79.6.60",
+      "unit_name": "臺北市立三民國民中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.6.60",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.6.60&job_number=115031",
+      "unit_url": "/index/unit/3.79.6.60",
+      "url": "/index/case/3.79.6.60/115031/20260807/aaa-71253747",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
         ],
         "matched_fields": [
           "title"
