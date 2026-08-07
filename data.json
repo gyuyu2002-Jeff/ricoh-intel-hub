@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-07 18:42",
+  "last_updated": "2026-08-07 21:50",
   "tenders": [
     {
       "city": "台北市",
@@ -966,13 +966,13 @@
       "2026-08-06"
     ],
     "failed_dates": [],
-    "backfill_remaining_days": 3,
+    "backfill_remaining_days": 2,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-07 08:27",
+      "last_run_at": "2026-08-07 21:50",
       "backfill_dates": [
-        "2026-06-11"
+        "2026-06-10"
       ],
       "failed_dates": []
     }
@@ -1383,6 +1383,13 @@
       "candidate_records": 6,
       "review_records": 5,
       "checked_at": "2026-08-07 18:37"
+    },
+    "2026-06-10": {
+      "status": "complete",
+      "source_records": 3015,
+      "candidate_records": 10,
+      "review_records": 8,
+      "checked_at": "2026-08-07 21:46"
     }
   },
   "candidate_cache": [
@@ -7465,6 +7472,223 @@
       "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.92.1.24&job_number=115-T15-G05",
       "unit_url": "/index/unit/3.92.1.24",
       "url": "/index/case/3.92.1.24/115-T15-G05/20260611/TIQ-11-71045343",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260610,
+      "filename": "ttd-71244922",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "辦公室設備及地板施作",
+        "category": "財物類412-滾壓,拉拔,摺疊製鋼鐵製品",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-0604-001A",
+      "unit_id": "3.76.48.97.74",
+      "unit_name": "南投縣中寮鄉中寮國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.48.97.74",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.48.97.74&job_number=115-0604-001A",
+      "unit_url": "/index/unit/3.76.48.97.74",
+      "url": "/index/case/3.76.48.97.74/115-0604-001A/20260610/ttd-71244922",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公室設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260610,
+      "filename": "PPW-1-70105574",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "二手影印機租賃",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "LP5-115032",
+      "unit_id": "A.7.31.1",
+      "unit_name": "臺灣銀行股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.31.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.31.1&job_number=LP5-115032",
+      "unit_url": "/index/unit/A.7.31.1",
+      "url": "/index/case/A.7.31.1/LP5-115032/20260610/PPW-1-70105574",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260610,
+      "filename": "PPW-1-70105498",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "檢驗科資訊設備一批",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "KMSH15121",
+      "unit_id": "3.97.14.1",
+      "unit_name": "高雄市立民生醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.14.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.14.1&job_number=KMSH15121",
+      "unit_url": "/index/unit/3.97.14.1",
+      "url": "/index/case/3.97.14.1/KMSH15121/20260610/PPW-1-70105498",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260610,
+      "filename": "BDM-2-71199379",
+      "brief": {
+        "type": "更正決標公告",
+        "title": "115-117年度RICOH多功能事務機維修服務採購案（開口契約）",
+        "companies": {
+          "ids": [
+            "12516241",
+            "24542146"
+          ],
+          "names": [
+            "互盛股份有限公司",
+            "寶宏資訊有限公司",
+            "PHIC Inc."
+          ],
+          "id_key": {
+            "12516241": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ],
+            "24542146": [
+              "投標廠商:投標廠商2:廠商代碼",
+              "英文公告:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "PHIC Inc.": [
+              "英文公告:廠商名稱"
+            ],
+            "互盛股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ],
+            "寶宏資訊有限公司": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115-2-00022",
+      "unit_id": "3.15.85",
+      "unit_name": "桃園國際機場股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.85",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.85&job_number=115-2-00022",
+      "unit_url": "/index/unit/3.15.85",
+      "url": "/index/case/3.15.85/115-2-00022/20260610/BDM-2-71199379",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "多功能事務機",
+          "事務機",
+          "採購",
+          "維修",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260610,
+      "filename": "BDM-1-71201064",
+      "brief": {
+        "type": "決標公告",
+        "title": "臺東縣蘭嶼鄉衛生所--115年度原住民族及離島地區資訊設備、巡迴醫療(機)車及醫療儀器補助計畫採購案(行動醫療車)",
+        "companies": {
+          "ids": [
+            "97140132"
+          ],
+          "names": [
+            "楓展貿易有限公司 (FONN CHANG TRADING CO. , LTD.)"
+          ],
+          "id_key": {
+            "97140132": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "楓展貿易有限公司 (FONN CHANG TRADING CO. , LTD.)": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115403920124",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115403920124",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115403920124/20260610/BDM-1-71201064",
       "relevance": {
         "status": "review",
         "confidence": "low",
