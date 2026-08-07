@@ -1199,11 +1199,11 @@ def main(mode="live"):
                 award_date_str = str(failed_record.get("date", ""))
                 if award_date_str:
                     try:
-                        # Check age (skip if older than 60 days)
+                        # Check age (skip if older than 7 days)
                         award_date = datetime.strptime(award_date_str, "%Y%m%d")
                         taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).replace(tzinfo=None)
                         delta = taipei_now - award_date
-                        if delta.days > 60:
+                        if delta.days > 7:
                             print(f"Skipping older failed tender: {title} (failed {delta.days} days ago)")
                             continue
                     except:
@@ -1215,7 +1215,7 @@ def main(mode="live"):
                 historical_winner = extract_winning_competitor(detail_obj)
                 real_budget, real_award = extract_budget_and_award(detail_obj)
                 
-                # Check age of award notice (skip if older than 60 days to keep DB fresh)
+                # Check age of award notice (skip if older than 7 days to keep DB fresh)
                 award_date_str = str(award_record.get("date", ""))
                 if award_date_str:
                     try:
@@ -1223,7 +1223,7 @@ def main(mode="live"):
                         award_date = datetime.strptime(award_date_str, "%Y%m%d")
                         taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).replace(tzinfo=None)
                         delta = taipei_now - award_date
-                        if delta.days > 60:
+                        if delta.days > 7:
                             # Skip old resolved tenders to keep DB active
                             print(f"Skipping older resolved tender: {title} (awarded {delta.days} days ago)")
                             continue
