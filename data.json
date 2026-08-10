@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-10 16:04",
+  "last_updated": "2026-08-10 17:48",
   "tenders": [
     {
       "city": "桃園市",
@@ -1024,9 +1024,9 @@
     "today": "2026-08-10",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-10 16:04",
-    "source_records": 1723,
-    "candidate_records": 10,
+    "latest_attempt_at": "2026-08-10 17:48",
+    "source_records": 1755,
+    "candidate_records": 11,
     "review_records": 0,
     "successful_dates": [
       "2026-08-10",
@@ -1458,17 +1458,17 @@
     },
     "2026-08-10": {
       "status": "complete",
-      "source_records": 1723,
-      "candidate_records": 10,
-      "review_records": 9,
-      "checked_at": "2026-08-10 15:59"
+      "source_records": 1755,
+      "candidate_records": 11,
+      "review_records": 10,
+      "checked_at": "2026-08-10 17:43"
     },
     "2026-08-09": {
       "status": "complete",
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-08-10 15:59"
+      "checked_at": "2026-08-10 17:43"
     }
   },
   "candidate_cache": [
@@ -1493,6 +1493,54 @@
       "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.55.97.4&job_number=MCPS1150814",
       "unit_url": "/index/unit/3.76.55.97.4",
       "url": "/index/case/3.76.55.97.4/MCPS1150814/20260810/ttd-71297178",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260810,
+      "filename": "aaa-71254807",
+      "brief": {
+        "type": "決標公告",
+        "title": "楠梓國小附幼115年度資訊設備財務採購",
+        "companies": {
+          "ids": [
+            "80421756"
+          ],
+          "names": [
+            "喬太視聽科技有限公司"
+          ],
+          "id_key": {
+            "80421756": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "喬太視聽科技有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115M05",
+      "unit_id": "3.97.7.51",
+      "unit_name": "高雄市楠梓區楠梓國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.7.51",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.7.51&job_number=115M05",
+      "unit_url": "/index/unit/3.97.7.51",
+      "url": "/index/case/3.97.7.51/115M05/20260810/aaa-71254807",
       "relevance": {
         "status": "review",
         "confidence": "low",
