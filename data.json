@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-11 05:14",
+  "last_updated": "2026-08-11 06:55",
   "tenders": [
     {
       "city": "桃園市",
@@ -1024,13 +1024,13 @@
     "today": "2026-08-11",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-10 18:55",
-    "source_records": 1764,
-    "candidate_records": 11,
+    "latest_attempt_at": "2026-08-11 06:55",
+    "source_records": 1882,
+    "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-10",
-      "2026-08-09"
+      "2026-08-11",
+      "2026-08-10"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -1451,10 +1451,10 @@
     },
     "2026-08-10": {
       "status": "complete",
-      "source_records": 1764,
+      "source_records": 1773,
       "candidate_records": 11,
       "review_records": 10,
-      "checked_at": "2026-08-10 18:50"
+      "checked_at": "2026-08-11 06:51"
     },
     "2026-08-09": {
       "status": "complete",
@@ -1462,9 +1462,147 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-08-10 18:50"
+    },
+    "2026-08-11": {
+      "status": "complete",
+      "source_records": 1882,
+      "candidate_records": 3,
+      "review_records": 3,
+      "checked_at": "2026-08-11 06:51"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260811,
+      "filename": "TIQ-12-71086639",
+      "brief": {
+        "type": "公開取得報價單或企劃書更正公告",
+        "title": "西門國小115年新世代學習空間資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "XM1150703",
+      "unit_id": "3.79.8.66",
+      "unit_name": "臺北市萬華區西門國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.8.66",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.8.66&job_number=XM1150703",
+      "unit_url": "/index/unit/3.79.8.66",
+      "url": "/index/case/3.79.8.66/XM1150703/20260811/TIQ-12-71086639",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260811,
+      "filename": "BDM-3-71254104",
+      "brief": {
+        "type": "定期彙送",
+        "title": "高雄港務警察總隊115年人事室辦公設備附加項採購案",
+        "companies": {
+          "ids": [
+            "16808634"
+          ],
+          "names": [
+            "又加興有限公司"
+          ],
+          "id_key": {
+            "16808634": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "又加興有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115-07-10",
+      "unit_id": "A.1.1.23",
+      "unit_name": "內政部警政署高雄港務警察總隊",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.1.1.23",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.1.1.23&job_number=115-07-10",
+      "unit_url": "/index/unit/A.1.1.23",
+      "url": "/index/case/A.1.1.23/115-07-10/20260811/BDM-3-71254104",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260811,
+      "filename": "BDM-1-71254763",
+      "brief": {
+        "type": "決標公告",
+        "title": "巴楠花改制國高中新校舍設施設備－教學及辦公設備(含系統整合)",
+        "companies": {
+          "ids": [
+            "84733859"
+          ],
+          "names": [
+            "響立科技企業有限公司"
+          ],
+          "id_key": {
+            "84733859": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "響立科技企業有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "padan115005",
+      "unit_id": "3.97.6.34",
+      "unit_name": "高雄市立巴楠花部落國民中小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.6.34",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.6.34&job_number=padan115005",
+      "unit_url": "/index/unit/3.97.6.34",
+      "url": "/index/case/3.97.6.34/padan115005/20260811/BDM-1-71254763",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260810,
       "filename": "ttd-71297178",
@@ -1974,42 +2112,6 @@
           "資訊設備",
           "採購",
           "更新"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260807,
-      "filename": "TIQ-12-71086639",
-      "brief": {
-        "type": "公開取得報價單或企劃書更正公告",
-        "title": "西門國小115年新世代學習空間資訊設備採購案",
-        "category": "財物類452-計算機及其零件與配件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "XM1150703",
-      "unit_id": "3.79.8.66",
-      "unit_name": "臺北市萬華區西門國民小學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.8.66",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.8.66&job_number=XM1150703",
-      "unit_url": "/index/unit/3.79.8.66",
-      "url": "/index/case/3.79.8.66/XM1150703/20260807/TIQ-12-71086639",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備",
-          "採購"
         ],
         "matched_fields": [
           "title"
@@ -3445,40 +3547,6 @@
           "title"
         ],
         "reason": "命中設備名稱或公告規格"
-      }
-    },
-    {
-      "date": 20260727,
-      "filename": "NAI-1-71241240",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "巴楠花改制國高中新校舍設施設備－教學及辦公設備(含系統整合)",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "padan115005",
-      "unit_id": "3.97.6.34",
-      "unit_name": "高雄市立巴楠花部落國民中小學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.6.34",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.6.34&job_number=padan115005",
-      "unit_url": "/index/unit/3.97.6.34",
-      "url": "/index/case/3.97.6.34/padan115005/20260727/NAI-1-71241240",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 1,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公設備"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
     },
     {
