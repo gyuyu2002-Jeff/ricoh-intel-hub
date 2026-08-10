@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-11 03:32",
+  "last_updated": "2026-08-11 05:14",
   "tenders": [
     {
       "city": "桃園市",
@@ -1037,7 +1037,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-11 03:32",
+      "last_run_at": "2026-08-11 05:14",
       "backfill_dates": [],
       "failed_dates": []
     }
