@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-12 01:32",
+  "last_updated": "2026-08-12 03:36",
   "tenders": [
     {
       "city": "桃園市",
@@ -257,15 +257,15 @@
     },
     {
       "city": "台北市",
-      "tag": "重點攻堅",
-      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
       "unit": "國立臺灣大學醫學院附設醫院",
       "unit_id": "3.9.20.1",
       "job_number": "UH150060",
       "publish_date": "2026-07-27",
       "deadline": "2026-08-10",
-      "budget": "NT$ 40,482,150",
+      "budget": "無公開數據",
       "award_price": "",
       "avg_discount": "資料不足",
       "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
@@ -276,11 +276,11 @@
         "record_count": 0,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyODQ2MzA",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260812&fn=NAI-1-71255328.xml",
       "history_stats": [],
       "history_records": [],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
       "duration_years": 3,
       "relevance": {
         "status": "included",
@@ -1027,7 +1027,7 @@
     "latest_attempt_at": "2026-08-11 18:42",
     "source_records": 2080,
     "candidate_records": 3,
-    "review_records": 1,
+    "review_records": 0,
     "successful_dates": [
       "2026-08-11",
       "2026-08-10"
@@ -1037,7 +1037,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-12 01:32",
+      "last_run_at": "2026-08-12 03:36",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -7807,30 +7807,7 @@
       }
     }
   ],
-  "review_candidates": [
-    {
-      "date": "2026-06-18",
-      "title": "辦公室設備採購",
-      "unit": "桃園市龜山區大坑國民小學",
-      "unit_id": "3.80.8.30",
-      "job_number": "DKES114C03",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260618&fn=TIQ-12-71048899.xml",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公室設備",
-          "採購"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "政府公告明細暫時無法取得，等待下次自動查驗"
-      }
-    }
-  ],
+  "review_candidates": [],
   "history_cache": [
     {
       "unit_id": "55709324",
@@ -10405,7 +10382,7 @@
     "3.9.20.20": "2026-08-12",
     "3.9.20.2": "2026-08-12",
     "3.9.20.4": "2026-08-12",
-    "3.9.20.40": "2026-08-11",
+    "3.9.20.40": "2026-08-12",
     "3.9.20.31": "2026-08-12",
     "3.9.20.50": "2026-08-12",
     "3.9.20.33": "2026-08-12",
