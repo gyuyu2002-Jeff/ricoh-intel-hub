@@ -1,6 +1,51 @@
 {
-  "last_updated": "2026-08-12 05:16",
+  "last_updated": "2026-08-12 07:00",
   "tenders": [
+    {
+      "city": "台北市",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "115年SHARP影印機計張維護開口契約",
+      "unit": "國立臺灣大學",
+      "unit_id": "3.9.20",
+      "job_number": "1150706",
+      "publish_date": "2026-08-12",
+      "deadline": "2026-08-18",
+      "budget": "NT$ 1,087,816",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEyOTkwMjU",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "公開徵求價單",
+      "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
+      "duration_years": 1,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "維護",
+          "維修",
+          "計張",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "city": "桃園市",
       "tag": "一般監控",
@@ -1024,13 +1069,13 @@
     "today": "2026-08-12",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-11 18:42",
-    "source_records": 2080,
-    "candidate_records": 3,
+    "latest_attempt_at": "2026-08-12 07:00",
+    "source_records": 2589,
+    "candidate_records": 6,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-11",
-      "2026-08-10"
+      "2026-08-12",
+      "2026-08-11"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -1458,13 +1503,237 @@
     },
     "2026-08-11": {
       "status": "complete",
-      "source_records": 2080,
+      "source_records": 2082,
       "candidate_records": 3,
       "review_records": 3,
-      "checked_at": "2026-08-11 18:37"
+      "checked_at": "2026-08-12 06:56"
+    },
+    "2026-08-12": {
+      "status": "complete",
+      "source_records": 2589,
+      "candidate_records": 6,
+      "review_records": 2,
+      "checked_at": "2026-08-12 06:56"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260812,
+      "filename": "ttd-71299855",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "羅浮里辦公室設備汰換工程",
+        "category": "工程類5139-其他土木工程",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115A133",
+      "unit_id": "3.80.63",
+      "unit_name": "桃園市復興區公所",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.80.63",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.80.63&job_number=115A133",
+      "unit_url": "/index/unit/3.80.63",
+      "url": "/index/case/3.80.63/115A133/20260812/ttd-71299855",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公室設備",
+          "汰換"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260812,
+      "filename": "TIQ-3-71090852",
+      "brief": {
+        "type": "經公開評選或公開徵求之限制性招標公告",
+        "title": "115年SHARP影印機計張維護開口契約",
+        "category": "勞務類886-附帶於金屬產品、機械及設備維修之服務",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150706",
+      "unit_id": "3.9.20",
+      "unit_name": "國立臺灣大學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.20",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.20&job_number=1150706",
+      "unit_url": "/index/unit/3.9.20",
+      "url": "/index/case/3.9.20/1150706/20260812/TIQ-3-71090852",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "維護",
+          "維修",
+          "計張",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260812,
+      "filename": "TIQ-1-71091350",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "UH150060",
+      "unit_id": "3.9.20.1",
+      "unit_name": "國立臺灣大學醫學院附設醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.20.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.20.1&job_number=UH150060",
+      "unit_url": "/index/unit/3.9.20.1",
+      "url": "/index/case/3.9.20.1/UH150060/20260812/TIQ-1-71091350",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260812,
+      "filename": "TIQ-1-71091293",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "傳真機及影印機",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "LP5-115033",
+      "unit_id": "A.7.31.1",
+      "unit_name": "臺灣銀行股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.31.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.31.1&job_number=LP5-115033",
+      "unit_url": "/index/unit/A.7.31.1",
+      "url": "/index/case/A.7.31.1/LP5-115033/20260812/TIQ-1-71091293",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260812,
+      "filename": "TIQ-1-71090388",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "115年海象氣候組資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115157G",
+      "unit_id": "A.15.2",
+      "unit_name": "交通部中央氣象署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.15.2",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.15.2&job_number=115157G",
+      "unit_url": "/index/unit/A.15.2",
+      "url": "/index/case/A.15.2/115157G/20260812/TIQ-1-71090388",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260812,
+      "filename": "NAI-1-71255328",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "UH150060",
+      "unit_id": "3.9.20.1",
+      "unit_name": "國立臺灣大學醫學院附設醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.20.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.20.1&job_number=UH150060",
+      "unit_url": "/index/unit/3.9.20.1",
+      "url": "/index/case/3.9.20.1/UH150060/20260812/NAI-1-71255328",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "date": 20260811,
       "filename": "TIQ-12-71086639",
@@ -3437,42 +3706,6 @@
     },
     {
       "date": 20260727,
-      "filename": "TIQ-1-71078731",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "UH150060",
-      "unit_id": "3.9.20.1",
-      "unit_name": "國立臺灣大學醫學院附設醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.20.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.20.1&job_number=UH150060",
-      "unit_url": "/index/unit/3.9.20.1",
-      "url": "/index/case/3.9.20.1/UH150060/20260727/TIQ-1-71078731",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "影印機",
-          "租賃"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
-      }
-    },
-    {
-      "date": 20260727,
       "filename": "TIQ-1-71078354",
       "brief": {
         "type": "公開招標公告",
@@ -5022,40 +5255,6 @@
           "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260710,
-      "filename": "DTG-1-70014220",
-      "brief": {
-        "type": "招標文件公開閱覽公告資料公告",
-        "title": "傳真機及影印機",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "LP5-115033",
-      "unit_id": "A.7.31.1",
-      "unit_name": "臺灣銀行股份有限公司",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.31.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.31.1&job_number=LP5-115033",
-      "unit_url": "/index/unit/A.7.31.1",
-      "url": "/index/case/A.7.31.1/LP5-115033/20260710/DTG-1-70014220",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "影印機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
       }
     },
     {
@@ -10546,6 +10745,7 @@
     "3.79.14.14||unspecified|桌上型標籤條碼列印機": "2026-07-30",
     "3.5.10.100||unspecified|Canon TX4000系列繪圖機專用噴頭等7項": "2026-07-31",
     "3.79.14.14||unspecified|條碼列印機手圈貼紙及感應標籤": "2026-07-31",
-    "3.13.50.48.1|copier|rental|影印機租賃長約": "2026-08-10"
+    "3.13.50.48.1|copier|rental|影印機租賃長約": "2026-08-10",
+    "3.9.20|copier|maintenance|115年SHARP影印機計張維護開口契約": "2026-08-12"
   }
 }
