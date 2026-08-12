@@ -1015,13 +1015,18 @@
               </span>
             </div>
             
-            <!-- Clickable Link to Tender url -->
-            <a href="${t.tender_url}" target="_blank" class="group/link text-sm sm:text-base font-bold text-slate-800 tracking-wide leading-snug hover:text-red-600 transition-colors duration-200 flex items-start gap-1.5">
-              <span>${t.title}</span>
-              <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover/link:text-red-400 flex-shrink-0 mt-1 transition-colors"></i>
-            </a>
+            <!-- Clickable Link & Official PCC Badge (Option A + Tooltip) -->
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+              <a href="${t.tender_url}" target="_blank" rel="noopener noreferrer" title="點擊前往政府電子採購網 (P.C.C.) 官方公告原始頁面" class="group/link text-sm sm:text-base font-bold text-slate-800 tracking-wide leading-snug hover:text-ricoh-red hover:underline transition-colors flex items-start gap-1.5 flex-1">
+                <span>${t.title}</span>
+              </a>
+              <a href="${t.tender_url}" target="_blank" rel="noopener noreferrer" title="點擊前往政府電子採購網 (P.C.C.) 查看招標／決標官方原始公告與招標文件" class="shrink-0 inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-ricoh-red hover:text-white hover:border-ricoh-red transition-all shadow-xs group/btn">
+                <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-500 group-hover/btn:text-white transition-colors"></i>
+                <span>政府採購網原案</span>
+              </a>
+            </div>
             
-            <div class="flex items-center gap-1.5 text-xs text-slate-500">
+            <div class="flex items-center gap-1.5 text-xs text-slate-500 mt-0.5">
               <i data-lucide="building" class="w-3.5 h-3.5 text-slate-500"></i>
               <span>${t.unit}</span>
             </div>
