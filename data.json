@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-13 05:16",
+  "last_updated": "2026-08-13 06:59",
   "tenders": [
     {
       "city": "台北市",
@@ -968,13 +968,13 @@
     "today": "2026-08-13",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-12 18:50",
-    "source_records": 2773,
-    "candidate_records": 6,
+    "latest_attempt_at": "2026-08-13 06:59",
+    "source_records": 2274,
+    "candidate_records": 2,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-12",
-      "2026-08-11"
+      "2026-08-13",
+      "2026-08-12"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -1402,13 +1402,89 @@
     },
     "2026-08-12": {
       "status": "complete",
-      "source_records": 2773,
+      "source_records": 2775,
       "candidate_records": 6,
       "review_records": 2,
-      "checked_at": "2026-08-12 18:45"
+      "checked_at": "2026-08-13 06:54"
+    },
+    "2026-08-13": {
+      "status": "complete",
+      "source_records": 2274,
+      "candidate_records": 2,
+      "review_records": 2,
+      "checked_at": "2026-08-13 06:54"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260813,
+      "filename": "PPW-1-70112522",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "衛生福利部中央健康保險署南區業務組公園大樓辦公設備及地板汰換",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "S115010-GH",
+      "unit_id": "A.21.3",
+      "unit_name": "衛生福利部中央健康保險署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.3",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.3&job_number=S115010-GH",
+      "unit_url": "/index/unit/A.21.3",
+      "url": "/index/case/A.21.3/S115010-GH/20260813/PPW-1-70112522",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "汰換"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260813,
+      "filename": "PPW-1-70112433",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "115年度資訊設備一批",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-02-022",
+      "unit_id": "94569104",
+      "unit_name": "國家運動科學中心",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=94569104",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=94569104&job_number=115-02-022",
+      "unit_url": "/index/unit/94569104",
+      "url": "/index/case/94569104/115-02-022/20260813/PPW-1-70112433",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260812,
       "filename": "ttd-71299855",
