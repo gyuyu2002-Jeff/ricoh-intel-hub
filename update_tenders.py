@@ -22,22 +22,68 @@ OFFICIAL_SSL_CONTEXT = ssl.create_default_context()
 if hasattr(ssl, "VERIFY_X509_STRICT"):
     OFFICIAL_SSL_CONTEXT.verify_flags &= ~ssl.VERIFY_X509_STRICT
 
-def get_city(unit_name):
+INSTITUTION_CITY_MAP = {
+    # Hsinchu
+    "國家同步輻射": "新竹市", "同步輻射": "新竹市", "工研院": "新竹市", "工業技術研究院": "新竹市",
+    "清華大學": "新竹市", "陽明交通大學": "新竹市", "交通大學": "新竹市", "竹科": "新竹市", "新竹科學園區": "新竹市",
+    # Taoyuan
+    "中央大學": "桃園市", "長庚大學": "桃園市", "元智大學": "桃園市", "中原大學": "桃園市",
+    # Taichung
+    "中興大學": "台中市", "東海大學": "台中市", "逢甲大學": "台中市", "台中教育大學": "台中市", "中科": "台中市",
+    # Tainan
+    "成功大學": "台南市", "台南大學": "台南市", "南科": "台南市",
+    # Kaohsiung
+    "中山大學": "高雄市", "高雄科技大學": "高雄市", "高科大": "高雄市", "高雄大學": "高雄市", "高雄醫學大學": "高雄市",
+    # Taipei / New Taipei
+    "台灣大學": "台北市", "臺灣大學": "台北市", "政治大學": "台北市", "師範大學": "台北市", "台北科技大學": "台北市", "台灣科技大學": "台北市",
+    "台北大學": "新北市", "輔仁大學": "新北市", "淡江大學": "新北市",
+    # Eastern / Counties
+    "東華大學": "花蓮縣", "慈濟": "花蓮縣", "宜蘭大學": "宜蘭縣", "台東大學": "台東縣", "臺灣東大學": "台東縣",
+    "金門大學": "金門縣", "澎湖科技大學": "澎湖縣", "屏東科技大學": "屏東縣", "屏科大": "屏東縣", "屏東大學": "屏東縣",
+    "彰化師範大學": "彰化縣", "大葉大學": "彰化縣", "雲林科技大學": "雲林縣", "虎尾科技大學": "雲林縣",
+    "中正大學": "嘉義縣", "嘉義大學": "嘉義市", "聯合大學": "苗栗縣", "暨南國際大學": "南投縣"
+}
+
+def get_city(unit_name, detail_data=None):
     cities = ["台北市", "新北市", "桃園市", "台中市", "台南市", "高雄市", 
               "基隆市", "新竹市", "嘉義市", "新竹縣", "苗栗縣", "彰化縣", 
               "南投縣", "雲林縣", "嘉義縣", "屏東縣", "宜蘭縣", "花蓮縣", 
               "台東縣", "澎湖縣", "金門縣", "連江縣"]
-    normalized = unit_name.replace("臺", "台")
+
+    # 1. Prioritize execution location and agency address from detail_data
+    if detail_data and isinstance(detail_data, dict):
+        records = detail_data.get("records", [])
+        for rec in records:
+            det = rec.get("detail", {})
+            for k, v in det.items():
+                if "履約地點" in k and v:
+                    val_str = str(v).replace("臺", "台")
+                    for c in cities:
+                        norm_c = c.replace("臺", "台")
+                        if norm_c[:2] in val_str or norm_c in val_str:
+                            return c
+        for rec in records:
+            det = rec.get("detail", {})
+            for k, v in det.items():
+                if any(kw in k for kw in ["機關:地址", "機關地址", "地址", "開標地點", "收受投標文件地點"]) and v:
+                    val_str = str(v).replace("臺", "台")
+                    for c in cities:
+                        norm_c = c.replace("臺", "台")
+                        if norm_c[:2] in val_str or norm_c in val_str:
+                            return c
+
+    # 2. Check unit name directly
+    normalized = (unit_name or "").replace("臺", "台")
     for city in cities:
         norm_city = city.replace("臺", "台")
         if norm_city[:2] in normalized:
             return city
-    # Special fallbacks
-    if "中央大學" in unit_name: return "桃園市"
-    if "中興大學" in unit_name: return "台中市"
-    if "台灣大學" in unit_name or "臺灣大學" in unit_name: return "台北市"
-    if "成功大學" in unit_name: return "台南市"
-    if "中山大學" in unit_name: return "高雄市"
+
+    # 3. Check known institutions / universities
+    for inst, city in INSTITUTION_CITY_MAP.items():
+        if inst in normalized:
+            return city
+
     return "台北市"
 
 def extract_budget_and_award(detail):
@@ -1367,7 +1413,7 @@ def main(mode="live"):
         if not deadline_str:
             deadline_str = "未公開"
             
-        city = get_city(unit_name)
+        city = get_city(unit_name, detail_data)
         tag = "重點攻堅" if final_budget_val >= 2500000 else "一般監控"
         tag_color = "bg-red-950/45 border-red-500/40 text-red-400" if tag == "重點攻堅" else "bg-slate-900 border-slate-700 text-slate-400"
         
