@@ -932,7 +932,7 @@ def main(mode="live"):
                     continue
                 brief = record.get("brief", {})
                 notice_type = brief.get("type", "")
-                if "決標" not in notice_type or "無法決標" in notice_type:
+                if ("決標" not in notice_type and "彙送" not in notice_type) or "無法決標" in notice_type:
                     continue
                 history_title = brief.get("title", "")
                 if not is_relevant_equipment_title(history_title):
@@ -980,7 +980,7 @@ def main(mode="live"):
                 notice_type = brief.get("type", "")
                 history_title = brief.get("title", "")
                 if (
-                    "決標" not in notice_type
+                    ("決標" not in notice_type and "彙送" not in notice_type)
                     or "無法決標" in notice_type
                     or not is_comparable_history(title, history_title)
                 ):
@@ -1227,10 +1227,13 @@ def main(mode="live"):
             failed_record = None
             for r in records:
                 r_type = r.get("brief", {}).get("type", "")
-                if "無法決標" in r_type:
+                r_detail = r.get("detail", {})
+                is_failed = "無法決標" in r_type or any("無法決標" in k for k in r_detail)
+                is_award = "決標" in r_type or "彙送" in r_type or any("總決標金額" in k or "得標廠商" in k for k in r_detail)
+                if is_failed:
                     if not failed_record:
                         failed_record = r
-                elif "決標" in r_type:
+                elif is_award:
                     if not award_record:
                         award_record = r
             
