@@ -317,6 +317,12 @@
             <div id="city-filter-list" class="grid grid-cols-2 gap-2 sm:grid-cols-1" role="list" aria-label="依縣市篩選標案">
               <span class="col-span-full py-3 text-center text-xs text-slate-400">縣市統計載入中...</span>
             </div>
+            <div id="zero-city-filter" class="mt-2">
+              <label for="zero-city-select" class="sr-only">選擇目前 0 件的縣市</label>
+              <select id="zero-city-select" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-semibold text-slate-600 focus:border-ricoh-red focus:outline-none focus:ring-2 focus:ring-ricoh-red/30">
+                <option value="">其他縣市（目前 0 件）</option>
+              </select>
+            </div>
             <div id="city-data-quality" class="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-[11px] leading-relaxed text-slate-500">縣市資料品質載入中...</div>
           </div>
 
@@ -845,8 +851,13 @@
       }, {});
       const filters = [
         { city: "all", label: "全台灣", count: tendersData.length },
-        ...ALL_CITIES.map(city => ({ city, label: city, count: counts[city] || 0 }))
+        ...ALL_CITIES
+          .map(city => ({ city, label: city, count: counts[city] || 0 }))
+          .filter(filter => filter.count > 0)
       ];
+      const zeroCityFilters = ALL_CITIES
+        .map(city => ({ city, label: city, count: counts[city] || 0 }))
+        .filter(filter => filter.count === 0);
 
       const classified = tendersData.filter(tender => tender.city && tender.city !== "未分類").length;
       const unclassified = tendersData.filter(tender => !tender.city || tender.city === "未分類").length;
@@ -874,8 +885,23 @@
         button.append(label, count);
         list.appendChild(button);
       });
+      const zeroCitySelect = document.getElementById("zero-city-select");
+      if (zeroCitySelect) {
+        zeroCitySelect.replaceChildren();
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = `其他縣市（目前 ${zeroCityFilters.length} 個縣市為 0 件）`;
+        zeroCitySelect.appendChild(placeholder);
+        zeroCityFilters.forEach(filter => {
+          const option = document.createElement("option");
+          option.value = filter.city;
+          option.textContent = `${filter.label}（0 件）`;
+          option.selected = filter.city === activeCityFilter;
+          zeroCitySelect.appendChild(option);
+        });
+        zeroCitySelect.value = zeroCityFilters.some(filter => filter.city === activeCityFilter) ? activeCityFilter : "";
+      }
     }
-
     function selectCityFilter(city) {
       activeCityFilter = city;
       renderCityFilters();
@@ -1312,6 +1338,9 @@
       document.getElementById("city-filter-list").addEventListener("click", (event) => {
         const button = event.target.closest("button[data-city]");
         if (button) selectCityFilter(button.dataset.city);
+      });
+      document.getElementById("zero-city-select").addEventListener("change", (event) => {
+        if (event.target.value) selectCityFilter(event.target.value);
       });
 
       // 3. Escape Key Modal Closer
