@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-14 05:16",
+  "last_updated": "2026-08-14 07:01",
   "tenders": [
     {
       "city": "台北市",
@@ -989,13 +989,13 @@
     "today": "2026-08-14",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-13 18:51",
-    "source_records": 2445,
-    "candidate_records": 2,
+    "latest_attempt_at": "2026-08-14 07:01",
+    "source_records": 2444,
+    "candidate_records": 6,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-13",
-      "2026-08-12"
+      "2026-08-14",
+      "2026-08-13"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -1423,13 +1423,283 @@
     },
     "2026-08-13": {
       "status": "complete",
-      "source_records": 2445,
+      "source_records": 2451,
       "candidate_records": 2,
       "review_records": 2,
-      "checked_at": "2026-08-13 18:46"
+      "checked_at": "2026-08-14 06:55"
+    },
+    "2026-08-14": {
+      "status": "complete",
+      "source_records": 2444,
+      "candidate_records": 6,
+      "review_records": 5,
+      "checked_at": "2026-08-14 06:55"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260814,
+      "filename": "ttd-71301870",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年度偏遠地區學校及非山非市學校設施設備計畫-改善教學環境資訊設備1批",
+        "category": "財物類47-收音機、電視,通訊器材及儀器",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "YMPS1150731P1",
+      "unit_id": "3.76.50.97.34",
+      "unit_name": "嘉義縣新港鄉月眉國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.50.97.34",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.50.97.34&job_number=YMPS1150731P1",
+      "unit_url": "/index/unit/3.76.50.97.34",
+      "url": "/index/case/3.76.50.97.34/YMPS1150731P1/20260814/ttd-71301870",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260814,
+      "filename": "ttd-71301232",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "北市民生國中115年資訊設備財物採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150810",
+      "unit_id": "3.79.6.2",
+      "unit_name": "臺北市立民生國民中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.6.2",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.6.2&job_number=1150810",
+      "unit_url": "/index/unit/3.79.6.2",
+      "url": "/index/case/3.79.6.2/1150810/20260814/ttd-71301232",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260814,
+      "filename": "TIQ-1-71092994",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "116年度資訊安全及資訊設備維護人力業務外包勞務採購",
+        "category": "勞務類911-政府行政服務",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1154E025",
+      "unit_id": "A.15.3.4",
+      "unit_name": "交通部公路局東區養護工程分局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.15.3.4",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.15.3.4&job_number=1154E025",
+      "unit_url": "/index/unit/A.15.3.4",
+      "url": "/index/case/A.15.3.4/1154E025/20260814/TIQ-1-71092994",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260814,
+      "filename": "BDM-1-71258177",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年影印機維護保養採購案",
+        "companies": {
+          "ids": [
+            "70792357"
+          ],
+          "names": [
+            "震旦行股份有限公司土城一分公司"
+          ],
+          "id_key": {
+            "70792357": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "震旦行股份有限公司土城一分公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "pcdc11528",
+      "unit_id": "5.4.39",
+      "unit_name": "臺灣新北地方法院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=5.4.39",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=5.4.39&job_number=pcdc11528",
+      "unit_url": "/index/unit/5.4.39",
+      "url": "/index/case/5.4.39/pcdc11528/20260814/BDM-1-71258177",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "採購",
+          "維護",
+          "保養"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260814,
+      "filename": "BDM-1-71258079",
+      "brief": {
+        "type": "決標公告",
+        "title": "115-116年度資訊設備維護委外服務",
+        "companies": {
+          "ids": [
+            "70452786"
+          ],
+          "names": [
+            "德欣寰宇科技股份有限公司"
+          ],
+          "id_key": {
+            "70452786": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "德欣寰宇科技股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "PCDH11510",
+      "unit_id": "A.11.10.8",
+      "unit_name": "臺灣新北地方檢察署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.11.10.8",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.11.10.8&job_number=PCDH11510",
+      "unit_url": "/index/unit/A.11.10.8",
+      "url": "/index/case/A.11.10.8/PCDH11510/20260814/BDM-1-71258079",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260814,
+      "filename": "BDM-1-71258006",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年度第48屆國際技能競賽設備汰舊換新計畫-資訊設備採購案",
+        "companies": {
+          "ids": [
+            "69415145",
+            "23730303"
+          ],
+          "names": [
+            "心楙系統整合有限公司",
+            "三合一資訊有限公司"
+          ],
+          "id_key": {
+            "23730303": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ],
+            "69415145": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "三合一資訊有限公司": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ],
+            "心楙系統整合有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "11526",
+      "unit_id": "3.82.5.32",
+      "unit_name": "新北市立新北高級工業職業學校",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.82.5.32",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.82.5.32&job_number=11526",
+      "unit_url": "/index/unit/3.82.5.32",
+      "url": "/index/case/3.82.5.32/11526/20260814/BDM-1-71258006",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260813,
       "filename": "PPW-1-70112522",
