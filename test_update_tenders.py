@@ -5,6 +5,7 @@ from update_tenders import (
     build_required_dates,
     classify_tender_relevance,
     deduplicate_announcements,
+    get_city_info,
 )
 
 
@@ -112,6 +113,27 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         result = deduplicate_announcements(records)
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0]["filename"], "new")
+
+
+class CityClassificationTests(unittest.TestCase):
+    def test_county_from_unit_name_is_preserved(self):
+        result = get_city_info("花蓮縣政府")
+        self.assertEqual(result["city"], "花蓮縣")
+        self.assertEqual(result["city_source"], "機關名稱")
+        self.assertEqual(result["city_confidence"], "high")
+
+    def test_city_from_execution_location_is_high_confidence(self):
+        result = get_city_info(
+            "某地方機關",
+            {"records": [{"detail": {"履約地點": "嘉義市東區"}}]}
+        )
+        self.assertEqual(result["city"], "嘉義市")
+        self.assertEqual(result["city_source"], "履約地點")
+
+    def test_unknown_unit_is_not_silently_assigned_to_taipei(self):
+        result = get_city_info("某某地方機關")
+        self.assertEqual(result["city"], "未分類")
+        self.assertEqual(result["city_confidence"], "low")
 
 
 class UpdateModeTests(unittest.TestCase):

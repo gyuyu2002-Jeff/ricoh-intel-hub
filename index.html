@@ -311,12 +311,13 @@
           <!-- County Tender Counts -->
           <div id="city-filter-container">
             <div class="flex items-center justify-between gap-3 mb-2">
-              <span class="block text-[10px] uppercase font-bold tracking-wider text-slate-400">有標案的縣市</span>
+              <span class="block text-[10px] uppercase font-bold tracking-wider text-slate-400">全台縣市概況</span>
               <span class="text-[10px] text-slate-400">點選即可篩選</span>
             </div>
             <div id="city-filter-list" class="grid grid-cols-2 gap-2 sm:grid-cols-1" role="list" aria-label="依縣市篩選標案">
               <span class="col-span-full py-3 text-center text-xs text-slate-400">縣市統計載入中...</span>
             </div>
+            <div id="city-data-quality" class="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-[11px] leading-relaxed text-slate-500">縣市資料品質載入中...</div>
           </div>
 
           <!-- Radar Status & Tenders Count -->
@@ -511,6 +512,12 @@
 
   <script>
     // System Data State
+    const ALL_CITIES = [
+      "台北市", "新北市", "桃園市", "台中市", "台南市", "高雄市",
+      "基隆市", "新竹市", "嘉義市", "新竹縣", "苗栗縣", "彰化縣",
+      "南投縣", "雲林縣", "嘉義縣", "屏東縣", "宜蘭縣", "花蓮縣",
+      "台東縣", "澎湖縣", "金門縣", "連江縣", "未分類"
+    ];
     let tendersData = [];
     let currentFilteredTenders = [];
     let activeCityFilter = "all";
@@ -838,10 +845,17 @@
       }, {});
       const filters = [
         { city: "all", label: "全台灣", count: tendersData.length },
-        ...Object.entries(counts)
-          .map(([city, count]) => ({ city, label: city, count }))
-          .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, "zh-TW"))
+        ...ALL_CITIES.map(city => ({ city, label: city, count: counts[city] || 0 }))
       ];
+
+      const classified = tendersData.filter(tender => tender.city && tender.city !== "未分類").length;
+      const unclassified = tendersData.filter(tender => !tender.city || tender.city === "未分類").length;
+      const qualityEl = document.getElementById("city-data-quality");
+      if (qualityEl) {
+        qualityEl.innerHTML = unclassified
+          ? `<strong class="text-amber-700">${unclassified} 件待確認地點</strong>；其餘 ${classified} 件已有縣市判定。0 件縣市仍保留在清單中，避免誤以為系統未監控。`
+          : `目前 ${classified} 件案件皆已有縣市判定；0 件縣市仍保留在清單中，方便確認資料覆蓋範圍。`;
+      }
 
       list.replaceChildren();
       filters.forEach(filter => {
@@ -993,8 +1007,9 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
               <div class="flex items-center gap-2 flex-wrap">
                 <span class="text-[10px] bg-red-50 border border-red-200 text-ricoh-red font-bold px-2 py-0.5 rounded-md">
-                  ${t.city}
+                  ${escapeHtml(t.city || '未分類')}
                 </span>
+                ${t.city_confidence === 'low' ? '<span class="text-[10px] bg-amber-50 border border-amber-200 text-amber-700 font-bold px-2 py-0.5 rounded-md">地點待確認</span>' : ''}
                 <span class="px-2 py-0.5 rounded-md text-[10px] border ${tagClass}">
                   ${t.tag}
                 </span>

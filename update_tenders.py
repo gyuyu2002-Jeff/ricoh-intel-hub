@@ -44,47 +44,64 @@ INSTITUTION_CITY_MAP = {
     "中正大學": "嘉義縣", "嘉義大學": "嘉義市", "聯合大學": "苗栗縣", "暨南國際大學": "南投縣"
 }
 
-def get_city(unit_name, detail_data=None):
-    cities = ["台北市", "新北市", "桃園市", "台中市", "台南市", "高雄市", 
-              "基隆市", "新竹市", "嘉義市", "新竹縣", "苗栗縣", "彰化縣", 
-              "南投縣", "雲林縣", "嘉義縣", "屏東縣", "宜蘭縣", "花蓮縣", 
+def get_city_info(unit_name, detail_data=None):
+    """Resolve city and preserve the evidence used for the classification."""
+    cities = ["台北市", "新北市", "桃園市", "台中市", "台南市", "高雄市",
+              "基隆市", "新竹市", "嘉義市", "新竹縣", "苗栗縣", "彰化縣",
+              "南投縣", "雲林縣", "嘉義縣", "屏東縣", "宜蘭縣", "花蓮縣",
               "台東縣", "澎湖縣", "金門縣", "連江縣"]
 
-    # 1. Prioritize execution location and agency address from detail_data
+    def match_city(value):
+        value = str(value or "").replace("臺", "台")
+        for city_name in cities:
+            if city_name.replace("臺", "台") in value:
+                return city_name
+        return None
+
+    def result(city, source, confidence, raw_text=""):
+        return {
+            "city": city,
+            "city_source": source,
+            "city_confidence": confidence,
+            "city_raw_text": str(raw_text or "")[:240]
+        }
+
+    # 1. Prefer execution location and address fields from the official detail.
     if detail_data and isinstance(detail_data, dict):
         records = detail_data.get("records", [])
         for rec in records:
             det = rec.get("detail", {})
-            for k, v in det.items():
-                if "履約地點" in k and v:
-                    val_str = str(v).replace("臺", "台")
-                    for c in cities:
-                        norm_c = c.replace("臺", "台")
-                        if norm_c[:2] in val_str or norm_c in val_str:
-                            return c
+            for key, value in det.items():
+                if "履約地點" in key and value:
+                    city = match_city(value)
+                    if city:
+                        return result(city, "履約地點", "high", value)
         for rec in records:
             det = rec.get("detail", {})
-            for k, v in det.items():
-                if any(kw in k for kw in ["機關:地址", "機關地址", "地址", "開標地點", "收受投標文件地點"]) and v:
-                    val_str = str(v).replace("臺", "台")
-                    for c in cities:
-                        norm_c = c.replace("臺", "台")
-                        if norm_c[:2] in val_str or norm_c in val_str:
-                            return c
+            for key, value in det.items():
+                if any(kw in key for kw in ["機關:地址", "機關地址", "地址", "開標地點", "收受投標文件地點"]) and value:
+                    city = match_city(value)
+                    if city:
+                        return result(city, "機關地址／開標地點", "high", value)
 
-    # 2. Check unit name directly
+    # 2. Check the procurement unit name directly.
     normalized = (unit_name or "").replace("臺", "台")
-    for city in cities:
-        norm_city = city.replace("臺", "台")
-        if norm_city[:2] in normalized:
-            return city
+    city = match_city(normalized)
+    if city:
+        return result(city, "機關名稱", "high", unit_name)
 
-    # 3. Check known institutions / universities
-    for inst, city in INSTITUTION_CITY_MAP.items():
-        if inst in normalized:
-            return city
+    # 3. Check known institutions / universities.
+    for institution, mapped_city in INSTITUTION_CITY_MAP.items():
+        if institution in normalized:
+            return result(mapped_city, "機關對照表", "medium", unit_name)
 
-    return "台北市"
+    # Never silently classify an unknown unit as Taipei. Keep it visible for review.
+    return result("未分類", "無法判定", "low", unit_name)
+
+
+def get_city(unit_name, detail_data=None):
+    """Backward-compatible city-only helper."""
+    return get_city_info(unit_name, detail_data)["city"]
 
 def extract_budget_and_award(detail):
     budget_val = 0
@@ -1416,7 +1433,8 @@ def main(mode="live"):
         if not deadline_str:
             deadline_str = "未公開"
             
-        city = get_city(unit_name, detail_data)
+        city_info = get_city_info(unit_name, detail_data)
+        city = city_info["city"]
         tag = "重點攻堅" if final_budget_val >= 2500000 else "一般監控"
         tag_color = "bg-red-950/45 border-red-500/40 text-red-400" if tag == "重點攻堅" else "bg-slate-900 border-slate-700 text-slate-400"
         
@@ -1429,6 +1447,9 @@ def main(mode="live"):
 
         processed_tenders.append({
             "city": city,
+            "city_source": city_info["city_source"],
+            "city_confidence": city_info["city_confidence"],
+            "city_raw_text": city_info["city_raw_text"],
             "tag": tag,
             "tag_color": tag_color,
             "title": title,
