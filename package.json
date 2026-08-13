@@ -1,0 +1,24 @@
+{
+  "name": "ricoh-work",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i ./src/input.css -o ./static/styles.css --minify",
+    "test": "python3 -m unittest -v test_update_tenders.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gyuyu2002-Jeff/ricoh-intel-hub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gyuyu2002-Jeff/ricoh-intel-hub/issues"
+  },
+  "homepage": "https://github.com/gyuyu2002-Jeff/ricoh-intel-hub#readme",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

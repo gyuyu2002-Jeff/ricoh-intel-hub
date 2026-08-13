@@ -12,32 +12,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS: locally compiled for reliable offline/mobile rendering -->
+  <link rel="stylesheet" href="static/styles.css">
   
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
-            display: ['Outfit', 'Noto Sans TC', 'sans-serif'],
-          },
-          colors: {
-            ricoh: {
-              red: '#D11A2A',
-              hoverRed: '#B01220',
-              darkBg: '#0F172A', /* Slate-900 equivalent */
-              panelBg: '#1E293B', /* Slate-800 equivalent */
-            }
-          }
-        }
-      }
-    }
-  </script>
 
   <style>
     /* Sage Eye-Care Theme (Option C) Style System Overrides */
@@ -319,7 +299,7 @@
             </div>
             <div id="zero-city-filter" class="mt-2">
               <label for="zero-city-select" class="sr-only">選擇目前 0 件的縣市</label>
-              <select id="zero-city-select" class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-semibold text-slate-600 focus:border-ricoh-red focus:outline-none focus:ring-2 focus:ring-ricoh-red/30">
+              <select id="zero-city-select" class="min-h-11 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-semibold text-slate-600 focus:border-ricoh-red focus:outline-none focus:ring-2 focus:ring-ricoh-red/30">
                 <option value="">其他縣市（目前 0 件）</option>
               </select>
             </div>
