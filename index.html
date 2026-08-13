@@ -364,7 +364,19 @@
           <!-- Brand selector list -->
           <div id="brand-tabs-container" class="flex flex-col gap-2">
             <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">選擇競對品牌</span>
-            <div class="flex flex-col gap-2">
+            <label for="mobile-brand-select" class="sr-only">選擇競對品牌</label>
+            <select id="mobile-brand-select" onchange="switchBrand(this.value)" class="lg:hidden min-h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-semibold text-slate-700 shadow-sm focus:border-ricoh-red focus:outline-none focus:ring-2 focus:ring-ricoh-red/20">
+              <option value="FUJIFILM">FUJIFILM</option>
+              <option value="Canon">Canon</option>
+              <option value="Konica Minolta">Konica Minolta</option>
+              <option value="SHARP">SHARP</option>
+              <option value="Kyocera">Kyocera</option>
+              <option value="Epson">Epson</option>
+              <option value="HP">HP</option>
+              <option value="Brother">Brother</option>
+              <option value="其他廠牌">其他廠牌</option>
+            </select>
+            <div class="hidden lg:flex flex-col gap-2">
               <button onclick="switchBrand('FUJIFILM')" id="tab-FUJIFILM" class="brand-tab px-4 py-3 rounded-xl text-left text-xs font-semibold border transition-all duration-200 focus:outline-none flex items-center justify-between">
                 <span>FUJIFILM</span>
                 <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
@@ -420,6 +432,33 @@
                 一鍵列印資訊卡
               </button>
             </div>
+
+            <!-- Quick conclusion card: designed for fast customer-facing preparation -->
+            <section id="quick-conclusion-card" class="rounded-xl border border-amber-200 bg-amber-50/80 p-4 shadow-sm" aria-labelledby="quick-conclusion-title">
+              <div class="mb-3 flex items-center gap-2">
+                <i data-lucide="zap" class="h-4 w-4 text-amber-600"></i>
+                <h2 id="quick-conclusion-title" class="text-xs font-extrabold uppercase tracking-wider text-amber-900">快速結論卡</h2>
+                <span class="ml-auto rounded-full bg-white/80 px-2 py-1 text-[10px] font-semibold text-amber-700">拜訪前 30 秒摘要</span>
+              </div>
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                <div>
+                  <span class="text-[9px] font-bold uppercase tracking-wider text-slate-500">市場定位</span>
+                  <p id="quick-positioning" class="mt-1 text-xs font-semibold leading-relaxed text-slate-800">---</p>
+                </div>
+                <div>
+                  <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-700">可利用優勢</span>
+                  <p id="quick-advantage" class="mt-1 text-xs font-semibold leading-relaxed text-slate-800">---</p>
+                </div>
+                <div>
+                  <span class="text-[9px] font-bold uppercase tracking-wider text-red-700">先確認風險</span>
+                  <p id="quick-risk" class="mt-1 text-xs font-semibold leading-relaxed text-slate-800">---</p>
+                </div>
+                <div>
+                  <span class="text-[9px] font-bold uppercase tracking-wider text-ricoh-red">RICOH 應對方向</span>
+                  <p id="quick-pitch" class="mt-1 text-xs font-semibold leading-relaxed text-slate-800">---</p>
+                </div>
+              </div>
+            </section>
 
             <!-- Two Column Grid for News and Specs -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -532,7 +571,13 @@
           key_specs: "真實列印解析度 1200 x 2400 dpi，配備 LED 曝光印字頭，掃描速度最高達 270 ipm (雙面同步)，搭載 10.1 吋智慧操作面板。",
           strengths: "<li><strong>影像色彩品質優異：</strong>高解析度與色彩鮮明度在業界享有極高口碑，適合設計業與精緻文件印刷。</li><li><strong>市佔率優勢：</strong>於中大型企業與公務機關裝機量大，使用者對介面習慣度高。</li>",
           weaknesses: "<li><strong>系統整合授權費用高：</strong>原廠面板 App 生態系較封閉，若需與企業 AD / OneDrive 等進行深度雲端對接，通常需額外加購昂貴的中介軟體授權。</li><li><strong>PS3 列印標準配備不齊：</strong>標案機型常僅提供 PCL 相機模擬，向量 PDF 與 CAD 圖檔列印易出錯，Genuine Adobe PS3 多列為高價選配件。</li>",
-          ricoh_match: "RICOH IM C2510 / C3010 / C4510"
+          ricoh_match: "RICOH IM C2510 / C3010 / C4510",
+          quick_summary: {
+            positioning: "A3 彩色複合機系列，主打高畫質、快速掃描與企業文件流程。",
+            advantage: "系列官方資料列出最高 270 ppm 掃描、1200 x 2400 dpi 列印解析度；實際 C3070/C3570/C4570 需依型號與選配核對。",
+            risk: "先確認雙面送稿器、雲端整合與安全功能是否為標配或選配，以及實際授權成本。",
+            pitch: "以 RICOH IM C3010/C4510 對照實際月印量、掃描量與五年總成本，不只比較單一最高規格。"
+          }
         }
       },
       "Canon": {
@@ -775,10 +820,28 @@
         activeTab.classList.add('bg-ricoh-red', 'text-white', 'border-ricoh-red', 'shadow-md', 'shadow-ricoh-red/20');
       }
 
+      // Keep the mobile selector synchronized with sidebar tabs.
+      const mobileBrandSelect = document.getElementById("mobile-brand-select");
+      if (mobileBrandSelect) mobileBrandSelect.value = brandName;
+
       // Populate Strategy Card Content
       const data = brandDatabase[brandName];
       if (data) {
         document.getElementById("active-brand-title").textContent = data.title;
+
+        const stripMarkup = (value) => (value || "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+        const firstItem = (value) => stripMarkup(value).split("。")[0] + (stripMarkup(value).includes("。") ? "。" : "");
+        const fallbackSummary = {
+          positioning: `主力機型：${data.product.main_models}`,
+          advantage: firstItem(data.product.strengths),
+          risk: firstItem(data.product.weaknesses),
+          pitch: `以 ${data.product.ricoh_match} 對照客戶實際印量、功能與總持有成本。`
+        };
+        const summary = data.quick_summary || fallbackSummary;
+        document.getElementById("quick-positioning").textContent = summary.positioning;
+        document.getElementById("quick-advantage").textContent = summary.advantage;
+        document.getElementById("quick-risk").textContent = summary.risk;
+        document.getElementById("quick-pitch").textContent = summary.pitch;
         
         // Render News
         const newsContainer = document.getElementById("brand-news-container");
