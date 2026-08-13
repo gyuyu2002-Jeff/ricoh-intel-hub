@@ -357,7 +357,7 @@
             </div>
             <div>
               <h2 class="text-lg font-bold text-white">應對重點</h2>
-              <p class="text-xs text-slate-400 mt-0.5">解構競對品牌主力機型與市場新聞</p>
+              <p class="text-xs text-slate-400 mt-0.5">依官方來源拆解產品、資安、雲端與拜訪話術</p>
             </div>
           </div>
 
@@ -467,10 +467,24 @@
               <div class="lg:col-span-5 flex flex-col gap-4">
                 <div class="flex items-center gap-2 text-slate-800 border-b border-slate-100 pb-2">
                   <i data-lucide="newspaper" class="w-4 h-4 text-ricoh-red"></i>
-                  <h3 class="text-xs uppercase font-extrabold tracking-wider">品牌市場與資安動態 (News)</h3>
+                  <h3 class="text-xs uppercase font-extrabold tracking-wider">官方查證依據與銷售問題</h3>
                 </div>
                 <div id="brand-news-container" class="flex flex-col gap-3.5">
-                  <!-- Dynamically populated news cards -->
+                  <!-- Dynamically populated evidence cards -->
+                </div>
+                <div class="rounded-xl border border-blue-200 bg-blue-50/70 p-4">
+                  <div class="mb-2 flex items-center gap-2 text-blue-900">
+                    <i data-lucide="message-circle-question" class="h-4 w-4"></i>
+                    <h3 class="text-[10px] font-extrabold uppercase tracking-wider">拜訪前先問</h3>
+                  </div>
+                  <ul id="discovery-questions" class="list-disc space-y-1.5 pl-4 text-[11px] leading-relaxed text-slate-700"></ul>
+                </div>
+                <div class="rounded-xl border border-ricoh-red/20 bg-red-50/60 p-4">
+                  <div class="mb-2 flex items-center gap-2 text-ricoh-red">
+                    <i data-lucide="messages-square" class="h-4 w-4"></i>
+                    <h3 class="text-[10px] font-extrabold uppercase tracking-wider">三句可直接使用的實戰話術</h3>
+                  </div>
+                  <ol id="battlefield-scripts" class="list-decimal space-y-2 pl-4 text-[11px] leading-relaxed text-slate-800"></ol>
                 </div>
               </div>
 
@@ -548,231 +562,368 @@
     let activeCityFilter = "all";
     let selectedBrand = "FUJIFILM";
 
-    // Brand News and Specs Database - Curated copier market data in Taiwan
+    // Sales-ready competitor intelligence database; claims are tied to official sources.
     const brandDatabase = {
-      "FUJIFILM": {
-        title: "FUJIFILM (富士軟片資訊)",
-        news: [
-          {
-            title: "富士軟片資訊發布 A3 複合機安全韌體更新以修補重要漏洞",
-            date: "2026-06-15",
-            source: "IT資安通報",
-            brief: "針對近期發現的網路通訊埠緩衝區溢位弱點，原廠釋出最新安全性韌體補丁，強烈建議企業IT管理員儘速排程更新以防範勒索軟體攻擊。"
-          },
-          {
-            title: "台灣富士軟片加強推廣雲端智慧辦公室與 Apeos 整合解決方案",
-            date: "2026-04-10",
-            source: "經濟日報",
-            brief: "因應混合辦公趨勢，富士展示全新 Apeos 雲端連結服務，主打免建伺服器即時完成行動列印與無紙化電子歸檔整合流程。"
-          }
-        ],
-        product: {
-          main_models: "Apeos C3070 / C3570 / C4570 系列 (彩色 A3 複合機)",
-          key_specs: "真實列印解析度 1200 x 2400 dpi，配備 LED 曝光印字頭，掃描速度最高達 270 ipm (雙面同步)，搭載 10.1 吋智慧操作面板。",
-          strengths: "<li><strong>影像色彩品質優異：</strong>高解析度與色彩鮮明度在業界享有極高口碑，適合設計業與精緻文件印刷。</li><li><strong>市佔率優勢：</strong>於中大型企業與公務機關裝機量大，使用者對介面習慣度高。</li>",
-          weaknesses: "<li><strong>系統整合授權費用高：</strong>原廠面板 App 生態系較封閉，若需與企業 AD / OneDrive 等進行深度雲端對接，通常需額外加購昂貴的中介軟體授權。</li><li><strong>PS3 列印標準配備不齊：</strong>標案機型常僅提供 PCL 相機模擬，向量 PDF 與 CAD 圖檔列印易出錯，Genuine Adobe PS3 多列為高價選配件。</li>",
-          ricoh_match: "RICOH IM C2510 / C3010 / C4510",
-          quick_summary: {
-            positioning: "A3 彩色複合機系列，主打高畫質、快速掃描與企業文件流程。",
-            advantage: "系列官方資料列出最高 270 ppm 掃描、1200 x 2400 dpi 列印解析度；實際 C3070/C3570/C4570 需依型號與選配核對。",
-            risk: "先確認雙面送稿器、雲端整合與安全功能是否為標配或選配，以及實際授權成本。",
-            pitch: "以 RICOH IM C3010/C4510 對照實際月印量、掃描量與五年總成本，不只比較單一最高規格。"
-          }
-        }
-      },
-      "Canon": {
-        title: "Canon (台灣佳能)",
-        news: [
-          {
-            title: "Canon 商用影印機供應鏈受阻，亞太區多功能事務機出貨週期延長",
-            date: "2026-05-22",
-            source: "電子時報",
-            brief: "受關鍵控制晶片缺料影響，台灣佳能發布公告調整部分 imageRUNNER ADVANCE 系列機種的交期，影響合約客戶更換進度。"
-          },
-          {
-            title: "台灣佳能攜手系統整合商推廣 imageRUNNER DX 智慧防護功能",
-            date: "2026-03-08",
-            source: "科技新報",
-            brief: "強調與 McAfee 合作內建系統開機引導保護 (Sure Start 同級功能)，保障文件輸出時不會成為網路資安駭客跳板。"
-          }
-        ],
-        product: {
-          main_models: "imageRUNNER ADVANCE DX C3930i / C5840i 系列",
-          key_specs: "真實解析度 1200 x 1200 dpi，雙核處理器，最高掃描速度 270 ipm，配備高耐久聚合物進紙道滾輪。",
-          strengths: "<li><strong>單機採購預算低：</strong>硬體價格親民，標案與短期租賃月租報價極具價格優勢。</li><li><strong>雙面同步掃描速度快：</strong>DX 高階機種標配高速雙面同步進紙器，掃描性能佳。</li>",
-          weaknesses: "<li><strong>售後服務通路依賴經銷商：</strong>在非都會區多無直營維修站，委外代理商維護之效率與零配件備料狀況易有起伏。</li><li><strong>機身防潮性能較弱：</strong>機紙道彎角弧度較陡，在台灣潮濕氣候下，若使用吸濕紙張，其卡紙率相較理光等日系平直紙道機種明顯偏高。</li>",
-          ricoh_match: "RICOH IM C3010 / C4510"
-        }
-      },
-      "Konica Minolta": {
-        title: "Konica Minolta (金儀)",
-        news: [
-          {
-            title: "金儀發表全新 bizhub i 系列彩色多功能影印機搶攻中小企業",
-            date: "2026-06-01",
-            source: "商工時報",
-            brief: "主打全新 UI 操作體驗、高安全性 SSD 硬碟與高階防毒引擎，並積極整合遠端抄表系統提供智慧合約維護服務。"
-          },
-          {
-            title: "Konica Minolta 於歐洲推動智能辦公遠端維護系統升級",
-            date: "2026-02-18",
-            source: "全球科技日報",
-            brief: "原廠升級物聯網維修系統，可主動預測碳粉與感光鼓壽命，大幅減少客戶叫修停機時間。"
-          }
-        ],
-        product: {
-          main_models: "bizhub C250i / C300i / C360i (彩色 A3 複合機)",
-          key_specs: "10.1 吋懸浮操作面板，真實 1200 dpi 列印，內建 MicroSD / SSD 加密硬碟，支援防毒軟體擴充。",
-          strengths: "<li><strong>操作介面反應流暢：</strong>新一代 i 系列面板作業系統改版，滑動觸控體驗好，IT 設定選項豐富。</li><li><strong>基本單機成本較低：</strong>與代理商金儀的價格彈性高，在一般商務辦公租賃案中殺價力道強。</li>",
-          weaknesses: "<li><strong>掃描 PDF 壓縮率較低：</strong>缺乏專利高壓縮引擎，產生的彩色掃描 PDF 檔案體積偏大，易佔用電子郵件頻寬與伺服器硬碟容量。</li><li><strong>面板操作選單較為繁瑣：</strong>功能選單層級較多，一般同仁初次上手需要較長適應期。</li>",
-          ricoh_match: "RICOH IM C2510 / C3010 / C3510"
-        }
-      },
-      "SHARP": {
-        title: "SHARP (震旦行)",
-        news: [
-          {
-            title: "震旦行獨家代理引進 SHARP BP-70C 系列高效彩機",
-            date: "2026-07-02",
-            source: "工商時報",
-            brief: "新一代 BP 系列主打極簡外觀、大字體面板與高產能。配備接近式傳感器，人走近即自動從休眠喚醒以節省等待時間。"
-          },
-          {
-            title: "SHARP 多功能複合機系列榮獲 Buyers Lab (BLI) 年度傑出大獎",
-            date: "2026-03-12",
-            source: "印表機專業評測網",
-            brief: "BP-70C 系列在可靠性、列印速度與雲端應用相容性上獲得國際評測機構高度推薦。"
-          }
-        ],
-        product: {
-          main_models: "SHARP BP-70C31 / BP-70C36 / BP-70C45 系列",
-          key_specs: "真實 1200 dpi，標配無邊框滿版列印，內建人體接近感應器，最高列印速度 45 ppm，支援微軟雲端對接。",
-          strengths: "<li><strong>大字體與直覺面板：</strong>夏普面板字體大且支援圖示自訂，年長員工或一般公務員使用習慣度極佳。</li><li><strong>服務網點綿密：</strong>由震旦行全台直營維護，中南部鄉鎮網點覆蓋率高。</li>",
-          weaknesses: "<li><strong>定影構造防潮力較弱：</strong>進紙路徑在定影器前彎折度高，若遇到台灣冬季受潮紙張，卡紙頻率較高，需要常備乾燥箱。</li><li><strong>韌體改版適應慢：</strong>針對 Windows 11 或 macOS 的系統重大更新，驅動與原廠軟體修正發布時程較慢。</li>",
-          ricoh_match: "RICOH IM C3010 / C3510 / C4510"
-        }
-      },
-      "Kyocera": {
-        title: "Kyocera (台灣京瓷)",
-        news: [
-          {
-            title: "台灣京瓷宣示於南部科學園區設立直營高產能設備展示中心",
-            date: "2026-05-15",
-            source: "自由時報",
-            brief: "京瓷引進高階 TASKalfa 系列，強調以超長壽命非晶矽 (a-Si) 感光鼓大幅減少企業電子廢棄物，吸引高印量傳產業客戶。"
-          },
-          {
-            title: "Kyocera 發表全新碳平衡節能黑白/彩色複合機搶占 ESG 市場",
-            date: "2026-01-20",
-            source: "綠色科技論壇",
-            brief: "京瓷複合機透過低溫熔化碳粉與超低待機功耗，協助中小企業完成減碳政策目標。"
-          }
-        ],
-        product: {
-          main_models: "TASKalfa 2554ci / 3554ci / 4054ci 系列",
-          key_specs: "標配 30 萬張非晶矽感光鼓，極速回溫技術，真實 1200 dpi，內建高效防夾進紙偵測傳感器。",
-          strengths: "<li><strong>耗材使用壽命極長：</strong>感光鼓與主要齒輪折舊週期長，在長合約租賃期內能維持較低的耗材更換頻率。</li><li><strong>印量承載力強：</strong>適合工廠、營造業等大印量、高粉塵的惡劣辦公環境。</li>",
-          weaknesses: "<li><strong>感光鼓人為損壞排除困難：</strong>原廠陶瓷鼓單價極高，合約多註明『人為刮傷（如複印夾帶訂書針）需客戶自費數萬元更換』，造成客戶非預期成本增加。</li><li><strong>彩色成色層次單薄：</strong>採用硬質節能碳粉，彩色圖表與相片列印易出現條紋或成色偏乾蒼白。</li>",
-          ricoh_match: "RICOH IM C2510 / C3010 / C4510"
-        }
-      },
-      "Epson": {
-        title: "Epson (台灣愛普生)",
-        news: [
-          {
-            title: "Epson 宣示於 2026 年底前全球全面終止雷射印表機研發",
-            date: "2026-06-25",
-            source: "日經新聞",
-            brief: "愛普生宣布退出雷射影印機市場，未來重心 100% 移轉至 Heat-Free 免加熱微噴墨影印機，宣稱可減少 85% 電能消耗與碳足跡。"
-          },
-          {
-            title: "台灣愛普生協助台積電供應鏈廠商導入免加熱影印機落實 ESG",
-            date: "2026-04-12",
-            source: "科技人",
-            brief: "噴墨技術無粉塵且省電，符合各大高科技半導體廠區無塵室或辦公室之嚴格空氣品質與節能規章。"
-          }
-        ],
-        product: {
-          main_models: "WorkForce Enterprise AM-C3000 / AM-C4000 (免加熱噴墨複合機)",
-          key_specs: "微壓電噴墨技術，最高列印速度 40 ppm，運行功耗低於 190W，免加熱冷印技術。",
-          strengths: "<li><strong>極低運行用電量：</strong>免加熱技術運行耗電極低，可直接協助企業申報範疇二減碳。</li><li><strong>內部耗材件極少：</strong>無加熱器、無轉寫帶，碳粉粉塵污染為零，運轉安靜。</li>",
-          weaknesses: "<li><strong>噴嘴阻塞維護率高：</strong>若遇長假或冷氣房高蒸發環境，墨水易乾涸造成噴嘴阻塞，清洗噴頭耗費大量墨水且影響列印進度。</li><li><strong>字跡防水性不佳：</strong>水分或酒精潑灑時墨水仍易暈開，無法滿足公務機關或金融合約『公文歸檔保存 30-50 年』之法律標準。</li>",
-          ricoh_match: "RICOH IM C3010 / C4510"
-        }
-      },
-      "HP": {
-        title: "HP (惠普)",
-        news: [
-          {
-            title: "HP 商用印表機內建 Wolf Security 通過國防級滲透測試",
-            date: "2026-07-10",
-            source: "資安日報",
-            brief: "HP 發表最新印表機韌體自我修復技術，當設備主機板遭竄改時可自動載入乾淨 Golden Copy，保障內網安全。"
-          },
-          {
-            title: "惠普調整亞太區 A3 複合機分銷策略，聚焦 IT 代理商通路",
-            date: "2026-03-15",
-            source: "3C通路週刊",
-            brief: "HP 強化與大聯大等通路商合作，在台灣市場主推 IT 系統整合商搭售影印機租賃，將列印設備納入 IT 管理服務中。"
-          }
-        ],
-        product: {
-          main_models: "Color LaserJet Managed MFP E78630 / E87740 系列",
-          key_specs: "HP Wolf Security 防禦晶片，三星 A3 貼牌引擎架構，高容量智慧粉匣，最高速度 40 ppm。",
-          strengths: "<li><strong>資安防護規格完整：</strong> Sure Start、TPM 晶片與韌體動態檢測功能在 IT 評分中常拿高分。</li><li><strong>IT 整合管理便利：</strong>HP Web Jetadmin 提供大規模印表機群組控管，適合跨國企業 IT 總部集中控管。</li>",
-          weaknesses: "<li><strong>售後實體叫修委外：</strong>售後多委任 IT 電腦維修經銷商，無專職影印機直營服務體系，工程師硬體維修經驗參差不齊。</li><li><strong>機械結構大量採用塑料：</strong>三星引擎平台大量使用輕型塑料件與塑料齒輪，長期大印量使用折舊快、異音發生率高。</li>",
-          ricoh_match: "RICOH IM C3010 / C4510"
-        }
-      },
-      "Brother": {
-        title: "Brother (台灣兄弟)",
-        news: [
-          {
-            title: "Brother 在台發表全新商用彩色桌上型複合機系列",
-            date: "2026-06-20",
-            source: "壹科技",
-            brief: "主打體積精巧、每分鐘 30 頁高速彩色輸出，鎖定中小企業分處與 SOHO 工作室租賃市場。"
-          },
-          {
-            title: "日本兄弟工業宣布加強東南亞與台灣租賃包月耗材整合銷售",
-            date: "2026-02-28",
-            source: "日經流通新聞",
-            brief: "以「耗材訂閱制」結合智慧管理，當客戶剩餘碳粉低於 20% 時自動將新碳粉配送至辦公室。"
-          }
-        ],
-        product: {
-          main_models: "MFC-L8390CDW / MFC-L9630CDN 系列 (A4 桌上型複合機)",
-          key_specs: "桌上型 footprint，最高列印速度 40 ppm，高容量碳粉匣，內建 Wi-Fi 6 與安全鎖定功能。",
-          strengths: "<li><strong>體積小巧不佔空間：</strong>適合寸土寸金的小型處室或櫃檯旁，價格極具優勢。</li><li><strong>安裝設定簡單：</strong>支援全面 Wi-Fi 連結，員工自行操作安裝驅動便利性極高。</li>",
-          weaknesses: "<li><strong>單張列印成本 (張費) 昂貴：</strong>A4 小型機因碳粉匣容量小，單張碳粉成本是 A3 大型複合機的 3 倍以上，印量稍大即會使開支暴增。</li><li><strong>無法列印 A3 且無後端裝訂：</strong>無法列印公文標準 A3 尺寸，且不支援自動釘針、摺頁、打孔等商務印後作業。</li>",
-          ricoh_match: "RICOH IM C2010 (A3) / IM 350F (A4)"
-        }
-      },
-      "其他廠牌": {
-        title: "其他副廠 / 二手機品牌",
-        news: [
-          {
-            title: "消基會抽查副廠碳粉釋放苯與甲苯，警告危害辦公同仁健康",
-            date: "2026-07-05",
-            source: "消費者日報",
-            brief: "市售廉價拼裝機所使用的非原廠碳粉高溫定影時易釋放有害氣體與超細微粉塵，呼籲企業採購認證之環保無毒耗材。"
-          },
-          {
-            title: "台灣中古影印機資安外洩通報，退租硬碟未清理風險高",
-            date: "2026-04-18",
-            source: "國家資安會報",
-            brief: "二手機商回收舊型機台常無硬體銷毀流程，導致舊機內藏的企業機密公文、個資直接流入二手市場造成外洩。"
-          }
-        ],
-        product: {
-          main_models: "二手機 (如舊型 Fuji Xerox IV / V 系列) 或白牌拼裝設備",
-          key_specs: "規格老舊且零散，通常使用舊型主機板，缺乏最新安全加密協定，無原廠安全防禦補丁。",
-          strengths: "<li><strong>極其低廉的租金：</strong>以二手機拼裝，機器折舊已近零，月租甚至低於 1,000 元。</li><li><strong>適合短期工地使用：</strong>毀損亦無大礙，適合臨時工寮或短期活動使用。</li>",
-          weaknesses: "<li><strong>網路資安跳板漏洞：</strong>晶片無安全認證，韌體長年停止更新，極易成為勒索軟體入侵內網的後門。</li><li><strong>零配件停產斷料：</strong>非原廠供應鏈，故障叫修時常面臨無零件可換或長時間停機，長期運作成本極高。</li>",
-          ricoh_match: "RICOH IM C2510 (全新機租賃保障)"
-        }
-      }
-    };
+  "FUJIFILM": {
+    "title": "FUJIFILM（富士軟片資訊）",
+    "quick_summary": {
+      "positioning": "A3 彩色複合機與文件工作流程整合，重點在影像品質、資安與雲端連結。",
+      "advantage": "Apeos C 系列可把彩色輸出、掃描、驗證與文件流程放在同一設備平台。",
+      "risk": "最高 270 ipm、PS、傳真、無線與部分雲端能力需依型號及選配確認。",
+      "pitch": "先用客戶的掃描、權限與文件流向做測試，再把 RICOH 的流程落地與服務責任寫入方案。"
+    },
+    "product": {
+      "main_models": "Apeos C3070 / C3570 / C4570 / C5570 / C6570 / C7070",
+      "key_specs": "官方資料列出最高機型 70 ppm、列印解析度 1200 × 2400 dpi；特定雙面送稿器配置的掃描最高 270 ppm。",
+      "ricoh_match": "RICOH IM C3010 / IM C4510",
+      "strengths": [
+        "官方台灣頁面強調 TPM 2.0、256 位元加密、韌體完整性檢查、竄改偵測與硬碟覆寫清除。",
+        "可用 DMP 20、Print Utility 與雲端／行動服務銜接掃描與文件流程。"
+      ],
+      "weaknesses": [
+        "不同子型號、送稿器與軟體方案的標配／選配差異大，不能用最高規格代表整個系列。",
+        "若客戶要做 AD、雲端儲存或複雜文件流程，應先把授權、介接範圍與台灣支援寫進報價。"
+      ]
+    },
+    "questions": [
+      "這次比較的機型與送稿器配置，是否能在現場示範同一份雙面文件？",
+      "雲端掃描是要到 OneDrive／SharePoint、郵件，還是既有 DMS？誰負責帳號與授權？"
+    ],
+    "scripts": [
+      "「如果貴司在意的不只是彩色，而是掃描後能不能依部門、權限和目的地自動走完，我建議我們用同一份文件做 Apeos 與 RICOH 的流程實測，不用只看型錄。」",
+      "「這個系列的 270 ppm 是特定雙面送稿器和配置下的數字；我們把實際型號、ADF、OCR 和雲端授權逐項列出，避免標案交機後才發現規格不是標配。」",
+      "「資安我不只比較有沒有加密，會把韌體更新、硬碟清除、權限和故障時由誰處理寫進服務方案，讓 IT 能驗收。」"
+    ],
+    "sources": [
+      [
+        "FUJIFILM Apeos C Series official product page",
+        "https://www.fujifilm.com/us/en/business/office-printers/multifunction-printers/apeos-c7070"
+      ],
+      [
+        "台灣富士軟片資訊 Apeos solutions",
+        "https://www.fujifilm.com/fbtw/zh-tw/solutions/insights/article/new-apeos"
+      ]
+    ]
+  },
+  "Canon": {
+    "title": "Canon（台灣佳能）",
+    "quick_summary": {
+      "positioning": "imageRUNNER ADVANCE DX 以 A3 文件輸出、掃描傳送、uniFLOW 與企業資安整合為主。",
+      "advantage": "DX C3900i 可支援 TLS 1.3、IPSec、802.1X、WPA3、TPM 與 SSD 保護等企業控制。",
+      "risk": "掃描速度、PS、傳真、無線與進階送稿器依型號／選配不同，不能把高階配置套用全系列。",
+      "pitch": "把 Canon 的安全與雲端功能拆成驗收清單，與 RICOH 的實際流程時間及服務責任對照。"
+    },
+    "product": {
+      "main_models": "imageRUNNER ADVANCE DX C3930i / C5840i 系列",
+      "key_specs": "C3930i 官方頁列最高 30 ppm A4／15 ppm A3、256 GB SSD、10.1 吋面板；支援列印、影印、掃描、傳送與儲存，傳真及部分驅動／送稿器為選購或依配置。",
+      "ricoh_match": "RICOH IM C3010 / IM C4510",
+      "strengths": [
+        "官方資料列出 TLS 1.3、IPSec、IEEE 802.1X、SNMPv3、防火牆、WPA3、SSD 加密、TPM、啟動驗證與 SIEM 稽核能力。",
+        "支援 uniFLOW Online／Express、AirPrint、Mopria、Canon PRINT Business 與 Universal Print 等工作流程。"
+      ],
+      "weaknesses": [
+        "多項能力取決於選配送稿器、PS、無線 LAN、傳真或雲端方案，採購時必須逐項確認。",
+        "客戶若只看單機價格，容易漏掉 uniFLOW、進階掃描格式、驗證與維護的整體成本。"
+      ]
+    },
+    "questions": [
+      "客戶的文件是否需要 uniFLOW 或 Universal Print？目前 Microsoft 365、AD 和 SIEM 的責任邊界怎麼分？",
+      "請對方提供實際報價配置表：ADF、PS、傳真、無線、OCR、雲端授權是否包含？"
+    ],
+    "scripts": [
+      "「Canon 的安全規格很完整，我們不跟您爭論品牌；我會請您用同一張網路架構表確認 RICOH 是否也能完成 802.1X、權限、稽核和硬碟清除，差異才會出在可交付性。」",
+      "「C3930i 的 30 ppm 是 A4 速度，A3 是 15 ppm；如果貴司標案文件常用 A3，我們今天就用實際 A3 雙面掃描與輸出時間比較。」",
+      "「請把 uniFLOW 或其他雲端授權列成五年成本，我們也把 RICOH 的流程、耗材與服務責任攤開，您比較的是總持有成本，不是只看第一張報價。」"
+    ],
+    "sources": [
+      [
+        "Canon Taiwan imageRUNNER ADVANCE DX C3900i",
+        "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/product"
+      ],
+      [
+        "Canon imageRUNNER ADVANCE DX C3800 security and workflow",
+        "https://en.canon-cna.com/business/products/office-printers/multifunction/colour/imagerunner-advance-dx-c3800-series/"
+      ]
+    ]
+  },
+  "Konica Minolta": {
+    "title": "Konica Minolta（金儀）",
+    "quick_summary": {
+      "positioning": "bizhub i-Series 以觸控操作、A3 文件中心、掃描與雲端／身分整合為核心。",
+      "advantage": "官方資料強調韌體安全、Authentication Attack Detection，且部分配置可接 Microsoft Entra ID 或 Google Workspace SSO。",
+      "risk": "雲端列印／傳真／掃描、Bitdefender 與媒體偵測等能力依型號或選配，需看正式配置。",
+      "pitch": "用實際登入、掃描目的地與韌體管理情境驗證，而不是用面板印象評斷。"
+    },
+    "product": {
+      "main_models": "bizhub C250i / C300i / C360i、One i-Series",
+      "key_specs": "官方產品頁涵蓋 C250i／C300i／C360i；One i-Series 官方資料強調高速掃描、改版選單與雲端／身分整合，實際速度與功能依型號配置。",
+      "ricoh_match": "RICOH IM C2510 / IM C3010 / IM C3510",
+      "strengths": [
+        "官方新聞稿列出韌體安全強化、Authentication Attack Detection 與暴力破解通知。",
+        "部分型號可選雲端列印、傳真、掃描與 Microsoft Entra ID／Google Workspace SSO。"
+      ],
+      "weaknesses": [
+        "官方明確標示部分雲端能力為 optional，不能把「雲端支援」直接寫成全系列標配。",
+        "面板體驗與掃描檔案大小應以客戶現場任務測試，不宜使用無來源的「繁瑣」或「壓縮較差」定論。"
+      ]
+    },
+    "questions": [
+      "登入是用本機帳密、AD、Entra ID 還是 Google Workspace？故障時誰負責帳號與憑證？",
+      "請現場測試 20 頁混合彩色／黑白雙面文件，量測檔案大小、目的地與使用者步驟。"
+    ],
+    "scripts": [
+      "「金儀 i-Series 的重點不是只有面板漂亮，而是它能不能接到貴司現在的身分系統；我們今天直接測登入、權限和掃描目的地，結果比口頭比較可靠。」",
+      "「雲端列印與掃描在官方資料中有些是選配，我會把每一項授權和設備配置列成驗收表，也請您要求對方把相同項目寫進報價。」",
+      "「如果現場人員每天掃描的步驟很多，我們用實際 20 頁文件做任務測試；選單偏好可以討論，但每位員工少幾個步驟才是真正的生產力。」"
+    ],
+    "sources": [
+      [
+        "Konica Minolta bizhub C250i/C300i/C360i official page",
+        "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/"
+      ],
+      [
+        "Konica Minolta One i-Series security release",
+        "https://kmbs.konicaminolta.us/press-release/km-introduces-new-i-series-multifunctional-printers/"
+      ]
+    ]
+  },
+  "SHARP": {
+    "title": "SHARP（台灣供應／代理配置需確認）",
+    "quick_summary": {
+      "positioning": "BP 系列鎖定高產能 A3 彩機、厚紙與紙張處理、雲端連結和安全控制。",
+      "advantage": "BP-70C45 官方資料列最高 45 ppm、最大進紙 6,300 張、300 gsm 媒體，選配送稿器掃描最高 280 ipm。",
+      "risk": "Teams、Google Drive、Dropbox、Universal Print、Wi-Fi、OSA 與 Bitdefender 等多為選配或依市場配置。",
+      "pitch": "以紙張、印量和雲端配置做實測，並先確認台灣可供應的完整料號與服務責任。"
+    },
+    "product": {
+      "main_models": "BP-70C45（BP-70C 系列）",
+      "key_specs": "最高 45 ppm、1,200 × 1,200 dpi、最大進紙 6,300 張、最高 300 gsm；選配 300 張雙面單次送稿器時掃描最高 280 ipm。",
+      "ricoh_match": "RICOH IM C3010 / IM C4510",
+      "strengths": [
+        "官方頁強調厚紙、進紙容量與大量工作流，適合混合紙張和長時間輸出。",
+        "可選 Microsoft Teams、Google Drive、Dropbox、Universal Print、Sharp OSA、5GHz Wi-Fi；頁面亦列啟動完整性與韌體攻擊防護。"
+      ],
+      "weaknesses": [
+        "關鍵雲端、無線、OSA、Bitdefender 與送稿器功能需標示 optional／依配置。",
+        "美國或全球頁面的供貨、驗證與服務條件不能直接當作台灣承諾，必須回到台灣正式料號與合約。"
+      ]
+    },
+    "questions": [
+      "貴司真正的瓶頸是每月印量、厚紙、容量，還是掃描到 Teams／雲端？請用最近一週文件量說明。",
+      "BP-70C45 的選配清單和台灣維護 SLA 能否在報價與合約中逐項確認？"
+    ],
+    "scripts": [
+      "「SHARP 的 6,300 張和 300 gsm 真的適合高紙量場景；我們不先否定它，而是拿貴司最常用的厚紙、長批次和裝訂需求，做同條件測試。」",
+      "「280 ipm 是搭配特定雙面送稿器的數字；若這是決策關鍵，請把送稿器、OCR、雲端連接和台灣可維護性一起寫成驗收條件。」",
+      "「雲端功能不是看到圖示就代表已經可用，我會把 Teams／Universal Print 的帳號、授權、網路和故障責任畫成流程，避免上線後才發現缺一段。」"
+    ],
+    "sources": [
+      [
+        "SHARP BP-70C45 official product page",
+        "https://business.sharpusa.com/document-systems/models/details/bp-70c45"
+      ],
+      [
+        "SHARP BP-70C65 official product page",
+        "https://global.sharp/products/copier/products/bp_70c65/index.html"
+      ]
+    ]
+  },
+  "Kyocera": {
+    "title": "Kyocera（台灣京瓷）",
+    "quick_summary": {
+      "positioning": "TASKalfa MZ 以 A3 中高速、長壽命元件、雲端工作流、資安與紙張容量控制為主。",
+      "advantage": "MZ4001ci 官方規格列 40 ppm A4／20 ppm A3、最高 7,150 張進紙，特定送稿器掃描最高 274 ipm。",
+      "risk": "搜尋 PDF、無線、硬碟、讀卡、傳真與部分掃描能力依選配；長壽命或認證宣稱不等於每個現場都零故障。",
+      "pitch": "以五年印量、耗材更換、資安選配和實際掃描流程做 TCO 驗證。"
+    },
+    "product": {
+      "main_models": "TASKalfa MZ4001ci／MZ 系列 25–70 ppm",
+      "key_specs": "MZ4001ci 最高 40 ppm A4／20 ppm A3、1,200 × 1,200 dpi、最高 7,150 張進紙；搭配特定 DP-7160／7170 時掃描最高 274 ipm。",
+      "ricoh_match": "RICOH IM C3010 / IM C4510",
+      "strengths": [
+        "官方 MZ 資料主打雲端文件擷取／管理、AI 掃描、K Level Security 與長壽命元件。",
+        "官方規格列 SSL、IPsec、SNMPv3、安全列印、加密列印，以及 Scan-to-E-mail／FTP／SMB／USB／Box。"
+      ],
+      "weaknesses": [
+        "掃描器、搜尋 PDF、無線、硬碟、讀卡與傳真等功能有選配差異，必須以正式配置表核對。",
+        "長壽命元件與 FIPS 等官方主張應確認適用型號、區域與認證範圍，不能直接推論現場故障率。"
+      ]
+    },
+    "questions": [
+      "五年預估印量、彩色比例和紙張種類是多少？要用它計算碳粉、感光元件與維護而不是只看月租。",
+      "掃描到 Box／SMB／郵件是否需要搜尋 PDF、讀卡或無線？這些選配是否已列入報價？"
+    ],
+    "scripts": [
+      "「京瓷的長壽命元件是它的特色，我們直接用貴司五年印量算耗材與維護；如果 RICOH 的整體停機責任和交付速度更符合，就不會只被單一鼓壽命帶著走。」",
+      "「MZ4001ci 的 40 ppm 是 A4、A3 是 20 ppm；如果您的文件以 A3 為主，我們今天就用 A3 混合文件實測，不拿 A4 數字代替。」",
+      "「雲端和安全功能要看選配，我會請兩邊把搜尋 PDF、SMB、讀卡、加密和韌體更新逐項勾選，再比較五年總成本。」"
+    ],
+    "sources": [
+      [
+        "Kyocera TASKalfa MZ EvolutionNext",
+        "https://www.kyoceradocumentsolutions.us/es/products/mfp/kyocera-taskalfa-mz7001ci-series-devices.html"
+      ],
+      [
+        "Kyocera TASKalfa MZ4001ci official specifications",
+        "https://www.kyoceradocumentsolutions.eu/en/products/mfp/TASKALFAMZ4001CI.html"
+      ]
+    ]
+  },
+  "Epson": {
+    "title": "Epson（台灣愛普生）",
+    "quick_summary": {
+      "positioning": "WorkForce Enterprise Heat-Free 商務噴墨，主打低熱／低功耗、A4/A3 辦公輸出與較少耗材零件。",
+      "advantage": "AM-C 系列以免加熱微壓電噴墨為核心，適合把 ESG 用電與辦公流程一起評估。",
+      "risk": "「400 年」是特定 UltraChrome HD 專業相片顏料墨水與保存條件的宣稱，不是一般 AM-C 辦公文件保證。",
+      "pitch": "先確認文件保存、防水、印量與色彩需求，再用實際耗電、速度、耗材與歸檔樣本比較。"
+    },
+    "product": {
+      "main_models": "WorkForce Enterprise AM-C3000 / AM-C4000",
+      "key_specs": "免加熱微壓電噴墨商務 MFP；實際速度、耗電、墨水與 A3／ADF 配置應以台灣正式型號規格表為準。",
+      "ricoh_match": "RICOH IM C3010 / IM C4510",
+      "strengths": [
+        "Heat-Free 架構可作為低熱／低功耗與辦公室 ESG 評估的一部分，需用同條件量測驗證。",
+        "沒有雷射定影器這類加熱流程，設備工作流程與耗材結構和碳粉型 MFP 不同。"
+      ],
+      "weaknesses": [
+        "墨水防水、長期保存、濃淡與噴嘴維護必須以實際紙張、環境和文件用途測試，不能用專業相片產品宣稱替代。",
+        "不能把 Epson UltraChrome HD 的 400 年保存宣稱套用到一般商務 MFP 或所有墨水、紙張與環境。"
+      ]
+    },
+    "questions": [
+      "文件需要保存多久、是否接觸水氣或酒精、是否為正式公文？請先定義保存與防水驗收條件。",
+      "請用同樣印量和待機時間比較實測耗電、墨水／碳粉成本、清潔耗材與停機風險。"
+    ],
+    "scripts": [
+      "「Epson 的 400 年是特定專業相片顏料墨水和保存條件的資料，不是一般辦公 MFP 的文件保證；我們不混用兩種產品，直接測貴司公文紙的保存與防水。」",
+      "「免加熱的價值要落到電費和維護，我們以貴司每月印量與待機時間量測五年用電，再跟 RICOH 的碳粉與服務責任一起算。」",
+      "「如果這些文件要歸檔，真正的問題是字跡遇水、紙張和保存環境能否過驗收；今天我帶樣本測，不只引用品牌口號。」"
+    ],
+    "sources": [
+      [
+        "Epson WorkForce Enterprise AM-C official family page",
+        "https://epson.com.tw/%E5%95%86%E7%94%A8%E7%B3%BB%E5%88%97/%E5%8D%B0%E8%A1%A8%E6%A9%9F/%E5%85%8D%E5%8A%A0%E7%86%B1%E5%BE%AE%E5%99%B4%E5%BD%B1%E5%8D%B0%E6%A9%9F/Epson-WorkForce-Enterprise-AM-C4000/p/C11CJ43506"
+      ],
+      [
+        "Epson UltraChrome HD archival claim context",
+        "https://news.epson.com/news/new-epson-ultrachrome-hd-pigment-ink-technology-delivers-the-highest-print-permanence-ratings-ever-achieved-for-epson-ultrachrome-inks"
+      ]
+    ]
+  },
+  "HP": {
+    "title": "HP（惠普）",
+    "quick_summary": {
+      "positioning": "LaserJet Enterprise／Managed 以 FutureSmart 韌體、機隊管理與 Microsoft 365／Entra 工作流程為核心。",
+      "advantage": "HP Web Jetadmin、FutureSmart、Universal Print、Entra ID 與 SharePoint／OneDrive 流程適合既有 Microsoft IT 環境。",
+      "risk": "資安、雲端、速度與 A3／MFP 能力依型號、韌體版本、管理方案與區域供貨不同。",
+      "pitch": "先判斷客戶是否已有 HP 機隊與 Microsoft 管理標準，再比較跨品牌導入成本與現場服務。"
+    },
+    "product": {
+      "main_models": "LaserJet Enterprise／Managed MFP；A3 例：Color LaserJet Managed MFP M776",
+      "key_specs": "HP Enterprise 官方頁涵蓋 A4／A3 與不同工作群組；M776 範例最高 45 ppm、可至 A3、200 張 ADF，實際規格依型號。",
+      "ricoh_match": "RICOH IM C3010 / IM C4510",
+      "strengths": [
+        "FutureSmart 可提供韌體與嵌入式資安控制；官方列出 Universal Print、Entra ID、Scan to OneDrive／SharePoint 與 OCR 工作流程。",
+        "HP Web Jetadmin 可用於機隊管理與韌體升級，對既有 HP／Microsoft 管理環境有整合優勢。"
+      ],
+      "weaknesses": [
+        "「世界最安全」是 HP 官方行銷主張，不應當作獨立排名；實際防護依型號與韌體版本。",
+        "若客戶沒有 HP 機隊或 Microsoft 管理基礎，導入價值要和 RICOH 的現場流程、服務與移轉成本一起評估。"
+      ]
+    },
+    "questions": [
+      "客戶是否已使用 HP Web Jetadmin、FutureSmart、Entra ID 或 Universal Print？既有政策能否沿用？",
+      "韌體更新、弱點修補、耗材與硬體叫修由誰負責？請把 SLA 和版本支援週期寫進合約。"
+    ],
+    "scripts": [
+      "「HP 在 Microsoft 管理環境很有優勢；如果貴司已經有 Web Jetadmin 和 Entra，我們先確認 RICOH 是否能接上同一套政策，再比較轉換成本，而不是只比資安標語。」",
+      "「FutureSmart 的資安要看機型和韌體，我會請 IT 用同一份驗收表測啟動驗證、更新、稽核與硬碟資料清除，這樣 RICOH 也能公平對照。」",
+      "「如果貴司要的是跨品牌集中管理，我們把每月管理工時、故障回應和韌體責任算進 TCO；單一品牌的既有投資才是真正的比較基準。」"
+    ],
+    "sources": [
+      [
+        "HP Enterprise printers",
+        "https://www.hp.com/us-en/printers/enterprise-printers.html"
+      ],
+      [
+        "HP FutureSmart firmware and workflow",
+        "https://www.hp.com/us-en/printers/futuresmart-firmware.html"
+      ]
+    ]
+  },
+  "Brother": {
+    "title": "Brother（台灣型號與服務需確認）",
+    "quick_summary": {
+      "positioning": "Workhorse 商用 A4 工作群組，主打部署簡易、進紙／耗材選擇與中小型團隊成本控制。",
+      "advantage": "Brother USA 企業頁列出彩色最高 42 ppm、雙面掃描最高 104 ipm、最高 2,700 張進紙等代表性配置。",
+      "risk": "上述代表數據來自 Brother USA，不能直接推論台灣型號、供貨、耗材或維修條件；A4 也不等於 A3 文件中心。",
+      "pitch": "把 Brother 放在 A4 分點與工作群組場景公平比較，不用不實的成本或品質定論。"
+    },
+    "product": {
+      "main_models": "Workhorse enterprise printers；代表：MFC-L8390CDW／MFC-L9630CDN（市場與區域依供貨）",
+      "key_specs": "Brother USA Workhorse enterprise 頁列彩色最高 42 ppm、單／雙面掃描最高 52／104 ipm、最大進紙 2,700 張；實際型號與台灣規格需另核對。",
+      "ricoh_match": "RICOH IM C2010（A3）／RICOH IM 350F（A4）",
+      "strengths": [
+        "官方商用頁按 Enterprise、SMB 等工作群組區分，強調 Triple Layer Security、BRAdmin 與部署管理。",
+        "A4 工作群組配置可在空間、部署簡易與中等印量需求上形成清楚的比較基準。"
+      ],
+      "weaknesses": [
+        "官方資料主要為 Brother USA，不能直接作為台灣供貨、保固、服務網與耗材價格承諾。",
+        "若需求包含 A3、裝訂、打孔、摺頁或集中式高量流程，必須先確認實際機型能力，再與 RICOH A3 方案比較。"
+      ]
+    },
+    "questions": [
+      "這個分點是否真的需要 A3、裝訂、打孔或集中掃描？若沒有，A4 工作群組才是合理比較。",
+      "請確認台灣正式型號、每月建議印量、ADF、雲端、保固與耗材價格，不直接套用美國頁資料。"
+    ],
+    "scripts": [
+      "「Brother 在 A4 工作群組可能很合適；我先不把它和 A3 機硬比，請您確認分點是否真的需要 A3、裝訂或集中掃描，再決定 RICOH 的方案大小。」",
+      "「官方 42 ppm 和 104 ipm 是 Brother USA 代表配置，我們會以台灣可供應料號和同一份文件實測，避免把不同市場的數字當成採購承諾。」",
+      "「如果每天印量已超過桌上型設備舒適範圍，我們用五年耗材、停機和叫修成本比較；便宜的入口價格不一定等於分點的最低總成本。」"
+    ],
+    "sources": [
+      [
+        "Brother business printers",
+        "https://www.brother-usa.com/business/printers"
+      ],
+      [
+        "Brother Workhorse enterprise printers",
+        "https://www.brother-usa.com/business/printers/workhorse-series/enterprise-printers"
+      ]
+    ]
+  },
+  "其他廠牌": {
+    "title": "其他廠牌／二手機（需個案查證）",
+    "quick_summary": {
+      "positioning": "不是單一品牌，而是採購、保固、資料清除與零件供應風險的查核類別。",
+      "advantage": "短期或特殊場景可能有較低初始支出，但必須用合約和驗收條件證明。",
+      "risk": "無法以類別名稱推論資安、耗材或服務品質；任何具體風險都應回到設備型號、韌體與供應商證據。",
+      "pitch": "把價格比較拉回可驗收的資安、停機、耗材與退租資料清除責任。"
+    },
+    "product": {
+      "main_models": "個案設備／二手機（不代表特定品牌）",
+      "key_specs": "型號、韌體、硬碟、耗材、維修 SLA 與退租清除流程均需逐案取得文件。",
+      "ricoh_match": "RICOH IM C2510／IM C3010",
+      "strengths": [
+        "可作為短期、低量或特殊場景的價格基準，但不能只用租金作結論。"
+      ],
+      "weaknesses": [
+        "沒有型號與合約證據，就不能判定資安、可靠性、耗材成本或服務品質。",
+        "二手設備需確認資料清除、韌體支援、零件供應、保固和停機補償。"
+      ]
+    },
+    "questions": [
+      "設備退租時誰負責硬碟資料清除與證明？韌體支援到哪一天？",
+      "五年內的耗材、零件、到場時間與停機補償是否寫入合約？"
+    ],
+    "scripts": [
+      "「我不會只用品牌名稱判斷二手機好不好；請把型號、韌體支援、硬碟清除證明和零件 SLA 拿出來，我們用同一張驗收表比較。」",
+      "「如果初始租金低，但停一天機由客戶承擔，總成本可能不同；我們把印量、耗材、叫修和停機補償一起算。」",
+      "「只要對方能把資安與服務責任寫清楚，就值得公平比較；如果寫不清楚，風險不是品牌印象，而是合約無法驗收。」"
+    ],
+    "sources": []
+  }
+};
 
     // SPA Navigation Router
     function navigateToPage(pageId) {
@@ -829,7 +980,7 @@
       if (data) {
         document.getElementById("active-brand-title").textContent = data.title;
 
-        const stripMarkup = (value) => (value || "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+        const stripMarkup = (value) => (Array.isArray(value) ? value.join(" ") : (value || "")).replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
         const firstItem = (value) => stripMarkup(value).split("。")[0] + (stripMarkup(value).includes("。") ? "。" : "");
         const fallbackSummary = {
           positioning: `主力機型：${data.product.main_models}`,
@@ -843,31 +994,30 @@
         document.getElementById("quick-risk").textContent = summary.risk;
         document.getElementById("quick-pitch").textContent = summary.pitch;
         
-        // Render News
+        const escapeHtml = (value) => String(value ?? "")
+          .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+        const listHtml = (items) => (items || []).map(item => `<li>${escapeHtml(item)}</li>`).join("");
+
+        // Render official evidence, not unverified market news.
         const newsContainer = document.getElementById("brand-news-container");
-        newsContainer.innerHTML = "";
-        data.news.forEach(n => {
-          const newsCard = document.createElement("div");
-          newsCard.className = "bg-slate-50 border border-slate-200/60 rounded-xl p-3.5 flex flex-col gap-1.5 shadow-sm";
-          newsCard.innerHTML = `
-            <div class="flex items-center justify-between gap-2 text-[9px] font-mono text-slate-400">
-              <span class="bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded leading-none font-bold">${n.source}</span>
-              <span>${n.date}</span>
+        newsContainer.innerHTML = data.sources.length ? data.sources.map(([label, url]) => `
+          <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="group rounded-xl border border-slate-200 bg-slate-50 p-3.5 shadow-sm transition hover:border-ricoh-red/40 hover:bg-white">
+            <div class="flex items-start gap-2">
+              <i data-lucide="external-link" class="mt-0.5 h-3.5 w-3.5 shrink-0 text-ricoh-red"></i>
+              <div><p class="text-[11px] font-bold leading-snug text-slate-800 group-hover:text-ricoh-red">${escapeHtml(label)}</p><p class="mt-1 break-all text-[9px] leading-relaxed text-slate-500">${escapeHtml(url)}</p></div>
             </div>
-            <h4 class="text-xs font-bold text-slate-800 leading-snug">${n.title}</h4>
-            <p class="text-[10.5px] text-slate-500 leading-relaxed font-medium">${n.brief}</p>
-          `;
-          newsContainer.appendChild(newsCard);
-        });
+          </a>`).join("") : `<div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 text-[11px] leading-relaxed text-slate-500">此類別沒有單一品牌官方來源；請以設備型號與供應商文件查證。</div>`;
+
+        document.getElementById("discovery-questions").innerHTML = listHtml(data.questions);
+        document.getElementById("battlefield-scripts").innerHTML = listHtml(data.scripts);
 
         // Render Specs & Match
         document.getElementById("ricoh-match-model").textContent = data.product.ricoh_match;
         document.getElementById("competitor-models").textContent = data.product.main_models;
         document.getElementById("product-specs").textContent = data.product.key_specs;
-        
-        // Render Strengths & Weaknesses lists
-        document.getElementById("product-strengths").innerHTML = data.product.strengths;
-        document.getElementById("product-weaknesses").innerHTML = data.product.weaknesses;
+        document.getElementById("product-strengths").innerHTML = listHtml(data.product.strengths);
+        document.getElementById("product-weaknesses").innerHTML = listHtml(data.product.weaknesses);
       }
       
       lucide.createIcons();
