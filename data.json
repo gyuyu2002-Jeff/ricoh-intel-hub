@@ -1,8 +1,11 @@
 {
-  "last_updated": "2026-08-13 10:45",
+  "last_updated": "2026-08-13 12:27",
   "tenders": [
     {
       "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "115年SHARP影印機計張維護開口契約",
@@ -48,6 +51,9 @@
     },
     {
       "city": "桃園市",
+      "city_source": "機關地址／開標地點",
+      "city_confidence": "high",
+      "city_raw_text": "333桃園市龜山區民生北路一段五十號",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "115117年度影印機租賃長約",
@@ -115,6 +121,9 @@
     },
     {
       "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
       "tag": "重點攻堅",
       "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
       "title": "影印機租賃案",
@@ -302,6 +311,9 @@
     },
     {
       "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
@@ -344,6 +356,9 @@
     },
     {
       "city": "台北市",
+      "city_source": "機關地址／開標地點",
+      "city_confidence": "high",
+      "city_raw_text": "115臺北市南港區經貿一路265號2樓",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "116年度影印機租賃採購案",
@@ -529,6 +544,9 @@
     },
     {
       "city": "台北市",
+      "city_source": "機關地址／開標地點",
+      "city_confidence": "high",
+      "city_raw_text": "100臺北市中正區羅斯福路3段242號5樓",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "總管理處數位式多功能影印機租賃共61台",
@@ -662,6 +680,9 @@
     },
     {
       "city": "台北市",
+      "city_source": "機關地址／開標地點",
+      "city_confidence": "high",
+      "city_raw_text": "104臺北市中山區中山北路2段48巷7號2樓",
       "tag": "一般監控",
       "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
       "title": "影印機租賃採購",
@@ -968,8 +989,8 @@
     "today": "2026-08-13",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-13 10:45",
-    "source_records": 2308,
+    "latest_attempt_at": "2026-08-13 12:27",
+    "source_records": 2363,
     "candidate_records": 2,
     "review_records": 0,
     "successful_dates": [
@@ -1405,14 +1426,14 @@
       "source_records": 2775,
       "candidate_records": 6,
       "review_records": 2,
-      "checked_at": "2026-08-13 10:39"
+      "checked_at": "2026-08-13 12:21"
     },
     "2026-08-13": {
       "status": "complete",
-      "source_records": 2308,
+      "source_records": 2363,
       "candidate_records": 2,
       "review_records": 2,
-      "checked_at": "2026-08-13 10:39"
+      "checked_at": "2026-08-13 12:21"
     }
   },
   "candidate_cache": [
