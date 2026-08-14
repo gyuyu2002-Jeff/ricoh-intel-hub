@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0",
+  "checkedAt": "2026-08-14",
+  "brandDirectory": [
+    { "id": "ricoh", "name": "RICOH", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "loaded": true },
+    { "id": "fujifilm", "name": "FUJIFILM", "checkedAt": "2026-08-14", "sourceUrl": "https://www.fujifilm.com/fbtw/zh-tw", "loaded": false },
+    { "id": "canon", "name": "Canon", "checkedAt": "2026-08-14", "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices", "loaded": true },
+    { "id": "konica-minolta", "name": "Konica M.", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/", "loaded": true },
+    { "id": "sharp", "name": "SHARP", "checkedAt": "2026-08-14", "sourceUrl": "https://global.sharp/business/printing/", "loaded": false },
+    { "id": "kyocera", "name": "Kyocera", "checkedAt": "2026-08-14", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh-tw/", "loaded": false },
+    { "id": "epson", "name": "Epson", "checkedAt": "2026-08-14", "sourceUrl": "https://www.epson.com.tw/", "loaded": false },
+    { "id": "hp", "name": "HP", "checkedAt": "2026-08-14", "sourceUrl": "https://www.hp.com/tw-zh/printers/business-printers.html", "loaded": false },
+    { "id": "brother", "name": "Brother", "checkedAt": "2026-08-14", "sourceUrl": "https://www.brother.tw/", "loaded": false }
+  ],
+  "brands": [
+    {
+      "id": "ricoh", "index": "01", "name": "RICOH", "regionStatus": "台灣已確認", "statusTone": "stamp-red", "checkedAt": "2026-08-14", "models": "IM C4510",
+      "summary": { "entryPoint": "文件管理流程與安全存取，先把方案條件說清楚。", "competitiveStrength": "官方頁提供文件工作流程、資訊安全與軟體解決方案分類。", "mustAsk": "確認台灣料號、ADF／裝訂等選配與服務範圍。" },
+      "sources": [
+        { "title": "RICOH IM C4510", "description": "台灣理光 · A3 彩色多功能事務機 · 台灣", "status": "已確認", "checkedAt": "2026-08-14", "url": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510" },
+        { "title": "RICOH IM C4510 PDF 型錄", "description": "台灣理光 · 中文產品型錄 · 規格細項", "status": "已確認", "checkedAt": "2026-08-14", "url": "https://www.ricoh.com.tw/-/media/rtw/files/pdfs/chinese-product-brochure/chinese-office-solution/chinese-mfp-color/imc-2010_6010_ch_web.pdf" }
+      ],
+      "fields": {
+        "model": { "value": "IM C4510", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "sourceLabel": "台灣理光產品頁" },
+        "positioning": { "value": "A3 彩色多功能事務機；文件管理與安全存取", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "sourceLabel": "產品介紹" },
+        "printSpeed": { "value": "最高 45 ppm", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "sourceLabel": "產品重點" },
+        "scanSpeed": { "value": "依 ADF 配置；官方頁提供掃描功能分類", "status": "待確認", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "sourceLabel": "掃描功能" },
+        "scanDestinations": { "value": "Smart Device Connector；第三方雲端連接", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "sourceLabel": "軟體及解決方案" },
+        "transportSecurity": { "value": "官方頁提供資訊安全規格分類；細項依型錄確認", "status": "待確認", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "sourceLabel": "資訊安全" },
+        "deviceSecurity": { "value": "安全可靠；管理員帳戶與權限設定", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "sourceLabel": "產品介紹" },
+        "cloudManagement": { "value": "Smart Device Connector；應用程式可更新", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "sourceLabel": "解決方案" },
+        "taiwanSuitability": { "value": "台灣官方產品頁與型錄已提供", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "sourceLabel": "台灣理光" },
+        "limitations": { "value": "選配傳真、ADF／裝訂與服務條件需依報價確認", "status": "條件", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "sourceLabel": "規格與選配" }
+      }
+    },
+    {
+      "id": "canon", "index": "02", "name": "Canon", "regionStatus": "台灣已確認", "statusTone": "stamp-green", "checkedAt": "2026-08-14", "models": "imageRUNNER ADVANCE DX C3930i",
+      "summary": { "entryPoint": "商用多功能輸出與雲端／行動列印整合。", "competitiveStrength": "官方規格列出 AirPrint、Mopria、Canon PRINT Business、uniFLOW Online 與 Universal Print。", "mustAsk": "確認 C3930i 與 C3926i 型號差異、選配與雲端授權。" },
+      "sources": [
+        { "title": "Canon imageRUNNER ADVANCE DX C3930i", "description": "佳能台灣 · 商用多功能複合機 · 台灣規格", "status": "已確認", "checkedAt": "2026-08-14", "url": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices" },
+        { "title": "Canon C3930i 使用手冊", "description": "Canon 官方手冊 · 繁體中文操作與規格參考", "status": "已確認", "checkedAt": "2026-08-14", "url": "https://oip.manual.canon/USRMA-8194-zz-CS-3900-zhTW/contents/devu-dev-dev_spec-main_unit.html" }
+      ],
+      "fields": {
+        "model": { "value": "imageRUNNER ADVANCE DX C3930i", "checkedAt": "2026-08-14", "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices", "sourceLabel": "佳能台灣規格頁" },
+        "positioning": { "value": "商用多功能複合機；文件輸出與雲端／行動列印", "checkedAt": "2026-08-14", "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices", "sourceLabel": "產品頁" },
+        "printSpeed": { "value": "最高 30 ppm（A4）", "checkedAt": "2026-08-14", "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices", "sourceLabel": "列印速度" },
+        "scanSpeed": { "value": "官方頁本次未列單一掃描速度；依配置確認", "status": "待確認", "checkedAt": "2026-08-14", "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices", "sourceLabel": "Canon 規格頁" },
+        "scanDestinations": { "value": "AirPrint · Mopria · Canon PRINT Business · uniFLOW Online · Universal Print", "checkedAt": "2026-08-14", "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices", "sourceLabel": "雲端列印" },
+        "transportSecurity": { "value": "官方規格與手冊分開提供；協定細項依部署版本確認", "status": "待確認", "checkedAt": "2026-08-14", "sourceUrl": "https://oip.manual.canon/USRMA-8194-zz-CS-3900-zhTW/contents/devu-dev-dev_spec-main_unit.html", "sourceLabel": "Canon 官方手冊" },
+        "deviceSecurity": { "value": "支援官方手冊與技術支援查核；未在本次摘要直接判定", "status": "待確認", "checkedAt": "2026-08-14", "sourceUrl": "https://oip.manual.canon/USRMA-8194-zz-CS-3900-zhTW/contents/devu-dev-dev_spec-main_unit.html", "sourceLabel": "Canon 官方手冊" },
+        "cloudManagement": { "value": "uniFLOW Online；另支援 Universal Print", "checkedAt": "2026-08-14", "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices", "sourceLabel": "雲端應用程式" },
+        "taiwanSuitability": { "value": "佳能台灣官方規格頁已提供", "checkedAt": "2026-08-14", "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices", "sourceLabel": "佳能台灣" },
+        "limitations": { "value": "C3930i／C3926i 規格需分辨；Adobe PostScript 3 為選購", "status": "條件", "checkedAt": "2026-08-14", "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices", "sourceLabel": "列印規格" }
+      }
+    },
+    {
+      "id": "konica-minolta", "index": "03", "name": "Konica Minolta", "regionStatus": "海外官方頁／台灣待確認", "statusTone": "stamp-blue", "checkedAt": "2026-08-14", "models": "bizhub C360i / C300i / C250i",
+      "summary": { "entryPoint": "i-Series 以雲端工作流程與面板體驗切入。", "competitiveStrength": "官方頁標示雲端掃描工作流程、雙面掃描選項與高容量紙匣。", "mustAsk": "確認台灣料號、服務據點、選配與在地 SLA。" },
+      "sources": [
+        { "title": "bizhub C360i / C300i / C250i", "description": "Konica Minolta 官方產品頁 · 海外產品資訊", "status": "待確認", "checkedAt": "2026-08-14", "url": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/" },
+        { "title": "bizhub C360i 系列 Spec Sheet", "description": "Konica Minolta 官方規格型錄 · 海外 PDF", "status": "待確認", "checkedAt": "2026-08-14", "url": "https://kmbscontent.konicaminolta.us/wps/wcm/connect/newweb/7bc0757d-0dbd-4c78-92ae-2213485b9d1c/bizhub_C360i_Cloud_Enabled_Datasheet.pdf?MOD=AJPERES&attachment=false&id=1694004254115" }
+      ],
+      "fields": {
+        "model": { "value": "bizhub C360i / C300i / C250i", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/", "sourceLabel": "官方產品頁" },
+        "positioning": { "value": "i-Series；雲端工作流程與高效能多功能事務機", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/", "sourceLabel": "產品介紹" },
+        "printSpeed": { "value": "C360i／C300i／C250i；速度依官方 Spec Sheet", "status": "待確認", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbscontent.konicominolta.us/wps/wcm/connect/newweb/7bc0757d-0dbd-4c78-92ae-2213485b9d1c/bizhub_C360i_Cloud_Enabled_Datasheet.pdf?MOD=AJPERES&attachment=false&id=1694004254115", "sourceLabel": "官方規格型錄" },
+        "scanSpeed": { "value": "雙面掃描選項最高 200 ipm", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/", "sourceLabel": "Key Features" },
+        "scanDestinations": { "value": "雲端掃描工作流程自動化；細項依部署確認", "status": "條件", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/", "sourceLabel": "產品介紹" },
+        "transportSecurity": { "value": "官方頁提供 Protect and Secure 方向；協定細項需查型錄", "status": "待確認", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/", "sourceLabel": "產品特點" },
+        "deviceSecurity": { "value": "標準 8 GB 記憶體與 256 GB SSD；安全功能依在地版本確認", "status": "待確認", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/", "sourceLabel": "產品介紹" },
+        "cloudManagement": { "value": "True cloud scan workflow automation；面板與行動列印支援", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/", "sourceLabel": "Key Features" },
+        "taiwanSuitability": { "value": "海外官方頁；台灣料號、供貨與 SLA 待確認", "status": "待確認", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/", "sourceLabel": "海外官方產品頁" },
+        "limitations": { "value": "海外資料不可直接視為台灣承諾；選配與服務條件需人工確認", "status": "條件", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbscontent.konicaminolta.us/wps/wcm/connect/newweb/7bc0757d-0dbd-4c78-92ae-2213485b9d1c/bizhub_C360i_Cloud_Enabled_Datasheet.pdf?MOD=AJPERES&attachment=false&id=1694004254115", "sourceLabel": "官方規格型錄" }
+      }
+    }
+  ]
+}
