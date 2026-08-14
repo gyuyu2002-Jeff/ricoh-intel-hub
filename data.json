@@ -988,8 +988,8 @@
   "collection_status": {
     "today": "2026-08-15",
     "status": "complete",
-    "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-14 17:21",
+    "latest_attempt_status": "failed",
+    "latest_attempt_at": "2026-08-15 06:34",
     "source_records": 2567,
     "candidate_records": 6,
     "review_records": 0,
@@ -997,7 +997,9 @@
       "2026-08-14",
       "2026-08-13"
     ],
-    "failed_dates": [],
+    "failed_dates": [
+      "2026-08-15"
+    ],
     "backfill_remaining_days": 0,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
