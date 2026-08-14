@@ -310,6 +310,7 @@ function SectionSkeleton({ view }: { view: View }) {
 
 function TenderCard({ tender }: { tender: Tender }) {
   const [expanded, setExpanded] = useState(false);
+  const latestHistory = tender.history[0];
   return (
     <article className="tender-card">
       <div className="dossier-spine" aria-hidden="true"><span>{tender.priority}</span><i>{tender.job}</i></div>
@@ -334,7 +335,7 @@ function TenderCard({ tender }: { tender: Tender }) {
         <Metric label="預算" value={tender.budget} note={tender.budget.includes("無") ? "附件／後續公告待確認" : "官方公告已提供"} />
         <Metric label="歷史折率中位數" value={tender.discount} note={tender.samples} />
         <Metric label={tender.reference.includes("不") ? "歷史優勢商" : "歷史參考價格"} value={tender.reference} note={tender.reference.includes("不") ? tender.competitor : "依中位折率推算｜僅供參考"} />
-        <Metric label="前次得標廠商" value={tender.previousWinner} note={`${tender.history[0][0]} · ${tender.history[0][2]}`} />
+        <Metric label="前次得標廠商" value={tender.previousWinner} note={latestHistory ? `${latestHistory[0]} · ${latestHistory[2]}` : "尚無歷史得標紀錄"} />
       </div>
       <div className="decision-strip">
         <div className="decision-main">
