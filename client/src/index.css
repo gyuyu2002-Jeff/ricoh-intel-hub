@@ -33,6 +33,11 @@
 .matrix-brand-cell.matrix-brand-active{position:relative}
 .matrix-brand-cell.matrix-brand-active:after{content:"目前選取";position:absolute;right:10px;bottom:7px;color:var(--red);font:700 8px "Noto Sans TC",sans-serif;letter-spacing:.04em}
 @media (max-width:820px){.matrix-row{grid-template-columns:150px repeat(9,203px)}.matrix-brand-cell.matrix-brand-active:after{display:none}}
+
+/* RICOH-first comparison: keep the primary brand visible and let the user select one comparison brand. */
+.brand-main-focused{min-width:0}.brand-main-focused .matrix-table{min-width:720px}.brand-main-focused .matrix-row{grid-template-columns:185px repeat(2,minmax(250px,1fr))}.brand-main-focused .matrix-competitor{background:#fff}.brand-select-trigger{min-width:170px}
+@media (max-width:820px){.brand-main-focused .matrix-table{min-width:640px}.brand-main-focused .matrix-row{grid-template-columns:150px repeat(2,minmax(220px,1fr))}.brand-select-trigger{min-width:0}}
+@media (max-width:560px){.brand-main-focused .matrix-table{min-width:600px}.brand-main-focused .matrix-row{grid-template-columns:125px repeat(2,220px)}}
 /* Award-history extension: the new fifth metric stays scannable without becoming a second card. */
 .metric-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.metric-grid .metric:last-child{border-right:0}.metric-grid .metric:nth-child(5){background:#f7faf6}.metric-grid .metric:nth-child(5) .metric-value{color:var(--deep);font-size:17px}.summary-source-link{display:inline-flex;align-items:center;gap:5px;justify-self:start;color:var(--red);font-size:10px;font-weight:700;text-decoration:none}.summary-source-link:hover{text-decoration:underline;transform:translateX(2px)}.award-note{display:flex;align-items:center;gap:9px;margin-top:13px;padding:11px 13px;background:#fff7f6;border-left:3px solid var(--red);color:#6f7d74;font-size:10px;line-height:1.5}.award-note span{color:var(--red);font:700 9px "Space Grotesk",sans-serif;letter-spacing:.06em}.award-note strong{color:#4f5e55;font-size:11px}.award-note em{margin-left:auto;color:#a08f8a;font-style:normal}.action-secondary{max-width:210px}
 @media (max-width:1100px){.metric-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.metric-grid .metric:nth-child(3){border-right:0}}
