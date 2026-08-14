@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-14 21:55",
+  "last_updated": "2026-08-14 23:18",
   "tenders": [
     {
       "city": "台北市",
@@ -1002,7 +1002,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-14 21:55",
+      "last_run_at": "2026-08-14 23:18",
       "backfill_dates": [],
       "failed_dates": []
     }
