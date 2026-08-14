@@ -4,7 +4,6 @@
  * language, and calm motion. This page intentionally avoids tracking/copy flows.
  */
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   ArrowUpRight,
   BarChart3,
@@ -387,10 +386,8 @@ function TenderCard({ tender }: { tender: Tender }) {
 }
 
 function BrandMatrix() {
-  const [scenario, setScenario] = useState("政府標案");
   const [openGroups, setOpenGroups] = useState({ core: true, workflow: true, security: true, service: false });
   const [matrixLoading, setMatrixLoading] = useState(false);
-  const updateScenario = (next: string) => { setMatrixLoading(true); setScenario(next); window.setTimeout(() => setMatrixLoading(false), 280); };
   const ricoh = brands.find((brand) => brand.id === "ricoh") ?? brands[0];
   const competitorOptions = brands.filter((brand) => brand.id !== "ricoh");
   const [comparisonBrandId, setComparisonBrandId] = useState(competitorOptions[0]?.id ?? "");
@@ -401,12 +398,10 @@ function BrandMatrix() {
   return (
     <section className="brand-workspace">
       <div className="comparison-toolbar">
-        <div className="toolbar-field"><span>客戶情境</span><button className="select-button">{scenario}<ChevronDown size={15} /></button></div>
-        <div className="toolbar-field"><span>比較品牌</span><Select value={competitor.id} onValueChange={(value) => { setMatrixLoading(true); setComparisonBrandId(value); window.setTimeout(() => setMatrixLoading(false), 280); }}><SelectTrigger className="select-button brand-select-trigger"><SelectValue /></SelectTrigger><SelectContent>{competitorOptions.map((brand) => <SelectItem key={brand.id} value={brand.id}>{brand.name}</SelectItem>)}</SelectContent></Select></div>
+        <label className="toolbar-field" htmlFor="comparison-brand"><span>比較品牌</span><select id="comparison-brand" className="select-button brand-select-native" value={competitor.id} onChange={(event) => { setMatrixLoading(true); setComparisonBrandId(event.target.value); window.setTimeout(() => setMatrixLoading(false), 280); }}>{competitorOptions.map((brand) => <option key={brand.id} value={brand.id}>{brand.name}</option>)}</select></label>
         <div className="toolbar-field"><span>型號層級</span><button className="select-button">代表型號 <ChevronDown size={15} /></button></div>
         <div className="toolbar-field"><span>資料狀態</span><button className="select-button">官方來源已建檔 <ChevronDown size={15} /></button></div>
       </div>
-      <div className="scenario-chips">{["政府標案", "企業多據點", "醫療／高資安", "價格導向"].map((item) => <button key={item} className={scenario === item ? "active" : ""} onClick={() => updateScenario(item)}>{item}</button>)}</div>
       <div className="matrix-summary">
         <div className="summary-block summary-red"><span className="summary-kicker">RICOH 主品牌</span><strong>{ricoh.summary.entryPoint}</strong><small>查核 {ricoh.checkedAt} · <a href={ricoh.sources[0].url} target="_blank" rel="noreferrer">官方來源</a></small></div>
         <div className="summary-block"><span className="summary-kicker">{competitor.name} 比較品牌</span><strong>{competitor.summary.competitiveStrength}</strong><a className="summary-source-link" href={competitor.sources[0].url} target="_blank" rel="noreferrer">查看官方來源 <ArrowUpRight size={13} /></a></div>
