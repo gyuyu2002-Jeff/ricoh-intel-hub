@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-14 13:59",
+  "last_updated": "2026-08-14 15:51",
   "tenders": [
     {
       "city": "台北市",
@@ -989,10 +989,10 @@
     "today": "2026-08-14",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-14 13:59",
-    "source_records": 2514,
+    "latest_attempt_at": "2026-08-14 15:51",
+    "source_records": 2543,
     "candidate_records": 6,
-    "review_records": 1,
+    "review_records": 0,
     "successful_dates": [
       "2026-08-14",
       "2026-08-13"
@@ -1426,14 +1426,14 @@
       "source_records": 2451,
       "candidate_records": 2,
       "review_records": 2,
-      "checked_at": "2026-08-14 13:43"
+      "checked_at": "2026-08-14 15:45"
     },
     "2026-08-14": {
       "status": "complete",
-      "source_records": 2514,
+      "source_records": 2543,
       "candidate_records": 6,
       "review_records": 5,
-      "checked_at": "2026-08-14 13:43"
+      "checked_at": "2026-08-14 15:45"
     }
   },
   "candidate_cache": [
@@ -8258,29 +8258,7 @@
       }
     }
   ],
-  "review_candidates": [
-    {
-      "date": "2026-07-27",
-      "title": "巴楠花改制國高中新校舍設施設備－教學及辦公設備(含系統整合)",
-      "unit": "高雄市立巴楠花部落國民中小學",
-      "unit_id": "3.97.6.34",
-      "job_number": "padan115005",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260727&fn=TIQ-1-71078354.xml",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 1,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公設備"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "政府公告明細暫時無法取得，等待下次自動查驗"
-      }
-    }
-  ],
+  "review_candidates": [],
   "history_cache": [
     {
       "unit_id": "55709324",
