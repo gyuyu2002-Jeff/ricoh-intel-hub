@@ -6,3 +6,4 @@
 - [x] 執行 TypeScript 檢查與正式建置。
 - [ ] 執行既有標案資料更新測試。
 - [ ] 同步提交至原始 GitHub 專案並確認 Actions 狀態。
+- [ ] 排查 GitHub Pages 顯示 404，確認 Pages source、artifact 與子路徑設定。
