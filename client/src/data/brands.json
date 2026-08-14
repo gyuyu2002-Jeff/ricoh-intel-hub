@@ -3,9 +3,9 @@
   "checkedAt": "2026-08-14",
   "brandDirectory": [
     { "id": "ricoh", "name": "RICOH", "checkedAt": "2026-08-14", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "loaded": true },
-    { "id": "fujifilm", "name": "FUJIFILM", "checkedAt": "2026-08-14", "sourceUrl": "https://www.fujifilm.com/fbtw/zh-tw/products/multifunction-printers", "loaded": true },
     { "id": "canon", "name": "Canon", "checkedAt": "2026-08-14", "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices", "loaded": true },
     { "id": "konica-minolta", "name": "Konica Minolta", "checkedAt": "2026-08-14", "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/", "loaded": true },
+    { "id": "fujifilm", "name": "FUJIFILM", "checkedAt": "2026-08-14", "sourceUrl": "https://www.fujifilm.com/fbtw/zh-tw/products/multifunction-printers", "loaded": true },
     { "id": "sharp", "name": "SHARP", "checkedAt": "2026-08-14", "sourceUrl": "https://global.sharp/products/copier/", "loaded": true },
     { "id": "kyocera", "name": "Kyocera", "checkedAt": "2026-08-14", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "loaded": true },
     { "id": "epson", "name": "Epson", "checkedAt": "2026-08-14", "sourceUrl": "https://www.epson.com.tw/", "loaded": true },
