@@ -21,6 +21,20 @@
       "statusTone": "stamp-red",
       "checkedAt": "2026-08-14",
       "models": "IM C4510",
+      "modelOptions": [
+        {
+          "id": "im-c4510",
+          "label": "IM C4510",
+          "status": "台灣實機型號",
+          "note": "台灣產品頁已確認；ADF、裝訂與服務選配需依報價確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510",
+          "sourceLabel": "台灣理光 IM C4510",
+          "fields": {
+            "model": { "value": "IM C4510", "checkedAt": "2026-08-15", "sourceUrl": "https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c4510", "sourceLabel": "台灣理光產品頁" }
+          }
+        }
+      ],
       "summary": {
         "entryPoint": "文件管理流程與安全存取，先把方案條件說清楚。",
         "competitiveStrength": "官方頁提供文件工作流程、資訊安全與軟體解決方案分類。",
@@ -51,6 +65,20 @@
       "statusTone": "stamp-green",
       "checkedAt": "2026-08-14",
       "models": "imageRUNNER ADVANCE DX C3930i",
+      "modelOptions": [
+        {
+          "id": "c3930i",
+          "label": "imageRUNNER ADVANCE DX C3930i",
+          "status": "台灣實機型號",
+          "note": "台灣規格已確認；送稿機 C1／BA1 與選配需依案件條件確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices",
+          "sourceLabel": "佳能台灣 C3930i 規格頁",
+          "fields": {
+            "model": { "value": "imageRUNNER ADVANCE DX C3930i", "checkedAt": "2026-08-15", "sourceUrl": "https://tw.canon/zh_TW/business/imagerunner-advance-dx-c3900i-series/main/specification?category=printing&subCategory=multi-functional-devices", "sourceLabel": "佳能台灣規格頁" }
+          }
+        }
+      ],
       "summary": {
         "entryPoint": "商用多功能輸出與雲端／行動列印整合。",
         "competitiveStrength": "官方規格列出 AirPrint、Mopria、Canon PRINT Business、uniFLOW Online 與 Universal Print。",
@@ -81,6 +109,47 @@
       "statusTone": "stamp-blue",
       "checkedAt": "2026-08-14",
       "models": "bizhub C360i / C300i / C250i",
+      "modelOptions": [
+        {
+          "id": "c360i",
+          "label": "bizhub C360i",
+          "status": "海外實機型號",
+          "note": "官方手冊已確認；台灣料號、供貨、選配與 SLA 需確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://manuals.konicaminolta.eu/bizhub-C360i-C300i-C250i-UD/EN/contents/id13-_104514277.html",
+          "sourceLabel": "Konica Minolta 官方手冊",
+          "fields": {
+            "model": { "value": "bizhub C360i", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://manuals.konicaminolta.eu/bizhub-C360i-C300i-C250i-UD/EN/contents/id13-_104514277.html", "sourceLabel": "Konica Minolta 官方手冊" },
+            "printSpeed": { "value": "A4 長邊進紙最高 36 ppm（彩色／黑白）", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://manuals.konicaminolta.eu/bizhub-C360i-C300i-C250i-UD/EN/contents/id13-_104514277.html", "sourceLabel": "Konica Minolta 官方手冊" }
+          }
+        },
+        {
+          "id": "c300i",
+          "label": "bizhub C300i",
+          "status": "海外實機型號",
+          "note": "官方手冊已確認；台灣料號、供貨、選配與 SLA 需確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://manuals.konicaminolta.eu/bizhub-C360i-C300i-C250i-UD/EN/contents/id13-_104514277.html",
+          "sourceLabel": "Konica Minolta 官方手冊",
+          "fields": {
+            "model": { "value": "bizhub C300i", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://manuals.konicaminolta.eu/bizhub-C360i-C300i-C250i-UD/EN/contents/id13-_104514277.html", "sourceLabel": "Konica Minolta 官方手冊" },
+            "printSpeed": { "value": "A4 長邊進紙最高 30 ppm（彩色／黑白）", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://manuals.konicaminolta.eu/bizhub-C360i-C300i-C250i-UD/EN/contents/id13-_104514277.html", "sourceLabel": "Konica Minolta 官方手冊" }
+          }
+        },
+        {
+          "id": "c250i",
+          "label": "bizhub C250i",
+          "status": "海外實機型號",
+          "note": "官方手冊已確認；台灣料號、供貨、選配與 SLA 需確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://manuals.konicaminolta.eu/bizhub-C360i-C300i-C250i-UD/EN/contents/id13-_104514277.html",
+          "sourceLabel": "Konica Minolta 官方手冊",
+          "fields": {
+            "model": { "value": "bizhub C250i", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://manuals.konicaminolta.eu/bizhub-C360i-C300i-C250i-UD/EN/contents/id13-_104514277.html", "sourceLabel": "Konica Minolta 官方手冊" },
+            "printSpeed": { "value": "A4 長邊進紙最高 25 ppm（彩色／黑白）", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://manuals.konicaminolta.eu/bizhub-C360i-C300i-C250i-UD/EN/contents/id13-_104514277.html", "sourceLabel": "Konica Minolta 官方手冊" }
+          }
+        }
+      ],
       "summary": {
         "entryPoint": "i-Series 以雲端工作流程與面板體驗切入。",
         "competitiveStrength": "官方頁標示雲端掃描工作流程、雙面掃描選項與高容量紙匣。",
@@ -111,6 +180,50 @@
       "statusTone": "stamp-amber",
       "checkedAt": "2026-08-14",
       "models": "Apeos New Series；C3061 / C2561 / C2061",
+      "modelOptions": [
+        {
+          "id": "apeos-c3061",
+          "label": "Apeos C3061",
+          "status": "海外實機型號",
+          "note": "海外官方規格已確認；台灣供貨、料號與服務條件需確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf",
+          "sourceLabel": "FUJIFILM Apeos 官方規格表",
+          "fields": {
+            "model": { "value": "Apeos C3061", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf", "sourceLabel": "FUJIFILM 官方規格表" },
+            "printSpeed": { "value": "A4 LEF 黑白／彩色最高 30 ppm", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf", "sourceLabel": "FUJIFILM 官方規格表" },
+            "scanSpeed": { "value": "最高 80 ppm（A4 LEF、200 dpi、Scan to Folder）", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf", "sourceLabel": "FUJIFILM 官方規格表" }
+          }
+        },
+        {
+          "id": "apeos-c2561",
+          "label": "Apeos C2561",
+          "status": "海外實機型號",
+          "note": "海外官方規格已確認；台灣供貨、料號與服務條件需確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf",
+          "sourceLabel": "FUJIFILM Apeos 官方規格表",
+          "fields": {
+            "model": { "value": "Apeos C2561", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf", "sourceLabel": "FUJIFILM 官方規格表" },
+            "printSpeed": { "value": "A4 LEF 黑白／彩色最高 25 ppm", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf", "sourceLabel": "FUJIFILM 官方規格表" },
+            "scanSpeed": { "value": "最高 80 ppm（A4 LEF、200 dpi、Scan to Folder）", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf", "sourceLabel": "FUJIFILM 官方規格表" }
+          }
+        },
+        {
+          "id": "apeos-c2061",
+          "label": "Apeos C2061",
+          "status": "海外實機型號",
+          "note": "海外官方規格已確認；台灣供貨、料號與服務條件需確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf",
+          "sourceLabel": "FUJIFILM Apeos 官方規格表",
+          "fields": {
+            "model": { "value": "Apeos C2061", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf", "sourceLabel": "FUJIFILM 官方規格表" },
+            "printSpeed": { "value": "A4 LEF 黑白／彩色最高 20 ppm", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf", "sourceLabel": "FUJIFILM 官方規格表" },
+            "scanSpeed": { "value": "最高 80 ppm（A4 LEF、200 dpi、Scan to Folder）", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://asset.fujifilm.com/www/nl/files/2026-05/303ec1a654e0d01469bfaaf776441645/nm0028S_ap_c3061_spec_en.pdf", "sourceLabel": "FUJIFILM 官方規格表" }
+          }
+        }
+      ],
       "summary": {
         "entryPoint": "以文件數位化、掃描與安全文件管理切入。",
         "competitiveStrength": "Apeos 系列官方資料涵蓋多功能輸出、行動操作、掃描儲存與無紙化傳真。",
@@ -142,6 +255,22 @@
       "statusTone": "stamp-blue",
       "checkedAt": "2026-08-14",
       "models": "BP 系列數位 MFP；A3／A4 彩色與黑白",
+      "modelOptions": [
+        {
+          "id": "bp-70c45",
+          "label": "BP-70C45",
+          "status": "海外實機型號",
+          "note": "全球官方規格已確認；台灣料號、供貨與 SLA 需確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://global.sharp/products/copier/products/bp_70c65/specifications/index.html",
+          "sourceLabel": "SHARP BP-70C45 官方規格",
+          "fields": {
+            "model": { "value": "BP-70C45", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://global.sharp/products/copier/products/bp_70c65/specifications/index.html", "sourceLabel": "SHARP 官方規格頁" },
+            "printSpeed": { "value": "A4 最高 45 ppm", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://global.sharp/products/copier/products/bp_70c65/specifications/index.html", "sourceLabel": "SHARP 官方規格頁" },
+            "scanSpeed": { "value": "單面最高 140 originals/min；雙面最高 280 originals/min", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://global.sharp/products/copier/products/bp_70c65/specifications/index.html", "sourceLabel": "SHARP 官方規格頁" }
+          }
+        }
+      ],
       "summary": {
         "entryPoint": "以數位 MFP、文件系統與裝置資安能力切入。",
         "competitiveStrength": "官方商用資料涵蓋使用者驗證、加密、防火牆、韌體完整性與裝置管理。",
@@ -173,6 +302,14 @@
       "statusTone": "stamp-green",
       "checkedAt": "2026-08-14",
       "models": "TASKalfa 2554ci／3554ci／4054ci／5054ci／6054ci／7054ci",
+      "modelOptions": [
+        { "id": "taskalfa-2554ci", "label": "TASKalfa 2554ci", "status": "台灣實機型號", "note": "台灣官方型號清單已確認；ADF、資安協定與選配需依案件確認。", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣京瓷彩色 MFP 清單", "fields": { "model": { "value": "TASKalfa 2554ci", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣彩色 MFP 清單" }, "printSpeed": { "value": "A4 黑白／彩色最高 25 ppm", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣列印速度清單" } } },
+        { "id": "taskalfa-3554ci", "label": "TASKalfa 3554ci", "status": "台灣實機型號", "note": "台灣官方型號清單已確認；ADF、資安協定與選配需依案件確認。", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣京瓷彩色 MFP 清單", "fields": { "model": { "value": "TASKalfa 3554ci", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣彩色 MFP 清單" }, "printSpeed": { "value": "A4 黑白／彩色最高 35 ppm", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣列印速度清單" } } },
+        { "id": "taskalfa-4054ci", "label": "TASKalfa 4054ci", "status": "台灣實機型號", "note": "台灣官方型號清單已確認；ADF、資安協定與選配需依案件確認。", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣京瓷彩色 MFP 清單", "fields": { "model": { "value": "TASKalfa 4054ci", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣彩色 MFP 清單" }, "printSpeed": { "value": "A4 黑白／彩色最高 40 ppm", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣列印速度清單" } } },
+        { "id": "taskalfa-5054ci", "label": "TASKalfa 5054ci", "status": "台灣實機型號", "note": "台灣官方型號清單已確認；ADF、資安協定與選配需依案件確認。", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣京瓷彩色 MFP 清單", "fields": { "model": { "value": "TASKalfa 5054ci", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣彩色 MFP 清單" }, "printSpeed": { "value": "A4 黑白／彩色最高 50 ppm", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣列印速度清單" } } },
+        { "id": "taskalfa-6054ci", "label": "TASKalfa 6054ci", "status": "台灣實機型號", "note": "台灣官方型號清單已確認；ADF、資安協定與選配需依案件確認。", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣京瓷彩色 MFP 清單", "fields": { "model": { "value": "TASKalfa 6054ci", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣彩色 MFP 清單" }, "printSpeed": { "value": "A4 黑白／彩色最高 60 ppm", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣列印速度清單" } } },
+        { "id": "taskalfa-7054ci", "label": "TASKalfa 7054ci", "status": "台灣實機型號", "note": "台灣官方型號清單已確認；ADF、資安協定與選配需依案件確認。", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣京瓷彩色 MFP 清單", "fields": { "model": { "value": "TASKalfa 7054ci", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣彩色 MFP 清單" }, "printSpeed": { "value": "A4 黑白／彩色最高 70 ppm", "checkedAt": "2026-08-15", "sourceUrl": "https://www.kyoceradocumentsolutions.com/tw/zh/products/index-color-mfp.html", "sourceLabel": "台灣列印速度清單" } } }
+      ],
       "summary": {
         "entryPoint": "以台灣 A3 彩色 MFP、長期耐用與企業工作流程切入。",
         "competitiveStrength": "台灣官方清單直接列出 A3／A4 型號、列印速度與彩色掃描、紙張處理及解決方案。",
@@ -203,6 +340,22 @@
       "statusTone": "stamp-blue",
       "checkedAt": "2026-08-14",
       "models": "WorkForce Pro／WorkForce Enterprise；商用免加熱微噴影印機",
+      "modelOptions": [
+        {
+          "id": "am-c550",
+          "label": "WorkForce Enterprise AM-C550",
+          "status": "海外實機型號",
+          "note": "Epson America 規格已確認；台灣 SKU、供貨與服務條件需確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://mediaserver.goepson.com/ImConvServlet/imconv/6ad24813bdd6604f2edcf23e6abcad38dd8ff7c4/original?assetDescr=WorkForce_Enterprise_AM-C550_Specification_Sheet_CPD-64345.pdf",
+          "sourceLabel": "Epson AM-C550 官方規格表",
+          "fields": {
+            "model": { "value": "WorkForce Enterprise AM-C550", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://mediaserver.goepson.com/ImConvServlet/imconv/6ad24813bdd6604f2edcf23e6abcad38dd8ff7c4/original?assetDescr=WorkForce_Enterprise_AM-C550_Specification_Sheet_CPD-64345.pdf", "sourceLabel": "Epson 官方規格表" },
+            "printSpeed": { "value": "黑白／彩色最高 55 ISO ppm", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://mediaserver.goepson.com/ImConvServlet/imconv/6ad24813bdd6604f2edcf23e6abcad38dd8ff7c4/original?assetDescr=WorkForce_Enterprise_AM-C550_Specification_Sheet_CPD-64345.pdf", "sourceLabel": "Epson 官方規格表" },
+            "scanSpeed": { "value": "ADF 單面最高 50 ipm；雙面最高 100 ipm", "status": "海外規格", "checkedAt": "2026-08-15", "sourceUrl": "https://mediaserver.goepson.com/ImConvServlet/imconv/6ad24813bdd6604f2edcf23e6abcad38dd8ff7c4/original?assetDescr=WorkForce_Enterprise_AM-C550_Specification_Sheet_CPD-64345.pdf", "sourceLabel": "Epson 官方規格表" }
+          }
+        }
+      ],
       "summary": {
         "entryPoint": "以商用噴墨、免加熱文件輸出與能源效率切入。",
         "competitiveStrength": "台灣官方入口涵蓋商用印表機、免加熱微噴影印機、掃描與行動列印／掃描支援。",
@@ -233,6 +386,36 @@
       "statusTone": "stamp-green",
       "checkedAt": "2026-08-14",
       "models": "Color LaserJet Pro MFP 4301fdw／LaserJet Pro MFP 4103fdw",
+      "modelOptions": [
+        {
+          "id": "clj-4301fdw",
+          "label": "Color LaserJet Pro MFP 4301fdw",
+          "status": "台灣實機型號",
+          "note": "官方技術規格已確認；台灣 SKU、企業服務與韌體版本需確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://www.hp.com/lk-en/products/printers/product-details/product-specifications/2100840353",
+          "sourceLabel": "HP 4301fdw 官方技術規格",
+          "fields": {
+            "model": { "value": "Color LaserJet Pro MFP 4301fdw", "checkedAt": "2026-08-15", "sourceUrl": "https://www.hp.com/lk-en/products/printers/product-details/product-specifications/2100840353", "sourceLabel": "HP 官方技術規格" },
+            "printSpeed": { "value": "A4 黑白／彩色最高 33 ppm", "checkedAt": "2026-08-15", "sourceUrl": "https://www.hp.com/lk-en/products/printers/product-details/product-specifications/2100840353", "sourceLabel": "HP 官方技術規格" },
+            "scanSpeed": { "value": "A4 單面最高 29 ppm（黑白）／26 ppm（彩色）；雙面最高 44／35 ipm", "checkedAt": "2026-08-15", "sourceUrl": "https://www.hp.com/lk-en/products/printers/product-details/product-specifications/2100840353", "sourceLabel": "HP 官方技術規格" }
+          }
+        },
+        {
+          "id": "lj-4103fdw",
+          "label": "LaserJet Pro MFP 4103fdw",
+          "status": "台灣實機型號",
+          "note": "官方列印速度已確認；ADF 掃描速度、台灣 SKU 與企業服務需確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://support.hp.com/hr-en/product/product-specs/hp-laserjet-pro-mfp-4101-4104dw-fdn-fdw-printer-series/model/38348000",
+          "sourceLabel": "HP 4103fdw 官方支援規格",
+          "fields": {
+            "model": { "value": "LaserJet Pro MFP 4103fdw", "checkedAt": "2026-08-15", "sourceUrl": "https://support.hp.com/hr-en/product/product-specs/hp-laserjet-pro-mfp-4101-4104dw-fdn-fdw-printer-series/model/38348000", "sourceLabel": "HP 官方支援規格" },
+            "printSpeed": { "value": "A4 黑白最高 40 ppm", "checkedAt": "2026-08-15", "sourceUrl": "https://support.hp.com/hr-en/product/product-specs/hp-laserjet-pro-mfp-4101-4104dw-fdn-fdw-printer-series/model/38348000", "sourceLabel": "HP 官方支援規格" },
+            "scanSpeed": { "value": "需確認：官方支援規格本輪僅直接核對 A4 列印速度。", "status": "待確認", "checkedAt": "2026-08-15", "sourceUrl": "https://support.hp.com/hr-en/product/product-specs/hp-laserjet-pro-mfp-4101-4104dw-fdn-fdw-printer-series/model/38348000", "sourceLabel": "HP 官方支援規格" }
+          }
+        }
+      ],
       "summary": {
         "entryPoint": "以商用 LaserJet MFP、HP 應用程式與列印安全切入。",
         "competitiveStrength": "台灣官方頁列出 MFP 的列印、掃描、複印、傳真、雙面與無線；企業頁補充機隊管理與雲端工作流程。",
@@ -263,6 +446,22 @@
       "statusTone": "stamp-blue",
       "checkedAt": "2026-08-14",
       "models": "MFC-J3960DW；台灣商用多功能系列",
+      "modelOptions": [
+        {
+          "id": "mfc-j3960dw",
+          "label": "MFC-J3960DW",
+          "status": "台灣實機型號",
+          "note": "台灣單機已確認；ADF 掃描速度、商用資安方案與 SLA 需確認。",
+          "checkedAt": "2026-08-15",
+          "sourceUrl": "https://www.brother.tw/zh-tw/printers/all-printers/mfc-j3960dw",
+          "sourceLabel": "Brother 台灣 MFC-J3960DW",
+          "fields": {
+            "model": { "value": "MFC-J3960DW", "checkedAt": "2026-08-15", "sourceUrl": "https://www.brother.tw/zh-tw/printers/all-printers/mfc-j3960dw", "sourceLabel": "Brother 台灣產品頁" },
+            "printSpeed": { "value": "A4 列印最高 31 頁／分黑白／30 頁／分彩色", "checkedAt": "2026-08-15", "sourceUrl": "https://www.brother.tw/zh-tw/printers/all-printers/mfc-j3960dw", "sourceLabel": "Brother 台灣產品頁" },
+            "scanSpeed": { "value": "支援 50 頁 ADF 與雙面掃描；官方頁未列 ADF 掃描速度，需確認", "status": "待確認", "checkedAt": "2026-08-15", "sourceUrl": "https://www.brother.tw/zh-tw/printers/all-printers/mfc-j3960dw", "sourceLabel": "Brother 台灣產品頁" }
+          }
+        }
+      ],
       "summary": {
         "entryPoint": "以 A3 商用多功能、行動列印與文件流程方案切入。",
         "competitiveStrength": "台灣產品入口涵蓋 A3、ADF、雙面掃描與行動列印；商用方案補充驗證、TLS、雲端與安全列印。",

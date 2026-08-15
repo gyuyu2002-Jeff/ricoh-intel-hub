@@ -25,6 +25,16 @@ import brandPayload from "../data/brands.json";
 
 type View = "tenders" | "brands";
 type BrandField = { value: string; status?: string; checkedAt: string; sourceUrl: string; sourceLabel: string };
+type ModelOption = {
+  id: string;
+  label: string;
+  status: string;
+  note: string;
+  checkedAt: string;
+  sourceUrl: string;
+  sourceLabel: string;
+  fields: Record<string, BrandField>;
+};
 type Brand = {
   id: string;
   index: string;
@@ -33,6 +43,7 @@ type Brand = {
   statusTone: string;
   checkedAt: string;
   models: string;
+  modelOptions: ModelOption[];
   summary: { entryPoint: string; competitiveStrength: string; mustAsk: string };
   sources: Array<{ title: string; description: string; status: string; checkedAt: string; url: string }>;
   fields: Record<string, BrandField>;
@@ -82,6 +93,12 @@ type Tender = {
 
 const payload = brandPayload as Payload;
 const { brands } = payload;
+const modelStampTone = (status: string) => status.includes("海外") ? "stamp-amber" : status.includes("台灣") ? "stamp-green" : "stamp-blue";
+const resolveBrandModel = (brand: Brand, modelId?: string) => {
+  const activeModel = brand.modelOptions.find((model) => model.id === modelId) ?? brand.modelOptions[0];
+  if (!activeModel) return { ...brand, activeModel: undefined };
+  return { ...brand, activeModel, fields: { ...brand.fields, ...activeModel.fields } };
+};
 const rows = [
   ["model", "代表系列／型號"],
   ["positioning", "定位"],
@@ -391,26 +408,34 @@ function BrandMatrix() {
   const ricoh = brands.find((brand) => brand.id === "ricoh") ?? brands[0];
   const competitorOptions = brands.filter((brand) => brand.id !== "ricoh");
   const [comparisonBrandId, setComparisonBrandId] = useState(competitorOptions[0]?.id ?? "");
-  const competitor = competitorOptions.find((brand) => brand.id === comparisonBrandId) ?? competitorOptions[0];
-  const visibleBrands = ricoh && competitor ? [ricoh, competitor] : [];
+  const [comparisonModelId, setComparisonModelId] = useState(competitorOptions[0]?.modelOptions[0]?.id ?? "");
+  const competitorBase = competitorOptions.find((brand) => brand.id === comparisonBrandId) ?? competitorOptions[0];
+  const selectedRicoh = ricoh ? resolveBrandModel(ricoh) : undefined;
+  const competitor = competitorBase ? resolveBrandModel(competitorBase, comparisonModelId) : undefined;
+  const visibleBrands = selectedRicoh && competitor ? [selectedRicoh, competitor] : [];
   if (matrixLoading) return <SectionSkeleton view="brands" />;
-  if (!ricoh || !competitor) return <div className="brand-empty-state">目前沒有足夠的品牌資料可供比較。</div>;
+  if (!ricoh || !selectedRicoh || !competitor || !competitor.activeModel || !selectedRicoh.activeModel) return <div className="brand-empty-state">目前沒有足夠的已建檔型號資料可供比較。</div>;
   return (
     <section className="brand-workspace">
       <div className="comparison-toolbar">
-        <label className="toolbar-field" htmlFor="comparison-brand"><span>比較品牌</span><select id="comparison-brand" className="select-button brand-select-native" value={competitor.id} onChange={(event) => { setMatrixLoading(true); setComparisonBrandId(event.target.value); window.setTimeout(() => setMatrixLoading(false), 280); }}>{competitorOptions.map((brand) => <option key={brand.id} value={brand.id}>{brand.name}</option>)}</select></label>
-        <div className="toolbar-field"><span>型號層級</span><button className="select-button">代表型號 <ChevronDown size={15} /></button></div>
-        <div className="toolbar-field"><span>資料狀態</span><button className="select-button">官方來源已建檔 <ChevronDown size={15} /></button></div>
+        <label className="toolbar-field" htmlFor="comparison-brand"><span>比較品牌</span><select id="comparison-brand" className="select-button brand-select-native" value={competitor.id} onChange={(event) => { const nextBrand = competitorOptions.find((brand) => brand.id === event.target.value); setMatrixLoading(true); setComparisonBrandId(event.target.value); setComparisonModelId(nextBrand?.modelOptions[0]?.id ?? ""); window.setTimeout(() => setMatrixLoading(false), 280); }}>{competitorOptions.map((brand) => <option key={brand.id} value={brand.id}>{brand.name}</option>)}</select></label>
+        <label className="toolbar-field" htmlFor="comparison-model"><span>比較型號</span><select id="comparison-model" className="select-button brand-select-native" value={competitor.activeModel.id} onChange={(event) => { setMatrixLoading(true); setComparisonModelId(event.target.value); window.setTimeout(() => setMatrixLoading(false), 280); }}>{competitorBase.modelOptions.map((model) => <option key={model.id} value={model.id}>{model.label}</option>)}</select></label>
+        <div className="toolbar-field toolbar-status"><span>資料狀態</span><div className="toolbar-status-copy"><strong>{competitor.activeModel.status}</strong><small>查核 {competitor.activeModel.checkedAt}</small></div></div>
+      </div>
+      <div className="model-verification-strip">
+        <div><span>固定主品牌</span><strong>{selectedRicoh.activeModel.label}</strong></div>
+        <div><span>已選比較型號</span><strong>{competitor.activeModel.label}</strong><a href={competitor.activeModel.sourceUrl} target="_blank" rel="noreferrer">{competitor.activeModel.sourceLabel} <ExternalLink size={11} /></a></div>
+        <div><span>待核對動作</span><strong>{competitor.activeModel.note}</strong></div>
       </div>
       <div className="matrix-summary">
-        <div className="summary-block summary-red"><span className="summary-kicker">RICOH 主品牌</span><strong>{ricoh.summary.entryPoint}</strong><small>查核 {ricoh.checkedAt} · <a href={ricoh.sources[0].url} target="_blank" rel="noreferrer">官方來源</a></small></div>
-        <div className="summary-block"><span className="summary-kicker">{competitor.name} 比較品牌</span><strong>{competitor.summary.competitiveStrength}</strong><a className="summary-source-link" href={competitor.sources[0].url} target="_blank" rel="noreferrer">查看官方來源 <ArrowUpRight size={13} /></a></div>
-        <div className="summary-block"><span className="summary-kicker">比較時必問</span><strong>{competitor.summary.mustAsk}</strong><small>以 {competitor.name} 官方資料為比較依據 · 查核 {competitor.checkedAt}</small></div>
+        <div className="summary-block summary-red"><span className="summary-kicker">RICOH 主品牌 · {selectedRicoh.activeModel.label}</span><strong>{selectedRicoh.summary.entryPoint}</strong><small>查核 {selectedRicoh.activeModel.checkedAt} · <a href={selectedRicoh.activeModel.sourceUrl} target="_blank" rel="noreferrer">型號官方來源</a></small></div>
+        <div className="summary-block"><span className="summary-kicker">{competitor.name} · {competitor.activeModel.label}</span><strong>{competitor.summary.competitiveStrength}</strong><a className="summary-source-link" href={competitor.activeModel.sourceUrl} target="_blank" rel="noreferrer">查看型號官方來源 <ArrowUpRight size={13} /></a></div>
+        <div className="summary-block"><span className="summary-kicker">待核對動作</span><strong>{competitor.activeModel.note}</strong><small>此型號狀態：{competitor.activeModel.status} · 查核 {competitor.activeModel.checkedAt}</small></div>
       </div>
       <div className="matrix-shell">
-        <div className="matrix-scroll-hint"><span><PanelLeft size={14} /> RICOH 固定主品牌</span><span>{competitor.name} · 單一比較視圖 <ArrowUpRight size={13} /></span></div>
+        <div className="matrix-scroll-hint"><span><PanelLeft size={14} /> RICOH 固定主品牌 · {selectedRicoh.activeModel.label}</span><span>{competitor.name} · {competitor.activeModel.label} <ArrowUpRight size={13} /></span></div>
         <div className="matrix-table" role="table">
-          <div className="matrix-row matrix-head"><div className="matrix-label-cell">比較項目</div>{visibleBrands.map((brand) => <div className={`matrix-brand-cell ${brand.id === "ricoh" ? "matrix-ricoh" : "matrix-competitor"}`} data-brand-id={brand.id} key={brand.id}><span className="brand-index">{brand.index}</span><strong>{brand.name}</strong><Stamp tone={brand.statusTone}>{brand.regionStatus}</Stamp><small>查核 {brand.checkedAt}</small></div>)}</div>
+          <div className="matrix-row matrix-head"><div className="matrix-label-cell">比較項目</div>{visibleBrands.map((brand) => <div className={`matrix-brand-cell ${brand.id === "ricoh" ? "matrix-ricoh" : "matrix-competitor"}`} data-brand-id={brand.id} key={brand.id}><span className="brand-index">{brand.index}</span><div className="matrix-brand-identity"><strong>{brand.name}</strong><small>{brand.activeModel?.label} · 查核 {brand.activeModel?.checkedAt}</small></div><Stamp tone={modelStampTone(brand.activeModel?.status ?? "")}>{brand.activeModel?.status ?? brand.regionStatus}</Stamp></div>)}</div>
           {groups.map((group) => openGroups[group.id as keyof typeof openGroups] && <div key={group.id} className="matrix-group"><button className="matrix-group-title" onClick={() => setOpenGroups({ ...openGroups, [group.id]: !openGroups[group.id as keyof typeof openGroups] })}><span><span className="group-rule" />{group.label}</span><ChevronDown size={15} /></button>{rows.slice(group.start, group.end).map(([key, label]) => <div className="matrix-row" key={key}><div className="matrix-label-cell"><span>{label}</span></div>{visibleBrands.map((brand) => { const field = brand.fields[key]; return <div className={`matrix-value-cell ${brand.id === "ricoh" ? "matrix-ricoh" : "matrix-competitor"}`} key={`${brand.id}-${key}`}><span>{field?.value ?? "待建檔"}</span>{field?.status && <span className={`cell-flag ${field.status === "待確認" ? "flag-blue" : "flag-amber"}`}>{field.status}</span>}{field?.sourceUrl && <a className="cell-evidence" href={field.sourceUrl} target="_blank" rel="noreferrer">來源 <ExternalLink size={11} /></a>}</div>; })}</div>)}</div>)}
         </div>
       </div>
