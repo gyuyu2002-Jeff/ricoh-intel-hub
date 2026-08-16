@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-17 04:49",
+  "last_updated": "2026-08-17 06:37",
   "tenders": [
     {
       "city": "台北市",
@@ -988,18 +988,16 @@
   "collection_status": {
     "today": "2026-08-17",
     "status": "complete",
-    "latest_attempt_status": "failed",
-    "latest_attempt_at": "2026-08-16 18:02",
-    "source_records": 2567,
-    "candidate_records": 6,
+    "latest_attempt_status": "complete",
+    "latest_attempt_at": "2026-08-17 06:37",
+    "source_records": 1663,
+    "candidate_records": 4,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-14",
-      "2026-08-13"
-    ],
-    "failed_dates": [
+      "2026-08-17",
       "2026-08-16"
     ],
+    "failed_dates": [],
     "backfill_remaining_days": 0,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
@@ -1422,9 +1420,182 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-08-17 00:47"
+    },
+    "2026-08-17": {
+      "status": "complete",
+      "source_records": 1663,
+      "candidate_records": 4,
+      "review_records": 4,
+      "checked_at": "2026-08-17 06:32"
+    },
+    "2026-08-16": {
+      "status": "complete",
+      "source_records": 0,
+      "candidate_records": 0,
+      "review_records": 0,
+      "checked_at": "2026-08-17 06:32"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260817,
+      "filename": "TIQ-11-71090023",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "佳民國小115年度非山非市學校資訊設備採購",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "cmps1150701",
+      "unit_id": "3.76.55.97.93",
+      "unit_name": "花蓮縣秀林鄉佳民國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.55.97.93",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.55.97.93&job_number=cmps1150701",
+      "unit_url": "/index/unit/3.76.55.97.93",
+      "url": "/index/case/3.76.55.97.93/cmps1150701/20260817/TIQ-11-71090023",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260817,
+      "filename": "TIQ-1-71094281",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "屏東縣政府「115年度本縣國中小資訊教室資訊設備更新採購案」",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "ggps1150806",
+      "unit_id": "3.76.53.97.4",
+      "unit_name": "屏東縣屏東市公館國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.53.97.4",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.53.97.4&job_number=ggps1150806",
+      "unit_url": "/index/unit/3.76.53.97.4",
+      "url": "/index/case/3.76.53.97.4/ggps1150806/20260817/TIQ-1-71094281",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260817,
+      "filename": "FAS-1-70020450",
+      "brief": {
+        "type": "財物變賣公告",
+        "title": "內政部警政署 「115年報廢事務設備財物50件」標售案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-NPA-02",
+      "unit_id": "3.1.1",
+      "unit_name": "內政部警政署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.1.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.1.1&job_number=115-NPA-02",
+      "unit_url": "/index/unit/3.1.1",
+      "url": "/index/case/3.1.1/115-NPA-02/20260817/FAS-1-70020450",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "事務設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260817,
+      "filename": "BDM-1-71259556",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年資訊設備汰舊換新",
+        "companies": {
+          "ids": [
+            "00252000"
+          ],
+          "names": [
+            "拓雲資科股份有限公司",
+            "CloudXpander"
+          ],
+          "id_key": {
+            "00252000": [
+              "投標廠商:投標廠商1:廠商代碼",
+              "英文公告:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "CloudXpander": [
+              "英文公告:廠商名稱"
+            ],
+            "拓雲資科股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "11581NT",
+      "unit_id": "A.19.1",
+      "unit_name": "農業部農糧署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.19.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.19.1&job_number=11581NT",
+      "unit_url": "/index/unit/A.19.1",
+      "url": "/index/case/A.19.1/11581NT/20260817/BDM-1-71259556",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260814,
       "filename": "ttd-71301870",
@@ -3724,40 +3895,6 @@
         "matched_terms": [
           "資訊設備",
           "採購"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260729,
-      "filename": "NAI-1-71244552",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "115年資訊設備汰舊換新",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "11581NT",
-      "unit_id": "A.19.1",
-      "unit_name": "農業部農糧署",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.19.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.19.1&job_number=11581NT",
-      "unit_url": "/index/unit/A.19.1",
-      "url": "/index/case/A.19.1/11581NT/20260729/NAI-1-71244552",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 1,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備"
         ],
         "matched_fields": [
           "title"
