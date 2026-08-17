@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-18 04:55",
+  "last_updated": "2026-08-18 06:40",
   "tenders": [
     {
       "city": "台北市",
@@ -865,13 +865,13 @@
     "today": "2026-08-18",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-17 18:21",
-    "source_records": 1785,
-    "candidate_records": 5,
+    "latest_attempt_at": "2026-08-18 06:40",
+    "source_records": 1774,
+    "candidate_records": 10,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-17",
-      "2026-08-16"
+      "2026-08-18",
+      "2026-08-17"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -1292,10 +1292,10 @@
     },
     "2026-08-17": {
       "status": "complete",
-      "source_records": 1785,
+      "source_records": 1787,
       "candidate_records": 5,
       "review_records": 5,
-      "checked_at": "2026-08-17 18:16"
+      "checked_at": "2026-08-18 06:35"
     },
     "2026-08-16": {
       "status": "complete",
@@ -1303,9 +1303,371 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-08-17 18:16"
+    },
+    "2026-08-18": {
+      "status": "complete",
+      "source_records": 1774,
+      "candidate_records": 10,
+      "review_records": 10,
+      "checked_at": "2026-08-18 06:35"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260818,
+      "filename": "TIQ-2-71094281",
+      "brief": {
+        "type": "公開招標更正公告",
+        "title": "屏東縣政府「115年度本縣國中小資訊教室資訊設備更新採購案」",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "ggps1150806",
+      "unit_id": "3.76.53.97.4",
+      "unit_name": "屏東縣屏東市公館國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.53.97.4",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.53.97.4&job_number=ggps1150806",
+      "unit_url": "/index/unit/3.76.53.97.4",
+      "url": "/index/case/3.76.53.97.4/ggps1150806/20260818/TIQ-2-71094281",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260818,
+      "filename": "TIQ-11-71095416",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年度資訊設備管理系統改版建置案",
+        "category": "勞務類842-軟體執行服務",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11509",
+      "unit_id": "3.79.53.7",
+      "unit_name": "臺北市交通事件裁決所",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.53.7",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.53.7&job_number=11509",
+      "unit_url": "/index/unit/3.79.53.7",
+      "url": "/index/case/3.79.53.7/11509/20260818/TIQ-11-71095416",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260818,
+      "filename": "TIQ-11-71095385",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科設備採購案",
+        "category": "財物類481-醫療,外科及矯形設備",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115403820238",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115403820238",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115403820238/20260818/TIQ-11-71095385",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260818,
+      "filename": "TIQ-11-71094878",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "駐菲律賓代表處增租20樓辦公室辦公設備採購案",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "PHL202613",
+      "unit_id": "A.3.3",
+      "unit_name": "駐外機構",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.3.3",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.3.3&job_number=PHL202613",
+      "unit_url": "/index/unit/A.3.3",
+      "url": "/index/case/A.3.3/PHL202613/20260818/TIQ-11-71094878",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260818,
+      "filename": "TIQ-1-71095245",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "臺灣銀行股份有限公司廣州分行2026年資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150616-287-01",
+      "unit_id": "A.7.31.1",
+      "unit_name": "臺灣銀行股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.31.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.31.1&job_number=1150616-287-01",
+      "unit_url": "/index/unit/A.7.31.1",
+      "url": "/index/case/A.7.31.1/1150616-287-01/20260818/TIQ-1-71095245",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260818,
+      "filename": "TIQ-1-71094788",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "沉浸科技導入素養導向教學實施計畫資訊設備採購",
+        "category": "財物類47-收音機、電視,通訊器材及儀器",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115007",
+      "unit_id": "3.97.8.60",
+      "unit_name": "高雄市旗山區旗山國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.8.60",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.8.60&job_number=115007",
+      "unit_url": "/index/unit/3.97.8.60",
+      "url": "/index/case/3.97.8.60/115007/20260818/TIQ-1-71094788",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260818,
+      "filename": "NAI-1-71260382",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "臺灣土地銀行日本東京分行資訊設備採購",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-088-006",
+      "unit_id": "A.7.32",
+      "unit_name": "臺灣土地銀行股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.32",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.32&job_number=115-088-006",
+      "unit_url": "/index/unit/A.7.32",
+      "url": "/index/case/A.7.32/115-088-006/20260818/NAI-1-71260382",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260818,
+      "filename": "NAI-1-71260182",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科設備採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115403820238",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115403820238",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115403820238/20260818/NAI-1-71260182",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260818,
+      "filename": "NAI-1-71260044",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "內政部警政署基隆港務警察總隊新建廳舍辦公設備搬遷案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-08-01",
+      "unit_id": "A.1.1.21",
+      "unit_name": "內政部警政署基隆港務警察總隊",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.1.1.21",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.1.1.21&job_number=115-08-01",
+      "unit_url": "/index/unit/A.1.1.21",
+      "url": "/index/case/A.1.1.21/115-08-01/20260818/NAI-1-71260044",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260818,
+      "filename": "NAI-1-71259979",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "沉浸科技導入素養導向教學實施計畫資訊設備採購",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115007",
+      "unit_id": "3.97.8.60",
+      "unit_name": "高雄市旗山區旗山國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.8.60",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.8.60&job_number=115007",
+      "unit_url": "/index/unit/3.97.8.60",
+      "url": "/index/case/3.97.8.60/115007/20260818/NAI-1-71259979",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260817,
       "filename": "aaa-71260078",
@@ -1383,43 +1745,6 @@
         "matched_terms": [
           "資訊設備",
           "採購"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260817,
-      "filename": "TIQ-1-71094281",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "屏東縣政府「115年度本縣國中小資訊教室資訊設備更新採購案」",
-        "category": "財物類452-計算機及其零件與配件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "ggps1150806",
-      "unit_id": "3.76.53.97.4",
-      "unit_name": "屏東縣屏東市公館國民小學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.53.97.4",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.53.97.4&job_number=ggps1150806",
-      "unit_url": "/index/unit/3.76.53.97.4",
-      "url": "/index/case/3.76.53.97.4/ggps1150806/20260817/TIQ-1-71094281",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備",
-          "採購",
-          "更新"
         ],
         "matched_fields": [
           "title"
@@ -2363,42 +2688,6 @@
     },
     {
       "date": 20260810,
-      "filename": "TIQ-11-71089662",
-      "brief": {
-        "type": "公開取得報價單或企劃書公告",
-        "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科設備採購案",
-        "category": "財物類481-醫療,外科及矯形設備",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115403820238",
-      "unit_id": "3.76.54",
-      "unit_name": "臺東縣政府",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115403820238",
-      "unit_url": "/index/unit/3.76.54",
-      "url": "/index/case/3.76.54/115403820238/20260810/TIQ-11-71089662",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公設備",
-          "採購"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260810,
       "filename": "TIQ-11-71089402",
       "brief": {
         "type": "公開取得報價單或企劃書公告",
@@ -2856,42 +3145,6 @@
         "category": "needs_review",
         "matched_terms": [
           "資訊設備"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260806,
-      "filename": "TIQ-2-71084728",
-      "brief": {
-        "type": "公開招標更正公告",
-        "title": "沉浸科技導入素養導向教學實施計畫資訊設備採購",
-        "category": "財物類47-收音機、電視,通訊器材及儀器",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115007",
-      "unit_id": "3.97.8.60",
-      "unit_name": "高雄市旗山區旗山國民小學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.8.60",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.8.60&job_number=115007",
-      "unit_url": "/index/unit/3.97.8.60",
-      "url": "/index/case/3.97.8.60/115007/20260806/TIQ-2-71084728",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備",
-          "採購"
         ],
         "matched_fields": [
           "title"
