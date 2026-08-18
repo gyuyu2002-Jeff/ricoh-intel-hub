@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-19 04:51",
+  "last_updated": "2026-08-19 06:40",
   "tenders": [
     {
       "city": "台北市",
@@ -865,13 +865,13 @@
     "today": "2026-08-19",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-18 18:17",
-    "source_records": 1988,
-    "candidate_records": 10,
+    "latest_attempt_at": "2026-08-19 06:40",
+    "source_records": 2504,
+    "candidate_records": 6,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-18",
-      "2026-08-17"
+      "2026-08-19",
+      "2026-08-18"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -1299,15 +1299,22 @@
     },
     "2026-08-18": {
       "status": "complete",
-      "source_records": 1988,
+      "source_records": 1997,
       "candidate_records": 10,
       "review_records": 10,
-      "checked_at": "2026-08-18 18:12"
+      "checked_at": "2026-08-19 06:35"
+    },
+    "2026-08-19": {
+      "status": "complete",
+      "source_records": 2504,
+      "candidate_records": 6,
+      "review_records": 5,
+      "checked_at": "2026-08-19 06:35"
     }
   },
   "candidate_cache": [
     {
-      "date": 20260818,
+      "date": 20260819,
       "filename": "TIQ-2-71094281",
       "brief": {
         "type": "公開招標更正公告",
@@ -1326,7 +1333,7 @@
       "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.53.97.4",
       "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.53.97.4&job_number=ggps1150806",
       "unit_url": "/index/unit/3.76.53.97.4",
-      "url": "/index/case/3.76.53.97.4/ggps1150806/20260818/TIQ-2-71094281",
+      "url": "/index/case/3.76.53.97.4/ggps1150806/20260819/TIQ-2-71094281",
       "relevance": {
         "status": "review",
         "confidence": "low",
@@ -1336,6 +1343,193 @@
           "資訊設備",
           "採購",
           "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260819,
+      "filename": "TIQ-1-71095604",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "資訊設備-AI運算與數據管理系統一套",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11420",
+      "unit_id": "3.10.90.2",
+      "unit_name": "輔仁大學學校財團法人輔仁大學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.10.90.2",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.10.90.2&job_number=11420",
+      "unit_url": "/index/unit/3.10.90.2",
+      "url": "/index/case/3.10.90.2/11420/20260819/TIQ-1-71095604",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260819,
+      "filename": "NAI-1-71261673",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "115年度嘉義縣地政資訊設備採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11505",
+      "unit_id": "3.76.50.6",
+      "unit_name": "嘉義縣水上地政事務所",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.50.6",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.50.6&job_number=11505",
+      "unit_url": "/index/unit/3.76.50.6",
+      "url": "/index/case/3.76.50.6/11505/20260819/NAI-1-71261673",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260819,
+      "filename": "NAI-1-71261648",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "115-116年資訊設備維運駐點服務作業",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-P-69",
+      "unit_id": "A.47.2",
+      "unit_name": "海洋委員會海洋保育署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.47.2",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.47.2&job_number=115-P-69",
+      "unit_url": "/index/unit/A.47.2",
+      "url": "/index/case/A.47.2/115-P-69/20260819/NAI-1-71261648",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260819,
+      "filename": "DTG-1-70014947",
+      "brief": {
+        "type": "招標文件公開閱覽公告資料公告",
+        "title": "二手影印機租賃",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "LP5-115032",
+      "unit_id": "A.7.31.1",
+      "unit_name": "臺灣銀行股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.31.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.31.1&job_number=LP5-115032",
+      "unit_url": "/index/unit/A.7.31.1",
+      "url": "/index/case/A.7.31.1/LP5-115032/20260819/DTG-1-70014947",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260819,
+      "filename": "BDM-1-71261886",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年度資訊設備財物採購",
+        "companies": {
+          "ids": [
+            "13120176"
+          ],
+          "names": [
+            "仕揚科技股份有限公司"
+          ],
+          "id_key": {
+            "13120176": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "仕揚科技股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115012",
+      "unit_id": "3.79.6.97",
+      "unit_name": "臺北市西湖實驗國民中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.6.97",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.6.97&job_number=115012",
+      "unit_url": "/index/unit/3.79.6.97",
+      "url": "/index/case/3.79.6.97/115012/20260819/BDM-1-71261886",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
         ],
         "matched_fields": [
           "title"
@@ -6673,41 +6867,6 @@
       "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.20.1&job_number=HC-A26003",
       "unit_url": "/index/unit/3.9.20.1",
       "url": "/index/case/3.9.20.1/HC-A26003/20260702/TIQ-11-71060883",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 1,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260702,
-      "filename": "TIQ-1-71061229",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "資訊設備-AI運算與數據管理系統一套",
-        "category": "財物類452-計算機及其零件與配件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "11420",
-      "unit_id": "3.10.90.2",
-      "unit_name": "輔仁大學學校財團法人輔仁大學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.10.90.2",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.10.90.2&job_number=11420",
-      "unit_url": "/index/unit/3.10.90.2",
-      "url": "/index/case/3.10.90.2/11420/20260702/TIQ-1-71061229",
       "relevance": {
         "status": "review",
         "confidence": "low",
