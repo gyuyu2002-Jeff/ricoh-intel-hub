@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-20 04:56",
+  "last_updated": "2026-08-20 06:40",
   "tenders": [
     {
       "city": "台北市",
@@ -865,13 +865,13 @@
     "today": "2026-08-20",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-19 18:17",
-    "source_records": 2719,
-    "candidate_records": 7,
+    "latest_attempt_at": "2026-08-20 06:40",
+    "source_records": 2231,
+    "candidate_records": 8,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-19",
-      "2026-08-18"
+      "2026-08-20",
+      "2026-08-19"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -1299,13 +1299,320 @@
     },
     "2026-08-19": {
       "status": "complete",
-      "source_records": 2719,
+      "source_records": 2721,
       "candidate_records": 7,
       "review_records": 6,
-      "checked_at": "2026-08-19 18:12"
+      "checked_at": "2026-08-20 06:35"
+    },
+    "2026-08-20": {
+      "status": "complete",
+      "source_records": 2231,
+      "candidate_records": 8,
+      "review_records": 5,
+      "checked_at": "2026-08-20 06:35"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260820,
+      "filename": "TIQ-11-71097370",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "漳興國小115年度改善資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-03-56-002-F",
+      "unit_id": "3.76.48.98.49",
+      "unit_name": "南投縣南投市漳興國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.48.98.49",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.48.98.49&job_number=115-03-56-002-F",
+      "unit_url": "/index/unit/3.76.48.98.49",
+      "url": "/index/case/3.76.48.98.49/115-03-56-002-F/20260820/TIQ-11-71097370",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260820,
+      "filename": "TIQ-11-71096537",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-02-02",
+      "unit_id": "3.79.7.83",
+      "unit_name": "臺北市士林區社子國民小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.7.83",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.7.83&job_number=115-02-02",
+      "unit_url": "/index/unit/3.79.7.83",
+      "url": "/index/case/3.79.7.83/115-02-02/20260820/TIQ-11-71096537",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260820,
+      "filename": "TIQ-1-71097189",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "115年臺北市教育網路中心資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150813P0037",
+      "unit_id": "3.79.11",
+      "unit_name": "臺北市政府工務局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.11",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.11&job_number=1150813P0037",
+      "unit_url": "/index/unit/3.79.11",
+      "url": "/index/case/3.79.11/1150813P0037/20260820/TIQ-1-71097189",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260820,
+      "filename": "TIQ-1-71096563",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "UH150060",
+      "unit_id": "3.9.20.1",
+      "unit_name": "國立臺灣大學醫學院附設醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.20.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.20.1&job_number=UH150060",
+      "unit_url": "/index/unit/3.9.20.1",
+      "url": "/index/case/3.9.20.1/UH150060/20260820/TIQ-1-71096563",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260820,
+      "filename": "TIQ-1-71096321",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "115年度嘉義縣地政資訊設備採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11505",
+      "unit_id": "3.76.50.6",
+      "unit_name": "嘉義縣水上地政事務所",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.50.6",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.50.6&job_number=11505",
+      "unit_url": "/index/unit/3.76.50.6",
+      "url": "/index/case/3.76.50.6/11505/20260820/TIQ-1-71096321",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260820,
+      "filename": "TIQ-1-71094811",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "內政部警政署基隆港務警察總隊新建廳舍辦公設備搬遷案",
+        "category": "財物類381-傢具",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-08-01",
+      "unit_id": "A.1.1.21",
+      "unit_name": "內政部警政署基隆港務警察總隊",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.1.1.21",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.1.1.21&job_number=115-08-01",
+      "unit_url": "/index/unit/A.1.1.21",
+      "url": "/index/case/A.1.1.21/115-08-01/20260820/TIQ-1-71094811",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260820,
+      "filename": "NAI-1-71262304",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "UH150060",
+      "unit_id": "3.9.20.1",
+      "unit_name": "國立臺灣大學醫學院附設醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.20.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.20.1&job_number=UH150060",
+      "unit_url": "/index/unit/3.9.20.1",
+      "url": "/index/case/3.9.20.1/UH150060/20260820/NAI-1-71262304",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "date": 20260820,
+      "filename": "BDM-1-71263229",
+      "brief": {
+        "type": "決標公告",
+        "title": "115年SHARP影印機計張維護開口契約",
+        "companies": {
+          "ids": [
+            "27236248"
+          ],
+          "names": [
+            "震旦行股份有限公司台北三十一分公司"
+          ],
+          "id_key": {
+            "27236248": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "震旦行股份有限公司台北三十一分公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "1150706",
+      "unit_id": "3.9.20",
+      "unit_name": "國立臺灣大學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.20",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.20&job_number=1150706",
+      "unit_url": "/index/unit/3.9.20",
+      "url": "/index/case/3.9.20/1150706/20260820/BDM-1-71263229",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "維護",
+          "計張",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "date": 20260819,
       "filename": "aaa-71262767",
@@ -2474,42 +2781,6 @@
     },
     {
       "date": 20260812,
-      "filename": "TIQ-1-71091350",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "UH150060",
-      "unit_id": "3.9.20.1",
-      "unit_name": "國立臺灣大學醫學院附設醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.20.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.20.1&job_number=UH150060",
-      "unit_url": "/index/unit/3.9.20.1",
-      "url": "/index/case/3.9.20.1/UH150060/20260812/TIQ-1-71091350",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "影印機",
-          "租賃"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
-      }
-    },
-    {
-      "date": 20260812,
       "filename": "TIQ-1-71091293",
       "brief": {
         "type": "公開招標公告",
@@ -2577,41 +2848,6 @@
           "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260812,
-      "filename": "NAI-1-71255328",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "UH150060",
-      "unit_id": "3.9.20.1",
-      "unit_name": "國立臺灣大學醫學院附設醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.9.20.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.9.20.1&job_number=UH150060",
-      "unit_url": "/index/unit/3.9.20.1",
-      "url": "/index/case/3.9.20.1/UH150060/20260812/NAI-1-71255328",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "影印機",
-          "租賃"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
       }
     },
     {
@@ -3297,42 +3533,6 @@
       }
     },
     {
-      "date": 20260807,
-      "filename": "TIQ-1-71087291",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "115年度嘉義縣地政資訊設備採購案",
-        "category": "財物類452-計算機及其零件與配件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "11505",
-      "unit_id": "3.76.50.6",
-      "unit_name": "嘉義縣水上地政事務所",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.50.6",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.50.6&job_number=11505",
-      "unit_url": "/index/unit/3.76.50.6",
-      "url": "/index/case/3.76.50.6/11505/20260807/TIQ-1-71087291",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備",
-          "採購"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
       "date": 20260806,
       "filename": "aaa-71252151",
       "brief": {
@@ -3581,41 +3781,6 @@
           "title"
         ],
         "reason": "命中設備名稱或公告規格"
-      }
-    },
-    {
-      "date": 20260804,
-      "filename": "TIQ-1-71085793",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "內政部警政署基隆港務警察總隊新建廳舍辦公設備搬遷案",
-        "category": "財物類381-傢具",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115-08-01",
-      "unit_id": "A.1.1.21",
-      "unit_name": "內政部警政署基隆港務警察總隊",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.1.1.21",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.1.1.21&job_number=115-08-01",
-      "unit_url": "/index/unit/A.1.1.21",
-      "url": "/index/case/A.1.1.21/115-08-01/20260804/TIQ-1-71085793",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 1,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公設備"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
     },
     {
