@@ -1498,6 +1498,10 @@ def main(mode="live"):
         if (
             previous_key in current_project_keys
             or previous_key in reviewed_project_keys
+            # Final outcomes are intentionally short-lived in the live list.
+            # Do not resurrect an old resolved/failed tender from existing_data
+            # after the crawler has already stopped returning it.
+            or previous.get("stage") in {"已決標", "無法決標"}
             or previous.get("publish_date", "") < cutoff_iso
             or get_title_scope_exclusion(previous.get("title", ""))
         ):
