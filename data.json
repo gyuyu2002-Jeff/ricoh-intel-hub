@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-21 04:58",
+  "last_updated": "2026-08-21 06:43",
   "tenders": [
     {
       "city": "桃園市",
@@ -268,13 +268,13 @@
     "today": "2026-08-21",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-20 18:19",
-    "source_records": 2395,
-    "candidate_records": 9,
+    "latest_attempt_at": "2026-08-21 06:43",
+    "source_records": 2359,
+    "candidate_records": 1,
     "review_records": 80,
     "successful_dates": [
-      "2026-08-20",
-      "2026-08-19"
+      "2026-08-21",
+      "2026-08-20"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -702,13 +702,56 @@
     },
     "2026-08-20": {
       "status": "complete",
-      "source_records": 2395,
+      "source_records": 2402,
       "candidate_records": 9,
       "review_records": 5,
-      "checked_at": "2026-08-20 18:14"
+      "checked_at": "2026-08-21 06:38"
+    },
+    "2026-08-21": {
+      "status": "complete",
+      "source_records": 2359,
+      "candidate_records": 1,
+      "review_records": 1,
+      "checked_at": "2026-08-21 06:38"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260821,
+      "filename": "TIQ-11-71098330",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115-116年資訊設備維運駐點服務作業",
+        "category": "勞務類845-辦公室機器及設備(包括電腦)之維修服務",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-P-69",
+      "unit_id": "A.47.2",
+      "unit_name": "海洋委員會海洋保育署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.47.2",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.47.2&job_number=115-P-69",
+      "unit_url": "/index/unit/A.47.2",
+      "url": "/index/case/A.47.2/115-P-69/20260821/TIQ-11-71098330",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "維修"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260820,
       "filename": "aaa-71264586",
@@ -2586,42 +2629,6 @@
         "matched_terms": [
           "資訊設備",
           "採購"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260810,
-      "filename": "TIQ-11-71089402",
-      "brief": {
-        "type": "公開取得報價單或企劃書公告",
-        "title": "115-116年資訊設備維運駐點服務作業",
-        "category": "勞務類845-辦公室機器及設備(包括電腦)之維修服務",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115-P-69",
-      "unit_id": "A.47.2",
-      "unit_name": "海洋委員會海洋保育署",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.47.2",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.47.2&job_number=115-P-69",
-      "unit_url": "/index/unit/A.47.2",
-      "url": "/index/case/A.47.2/115-P-69/20260810/TIQ-11-71089402",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備",
-          "維修"
         ],
         "matched_fields": [
           "title"
@@ -7712,6 +7719,37 @@
   ],
   "review_candidates": [
     {
+      "date": "2026-04-27",
+      "publish_date": "2026-04-27",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-17",
+      "deadline_confidence": "verified",
+      "title": "115-116年資訊設備維運駐點服務作業",
+      "unit": "海洋委員會海洋保育署",
+      "unit_id": "A.47.2",
+      "job_number": "115-P-69",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260821&fn=TIQ-11-71098330.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購",
+          "更新",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
       "date": "2026-08-20",
       "publish_date": "2026-08-20",
       "publish_date_confidence": "verified",
@@ -8344,37 +8382,6 @@
           "傳真",
           "A3",
           "採購"
-        ],
-        "matched_fields": [
-          "title",
-          "detail"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": "2026-04-27",
-      "publish_date": "2026-04-27",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-08-17",
-      "deadline_confidence": "verified",
-      "title": "115-116年資訊設備維運駐點服務作業",
-      "unit": "海洋委員會海洋保育署",
-      "unit_id": "A.47.2",
-      "job_number": "115-P-69",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260810&fn=TIQ-11-71089402.xml",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 3,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備",
-          "傳真",
-          "採購",
-          "更新",
-          "維護",
-          "維修"
         ],
         "matched_fields": [
           "title",
