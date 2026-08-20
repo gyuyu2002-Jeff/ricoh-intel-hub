@@ -693,6 +693,16 @@ def fetch_json_with_retry(url, label, max_retries=5):
             time.sleep(wait_time)
     return None
 
+def is_past_deadline(deadline_value, today):
+    """Return True only when a tender has a valid deadline before today."""
+    if not deadline_value or deadline_value in {"未公開", "待確認"}:
+        return False
+    try:
+        return datetime.strptime(str(deadline_value), "%Y-%m-%d").date() < today
+    except (TypeError, ValueError):
+        return False
+
+
 def build_required_dates(mode, today, collection_days):
     if mode == "live":
         return [today, today - timedelta(days=1)]
@@ -1432,6 +1442,12 @@ def main(mode="live"):
                 pass
         if not deadline_str:
             deadline_str = "未公開"
+
+        # The homepage is an opportunity list, not a 60-day announcement archive.
+        # Keep recent outcomes separately, but remove unresolved tenders after bidding closes.
+        if stage not in {"已決標", "無法決標"} and is_past_deadline(deadline_str, today):
+            print(f"Skipping expired unresolved tender: {title} (deadline {deadline_str})")
+            continue
             
         city_info = get_city_info(unit_name, detail_data)
         city = city_info["city"]
@@ -1502,7 +1518,8 @@ def main(mode="live"):
             # Do not resurrect an old resolved/failed tender from existing_data
             # after the crawler has already stopped returning it.
             or previous.get("stage") in {"已決標", "無法決標"}
-            or previous.get("publish_date", "") < cutoff_iso
+            or is_past_deadline(previous.get("deadline", ""), today)
+            or (not previous.get("deadline") and previous.get("publish_date", "") < cutoff_iso)
             or get_title_scope_exclusion(previous.get("title", ""))
         ):
             continue

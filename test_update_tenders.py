@@ -6,11 +6,23 @@ from update_tenders import (
     classify_tender_relevance,
     deduplicate_announcements,
     get_city_info,
+    is_past_deadline,
 )
 
 
 def announcement(title, category=""):
     return {"brief": {"title": title, "category": category}}
+
+
+class DeadlineRetentionTests(unittest.TestCase):
+    def test_expired_tender_is_not_active(self):
+        self.assertTrue(is_past_deadline("2026-07-16", date(2026, 8, 20)))
+
+    def test_today_deadline_remains_active(self):
+        self.assertFalse(is_past_deadline("2026-08-20", date(2026, 8, 20)))
+
+    def test_unknown_deadline_is_not_assumed_expired(self):
+        self.assertFalse(is_past_deadline("未公開", date(2026, 8, 20)))
 
 
 class TenderRelevanceTests(unittest.TestCase):
