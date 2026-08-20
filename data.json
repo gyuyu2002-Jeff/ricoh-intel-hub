@@ -1,54 +1,6 @@
 {
-  "last_updated": "2026-08-20 15:05",
+  "last_updated": "2026-08-20 15:39",
   "tenders": [
-    {
-      "city": "台北市",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "臺北市(非原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "115年SHARP影印機計張維護開口契約",
-      "unit": "國立臺灣大學",
-      "unit_id": "3.9.20",
-      "job_number": "1150706",
-      "publish_date": "2026-08-12",
-      "deadline": "2026-08-18",
-      "budget": "NT$ 1,087,816",
-      "award_price": "NT$ 1,085,832",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "震旦 SHARP",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260820&fn=BDM-1-71263229.xml",
-      "history_stats": [],
-      "history_records": [],
-      "stage": "已決標",
-      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
-      "duration_years": 1,
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "影印機",
-          "維護",
-          "維修",
-          "計張",
-          "開口契約"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
-      }
-    },
     {
       "city": "桃園市",
       "city_source": "機關地址／開標地點",
@@ -61,7 +13,9 @@
       "unit_id": "3.13.50.48.1",
       "job_number": "I7315D063",
       "publish_date": "2026-08-10",
+      "publish_date_confidence": "verified",
       "deadline": "2026-08-24",
+      "deadline_confidence": "inferred",
       "budget": "無公開數據",
       "award_price": "",
       "avg_discount": "資料不足",
@@ -314,10 +268,10 @@
     "today": "2026-08-20",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-20 15:05",
-    "source_records": 2320,
+    "latest_attempt_at": "2026-08-20 15:39",
+    "source_records": 2345,
     "candidate_records": 8,
-    "review_records": 0,
+    "review_records": 80,
     "successful_dates": [
       "2026-08-20",
       "2026-08-19"
@@ -751,14 +705,14 @@
       "source_records": 2721,
       "candidate_records": 7,
       "review_records": 6,
-      "checked_at": "2026-08-20 15:00"
+      "checked_at": "2026-08-20 15:34"
     },
     "2026-08-20": {
       "status": "complete",
-      "source_records": 2320,
+      "source_records": 2345,
       "candidate_records": 8,
       "review_records": 5,
-      "checked_at": "2026-08-20 15:00"
+      "checked_at": "2026-08-20 15:34"
     }
   },
   "candidate_cache": [
@@ -7715,7 +7669,2151 @@
       }
     }
   ],
-  "review_candidates": [],
+  "review_candidates": [
+    {
+      "date": "2026-08-20",
+      "publish_date": "2026-08-20",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-24",
+      "deadline_confidence": "verified",
+      "title": "漳興國小115年度改善資訊設備採購案",
+      "unit": "南投縣南投市漳興國民小學",
+      "unit_id": "3.76.48.98.49",
+      "job_number": "115-03-56-002-F",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260820&fn=TIQ-11-71097370.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-20",
+      "publish_date": "2026-08-20",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-24",
+      "deadline_confidence": "verified",
+      "title": "115年資訊設備採購案",
+      "unit": "臺北市士林區社子國民小學",
+      "unit_id": "3.79.7.83",
+      "job_number": "115-02-02",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260820&fn=TIQ-11-71096537.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-20",
+      "publish_date": "2026-08-20",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-02",
+      "deadline_confidence": "verified",
+      "title": "115年臺北市教育網路中心資訊設備採購案",
+      "unit": "臺北市政府工務局",
+      "unit_id": "3.79.11",
+      "job_number": "1150813P0037",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260820&fn=TIQ-1-71097189.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-07",
+      "publish_date": "2026-08-07",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-17",
+      "deadline_confidence": "verified",
+      "title": "115年度嘉義縣地政資訊設備採購案",
+      "unit": "嘉義縣水上地政事務所",
+      "unit_id": "3.76.50.6",
+      "job_number": "11505",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260820&fn=TIQ-1-71096321.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-04",
+      "publish_date": "2026-08-04",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-14",
+      "deadline_confidence": "verified",
+      "title": "內政部警政署基隆港務警察總隊新建廳舍辦公設備搬遷案",
+      "unit": "內政部警政署基隆港務警察總隊",
+      "unit_id": "A.1.1.21",
+      "job_number": "115-08-01",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260820&fn=TIQ-1-71094811.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-17",
+      "publish_date": "2026-08-17",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-27",
+      "deadline_confidence": "verified",
+      "title": "屏東縣政府「115年度本縣國中小資訊教室資訊設備更新採購案」",
+      "unit": "屏東縣屏東市公館國民小學",
+      "unit_id": "3.76.53.97.4",
+      "job_number": "ggps1150806",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260819&fn=TIQ-2-71094281.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-17",
+      "publish_date": "2026-06-17",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-01",
+      "deadline_confidence": "verified",
+      "title": "資訊設備-AI運算與數據管理系統一套",
+      "unit": "輔仁大學學校財團法人輔仁大學",
+      "unit_id": "3.10.90.2",
+      "job_number": "11420",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260819&fn=TIQ-1-71095604.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "A3",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-18",
+      "publish_date": "2026-08-18",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-24",
+      "deadline_confidence": "verified",
+      "title": "115年度資訊設備管理系統改版建置案",
+      "unit": "臺北市交通事件裁決所",
+      "unit_id": "3.79.53.7",
+      "job_number": "11509",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260818&fn=TIQ-11-71095416.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "publish_date": "2026-08-10",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-14",
+      "deadline_confidence": "verified",
+      "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科設備採購案",
+      "unit": "臺東縣政府",
+      "unit_id": "3.76.54",
+      "job_number": "115403820238",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260818&fn=TIQ-11-71095385.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "傳真",
+          "A3",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-18",
+      "publish_date": "2026-08-18",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-24",
+      "deadline_confidence": "verified",
+      "title": "駐菲律賓代表處增租20樓辦公室辦公設備採購案",
+      "unit": "駐外機構",
+      "unit_id": "A.3.3",
+      "job_number": "PHL202613",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260818&fn=TIQ-11-71094878.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-04",
+      "publish_date": "2026-08-04",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-17",
+      "deadline_confidence": "verified",
+      "title": "沉浸科技導入素養導向教學實施計畫資訊設備採購",
+      "unit": "高雄市旗山區旗山國民小學",
+      "unit_id": "3.97.8.60",
+      "job_number": "115007",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260818&fn=TIQ-1-71094788.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-17",
+      "publish_date": "2026-08-17",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-24",
+      "deadline_confidence": "verified",
+      "title": "佳民國小115年度非山非市學校資訊設備採購",
+      "unit": "花蓮縣秀林鄉佳民國民小學",
+      "unit_id": "3.76.55.97.93",
+      "job_number": "cmps1150701",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260817&fn=TIQ-11-71090023.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-17",
+      "publish_date": "2026-08-17",
+      "publish_date_confidence": "inferred",
+      "deadline": "2026-08-31",
+      "deadline_confidence": "inferred",
+      "title": "內政部警政署 「115年報廢事務設備財物50件」標售案",
+      "unit": "內政部警政署",
+      "unit_id": "3.1.1",
+      "job_number": "115-NPA-02",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260817&fn=FAS-1-70020450.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "事務設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-14",
+      "publish_date": "2026-08-14",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-27",
+      "deadline_confidence": "verified",
+      "title": "115年度偏遠地區學校及非山非市學校設施設備計畫-改善教學環境資訊設備1批",
+      "unit": "嘉義縣新港鄉月眉國民小學",
+      "unit_id": "3.76.50.97.34",
+      "job_number": "YMPS1150731P1",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260814&fn=ttd-71301870.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-14",
+      "publish_date": "2026-08-14",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-18",
+      "deadline_confidence": "verified",
+      "title": "北市民生國中115年資訊設備財物採購案",
+      "unit": "臺北市立民生國民中學",
+      "unit_id": "3.79.6.2",
+      "job_number": "1150810",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260814&fn=ttd-71301232.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-14",
+      "publish_date": "2026-08-14",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-24",
+      "deadline_confidence": "verified",
+      "title": "116年度資訊安全及資訊設備維護人力業務外包勞務採購",
+      "unit": "交通部公路局東區養護工程分局",
+      "unit_id": "A.15.3.4",
+      "job_number": "1154E025",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260814&fn=TIQ-1-71092994.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購",
+          "維護"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-13",
+      "publish_date": "2026-08-13",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-27",
+      "deadline_confidence": "inferred",
+      "title": "衛生福利部中央健康保險署南區業務組公園大樓辦公設備及地板汰換",
+      "unit": "衛生福利部中央健康保險署",
+      "unit_id": "A.21.3",
+      "job_number": "S115010-GH",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260813&fn=PPW-1-70112522.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "汰換"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-13",
+      "publish_date": "2026-08-13",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-27",
+      "deadline_confidence": "inferred",
+      "title": "115年度資訊設備一批",
+      "unit": "國家運動科學中心",
+      "unit_id": "94569104",
+      "job_number": "115-02-022",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260813&fn=PPW-1-70112433.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-12",
+      "publish_date": "2026-08-12",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-19",
+      "deadline_confidence": "verified",
+      "title": "羅浮里辦公室設備汰換工程",
+      "unit": "桃園市復興區公所",
+      "unit_id": "3.80.63",
+      "job_number": "115A133",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260812&fn=ttd-71299855.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公室設備",
+          "採購",
+          "汰換"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-12",
+      "publish_date": "2026-08-12",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-10",
+      "deadline_confidence": "verified",
+      "title": "115年海象氣候組資訊設備採購案",
+      "unit": "交通部中央氣象署",
+      "unit_id": "A.15.2",
+      "job_number": "115157G",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260812&fn=TIQ-1-71090388.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-05",
+      "publish_date": "2026-08-05",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-13",
+      "deadline_confidence": "verified",
+      "title": "西門國小115年新世代學習空間資訊設備採購案",
+      "unit": "臺北市萬華區西門國民小學",
+      "unit_id": "3.79.8.66",
+      "job_number": "XM1150703",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260811&fn=TIQ-12-71086639.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-11",
+      "publish_date": "2026-08-11",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-25",
+      "deadline_confidence": "inferred",
+      "title": "高雄港務警察總隊115年人事室辦公設備附加項採購案",
+      "unit": "內政部警政署高雄港務警察總隊",
+      "unit_id": "A.1.1.23",
+      "job_number": "115-07-10",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260811&fn=BDM-3-71254104.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "publish_date": "2026-08-10",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-17",
+      "deadline_confidence": "verified",
+      "title": "花蓮市明恥國民小學特教班智慧黑白板及電腦資訊設備採購案",
+      "unit": "花蓮縣花蓮市明恥國民小學",
+      "unit_id": "3.76.55.97.4",
+      "job_number": "MCPS1150814",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260810&fn=ttd-71297178.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "列印",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "publish_date": "2026-08-10",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-14",
+      "deadline_confidence": "verified",
+      "title": "桃源國中--115年教學資訊設備採購",
+      "unit": "臺東縣政府",
+      "unit_id": "3.76.54",
+      "job_number": "115201020237",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260810&fn=TIQ-11-71089666.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "A3",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-04-27",
+      "publish_date": "2026-04-27",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-17",
+      "deadline_confidence": "verified",
+      "title": "115-116年資訊設備維運駐點服務作業",
+      "unit": "海洋委員會海洋保育署",
+      "unit_id": "A.47.2",
+      "job_number": "115-P-69",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260810&fn=TIQ-11-71089402.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購",
+          "更新",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "publish_date": "2026-08-10",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-17",
+      "deadline_confidence": "verified",
+      "title": "115年度資訊設備財物採購",
+      "unit": "臺北市西湖實驗國民中學",
+      "unit_id": "3.79.6.97",
+      "job_number": "115012",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260810&fn=TIQ-11-71089394.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "publish_date": "2026-08-10",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-20",
+      "deadline_confidence": "verified",
+      "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科雙波長雷射採購案",
+      "unit": "臺東縣政府",
+      "unit_id": "3.76.54",
+      "job_number": "115403820234",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260810&fn=TIQ-1-71089198.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "傳真",
+          "A3",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "publish_date": "2026-08-10",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-24",
+      "deadline_confidence": "verified",
+      "title": "駐印尼代表處訂製8樓辦公設備",
+      "unit": "駐外機構",
+      "unit_id": "A.3.3",
+      "job_number": "IDN1150806",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260810&fn=TIQ-1-71089144.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-07",
+      "publish_date": "2026-08-07",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-12",
+      "deadline_confidence": "verified",
+      "title": "⺠族國⼩115年資訊設備財物採購案",
+      "unit": "臺北市松山區民族國民小學",
+      "unit_id": "3.79.8.8",
+      "job_number": "11513",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260807&fn=ttd-71296544.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-05",
+      "publish_date": "2026-08-05",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-18",
+      "deadline_confidence": "verified",
+      "title": "115年度氣象組資訊設備維護案",
+      "unit": "國家災害防救科技中心",
+      "unit_id": "41113078",
+      "job_number": "NCDR-S-115069",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260805&fn=TIQ-3-71086502.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-05",
+      "publish_date": "2026-08-05",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-12",
+      "deadline_confidence": "verified",
+      "title": "115年度第48屆國際技能競賽設備汰舊換新計畫-資訊設備採購案",
+      "unit": "新北市立新北高級工業職業學校",
+      "unit_id": "3.82.5.32",
+      "job_number": "11526",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260805&fn=TIQ-11-71085941.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-06",
+      "publish_date": "2026-07-06",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-16",
+      "deadline_confidence": "verified",
+      "title": "國立公共資訊圖書館115年資訊設備智慧整合服務系統建置暨資訊設備採購案",
+      "unit": "國立公共資訊圖書館",
+      "unit_id": "A.9.11",
+      "job_number": "NLPI-N-11507032",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260805&fn=BDM-3-71250775.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-31",
+      "publish_date": "2026-07-31",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-05",
+      "deadline_confidence": "verified",
+      "title": "桃源國中--115年教學資訊設備採購",
+      "unit": "臺東縣政府",
+      "unit_id": "3.76.54",
+      "job_number": "115201020221",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260731&fn=TIQ-11-71084283.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "A3",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-31",
+      "publish_date": "2026-07-31",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-13",
+      "deadline_confidence": "verified",
+      "title": "臺灣土地銀行日本東京分行資訊設備採購",
+      "unit": "臺灣土地銀行股份有限公司",
+      "unit_id": "A.7.32",
+      "job_number": "115-088-006",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260731&fn=TIQ-1-71084339.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-15",
+      "publish_date": "2026-07-15",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-27",
+      "deadline_confidence": "verified",
+      "title": "115年度資訊設備及服務採購案",
+      "unit": "臺北市立士林高級商業職業學校",
+      "unit_id": "3.79.5.32",
+      "job_number": "115B08-2",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260731&fn=TIQ-1-71084247.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "publish_date": "2026-06-25",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-24",
+      "deadline_confidence": "verified",
+      "title": "115年資訊設備汰舊換新",
+      "unit": "農業部農糧署",
+      "unit_id": "A.19.1",
+      "job_number": "11581NT",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260731&fn=TIQ-1-71084058.xml",
+      "relevance": {
+        "status": "excluded",
+        "confidence": "high",
+        "score": -3,
+        "category": "network_or_server",
+        "matched_terms": [
+          "儲存設備"
+        ],
+        "matched_fields": [
+          "detail"
+        ],
+        "reason": "明確屬於非辦公輸出設備"
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "publish_date": "2026-07-17",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-29",
+      "deadline_confidence": "verified",
+      "title": "115年度國民中小學資訊設備更新採購案",
+      "unit": "新竹縣教育研究發展暨網路中心",
+      "unit_id": "3.76.44.27",
+      "job_number": "115014",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260731&fn=TIQ-1-71083831.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-30",
+      "publish_date": "2026-07-30",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-28",
+      "deadline_confidence": "verified",
+      "title": "115年度健保資訊設備建置服務採購案",
+      "unit": "衛生福利部中央健康保險署",
+      "unit_id": "A.21.3",
+      "job_number": "W1150690249",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260730&fn=TIQ-3-71083318.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-30",
+      "publish_date": "2026-07-30",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-11",
+      "deadline_confidence": "verified",
+      "title": "115-116年度資訊設備維護委外服務",
+      "unit": "臺灣新北地方檢察署",
+      "unit_id": "A.11.10.8",
+      "job_number": "PCDH11510",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260730&fn=TIQ-11-71082514.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-28",
+      "publish_date": "2026-07-28",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-11",
+      "deadline_confidence": "inferred",
+      "title": "香港分行2026年度資訊設備採購案",
+      "unit": "臺灣土地銀行股份有限公司",
+      "unit_id": "A.7.32",
+      "job_number": "LBOTHK2026-18",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260728&fn=PPW-1-70110649.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-13",
+      "publish_date": "2026-07-13",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-23",
+      "deadline_confidence": "verified",
+      "title": "巴楠花改制國高中新校舍設施設備－教學及辦公設備(含系統整合)",
+      "unit": "高雄市立巴楠花部落國民中小學",
+      "unit_id": "3.97.6.34",
+      "job_number": "padan115005",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260727&fn=TIQ-1-71078354.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-24",
+      "publish_date": "2026-07-24",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-03",
+      "deadline_confidence": "verified",
+      "title": "校園網路及資訊設備一批",
+      "unit": "臺北市立南港高級工業職業學校",
+      "unit_id": "3.79.5.34",
+      "job_number": "115A17",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260724&fn=ttd-71283620.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-24",
+      "publish_date": "2026-07-24",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-28",
+      "deadline_confidence": "verified",
+      "title": "115年度資訊設備採購案",
+      "unit": "臺北市立興雅國民中學",
+      "unit_id": "3.79.6.5",
+      "job_number": "115-09",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260724&fn=ttd-71281638.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-07",
+      "publish_date": "2026-07-07",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-29",
+      "deadline_confidence": "verified",
+      "title": "115年度大興國小資訊設備採購",
+      "unit": "花蓮縣光復鄉大興國民小學",
+      "unit_id": "3.76.55.97.50",
+      "job_number": "DS11507",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260723&fn=TIQ-11-71076955.xml",
+      "relevance": {
+        "status": "excluded",
+        "confidence": "high",
+        "score": -3,
+        "category": "computer_or_software",
+        "matched_terms": [
+          "平板電腦"
+        ],
+        "matched_fields": [
+          "detail"
+        ],
+        "reason": "明確屬於非辦公輸出設備"
+      }
+    },
+    {
+      "date": "2026-07-14",
+      "publish_date": "2026-07-14",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-20",
+      "deadline_confidence": "verified",
+      "title": "115年度資訊設備及教室設備更新採購案",
+      "unit": "臺北市立三民國民中學",
+      "unit_id": "3.79.6.60",
+      "job_number": "115031",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260722&fn=ttd-71273039.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "publish_date": "2026-07-17",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-21",
+      "deadline_confidence": "verified",
+      "title": "楠梓國小附幼115年度資訊設備財務採購",
+      "unit": "高雄市楠梓區楠梓國民小學",
+      "unit_id": "3.97.7.51",
+      "job_number": "115M05",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260717&fn=ttd-71278085.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-29",
+      "publish_date": "2026-06-29",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-09",
+      "deadline_confidence": "verified",
+      "title": "新竹縣竹北市嘉豐國民小學115年增班設備資訊設備採購案",
+      "unit": "新竹縣竹北市嘉豐國民小學",
+      "unit_id": "3.76.44.98.2",
+      "job_number": "JF1150615",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260717&fn=TIQ-1-71072780.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-16",
+      "publish_date": "2026-07-16",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-23",
+      "deadline_confidence": "verified",
+      "title": "宜蘭縣2026城鎮韌性（全民防衛動員）演習資訊設備租賃案",
+      "unit": "宜蘭縣政府",
+      "unit_id": "3.76.42",
+      "job_number": "CVSL115015",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260716&fn=TIQ-11-71071351.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-03-05",
+      "publish_date": "2026-03-05",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-03-16",
+      "deadline_confidence": "verified",
+      "title": "115年度資訊設備維護採購案(3季)",
+      "unit": "臺北市政府工務局水利工程處",
+      "unit_id": "3.79.11.7",
+      "job_number": "115085",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260716&fn=TIQ-1-71071222.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購",
+          "維護",
+          "維修"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-08",
+      "publish_date": "2026-07-08",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-14",
+      "deadline_confidence": "verified",
+      "title": "115年度資訊設備財物採購案",
+      "unit": "臺北市內湖區東湖國民小學",
+      "unit_id": "3.79.7.67",
+      "job_number": "dhes11520",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260715&fn=ttd-71268761.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-14",
+      "publish_date": "2026-07-14",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-20",
+      "deadline_confidence": "verified",
+      "title": "射箭教室等教學辦公設備財物採購",
+      "unit": "臺南市立九份子國民中小學",
+      "unit_id": "3.95.6.12",
+      "job_number": "115B04",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260714&fn=ttd-71273268.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-13",
+      "publish_date": "2026-07-13",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-20",
+      "deadline_confidence": "verified",
+      "title": "臺中市烏日區旭光國民小學活動中心資訊設備採購",
+      "unit": "臺中市烏日區旭光國民小學",
+      "unit_id": "3.87.7.71",
+      "job_number": "xkes1150710",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260713&fn=ttd-71271641.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-10",
+      "publish_date": "2026-07-10",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-15",
+      "deadline_confidence": "verified",
+      "title": "115年「智慧學校數位學堂計畫」-資訊設備採購案",
+      "unit": "桃園市大溪區仁和國民小學",
+      "unit_id": "3.80.8.11",
+      "job_number": "11519",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260710&fn=ttd-71271786.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-10",
+      "publish_date": "2026-07-10",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-15",
+      "deadline_confidence": "verified",
+      "title": "臺東縣大武鄉衛生所--115年度（花東基金）衛生局所辦公設備-內視鏡清洗消毒機採購案",
+      "unit": "臺東縣政府",
+      "unit_id": "3.76.54",
+      "job_number": "115404920193",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260710&fn=TIQ-11-71068285.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "傳真",
+          "A3",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-09",
+      "publish_date": "2026-07-09",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-14",
+      "deadline_confidence": "verified",
+      "title": "115年度教學空間資訊設備財物採購案",
+      "unit": "臺北市松山區民族國民小學",
+      "unit_id": "3.79.8.8",
+      "job_number": "11508",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260709&fn=ttd-71270347.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-09",
+      "publish_date": "2026-07-09",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-16",
+      "deadline_confidence": "verified",
+      "title": "興中國小115年資訊設備暨教室智慧顯示器與視聽多媒體系統採購案",
+      "unit": "高雄市桃源區興中國民小學",
+      "unit_id": "3.97.9.7",
+      "job_number": "szu11506",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260709&fn=TIQ-11-71067105.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-08",
+      "publish_date": "2026-07-08",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-16",
+      "deadline_confidence": "verified",
+      "title": "114學年度提升特教品質與專業支持經費-資訊設備採購案",
+      "unit": "臺北市芳和實驗中學",
+      "unit_id": "3.79.5.77",
+      "job_number": "FH11514",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260708&fn=ttd-71268383.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "publish_date": "2026-06-25",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-07",
+      "deadline_confidence": "verified",
+      "title": "115年基隆市國民中小學資訊設備更新財物採購",
+      "unit": "基隆市安樂區長樂國民小學",
+      "unit_id": "3.76.57.97.40",
+      "job_number": "CLPS-115B08",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260708&fn=TIQ-1-71065506.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "更新"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-08",
+      "publish_date": "2026-07-08",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-22",
+      "deadline_confidence": "inferred",
+      "title": "115年專用網路系統提升暨資訊設備採購案",
+      "unit": "國防部資通電軍指揮部",
+      "unit_id": "A.5.16",
+      "job_number": "HK15073P",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260708&fn=PPW-1-70108406.xml",
+      "relevance": {
+        "status": "excluded",
+        "confidence": "high",
+        "score": -3,
+        "category": "network_or_server",
+        "matched_terms": [
+          "交換器"
+        ],
+        "matched_fields": [
+          "detail"
+        ],
+        "reason": "明確屬於非辦公輸出設備"
+      }
+    },
+    {
+      "date": "2026-07-08",
+      "publish_date": "2026-07-08",
+      "publish_date_confidence": "inferred",
+      "deadline": "2026-07-22",
+      "deadline_confidence": "inferred",
+      "title": "115年第1次醫療儀器、機電設備、辦公設備、家具、病床及其他等報廢品標售案標售案",
+      "unit": "衛生福利部臺中醫院",
+      "unit_id": "A.21.100.36",
+      "job_number": "TH115112",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260708&fn=FAS-1-70019941.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-07",
+      "publish_date": "2026-07-07",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-13",
+      "deadline_confidence": "verified",
+      "title": "115年度智慧學校數位學堂計畫資訊設備購置",
+      "unit": "桃園市立大成國民中學",
+      "unit_id": "3.80.5.77",
+      "job_number": "02115005",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=TIQ-11-71064804.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "列印",
+          "採購",
+          "購置"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-06",
+      "publish_date": "2026-07-06",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-13",
+      "deadline_confidence": "verified",
+      "title": "115年檢驗科資訊設備乙批",
+      "unit": "高雄市立民生醫院",
+      "unit_id": "3.97.14.1",
+      "job_number": "KMSH15142",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260706&fn=ttd-71266918.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-07-03",
+      "publish_date": "2026-07-03",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-09",
+      "deadline_confidence": "verified",
+      "title": "115年度嘉義縣龍港國民小學偏遠地區學校及非山非市學校設施設備-資訊設備採購案",
+      "unit": "嘉義縣東石鄉龍港國民小學",
+      "unit_id": "3.76.50.97.48",
+      "job_number": "lges11502",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260703&fn=ttd-71265196.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-04-01",
+      "publish_date": "2026-04-01",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-05-05",
+      "deadline_confidence": "verified",
+      "title": "機動資訊設備等9項",
+      "unit": "國防部",
+      "unit_id": "3.5",
+      "job_number": "TK15010L235",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260703&fn=TIQ-1-71063156.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-05-27",
+      "publish_date": "2026-05-27",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-06-03",
+      "deadline_confidence": "verified",
+      "title": "新竹台大分院電腦、視訊轉播車等資訊設備一批",
+      "unit": "國立臺灣大學醫學院附設醫院",
+      "unit_id": "3.9.20.1",
+      "job_number": "HC-A26003",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260702&fn=TIQ-11-71060883.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "publish_date": "2026-06-26",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-08",
+      "deadline_confidence": "verified",
+      "title": "建造技術科辦公室設備改善採購案",
+      "unit": "海洋委員會海巡署艦隊分署",
+      "unit_id": "A.47.1.7",
+      "job_number": "B115206",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260701&fn=TIQ-12-71057738.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公室設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-05-29",
+      "publish_date": "2026-05-29",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-06-10",
+      "deadline_confidence": "verified",
+      "title": "臺西分局三條崙派出所辦公設備及待勤家具採購案",
+      "unit": "雲林縣警察局",
+      "unit_id": "3.76.49.2",
+      "job_number": "c11514",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260630&fn=TIQ-11-71058619.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-05-29",
+      "publish_date": "2026-05-29",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-06-04",
+      "deadline_confidence": "verified",
+      "title": "115年度資訊設備採購案（固定金額給付）",
+      "unit": "金門縣採購招標所",
+      "unit_id": "3.71.2.63",
+      "job_number": "N115210120101",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260630&fn=BDM-3-71218125.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-29",
+      "publish_date": "2026-06-29",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-08",
+      "deadline_confidence": "verified",
+      "title": "多功能辦公室設備採購案",
+      "unit": "桃園市立觀音高級中等學校",
+      "unit_id": "3.80.5.12",
+      "job_number": "115-G003",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260629&fn=ttd-71260642.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公室設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "publish_date": "2026-06-26",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-01",
+      "deadline_confidence": "verified",
+      "title": "115年第二季資訊設備採購",
+      "unit": "臺中市立東勢工業高級中等學校",
+      "unit_id": "3.87.5.33",
+      "job_number": "115-14-0626-01",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260626&fn=ttd-71259211.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "publish_date": "2026-06-26",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-06",
+      "deadline_confidence": "verified",
+      "title": "新竹市幸福小黃動態資訊設備建置計畫",
+      "unit": "新竹市政府",
+      "unit_id": "3.76.58",
+      "job_number": "1150203",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260626&fn=TIQ-11-71057842.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "列印",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "publish_date": "2026-06-26",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-06",
+      "deadline_confidence": "verified",
+      "title": "115年度資訊設備及服務採購案",
+      "unit": "臺北市立士林高級商業職業學校",
+      "unit_id": "3.79.5.32",
+      "job_number": "115B08",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260626&fn=TIQ-1-71057691.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "publish_date": "2026-06-26",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-09",
+      "deadline_confidence": "verified",
+      "title": "115年度資訊設備及軟體採購",
+      "unit": "國立臺南高級商業職業學校",
+      "unit_id": "3.92.4.9",
+      "job_number": "115010",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260626&fn=TIQ-1-71056684.xml",
+      "relevance": {
+        "status": "excluded",
+        "confidence": "high",
+        "score": -3,
+        "category": "computer_or_software",
+        "matched_terms": [
+          "個人電腦",
+          "電腦教室"
+        ],
+        "matched_fields": [
+          "detail"
+        ],
+        "reason": "明確屬於非辦公輸出設備"
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "publish_date": "2026-06-25",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-06-29",
+      "deadline_confidence": "verified",
+      "title": "115年臺北市STEAM學校認證實施計畫資訊設備採購案",
+      "unit": "臺北市信義區福德國民小學",
+      "unit_id": "3.79.8.46",
+      "job_number": "11516",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260625&fn=ttd-71258277.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "publish_date": "2026-06-25",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-06-29",
+      "deadline_confidence": "verified",
+      "title": "115年度竹圍高中優質化資訊設備採購案",
+      "unit": "新北市立竹圍高級中學",
+      "unit_id": "3.82.5.12",
+      "job_number": "zw1150525-1",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260625&fn=ttd-71257495.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-09",
+      "publish_date": "2026-06-09",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-06-22",
+      "deadline_confidence": "verified",
+      "title": "新北市政府警察局三重分局中興橋派出所新廳舍辦公設備採購案",
+      "unit": "新北市政府警察局三重分局",
+      "unit_id": "3.82.13.21",
+      "job_number": "1150601001",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260625&fn=TIQ-12-71055044.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "publish_date": "2026-06-25",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-01",
+      "deadline_confidence": "verified",
+      "title": "115年中原國小藝才班資訊設備採購案",
+      "unit": "花蓮縣花蓮市中原國民小學",
+      "unit_id": "3.76.55.98.20",
+      "job_number": "CY11505",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260625&fn=TIQ-12-71054629.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "publish_date": "2026-06-25",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-09",
+      "deadline_confidence": "inferred",
+      "title": "111年度偵查及訊問相關資訊設備維護委外服務案",
+      "unit": "",
+      "unit_id": "",
+      "job_number": "無案號",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260625&fn=RML-1-70008347.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "publish_date": "2026-06-25",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-09",
+      "deadline_confidence": "inferred",
+      "title": "116年憑證管理系統資訊設備維護",
+      "unit": "國防部軍事情報局",
+      "unit_id": "A.5.5.1",
+      "job_number": "HI16002",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260625&fn=PPW-1-70107095.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "更新",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-22",
+      "publish_date": "2026-06-22",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-06",
+      "deadline_confidence": "inferred",
+      "title": "花蓮市明恥國民小學特教班智慧黑白板及電腦資訊設備採購案",
+      "unit": "花蓮縣花蓮市明恥國民小學",
+      "unit_id": "3.76.55.97.4",
+      "job_number": "MCPS1150619",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260622&fn=PPW-1-70106694.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    }
+  ],
   "history_cache": [
     {
       "unit_id": "3.9.20",
@@ -7838,6 +9936,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "A.11.10.12",
+      "unit_name": "臺灣臺中地方檢察署",
+      "award_date": "2026-07-15",
+      "year": 2026,
+      "title": "115年數位式多功能影印機財物採購案",
+      "job_number": "11508",
+      "budget": 1000000,
+      "award_price": 940000,
+      "discount_rate": 94.0,
+      "winner": "本公司 (互盛 RICOH)",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260715&fn=BDM-3-71231827.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.32.82",
       "unit_name": "高雄榮民總醫院",
       "award_date": "2026-07-08",
@@ -7864,6 +9977,21 @@
       "discount_rate": 97.5,
       "winner": "創意機器人科技有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEyMjYyMzQ=",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "05601093",
+      "unit_name": "國家同步輻射研究中心",
+      "award_date": "2026-07-07",
+      "year": 2026,
+      "title": "114年度國家同步輻射中心影印機租賃",
+      "job_number": "SRPO-1140189",
+      "budget": 591600,
+      "award_price": 591600,
+      "discount_rate": 100.0,
+      "winner": "本公司 (互盛 RICOH)",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260707&fn=BDM-4-70851213.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -9070,6 +11198,21 @@
     {
       "unit_id": "A.7.3",
       "unit_name": "財政部臺北國稅局",
+      "award_date": "2021-10-12",
+      "year": 2021,
+      "title": "109年事務機器採購案",
+      "job_number": "109-035-1",
+      "budget": 110000,
+      "award_price": 110000,
+      "discount_rate": 100.0,
+      "winner": "上毅實業有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTM1MjQ3OTE=",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.7.3",
+      "unit_name": "財政部臺北國稅局",
       "award_date": "2021-08-31",
       "year": 2021,
       "title": "23數位式影印機租賃案",
@@ -9079,6 +11222,21 @@
       "discount_rate": 100.0,
       "winner": "新印科技股份有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20210831&fn=BDM-1-53493033.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.11.10.12",
+      "unit_name": "臺灣臺中地方檢察署",
+      "award_date": "2021-07-30",
+      "year": 2021,
+      "title": "臺灣臺中地方檢察署數位式黑白影印機八台財物採購案",
+      "job_number": "11009",
+      "budget": 784000,
+      "award_price": 721000,
+      "discount_rate": 92.0,
+      "winner": "黃蘋科技實業有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTM0Njg2MjE=",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -9199,6 +11357,21 @@
       "discount_rate": 85.1,
       "winner": "傳響音影工程設計有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20210226&fn=BDM-1-53339328.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.11.10.12",
+      "unit_name": "臺灣臺中地方檢察署",
+      "award_date": "2020-11-12",
+      "year": 2020,
+      "title": "臺灣臺中地方檢察署數位式黑白影印機四台財物採購案",
+      "job_number": "10925",
+      "budget": 400000,
+      "award_price": 365000,
+      "discount_rate": 91.2,
+      "winner": "黃蘋科技實業有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTMyNDA2MTk=",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -9503,6 +11676,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "05601093",
+      "unit_name": "國家同步輻射研究中心",
+      "award_date": "2019-02-27",
+      "year": 2019,
+      "title": "中心影印機租賃(二年)",
+      "job_number": "SRPO-1080168",
+      "budget": 672000,
+      "award_price": 671304,
+      "discount_rate": 99.9,
+      "winner": "金儀 Konica Minolta",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20190227&fn=BDM-3-52711503.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.19",
       "unit_name": "僑務委員會",
       "award_date": "2018-11-13",
@@ -9559,6 +11747,21 @@
       "discount_rate": 72.8,
       "winner": "四海事務機器有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20180907&fn=BDM-2-52525677.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.11.10.12",
+      "unit_name": "臺灣臺中地方檢察署",
+      "award_date": "2018-06-25",
+      "year": 2018,
+      "title": "臺灣臺中地方檢察署數位式黑白影印機8台財物採購案",
+      "job_number": "10718",
+      "budget": 784000,
+      "award_price": 736000,
+      "discount_rate": 93.9,
+      "winner": "本公司 (互盛 RICOH)",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTI0ODI5MzA=",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
