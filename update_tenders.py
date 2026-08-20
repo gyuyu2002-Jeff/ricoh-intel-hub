@@ -139,9 +139,55 @@ def extract_budget_and_award(detail):
                     
     return budget_val, award_val
 
+FAILED_STATUS_TERMS = [
+    "無法決標", "流標", "廢標", "未達法定家數", "無廠商投標", "無人投標",
+    "不予開標", "撤標", "撤案", "停止採購", "取消採購"
+]
+AWARD_STATUS_TERMS = ["決標", "彙送", "得標廠商", "總決標金額"]
+
+
+def status_text_contains(text, terms):
+    normalized = str(text or "").replace("臺", "台")
+    return any(term in normalized for term in terms)
+
+
+def is_failed_notice(record):
+    """Recognize known failed/cancelled procurement notices and detail variants."""
+    if not isinstance(record, dict):
+        return False
+    brief = record.get("brief", {}) or {}
+    detail = record.get("detail", {}) or {}
+    detail_text = " ".join(f"{key} {value}" for key, value in detail.items())
+    return status_text_contains(brief.get("type", ""), FAILED_STATUS_TERMS) or status_text_contains(detail_text, FAILED_STATUS_TERMS)
+
+
+def is_award_notice(record):
+    if not isinstance(record, dict):
+        return False
+    brief = record.get("brief", {}) or {}
+    detail = record.get("detail", {}) or {}
+    detail_text = " ".join(f"{key} {value}" for key, value in detail.items())
+    return status_text_contains(brief.get("type", ""), AWARD_STATUS_TERMS) or status_text_contains(detail_text, AWARD_STATUS_TERMS)
+
+
+def resolve_notice_status(records):
+    """Award wins over failed notices when a tender has mixed lifecycle records."""
+    if any(is_award_notice(record) for record in records or []):
+        return "已決標"
+    if any(is_failed_notice(record) for record in records or []):
+        return "無法決標"
+    return ""
+
+
+def is_terminal_notice_type(notice_type):
+    return status_text_contains(notice_type, FAILED_STATUS_TERMS + AWARD_STATUS_TERMS)
+
+
 def extract_dates(detail, publish_fallback_str):
     publish_date = ""
     deadline_date = ""
+    publish_confidence = "unknown"
+    deadline_confidence = "unknown"
     
     # 1. Look for Notice Date (公告日期)
     for k, v in detail.items():
@@ -153,6 +199,7 @@ def extract_dates(detail, publish_fallback_str):
                     roc_year = int(digits[0])
                     ad_year = roc_year + 1911 if roc_year < 1911 else roc_year
                     publish_date = f"{ad_year}-{int(digits[1]):02d}-{int(digits[2]):02d}"
+                    publish_confidence = "verified"
                     break
                 except:
                     pass
@@ -167,6 +214,7 @@ def extract_dates(detail, publish_fallback_str):
                     roc_year = int(digits[0])
                     ad_year = roc_year + 1911 if roc_year < 1911 else roc_year
                     deadline_date = f"{ad_year}-{int(digits[1]):02d}-{int(digits[2]):02d}"
+                    deadline_confidence = "verified"
                     break
                 except:
                     pass
@@ -176,17 +224,19 @@ def extract_dates(detail, publish_fallback_str):
             try:
                 dt = datetime.strptime(publish_fallback_str, "%Y%m%d")
                 publish_date = dt.strftime("%Y-%m-%d")
+                publish_confidence = "inferred"
             except:
                 pass
                 
     if not deadline_date and publish_date:
+        deadline_confidence = "inferred"
         try:
             dt = datetime.strptime(publish_date, "%Y-%m-%d")
             deadline_date = (dt + timedelta(days=14)).strftime("%Y-%m-%d")
         except:
             pass
             
-    return publish_date, deadline_date
+    return publish_date, deadline_date, publish_confidence, deadline_confidence
 
 def extract_winning_competitor(detail):
     winner = ""
@@ -909,7 +959,20 @@ def main(mode="live"):
                     "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
                     "relevance": {**detailed_relevance, "reason": "政府公告明細暫時無法取得，等待下次自動查驗"}
                 })
+                continue
             if detailed_relevance["status"] != "included":
+                review_publish, review_deadline, review_publish_confidence, review_deadline_confidence = extract_dates(merged_detail, date_raw)
+                review_candidates.append({
+                    "date": review_publish or date_to_iso(date_raw),
+                    "publish_date": review_publish or date_to_iso(date_raw),
+                    "publish_date_confidence": review_publish_confidence,
+                    "deadline": review_deadline or "未公開",
+                    "deadline_confidence": review_deadline_confidence,
+                    "title": title, "unit": unit_name,
+                    "unit_id": unit_id, "job_number": item.get("job_number", ""),
+                    "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
+                    "relevance": detailed_relevance
+                })
                 continue
             relevance = detailed_relevance
             item["relevance"] = relevance
@@ -959,7 +1022,7 @@ def main(mode="live"):
                     continue
                 brief = record.get("brief", {})
                 notice_type = brief.get("type", "")
-                if ("決標" not in notice_type and "彙送" not in notice_type) or "無法決標" in notice_type:
+                if not is_award_notice(record) or is_failed_notice(record):
                     continue
                 history_title = brief.get("title", "")
                 if not is_relevant_equipment_title(history_title):
@@ -1007,8 +1070,8 @@ def main(mode="live"):
                 notice_type = brief.get("type", "")
                 history_title = brief.get("title", "")
                 if (
-                    ("決標" not in notice_type and "彙送" not in notice_type)
-                    or "無法決標" in notice_type
+                    not is_award_notice(record)
+                    or is_failed_notice(record)
                     or not is_comparable_history(title, history_title)
                 ):
                     continue
@@ -1049,8 +1112,7 @@ def main(mode="live"):
                 continue
             award_records = [
                 record for record in h_details["records"]
-                if "決標" in record.get("brief", {}).get("type", "")
-                and "無法決標" not in record.get("brief", {}).get("type", "")
+                if is_award_notice(record) and not is_failed_notice(record)
             ]
             if not award_records:
                 continue
@@ -1255,8 +1317,8 @@ def main(mode="live"):
             for r in records:
                 r_type = r.get("brief", {}).get("type", "")
                 r_detail = r.get("detail", {})
-                is_failed = "無法決標" in r_type or any("無法決標" in k for k in r_detail)
-                is_award = "決標" in r_type or "彙送" in r_type or any("總決標金額" in k or "得標廠商" in k for k in r_detail)
+                is_failed = is_failed_notice(r)
+                is_award = is_award_notice(r)
                 if is_failed:
                     if not failed_record:
                         failed_record = r
@@ -1417,15 +1479,19 @@ def main(mode="live"):
         # Extract real publication date and bidding deadline from detail records
         publish_date_str = ""
         deadline_str = ""
+        publish_date_confidence = "unknown"
+        deadline_confidence = "unknown"
         if detail_data and detail_data.get("records"):
             for r in detail_data["records"]:
                 r_detail = r.get("detail", {})
                 if r_detail:
-                    p_date, d_date = extract_dates(r_detail, date_raw)
+                    p_date, d_date, p_confidence, d_confidence = extract_dates(r_detail, date_raw)
                     if p_date:
                         publish_date_str = p_date
+                        publish_date_confidence = p_confidence
                     if d_date:
                         deadline_str = d_date
+                        deadline_confidence = d_confidence
                     if publish_date_str and deadline_str:
                         break
                         
@@ -1433,15 +1499,18 @@ def main(mode="live"):
             if len(date_raw) == 8:
                 try:
                     publish_date_str = datetime.strptime(date_raw, "%Y%m%d").strftime("%Y-%m-%d")
+                    publish_date_confidence = "inferred"
                 except:
                     pass
         if not deadline_str and publish_date_str:
             try:
                 deadline_str = (datetime.strptime(publish_date_str, "%Y-%m-%d") + timedelta(days=14)).strftime("%Y-%m-%d")
+                deadline_confidence = "inferred"
             except:
                 pass
         if not deadline_str:
             deadline_str = "未公開"
+            deadline_confidence = "unknown"
 
         # The homepage is an opportunity list, not a 60-day announcement archive.
         # Keep recent outcomes separately, but remove unresolved tenders after bidding closes.
@@ -1473,7 +1542,9 @@ def main(mode="live"):
             "unit_id": unit_id,
             "job_number": job_number,
             "publish_date": publish_date_str,
+            "publish_date_confidence": publish_date_confidence,
             "deadline": deadline_str,
+            "deadline_confidence": deadline_confidence,
             "budget": budget_str,
             "award_price": award_price_str,
             "avg_discount": avg_discount_str,

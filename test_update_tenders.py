@@ -7,6 +7,10 @@ from update_tenders import (
     deduplicate_announcements,
     get_city_info,
     is_past_deadline,
+    is_failed_notice,
+    is_award_notice,
+    resolve_notice_status,
+    extract_dates,
 )
 
 
@@ -23,6 +27,38 @@ class DeadlineRetentionTests(unittest.TestCase):
 
     def test_unknown_deadline_is_not_assumed_expired(self):
         self.assertFalse(is_past_deadline("未公開", date(2026, 8, 20)))
+
+
+class StatusAndDateConfidenceTests(unittest.TestCase):
+    def test_failed_status_variants_are_detected(self):
+        for phrase in ["流標", "廢標", "未達法定家數", "無廠商投標", "無人投標", "不予開標", "撤標", "撤案", "停止採購", "取消採購"]:
+            with self.subTest(phrase=phrase):
+                self.assertTrue(is_failed_notice({"brief": {"type": phrase}}))
+
+    def test_failed_status_can_be_found_in_detail_value(self):
+        self.assertTrue(is_failed_notice({"brief": {}, "detail": {"開標結果": "本案無廠商投標，流標"}}))
+
+    def test_award_wins_over_failed_notice(self):
+        records = [
+            {"brief": {"type": "廢標"}},
+            {"brief": {"type": "決標公告"}, "detail": {"得標廠商": "測試公司"}},
+        ]
+        self.assertEqual(resolve_notice_status(records), "已決標")
+
+    def test_failed_status_wins_when_no_award_exists(self):
+        self.assertEqual(resolve_notice_status([{"brief": {"type": "撤案公告"}}]), "無法決標")
+
+    def test_verified_dates_are_marked_verified(self):
+        result = extract_dates({"公告日期": "115/08/20", "截止投標": "115/08/27"}, "20260820")
+        self.assertEqual(result, ("2026-08-20", "2026-08-27", "verified", "verified"))
+
+    def test_publish_fallback_and_deadline_are_marked_inferred(self):
+        result = extract_dates({}, "20260820")
+        self.assertEqual(result, ("2026-08-20", "2026-09-03", "inferred", "inferred"))
+
+    def test_invalid_dates_remain_unknown(self):
+        result = extract_dates({"公告日期": "日期待確認", "截止投標": "尚未公告"}, "bad-date")
+        self.assertEqual(result, ("", "", "unknown", "unknown"))
 
 
 class TenderRelevanceTests(unittest.TestCase):
