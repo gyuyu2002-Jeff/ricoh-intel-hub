@@ -65,3 +65,25 @@
 .toolbar-status-copy{display:grid;align-content:center;gap:3px;min-width:190px;min-height:38px;padding:7px 11px;background:#f4f8f3;border:1px solid var(--line);border-radius:7px}.toolbar-status-copy strong{color:var(--deep);font-size:12px;line-height:1.25}.toolbar-status-copy small{color:#87948b;font-size:9px}.model-verification-strip{display:grid;grid-template-columns:.95fr 1.3fr 2.15fr;gap:0;margin:0 0 16px;background:#f5f8f3;border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;overflow:hidden}.model-verification-strip>div{display:grid;align-content:start;gap:4px;min-height:66px;padding:11px 14px;border-right:1px solid #dfe8e0}.model-verification-strip>div:last-child{border-right:0}.model-verification-strip span{color:#87948c;font:9px "Space Grotesk","Noto Sans TC",sans-serif;letter-spacing:.07em}.model-verification-strip strong{color:#48574e;font-size:11px;line-height:1.55}.model-verification-strip a{display:inline-flex;align-items:center;gap:4px;justify-self:start;color:var(--red);font-size:10px;font-weight:700;line-height:1.4;text-decoration:none}.model-verification-strip a:hover{text-decoration:underline}.matrix-brand-identity{display:grid;gap:3px;min-width:0}.matrix-brand-identity small{color:#85928a;font-size:9px;line-height:1.35}.matrix-brand-cell .matrix-brand-identity{flex:1}.matrix-brand-cell .status-stamp{flex:0 0 auto}.matrix-footer-note{margin-top:12px}.cell-flag{line-height:1.35}
 @media (max-width:820px){.toolbar-status-copy{min-width:0;width:100%}.model-verification-strip{grid-template-columns:1fr 1fr}.model-verification-strip>div:nth-child(2){border-right:0}.model-verification-strip>div:last-child{grid-column:1/-1;border-top:1px solid #dfe8e0}.matrix-brand-identity small{max-width:110px}}
 @media (max-width:560px){.model-verification-strip{grid-template-columns:1fr;margin-bottom:14px}.model-verification-strip>div,.model-verification-strip>div:nth-child(2),.model-verification-strip>div:last-child{grid-column:auto;min-height:0;padding:10px 12px;border-right:0;border-bottom:1px solid #dfe8e0}.model-verification-strip>div:last-child{border-bottom:0}.toolbar-status-copy{padding:8px 11px}.matrix-brand-identity small{font-size:8px;max-width:106px}.matrix-scroll-hint span:first-child{max-width:210px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+
+/* Awarded tender emphasis: make resolved results immediately scannable on the homepage. */
+.tender-overview{grid-template-columns:1.45fr repeat(4,minmax(0,1fr))}
+.overview-awarded{background:#fff8e9;border-top:3px solid #c38a2b;padding-top:19px}
+.overview-awarded span{color:#8a6a2b}
+.overview-awarded strong{color:#9a671d}
+.stage-awarded{color:#80551c;background:#fff0c9;border:1px solid #e5bd65;font-weight:800;box-shadow:0 2px 8px rgba(164,98,37,.14)}
+.stage-failed{color:#8a3b49;background:#fff0f2;border:1px solid #efc8cf}
+.tender-card-awarded{border-color:#e1bb68;box-shadow:0 10px 28px rgba(164,98,37,.13)}
+.tender-card-awarded:before{width:5px;background:#c38a2b}
+.tender-card-awarded .tender-status-bar{background:#fff9ec;border-bottom-color:#efdbad}
+.tender-card-awarded .dossier-spine{color:#9b671e}
+.tender-card-awarded .metric:nth-child(2){background:#fff9ec}
+.tender-card-awarded .metric:nth-child(2) .metric-value{color:#9a671d}
+.award-result-banner{display:flex;align-items:center;gap:11px;margin:15px 23px 0;padding:11px 13px;background:linear-gradient(90deg,#fff3cf,#fff9eb);border:1px solid #ebcf8a;border-left:4px solid #c38a2b;border-radius:7px;color:#6c501f}
+.award-result-mark{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#c38a2b;color:#fff;font-weight:800;font-size:15px}
+.award-result-banner div{display:grid;gap:2px;min-width:0}
+.award-result-banner strong{font-size:12px;color:#6e4b12}
+.award-result-banner span:not(.award-result-mark):not(.award-result-label){font-size:10px;color:#8a7650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.award-result-label{margin-left:auto;color:#a2782b;font:700 9px "Space Grotesk",sans-serif;letter-spacing:.13em}
+@media (max-width:820px){.tender-overview{grid-template-columns:1fr 1fr}.overview-main{grid-column:span 2}.overview-awarded{border-top:0;border-left:3px solid #c38a2b;padding-top:22px}}
+@media (max-width:560px){.award-result-banner{margin:12px 14px 0;align-items:flex-start}.award-result-banner div{flex:1}.award-result-label{display:none}}

@@ -69,6 +69,8 @@ type Tender = {
   city: string;
   stage: string;
   stageTone: string;
+  isAwarded: boolean;
+  awardPrice: string;
   countdown: string;
   title: string;
   job: string;
@@ -125,6 +127,8 @@ const fallbackTenders: Tender[] = [
     city: "台北市",
     stage: "正式開標",
     stageTone: "stage-blue",
+    isAwarded: false,
+    awardPrice: "未公開",
     countdown: "距截止 24 天",
     title: "影印機租賃案",
     job: "115-033",
@@ -156,6 +160,8 @@ const fallbackTenders: Tender[] = [
     city: "桃園市",
     stage: "公開徵求價單",
     stageTone: "stage-amber",
+    isAwarded: false,
+    awardPrice: "未公開",
     countdown: "距截止 10 天",
     title: "115117年度影印機租賃長約",
     job: "I7315D063",
@@ -183,6 +189,8 @@ const fallbackTenders: Tender[] = [
     city: "新北市",
     stage: "評選中",
     stageTone: "stage-dark",
+    isAwarded: false,
+    awardPrice: "未公開",
     countdown: "資料更新 2 小時前",
     title: "多功能事務機設備租賃暨維護",
     job: "115-0718",
@@ -217,6 +225,7 @@ type RawTender = {
   publish_date?: string;
   deadline?: string;
   budget?: string | number;
+  award_price?: string | number;
   avg_discount?: string;
   suggested_price?: string;
   main_competitor?: string;
@@ -256,7 +265,8 @@ function mapRawTender(raw: RawTender): Tender {
   const confidence = raw.relevance?.confidence === "high" ? "高" : raw.relevance?.confidence === "medium" ? "中" : "待確認";
   const priority = raw.relevance?.score && raw.relevance.score >= 4 ? "P1" : "P2";
   const stage = raw.stage ?? "狀態待確認";
-  const stageTone = stage.includes("公開") ? "stage-amber" : stage.includes("評選") ? "stage-dark" : "stage-blue";
+  const isAwarded = stage === "已決標";
+  const stageTone = isAwarded ? "stage-awarded" : stage.includes("無法決標") ? "stage-failed" : stage.includes("公開") ? "stage-amber" : stage.includes("評選") ? "stage-dark" : "stage-blue";
   const comparable = history.length > 0 ? `近 5 年｜可比紀錄 ${history.length} 筆` : "目前無完整可比紀錄";
   const summary = history.length > 0
     ? `${raw.unit ?? "本案機關"}過去有 ${history.length} 筆可比資料，前次由${previousWinner}得標。`
@@ -270,6 +280,8 @@ function mapRawTender(raw: RawTender): Tender {
     city: raw.city ?? "地點待確認",
     stage,
     stageTone,
+    isAwarded,
+    awardPrice: typeof raw.award_price === "number" ? `NT$ ${raw.award_price.toLocaleString("en-US")}` : raw.award_price ?? "未公開",
     countdown: formatDeadlineCountdown(raw.deadline),
     title: raw.title ?? "未命名標案",
     job: raw.job_number ?? "待查",
@@ -337,16 +349,17 @@ function TenderCard({ tender }: { tender: Tender }) {
   const [expanded, setExpanded] = useState(false);
   const latestHistory = tender.history[0];
   return (
-    <article className="tender-card">
+    <article className={`tender-card ${tender.isAwarded ? "tender-card-awarded" : ""}`}>
       <div className="dossier-spine" aria-hidden="true"><span>{tender.priority}</span><i>{tender.job}</i></div>
       <div className="tender-status-bar">
         <div className="status-left">
           <Stamp tone={tender.priority === "P1" ? "stamp-red" : "stamp-ink"}>{tender.priority} · {tender.priorityLabel}</Stamp>
           <Stamp tone="stamp-sage">{tender.city}</Stamp>
-          <Stamp tone={tender.stageTone}>{tender.stage}</Stamp>
+          <Stamp tone={tender.stageTone}>{tender.isAwarded ? "✓ 已決標" : tender.stage}</Stamp>
         </div>
         <div className={`countdown ${tender.priority === "P1" ? "countdown-hot" : ""}`}><Clock3 size={14} />{tender.countdown}</div>
       </div>
+      {tender.isAwarded && <div className="award-result-banner"><span className="award-result-mark">✓</span><div><strong>本案已決標</strong><span>得標廠商：{tender.competitor} · 決標金額：{tender.awardPrice}</span></div><span className="award-result-label">RESULT</span></div>}
       <div className="tender-identity">
         <div>
           <div className="eyebrow">TENDER FILE <span>/</span> {tender.publish}</div>
@@ -357,7 +370,7 @@ function TenderCard({ tender }: { tender: Tender }) {
       </div>
       <div className="metric-grid">
         <Metric label="截止日" value={tender.deadline} note={tender.stage} alert={tender.priority === "P1"} />
-        <Metric label="預算" value={tender.budget} note={tender.budget.includes("無") ? "附件／後續公告待確認" : "官方公告已提供"} />
+        <Metric label={tender.isAwarded ? "決標金額" : "預算"} value={tender.isAwarded ? tender.awardPrice : tender.budget} note={tender.isAwarded ? "官方決標公告已提供" : tender.budget.includes("無") ? "附件／後續公告待確認" : "官方公告已提供"} />
         <Metric label="歷史折率中位數" value={tender.discount} note={tender.samples} />
         <Metric label={tender.reference.includes("不") ? "歷史優勢商" : "歷史參考價格"} value={tender.reference} note={tender.reference.includes("不") ? tender.competitor : "依中位折率推算｜僅供參考"} />
         <Metric label="前次得標廠商" value={tender.previousWinner} note={latestHistory ? `${latestHistory[0]} · ${latestHistory[2]}` : "尚無歷史得標紀錄"} />
@@ -487,5 +500,5 @@ export default function Home() {
   if (loading) return <div className="app-shell loading-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div></div></div><span className="loading-top-note"><span className="loading-pulse" /> 讀取來源索引</span></header><main className="page-container"><SectionSkeleton view="tenders" /></main></div>;
   const dataUpdateCopy = dataSyncStatus === "warning" ? `最後成功更新：${dataUpdated}` : `資料更新：${dataUpdated}`;
   const dataUpdateTitle = dataSyncStatus === "warning" && dataSyncAttempt ? `最近一次同步嘗試：${dataSyncAttempt}；目前顯示最後成功更新資料。` : "標案資料集最後成功同步時間";
-  return <div className="app-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div></div></div><div className="topbar-actions"><span className={`live-indicator ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}><span /> LIVE <em>{dataSyncStatus === "warning" ? `最後成功 ${dataUpdated}` : `資料更新 ${dataUpdated}`}</em></span><button className="icon-button" aria-label="列印工作區"><FileDown size={17} /></button></div></header><main className="page-container"><div className="workspace-switcher" role="tablist" aria-label="主要功能切換"><div className="switcher-label">主要功能</div><button role="tab" aria-selected={view === "tenders"} className={view === "tenders" ? "switcher-tab active" : "switcher-tab"} onClick={() => switchView("tenders")}><BarChart3 size={16} /><span><strong>標案情報監控雷達</strong><small>案件優先級與前次得標</small></span></button><button role="tab" aria-selected={view === "brands"} className={view === "brands" ? "switcher-tab active" : "switcher-tab"} onClick={() => switchView("brands")}><Layers3 size={16} /><span><strong>各廠牌產品與市場資訊</strong><small>官方來源與規格比較</small></span></button></div><div className="page-heading"><div><div className="eyebrow">互盛情報中樞 <span>/</span> 2026.08.14</div><h1>{view === "tenders" ? "標案情報監控雷達" : "各廠牌規格比較"}</h1><p>{view === "tenders" ? "先看今天該追的案，再回頭核對前次得標紀錄。" : "以 RICOH 為主要品牌，選擇單一比較品牌快速核對產品、資安、雲端與管理規格。"}</p></div><div className="heading-actions"><span className={`update-note ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}><Database size={14} /><time>{dataUpdateCopy}</time></span><button className="outline-button"><FileDown size={15} /> 列印工作區</button></div></div>{viewLoading ? <SectionSkeleton view={view} /> : view === "tenders" ? <><div className="tender-overview"><div className="overview-main"><div className="overview-kicker">TODAY'S OPPORTUNITY INDEX</div><div className="overview-number">{tenders.length}</div><div className="overview-copy"><strong>件進行中標案</strong><span>已完成縣市判定，依業務優先級重新排序</span></div></div><div className="overview-stat"><span>今日來源公告</span><strong>{tenders.length}</strong><small>目前資料集案件量</small></div><div className="overview-stat"><span>可比歷史資料</span><strong>{tenders.filter((tender) => tender.history.length >= 2).length}</strong><small>具可比歷史資料</small></div><div className="overview-stat"><span>待人工確認</span><strong className="red-text">{tenders.filter((tender) => tender.confidence !== "高").length}</strong><small>資料需補查核</small></div></div><div className="city-quick-filter" aria-label="縣市快速選擇"><div className="city-filter-heading"><div className="city-filter-title"><MapPin size={17} /><div><strong>縣市快速選擇</strong><span>先按地區縮小案件範圍，再搭配案件狀態篩選</span></div></div><div className="city-filter-meta"><span>{cityFilter === "全部縣市" ? "全台案件" : cityFilter}</span><small>{filteredTenders.length} 件符合目前條件</small></div></div><div className="city-pill-list" role="group" aria-label="標案縣市"><button type="button" aria-pressed={cityFilter === "全部縣市"} className={cityFilter === "全部縣市" ? "city-pill active" : "city-pill"} onClick={() => setCityFilter("全部縣市")}><span>全部縣市</span><strong>{tenders.length}</strong></button>{cityOptions.map(([city, count]) => <button type="button" aria-pressed={cityFilter === city} className={cityFilter === city ? "city-pill active" : "city-pill"} key={city} onClick={() => setCityFilter(city)}><span>{city}</span><strong>{count}</strong></button>)}</div></div><div className="workspace-toolbar"><div className="filter-intro"><Filter size={16} /><strong>案件檔案</strong><span>{filteredTenders.length} / {tenders.length} 顯示</span></div><div className="filter-tabs">{["全部案件", "3 日內", "待確認"].map((item) => <button key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{item}</button>)}</div><button className="outline-button"><Search size={15} /> 搜尋案件</button></div><div className="tender-list">{filteredTenders.map((tender) => <TenderCard key={tender.job} tender={tender} />)}</div></> : <div className="brand-main brand-main-focused"><BrandMatrix /></div>}</main><footer className="page-footer"><span>互盛情報中樞 / INTERNAL BUSINESS INTELLIGENCE</span><span>品牌查核日期：{payload.checkedAt}</span></footer></div>;
+  return <div className="app-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div></div></div><div className="topbar-actions"><span className={`live-indicator ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}><span /> LIVE <em>{dataSyncStatus === "warning" ? `最後成功 ${dataUpdated}` : `資料更新 ${dataUpdated}`}</em></span><button className="icon-button" aria-label="列印工作區"><FileDown size={17} /></button></div></header><main className="page-container"><div className="workspace-switcher" role="tablist" aria-label="主要功能切換"><div className="switcher-label">主要功能</div><button role="tab" aria-selected={view === "tenders"} className={view === "tenders" ? "switcher-tab active" : "switcher-tab"} onClick={() => switchView("tenders")}><BarChart3 size={16} /><span><strong>標案情報監控雷達</strong><small>案件優先級與前次得標</small></span></button><button role="tab" aria-selected={view === "brands"} className={view === "brands" ? "switcher-tab active" : "switcher-tab"} onClick={() => switchView("brands")}><Layers3 size={16} /><span><strong>各廠牌產品與市場資訊</strong><small>官方來源與規格比較</small></span></button></div><div className="page-heading"><div><div className="eyebrow">互盛情報中樞 <span>/</span> 2026.08.14</div><h1>{view === "tenders" ? "標案情報監控雷達" : "各廠牌規格比較"}</h1><p>{view === "tenders" ? "先看今天該追的案，再回頭核對前次得標紀錄。" : "以 RICOH 為主要品牌，選擇單一比較品牌快速核對產品、資安、雲端與管理規格。"}</p></div><div className="heading-actions"><span className={`update-note ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}><Database size={14} /><time>{dataUpdateCopy}</time></span><button className="outline-button"><FileDown size={15} /> 列印工作區</button></div></div>{viewLoading ? <SectionSkeleton view={view} /> : view === "tenders" ? <><div className="tender-overview"><div className="overview-main"><div className="overview-kicker">TODAY'S OPPORTUNITY INDEX</div><div className="overview-number">{tenders.length}</div><div className="overview-copy"><strong>件進行中標案</strong><span>已完成縣市判定，依業務優先級重新排序</span></div></div><div className="overview-stat overview-awarded"><span>已決標案件</span><strong>{tenders.filter((tender) => tender.isAwarded).length}</strong><small>近期結果醒目追蹤</small></div><div className="overview-stat"><span>今日來源公告</span><strong>{tenders.length}</strong><small>目前資料集案件量</small></div><div className="overview-stat"><span>可比歷史資料</span><strong>{tenders.filter((tender) => tender.history.length >= 2).length}</strong><small>具可比歷史資料</small></div><div className="overview-stat"><span>待人工確認</span><strong className="red-text">{tenders.filter((tender) => tender.confidence !== "高").length}</strong><small>資料需補查核</small></div></div><div className="city-quick-filter" aria-label="縣市快速選擇"><div className="city-filter-heading"><div className="city-filter-title"><MapPin size={17} /><div><strong>縣市快速選擇</strong><span>先按地區縮小案件範圍，再搭配案件狀態篩選</span></div></div><div className="city-filter-meta"><span>{cityFilter === "全部縣市" ? "全台案件" : cityFilter}</span><small>{filteredTenders.length} 件符合目前條件</small></div></div><div className="city-pill-list" role="group" aria-label="標案縣市"><button type="button" aria-pressed={cityFilter === "全部縣市"} className={cityFilter === "全部縣市" ? "city-pill active" : "city-pill"} onClick={() => setCityFilter("全部縣市")}><span>全部縣市</span><strong>{tenders.length}</strong></button>{cityOptions.map(([city, count]) => <button type="button" aria-pressed={cityFilter === city} className={cityFilter === city ? "city-pill active" : "city-pill"} key={city} onClick={() => setCityFilter(city)}><span>{city}</span><strong>{count}</strong></button>)}</div></div><div className="workspace-toolbar"><div className="filter-intro"><Filter size={16} /><strong>案件檔案</strong><span>{filteredTenders.length} / {tenders.length} 顯示</span></div><div className="filter-tabs">{["全部案件", "3 日內", "待確認"].map((item) => <button key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{item}</button>)}</div><button className="outline-button"><Search size={15} /> 搜尋案件</button></div><div className="tender-list">{filteredTenders.map((tender) => <TenderCard key={tender.job} tender={tender} />)}</div></> : <div className="brand-main brand-main-focused"><BrandMatrix /></div>}</main><footer className="page-footer"><span>互盛情報中樞 / INTERNAL BUSINESS INTELLIGENCE</span><span>品牌查核日期：{payload.checkedAt}</span></footer></div>;
 }
