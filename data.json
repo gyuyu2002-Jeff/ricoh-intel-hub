@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-20 16:56",
+  "last_updated": "2026-08-20 18:19",
   "tenders": [
     {
       "city": "桃園市",
@@ -268,9 +268,9 @@
     "today": "2026-08-20",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-20 16:56",
-    "source_records": 2370,
-    "candidate_records": 8,
+    "latest_attempt_at": "2026-08-20 18:19",
+    "source_records": 2395,
+    "candidate_records": 9,
     "review_records": 80,
     "successful_dates": [
       "2026-08-20",
@@ -705,17 +705,65 @@
       "source_records": 2721,
       "candidate_records": 7,
       "review_records": 6,
-      "checked_at": "2026-08-20 16:51"
+      "checked_at": "2026-08-20 18:14"
     },
     "2026-08-20": {
       "status": "complete",
-      "source_records": 2370,
-      "candidate_records": 8,
+      "source_records": 2395,
+      "candidate_records": 9,
       "review_records": 5,
-      "checked_at": "2026-08-20 16:51"
+      "checked_at": "2026-08-20 18:14"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260820,
+      "filename": "aaa-71264586",
+      "brief": {
+        "type": "決標公告",
+        "title": "立法院「115年度影印機配件採購案」",
+        "companies": {
+          "ids": [
+            "82843583"
+          ],
+          "names": [
+            "台灣富士軟片系統整合股份有限公司"
+          ],
+          "id_key": {
+            "82843583": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "台灣富士軟片系統整合股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "1150900897",
+      "unit_id": "4",
+      "unit_name": "立法院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=4",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=4&job_number=1150900897",
+      "unit_url": "/index/unit/4",
+      "url": "/index/case/4/1150900897/20260820/aaa-71264586",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "date": 20260820,
       "filename": "TIQ-11-71097370",
