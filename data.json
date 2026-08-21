@@ -267,8 +267,8 @@
   "collection_status": {
     "today": "2026-08-22",
     "status": "complete",
-    "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-21 18:19",
+    "latest_attempt_status": "failed",
+    "latest_attempt_at": "2026-08-22 06:35",
     "source_records": 2475,
     "candidate_records": 1,
     "review_records": 79,
@@ -276,7 +276,9 @@
       "2026-08-21",
       "2026-08-20"
     ],
-    "failed_dates": [],
+    "failed_dates": [
+      "2026-08-22"
+    ],
     "backfill_remaining_days": 0,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
