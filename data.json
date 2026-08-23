@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-24 04:50",
+  "last_updated": "2026-08-24 06:37",
   "tenders": [
     {
       "city": "桃園市",
@@ -267,18 +267,16 @@
   "collection_status": {
     "today": "2026-08-24",
     "status": "complete",
-    "latest_attempt_status": "failed",
-    "latest_attempt_at": "2026-08-23 18:02",
-    "source_records": 2475,
-    "candidate_records": 1,
-    "review_records": 79,
+    "latest_attempt_status": "complete",
+    "latest_attempt_at": "2026-08-24 06:37",
+    "source_records": 1606,
+    "candidate_records": 4,
+    "review_records": 80,
     "successful_dates": [
-      "2026-08-21",
-      "2026-08-20"
-    ],
-    "failed_dates": [
+      "2026-08-24",
       "2026-08-23"
     ],
+    "failed_dates": [],
     "backfill_remaining_days": 0,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
@@ -701,9 +699,177 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-08-24 00:48"
+    },
+    "2026-08-24": {
+      "status": "complete",
+      "source_records": 1606,
+      "candidate_records": 4,
+      "review_records": 4,
+      "checked_at": "2026-08-24 06:32"
+    },
+    "2026-08-23": {
+      "status": "complete",
+      "source_records": 0,
+      "candidate_records": 0,
+      "review_records": 0,
+      "checked_at": "2026-08-24 06:32"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260824,
+      "filename": "TIQ-3-71098791",
+      "brief": {
+        "type": "經公開評選或公開徵求之限制性招標公告",
+        "title": "115年附屬醫療及社會福利機構管理會資訊設備維護委外服務",
+        "category": "勞務類842-軟體執行服務",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "M1513418",
+      "unit_id": "A.21",
+      "unit_name": "衛生福利部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21&job_number=M1513418",
+      "unit_url": "/index/unit/A.21",
+      "url": "/index/case/A.21/M1513418/20260824/TIQ-3-71098791",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "維護"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260824,
+      "filename": "TIQ-1-71098865",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科雙波長雷射採購案",
+        "category": "財物類481-醫療,外科及矯形設備",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115403820234",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115403820234",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115403820234/20260824/TIQ-1-71098865",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260824,
+      "filename": "NAI-1-71264917",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科雙波長雷射採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115403820234",
+      "unit_id": "3.76.54",
+      "unit_name": "臺東縣政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115403820234",
+      "unit_url": "/index/unit/3.76.54",
+      "url": "/index/case/3.76.54/115403820234/20260824/NAI-1-71264917",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": 20260824,
+      "filename": "BDM-3-71265107",
+      "brief": {
+        "type": "定期彙送",
+        "title": "新竹市幸福小黃動態資訊設備建置計畫",
+        "companies": {
+          "ids": [
+            "27950876"
+          ],
+          "names": [
+            "中華電信股份有限公司企業客戶分公司"
+          ],
+          "id_key": {
+            "27950876": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "中華電信股份有限公司企業客戶分公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "1150203",
+      "unit_id": "3.76.58",
+      "unit_name": "新竹市政府",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.58",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.58&job_number=1150203",
+      "unit_url": "/index/unit/3.76.58",
+      "url": "/index/case/3.76.58/1150203/20260824/BDM-3-71265107",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 1,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": 20260821,
       "filename": "TIQ-11-71098330",
@@ -2652,42 +2818,6 @@
         "category": "needs_review",
         "matched_terms": [
           "資訊設備",
-          "採購"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260810,
-      "filename": "TIQ-1-71089198",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科雙波長雷射採購案",
-        "category": "財物類481-醫療,外科及矯形設備",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115403820234",
-      "unit_id": "3.76.54",
-      "unit_name": "臺東縣政府",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.54",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.54&job_number=115403820234",
-      "unit_url": "/index/unit/3.76.54",
-      "url": "/index/case/3.76.54/115403820234/20260810/TIQ-1-71089198",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公設備",
           "採購"
         ],
         "matched_fields": [
@@ -6956,41 +7086,6 @@
     },
     {
       "date": 20260626,
-      "filename": "TIQ-11-71057842",
-      "brief": {
-        "type": "公開取得報價單或企劃書公告",
-        "title": "新竹市幸福小黃動態資訊設備建置計畫",
-        "category": "財物類389-其他製造商品",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "1150203",
-      "unit_id": "3.76.58",
-      "unit_name": "新竹市政府",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.58",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.58&job_number=1150203",
-      "unit_url": "/index/unit/3.76.58",
-      "url": "/index/case/3.76.58/1150203/20260626/TIQ-11-71057842",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 1,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260626,
       "filename": "TIQ-1-71057691",
       "brief": {
         "type": "公開招標公告",
@@ -7576,6 +7671,92 @@
     }
   ],
   "review_candidates": [
+    {
+      "date": "2026-08-24",
+      "publish_date": "2026-08-24",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-24",
+      "deadline_confidence": "verified",
+      "title": "115年附屬醫療及社會福利機構管理會資訊設備維護委外服務",
+      "unit": "衛生福利部",
+      "unit_id": "A.21",
+      "job_number": "M1513418",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260824&fn=TIQ-3-71098791.xml",
+      "relevance": {
+        "status": "excluded",
+        "confidence": "high",
+        "score": -3,
+        "category": "network_or_server",
+        "matched_terms": [
+          "機房",
+          "網路設備",
+          "伺服器",
+          "儲存設備"
+        ],
+        "matched_fields": [
+          "detail"
+        ],
+        "reason": "明確屬於非辦公輸出設備"
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "publish_date": "2026-08-10",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-20",
+      "deadline_confidence": "verified",
+      "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科雙波長雷射採購案",
+      "unit": "臺東縣政府",
+      "unit_id": "3.76.54",
+      "job_number": "115403820234",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260824&fn=TIQ-1-71098865.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "傳真",
+          "A3",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "publish_date": "2026-06-26",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-07-06",
+      "deadline_confidence": "verified",
+      "title": "新竹市幸福小黃動態資訊設備建置計畫",
+      "unit": "新竹市政府",
+      "unit_id": "3.76.58",
+      "job_number": "1150203",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260824&fn=BDM-3-71265107.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 3,
+        "category": "needs_review",
+        "matched_terms": [
+          "資訊設備",
+          "列印",
+          "傳真",
+          "採購"
+        ],
+        "matched_fields": [
+          "title",
+          "detail"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
     {
       "date": "2026-04-27",
       "publish_date": "2026-04-27",
@@ -8267,35 +8448,6 @@
         "matched_terms": [
           "資訊設備",
           "傳真",
-          "採購"
-        ],
-        "matched_fields": [
-          "title",
-          "detail"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": "2026-08-10",
-      "publish_date": "2026-08-10",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-08-20",
-      "deadline_confidence": "verified",
-      "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科雙波長雷射採購案",
-      "unit": "臺東縣政府",
-      "unit_id": "3.76.54",
-      "job_number": "115403820234",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260810&fn=TIQ-1-71089198.xml",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 3,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公設備",
-          "傳真",
-          "A3",
           "採購"
         ],
         "matched_fields": [
@@ -9451,35 +9603,6 @@
         ],
         "matched_fields": [
           "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": "2026-06-26",
-      "publish_date": "2026-06-26",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-07-06",
-      "deadline_confidence": "verified",
-      "title": "新竹市幸福小黃動態資訊設備建置計畫",
-      "unit": "新竹市政府",
-      "unit_id": "3.76.58",
-      "job_number": "1150203",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260626&fn=TIQ-11-71057842.xml",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 3,
-        "category": "needs_review",
-        "matched_terms": [
-          "資訊設備",
-          "列印",
-          "傳真",
-          "採購"
-        ],
-        "matched_fields": [
-          "title",
-          "detail"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
