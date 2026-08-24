@@ -5,7 +5,6 @@
  */
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
-  ArrowUpRight,
   BarChart3,
   ChevronDown,
   ChevronRight,
@@ -14,45 +13,12 @@ import {
   ExternalLink,
   FileDown,
   Filter,
-  Layers3,
   MapPin,
   MoreHorizontal,
-  PanelLeft,
   Search,
   Sparkles,
 } from "lucide-react";
-import brandPayload from "../data/brands.json";
 
-type View = "tenders" | "brands";
-type BrandField = { value: string; status?: string; checkedAt: string; sourceUrl: string; sourceLabel: string };
-type ModelOption = {
-  id: string;
-  label: string;
-  status: string;
-  note: string;
-  checkedAt: string;
-  sourceUrl: string;
-  sourceLabel: string;
-  fields: Record<string, BrandField>;
-};
-type Brand = {
-  id: string;
-  index: string;
-  name: string;
-  regionStatus: string;
-  statusTone: string;
-  checkedAt: string;
-  models: string;
-  modelOptions: ModelOption[];
-  summary: { entryPoint: string; competitiveStrength: string; mustAsk: string };
-  sources: Array<{ title: string; description: string; status: string; checkedAt: string; url: string }>;
-  fields: Record<string, BrandField>;
-};
-type Payload = {
-  checkedAt: string;
-  brandDirectory: Array<{ id: string; name: string; checkedAt: string; sourceUrl: string; loaded: boolean }>;
-  brands: Brand[];
-};
 type TenderPayload = {
   last_updated?: string;
   tenders?: RawTender[];
@@ -96,33 +62,6 @@ type Tender = {
   sourceUrl: string;
   history: HistoryRow[];
 };
-
-const payload = brandPayload as Payload;
-const { brands } = payload;
-const modelStampTone = (status: string) => status.includes("海外") ? "stamp-amber" : status.includes("台灣") ? "stamp-green" : "stamp-blue";
-const resolveBrandModel = (brand: Brand, modelId?: string) => {
-  const activeModel = brand.modelOptions.find((model) => model.id === modelId) ?? brand.modelOptions[0];
-  if (!activeModel) return { ...brand, activeModel: undefined };
-  return { ...brand, activeModel, fields: { ...brand.fields, ...activeModel.fields } };
-};
-const rows = [
-  ["model", "代表系列／型號"],
-  ["positioning", "定位"],
-  ["printSpeed", "列印速度"],
-  ["scanSpeed", "掃描速度"],
-  ["scanDestinations", "掃描目的地"],
-  ["transportSecurity", "傳輸安全"],
-  ["deviceSecurity", "裝置安全"],
-  ["cloudManagement", "雲端／管理"],
-  ["taiwanSuitability", "台灣適用性"],
-  ["limitations", "主要限制"],
-] as const;
-const groups = [
-  { id: "core", label: "定位與核心規格", start: 0, end: 4 },
-  { id: "workflow", label: "文件工作流程", start: 4, end: 5 },
-  { id: "security", label: "資安與裝置管理", start: 5, end: 7 },
-  { id: "service", label: "台灣適用性與限制", start: 7, end: 10 },
-];
 
 const fallbackTenders: Tender[] = [
   {
@@ -340,11 +279,11 @@ function Metric({ label, value, note, alert = false }: { label: string; value: s
   );
 }
 
-function SectionSkeleton({ view }: { view: View }) {
+function SectionSkeleton() {
   return (
     <div className="loading-panel" aria-live="polite" aria-busy="true">
       <div className="loading-kicker">
-        <span className="loading-pulse" /> {view === "brands" ? "載入品牌資料與來源索引" : "載入標案情報與歷史紀錄"}
+        <span className="loading-pulse" /> {"載入標案情報與歷史紀錄"}
       </div>
       <div className="skeleton-heading" />
       <div className="skeleton-subheading" />
@@ -424,54 +363,10 @@ function TenderCard({ tender }: { tender: Tender }) {
   );
 }
 
-function BrandMatrix() {
-  const [openGroups, setOpenGroups] = useState({ core: true, workflow: true, security: true, service: false });
-  const [matrixLoading, setMatrixLoading] = useState(false);
-  const ricoh = brands.find((brand) => brand.id === "ricoh") ?? brands[0];
-  const competitorOptions = brands.filter((brand) => brand.id !== "ricoh");
-  const [comparisonBrandId, setComparisonBrandId] = useState(competitorOptions[0]?.id ?? "");
-  const [comparisonModelId, setComparisonModelId] = useState(competitorOptions[0]?.modelOptions[0]?.id ?? "");
-  const competitorBase = competitorOptions.find((brand) => brand.id === comparisonBrandId) ?? competitorOptions[0];
-  const selectedRicoh = ricoh ? resolveBrandModel(ricoh) : undefined;
-  const competitor = competitorBase ? resolveBrandModel(competitorBase, comparisonModelId) : undefined;
-  const visibleBrands = selectedRicoh && competitor ? [selectedRicoh, competitor] : [];
-  if (matrixLoading) return <SectionSkeleton view="brands" />;
-  if (!ricoh || !selectedRicoh || !competitor || !competitor.activeModel || !selectedRicoh.activeModel) return <div className="brand-empty-state">目前沒有足夠的已建檔型號資料可供比較。</div>;
-  return (
-    <section className="brand-workspace">
-      <div className="comparison-toolbar">
-        <label className="toolbar-field" htmlFor="comparison-brand"><span>比較品牌</span><select id="comparison-brand" className="select-button brand-select-native" value={competitor.id} onChange={(event) => { const nextBrand = competitorOptions.find((brand) => brand.id === event.target.value); setMatrixLoading(true); setComparisonBrandId(event.target.value); setComparisonModelId(nextBrand?.modelOptions[0]?.id ?? ""); window.setTimeout(() => setMatrixLoading(false), 280); }}>{competitorOptions.map((brand) => <option key={brand.id} value={brand.id}>{brand.name}</option>)}</select></label>
-        <label className="toolbar-field" htmlFor="comparison-model"><span>比較型號</span><select id="comparison-model" className="select-button brand-select-native" value={competitor.activeModel.id} onChange={(event) => { setMatrixLoading(true); setComparisonModelId(event.target.value); window.setTimeout(() => setMatrixLoading(false), 280); }}>{competitorBase.modelOptions.map((model) => <option key={model.id} value={model.id}>{model.label}</option>)}</select></label>
-        <div className="toolbar-field toolbar-status"><span>資料狀態</span><div className="toolbar-status-copy"><strong>{competitor.activeModel.status}</strong><small>查核 {competitor.activeModel.checkedAt}</small></div></div>
-      </div>
-      <div className="model-verification-strip">
-        <div><span>固定主品牌</span><strong>{selectedRicoh.activeModel.label}</strong></div>
-        <div><span>已選比較型號</span><strong>{competitor.activeModel.label}</strong><a href={competitor.activeModel.sourceUrl} target="_blank" rel="noreferrer">{competitor.activeModel.sourceLabel} <ExternalLink size={11} /></a></div>
-        <div><span>待核對動作</span><strong>{competitor.activeModel.note}</strong></div>
-      </div>
-      <div className="matrix-summary">
-        <div className="summary-block summary-red"><span className="summary-kicker">RICOH 主品牌 · {selectedRicoh.activeModel.label}</span><strong>{selectedRicoh.summary.entryPoint}</strong><small>查核 {selectedRicoh.activeModel.checkedAt} · <a href={selectedRicoh.activeModel.sourceUrl} target="_blank" rel="noreferrer">型號官方來源</a></small></div>
-        <div className="summary-block"><span className="summary-kicker">{competitor.name} · {competitor.activeModel.label}</span><strong>{competitor.summary.competitiveStrength}</strong><a className="summary-source-link" href={competitor.activeModel.sourceUrl} target="_blank" rel="noreferrer">查看型號官方來源 <ArrowUpRight size={13} /></a></div>
-        <div className="summary-block"><span className="summary-kicker">待核對動作</span><strong>{competitor.activeModel.note}</strong><small>此型號狀態：{competitor.activeModel.status} · 查核 {competitor.activeModel.checkedAt}</small></div>
-      </div>
-      <div className="matrix-shell">
-        <div className="matrix-scroll-hint"><span><PanelLeft size={14} /> RICOH 固定主品牌 · {selectedRicoh.activeModel.label}</span><span>{competitor.name} · {competitor.activeModel.label} <ArrowUpRight size={13} /></span></div>
-        <div className="matrix-table" role="table">
-          <div className="matrix-row matrix-head"><div className="matrix-label-cell">比較項目</div>{visibleBrands.map((brand) => <div className={`matrix-brand-cell ${brand.id === "ricoh" ? "matrix-ricoh" : "matrix-competitor"}`} data-brand-id={brand.id} key={brand.id}><span className="brand-index">{brand.index}</span><div className="matrix-brand-identity"><strong>{brand.name}</strong><small>{brand.activeModel?.label} · 查核 {brand.activeModel?.checkedAt}</small></div><Stamp tone={modelStampTone(brand.activeModel?.status ?? "")}>{brand.activeModel?.status ?? brand.regionStatus}</Stamp></div>)}</div>
-          {groups.map((group) => openGroups[group.id as keyof typeof openGroups] && <div key={group.id} className="matrix-group"><button className="matrix-group-title" onClick={() => setOpenGroups({ ...openGroups, [group.id]: !openGroups[group.id as keyof typeof openGroups] })}><span><span className="group-rule" />{group.label}</span><ChevronDown size={15} /></button>{rows.slice(group.start, group.end).map(([key, label]) => <div className="matrix-row" key={key}><div className="matrix-label-cell"><span>{label}</span></div>{visibleBrands.map((brand) => { const field = brand.fields[key]; return <div className={`matrix-value-cell ${brand.id === "ricoh" ? "matrix-ricoh" : "matrix-competitor"}`} key={`${brand.id}-${key}`}><span>{field?.value ?? "待建檔"}</span>{field?.status && <span className={`cell-flag ${field.status === "待確認" ? "flag-blue" : "flag-amber"}`}>{field.status}</span>}{field?.sourceUrl && <a className="cell-evidence" href={field.sourceUrl} target="_blank" rel="noreferrer">來源 <ExternalLink size={11} /></a>}</div>; })}</div>)}</div>)}
-        </div>
-      </div>
-      <div className="matrix-footer-note"><Database size={15} /><span>RICOH 為固定主品牌；右側比較品牌可由上方選擇器切換。矩陣資料於 {payload.checkedAt} 查核，海外來源、選配與授權條件不代表台灣承諾，請在提案前完成人工確認。</span></div>
-    </section>
-  );
-}
-
 export default function Home() {
-  const [view, setView] = useState<View>("tenders");
   const [filter, setFilter] = useState("全部案件");
   const [cityFilter, setCityFilter] = useState("全部縣市");
   const [loading, setLoading] = useState(true);
-  const [viewLoading, setViewLoading] = useState(false);
   const [tenders, setTenders] = useState<Tender[]>(fallbackTenders);
   const [reviewTenders, setReviewTenders] = useState<Tender[]>([]);
   const [dataUpdated, setDataUpdated] = useState("待確認");
@@ -507,9 +402,8 @@ export default function Home() {
       .finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
   }, []);
-  const switchView = (next: View) => { if (next === view) return; setViewLoading(true); setView(next); window.setTimeout(() => setViewLoading(false), 380); };
-  if (loading) return <div className="app-shell loading-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div></div></div><span className="loading-top-note"><span className="loading-pulse" /> 讀取來源索引</span></header><main className="page-container"><SectionSkeleton view="tenders" /></main></div>;
+  if (loading) return <div className="app-shell loading-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div></div></div><span className="loading-top-note"><span className="loading-pulse" /> 讀取來源索引</span></header><main className="page-container"><SectionSkeleton /></main></div>;
   const dataUpdateCopy = dataSyncStatus === "warning" ? `最後成功更新：${dataUpdated}` : `資料更新：${dataUpdated}`;
   const dataUpdateTitle = dataSyncStatus === "warning" && dataSyncAttempt ? `最近一次同步嘗試：${dataSyncAttempt}；目前顯示最後成功更新資料。` : "標案資料集最後成功同步時間";
-  return <div className="app-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div></div></div><div className="topbar-actions"><span className={`live-indicator ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}><span /> LIVE <em>{dataSyncStatus === "warning" ? `最後成功 ${dataUpdated}` : `資料更新 ${dataUpdated}`}</em></span><button className="icon-button" aria-label="列印工作區"><FileDown size={17} /></button></div></header><main className="page-container"><div className="workspace-switcher" role="tablist" aria-label="主要功能切換"><div className="switcher-label">主要功能</div><button role="tab" aria-selected={view === "tenders"} className={view === "tenders" ? "switcher-tab active" : "switcher-tab"} onClick={() => switchView("tenders")}><BarChart3 size={16} /><span><strong>標案情報監控雷達</strong><small>案件優先級與前次得標</small></span></button><button role="tab" aria-selected={view === "brands"} className={view === "brands" ? "switcher-tab active" : "switcher-tab"} onClick={() => switchView("brands")}><Layers3 size={16} /><span><strong>各廠牌產品與市場資訊</strong><small>官方來源與規格比較</small></span></button></div><div className="page-heading"><div><div className="eyebrow">互盛情報中樞 <span>/</span> 2026.08.14</div><h1>{view === "tenders" ? "標案情報監控雷達" : "各廠牌規格比較"}</h1><p>{view === "tenders" ? "先看今天該追的案，再回頭核對前次得標紀錄。" : "以 RICOH 為主要品牌，選擇單一比較品牌快速核對產品、資安、雲端與管理規格。"}</p></div><div className="heading-actions"><span className={`update-note ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}><Database size={14} /><time>{dataUpdateCopy}</time></span><button className="outline-button"><FileDown size={15} /> 列印工作區</button></div></div>{viewLoading ? <SectionSkeleton view={view} /> : view === "tenders" ? <><div className="tender-overview"><div className="overview-main"><div className="overview-kicker">TODAY'S OPPORTUNITY INDEX</div><div className="overview-number">{tenders.length}</div><div className="overview-copy"><strong>件進行中標案</strong><span>已完成縣市判定，依業務優先級重新排序</span></div></div><div className="overview-stat overview-awarded"><span>已決標案件</span><strong>{tenders.filter((tender) => tender.isAwarded).length}</strong><small>近期結果醒目追蹤</small></div><div className="overview-stat"><span>今日來源公告</span><strong>{tenders.length}</strong><small>目前資料集案件量</small></div><div className="overview-stat"><span>可比歷史資料</span><strong>{tenders.filter((tender) => tender.history.length >= 2).length}</strong><small>具可比歷史資料</small></div><div className="overview-stat overview-review"><span>待人工確認</span><strong className="red-text">{reviewTenders.length}</strong><small>不列入正式案件</small></div></div><div className="city-quick-filter" aria-label="縣市快速選擇"><div className="city-filter-heading"><div className="city-filter-title"><MapPin size={17} /><div><strong>縣市快速選擇</strong><span>先按地區縮小案件範圍，再搭配案件狀態篩選</span></div></div><div className="city-filter-meta"><span>{cityFilter === "全部縣市" ? "全台案件" : cityFilter}</span><small>{filteredTenders.length} 件符合目前條件</small></div></div><div className="city-pill-list" role="group" aria-label="標案縣市"><button type="button" aria-pressed={cityFilter === "全部縣市"} className={cityFilter === "全部縣市" ? "city-pill active" : "city-pill"} onClick={() => setCityFilter("全部縣市")}><span>全部縣市</span><strong>{tenders.length}</strong></button>{cityOptions.map(([city, count]) => <button type="button" aria-pressed={cityFilter === city} className={cityFilter === city ? "city-pill active" : "city-pill"} key={city} onClick={() => setCityFilter(city)}><span>{city}</span><strong>{count}</strong></button>)}</div></div><div className="workspace-toolbar"><div className="filter-intro"><Filter size={16} /><strong>案件檔案</strong><span>{filteredTenders.length} / {tenders.length} 顯示</span></div><div className="filter-tabs">{["全部案件", "3 日內"].map((item) => <button key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{item}</button>)}</div><button className="outline-button"><Search size={15} /> 搜尋案件</button></div><section className="tender-section formal-section" aria-labelledby="formal-tenders-heading"><div className="tender-section-heading"><div><span className="section-kicker">FORMAL OPPORTUNITIES</span><h2 id="formal-tenders-heading">正式案件</h2><p>已確認為目標設備，且符合首頁日期與狀態保留規則。</p></div><strong>{filteredTenders.length} 件</strong></div><div className="tender-list">{filteredTenders.length > 0 ? filteredTenders.map((tender) => <TenderCard key={tender.job} tender={tender} />) : <div className="empty-state">目前沒有符合條件的正式案件。</div>}</div></section><section className="tender-section review-section" aria-labelledby="review-tenders-heading"><div className="tender-section-heading"><div><span className="section-kicker">REVIEW QUEUE</span><h2 id="review-tenders-heading">待確認案件</h2><p>可能相關但明細不足或設備範圍不明，需人工核對後才會進入正式案件。</p></div><strong>{filteredReviewTenders.length} 件</strong></div><div className="tender-list">{filteredReviewTenders.length > 0 ? filteredReviewTenders.map((tender) => <TenderCard key={`review-${tender.job}`} tender={tender} />) : <div className="empty-state">目前沒有待確認案件。</div>}</div></section></> : <div className="brand-main brand-main-focused"><BrandMatrix /></div>}</main><footer className="page-footer"><span>互盛情報中樞 / INTERNAL BUSINESS INTELLIGENCE</span><span>品牌查核日期：{payload.checkedAt}</span></footer></div>;
+  return <div className="app-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div></div></div><div className="topbar-actions"><span className={`live-indicator ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}><span /> LIVE <em>{dataSyncStatus === "warning" ? `最後成功 ${dataUpdated}` : `資料更新 ${dataUpdated}`}</em></span><button className="icon-button" aria-label="列印工作區"><FileDown size={17} /></button></div></header><main className="page-container"><div className="page-heading"><div><div className="eyebrow">互盛情報中樞 <span>/</span> 2026.08.14</div><h1>標案情報監控雷達</h1><p>先看今天該追的案，再回頭核對前次得標紀錄。</p></div><div className="heading-actions"><span className={`update-note ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}><Database size={14} /><time>{dataUpdateCopy}</time></span><button className="outline-button"><FileDown size={15} /> 列印工作區</button></div></div><div className="tender-overview"><div className="overview-main"><div className="overview-kicker">TODAY'S OPPORTUNITY INDEX</div><div className="overview-number">{tenders.length}</div><div className="overview-copy"><strong>件進行中標案</strong><span>已完成縣市判定，依業務優先級重新排序</span></div></div><div className="overview-stat overview-awarded"><span>已決標案件</span><strong>{tenders.filter((tender) => tender.isAwarded).length}</strong><small>近期結果醒目追蹤</small></div><div className="overview-stat"><span>今日來源公告</span><strong>{tenders.length}</strong><small>目前資料集案件量</small></div><div className="overview-stat"><span>可比歷史資料</span><strong>{tenders.filter((tender) => tender.history.length >= 2).length}</strong><small>具可比歷史資料</small></div><div className="overview-stat overview-review"><span>待人工確認</span><strong className="red-text">{reviewTenders.length}</strong><small>不列入正式案件</small></div></div><div className="city-quick-filter" aria-label="縣市快速選擇"><div className="city-filter-heading"><div className="city-filter-title"><MapPin size={17} /><div><strong>縣市快速選擇</strong><span>先按地區縮小案件範圍，再搭配案件狀態篩選</span></div></div><div className="city-filter-meta"><span>{cityFilter === "全部縣市" ? "全台案件" : cityFilter}</span><small>{filteredTenders.length} 件符合目前條件</small></div></div><div className="city-pill-list" role="group" aria-label="標案縣市"><button type="button" aria-pressed={cityFilter === "全部縣市"} className={cityFilter === "全部縣市" ? "city-pill active" : "city-pill"} onClick={() => setCityFilter("全部縣市")}><span>全部縣市</span><strong>{tenders.length}</strong></button>{cityOptions.map(([city, count]) => <button type="button" aria-pressed={cityFilter === city} className={cityFilter === city ? "city-pill active" : "city-pill"} key={city} onClick={() => setCityFilter(city)}><span>{city}</span><strong>{count}</strong></button>)}</div></div><div className="workspace-toolbar"><div className="filter-intro"><Filter size={16} /><strong>案件檔案</strong><span>{filteredTenders.length} / {tenders.length} 顯示</span></div><div className="filter-tabs">{["全部案件", "3 日內"].map((item) => <button key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{item}</button>)}</div><button className="outline-button"><Search size={15} /> 搜尋案件</button></div><section className="tender-section formal-section" aria-labelledby="formal-tenders-heading"><div className="tender-section-heading"><div><span className="section-kicker">FORMAL OPPORTUNITIES</span><h2 id="formal-tenders-heading">正式案件</h2><p>已確認為目標設備，且符合首頁日期與狀態保留規則。</p></div><strong>{filteredTenders.length} 件</strong></div><div className="tender-list">{filteredTenders.length > 0 ? filteredTenders.map((tender) => <TenderCard key={tender.job} tender={tender} />) : <div className="empty-state">目前沒有符合條件的正式案件。</div>}</div></section><section className="tender-section review-section" aria-labelledby="review-tenders-heading"><div className="tender-section-heading"><div><span className="section-kicker">REVIEW QUEUE</span><h2 id="review-tenders-heading">待確認案件</h2><p>可能相關但明細不足或設備範圍不明，需人工核對後才會進入正式案件。</p></div><strong>{filteredReviewTenders.length} 件</strong></div><div className="tender-list">{filteredReviewTenders.length > 0 ? filteredReviewTenders.map((tender) => <TenderCard key={`review-${tender.job}`} tender={tender} />) : <div className="empty-state">目前沒有待確認案件。</div>}</div></section></main><footer className="page-footer"><span>互盛情報中樞 / INTERNAL BUSINESS INTELLIGENCE</span><span>資料查核與同步：官方採購公告</span></footer></div>;
 }
