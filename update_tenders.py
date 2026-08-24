@@ -364,6 +364,7 @@ OUT_OF_SCOPE_PRINTER_TERMS = [
 MAINTENANCE_TERMS = ["維護", "維修", "保養"]
 CONTRACT_CHANGE_TERMS = ["契約變更", "變更案", "後續擴充", "追加採購"]
 NON_TARGET_TERM_GROUPS = {
+    "information_equipment": ["資訊設備", "資訊設備類", "資訊器材", "資訊產品", "資通訊設備", "資通訊產品", "資訊通信設備", "電腦設備", "電腦及周邊", "電腦周邊", "資訊週邊", "電腦週邊", "資訊系統", "資訊網路設備"],
     "network_or_server": ["機房", "交換器", "無線網路", "網路設備", "網路管理", "伺服器", "儲存設備", "資通訊", "RFID", "課程管理平台"],
     "computer_or_software": ["電腦軟體", "個人電腦", "平板電腦", "資訊科技教室", "電腦教室"],
     "medical_equipment": ["智慧藥櫃", "X光機", "Ｘ光機", "DR數位影像", "醫療設備", "診斷設備"],
@@ -445,6 +446,15 @@ def classify_tender_relevance(item, detail=None):
     announcement_type = str(brief.get("type", ""))
     detail_text = _flatten_detail(detail)
     combined = f"{title} {category} {detail_text}"
+
+    information_category, information_terms = _non_target_match(combined)
+    if information_category == "information_equipment":
+        return {
+            "status": "excluded", "confidence": "high", "score": -5,
+            "category": information_category, "matched_terms": information_terms,
+            "matched_fields": ["title" if _matched_terms(title, information_terms) else "detail"],
+            "reason": "資訊設備類標的全面排除，不納入標案監控範圍"
+        }
 
     machine_terms = _matched_terms(combined, MACHINE_TOOL_TERMS)
     direct_title = _matched_terms(title, DIRECT_EQUIPMENT_TERMS)

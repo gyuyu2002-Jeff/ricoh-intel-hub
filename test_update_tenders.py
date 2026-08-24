@@ -118,18 +118,28 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         result = classify_tender_relevance(announcement("數位影印機維護案"))
         self.assertEqual(result["status"], "included")
 
-    def test_contact_fax_does_not_confirm_broad_equipment(self):
+    def test_information_equipment_is_always_excluded_even_with_contact_fax(self):
         result = classify_tender_relevance(
             announcement("資訊設備採購案"),
             {"機關資料:傳真號碼": "02-12345678", "其他:申訴受理單位": "電話及傳真"}
         )
-        self.assertEqual(result["status"], "review")
-        self.assertNotIn("傳真", result["matched_terms"])
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "information_equipment")
+        self.assertIn("資訊設備", result["matched_terms"])
 
     def test_network_equipment_is_excluded(self):
         result = classify_tender_relevance(announcement("無線網路資訊設備壹式"))
         self.assertEqual(result["status"], "excluded")
-        self.assertEqual(result["category"], "network_or_server")
+        self.assertEqual(result["category"], "information_equipment")
+
+    def test_information_equipment_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("資訊設備及影印機採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "information_equipment")
+
+    def test_copier_only_remains_in_scope_after_information_exclusion(self):
+        result = classify_tender_relevance(announcement("數位影印機租賃案"))
+        self.assertEqual(result["status"], "included")
 
     def test_medical_equipment_is_excluded(self):
         result = classify_tender_relevance(announcement("衛生所辦公設備—智慧藥櫃"))

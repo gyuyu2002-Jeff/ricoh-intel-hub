@@ -101,6 +101,7 @@ export default function SpecComparison() {
           <a href="#" className="spec-return"><ArrowLeft size={15} /> 標案監控</a>
         </div>
       </header>
+      <nav className="site-tabs site-tabs-spec" aria-label="網站主要分頁"><a className="site-tab" href="#"><span className="site-tab-index">01</span><span><strong>標案監控</strong><small>即時案件與縣市篩選</small></span></a><a className="site-tab active" href="#/specs" aria-current="page"><span className="site-tab-index">02</span><span><strong>規格比較</strong><small>七品牌硬規格工作檯</small></span></a></nav>
 
       <main className="spec-main">
         <section className="spec-hero" aria-labelledby="spec-title">
