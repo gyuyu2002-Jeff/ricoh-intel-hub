@@ -298,7 +298,6 @@ function TenderCard({ tender }: { tender: Tender }) {
   const latestHistory = tender.history[0];
   return (
     <article className={`tender-card ${tender.isAwarded ? "tender-card-awarded" : ""} ${tender.isReview ? "tender-card-review" : ""}`}>
-      <div className="dossier-spine" aria-hidden="true"><span>{tender.priority}</span><i>{tender.job}</i></div>
       <div className="tender-status-bar">
         <div className="status-left">
           <Stamp tone={tender.priority === "P1" ? "stamp-red" : "stamp-ink"}>{tender.priority} · {tender.priorityLabel}</Stamp>
