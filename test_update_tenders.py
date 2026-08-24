@@ -137,8 +137,32 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         self.assertEqual(result["status"], "excluded")
         self.assertEqual(result["category"], "information_equipment")
 
+    def test_surveillance_equipment_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("監視器及影印機採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "surveillance_access")
+
+    def test_access_control_system_is_excluded(self):
+        result = classify_tender_relevance(announcement("新廳舍門禁系統及人臉辨識設備採購"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "surveillance_access")
+
+    def test_network_endpoint_is_excluded(self):
+        result = classify_tender_relevance(announcement("無線基地台、網路交換器及伺服器採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "network_or_server")
+
+    def test_display_equipment_is_excluded(self):
+        result = classify_tender_relevance(announcement("互動式顯示器及電子白板採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "it_endpoint")
+
     def test_copier_only_remains_in_scope_after_information_exclusion(self):
         result = classify_tender_relevance(announcement("數位影印機租賃案"))
+        self.assertEqual(result["status"], "included")
+
+    def test_network_printing_feature_does_not_exclude_copier(self):
+        result = classify_tender_relevance(announcement("具網路列印與掃描功能之多功能事務機租賃案"))
         self.assertEqual(result["status"], "included")
 
     def test_medical_equipment_is_excluded(self):

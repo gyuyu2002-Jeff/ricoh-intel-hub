@@ -2,17 +2,16 @@
  * Design system reminder: Specification dossier / Swiss archive.
  * This page prioritizes source traceability, actual ppm and configuration caveats.
  * Keep the warm-paper palette, signal-red index markers, mono technical data and low-radius surfaces.
+ * The brand comparator uses matched output type and speed tier before rendering side-by-side source fields.
  */
 import { useMemo, useState } from "react";
 import {
   ArrowLeft,
   ArrowUpRight,
-  BookOpenCheck,
   CheckCircle2,
   ChevronDown,
-  Database,
   FilterX,
-  HardDrive,
+  GitCompareArrows,
   Info,
   Search,
   SlidersHorizontal,
@@ -53,6 +52,13 @@ function confidenceText(value: string) {
   return value.startsWith("A —") ? "已核對" : value.startsWith("A-") ? "附註核對" : "待核對";
 }
 
+function pickComparisonRecord(brand: string, output: string, speedTier: string) {
+  const requestedPpm = Number(speedTier);
+  return allRecords
+    .filter((record) => record.brand === brand && machineKind(record) === output && record.comparison_tier.includes(`${speedTier} ppm`))
+    .sort((a, b) => Math.abs(a.actual_ppm_a4 - requestedPpm) - Math.abs(b.actual_ppm_a4 - requestedPpm))[0] ?? null;
+}
+
 function IndexMark() {
   return (
     <span className="spec-index-mark" aria-hidden="true">
@@ -67,6 +73,10 @@ export default function SpecComparison() {
   const [tier, setTier] = useState("all");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<SpecRecord | null>(allRecords[0] ?? null);
+  const [compareBrandA, setCompareBrandA] = useState("RICOH");
+  const [compareBrandB, setCompareBrandB] = useState("Canon");
+  const [compareOutput, setCompareOutput] = useState("彩色");
+  const [compareTier, setCompareTier] = useState("30");
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("zh-Hant");
@@ -86,6 +96,11 @@ export default function SpecComparison() {
     setQuery("");
   };
 
+  const comparisonRecords = useMemo(() => [
+    { brand: compareBrandA, record: pickComparisonRecord(compareBrandA, compareOutput, compareTier) },
+    { brand: compareBrandB, record: pickComparisonRecord(compareBrandB, compareOutput, compareTier) },
+  ], [compareBrandA, compareBrandB, compareOutput, compareTier]);
+
   return (
     <div className="spec-app-shell">
       <header className="spec-topbar">
@@ -93,7 +108,7 @@ export default function SpecComparison() {
           <IndexMark />
           <span>
             <strong>RIC0H INTEL HUB</strong>
-            <em>SPECIFICATION DESK / 07 BRANDS</em>
+            <em>07 BRANDS · 20 / 30 / 40 PPM PLATFORM</em>
           </span>
         </a>
         <div className="spec-topbar-side">
@@ -101,13 +116,13 @@ export default function SpecComparison() {
           <a href="#" className="spec-return"><ArrowLeft size={15} /> 標案監控</a>
         </div>
       </header>
-      <nav className="site-tabs site-tabs-spec" aria-label="網站主要分頁"><a className="site-tab" href="#"><span className="site-tab-index">01</span><span><strong>標案監控</strong><small>即時案件與縣市篩選</small></span></a><a className="site-tab active" href="#/specs" aria-current="page"><span className="site-tab-index">02</span><span><strong>規格比較</strong><small>七品牌硬規格工作檯</small></span></a></nav>
+      <nav className="site-tabs site-tabs-spec" aria-label="網站主要分頁"><a className="site-tab" href="#"><span className="site-tab-index">01</span><span><strong>標案監控</strong><small>即時案件與縣市篩選</small></span></a><a className="site-tab active" href="#/specs" aria-current="page"><span className="site-tab-index">02</span><span><strong>設備比較平台</strong><small>七品牌 20／30／40 張</small></span></a></nav>
 
       <main className="spec-main">
         <section className="spec-hero" aria-labelledby="spec-title">
           <div className="spec-hero-copy">
             <div className="spec-kicker"><span>01</span> SPECIFICATION ARCHIVE / 已核對欄位</div>
-            <h1 id="spec-title">七品牌硬規格<br /><em>比較工作檯</em></h1>
+            <h1 id="spec-title">七品牌 20／30／40 張<br /><em>設備比較平台</em></h1>
             <p>從原廠來源回看列印解析度、記憶體與內部儲存；保留實際 A4 ppm、來源市場與標準／選配差異。</p>
             <div className="spec-hero-facts">
               <div><strong>07</strong><span>指定品牌</span></div>
@@ -123,17 +138,43 @@ export default function SpecComparison() {
           </div>
         </section>
 
-        <section className="spec-method-strip" aria-label="資料使用方式">
-          <div><BookOpenCheck size={19} /><p><strong>實際速度優先</strong><span>25、35、45 ppm 不會改寫成整數級距。</span></p></div>
-          <div><Database size={19} /><p><strong>來源市場保留</strong><span>台灣、APAC、Europe 與 US 規格不混用。</span></p></div>
-          <div><HardDrive size={19} /><p><strong>未公開不補值</strong><span>未列儲存容量會明示待核對，不填 0。</span></p></div>
+        <section className="brand-compare-panel" aria-labelledby="brand-compare-title">
+          <div className="brand-compare-heading">
+            <div>
+              <div className="spec-kicker"><span>02</span> SIDE-BY-SIDE COMPARISON</div>
+              <h2 id="brand-compare-title">選擇兩個品牌，直接對照同級設備</h2>
+              <p>比較卡會優先配對相同輸出類型與速度級距；實際 ppm、來源市場與未公開欄位仍保留原始資訊。</p>
+            </div>
+            <GitCompareArrows size={28} aria-hidden="true" />
+          </div>
+
+          <div className="brand-compare-controls" aria-label="品牌比較條件">
+            <label className="brand-compare-select"><span>品牌 A</span><select value={compareBrandA} onChange={(event) => setCompareBrandA(event.target.value)}>{allBrands.map((item) => <option key={item} value={item}>{item}</option>)}</select><ChevronDown size={14} /></label>
+            <label className="brand-compare-select"><span>品牌 B</span><select value={compareBrandB} onChange={(event) => setCompareBrandB(event.target.value)}>{allBrands.map((item) => <option key={item} value={item}>{item}</option>)}</select><ChevronDown size={14} /></label>
+            <label className="brand-compare-select"><span>輸出類型</span><select value={compareOutput} onChange={(event) => setCompareOutput(event.target.value)}><option value="彩色">彩色</option><option value="黑白">黑白</option></select><ChevronDown size={14} /></label>
+            <label className="brand-compare-select"><span>速度級距</span><select value={compareTier} onChange={(event) => setCompareTier(event.target.value)}><option value="20">20 ppm</option><option value="30">30 ppm</option><option value="40">40 ppm</option></select><ChevronDown size={14} /></label>
+          </div>
+
+          {compareBrandA === compareBrandB ? <div className="brand-compare-notice"><Info size={17} />請選擇兩個不同品牌，才能進行並排比較。</div> : <div className="brand-compare-grid">
+            {comparisonRecords.map(({ brand: comparisonBrand, record }) => record ? <article className="brand-compare-card" key={comparisonBrand}>
+              <div className="brand-compare-card-head"><span className="spec-brand-code">{comparisonBrand}</span><span className={`spec-status ${record.source_confidence.startsWith("A —") ? "is-verified" : "is-caveat"}`}><CheckCircle2 size={13} />{confidenceText(record.source_confidence)}</span></div>
+              <h3>{record.model}</h3>
+              <p>{machineKind(record)} · 實際 {record.actual_ppm_a4} ppm · {record.comparison_tier}</p>
+              <dl className="brand-compare-fields">
+                <div><dt>列印解析度</dt><dd>{record.print_resolution}</dd></div>
+                <div><dt>記憶體</dt><dd>{record.ram_standard}<small>最大：{record.ram_max}</small></dd></div>
+                <div><dt>標準儲存</dt><dd>{record.storage_standard}<small>選配：{record.storage_optional}</small></dd></div>
+              </dl>
+              <div className="brand-compare-card-foot"><span>{record.source_market}</span><a href={record.source_url} target="_blank" rel="noreferrer">官方來源 <ArrowUpRight size={14} /></a></div>
+            </article> : <article className="brand-compare-card brand-compare-empty" key={comparisonBrand}><Info size={22} /><span className="spec-brand-code">{comparisonBrand}</span><h3>此條件沒有已核對代表型號</h3><p>目前資料未收錄 {compareOutput}／{compareTier} ppm 級距的官方代表機型。請調整輸出類型或速度級距。</p></article>)}
+          </div>}
         </section>
 
         <section className="spec-workbench" aria-labelledby="workbench-title">
           <div className="spec-section-heading">
             <div>
-              <div className="spec-kicker"><span>02</span> FILTERED DATASET</div>
-              <h2 id="workbench-title">從規格條件開始比對</h2>
+              <div className="spec-kicker"><span>03</span> FILTERED DATASET</div>
+              <h2 id="workbench-title">瀏覽七品牌 20／30／40 張設備資料</h2>
               <p>選擇品牌、輸出類型與速度級距；每列皆可展開原始條件與官方來源。</p>
             </div>
             <div className="spec-result-count"><strong>{filtered.length}</strong><span>/ {allRecords.length} 筆符合</span></div>
@@ -170,7 +211,7 @@ export default function SpecComparison() {
         </section>
 
         <section className="spec-detail-panel" aria-labelledby="detail-title">
-          <div className="spec-detail-index"><span>03</span><div className="spec-index-rail" /></div>
+          <div className="spec-detail-index"><span>04</span><div className="spec-index-rail" /></div>
           {selected ? <>
             <div className="spec-detail-heading"><div><span className="spec-brand-code">{selected.brand} / MODEL FILE</span><h2 id="detail-title">{selected.model}</h2><p>{selected.type}</p></div><span className="spec-status is-verified"><CheckCircle2 size={13} />{confidenceText(selected.source_confidence)}</span></div>
             <div className="spec-detail-grid">
@@ -183,13 +224,9 @@ export default function SpecComparison() {
           </> : <div className="spec-empty"><Info size={20} /><strong>請在上方表格選取一筆資料。</strong></div>}
         </section>
 
-        <section className="spec-reference-grid">
-          <article className="spec-reference-card"><div className="spec-reference-art trace-art" aria-hidden="true"><span>01</span><i /><i /><i /></div><div><span>TRACEABLE SOURCES</span><h3>每筆資料都保留來源市場與連結。</h3><p>台灣、海外官方頁與官方 PDF 不混成單一全球規格。</p></div></article>
-          <article className="spec-reference-card"><div className="spec-reference-art method-art" aria-hidden="true"><span>02</span><i /><i /><i /></div><div><span>COMPARISON METHOD</span><h3>把條件寫清楚，比數字更重要。</h3><p>half-speed、equivalent、HDD 選配與未公開容量均保留於原始欄位。</p></div></article>
-        </section>
       </main>
 
-      <footer className="spec-footer"><span>RIC0H INTEL HUB / SPECIFICATION DESK</span><span>查核日：{payload.checked_date} · 34 筆官方來源代表資料</span></footer>
+      <footer className="spec-footer"><span>RIC0H INTEL HUB / 20·30·40 PPM PLATFORM</span><span>查核日：{payload.checked_date} · 34 筆官方來源代表資料</span></footer>
     </div>
   );
 }

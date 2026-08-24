@@ -365,12 +365,15 @@ MAINTENANCE_TERMS = ["維護", "維修", "保養"]
 CONTRACT_CHANGE_TERMS = ["契約變更", "變更案", "後續擴充", "追加採購"]
 NON_TARGET_TERM_GROUPS = {
     "information_equipment": ["資訊設備", "資訊設備類", "資訊器材", "資訊產品", "資通訊設備", "資通訊產品", "資訊通信設備", "電腦設備", "電腦及周邊", "電腦周邊", "資訊週邊", "電腦週邊", "資訊系統", "資訊網路設備"],
-    "network_or_server": ["機房", "交換器", "無線網路", "網路設備", "網路管理", "伺服器", "儲存設備", "資通訊", "RFID", "課程管理平台"],
-    "computer_or_software": ["電腦軟體", "個人電腦", "平板電腦", "資訊科技教室", "電腦教室"],
+    "network_or_server": ["機房", "交換器", "網路交換器", "無線網路", "無線基地台", "無線 AP", "Wi-Fi", "WiFi", "路由器", "防火牆", "負載平衡器", "網路設備", "網路管理", "網路監控", "網路佈線", "網路布線", "結構化佈線", "光纖網路", "伺服器", "儲存設備", "NAS", "SAN", "資通訊", "RFID", "課程管理平台", "電話交換機", "IP PBX", "閘道器"],
+    "computer_or_software": ["電腦軟體", "個人電腦", "桌上型電腦", "筆記型電腦", "筆電", "平板電腦", "工作站", "瘦客戶機", "資訊科技教室", "電腦教室"],
+    "surveillance_access": ["監視器", "監控設備", "監控系統", "監視系統", "CCTV", "攝影機", "網路攝影機", "IP Camera", "IP CAM", "數位錄影機", "影像錄影機", "DVR", "NVR", "門禁", "門禁系統", "門禁設備", "刷卡機", "讀卡機", "生物辨識", "人臉辨識", "人臉識別", "電子圍籬", "防盜系統", "入侵警報", "保全系統", "對講機", "影像對講", "車牌辨識", "停車場管理"],
+    "it_endpoint": ["液晶螢幕", "電腦螢幕", "顯示器", "顯示設備", "觸控螢幕", "觸控顯示器", "互動式顯示器", "電子白板", "投影機", "投影設備", "視訊會議設備", "視訊會議系統", "LED 顯示", "電視牆"],
     "medical_equipment": ["智慧藥櫃", "X光機", "Ｘ光機", "DR數位影像", "醫療設備", "診斷設備"],
     "construction_or_furniture": ["規劃設計監造", "設計監造", "監造技術服務", "輕鋼架", "收納櫃", "裝修工程", "辦公空間改善"],
     "non_office_output": ["氣泡輸出設備", "水處理", "廣播設備", "音響設備", "城鎮韌性演習"],
 }
+HARD_NON_TARGET_CATEGORIES = {"information_equipment", "network_or_server", "computer_or_software", "surveillance_access", "it_endpoint"}
 RELEVANT_DETAIL_KEY_TERMS = [
     "標案名稱", "標的名稱", "標的分類", "採購品項", "品項名稱", "品名",
     "規格", "需求說明", "數量摘要", "工作內容", "附加說明"
@@ -447,13 +450,17 @@ def classify_tender_relevance(item, detail=None):
     detail_text = _flatten_detail(detail)
     combined = f"{title} {category} {detail_text}"
 
+    title_exclusion = get_title_scope_exclusion(f"{title} {announcement_type}")
+    if title_exclusion:
+        return title_exclusion
+
     information_category, information_terms = _non_target_match(combined)
-    if information_category == "information_equipment":
+    if information_category in HARD_NON_TARGET_CATEGORIES:
         return {
             "status": "excluded", "confidence": "high", "score": -5,
             "category": information_category, "matched_terms": information_terms,
             "matched_fields": ["title" if _matched_terms(title, information_terms) else "detail"],
-            "reason": "資訊設備類標的全面排除，不納入標案監控範圍"
+            "reason": "明確屬於資訊、網路、監控或門禁設備，全面排除於標案監控範圍"
         }
 
     machine_terms = _matched_terms(combined, MACHINE_TOOL_TERMS)
@@ -465,10 +472,6 @@ def classify_tender_relevance(item, detail=None):
     supply_terms = _matched_terms(title, SUPPLY_TERMS)
     service_terms = _matched_terms(title, PRINT_SERVICE_TERMS)
     specialized_terms = _matched_terms(title, SPECIALIZED_PRINTING_TERMS)
-
-    title_exclusion = get_title_scope_exclusion(f"{title} {announcement_type}")
-    if title_exclusion:
-        return title_exclusion
 
     if machine_terms:
         return {"status": "excluded", "confidence": "high", "score": -4, "category": "industrial_machine", "matched_terms": machine_terms, "reason": "工業機械誤判"}

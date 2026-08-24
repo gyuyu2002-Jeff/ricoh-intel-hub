@@ -124,9 +124,49 @@
 .site-tab strong { font-size: 18px; letter-spacing: .04em; }
 .site-tab small { font-size: 12px; opacity: .72; }
 .site-tab.active small { color: #dbe6dc; }
+
+/* Brand comparator: source-led, side-by-side comparison before the full searchable archive. */
+.brand-compare-panel { margin: 32px 0 42px; padding: 30px; background: #f8faf6; border: 1px solid var(--line); border-top: 4px solid var(--red); box-shadow: var(--soft-shadow); }
+.brand-compare-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 22px; margin-bottom: 24px; color: var(--deep); }
+.brand-compare-heading h2 { margin: 8px 0 8px; font: 700 clamp(24px, 2.7vw, 34px)/1.15 "Noto Serif TC", serif; letter-spacing: -.04em; color: var(--ink); }
+.brand-compare-heading p { max-width: 730px; margin: 0; color: #66746c; font-size: 13px; line-height: 1.8; }
+.brand-compare-heading > svg { flex: 0 0 auto; margin-top: 10px; color: var(--red); }
+.brand-compare-controls { display: grid; grid-template-columns: 1.3fr 1.3fr .9fr .8fr; gap: 10px; padding: 13px; background: #eef3ed; border: 1px solid #dbe5dd; }
+.brand-compare-select { position: relative; display: grid; gap: 5px; padding: 9px 12px; background: #fff; border: 1px solid #d5ded7; }
+.brand-compare-select > span { color: #7b897f; font-size: 10px; letter-spacing: .06em; }
+.brand-compare-select select { width: 100%; appearance: none; border: 0; outline: 0; background: transparent; color: var(--ink); font-weight: 700; padding: 0 18px 0 0; cursor: pointer; }
+.brand-compare-select svg { position: absolute; right: 11px; bottom: 12px; pointer-events: none; color: var(--red); }
+.brand-compare-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+.brand-compare-card { min-width: 0; padding: 21px; background: #fff; border: 1px solid #d7e1d9; box-shadow: 0 6px 18px rgba(38,61,52,.04); }
+.brand-compare-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.brand-compare-card h3 { margin: 18px 0 5px; color: var(--ink); font-size: 23px; letter-spacing: -.03em; line-height: 1.25; }
+.brand-compare-card > p { margin: 0 0 17px; color: #708077; font-size: 12px; }
+.brand-compare-fields { margin: 0; border-top: 1px solid #e2e9e3; }
+.brand-compare-fields > div { display: grid; grid-template-columns: 115px minmax(0, 1fr); gap: 12px; padding: 13px 0; border-bottom: 1px solid #e2e9e3; }
+.brand-compare-fields dt { color: #829087; font: 10px "IBM Plex Mono", monospace; letter-spacing: .03em; }
+.brand-compare-fields dd { margin: 0; color: #38473e; font-size: 12px; line-height: 1.6; font-weight: 650; overflow-wrap: anywhere; }
+.brand-compare-fields small { display: block; margin-top: 3px; color: #849087; font-size: 10px; font-weight: 500; }
+.brand-compare-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 16px; color: #7d8982; font-size: 10px; }
+.brand-compare-card-foot a { display: inline-flex; align-items: center; gap: 4px; color: var(--red); text-decoration: none; font-weight: 700; }
+.brand-compare-card-foot a:hover { color: var(--red-dark); text-decoration: underline; }
+.brand-compare-empty { display: grid; align-content: center; min-height: 340px; color: #78867d; background: #fcfdfb; border-style: dashed; }
+.brand-compare-empty svg { color: var(--amber); }
+.brand-compare-empty h3 { font-size: 18px; }
+.brand-compare-notice { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding: 13px 15px; color: #8a5424; background: #fff6e9; border: 1px solid #f1dfc5; font-size: 12px; }
 @media (max-width: 820px) {
   .site-tabs { width: calc(100% - 28px); margin-top: 12px; gap: 6px; padding: 6px; }
   .site-tab { min-height: 62px; padding: 10px 12px; gap: 8px; }
   .site-tab strong { font-size: 15px; }
   .site-tab small { font-size: 10px; }
+  .brand-compare-panel { margin: 24px 0 32px; padding: 19px 14px; }
+  .brand-compare-heading { margin-bottom: 18px; }
+  .brand-compare-heading h2 { font-size: 24px; }
+  .brand-compare-heading > svg { display: none; }
+  .brand-compare-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; padding: 8px; }
+  .brand-compare-select { padding: 8px 9px; }
+  .brand-compare-select select { font-size: 12px; }
+  .brand-compare-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+  .brand-compare-card { padding: 16px; }
+  .brand-compare-card h3 { margin-top: 14px; font-size: 20px; }
+  .brand-compare-fields > div { grid-template-columns: 92px minmax(0, 1fr); gap: 8px; }
 }
