@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-24 18:02",
+  "last_updated": "2026-08-24 18:23",
   "tenders": [
     {
       "city": "桃園市",
@@ -268,8 +268,8 @@
     "today": "2026-08-24",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-24 18:02",
-    "source_records": 1713,
+    "latest_attempt_at": "2026-08-24 18:23",
+    "source_records": 1719,
     "candidate_records": 2,
     "review_records": 12,
     "successful_dates": [
@@ -702,17 +702,17 @@
     },
     "2026-08-24": {
       "status": "complete",
-      "source_records": 1713,
+      "source_records": 1719,
       "candidate_records": 2,
       "review_records": 2,
-      "checked_at": "2026-08-24 17:55"
+      "checked_at": "2026-08-24 18:22"
     },
     "2026-08-23": {
       "status": "complete",
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-08-24 17:55"
+      "checked_at": "2026-08-24 18:22"
     }
   },
   "candidate_cache": [
