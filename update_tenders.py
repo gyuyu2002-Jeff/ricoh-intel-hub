@@ -973,6 +973,8 @@ def main(mode="live"):
                     for key, value in record.get("detail", {}).items():
                         merged_detail[f"{record_index}:{key}"] = value
             detailed_relevance = classify_tender_relevance(item, merged_detail)
+            if detailed_relevance["status"] == "excluded":
+                continue
             if not detail_data or not detail_data.get("records"):
                 review_city = review_city_fields(unit_name, None)
                 review_candidates.append({
@@ -983,7 +985,7 @@ def main(mode="live"):
                     "relevance": {**detailed_relevance, "reason": "政府公告明細暫時無法取得，等待下次自動查驗"}
                 })
                 continue
-            if detailed_relevance["status"] != "included":
+            if detailed_relevance["status"] == "review":
                 review_publish, review_deadline, review_publish_confidence, review_deadline_confidence = extract_dates(merged_detail, date_raw)
                 review_candidates.append({
                     "date": review_publish or date_to_iso(date_raw),

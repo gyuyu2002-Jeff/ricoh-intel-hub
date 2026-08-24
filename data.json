@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-24 17:17",
+  "last_updated": "2026-08-24 17:30",
   "tenders": [
     {
       "city": "桃園市",
@@ -268,10 +268,10 @@
     "today": "2026-08-24",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-24 17:17",
+    "latest_attempt_at": "2026-08-24 17:30",
     "source_records": 1713,
     "candidate_records": 2,
-    "review_records": 16,
+    "review_records": 12,
     "successful_dates": [
       "2026-08-24",
       "2026-08-23"
@@ -705,14 +705,14 @@
       "source_records": 1713,
       "candidate_records": 2,
       "review_records": 2,
-      "checked_at": "2026-08-24 17:14"
+      "checked_at": "2026-08-24 17:27"
     },
     "2026-08-23": {
       "status": "complete",
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-08-24 17:14"
+      "checked_at": "2026-08-24 17:27"
     }
   },
   "candidate_cache": [
@@ -2903,35 +2903,6 @@
   ],
   "review_candidates": [
     {
-      "date": "2026-08-10",
-      "publish_date": "2026-08-10",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-08-20",
-      "deadline_confidence": "verified",
-      "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科雙波長雷射採購案",
-      "unit": "臺東縣政府",
-      "city": "台東縣",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "臺東縣海端鄉(原住民地區)",
-      "unit_id": "3.76.54",
-      "job_number": "115403820234",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260824&fn=TIQ-1-71098865.xml",
-      "relevance": {
-        "status": "excluded",
-        "confidence": "high",
-        "score": -5,
-        "category": "information_equipment",
-        "matched_terms": [
-          "資訊系統"
-        ],
-        "matched_fields": [
-          "detail"
-        ],
-        "reason": "資訊設備類標的全面排除，不納入標案監控範圍"
-      }
-    },
-    {
       "date": "2026-08-04",
       "publish_date": "2026-08-04",
       "publish_date_confidence": "verified",
@@ -2959,35 +2930,6 @@
           "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": "2026-08-10",
-      "publish_date": "2026-08-10",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-08-14",
-      "deadline_confidence": "verified",
-      "title": "臺東縣海端鄉衛生所--115年度(花東基金)衛生局所辦公設備-牙科設備採購案",
-      "unit": "臺東縣政府",
-      "city": "台東縣",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "臺東縣海端鄉(原住民地區)",
-      "unit_id": "3.76.54",
-      "job_number": "115403820238",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260818&fn=TIQ-11-71095385.xml",
-      "relevance": {
-        "status": "excluded",
-        "confidence": "high",
-        "score": -5,
-        "category": "information_equipment",
-        "matched_terms": [
-          "資訊系統"
-        ],
-        "matched_fields": [
-          "detail"
-        ],
-        "reason": "資訊設備類標的全面排除，不納入標案監控範圍"
       }
     },
     {
@@ -3080,35 +3022,6 @@
       }
     },
     {
-      "date": "2026-08-12",
-      "publish_date": "2026-08-12",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-08-19",
-      "deadline_confidence": "verified",
-      "title": "羅浮里辦公室設備汰換工程",
-      "unit": "桃園市復興區公所",
-      "city": "桃園市",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "桃園市復興區(原住民地區)",
-      "unit_id": "3.80.63",
-      "job_number": "115A133",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260812&fn=ttd-71299855.xml",
-      "relevance": {
-        "status": "excluded",
-        "confidence": "high",
-        "score": -5,
-        "category": "information_equipment",
-        "matched_terms": [
-          "資訊系統"
-        ],
-        "matched_fields": [
-          "detail"
-        ],
-        "reason": "資訊設備類標的全面排除，不納入標案監控範圍"
-      }
-    },
-    {
       "date": "2026-08-10",
       "publish_date": "2026-08-10",
       "publish_date_confidence": "verified",
@@ -3196,35 +3109,6 @@
           "title"
         ],
         "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": "2026-07-10",
-      "publish_date": "2026-07-10",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-07-15",
-      "deadline_confidence": "verified",
-      "title": "臺東縣大武鄉衛生所--115年度（花東基金）衛生局所辦公設備-內視鏡清洗消毒機採購案",
-      "unit": "臺東縣政府",
-      "city": "台東縣",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "臺東縣大武鄉(原住民地區)",
-      "unit_id": "3.76.54",
-      "job_number": "115404920193",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260710&fn=TIQ-11-71068285.xml",
-      "relevance": {
-        "status": "excluded",
-        "confidence": "high",
-        "score": -5,
-        "category": "information_equipment",
-        "matched_terms": [
-          "資訊系統"
-        ],
-        "matched_fields": [
-          "detail"
-        ],
-        "reason": "資訊設備類標的全面排除，不納入標案監控範圍"
       }
     },
     {
