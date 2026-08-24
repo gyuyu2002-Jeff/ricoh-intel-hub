@@ -33,6 +33,20 @@ type SpecRecord = {
   source_confidence: string;
   source_url: string;
   notes: string;
+  scan_speed_simplex: string;
+  scan_speed_duplex: string;
+  adf_spdf: string;
+  scan_resolution: string;
+  duplex_print: string;
+  first_output: string;
+  paper_input: string;
+  max_paper_size: string;
+  monthly_volume: string;
+  print_language: string;
+  security_features: string;
+  cloud_scan_features: string;
+  extended_source_url: string;
+  extended_source_note: string;
 };
 
 type SpecPayload = {
@@ -84,7 +98,7 @@ export default function SpecComparison() {
       const matchesBrand = brand === "all" || record.brand === brand;
       const matchesKind = kind === "all" || machineKind(record) === kind;
       const matchesTier = tier === "all" || record.comparison_tier.includes(`${tier} ppm`);
-      const text = [record.brand, record.model, record.type, record.source_market, record.comparison_tier, record.print_resolution, record.ram_standard, record.storage_standard, record.notes].join(" ").toLocaleLowerCase("zh-Hant");
+      const text = [record.brand, record.model, record.type, record.source_market, record.comparison_tier, record.print_resolution, record.ram_standard, record.storage_standard, record.scan_speed_simplex, record.adf_spdf, record.paper_input, record.print_language, record.security_features, record.cloud_scan_features, record.notes].join(" ").toLocaleLowerCase("zh-Hant");
       return matchesBrand && matchesKind && matchesTier && (!normalized || text.includes(normalized));
     });
   }, [brand, kind, query, tier]);
@@ -123,11 +137,11 @@ export default function SpecComparison() {
           <div className="spec-hero-copy">
             <div className="spec-kicker"><span>01</span> SPECIFICATION ARCHIVE / 已核對欄位</div>
             <h1 id="spec-title">七品牌 20／30／40 張<br /><em>設備比較平台</em></h1>
-            <p>從原廠來源回看列印解析度、記憶體與內部儲存；保留實際 A4 ppm、來源市場與標準／選配差異。</p>
+            <p>從原廠來源回看列印、掃描、送稿、紙張與資安；保留實際 A4 ppm、來源市場與標準／選配差異。</p>
             <div className="spec-hero-facts">
               <div><strong>07</strong><span>指定品牌</span></div>
               <div><strong>{allRecords.length}</strong><span>代表機型</span></div>
-              <div><strong>03</strong><span>硬體欄位</span></div>
+              <div><strong>13</strong><span>比較欄位</span></div>
             </div>
           </div>
           <div className="spec-hero-visual spec-hero-blueprint" aria-hidden="true">
@@ -165,6 +179,20 @@ export default function SpecComparison() {
                 <div><dt>記憶體</dt><dd>{record.ram_standard}<small>最大：{record.ram_max}</small></dd></div>
                 <div><dt>標準儲存</dt><dd>{record.storage_standard}<small>選配：{record.storage_optional}</small></dd></div>
               </dl>
+              <details className="brand-compare-extended">
+                <summary>展開掃描、紙張與資安／雲端規格</summary>
+                <dl>
+                  <div><dt>單面掃描</dt><dd>{record.scan_speed_simplex}</dd></div>
+                  <div><dt>雙面掃描</dt><dd>{record.scan_speed_duplex}</dd></div>
+                  <div><dt>ADF／SPDF</dt><dd>{record.adf_spdf}</dd></div>
+                  <div><dt>掃描解析度</dt><dd>{record.scan_resolution}</dd></div>
+                  <div><dt>雙面列印／首張輸出</dt><dd>{record.duplex_print}<small>{record.first_output}</small></dd></div>
+                  <div><dt>進紙／最大紙張</dt><dd>{record.paper_input}<small>{record.max_paper_size}</small></dd></div>
+                  <div><dt>月印量</dt><dd>{record.monthly_volume}</dd></div>
+                  <div><dt>列印語言</dt><dd>{record.print_language}</dd></div>
+                  <div><dt>資安與雲端掃描</dt><dd>{record.security_features}<small>{record.cloud_scan_features}</small></dd></div>
+                </dl>
+              </details>
               <div className="brand-compare-card-foot"><span>{record.source_market}</span><a href={record.source_url} target="_blank" rel="noreferrer">官方來源 <ArrowUpRight size={14} /></a></div>
             </article> : <article className="brand-compare-card brand-compare-empty" key={comparisonBrand}><Info size={22} /><span className="spec-brand-code">{comparisonBrand}</span><h3>此條件沒有已核對代表型號</h3><p>目前資料未收錄 {compareOutput}／{compareTier} ppm 級距的官方代表機型。請調整輸出類型或速度級距。</p></article>)}
           </div>}
@@ -191,16 +219,16 @@ export default function SpecComparison() {
 
           <div className="spec-table-wrap" role="region" aria-label="品牌規格比較表" tabIndex={0}>
             <table className="spec-table">
-              <thead><tr><th>品牌／機型</th><th>類型與速度</th><th>列印解析度</th><th>記憶體</th><th>標準儲存</th><th>選配／備註</th><th>資料狀態</th></tr></thead>
+              <thead><tr><th>品牌／機型</th><th>類型與速度</th><th>列印解析度</th><th>掃描／送稿</th><th>記憶體</th><th>標準儲存</th><th>資料狀態</th></tr></thead>
               <tbody>
                 {filtered.map((record) => (
                   <tr key={`${record.brand}-${record.model}`} className={selected?.model === record.model ? "is-selected" : ""} onClick={() => setSelected(record)}>
                     <td><div className="spec-model-cell"><span className="spec-brand-code">{record.brand}</span><strong>{record.model}</strong><small>[{record.source_market}]</small></div></td>
                     <td><div className="spec-speed-cell"><b>{record.actual_ppm_a4} <span>ppm</span></b><small>{machineKind(record)} · {record.comparison_tier}</small></div></td>
                     <td>{record.print_resolution}</td>
+                    <td><strong>{record.scan_speed_simplex}</strong><small>{record.adf_spdf}</small></td>
                     <td><strong>{record.ram_standard}</strong><small>MAX：{record.ram_max}</small></td>
                     <td>{record.storage_standard}</td>
-                    <td><span>{record.storage_optional}</span></td>
                     <td><span className={`spec-status ${record.source_confidence.startsWith("A —") ? "is-verified" : "is-caveat"}`}><CheckCircle2 size={13} />{confidenceText(record.source_confidence)}</span></td>
                   </tr>
                 ))}
@@ -219,6 +247,11 @@ export default function SpecComparison() {
               <div className="spec-detail-spec"><span>PRINT RESOLUTION</span><strong>{selected.print_resolution}</strong></div>
               <div className="spec-detail-spec"><span>MEMORY</span><strong>{selected.ram_standard}</strong><small>最大：{selected.ram_max}</small></div>
               <div className="spec-detail-spec"><span>STORAGE</span><strong>{selected.storage_standard}</strong><small>選配：{selected.storage_optional}</small></div>
+            </div>
+            <div className="spec-detail-sections">
+              <section><h3>掃描與文件送稿</h3><dl><div><dt>單面掃描</dt><dd>{selected.scan_speed_simplex}</dd></div><div><dt>雙面掃描</dt><dd>{selected.scan_speed_duplex}</dd></div><div><dt>ADF／SPDF</dt><dd>{selected.adf_spdf}</dd></div><div><dt>掃描解析度</dt><dd>{selected.scan_resolution}</dd></div></dl></section>
+              <section><h3>列印效能與紙張處理</h3><dl><div><dt>雙面列印</dt><dd>{selected.duplex_print}</dd></div><div><dt>首張輸出</dt><dd>{selected.first_output}</dd></div><div><dt>進紙容量</dt><dd>{selected.paper_input}</dd></div><div><dt>最大紙張</dt><dd>{selected.max_paper_size}</dd></div><div><dt>建議／最高月印量</dt><dd>{selected.monthly_volume}</dd></div></dl></section>
+              <section><h3>列印語言、資安與雲端</h3><dl><div><dt>列印語言</dt><dd>{selected.print_language}</dd></div><div><dt>資安功能</dt><dd>{selected.security_features}</dd></div><div><dt>雲端／掃描流程</dt><dd>{selected.cloud_scan_features}</dd></div></dl></section>
             </div>
             <div className="spec-source-note"><div><span>資料限制／核對註記</span><p>{selected.notes}</p></div><a href={selected.source_url} target="_blank" rel="noreferrer">開啟官方來源 <ArrowUpRight size={15} /></a></div>
           </> : <div className="spec-empty"><Info size={20} /><strong>請在上方表格選取一筆資料。</strong></div>}

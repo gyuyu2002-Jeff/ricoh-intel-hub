@@ -170,3 +170,21 @@
   .brand-compare-card h3 { margin-top: 14px; font-size: 20px; }
   .brand-compare-fields > div { grid-template-columns: 92px minmax(0, 1fr); gap: 8px; }
 }
+
+/* Second-layer specifications: scan, paper handling, output, security and cloud workflow. */
+.brand-compare-extended { margin-top: 14px; padding-top: 13px; border-top: 1px solid #dfe7e0; }
+.brand-compare-extended summary { list-style: none; color: var(--deep); cursor: pointer; font: 700 10px "IBM Plex Mono", monospace; letter-spacing: .05em; }
+.brand-compare-extended summary::-webkit-details-marker { display: none; }
+.brand-compare-extended summary::after { content: "+"; float: right; color: var(--red); font-size: 16px; line-height: .6; }
+.brand-compare-extended[open] summary::after { content: "−"; }
+.brand-compare-extended dl { display: grid; gap: 0; margin: 11px 0 0; }
+.brand-compare-extended dl > div { display: grid; gap: 4px; padding: 10px 0; border-top: 1px solid #edf0ed; }
+.brand-compare-extended dt, .spec-detail-sections dt { color: #819087; font: 600 9px "IBM Plex Mono", monospace; letter-spacing: .05em; }
+.brand-compare-extended dd, .spec-detail-sections dd { margin: 0; color: #3d4b43; font-size: 11px; line-height: 1.65; overflow-wrap: anywhere; }
+.brand-compare-extended small, .spec-detail-sections small { display: block; margin-top: 4px; color: #7d8981; font-size: 10px; line-height: 1.55; }
+.spec-detail-sections { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; margin: 18px 0; }
+.spec-detail-sections section { min-width: 0; padding: 16px; background: rgba(255,255,255,.5); border: 1px solid #d5d4cc; }
+.spec-detail-sections h3 { margin: 0; color: #25342c; font: 700 14px "Noto Serif TC", serif; }
+.spec-detail-sections dl { display: grid; gap: 0; margin: 11px 0 0; }
+.spec-detail-sections dl > div { display: grid; gap: 5px; padding: 10px 0; border-top: 1px solid #dfdfd7; }
+@media (max-width: 980px) { .spec-detail-sections { grid-template-columns: 1fr; } }
