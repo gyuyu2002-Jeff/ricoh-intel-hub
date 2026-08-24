@@ -44,7 +44,7 @@
 
 - [ ] 確認目前本機工作樹包含標案監控、七品牌規格比較與根目錄 Pages 建置資產。
 - [x] 建立公開儲存庫 `gyuyu2002-Jeff/ricoh-intel-hub`。
-- [ ] 將本機 `main` 推送至新建立的公開儲存庫。
-- [ ] 啟用 GitHub Pages，來源設定為 `main` 分支根目錄。
-- [ ] 驗證 `https://gyuyu2002-jeff.github.io/ricoh-intel-hub/` 與 `#/specs` 可正常載入。
+- [x] 將本機 `main` 推送至新建立的公開儲存庫。
+- [x] 啟用 GitHub Pages，來源設定為 `main` 分支根目錄。
+- [x] 驗證 `https://gyuyu2002-jeff.github.io/ricoh-intel-hub/` 與 `#/specs` 可正常載入；首頁與 34 筆七品牌規格資料皆已顯示。
 - [ ] 建立最終版本快照並交付網址與維護說明。
