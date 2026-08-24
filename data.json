@@ -1,6 +1,101 @@
 {
-  "last_updated": "2026-08-25 04:59",
+  "last_updated": "2026-08-25 06:40",
   "tenders": [
+    {
+      "city": "新北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "新北市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "新北巿土城區各里具環保證號影印機租賃",
+      "unit": "新北市土城區公所",
+      "unit_id": "3.82.76",
+      "job_number": "11508C037",
+      "publish_date": "2026-08-25",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-01",
+      "deadline_confidence": "verified",
+      "budget": "NT$ 1,260,000",
+      "award_price": "",
+      "avg_discount": "91.7%",
+      "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
+      "main_competitor": "國碩資訊科技有限公司",
+      "suggested_price": "NT$ 1,155,000",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 2,
+        "discount_rate": 91.7
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzMDk1MzI",
+      "history_stats": [
+        {
+          "year": 2021,
+          "val": 93,
+          "type": "real",
+          "winner": "國碩資訊科技有限公司"
+        },
+        {
+          "year": 2024,
+          "val": 89,
+          "type": "real",
+          "winner": "國碩資訊科技有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2024-12-16",
+          "year": 2024,
+          "title": "新北市土城區各里影印機租賃",
+          "job_number": "11310C036",
+          "budget": 1108800,
+          "award_price": 993000,
+          "discount_rate": 89.6,
+          "winner": "國碩資訊科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA3NDgxNDE=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.82.76",
+          "source_unit": "新北市土城區公所",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2021-12-13",
+          "year": 2021,
+          "title": "111年度土城區公所行政大樓影印機租賃",
+          "job_number": "11009F027",
+          "budget": 707100,
+          "award_price": 663500,
+          "discount_rate": 93.8,
+          "winner": "國碩資訊科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTM1ODM5MDk=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.82.76",
+          "source_unit": "新北市土城區公所",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        }
+      ],
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
+      "duration_years": 3,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "city": "台北市",
       "city_source": "履約地點",
@@ -196,13 +291,13 @@
     "today": "2026-08-25",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-24 18:23",
-    "source_records": 1719,
-    "candidate_records": 2,
+    "latest_attempt_at": "2026-08-25 06:40",
+    "source_records": 1178,
+    "candidate_records": 1,
     "review_records": 11,
     "successful_dates": [
-      "2026-08-24",
-      "2026-08-23"
+      "2026-08-25",
+      "2026-08-24"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -623,10 +718,10 @@
     },
     "2026-08-24": {
       "status": "complete",
-      "source_records": 1719,
+      "source_records": 1722,
       "candidate_records": 2,
       "review_records": 2,
-      "checked_at": "2026-08-24 18:22"
+      "checked_at": "2026-08-25 06:38"
     },
     "2026-08-23": {
       "status": "complete",
@@ -634,9 +729,52 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-08-24 18:22"
+    },
+    "2026-08-25": {
+      "status": "complete",
+      "source_records": 1178,
+      "candidate_records": 1,
+      "review_records": 0,
+      "checked_at": "2026-08-25 06:38"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260825,
+      "filename": "ttd-71309532",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "新北巿土城區各里具環保證號影印機租賃",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "11508C037",
+      "unit_id": "3.82.76",
+      "unit_name": "新北市土城區公所",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.82.76",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.82.76&job_number=11508C037",
+      "unit_url": "/index/unit/3.82.76",
+      "url": "/index/case/3.82.76/11508C037/20260825/ttd-71309532",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "date": 20260824,
       "filename": "TIQ-1-71098865",
@@ -3656,6 +3794,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.82.76",
+      "unit_name": "新北市土城區公所",
+      "award_date": "2024-12-16",
+      "year": 2024,
+      "title": "新北市土城區各里影印機租賃",
+      "job_number": "11310C036",
+      "budget": 1108800,
+      "award_price": 993000,
+      "discount_rate": 89.6,
+      "winner": "國碩資訊科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA3NDgxNDE=",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.79.51.5",
       "unit_name": "臺北市政府捷運工程局第一區工程處",
       "award_date": "2024-12-11",
@@ -4432,6 +4585,21 @@
       "discount_rate": 92.1,
       "winner": "億雙企業有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20211223&fn=BDM-1-53597620.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.82.76",
+      "unit_name": "新北市土城區公所",
+      "award_date": "2021-12-13",
+      "year": 2021,
+      "title": "111年度土城區公所行政大樓影印機租賃",
+      "job_number": "11009F027",
+      "budget": 707100,
+      "award_price": 663500,
+      "discount_rate": 93.8,
+      "winner": "國碩資訊科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTM1ODM5MDk=",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -5872,7 +6040,8 @@
     "3.97.6.34": "2026-07-28",
     "3.5.48": "2026-07-31",
     "3.79.14.14": "2026-07-31",
-    "3.13.50.48.1": "2026-08-25"
+    "3.13.50.48.1": "2026-08-25",
+    "3.82.76": "2026-08-25"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
