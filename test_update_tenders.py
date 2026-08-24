@@ -11,6 +11,8 @@ from update_tenders import (
     is_award_notice,
     resolve_notice_status,
     extract_dates,
+    is_terminal_notice_type,
+    review_city_fields,
 )
 
 
@@ -162,6 +164,21 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0]["filename"], "new")
 
+    def test_terminal_variants_are_filtered_before_active_processing(self):
+        for phrase in ["流標公告", "廢標公告", "撤案公告", "無廠商投標結果", "決標公告"]:
+            with self.subTest(phrase=phrase):
+                self.assertTrue(is_terminal_notice_type(phrase))
+
+    def test_full_lifecycle_keeps_active_and_terminal_buckets_separate(self):
+        records = [
+            {"unit_id": "1", "job_number": "A", "date": "20260801", "filename": "active", "brief": {"type": "招標公告"}},
+            {"unit_id": "1", "job_number": "A", "date": "20260802", "filename": "failed", "brief": {"type": "流標公告"}},
+            {"unit_id": "1", "job_number": "A", "date": "20260803", "filename": "rebid", "brief": {"type": "重新招標公告"}},
+            {"unit_id": "1", "job_number": "A", "date": "20260804", "filename": "award", "brief": {"type": "決標公告"}},
+        ]
+        result = deduplicate_announcements(records)
+        self.assertEqual({row["filename"] for row in result}, {"rebid", "award"})
+
 
 class CityClassificationTests(unittest.TestCase):
     def test_county_from_unit_name_is_preserved(self):
@@ -182,6 +199,19 @@ class CityClassificationTests(unittest.TestCase):
         result = get_city_info("某某地方機關")
         self.assertEqual(result["city"], "未分類")
         self.assertEqual(result["city_confidence"], "low")
+
+    def test_all_22_counties_and_cities_are_resolvable(self):
+        cities = ["台北市", "新北市", "桃園市", "台中市", "台南市", "高雄市", "基隆市", "新竹市", "嘉義市", "新竹縣", "苗栗縣", "彰化縣", "南投縣", "雲林縣", "嘉義縣", "屏東縣", "宜蘭縣", "花蓮縣", "台東縣", "澎湖縣", "金門縣", "連江縣"]
+        for city in cities:
+            with self.subTest(city=city):
+                self.assertEqual(get_city_info(f"{city}政府")["city"], city)
+
+    def test_review_city_fields_preserve_location_evidence(self):
+        result = review_city_fields("某地方機關", {"records": [{"detail": {"履約地點": "花蓮縣壽豐鄉"}}]})
+        self.assertEqual(result["city"], "花蓮縣")
+        self.assertEqual(result["city_source"], "履約地點")
+        self.assertEqual(result["city_confidence"], "high")
+        self.assertIn("花蓮縣", result["city_raw_text"])
 
 
 class UpdateModeTests(unittest.TestCase):

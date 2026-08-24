@@ -103,6 +103,17 @@ def get_city(unit_name, detail_data=None):
     """Backward-compatible city-only helper."""
     return get_city_info(unit_name, detail_data)["city"]
 
+
+def review_city_fields(unit_name, detail_data=None):
+    """Return normalized geographic metadata for review candidates."""
+    info = get_city_info(unit_name, detail_data)
+    return {
+        "city": info["city"],
+        "city_source": info["city_source"],
+        "city_confidence": info["city_confidence"],
+        "city_raw_text": info["city_raw_text"],
+    }
+
 def extract_budget_and_award(detail):
     budget_val = 0
     award_val = 0
@@ -496,7 +507,7 @@ def deduplicate_announcements(records):
     for record in newest_first:
         project_key = (record.get("unit_id", ""), record.get("job_number", ""))
         announcement_type = str(record.get("brief", {}).get("type", ""))
-        lifecycle_bucket = "terminal" if "決標" in announcement_type else "active"
+        lifecycle_bucket = "terminal" if is_terminal_notice_type(announcement_type) or is_failed_notice(record) else "active"
         if not all(project_key):
             project_key = (
                 record.get("unit_id", ""), record.get("job_number", ""),
@@ -916,7 +927,7 @@ def main(mode="live"):
         unit_id = item.get("unit_id", "")
         
         # 1. STRICT ACTIVE FILTER: Exclude resolved/failed from active list
-        if "\u6c7a\u6a19" in brief_type or "\u7121\u6cd5\u6c7a\u6a19" in brief_type:
+        if is_terminal_notice_type(brief_type) or is_failed_notice(item):
             continue
             
         # 2. Keep a rolling 60-day opportunity window.
@@ -953,8 +964,10 @@ def main(mode="live"):
                         merged_detail[f"{record_index}:{key}"] = value
             detailed_relevance = classify_tender_relevance(item, merged_detail)
             if not detail_data or not detail_data.get("records"):
+                review_city = review_city_fields(unit_name, None)
                 review_candidates.append({
                     "date": date_to_iso(date_raw), "title": title, "unit": unit_name,
+                    **review_city,
                     "unit_id": unit_id, "job_number": item.get("job_number", ""),
                     "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
                     "relevance": {**detailed_relevance, "reason": "政府公告明細暫時無法取得，等待下次自動查驗"}
@@ -969,6 +982,7 @@ def main(mode="live"):
                     "deadline": review_deadline or "未公開",
                     "deadline_confidence": review_deadline_confidence,
                     "title": title, "unit": unit_name,
+                    **review_city_fields(unit_name, detail_data),
                     "unit_id": unit_id, "job_number": item.get("job_number", ""),
                     "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
                     "relevance": detailed_relevance
@@ -1382,8 +1396,10 @@ def main(mode="live"):
                 if real_budget == 0:
                     real_budget, _ = extract_budget_and_award(detail_obj)
         elif relevance.get("status") == "review":
+            review_city = review_city_fields(unit_name, detail_data)
             review_candidates.append({
                 "date": date_to_iso(date_raw), "title": title, "unit": unit_name,
+                **review_city,
                 "unit_id": unit_id, "job_number": job_number,
                 "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
                 "relevance": relevance
