@@ -216,3 +216,7 @@
   .spec-detail-sections,
   .spec-source-note { grid-column: 1; }
 }
+
+/* Home navigation keeps the published 20~60 ppm platform name aligned with the comparison page. */
+.site-tabs:not(.site-tabs-spec) .site-tab[href="#/specs"] small { font-size: 0; }
+.site-tabs:not(.site-tabs-spec) .site-tab[href="#/specs"] small::after { content: "7廠牌20~60張規格比較平台"; font-size: 12px; }
