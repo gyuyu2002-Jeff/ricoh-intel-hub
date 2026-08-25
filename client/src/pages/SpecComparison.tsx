@@ -193,7 +193,7 @@ export default function SpecComparison() {
                   <div><dt>資安與雲端掃描</dt><dd>{record.security_features}<small>{record.cloud_scan_features}</small></dd></div>
                 </dl>
               </details>
-              <div className="brand-compare-card-foot"><span>{record.source_market}</span><a href={record.source_url} target="_blank" rel="noreferrer">官方來源 <ArrowUpRight size={14} /></a></div>
+              <div className="brand-compare-card-foot"><span>{record.source_market}</span><div className="brand-compare-source-links"><a href={record.source_url} target="_blank" rel="noreferrer">原始規格 <ArrowUpRight size={14} /></a>{record.extended_source_url && record.extended_source_url !== record.source_url ? <a href={record.extended_source_url} target="_blank" rel="noreferrer">第二層來源 <ArrowUpRight size={14} /></a> : null}</div></div>
             </article> : <article className="brand-compare-card brand-compare-empty" key={comparisonBrand}><Info size={22} /><span className="spec-brand-code">{comparisonBrand}</span><h3>此條件沒有已核對代表型號</h3><p>目前資料未收錄 {compareOutput}／{compareTier} ppm 級距的官方代表機型。請調整輸出類型或速度級距。</p></article>)}
           </div>}
         </section>
@@ -253,7 +253,7 @@ export default function SpecComparison() {
               <section><h3>列印效能與紙張處理</h3><dl><div><dt>雙面列印</dt><dd>{selected.duplex_print}</dd></div><div><dt>首張輸出</dt><dd>{selected.first_output}</dd></div><div><dt>進紙容量</dt><dd>{selected.paper_input}</dd></div><div><dt>最大紙張</dt><dd>{selected.max_paper_size}</dd></div><div><dt>建議／最高月印量</dt><dd>{selected.monthly_volume}</dd></div></dl></section>
               <section><h3>列印語言、資安與雲端</h3><dl><div><dt>列印語言</dt><dd>{selected.print_language}</dd></div><div><dt>資安功能</dt><dd>{selected.security_features}</dd></div><div><dt>雲端／掃描流程</dt><dd>{selected.cloud_scan_features}</dd></div></dl></section>
             </div>
-            <div className="spec-source-note"><div><span>資料限制／核對註記</span><p>{selected.notes}</p></div><a href={selected.source_url} target="_blank" rel="noreferrer">開啟官方來源 <ArrowUpRight size={15} /></a></div>
+            <div className="spec-source-note"><div><span>資料限制／核對註記</span><p>{selected.notes}</p>{selected.extended_source_note ? <small>{selected.extended_source_note}</small> : null}</div><div className="spec-source-links"><a href={selected.source_url} target="_blank" rel="noreferrer">原始規格來源 <ArrowUpRight size={15} /></a>{selected.extended_source_url && selected.extended_source_url !== selected.source_url ? <a href={selected.extended_source_url} target="_blank" rel="noreferrer">第二層官方來源 <ArrowUpRight size={15} /></a> : null}</div></div>
           </> : <div className="spec-empty"><Info size={20} /><strong>請在上方表格選取一筆資料。</strong></div>}
         </section>
 
