@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-25 16:55",
+  "last_updated": "2026-08-25 18:14",
   "tenders": [
     {
       "city": "新北市",
@@ -385,7 +385,7 @@
     "today": "2026-08-25",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-25 16:55",
+    "latest_attempt_at": "2026-08-25 18:14",
     "source_records": 1329,
     "candidate_records": 1,
     "review_records": 0,
@@ -815,7 +815,7 @@
       "source_records": 1722,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-08-25 16:54"
+      "checked_at": "2026-08-25 18:12"
     },
     "2026-08-23": {
       "status": "complete",
@@ -829,7 +829,7 @@
       "source_records": 1329,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-08-25 16:54"
+      "checked_at": "2026-08-25 18:12"
     }
   },
   "candidate_cache": [
