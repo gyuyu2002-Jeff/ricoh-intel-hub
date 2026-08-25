@@ -122,7 +122,7 @@ export default function SpecComparison() {
           <IndexMark />
           <span>
             <strong>RIC0H INTEL HUB</strong>
-            <em>07 BRANDS · 20 / 30 / 40 PPM PLATFORM</em>
+            <em>07 BRANDS · 20–60 PPM PLATFORM</em>
           </span>
         </a>
         <div className="spec-topbar-side">
@@ -130,13 +130,13 @@ export default function SpecComparison() {
           <a href="#" className="spec-return"><ArrowLeft size={15} /> 標案監控</a>
         </div>
       </header>
-      <nav className="site-tabs site-tabs-spec" aria-label="網站主要分頁"><a className="site-tab" href="#"><span className="site-tab-index">01</span><span><strong>標案監控</strong><small>即時案件與縣市篩選</small></span></a><a className="site-tab active" href="#/specs" aria-current="page"><span className="site-tab-index">02</span><span><strong>設備比較平台</strong><small>七品牌 20／30／40 張</small></span></a></nav>
+      <nav className="site-tabs site-tabs-spec" aria-label="網站主要分頁"><a className="site-tab" href="#"><span className="site-tab-index">01</span><span><strong>標案監控</strong><small>即時案件與縣市篩選</small></span></a><a className="site-tab active" href="#/specs" aria-current="page"><span className="site-tab-index">02</span><span><strong>設備比較平台</strong><small>7廠牌 20~60 張規格比較</small></span></a></nav>
 
       <main className="spec-main">
         <section className="spec-hero" aria-labelledby="spec-title">
           <div className="spec-hero-copy">
             <div className="spec-kicker"><span>01</span> SPECIFICATION ARCHIVE / 已核對欄位</div>
-            <h1 id="spec-title">七品牌 20／30／40 張<br /><em>設備比較平台</em></h1>
+            <h1 id="spec-title">7廠牌20~60張<br /><em>規格比較平台</em></h1>
             <p>從原廠來源回看列印、掃描、送稿、紙張與資安；保留實際 A4 ppm、來源市場與標準／選配差異。</p>
             <div className="spec-hero-facts">
               <div><strong>07</strong><span>指定品牌</span></div>
@@ -148,7 +148,7 @@ export default function SpecComparison() {
             <div className="spec-blueprint-card"><span>OFFICIAL FIELD</span><b>RESOLUTION</b><i /></div>
             <div className="spec-blueprint-scale"><i /><i /><i /><i /><i /><i /></div>
             <div className="spec-visual-overlay" />
-            <div className="spec-visual-ledger"><span>ACTUAL PPM</span><b>20 / 30 / 40</b><span>NOT NORMALISED</span></div>
+            <div className="spec-visual-ledger"><span>ACTUAL PPM</span><b>20 / 30 / 40 / 50 / 60</b><span>NOT NORMALISED</span></div>
           </div>
         </section>
 
@@ -166,7 +166,7 @@ export default function SpecComparison() {
             <label className="brand-compare-select"><span>品牌 A</span><select value={compareBrandA} onChange={(event) => setCompareBrandA(event.target.value)}>{allBrands.map((item) => <option key={item} value={item}>{item}</option>)}</select><ChevronDown size={14} /></label>
             <label className="brand-compare-select"><span>品牌 B</span><select value={compareBrandB} onChange={(event) => setCompareBrandB(event.target.value)}>{allBrands.map((item) => <option key={item} value={item}>{item}</option>)}</select><ChevronDown size={14} /></label>
             <label className="brand-compare-select"><span>輸出類型</span><select value={compareOutput} onChange={(event) => setCompareOutput(event.target.value)}><option value="彩色">彩色</option><option value="黑白">黑白</option></select><ChevronDown size={14} /></label>
-            <label className="brand-compare-select"><span>速度級距</span><select value={compareTier} onChange={(event) => setCompareTier(event.target.value)}><option value="20">20 ppm</option><option value="30">30 ppm</option><option value="40">40 ppm</option></select><ChevronDown size={14} /></label>
+            <label className="brand-compare-select"><span>速度級距</span><select value={compareTier} onChange={(event) => setCompareTier(event.target.value)}><option value="20">20 ppm</option><option value="30">30 ppm</option><option value="40">40 ppm</option><option value="50">50 ppm</option><option value="60">60 ppm</option></select><ChevronDown size={14} /></label>
           </div>
 
           {compareBrandA === compareBrandB ? <div className="brand-compare-notice"><Info size={17} />請選擇兩個不同品牌，才能進行並排比較。</div> : <div className="brand-compare-grid">
@@ -202,7 +202,7 @@ export default function SpecComparison() {
           <div className="spec-section-heading">
             <div>
               <div className="spec-kicker"><span>03</span> FILTERED DATASET</div>
-              <h2 id="workbench-title">瀏覽七品牌 20／30／40 張設備資料</h2>
+              <h2 id="workbench-title">瀏覽 7廠牌20~60張設備資料</h2>
               <p>選擇品牌、輸出類型與速度級距；每列皆可展開原始條件與官方來源。</p>
             </div>
             <div className="spec-result-count"><strong>{filtered.length}</strong><span>/ {allRecords.length} 筆符合</span></div>
@@ -213,7 +213,7 @@ export default function SpecComparison() {
             <label className="spec-search-field" htmlFor="spec-search"><Search size={16} /><input id="spec-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜尋型號、規格或來源市場" /></label>
             <label className="spec-select-field"><span>品牌</span><select value={brand} onChange={(event) => setBrand(event.target.value)}><option value="all">全部品牌</option>{allBrands.map((item) => <option key={item} value={item}>{item}</option>)}</select><ChevronDown size={14} /></label>
             <label className="spec-select-field"><span>輸出</span><select value={kind} onChange={(event) => setKind(event.target.value)}><option value="all">黑白＋彩色</option><option value="彩色">彩色</option><option value="黑白">黑白</option></select><ChevronDown size={14} /></label>
-            <label className="spec-select-field"><span>速度級距</span><select value={tier} onChange={(event) => setTier(event.target.value)}><option value="all">20 / 30 / 40</option><option value="20">20 ppm</option><option value="30">30 ppm</option><option value="40">40 ppm</option></select><ChevronDown size={14} /></label>
+            <label className="spec-select-field"><span>速度級距</span><select value={tier} onChange={(event) => setTier(event.target.value)}><option value="all">20 / 30 / 40 / 50 / 60</option><option value="20">20 ppm</option><option value="30">30 ppm</option><option value="40">40 ppm</option><option value="50">50 ppm</option><option value="60">60 ppm</option></select><ChevronDown size={14} /></label>
             <button type="button" className="spec-reset" onClick={resetFilters}><FilterX size={16} /> 清除</button>
           </div>
 
@@ -259,7 +259,7 @@ export default function SpecComparison() {
 
       </main>
 
-      <footer className="spec-footer"><span>RIC0H INTEL HUB / 20·30·40 PPM PLATFORM</span><span>查核日：{payload.checked_date} · 34 筆官方來源代表資料</span></footer>
+      <footer className="spec-footer"><span>RIC0H INTEL HUB / 20–60 PPM PLATFORM</span><span>查核日：{payload.checked_date} · {allRecords.length} 筆官方來源代表資料</span></footer>
     </div>
   );
 }

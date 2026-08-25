@@ -474,10 +474,156 @@ const specs = {
     cloud_scan_features: 'Email、desktop、FTP、SMB、USB、本機儲存；選配 SSO 雲端、Wi-Fi／NFC／QR、OCR 可搜尋 PDF／Office',
     extended_source_url: 'https://www.sharp.eu/sharp-bp-30m31',
   },
+  'RICOH|IM C6010': {
+    scan_speed_simplex: '150 ppm（200 dpi）／120 ppm（300 dpi；SPDF）',
+    scan_speed_duplex: '300 ppm（200 dpi）／220 ppm（300 dpi；SPDF）',
+    adf_spdf: 'SPDF 220 張（標準）',
+    scan_resolution: '100–1,200 dpi；1,200 dpi 僅 A5 或更小',
+    duplex_print: '標準自動雙面列印',
+    first_output: '首張列印：黑白 2.4 秒／彩色 3.8 秒',
+    paper_input: '標準 1,200／最大 4,850 張',
+    max_paper_size: 'SRA3',
+    print_language: '標準 PCL 5c、PCL 6、PostScript 3 模擬、PDF Direct 模擬；選配 Adobe PS3',
+    security_features: 'SSD／PDF／安全列印加密、802.1X、WPA3、Windows／LDAP 認證、S/MIME',
+    cloud_scan_features: '掃描至 USB、Email、資料夾、URL、SMB、FTP、PDF/A、數位簽署 PDF；可搜尋 PDF 需選配 OCR',
+  },
+  'FUJIFILM Business Innovation|Apeos 5570': {
+    scan_speed_simplex: '黑白／彩色 80 ppm（A4 LEF、200 dpi、掃描至資料夾）',
+    scan_speed_duplex: '黑白／彩色 160 ppm（一段式雙面掃描；A4 LEF、200 dpi、掃描至資料夾）',
+    adf_spdf: '一段式雙面 DADF 130 張',
+    scan_resolution: '最高 600 × 600 dpi',
+    duplex_print: '標準雙面列印（FUJIFILM 驅動程式安裝預設）',
+    first_output: '首張影印：3.7 秒（A4 LEF、黑白優先模式）',
+    paper_input: '4 紙匣標準 2,170 張／Tandem 標準 3,700 張；最大 5,200 張',
+    max_paper_size: 'SRA3／12 × 18 吋',
+    print_language: '標準 PCL5／PCL6；選配 Adobe PostScript 3',
+    security_features: '本機／遠端／IC 卡認證、IP 過濾、軟體簽章、竄改偵測／自動修復、TPM 2.0、SSL/TLS、IPsec、S/MIME、WPA3',
+    cloud_scan_features: '掃描至 Email、URL、SMB／FTP／SFTP；支援加密 PDF、可搜尋 OCR PDF、AirPrint、Mopria、選配 Wi-Fi',
+    extended_source_url: 'https://asset.fujifilm.com/www/us/files/2025-02/98c9d231c309824b94a1c618d1d73b23/apeos-5570-4570_us-brochure.pdf',
+  },
+  'SHARP|BP-70C55': {
+    scan_speed_simplex: '黑白／彩色最高 140 originals/min（A4、送稿器、單面、原廠預設）',
+    scan_speed_duplex: '黑白／彩色最高 280 originals/min（A4、送稿器、雙面、原廠預設）',
+    adf_spdf: 'DSPF 300 張（美國官方；雙重進紙偵測為選配）',
+    scan_resolution: '推式 100–600 dpi；拉式最高 9,600 dpi（視掃描區域）',
+    duplex_print: '自動雙面；官方頁未單列雙面列印速度',
+    first_output: '首張影印：黑白 3.7 秒／彩色 4.8 秒',
+    paper_input: '標準 650／最大 6,300 張',
+    max_paper_size: 'SRA3',
+    print_language: 'PCL 6 emulation、Adobe PostScript 3',
+    security_features: '系統完整性檢查、韌體攻擊防護、選配 Bitdefender、防護更新、無線 5 GHz（選配）',
+    cloud_scan_features: '掃描至 Email、Desktop、FTP、SMB、USB；選配 Microsoft Teams、Google Drive、Dropbox 等雲端服務與 Universal Print',
+    extended_source_url: 'https://business.sharpusa.com/document-systems/models/details/bp-70c55',
+    extended_source_note: '第二層送稿器、資安及雲端資料引用 Sharp USA 官方產品頁；與全球／台灣市場的選配供應須於採購前再核對。',
+  },
+  'Canon|imageRUNNER ADVANCE DX C5860i': {
+    scan_speed_simplex: '黑白／彩色 135／135 ipm（A4、300 dpi、傳送）',
+    scan_speed_duplex: '黑白／彩色 270／270 ipm（A4、300 dpi、傳送）',
+    adf_spdf: '單次雙面 DADF 200 張',
+    scan_resolution: '掃描／傳送最高 600 × 600 dpi',
+    duplex_print: '自動雙面列印；52–256 gsm',
+    first_output: '首張影印：黑白／彩色 2.9／4.2 秒',
+    paper_input: '標準 1,200／最大 6,350 張',
+    max_paper_size: 'SRA3',
+    print_language: '標準 UFR II、PCL6；選配 Adobe PostScript 3',
+    security_features: 'TLS 1.3、IPSec、802.1X、SNMPv3、IP／MAC 過濾、SSD 加密／鎖定、TPM、完整性驗證、安全／加密列印與簽章 PDF',
+    cloud_scan_features: 'AirPrint、Mopria、Canon PRINT Business、uniFLOW Online、Universal Print；掃描至 Email、SMB、FTP、WebDAV、USB、Mail Box',
+  },
+  'HP|Color LaserJet Enterprise Flow MFP 6800zfsw': {
+    scan_speed_simplex: 'A4 單面：黑白／彩色最高 95 ppm／190 ipm（官方原表述）',
+    scan_speed_duplex: 'A4 雙面：黑白／彩色最高 190 ipm',
+    adf_spdf: 'ADF 150 張；支援雙面掃描',
+    scan_resolution: '光學最高 600 dpi；硬體最高 600 × 600 dpi',
+    duplex_print: '自動雙面列印',
+    first_output: '首張 A4：黑白 6.5 秒／彩色 7.4 秒',
+    paper_input: '標準 1,750 張（3 × 550＋100）；可選 550 張紙匣或 2,100 張高容量進紙器',
+    max_paper_size: 'Tray 1 最大 216 × 1,200 mm',
+    monthly_volume: '建議 2,000–14,000 頁／最高 100,000 頁',
+    print_language: 'HP PCL 6、HP PCL 5c、HP PostScript Level 3 模擬、native PDF 1.7、URF（AirPrint）',
+    security_features: 'Kerberos／LDAP／PIN、IPsec、防火牆、802.1X、SNMPv3、儲存加密／安全清除、Memory Shield、Sure Start Secure Boot、白名單、SIEM',
+    cloud_scan_features: 'Email、網路資料夾、USB、SharePoint、FTP／sFTP、LAN／Internet Fax、OneDrive／OneDrive for Business／SharePoint Online；AirPrint、Mopria、Universal Print',
+  },
+  'Epson|WorkForce Enterprise AM-C6000': {
+    scan_speed_simplex: 'ADF 單面：黑白／彩色 60 ipm（ISO/IEC 17991）',
+    scan_speed_duplex: 'ADF 雙面：黑白／彩色 120 ipm（ISO/IEC 17991）',
+    adf_spdf: 'ADF 150 張',
+    scan_resolution: '平臺 600 × 1,200 dpi；ADF 600 × 600 dpi',
+    duplex_print: '自動雙面；A4 黑白／彩色 60 ppm',
+    first_output: '首張輸出：黑白／彩色 4.5／4.5 秒（Europe 官方 SKU）',
+    paper_input: '標準 1,150／最大 5,150 張；手送 150 張',
+    max_paper_size: '自訂最大 297 × 1,200 mm',
+    monthly_volume: '建議 8,500–60,000 頁／最高 384,000 頁（Europe 官方 SKU）',
+    print_language: 'PCL5c、PCL6、PostScript 3、PDF 1.7、ESC/P-R、PCL5e、ESC/Page、ESC/Page-Colour',
+    security_features: 'IPsec、802.1X、TLS 1.3、SNMPv3、LDAP／LDAPS、WPA3、AES-256 加密 HDD、PIN 安全列印、IP／埠過濾',
+    cloud_scan_features: '掃描至 Email、FTP、網路資料夾、USB、PC、雲端；支援 AirPrint、Mopria、Epson Connect',
+    extended_source_url: 'https://www.epson.eu/en_EU/products/printers/inkjet/business-inkjet/workforce-enterprise%E2%80%8B-am-c6000%E2%80%8B-printer/p/34981',
+    extended_source_note: '本機型第二層規格引用 Epson Europe 官方 SKU；與台灣 SKU 的選配、建議月印量與首張輸出條件須於採購前再核對。',
+  },
+  'Konica Minolta|bizhub C551i': {
+    scan_speed_simplex: '黑白／彩色最高 140／140 ipm',
+    scan_speed_duplex: '黑白／彩色最高 280／280 ipm',
+    adf_spdf: 'Dualscan ADF 300 張（標準）',
+    scan_resolution: '最高 600 × 600 dpi',
+    duplex_print: '自動雙面；A6–SRA3、52–256 g/m²',
+    first_output: '首張輸出：黑白／彩色 3.3／4.3 秒',
+    paper_input: '標準 1,150／最大 6,650 張',
+    max_paper_size: 'A6–SRA3；banner 最長 1,200 × 297 mm',
+    monthly_volume: '建議 50,000 頁／最高 250,000 頁（2025 Europe datasheet）',
+    print_language: 'PCL 6、PCL 5c、PostScript 3、XPS',
+    security_features: 'ISO15408、IP／埠過濾、TLS 1.3、IPsec、802.1X、認證、Kerberos、硬碟覆寫／AES-256、選配 Bitdefender',
+    cloud_scan_features: '掃描至 Email、SMB、FTP、Box、USB、WebDAV、DPWS、URL、TWAIN；支援 LDAP、AirPrint、Mopria、Konica Minolta Mobile Print',
+    extended_source_url: 'https://assets-konicaminolta-eu.canto.global/direct/document/6nod92u0l11nh7d5hfnshu2q2d/1OoPinUBjznbI9PDUC5D929EpJ8/original?content-type=application%2Fpdf&name=bizhub_C551i_Datasheet.pdf',
+    extended_source_note: '第二層欄位引用 Konica Minolta Europe 官方 datasheet；實際台灣供應型號與選配須於採購前再核對。',
+  },
 };
 
-data.title = '七品牌 20／30／40 張設備比較平台';
-data.checked_date = '2026-08-24';
+const recordsToAdd = [
+  {
+    brand: 'RICOH', model: 'IM C6010', source_market: 'Taiwan official', type: 'A3 colour laser MFP; black/colour same speed', actual_ppm_a4: 60, comparison_tier: '60 ppm',
+    print_resolution: '1,200 x 1,200 dpi', ram_standard: '6 GB (2 GB main + 4 GB Smart Operation Panel) or 8 GB (4 GB main + 4 GB Smart Operation Panel)', ram_max: 'Not unambiguously mapped to Taiwan SKU', storage_standard: '256 GB SSD', storage_optional: 'Not stated on Taiwan product page',
+    source_confidence: 'A- — Taiwan official page, RAM configuration ambiguity', source_url: 'https://www.ricoh.com.tw/products/office-solutions/printers-and-copiers/mfp-colour/im-c6010', notes: 'Taiwan official A3 colour MFP. The page displays two RAM configurations; they are retained rather than collapsed into one SKU value.',
+  },
+  {
+    brand: 'FUJIFILM Business Innovation', model: 'Apeos 5570', source_market: 'US official PDF', type: 'A3 monochrome laser MFP', actual_ppm_a4: 55, comparison_tier: '50 ppm class (actual 55)',
+    print_resolution: 'Standard 1,200 x 2,400 dpi; high-resolution mode 1,200 x 1,200 dpi', ram_standard: '4 GB', ram_max: '4 GB', storage_standard: '128 GB storage device', storage_optional: 'Not stated',
+    source_confidence: 'A — official FUJIFILM US brochure', source_url: 'https://asset.fujifilm.com/www/us/files/2025-02/98c9d231c309824b94a1c618d1d73b23/apeos-5570-4570_us-brochure.pdf', notes: 'US official brochure; regional availability and options need confirmation for Taiwan procurement.',
+  },
+  {
+    brand: 'SHARP', model: 'BP-70C55', source_market: 'Global official + US official', type: 'A3 colour laser MFP; black/colour same speed', actual_ppm_a4: 55, comparison_tier: '50 ppm class (actual 55)',
+    print_resolution: '1,200 x 1,200 dpi; 600 x 600 dpi; 9,600 equivalent x 600 dpi', ram_standard: '5 GB copy/print shared', ram_max: 'Not separately stated', storage_standard: '256 GB SSD', storage_optional: '512 GB SSD',
+    source_confidence: 'A — Global product page + Sharp USA specification', source_url: 'https://global.sharp/products/copier/products/bp_70c65/specifications/index.html', notes: 'Global specifications provide core values; US official page is cited separately for 300-sheet DSPF, cloud and security details.',
+  },
+  {
+    brand: 'Canon', model: 'imageRUNNER ADVANCE DX C5860i', source_market: 'Canon EMEA official', type: 'A3 colour laser MFP; black/colour same speed', actual_ppm_a4: 60, comparison_tier: '60 ppm',
+    print_resolution: '1,200 x 1,200 dpi', ram_standard: '5 GB (2 GB main CPU + 2 GB image-processing CPU + 1 GB)', ram_max: 'Not separately stated', storage_standard: '256 GB SSD', storage_optional: '1 TB SSD',
+    source_confidence: 'A — Canon EMEA official specifications', source_url: 'https://en.canon-cna.com/business/products/office-printers/multifunction/colour/imagerunner-advance-dx-c5800-series/specifications/', notes: 'Canon EMEA official A3 colour MFP. Availability and Adobe PostScript configuration can vary by market.',
+  },
+  {
+    brand: 'HP', model: 'Color LaserJet Enterprise Flow MFP 6800zfsw', source_market: 'EMEA/Africa official', type: 'A4 colour laser MFP; black/colour same speed', actual_ppm_a4: 52, comparison_tier: '50 ppm class (actual 52)',
+    print_resolution: 'Up to 1,200 x 1,200 dpi', ram_standard: '6 GB', ram_max: '6 GB', storage_standard: '500 GB HDD', storage_optional: '256 GB SSD via CTO',
+    source_confidence: 'A — HP EMEA/Africa official product specification', source_url: 'https://www.hp.com/emea_africa-en/products/printers/product-details/product-specifications/2100491681', notes: 'A4 device. This EMEA/Africa configuration lists A4 52 ppm and Letter 55 ppm; both are retained to avoid treating Letter speed as A4.',
+  },
+  {
+    brand: 'Epson', model: 'WorkForce Enterprise AM-C6000', source_market: 'Europe official', type: 'A3 colour business inkjet MFP; black/colour same speed', actual_ppm_a4: 60, comparison_tier: '60 ppm',
+    print_resolution: '600 x 2,400 dpi', ram_standard: '8 GB', ram_max: '8 GB', storage_standard: '320 GB encrypted HDD', storage_optional: 'HDD mirroring option',
+    source_confidence: 'A- — Epson Europe official SKU', source_url: 'https://www.epson.eu/en_EU/products/printers/inkjet/business-inkjet/workforce-enterprise%E2%80%8B-am-c6000%E2%80%8B-printer/p/34981', notes: 'Europe official SKU. Taiwan product availability and optional configurations must be confirmed before procurement.',
+  },
+  {
+    brand: 'Konica Minolta', model: 'bizhub C551i', source_market: 'Europe official', type: 'A3 colour laser MFP; black/colour same speed', actual_ppm_a4: 55, comparison_tier: '50 ppm class (actual 55)',
+    print_resolution: '1,800 equivalent x 600 dpi; 1,200 x 1,200 dpi', ram_standard: '8 GB', ram_max: '8 GB', storage_standard: '256 GB SSD', storage_optional: '1 TB SSD',
+    source_confidence: 'A — Konica Minolta Europe product page and datasheet', source_url: 'https://www.konicaminolta.eu/eu-en/digital-workplace/printing-devices/bizhub-c551i', notes: 'Europe official model. The 2025 Europe datasheet is cited separately for second-layer fields and may differ from Taiwan configurations.',
+  },
+];
+
+for (const newRecord of recordsToAdd) {
+  const index = data.records.findIndex((record) => record.brand === newRecord.brand && record.model === newRecord.model);
+  if (index === -1) data.records.push(newRecord);
+  else data.records[index] = { ...data.records[index], ...newRecord };
+}
+
+data.title = '7廠牌20~60張規格比較平台';
+data.checked_date = '2026-08-25';
+data.scope = 'Official-source representative models; actual A4 ppm preserved; 20–60 ppm are comparison tiers, not a replacement for actual speed.';
 data.extended_fields = [
   'scan_speed_simplex', 'scan_speed_duplex', 'adf_spdf', 'scan_resolution',
   'duplex_print', 'first_output', 'paper_input', 'max_paper_size', 'monthly_volume',

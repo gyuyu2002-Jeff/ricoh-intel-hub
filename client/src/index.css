@@ -134,8 +134,8 @@
 .brand-compare-controls { display: grid; grid-template-columns: 1.3fr 1.3fr .9fr .8fr; gap: 10px; padding: 13px; background: #eef3ed; border: 1px solid #dbe5dd; }
 .brand-compare-select { position: relative; display: grid; gap: 5px; padding: 9px 12px; background: #fff; border: 1px solid #d5ded7; }
 .brand-compare-select > span { color: #7b897f; font-size: 10px; letter-spacing: .06em; }
-.brand-compare-select select { width: 100%; appearance: none; border: 0; outline: 0; background: transparent; color: var(--ink); font-weight: 700; padding: 0 18px 0 0; cursor: pointer; }
-.brand-compare-select svg { position: absolute; right: 11px; bottom: 12px; pointer-events: none; color: var(--red); }
+.brand-compare-select select { width: 100%; min-height: 44px; appearance: none; border: 0; outline: 0; background: transparent; color: var(--ink); font-weight: 700; padding: 0 18px 0 0; cursor: pointer; }
+.brand-compare-select svg { position: absolute; right: 11px; bottom: 25px; pointer-events: none; color: var(--red); }
 .brand-compare-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
 .brand-compare-card { min-width: 0; padding: 21px; background: #fff; border: 1px solid #d7e1d9; box-shadow: 0 6px 18px rgba(38,61,52,.04); }
 .brand-compare-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
