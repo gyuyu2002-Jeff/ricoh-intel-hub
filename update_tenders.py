@@ -390,10 +390,19 @@ NON_TARGET_TERM_GROUPS = {
     "surveillance_access": ["監視器", "監控設備", "監控系統", "監視系統", "CCTV", "攝影機", "網路攝影機", "IP Camera", "IP CAM", "數位錄影機", "影像錄影機", "DVR", "NVR", "門禁", "門禁系統", "門禁設備", "刷卡機", "讀卡機", "生物辨識", "人臉辨識", "人臉識別", "電子圍籬", "防盜系統", "入侵警報", "保全系統", "對講機", "影像對講", "車牌辨識", "停車場管理"],
     "it_endpoint": ["液晶螢幕", "電腦螢幕", "顯示器", "顯示設備", "觸控螢幕", "觸控顯示器", "互動式顯示器", "電子白板", "投影機", "投影設備", "視訊會議設備", "視訊會議系統", "LED 顯示", "電視牆"],
     "medical_equipment": ["智慧藥櫃", "X光機", "Ｘ光機", "DR數位影像", "醫療設備", "診斷設備"],
-    "construction_or_furniture": ["規劃設計監造", "設計監造", "監造技術服務", "輕鋼架", "收納櫃", "裝修工程", "辦公空間改善"],
+    "construction_or_furniture": [
+        "規劃設計監造", "設計監造", "監造技術服務", "輕鋼架", "收納櫃", "裝修工程",
+        "室內裝修", "室內裝潢", "辦公空間改善", "地板", "地坪", "地磚", "地毯",
+        "塑膠地磚", "木地板", "PVC地板", "地板更新", "地板修繕", "隔間工程",
+        "土木工程", "建築工程", "水電工程", "油漆工程", "防水工程", "鋪設工程",
+        "辦公家具", "家具採購", "桌椅採購"
+    ],
     "non_office_output": ["氣泡輸出設備", "水處理", "廣播設備", "音響設備", "城鎮韌性演習"],
 }
-HARD_NON_TARGET_CATEGORIES = {"information_equipment", "network_or_server", "computer_or_software", "surveillance_access", "it_endpoint"}
+# Any named non-target category must win even when a title also mentions a copier.
+# The dashboard follows a strict single-target policy: mixed information, construction,
+# medical, security or unrelated-output procurements are not sales opportunities.
+HARD_NON_TARGET_CATEGORIES = set(NON_TARGET_TERM_GROUPS)
 RELEVANT_DETAIL_KEY_TERMS = [
     "標案名稱", "標的名稱", "標的分類", "採購品項", "品項名稱", "品名",
     "規格", "需求說明", "數量摘要", "工作內容", "附加說明"
@@ -480,7 +489,7 @@ def classify_tender_relevance(item, detail=None):
             "status": "excluded", "confidence": "high", "score": -5,
             "category": information_category, "matched_terms": information_terms,
             "matched_fields": ["title" if _matched_terms(title, information_terms) else "detail"],
-            "reason": "明確屬於資訊、網路、監控或門禁設備，全面排除於標案監控範圍"
+            "reason": "含明確非影印機標的，依最高優先硬排除規則自標案監控汰除"
         }
 
     machine_terms = _matched_terms(combined, MACHINE_TOOL_TERMS)

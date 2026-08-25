@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-25 12:51",
+  "last_updated": "2026-08-25 13:32",
   "tenders": [
     {
       "city": "新北市",
@@ -385,10 +385,10 @@
     "today": "2026-08-25",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-25 12:51",
-    "source_records": 1248,
+    "latest_attempt_at": "2026-08-25 13:32",
+    "source_records": 1257,
     "candidate_records": 1,
-    "review_records": 12,
+    "review_records": 10,
     "successful_dates": [
       "2026-08-25",
       "2026-08-24"
@@ -815,7 +815,7 @@
       "source_records": 1722,
       "candidate_records": 2,
       "review_records": 2,
-      "checked_at": "2026-08-25 12:49"
+      "checked_at": "2026-08-25 13:29"
     },
     "2026-08-23": {
       "status": "complete",
@@ -826,10 +826,10 @@
     },
     "2026-08-25": {
       "status": "complete",
-      "source_records": 1248,
+      "source_records": 1257,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-08-25 12:49"
+      "checked_at": "2026-08-25 13:29"
     }
   },
   "candidate_cache": [
@@ -1402,77 +1402,6 @@
           "title"
         ],
         "reason": "命中設備名稱或公告規格"
-      }
-    },
-    {
-      "date": 20260813,
-      "filename": "PPW-1-70112522",
-      "brief": {
-        "type": "公開徵求廠商提供參考資料公告",
-        "title": "衛生福利部中央健康保險署南區業務組公園大樓辦公設備及地板汰換",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "S115010-GH",
-      "unit_id": "A.21.3",
-      "unit_name": "衛生福利部中央健康保險署",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.3",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.3&job_number=S115010-GH",
-      "unit_url": "/index/unit/A.21.3",
-      "url": "/index/case/A.21.3/S115010-GH/20260813/PPW-1-70112522",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公設備",
-          "汰換"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260812,
-      "filename": "ttd-71299855",
-      "brief": {
-        "type": "公開取得報價單或企劃書公告",
-        "title": "羅浮里辦公室設備汰換工程",
-        "category": "工程類5139-其他土木工程",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115A133",
-      "unit_id": "3.80.63",
-      "unit_name": "桃園市復興區公所",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.80.63",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.80.63&job_number=115A133",
-      "unit_url": "/index/unit/3.80.63",
-      "url": "/index/case/3.80.63/115A133/20260812/ttd-71299855",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公室設備",
-          "汰換"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
       }
     },
     {
@@ -2227,41 +2156,6 @@
     },
     {
       "date": 20260721,
-      "filename": "NAI-1-71236851",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "臺西分局三條崙派出所辦公設備及待勤家具採購案",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "c11514",
-      "unit_id": "3.76.49.2",
-      "unit_name": "雲林縣警察局",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.49.2",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.49.2&job_number=c11514",
-      "unit_url": "/index/unit/3.76.49.2",
-      "url": "/index/case/3.76.49.2/c11514/20260721/NAI-1-71236851",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公設備",
-          "採購"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": 20260721,
       "filename": "BDM-1-71236459",
       "brief": {
         "type": "決標公告",
@@ -2898,42 +2792,6 @@
       }
     },
     {
-      "date": 20260630,
-      "filename": "TIQ-11-71058619",
-      "brief": {
-        "type": "公開取得報價單或企劃書公告",
-        "title": "臺西分局三條崙派出所辦公設備及待勤家具採購案",
-        "category": "財物類448-家用電器及其零件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "c11514",
-      "unit_id": "3.76.49.2",
-      "unit_name": "雲林縣警察局",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.49.2",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.49.2&job_number=c11514",
-      "unit_url": "/index/unit/3.76.49.2",
-      "url": "/index/case/3.76.49.2/c11514/20260630/TIQ-11-71058619",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公設備",
-          "採購"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
       "date": 20260629,
       "filename": "ttd-71260642",
       "brief": {
@@ -3053,36 +2911,6 @@
         "category": "needs_review",
         "matched_terms": [
           "事務設備"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": "2026-08-13",
-      "publish_date": "2026-08-13",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-08-27",
-      "deadline_confidence": "inferred",
-      "title": "衛生福利部中央健康保險署南區業務組公園大樓辦公設備及地板汰換",
-      "unit": "衛生福利部中央健康保險署",
-      "city": "台南市",
-      "city_source": "機關地址／開標地點",
-      "city_confidence": "high",
-      "city_raw_text": "700臺南市中西區公園路96號",
-      "unit_id": "A.21.3",
-      "job_number": "S115010-GH",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260813&fn=PPW-1-70112522.xml",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公設備",
-          "汰換"
         ],
         "matched_fields": [
           "title"
@@ -3262,36 +3090,6 @@
         "category": "needs_review",
         "matched_terms": [
           "辦公室設備",
-          "採購"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "名稱較廣泛，需檢查公告品項或規格"
-      }
-    },
-    {
-      "date": "2026-05-29",
-      "publish_date": "2026-05-29",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-06-10",
-      "deadline_confidence": "verified",
-      "title": "臺西分局三條崙派出所辦公設備及待勤家具採購案",
-      "unit": "雲林縣警察局",
-      "city": "雲林縣",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "雲林縣(非原住民地區)",
-      "unit_id": "3.76.49.2",
-      "job_number": "c11514",
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260630&fn=TIQ-11-71058619.xml",
-      "relevance": {
-        "status": "review",
-        "confidence": "low",
-        "score": 2,
-        "category": "needs_review",
-        "matched_terms": [
-          "辦公設備",
           "採購"
         ],
         "matched_fields": [

@@ -153,6 +153,20 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         self.assertEqual(result["status"], "excluded")
         self.assertEqual(result["category"], "information_equipment")
 
+    def test_flooring_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("影印機租賃及辦公室地板更新工程"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "construction_or_furniture")
+
+    def test_construction_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("多功能事務機採購暨室內裝修工程"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "construction_or_furniture")
+
+    def test_copier_rental_with_floor_number_remains_in_scope(self):
+        result = classify_tender_relevance(announcement("一樓行政室數位影印機租賃案"))
+        self.assertEqual(result["status"], "included")
+
     def test_surveillance_equipment_overrides_copier_keyword(self):
         result = classify_tender_relevance(announcement("監視器及影印機採購案"))
         self.assertEqual(result["status"], "excluded")
