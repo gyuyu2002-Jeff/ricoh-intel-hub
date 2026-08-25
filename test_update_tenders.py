@@ -87,7 +87,8 @@ class TenderRelevanceTests(unittest.TestCase):
 
     def test_broad_title_waits_for_detail(self):
         result = classify_tender_relevance(announcement("辦公室設備更新採購案"))
-        self.assertEqual(result["status"], "review")
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "broad_office_equipment")
 
 
 class TenderRelevanceAdditionalTests(unittest.TestCase):
@@ -162,6 +163,26 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         result = classify_tender_relevance(announcement("多功能事務機採購暨室內裝修工程"))
         self.assertEqual(result["status"], "excluded")
         self.assertEqual(result["category"], "construction_or_furniture")
+
+    def test_relocation_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("影印機搬遷及辦公設備整備案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "non_pure_scope")
+
+    def test_scrap_sale_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("報廢影印機及事務設備財物標售案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "non_pure_scope")
+
+    def test_system_integration_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("多功能事務機及系統整合採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "non_pure_scope")
+
+    def test_broad_office_equipment_without_copier_is_excluded(self):
+        result = classify_tender_relevance(announcement("多功能辦公室設備採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "broad_office_equipment")
 
     def test_copier_rental_with_floor_number_remains_in_scope(self):
         result = classify_tender_relevance(announcement("一樓行政室數位影印機租賃案"))

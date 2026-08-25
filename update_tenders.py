@@ -397,6 +397,10 @@ NON_TARGET_TERM_GROUPS = {
         "土木工程", "建築工程", "水電工程", "油漆工程", "防水工程", "鋪設工程",
         "辦公家具", "家具採購", "桌椅採購"
     ],
+    "non_pure_scope": [
+        "搬遷", "搬運", "遷移", "報廢", "標售", "財物標售", "廢品",
+        "訂製", "訂做", "定製", "系統整合", "整合系統"
+    ],
     "non_office_output": ["氣泡輸出設備", "水處理", "廣播設備", "音響設備", "城鎮韌性演習"],
 }
 # Any named non-target category must win even when a title also mentions a copier.
@@ -533,7 +537,12 @@ def classify_tender_relevance(item, detail=None):
     if direct_title or direct_detail:
         return {"status": "included", "confidence": "high" if direct_title else "medium", "score": score, "category": "office_output_equipment", "matched_terms": matched, "matched_fields": matched_fields, "reason": "命中設備名稱或公告規格"}
     if broad_terms:
-        return {"status": "review", "confidence": "low", "score": score, "category": "needs_review", "matched_terms": matched, "matched_fields": matched_fields, "reason": "名稱較廣泛，需檢查公告品項或規格"}
+        return {
+            "status": "excluded", "confidence": "high", "score": score,
+            "category": "broad_office_equipment", "matched_terms": matched,
+            "matched_fields": matched_fields,
+            "reason": "僅命中廣義辦公設備，未能明確確認為單純影印機或多功能事務機"
+        }
     return {"status": "excluded", "confidence": "high", "score": 0, "category": "unrelated", "matched_terms": [], "matched_fields": [], "reason": "未命中設備範圍"}
 
 
