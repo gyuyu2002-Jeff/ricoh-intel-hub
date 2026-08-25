@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-25 09:50",
+  "last_updated": "2026-08-25 10:03",
   "tenders": [
     {
       "city": "新北市",
@@ -114,17 +114,59 @@
       "budget": "NT$ 1,087,816",
       "award_price": "NT$ 1,085,832",
       "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
       "main_competitor": "震旦 SHARP",
       "suggested_price": "資料不足",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
+        "record_count": 1,
         "discount_rate": null
       },
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260820&fn=BDM-1-71263229.xml",
-      "history_stats": [],
-      "history_records": [],
+      "history_stats": [
+        {
+          "year": 2022,
+          "val": 98,
+          "type": "real",
+          "winner": "震旦 SHARP"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2022-08-17",
+          "year": 2022,
+          "title": "SHARP影印機計張維護開口契約",
+          "job_number": "1110973",
+          "budget": 890530,
+          "award_price": 878430,
+          "discount_rate": 98.6,
+          "winner": "震旦 SHARP",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220817&fn=BDM-1-70065792.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.9.20",
+          "source_unit": "國立臺灣大學",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2018-12-11",
+          "year": 2018,
+          "title": "SHARP影印機計張維護開口契約",
+          "job_number": "1071291",
+          "budget": 985230,
+          "award_price": 942342,
+          "discount_rate": 95.6,
+          "winner": "震旦 SHARP",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20181211&fn=BDM-1-52636877.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.9.20",
+          "source_unit": "國立臺灣大學",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
       "stage": "已決標",
       "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 1,
@@ -343,7 +385,7 @@
     "today": "2026-08-25",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-25 09:50",
+    "latest_attempt_at": "2026-08-25 10:03",
     "source_records": 1188,
     "candidate_records": 1,
     "review_records": 12,
@@ -773,7 +815,7 @@
       "source_records": 1722,
       "candidate_records": 2,
       "review_records": 2,
-      "checked_at": "2026-08-25 09:48"
+      "checked_at": "2026-08-25 10:00"
     },
     "2026-08-23": {
       "status": "complete",
@@ -787,7 +829,7 @@
       "source_records": 1188,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-08-25 09:48"
+      "checked_at": "2026-08-25 10:00"
     }
   },
   "candidate_cache": [
@@ -4491,6 +4533,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.9.20",
+      "unit_name": "國立臺灣大學",
+      "award_date": "2022-08-17",
+      "year": 2022,
+      "title": "SHARP影印機計張維護開口契約",
+      "job_number": "1110973",
+      "budget": 890530,
+      "award_price": 878430,
+      "discount_rate": 98.6,
+      "winner": "震旦 SHARP",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220817&fn=BDM-1-70065792.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.13.31",
       "unit_name": "台灣電力股份有限公司",
       "award_date": "2022-08-15",
@@ -5192,6 +5249,21 @@
       "discount_rate": 99.9,
       "winner": "金儀 Konica Minolta",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20190227&fn=BDM-3-52711503.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.9.20",
+      "unit_name": "國立臺灣大學",
+      "award_date": "2018-12-11",
+      "year": 2018,
+      "title": "SHARP影印機計張維護開口契約",
+      "job_number": "1071291",
+      "budget": 985230,
+      "award_price": 942342,
+      "discount_rate": 95.6,
+      "winner": "震旦 SHARP",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20181211&fn=BDM-1-52636877.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -6179,6 +6251,7 @@
     "3.5.10.100||unspecified|Canon TX4000系列繪圖機專用噴頭等7項": "2026-07-31",
     "3.79.14.14||unspecified|條碼列印機手圈貼紙及感應標籤": "2026-07-31",
     "3.13.50.48.1|copier|rental|影印機租賃長約": "2026-08-10",
-    "3.9.20|copier|maintenance|115年SHARP影印機計張維護開口契約": "2026-08-12"
+    "3.9.20|copier|maintenance|115年SHARP影印機計張維護開口契約": "2026-08-12",
+    "3.9.20|copier|maintenance|SHARP影印機計張維護開口契約": "2026-08-25"
   }
 }

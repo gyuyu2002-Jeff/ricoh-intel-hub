@@ -3,6 +3,7 @@ from datetime import date, timedelta
 
 from update_tenders import (
     build_required_dates,
+    build_history_title_query,
     classify_tender_relevance,
     deduplicate_announcements,
     get_city_info,
@@ -280,6 +281,20 @@ class UpdateModeTests(unittest.TestCase):
         self.assertEqual(
             build_required_dates("maintenance", today, collection_days),
             [date(2026, 7, 25)]
+        )
+
+
+class HistoryTitleQueryTests(unittest.TestCase):
+    def test_roc_year_prefix_is_removed_for_history_search(self):
+        self.assertEqual(
+            build_history_title_query("115年SHARP影印機計張維護開口契約"),
+            "SHARP影印機計張維護開口契約",
+        )
+
+    def test_roc_year_and_yearly_suffix_are_removed_for_history_search(self):
+        self.assertEqual(
+            build_history_title_query("115年度 SHARP影印機計張維護開口契約"),
+            "SHARP影印機計張維護開口契約",
         )
 
 

@@ -593,6 +593,7 @@ def history_scope_key(unit_id, title):
 
 def build_history_title_query(title):
     normalized = re.sub(r'[「」『』【】()]', '', title).strip()
+    normalized = re.sub(r'^\s*(?:民國\s*)?\d{2,3}\s*年(?:度)?\s*', '', normalized).strip()
     year_suffix = re.split(r'(?:\d{2,3}(?:\s*[-~至]\s*\d{2,3})?\s*)?年度', normalized, maxsplit=1)
     if len(year_suffix) > 1 and year_suffix[-1].strip():
         normalized = year_suffix[-1].strip()
