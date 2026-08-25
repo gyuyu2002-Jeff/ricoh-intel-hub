@@ -49,6 +49,7 @@ type Tender = {
   samples: string;
   reference: string;
   competitor: string;
+  currentWinner: string;
   previousWinner: string;
   confidence: string;
   confidenceTone: string;
@@ -83,6 +84,7 @@ const fallbackTenders: Tender[] = [
     samples: "近 5 年｜同設備同契約｜4 筆",
     reference: "NT$ 10,544,000",
     competitor: "宏羚股份有限公司",
+    currentWinner: "宏羚股份有限公司",
     previousWinner: "宏羚股份有限公司",
     confidence: "高",
     confidenceTone: "confidence-high",
@@ -116,6 +118,7 @@ const fallbackTenders: Tender[] = [
     samples: "近 5 年僅 1 筆有效可比資料",
     reference: "不產生價格推估",
     competitor: "宏羚股份有限公司",
+    currentWinner: "宏羚股份有限公司",
     previousWinner: "宏羚股份有限公司",
     confidence: "中",
     confidenceTone: "confidence-mid",
@@ -145,6 +148,7 @@ const fallbackTenders: Tender[] = [
     samples: "跨機關｜近 5 年｜6 筆",
     reference: "NT$ 5,444,640",
     competitor: "待人工確認",
+    currentWinner: "待人工確認",
     previousWinner: "金儀 Konica Minolta",
     confidence: "中",
     confidenceTone: "confidence-mid",
@@ -197,7 +201,7 @@ function formatDeadlineCountdown(deadline?: string) {
   return `距截止 ${days} 天`;
 }
 
-function mapRawTender(raw: RawTender, isReview = false): Tender {
+export function mapRawTender(raw: RawTender, isReview = false): Tender {
   const history = [...(raw.history_records ?? [])]
     .sort((a, b) => String(b.award_date ?? "").localeCompare(String(a.award_date ?? "")))
     .map((record) => [
@@ -206,14 +210,19 @@ function mapRawTender(raw: RawTender, isReview = false): Tender {
       typeof record.discount_rate === "number" ? `${record.discount_rate}%` : "資料不足",
       record.winner ?? "待人工確認",
     ] as HistoryRow);
-  const previousWinner = history[0]?.[3] ?? raw.main_competitor ?? "待人工確認";
   const confidence = raw.relevance?.confidence === "high" ? "高" : raw.relevance?.confidence === "medium" ? "中" : "待確認";
   const priority = raw.relevance?.score && raw.relevance.score >= 4 ? "P1" : "P2";
   const stage = isReview ? "待確認" : raw.stage ?? "狀態待確認";
   const isAwarded = stage === "已決標";
+  const currentWinner = raw.main_competitor ?? (isAwarded ? "官方來源未列" : "待人工確認");
+  const previousWinner = history[0]?.[3] ?? (isAwarded ? "尚無可比前次紀錄" : currentWinner);
   const stageTone = isReview ? "stage-review" : isAwarded ? "stage-awarded" : stage.includes("無法決標") ? "stage-failed" : stage.includes("公開") ? "stage-amber" : stage.includes("評選") ? "stage-dark" : "stage-blue";
   const comparable = history.length > 0 ? `近 5 年｜可比紀錄 ${history.length} 筆` : "目前無完整可比紀錄";
-  const summary = history.length > 0
+  const summary = isAwarded
+    ? history.length > 0
+      ? `本次由${currentWinner}得標；同機關可比前次得標廠商為${previousWinner}。`
+      : `本次由${currentWinner}得標；目前尚無同機關可比的前次得標紀錄。`
+    : history.length > 0
     ? `${raw.unit ?? "本案機關"}過去有 ${history.length} 筆可比資料，前次由${previousWinner}得標。`
     : "目前尚無足夠歷史得標資料，先以公告規格與資格條件為主。";
   const next = stage.includes("公開")
@@ -237,7 +246,8 @@ function mapRawTender(raw: RawTender, isReview = false): Tender {
     discount: raw.avg_discount ?? "資料不足",
     samples: comparable,
     reference: raw.suggested_price ?? "資料不足",
-    competitor: raw.main_competitor ?? "待人工確認",
+    competitor: currentWinner,
+    currentWinner,
     previousWinner,
     confidence,
     confidenceTone: confidence === "高" ? "confidence-high" : confidence === "中" ? "confidence-mid" : "confidence-low",
@@ -306,7 +316,7 @@ function TenderCard({ tender }: { tender: Tender }) {
         </div>
         <div className={`countdown ${tender.priority === "P1" ? "countdown-hot" : ""}`}><Clock3 size={14} />{tender.countdown}</div>
       </div>
-      {tender.isAwarded && <div className="award-result-banner"><span className="award-result-mark">✓</span><div><strong>本案已決標</strong><span>得標廠商：{tender.competitor} · 決標金額：{tender.awardPrice}</span></div><span className="award-result-label">RESULT</span></div>}
+      {tender.isAwarded && <div className="award-result-banner"><span className="award-result-mark">✓</span><div><strong>本案已決標</strong><span>本次得標廠商：{tender.currentWinner} · 決標金額：{tender.awardPrice}</span></div><span className="award-result-label">RESULT</span></div>}
       <div className="tender-identity">
         <div>
           <div className="eyebrow">TENDER FILE <span>/</span> {tender.publish}</div>
@@ -318,9 +328,15 @@ function TenderCard({ tender }: { tender: Tender }) {
       <div className="metric-grid">
         <Metric label="截止日" value={tender.deadline} note={`${tender.stage} · ${tender.deadlineConfidence === "verified" ? "官方日期" : tender.deadlineConfidence === "inferred" ? "日期推估" : "日期待確認"}`} alert={tender.priority === "P1"} />
         <Metric label={tender.isAwarded ? "決標金額" : "預算"} value={tender.isAwarded ? tender.awardPrice : tender.budget} note={tender.isAwarded ? "官方決標公告已提供" : tender.budget.includes("無") ? "附件／後續公告待確認" : "官方公告已提供"} />
-        <Metric label="歷史折率中位數" value={tender.discount} note={tender.samples} />
-        <Metric label={tender.reference.includes("不") ? "歷史優勢商" : "歷史參考價格"} value={tender.reference} note={tender.reference.includes("不") ? tender.competitor : "依中位折率推算｜僅供參考"} />
-        <Metric label="前次得標廠商" value={tender.previousWinner} note={latestHistory ? `${latestHistory[0]} · ${latestHistory[2]}` : "尚無歷史得標紀錄"} />
+        {tender.isAwarded ? <>
+          <Metric label="本次得標廠商" value={tender.currentWinner} note="本次官方決標公告" />
+          <Metric label="前次得標廠商" value={tender.previousWinner} note={latestHistory ? `${latestHistory[0]} · 案號 ${latestHistory[1]}` : "同機關尚無可比前次紀錄"} />
+          <Metric label="前次決標" value={latestHistory ? latestHistory[0] : "尚無紀錄"} note={latestHistory ? `得標折率 ${latestHistory[2]}` : "未以本次得標者回填"} />
+        </> : <>
+          <Metric label="歷史折率中位數" value={tender.discount} note={tender.samples} />
+          <Metric label={tender.reference.includes("不") ? "歷史優勢商" : "歷史參考價格"} value={tender.reference} note={tender.reference.includes("不") ? tender.competitor : "依中位折率推算｜僅供參考"} />
+          <Metric label="前次得標廠商" value={tender.previousWinner} note={latestHistory ? `${latestHistory[0]} · ${latestHistory[2]}` : "尚無歷史得標紀錄"} />
+        </>}
       </div>
       <div className="decision-strip">
         <div className="decision-main">
@@ -348,14 +364,14 @@ function TenderCard({ tender }: { tender: Tender }) {
             <Stamp tone="stamp-blue">{tender.history.length} 筆可比紀錄</Stamp>
           </div>
           <div className="history-list">
-            {tender.history.map((row) => (
+            {tender.history.length === 0 ? <div className="empty-history">尚無同機關可比的前次得標紀錄。</div> : tender.history.map((row) => (
               <div className="history-row" key={row[1]}>
                 <span>{row[0]}</span><strong>{row[1]}</strong><span>{row[2]}</span><span>{row[3]}</span>
                 <Stamp tone={row[3] === tender.previousWinner ? "stamp-red" : "stamp-green"}>{row[3] === tender.previousWinner ? "前次得標" : "歷史紀錄"}</Stamp>
               </div>
             ))}
           </div>
-          <div className="award-note"><span>判讀提示</span><strong>前次得標廠商：{tender.previousWinner}</strong><em>本欄為歷史資訊，不代表本案結果。</em></div>
+          <div className="award-note"><span>判讀提示</span>{tender.isAwarded && <strong>本次得標廠商：{tender.currentWinner}</strong>}<strong>前次得標廠商：{tender.previousWinner}</strong><em>{tender.isAwarded ? "本次與前次資料分列；無歷史紀錄時不以本次得標者回填。" : "本欄為歷史資訊，不代表本案結果。"}</em></div>
         </div>
       )}
     </article>
