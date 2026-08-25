@@ -17,3 +17,10 @@ SHARP BP-70C55 卡片顯示「原始規格」與「第二層來源」兩條官�
 建置檢查：`npm run check` 與 `npm run build` 均成功完成。大型 JavaScript chunk 的 Vite 警告為既有建置效能提示，未造成型別或輸出失敗。
 
 行動版檢查：資料集篩選選單在 720px 以下維持 44px 高度；本次並將品牌比較下拉選單的原生可點擊區調整為最少 44px，新增的 50／60 ppm 選項沿用相同控制項與換行規則。
+
+## 正式網站發布後檢查
+
+發布提交：`22417cce3319a5fa515f47ab6e685170ab57caa5`  
+正式網址：<https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?v=22417cc#/specs>
+
+GitHub Pages 部署工作流程 `32794773290` 已成功完成。正式頁面已實際顯示「7廠牌20~60張規格比較平台」、41 筆代表機型，以及品牌比較與資料篩選中的 50／60 ppm 選項；新增的 RICOH IM C6010、FUJIFILM Apeos 5570、SHARP BP-70C55、Canon C5860i、HP MFP 6800zfsw、Epson AM-C6000、Konica Minolta C551i 均存在於正式資料表。
