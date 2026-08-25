@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-25 06:40",
+  "last_updated": "2026-08-25 08:55",
   "tenders": [
     {
       "city": "新北市",
@@ -78,8 +78,8 @@
           "is_stale": false
         }
       ],
-      "stage": "已決標",
-      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
       "duration_years": 3,
       "relevance": {
         "status": "included",
@@ -101,6 +101,56 @@
       "city_source": "履約地點",
       "city_confidence": "high",
       "city_raw_text": "臺北市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "115年SHARP影印機計張維護開口契約",
+      "unit": "國立臺灣大學",
+      "unit_id": "3.9.20",
+      "job_number": "1150706",
+      "publish_date": "2026-08-12",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-18",
+      "deadline_confidence": "verified",
+      "budget": "NT$ 1,087,816",
+      "award_price": "NT$ 1,085,832",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "震旦 SHARP",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260820&fn=BDM-1-71263229.xml",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
+      "duration_years": 1,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "維護",
+          "維修",
+          "計張",
+          "開口契約"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
+    {
+      "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
       "tag": "重點攻堅",
       "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
       "title": "影印機租賃案",
@@ -108,7 +158,9 @@
       "unit_id": "A.7.3",
       "job_number": "115-033",
       "publish_date": "2026-08-07",
+      "publish_date_confidence": "verified",
       "deadline": "2026-09-07",
+      "deadline_confidence": "verified",
       "budget": "NT$ 12,582,464",
       "award_price": "",
       "avg_discount": "83.8%",
@@ -291,10 +343,10 @@
     "today": "2026-08-25",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-08-25 06:40",
+    "latest_attempt_at": "2026-08-25 08:55",
     "source_records": 1178,
     "candidate_records": 1,
-    "review_records": 11,
+    "review_records": 12,
     "successful_dates": [
       "2026-08-25",
       "2026-08-24"
@@ -721,7 +773,7 @@
       "source_records": 1722,
       "candidate_records": 2,
       "review_records": 2,
-      "checked_at": "2026-08-25 06:38"
+      "checked_at": "2026-08-25 08:52"
     },
     "2026-08-23": {
       "status": "complete",
@@ -735,7 +787,7 @@
       "source_records": 1178,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-08-25 06:38"
+      "checked_at": "2026-08-25 08:52"
     }
   },
   "candidate_cache": [
@@ -2989,6 +3041,36 @@
         "matched_terms": [
           "辦公設備",
           "汰換"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "名稱較廣泛，需檢查公告品項或規格"
+      }
+    },
+    {
+      "date": "2026-08-11",
+      "publish_date": "2026-08-11",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-08-25",
+      "deadline_confidence": "inferred",
+      "title": "高雄港務警察總隊115年人事室辦公設備附加項採購案",
+      "unit": "內政部警政署高雄港務警察總隊",
+      "city": "高雄市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "高雄市(非原住民地區)",
+      "unit_id": "A.1.1.23",
+      "job_number": "115-07-10",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260811&fn=BDM-3-71254104.xml",
+      "relevance": {
+        "status": "review",
+        "confidence": "low",
+        "score": 2,
+        "category": "needs_review",
+        "matched_terms": [
+          "辦公設備",
+          "採購"
         ],
         "matched_fields": [
           "title"
@@ -5871,12 +5953,12 @@
     "3.13.31.13": "2026-07-29",
     "3.13.31": "2026-08-25",
     "55709324": "2026-08-25",
-    "A.11.10.12": "2026-08-24",
+    "A.11.10.12": "2026-08-25",
     "3.32.80": "2026-07-31",
     "A.7.32": "2026-07-28",
     "A.21.100.75": "2026-07-31",
     "A.13.2": "2026-07-28",
-    "05601093": "2026-08-24",
+    "05601093": "2026-08-25",
     "3.76.73.72": "2026-08-25",
     "3.5.11": "2026-07-28",
     "3.79.62": "2026-08-25",

@@ -197,3 +197,22 @@
   .brand-compare-source-links,.spec-source-links { width: 100%; justify-content: flex-start; gap: 8px 14px; }
   .brand-compare-source-links a,.spec-source-links a { min-height: 44px; }
 }
+
+/* Detail dossier layout guard: keep every data block to the right of the index rail. */
+.spec-detail-index { grid-row: 1 / span 4; }
+.spec-detail-heading,
+.spec-detail-grid,
+.spec-detail-sections,
+.spec-source-note { grid-column: 2; min-width: 0; }
+.spec-detail-grid { min-width: 0; }
+.spec-detail-spec { min-width: 0; overflow-wrap: anywhere; }
+.spec-detail-spec strong,
+.spec-detail-spec small { overflow-wrap: anywhere; }
+
+@media (max-width: 720px) {
+  .spec-detail-index { grid-row: auto; }
+  .spec-detail-heading,
+  .spec-detail-grid,
+  .spec-detail-sections,
+  .spec-source-note { grid-column: 1; }
+}

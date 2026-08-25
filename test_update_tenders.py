@@ -47,6 +47,21 @@ class StatusAndDateConfidenceTests(unittest.TestCase):
         ]
         self.assertEqual(resolve_notice_status(records), "已決標")
 
+    def test_award_method_in_live_notice_is_not_an_award(self):
+        live_notice = {
+            "brief": {"type": "公開取得報價單或企劃書公告"},
+            "detail": {
+                "招標資料:決標方式": "參考最有利標精神",
+                "領投開標:截止投標": "115/09/01 09:30",
+            },
+        }
+        self.assertFalse(is_award_notice(live_notice))
+        self.assertEqual(resolve_notice_status([live_notice]), "")
+
+    def test_populated_award_result_detail_is_an_award(self):
+        award_notice = {"brief": {}, "detail": {"決標結果:得標廠商": "測試公司"}}
+        self.assertTrue(is_award_notice(award_notice))
+
     def test_failed_status_wins_when_no_award_exists(self):
         self.assertEqual(resolve_notice_status([{"brief": {"type": "撤案公告"}}]), "無法決標")
 

@@ -154,7 +154,8 @@ FAILED_STATUS_TERMS = [
     "無法決標", "流標", "廢標", "未達法定家數", "無廠商投標", "無人投標",
     "不予開標", "撤標", "撤案", "停止採購", "取消採購"
 ]
-AWARD_STATUS_TERMS = ["決標", "彙送", "得標廠商", "總決標金額"]
+AWARD_NOTICE_TYPE_TERMS = ["決標公告", "決標結果公告"]
+AWARD_DETAIL_TERMS = ["得標廠商", "總決標金額", "決標金額", "決標日期"]
 
 
 def status_text_contains(text, terms):
@@ -173,12 +174,31 @@ def is_failed_notice(record):
 
 
 def is_award_notice(record):
+    """Recognize terminal award notices without mistaking tender configuration for an award.
+
+    A live tender normally includes a field such as ``決標方式``.  That describes the
+    selection method, not an outcome.  Therefore only a decision notice type or a
+    populated award-result field may mark the tender as awarded.
+    """
     if not isinstance(record, dict):
         return False
     brief = record.get("brief", {}) or {}
     detail = record.get("detail", {}) or {}
-    detail_text = " ".join(f"{key} {value}" for key, value in detail.items())
-    return status_text_contains(brief.get("type", ""), AWARD_STATUS_TERMS) or status_text_contains(detail_text, AWARD_STATUS_TERMS)
+    if status_text_contains(brief.get("type", ""), AWARD_NOTICE_TYPE_TERMS):
+        return True
+
+    for key, value in detail.items():
+        key_text = str(key)
+        value_text = str(value or "").strip()
+        if not value_text or value_text in {"無", "未公開", "否"}:
+            continue
+        if "是否得標" in key_text:
+            if value_text in {"是", "得標", "true", "True"}:
+                return True
+            continue
+        if status_text_contains(key_text, AWARD_DETAIL_TERMS):
+            return True
+    return False
 
 
 def resolve_notice_status(records):
@@ -191,7 +211,7 @@ def resolve_notice_status(records):
 
 
 def is_terminal_notice_type(notice_type):
-    return status_text_contains(notice_type, FAILED_STATUS_TERMS + AWARD_STATUS_TERMS)
+    return status_text_contains(notice_type, FAILED_STATUS_TERMS + AWARD_NOTICE_TYPE_TERMS)
 
 
 def extract_dates(detail, publish_fallback_str):
