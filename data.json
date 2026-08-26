@@ -1,6 +1,53 @@
 {
-  "last_updated": "2026-08-26 04:55",
+  "last_updated": "2026-08-26 09:55",
   "tenders": [
+    {
+      "city": "新竹縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "新竹縣(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "115-116學年度影印機租賃",
+      "unit": "新竹縣立勝利國民中學",
+      "unit_id": "3.76.44.96.34",
+      "job_number": "115011",
+      "publish_date": "2026-08-26",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-09",
+      "deadline_confidence": "inferred",
+      "budget": "NT$ 1,452,000",
+      "award_price": "NT$ 1,452,000",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "皓然企業有限公司",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260826&fn=BDM-3-71267046.xml",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
+      "duration_years": 3,
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "city": "新北市",
       "city_source": "履約地點",
@@ -384,18 +431,16 @@
   "collection_status": {
     "today": "2026-08-26",
     "status": "complete",
-    "latest_attempt_status": "failed",
-    "latest_attempt_at": "2026-08-26 06:39",
-    "source_records": 1329,
+    "latest_attempt_status": "complete",
+    "latest_attempt_at": "2026-08-26 09:55",
+    "source_records": 2381,
     "candidate_records": 1,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-25",
-      "2026-08-24"
+      "2026-08-26",
+      "2026-08-25"
     ],
-    "failed_dates": [
-      "2026-08-26"
-    ],
+    "failed_dates": [],
     "backfill_remaining_days": 0,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
@@ -821,13 +866,68 @@
     },
     "2026-08-25": {
       "status": "complete",
-      "source_records": 1329,
+      "source_records": 1375,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-08-25 18:12"
+      "checked_at": "2026-08-26 09:54"
+    },
+    "2026-08-26": {
+      "status": "complete",
+      "source_records": 2381,
+      "candidate_records": 1,
+      "review_records": 0,
+      "checked_at": "2026-08-26 09:54"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260826,
+      "filename": "BDM-3-71267046",
+      "brief": {
+        "type": "定期彙送",
+        "title": "115-116學年度影印機租賃",
+        "companies": {
+          "ids": [
+            "22806493"
+          ],
+          "names": [
+            "皓然企業有限公司"
+          ],
+          "id_key": {
+            "22806493": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "皓然企業有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115011",
+      "unit_id": "3.76.44.96.34",
+      "unit_name": "新竹縣立勝利國民中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.44.96.34",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.44.96.34&job_number=115011",
+      "unit_url": "/index/unit/3.76.44.96.34",
+      "url": "/index/case/3.76.44.96.34/115011/20260826/BDM-3-71267046",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "date": 20260825,
       "filename": "ttd-71309532",
@@ -4663,7 +4763,8 @@
     "3.5.48": "2026-07-31",
     "3.79.14.14": "2026-07-31",
     "3.13.50.48.1": "2026-08-26",
-    "3.82.76": "2026-08-26"
+    "3.82.76": "2026-08-26",
+    "3.76.44.96.34": "2026-08-26"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
