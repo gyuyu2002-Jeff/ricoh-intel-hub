@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-31 00:55",
+  "last_updated": "2026-08-31 05:21",
   "tenders": [
     {
       "city": "新竹縣",
@@ -355,10 +355,8 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-08-31 00:55",
-      "backfill_dates": [
-        "2026-08-29"
-      ],
+      "last_run_at": "2026-08-31 05:21",
+      "backfill_dates": [],
       "failed_dates": []
     }
   },
