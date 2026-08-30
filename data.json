@@ -340,7 +340,7 @@
     "today": "2026-08-30",
     "status": "complete",
     "latest_attempt_status": "failed",
-    "latest_attempt_at": "2026-08-29 22:41",
+    "latest_attempt_at": "2026-08-30 08:12",
     "source_records": 2259,
     "candidate_records": 0,
     "review_records": 0,
@@ -349,7 +349,7 @@
       "2026-08-27"
     ],
     "failed_dates": [
-      "2026-08-29"
+      "2026-08-30"
     ],
     "backfill_remaining_days": 0,
     "source": "政府電子採購網每日公告資料",
