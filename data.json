@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-31 05:21",
+  "last_updated": "2026-08-31 08:29",
   "tenders": [
     {
       "city": "新竹縣",
@@ -339,18 +339,16 @@
   "collection_status": {
     "today": "2026-08-31",
     "status": "complete",
-    "latest_attempt_status": "failed",
-    "latest_attempt_at": "2026-08-30 22:31",
-    "source_records": 2259,
+    "latest_attempt_status": "complete",
+    "latest_attempt_at": "2026-08-31 08:29",
+    "source_records": 1690,
     "candidate_records": 0,
     "review_records": 0,
     "successful_dates": [
-      "2026-08-28",
-      "2026-08-27"
-    ],
-    "failed_dates": [
+      "2026-08-31",
       "2026-08-30"
     ],
+    "failed_dates": [],
     "backfill_remaining_days": 0,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
@@ -773,6 +771,20 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-08-31 00:52"
+    },
+    "2026-08-31": {
+      "status": "complete",
+      "source_records": 1690,
+      "candidate_records": 0,
+      "review_records": 0,
+      "checked_at": "2026-08-31 08:28"
+    },
+    "2026-08-30": {
+      "status": "complete",
+      "source_records": 0,
+      "candidate_records": 0,
+      "review_records": 0,
+      "checked_at": "2026-08-31 08:28"
     }
   },
   "candidate_cache": [
