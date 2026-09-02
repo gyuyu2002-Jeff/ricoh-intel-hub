@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-02 12:22",
+  "last_updated": "2026-09-02 19:12",
   "tenders": [
     {
       "city": "新竹縣",
@@ -286,8 +286,8 @@
     "today": "2026-09-02",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-02 12:22",
-    "source_records": 2495,
+    "latest_attempt_at": "2026-09-02 19:12",
+    "source_records": 2591,
     "candidate_records": 0,
     "review_records": 0,
     "successful_dates": [
@@ -723,14 +723,14 @@
       "source_records": 1973,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-02 12:21"
+      "checked_at": "2026-09-02 19:11"
     },
     "2026-09-02": {
       "status": "complete",
-      "source_records": 2495,
+      "source_records": 2591,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-02 12:21"
+      "checked_at": "2026-09-02 19:11"
     }
   },
   "candidate_cache": [
