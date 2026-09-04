@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-04 05:13",
+  "last_updated": "2026-09-04 08:01",
   "tenders": [
     {
       "city": "台北市",
@@ -239,13 +239,13 @@
     "today": "2026-09-04",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-03 21:54",
-    "source_records": 2380,
-    "candidate_records": 0,
+    "latest_attempt_at": "2026-09-04 08:01",
+    "source_records": 2285,
+    "candidate_records": 1,
     "review_records": 0,
     "successful_dates": [
-      "2026-09-03",
-      "2026-09-02"
+      "2026-09-04",
+      "2026-09-03"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -673,13 +673,56 @@
     },
     "2026-09-03": {
       "status": "complete",
-      "source_records": 2380,
+      "source_records": 2382,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-03 21:53"
+      "checked_at": "2026-09-04 07:59"
+    },
+    "2026-09-04": {
+      "status": "complete",
+      "source_records": 2285,
+      "candidate_records": 1,
+      "review_records": 0,
+      "checked_at": "2026-09-04 07:59"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260904,
+      "filename": "PPW-1-70115152",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "116-117年影印機租賃（內含裝機、運費、維修、印量張數價金計算）",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "CGS115-01",
+      "unit_id": "A.47.1.3",
+      "unit_name": "海洋委員會海巡署南部分署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.47.1.3",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.47.1.3&job_number=CGS115-01",
+      "unit_url": "/index/unit/A.47.1.3",
+      "url": "/index/case/A.47.1.3/CGS115-01/20260904/PPW-1-70115152",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 4,
+        "category": "office_output_equipment",
+        "matched_terms": [
+          "影印機",
+          "租賃",
+          "維修"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中設備名稱或公告規格"
+      }
+    },
     {
       "date": 20260901,
       "filename": "BDM-1-71271477",
@@ -2143,6 +2186,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "A.47.1.1",
+      "unit_name": "海洋委員會海巡署北部分署",
+      "award_date": "2025-12-23",
+      "year": 2025,
+      "title": "數位影印機(含附加設備)租賃",
+      "job_number": "N115-002",
+      "budget": 1500576,
+      "award_price": 1156608,
+      "discount_rate": 77.1,
+      "winner": "台灣佳能 (Canon)",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251223&fn=BDM-1-71057853.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "A.7.32",
       "unit_name": "臺灣土地銀行股份有限公司",
       "award_date": "2025-12-17",
@@ -2184,6 +2242,21 @@
       "discount_rate": 95.0,
       "winner": "御晨科技有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251017&fn=BDM-1-70995345.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.47.1.9",
+      "unit_name": "海洋委員會海巡署教育訓練測考中心",
+      "award_date": "2025-08-19",
+      "year": 2025,
+      "title": "114-116年度二手數位式影印機租賃",
+      "job_number": "ETTC11410P",
+      "budget": 553755,
+      "award_price": 401795,
+      "discount_rate": 72.6,
+      "winner": "金儀 Konica Minolta",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA5MjgyOTg=",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -2863,6 +2936,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "A.47.1.3",
+      "unit_name": "海洋委員會海巡署南部分署",
+      "award_date": "2022-12-09",
+      "year": 2022,
+      "title": "112-113年二手數位式影印機租賃",
+      "job_number": "CGS112-007G1",
+      "budget": 924468,
+      "award_price": 830518,
+      "discount_rate": 89.8,
+      "winner": "震旦 SHARP",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221209&fn=BDM-1-70166049.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "A.7.8",
       "unit_name": "財政部關務署",
       "award_date": "2022-09-06",
@@ -3084,6 +3172,21 @@
       "discount_rate": 92.1,
       "winner": "億雙企業有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20211223&fn=BDM-1-53597620.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.47.1.1",
+      "unit_name": "海洋委員會海巡署北部分署",
+      "award_date": "2021-12-16",
+      "year": 2021,
+      "title": "數位影印機(含附加設備)租賃",
+      "job_number": "N111-006",
+      "budget": 1350720,
+      "award_price": 1206643,
+      "discount_rate": 89.3,
+      "winner": "金儀 Konica Minolta",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20211216&fn=BDM-1-53587337.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -3534,6 +3637,21 @@
       "discount_rate": 100.0,
       "winner": "頂能企業股份有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20191122&fn=BDM-1-52931449.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.47.1.3",
+      "unit_name": "海洋委員會海巡署南部分署",
+      "award_date": "2019-11-04",
+      "year": 2019,
+      "title": "109-110年數位式影印機租賃(開口契約)",
+      "job_number": "CGS109-007G1",
+      "budget": 1285920,
+      "award_price": 965568,
+      "discount_rate": 75.1,
+      "winner": "震旦 SHARP",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20191104&fn=BDM-1-52911713.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -4556,7 +4674,17 @@
     "3.79.14.14": "2026-07-31",
     "3.13.50.48.1": "2026-09-04",
     "3.82.76": "2026-09-04",
-    "3.76.44.96.34": "2026-09-04"
+    "3.76.44.96.34": "2026-09-04",
+    "A.47.1.3": "2026-09-04",
+    "A.47.1.4": "2026-09-04",
+    "A.47.1.6": "2026-09-04",
+    "A.47.1.7": "2026-09-04",
+    "A.47.1.2": "2026-09-04",
+    "A.47.1.8": "2026-09-04",
+    "A.47.1": "2026-09-04",
+    "A.47.1.1": "2026-09-04",
+    "A.47.1.5": "2026-09-04",
+    "A.47.1.9": "2026-09-04"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
