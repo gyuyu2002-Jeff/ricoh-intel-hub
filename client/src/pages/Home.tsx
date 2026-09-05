@@ -621,7 +621,7 @@ function SubscribeModal({
   onClose: () => void;
   availableCities?: string[];
 }) {
-  const [savedEmail] = useState(() => {
+  const [savedEmail, setSavedEmail] = useState(() => {
     try {
       const saved = localStorage.getItem("ricoh_subscriber_info");
       if (saved) return JSON.parse(saved).email || "";
@@ -656,6 +656,27 @@ function SubscribeModal({
       setOpenedAt(Date.now());
       setIsHumanVerified(false);
       setHoneypot("");
+      setStatus("idle");
+      setMessage("");
+
+      // 每次開啟彈窗時，重新載入本機已儲存的 Email 與關注縣市設定，方便同仁隨時勾選或變更
+      try {
+        const saved = localStorage.getItem("ricoh_subscriber_info");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.email) {
+            setSavedEmail(parsed.email);
+            setEmail(parsed.email);
+          }
+          if (Array.isArray(parsed.cities) && parsed.cities.length > 0) {
+            if (parsed.cities.includes("全台所有縣市") || parsed.cities.includes("全部")) {
+              setSelectedCities(ALL_TAIWAN_CITIES);
+            } else {
+              setSelectedCities(parsed.cities);
+            }
+          }
+        }
+      } catch {}
     }
   }, [isOpen]);
 
@@ -827,7 +848,24 @@ function SubscribeModal({
             <div style={{ background: "#fcfbf6", border: "1px solid #f1e9d2", borderRadius: "6px", padding: "10px 14px", marginTop: "14px", fontSize: "12px", color: "#7d6b38", textAlign: "left", lineHeight: "1.5" }}>
               💡 <strong>收信小撇步：</strong>若未在收件匣看到測試信，請檢查「垃圾郵件」或「促銷內容」匣，並將 <code>huxen.ricoh@gmail.com</code> 新增至通訊錄。
             </div>
-            <button className="action-primary modal-action-btn" onClick={onClose}>完成並返回首頁</button>
+            <div style={{ display: "flex", gap: "10px", marginTop: "16px" }}>
+              <button
+                type="button"
+                className="outline-button"
+                onClick={() => setStatus("idle")}
+                style={{ flex: 1, padding: "10px 14px", borderRadius: "8px", fontWeight: 600 }}
+              >
+                ✏️ 重新調整關注地區
+              </button>
+              <button
+                type="button"
+                className="action-primary modal-action-btn"
+                onClick={onClose}
+                style={{ flex: 1, marginTop: 0 }}
+              >
+                完成並返回首頁
+              </button>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="subscribe-form">
