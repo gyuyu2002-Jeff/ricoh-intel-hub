@@ -113,6 +113,13 @@ class TestSendAlerts(unittest.TestCase):
         self.assertIn("立即取消訂閱", welcome_html)
         self.assertIn("action=unsubscribe", welcome_html)
 
+        # Verify RFC 8058 List-Unsubscribe headers in SMTP message
+        from send_alerts import create_email_message
+        msg = create_email_message("hanjiunwu@eosasc.com.tw", "測試主旨", alert_html, "huxen.ricoh@gmail.com")
+        self.assertIn("List-Unsubscribe", msg)
+        self.assertIn("action=unsubscribe", msg["List-Unsubscribe"])
+        self.assertEqual(msg["List-Unsubscribe-Post"], "List-Unsubscribe=One-Click")
+
 
 if __name__ == "__main__":
     unittest.main()

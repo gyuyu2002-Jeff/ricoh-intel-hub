@@ -271,11 +271,22 @@ def build_email_html(subscriber_email, tenders, taipei_date_str):
       </div>
     </div>
 
-    <!-- Footer -->
-    <div style="background:#f4f7f4; padding:16px 28px; font-size:11px; color:#849289; text-align:center; border-top:1px solid #e1e9e2; line-height:1.7;">
-      發件信箱：huxen.ricoh@gmail.com · 此為互盛內部業務情報系統自動發送之快報<br>
-      若欲修改通知縣市，請至 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" style="color:#2f5146; text-decoration:none; font-weight:700;">互盛情報中樞首頁</a> 更新設定。<br>
-      若不想再收到此情報通報，請點擊 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?action=unsubscribe&amp;email={urllib.parse.quote(subscriber_email.strip().lower())}" style="color:#c92d3f; text-decoration:underline;">[立即取消訂閱]</a>。
+    <!-- Footer & Subscription Management -->
+    <div style="background:#f4f7f4; padding:22px 28px; text-align:center; border-top:1px solid #e1e9e2; line-height:1.7;">
+      <div style="font-size:12px; color:#53645b; margin-bottom:12px;">
+        發件來源：<code>huxen.ricoh@gmail.com</code> · 本信件發送至 <strong>{subscriber_email}</strong>
+      </div>
+      <div style="margin:14px 0 10px;">
+        <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" target="_blank" style="display:inline-block; padding:8px 18px; margin:0 5px 6px; background:#ffffff; border:1px solid #c9d8ce; color:#2f5146; border-radius:6px; text-decoration:none; font-weight:700; font-size:12px;">
+          ⚙️ 變更通知縣市
+        </a>
+        <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?action=unsubscribe&amp;email={urllib.parse.quote(subscriber_email.strip().lower())}" target="_blank" style="display:inline-block; padding:8px 18px; margin:0 5px 6px; background:#fff1f2; border:1px solid #fecdd3; color:#be123c; border-radius:6px; text-decoration:none; font-weight:700; font-size:12px;">
+          🚫 立即取消訂閱此信箱
+        </a>
+      </div>
+      <div style="font-size:11px; color:#849289; margin-top:8px;">
+        點擊「立即取消訂閱」後將立刻自通報名單中移除，系統往後將不再發送任何新案通知信。
+      </div>
     </div>
   </div>
 </body>
@@ -385,11 +396,22 @@ def build_welcome_email_html(subscriber_email, cities=None, sample_tenders=None)
       </div>
     </div>
 
-    <!-- Footer -->
-    <div style="background:#f4f7f4; padding:16px 28px; font-size:11px; color:#849289; text-align:center; border-top:1px solid #e1e9e2; line-height:1.7;">
-      發件信箱：huxen.ricoh@gmail.com · 此為互盛內部業務情報系統自動發送之設定確認信<br>
-      若欲修改通知縣市，請前往 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" style="color:#2f5146; text-decoration:none; font-weight:700;">互盛情報中樞</a> 更新設定。<br>
-      若不想再收到此情報信，請點擊 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?action=unsubscribe&amp;email={urllib.parse.quote(subscriber_email.strip().lower())}" style="color:#c92d3f; text-decoration:underline;">[立即取消訂閱]</a>。
+    <!-- Footer & Subscription Management -->
+    <div style="background:#f4f7f4; padding:22px 28px; text-align:center; border-top:1px solid #e1e9e2; line-height:1.7;">
+      <div style="font-size:12px; color:#53645b; margin-bottom:12px;">
+        發件來源：<code>huxen.ricoh@gmail.com</code> · 此為互盛內部業務情報系統自動發送之設定確認信
+      </div>
+      <div style="margin:14px 0 10px;">
+        <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" target="_blank" style="display:inline-block; padding:8px 18px; margin:0 5px 6px; background:#ffffff; border:1px solid #c9d8ce; color:#2f5146; border-radius:6px; text-decoration:none; font-weight:700; font-size:12px;">
+          ⚙️ 變更通知縣市
+        </a>
+        <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?action=unsubscribe&amp;email={urllib.parse.quote(subscriber_email.strip().lower())}" target="_blank" style="display:inline-block; padding:8px 18px; margin:0 5px 6px; background:#fff1f2; border:1px solid #fecdd3; color:#be123c; border-radius:6px; text-decoration:none; font-weight:700; font-size:12px;">
+          🚫 立即取消訂閱此信箱
+        </a>
+      </div>
+      <div style="font-size:11px; color:#849289; margin-top:8px;">
+        若此設定非您本人操作或不想再收到情報信，點擊「立即取消訂閱」即可自通報名單中移除。
+      </div>
     </div>
   </div>
 </body>
@@ -426,15 +448,29 @@ def send_welcome_email(email, cities=None, mail_user=None, mail_pass=None, sampl
         return False
 
 
-def send_email_smtp(to_email, subject, html_content, mail_user, mail_pass):
+def create_email_message(to_email, subject, html_content, mail_user):
     """
-    Sends an email using Gmail SMTP.
+    Constructs a MIMEMultipart email message with HTML content and RFC 8058 / RFC 2369 List-Unsubscribe headers.
     """
     msg = MIMEMultipart("alternative")
     msg["From"] = f"互盛情報中樞 <{mail_user}>"
     msg["To"] = to_email
     msg["Subject"] = subject
+
+    # RFC 8058 / RFC 2369: Allows Gmail/Outlook/Apple Mail to render a native "Unsubscribe" button at the top
+    unsub_url = f"https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?action=unsubscribe&email={urllib.parse.quote(to_email.strip().lower())}"
+    msg["List-Unsubscribe"] = f"<{unsub_url}>"
+    msg["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
+
     msg.attach(MIMEText(html_content, "html", "utf-8"))
+    return msg
+
+
+def send_email_smtp(to_email, subject, html_content, mail_user, mail_pass):
+    """
+    Sends an email using Gmail SMTP.
+    """
+    msg = create_email_message(to_email, subject, html_content, mail_user)
 
     server = smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=20)
     server.ehlo()

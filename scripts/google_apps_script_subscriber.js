@@ -217,10 +217,13 @@ function sendWelcomeTestEmail(toEmail, citiesStr) {
     + '<a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" target="_blank" style="display:inline-block; background:#202825; color:#ffffff; font-size:13px; font-weight:700; padding:10px 24px; border-radius:6px; text-decoration:none;">前往 互盛情報中樞 完整看板 ➜</a>'
     + '</div>'
     + '</div>'
-    + '<div style="background:#f4f7f4; padding:16px 28px; font-size:11px; color:#849289; text-align:center; border-top:1px solid #e1e9e2; line-height:1.7;">'
-    + '發件信箱：huxen.ricoh@gmail.com · 此為互盛內部業務情報系統自動發送之設定確認信<br>'
-    + '若欲修改通知縣市，請前往 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" style="color:#2f5146; text-decoration:none; font-weight:700;">互盛情報中樞</a> 更新設定。<br>'
-    + '若不想再收到此情報信，請點擊 <a href="' + unsubLink + '" style="color:#c92d3f; text-decoration:underline;">[立即取消訂閱]</a>。'
+    + '<div style="background:#f4f7f4; padding:22px 28px; text-align:center; border-top:1px solid #e1e9e2; line-height:1.7;">'
+    + '<div style="font-size:12px; color:#53645b; margin-bottom:12px;">發件來源：<code>huxen.ricoh@gmail.com</code> · 此為互盛內部業務情報系統自動發送之設定確認信</div>'
+    + '<div style="margin:14px 0 10px;">'
+    + '<a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" target="_blank" style="display:inline-block; padding:8px 18px; margin:0 5px 6px; background:#ffffff; border:1px solid #c9d8ce; color:#2f5146; border-radius:6px; text-decoration:none; font-weight:700; font-size:12px;">⚙️ 變更通知縣市</a>'
+    + '<a href="' + unsubLink + '" target="_blank" style="display:inline-block; padding:8px 18px; margin:0 5px 6px; background:#fff1f2; border:1px solid #fecdd3; color:#be123c; border-radius:6px; text-decoration:none; font-weight:700; font-size:12px;">🚫 立即取消訂閱此信箱</a>'
+    + '</div>'
+    + '<div style="font-size:11px; color:#849289; margin-top:8px;">若此設定非您本人操作或不想再收到情報信，點擊「立即取消訂閱」即可自通報名單中移除。</div>'
     + '</div></div></body></html>';
 
   MailApp.sendEmail({
