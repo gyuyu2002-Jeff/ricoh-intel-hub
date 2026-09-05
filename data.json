@@ -1,56 +1,6 @@
 {
-  "last_updated": "2026-09-05 21:04",
+  "last_updated": "2026-09-05 22:39",
   "tenders": [
-    {
-      "city": "宜蘭縣",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "宜蘭縣(非原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "A5影印紙80磅兩年開口契約",
-      "unit": "國立陽明交通大學附設醫院",
-      "unit_id": "A.9.6M.1",
-      "job_number": "115104Z57",
-      "publish_date": "2026-09-04",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-09-15",
-      "deadline_confidence": "verified",
-      "budget": "NT$ 1,100,000",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzMTg3MzM",
-      "history_stats": [],
-      "history_records": [],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "supplies",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "影印紙"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
     {
       "city": "高雄市",
       "city_source": "機關地址／開標地點",
@@ -213,56 +163,6 @@
       }
     },
     {
-      "city": "桃園市",
-      "city_source": "機關地址／開標地點",
-      "city_confidence": "high",
-      "city_raw_text": "325桃園市龍潭區文化路1000號",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "工業用標籤機",
-      "unit": "國家原子能科技研究院",
-      "unit_id": "02717206",
-      "job_number": "115a08010",
-      "publish_date": "2026-09-04",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-09-08",
-      "deadline_confidence": "verified",
-      "budget": "無公開數據",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260904&fn=PPW-1-70115049.xml",
-      "history_stats": [],
-      "history_records": [],
-      "stage": "公開徵求價單",
-      "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "printer",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "printer_or_plotter",
-        "stream": "peripherals",
-        "sub_type": "printer",
-        "matched_terms": [
-          "標籤機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中印表機或繪圖機標的"
-      }
-    },
-    {
       "city": "台北市",
       "city_source": "履約地點",
       "city_confidence": "high",
@@ -306,56 +206,6 @@
         "matched_terms": [
           "碳粉",
           "碳粉匣"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "city": "高雄市",
-      "city_source": "機關地址／開標地點",
-      "city_confidence": "high",
-      "city_raw_text": "811高雄市楠梓區左楠路2號",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "報表紙及非碳薪金表",
-      "unit": "台灣中油股份有限公司煉製事業部",
-      "unit_id": "3.13.50.48",
-      "job_number": "C0815D044",
-      "publish_date": "2026-09-01",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-09-11",
-      "deadline_confidence": "verified",
-      "budget": "無公開數據",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260901&fn=PPW-1-70114619.xml",
-      "history_stats": [],
-      "history_records": [],
-      "stage": "公開徵求價單",
-      "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "supplies",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "報表紙"
         ],
         "matched_fields": [
           "title"
@@ -629,171 +479,6 @@
           "title"
         ],
         "reason": "命中文件掃描器設備標的"
-      }
-    },
-    {
-      "city": "桃園市",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "桃園市(非原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "工業用管路標示帶及色帶",
-      "unit": "台灣中油股份有限公司煉製事業部桃園煉油廠",
-      "unit_id": "3.13.50.48.1",
-      "job_number": "I8C15Y013",
-      "publish_date": "2026-08-28",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-09-07",
-      "deadline_confidence": "verified",
-      "budget": "NT$ 1,018,500",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzMTI0Mjk",
-      "history_stats": [],
-      "history_records": [],
-      "stage": "公開徵求價單",
-      "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "supplies",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "色帶"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "city": "台中市",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "臺中市(非原住民地區)",
-      "tag": "重點攻堅",
-      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
-      "title": "115年度「電子舉發交通違規藍芽印表機專用列印紙捲」採購案",
-      "unit": "臺中市政府警察局交通警察大隊",
-      "unit_id": "3.87.13.3",
-      "job_number": "115LES20",
-      "publish_date": "2026-08-28",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-09-08",
-      "deadline_confidence": "verified",
-      "budget": "NT$ 3,520,000",
-      "award_price": "",
-      "avg_discount": "93.7%",
-      "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
-      "main_competitor": "大同醫護股份有限公司 (Tatung Medical & Healthcare Technologies Co., Ltd.)",
-      "suggested_price": "NT$ 3,296,000",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 2,
-        "discount_rate": 93.7
-      },
-      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzMTIyMDk",
-      "history_stats": [
-        {
-          "year": 2025,
-          "val": 98,
-          "type": "real",
-          "winner": "凌群電腦股份有限公司 (SYSCOM COMPUTER ENGINEERING COMPANY)"
-        },
-        {
-          "year": 2025,
-          "val": 89,
-          "type": "real",
-          "winner": "大同醫護股份有限公司 (Tatung Medical & Healthcare Technologies Co., Ltd.)"
-        }
-      ],
-      "history_records": [
-        {
-          "award_date": "2025-12-30",
-          "year": 2025,
-          "title": "115年度舉發交通違規案件用墨水匣採購案(含印表機設備使用)",
-          "job_number": "115LES01",
-          "budget": 2758185,
-          "award_price": 2454630,
-          "discount_rate": 89.0,
-          "winner": "大同醫護股份有限公司 (Tatung Medical & Healthcare Technologies Co., Ltd.)",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251230&fn=BDM-1-71067243.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.87.13.3",
-          "source_unit": "臺中市政府警察局交通警察大隊",
-          "relation_scope": "same_unit",
-          "is_stale": false
-        },
-        {
-          "award_date": "2025-08-29",
-          "year": 2025,
-          "title": "114年電子舉發製單攜帶式藍芽印表機採購案",
-          "job_number": "1140722-01",
-          "budget": 1128000,
-          "award_price": 1108800,
-          "discount_rate": 98.3,
-          "winner": "凌群電腦股份有限公司 (SYSCOM COMPUTER ENGINEERING COMPANY)",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250829&fn=BDM-1-70961908.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.87.13.3",
-          "source_unit": "臺中市政府警察局交通警察大隊",
-          "relation_scope": "same_unit",
-          "is_stale": false
-        },
-        {
-          "award_date": "2024-12-02",
-          "year": 2024,
-          "title": "113年度「電子舉發交通違規藍芽印表機專用列印紙捲」採購案",
-          "job_number": "1131119-01",
-          "budget": 1980000,
-          "award_price": 882000,
-          "discount_rate": 44.5,
-          "winner": "科進有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241202&fn=BDM-1-70730193.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.87.13.3",
-          "source_unit": "臺中市政府警察局交通警察大隊",
-          "relation_scope": "same_unit",
-          "is_stale": false
-        }
-      ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "supplies",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "列印紙"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
       }
     },
     {
@@ -1149,13 +834,25 @@
     "today": "2026-09-05",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-05 21:04",
+    "latest_attempt_at": "2026-09-05 22:39",
     "source_records": 0,
     "candidate_records": 0,
     "review_records": 0,
     "successful_dates": [
       "2026-09-05",
-      "2026-09-04"
+      "2026-09-04",
+      "2026-09-03",
+      "2026-09-02",
+      "2026-09-01",
+      "2026-08-31",
+      "2026-08-30",
+      "2026-08-29",
+      "2026-08-28",
+      "2026-08-27",
+      "2026-08-26",
+      "2026-08-25",
+      "2026-08-24",
+      "2026-08-23"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -1502,187 +1199,101 @@
       "source_records": 1722,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-08-23": {
       "status": "complete",
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-08-25": {
       "status": "complete",
       "source_records": 1375,
       "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-08-26": {
       "status": "complete",
       "source_records": 2600,
-      "candidate_records": 4,
+      "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-08-27": {
       "status": "complete",
       "source_records": 2587,
-      "candidate_records": 2,
+      "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-08-28": {
       "status": "complete",
       "source_records": 2357,
-      "candidate_records": 5,
+      "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-08-29": {
       "status": "complete",
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-08-31": {
       "status": "complete",
       "source_records": 1838,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-08-30": {
       "status": "complete",
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-09-01": {
       "status": "complete",
       "source_records": 1973,
-      "candidate_records": 4,
+      "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-09-02": {
       "status": "complete",
       "source_records": 2595,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-09-03": {
       "status": "complete",
       "source_records": 2382,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-05 20:45"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-09-04": {
       "status": "complete",
       "source_records": 2403,
-      "candidate_records": 4,
+      "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-05 21:02"
+      "checked_at": "2026-09-05 22:37"
     },
     "2026-09-05": {
       "status": "complete",
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-05 21:02"
+      "checked_at": "2026-09-05 22:37"
     }
   },
   "candidate_cache": [
-    {
-      "date": 20260904,
-      "filename": "aaa-71276813",
-      "brief": {
-        "type": "決標公告",
-        "title": "114年度電腦報表紙採購案",
-        "companies": {
-          "ids": [
-            "83744920"
-          ],
-          "names": [
-            "建良實業有限公司"
-          ],
-          "id_key": {
-            "83744920": [
-              "投標廠商:投標廠商1:廠商代碼"
-            ]
-          },
-          "name_key": {
-            "建良實業有限公司": [
-              "投標廠商:投標廠商1:廠商名稱",
-              "決標品項:第1品項:得標廠商1:得標廠商"
-            ]
-          }
-        }
-      },
-      "job_number": "114BB0703-1",
-      "unit_id": "A.7.8.4",
-      "unit_name": "財政部關務署高雄關",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.8.4",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.8.4&job_number=114BB0703-1",
-      "unit_url": "/index/unit/A.7.8.4",
-      "url": "/index/case/A.7.8.4/114BB0703-1/20260904/aaa-71276813",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "報表紙"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "date": 20260904,
-      "filename": "TIQ-1-71107356",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "A5影印紙80磅兩年開口契約",
-        "category": "財物類32-紙漿,紙及紙產品;印刷品及相關的商品",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115104Z57",
-      "unit_id": "A.9.6M.1",
-      "unit_name": "國立陽明交通大學附設醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.9.6M.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.9.6M.1&job_number=115104Z57",
-      "unit_url": "/index/unit/A.9.6M.1",
-      "url": "/index/case/A.9.6M.1/115104Z57/20260904/TIQ-1-71107356",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "影印紙"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
     {
       "date": 20260904,
       "filename": "PPW-1-70115152",
@@ -1717,42 +1328,6 @@
           "title"
         ],
         "reason": "命中影印機/複合機主機設備或公告規格"
-      }
-    },
-    {
-      "date": 20260904,
-      "filename": "PPW-1-70115049",
-      "brief": {
-        "type": "公開徵求廠商提供參考資料公告",
-        "title": "工業用標籤機",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115a08010",
-      "unit_id": "02717206",
-      "unit_name": "國家原子能科技研究院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=02717206",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=02717206&job_number=115a08010",
-      "unit_url": "/index/unit/02717206",
-      "url": "/index/case/02717206/115a08010/20260904/PPW-1-70115049",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "printer_or_plotter",
-        "stream": "peripherals",
-        "sub_type": "printer",
-        "matched_terms": [
-          "標籤機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中印表機或繪圖機標的"
       }
     },
     {
@@ -1826,42 +1401,6 @@
         "matched_terms": [
           "碳粉",
           "碳粉匣"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "date": 20260901,
-      "filename": "PPW-1-70114619",
-      "brief": {
-        "type": "公開徵求廠商提供參考資料公告",
-        "title": "報表紙及非碳薪金表",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "C0815D044",
-      "unit_id": "3.13.50.48",
-      "unit_name": "台灣中油股份有限公司煉製事業部",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.50.48",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.50.48&job_number=C0815D044",
-      "unit_url": "/index/unit/3.13.50.48",
-      "url": "/index/case/3.13.50.48/C0815D044/20260901/PPW-1-70114619",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "報表紙"
         ],
         "matched_fields": [
           "title"
@@ -1993,193 +1532,6 @@
     },
     {
       "date": 20260828,
-      "filename": "TIQ-3-71102063",
-      "brief": {
-        "type": "經公開評選或公開徵求之限制性招標公告",
-        "title": "工業用管路標示帶及色帶",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "I8C15Y013",
-      "unit_id": "3.13.50.48.1",
-      "unit_name": "台灣中油股份有限公司煉製事業部桃園煉油廠",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.50.48.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.50.48.1&job_number=I8C15Y013",
-      "unit_url": "/index/unit/3.13.50.48.1",
-      "url": "/index/case/3.13.50.48.1/I8C15Y013/20260828/TIQ-3-71102063",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "色帶"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "date": 20260828,
-      "filename": "TIQ-1-71101899",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "藥學部全自動微量散劑卡匣式色帶等計3項(開口契約)",
-        "category": "財物類389-其他製造商品",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "SP15385",
-      "unit_id": "3.32.82",
-      "unit_name": "高雄榮民總醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.82",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.82&job_number=SP15385",
-      "unit_url": "/index/unit/3.32.82",
-      "url": "/index/case/3.32.82/SP15385/20260828/TIQ-1-71101899",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "色帶"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "date": 20260828,
-      "filename": "TIQ-1-71101890",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "115年度「電子舉發交通違規藍芽印表機專用列印紙捲」採購案",
-        "category": "財物類32-紙漿,紙及紙產品;印刷品及相關的商品",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115LES20",
-      "unit_id": "3.87.13.3",
-      "unit_name": "臺中市政府警察局交通警察大隊",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.87.13.3",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.87.13.3&job_number=115LES20",
-      "unit_url": "/index/unit/3.87.13.3",
-      "url": "/index/case/3.87.13.3/115LES20/20260828/TIQ-1-71101890",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "列印紙"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "date": 20260828,
-      "filename": "BDM-2-71267433",
-      "brief": {
-        "type": "更正決標公告",
-        "title": "條碼列印機手圈貼紙及感應標籤",
-        "companies": {
-          "ids": [
-            "61271367",
-            "16420422",
-            "23165539",
-            "80371334"
-          ],
-          "names": [
-            "堡成企業社",
-            "群洽有限公司",
-            "赫立有限公司",
-            "吉碼企業有限公司"
-          ],
-          "id_key": {
-            "16420422": [
-              "投標廠商:投標廠商2:廠商代碼"
-            ],
-            "23165539": [
-              "投標廠商:投標廠商3:廠商代碼"
-            ],
-            "61271367": [
-              "投標廠商:投標廠商1:廠商代碼"
-            ],
-            "80371334": [
-              "投標廠商:投標廠商4:廠商代碼"
-            ]
-          },
-          "name_key": {
-            "堡成企業社": [
-              "投標廠商:投標廠商1:廠商名稱",
-              "決標品項:第1品項:得標廠商1:得標廠商"
-            ],
-            "群洽有限公司": [
-              "投標廠商:投標廠商2:廠商名稱",
-              "決標品項:第1品項:未得標廠商1:未得標廠商"
-            ],
-            "赫立有限公司": [
-              "投標廠商:投標廠商3:廠商名稱",
-              "決標品項:第1品項:未得標廠商2:未得標廠商"
-            ],
-            "吉碼企業有限公司": [
-              "投標廠商:投標廠商4:廠商名稱",
-              "決標品項:第1品項:未得標廠商3:未得標廠商"
-            ]
-          }
-        }
-      },
-      "job_number": "F115036",
-      "unit_id": "3.79.14.14",
-      "unit_name": "臺北市立聯合醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.14.14",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.14.14&job_number=F115036",
-      "unit_url": "/index/unit/3.79.14.14",
-      "url": "/index/case/3.79.14.14/F115036/20260828/BDM-2-71267433",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "printer_or_plotter",
-        "stream": "peripherals",
-        "sub_type": "printer",
-        "matched_terms": [
-          "列印機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中印表機或繪圖機標的"
-      }
-    },
-    {
-      "date": 20260828,
       "filename": "BDM-1-71269777",
       "brief": {
         "type": "決標公告",
@@ -2262,42 +1614,6 @@
           "title"
         ],
         "reason": "命中印表機或繪圖機標的"
-      }
-    },
-    {
-      "date": 20260827,
-      "filename": "NAI-1-71268736",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "藥學部全自動微量散劑卡匣式色帶等計3項(開口契約)",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "SP15385",
-      "unit_id": "3.32.82",
-      "unit_name": "高雄榮民總醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.82",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.82&job_number=SP15385",
-      "unit_url": "/index/unit/3.32.82",
-      "url": "/index/case/3.32.82/SP15385/20260827/NAI-1-71268736",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "色帶"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
       }
     },
     {

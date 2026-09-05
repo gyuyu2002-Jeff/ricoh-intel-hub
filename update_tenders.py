@@ -404,11 +404,21 @@ CONTRACT_CHANGE_TERMS = ["契約變更", "變更案", "後續擴充", "追加採
 
 # 02 周邊耗材專區定義（零重疊互斥）
 EXCLUDED_SUNDRY_TERMS = ["碎紙機", "打孔機", "裝訂機", "膠裝機", "護貝機", "護貝"]
+EXCLUDED_PAPER_RIBBON_LABEL_TERMS = [
+    # 色帶
+    "色帶", "印表機色帶", "碳帶", "打卡色帶", "收銀機色帶",
+    # 紙張
+    "紙張", "影印紙", "列印紙", "報表紙", "印表紙", "電腦報表紙", "道林紙",
+    "過磅紙", "過磅專用列印紙", "傳真紙", "熱感紙", "熱感應紙", "紙捲", "發票紙", "印刷紙",
+    # 標籤
+    "標籤", "標籤機", "標籤帶", "標籤紙", "標籤貼紙", "標示帶", "標價機",
+    "條碼機", "條碼印表機", "條碼列印機", "條碼標籤", "標籤印表機", "標籤列印機"
+]
 PERIPHERAL_SUPPLY_TERMS = [
-    "碳粉", "碳粉匣", "碳粉夾", "墨水", "墨水匣", "感光鼓", "轉寫帶", "色帶", "報表紙", "印表紙", "影印紙", "列印紙", "列印耗材", "印表機耗材", "事務機耗材", "影印機耗材"
+    "碳粉", "碳粉匣", "碳粉夾", "墨水", "墨水匣", "感光鼓", "轉寫帶", "列印耗材", "印表機耗材", "事務機耗材", "影印機耗材"
 ]
 PERIPHERAL_PRINTER_TERMS = [
-    "印表機", "列印機", "雷射印表機", "點陣式印表機", "點矩陣印表機", "繪圖機", "大圖輸出機", "標籤機", "條碼機", "printer", "plotter"
+    "印表機", "列印機", "雷射印表機", "點陣式印表機", "點矩陣印表機", "繪圖機", "大圖輸出機", "printer", "plotter"
 ]
 PERIPHERAL_SCANNER_TERMS = [
     "掃描器", "文件掃描", "高速掃描", "饋紙式掃描", "平台掃描", "scanner"
@@ -489,6 +499,16 @@ def get_title_scope_exclusion(title):
             "category": "specialized_printing", "matched_terms": specialized_terms,
             "reason": "3D 或特殊列印設備不在辦公輸出設備範圍"
         }
+    copier_terms = _matched_terms(title, DIRECT_EQUIPMENT_TERMS)
+    is_copier_machine = copier_terms and any(t in title for t in ["租賃", "租用", "計張", "保養", "全包"])
+    if not is_copier_machine:
+        paper_ribbon_label_terms = _matched_terms(title, EXCLUDED_PAPER_RIBBON_LABEL_TERMS)
+        if paper_ribbon_label_terms:
+            return {
+                "status": "excluded", "confidence": "high", "score": -4,
+                "category": "excluded_paper_ribbon_label", "matched_terms": paper_ribbon_label_terms,
+                "reason": "色帶、紙張或標籤相關品項不在追蹤範圍"
+            }
     return None
 
 
@@ -562,7 +582,7 @@ def classify_tender_relevance(item, detail=None):
     supply_matched = _matched_terms(title, PERIPHERAL_SUPPLY_TERMS) or _matched_terms(detail_text, PERIPHERAL_SUPPLY_TERMS)
     if not supply_matched and ("耗材" in title or "耗材" in detail_text):
         combined = f"{title} {detail_text}"
-        if any(k in combined for k in ["印表", "列印", "影印", "事務", "電腦", "資訊", "辦公", "碳粉", "墨水", "色帶"]):
+        if any(k in combined for k in ["印表", "列印", "影印", "事務", "電腦", "資訊", "辦公", "碳粉", "墨水"]):
             supply_matched = ["耗材"]
     printer_matched = _matched_terms(title, PERIPHERAL_PRINTER_TERMS)
     scanner_matched = _matched_terms(title, PERIPHERAL_SCANNER_TERMS) or _matched_terms(detail_text, PERIPHERAL_SCANNER_TERMS)

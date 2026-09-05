@@ -260,6 +260,46 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         self.assertEqual(result["status"], "excluded")
         self.assertEqual(result["category"], "office_sundry")
 
+    def test_ribbon_is_excluded(self):
+        result = classify_tender_relevance(announcement("印表機色帶採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_paper_is_excluded(self):
+        result = classify_tender_relevance(announcement("A5影印紙80磅兩年開口契約"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_report_paper_is_excluded(self):
+        result = classify_tender_relevance(announcement("報表紙及非碳薪金表採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_printer_paper_roll_is_excluded(self):
+        result = classify_tender_relevance(announcement("藍芽印表機專用列印紙捲採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_label_machine_is_excluded(self):
+        result = classify_tender_relevance(announcement("工業用標籤機"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_label_tape_is_excluded(self):
+        result = classify_tender_relevance(announcement("工業用管路標示帶及色帶"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_copier_rental_with_paper_remains_copier(self):
+        result = classify_tender_relevance(announcement("116-117年影印機租賃（內含裝機、運費、維修、紙張）"))
+        self.assertEqual(result["status"], "included")
+        self.assertEqual(result["stream"], "copier")
+
+    def test_pure_paper_with_copier_word_is_excluded(self):
+        result = classify_tender_relevance(announcement("影印機用影印紙採購"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
     def test_copier_and_printer_mixed_purchase_remains_in_scope(self):
         result = classify_tender_relevance(announcement("數位複合機及印表機採購案"))
         self.assertEqual(result["status"], "included")
