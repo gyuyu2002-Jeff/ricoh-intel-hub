@@ -362,6 +362,14 @@ class UpdateModeTests(unittest.TestCase):
             [date(2026, 7, 25)]
         )
 
+    def test_backfill_days_returns_explicit_range(self):
+        today = date(2026, 7, 28)
+        collection_days = {}
+        self.assertEqual(
+            build_required_dates("live", today, collection_days, backfill_days=3),
+            [date(2026, 7, 28), date(2026, 7, 27), date(2026, 7, 26)]
+        )
+
 
 class HistoryTitleQueryTests(unittest.TestCase):
     def test_roc_year_prefix_is_removed_for_history_search(self):

@@ -405,13 +405,13 @@ CONTRACT_CHANGE_TERMS = ["契約變更", "變更案", "後續擴充", "追加採
 # 02 周邊耗材專區定義（零重疊互斥）
 EXCLUDED_SUNDRY_TERMS = ["碎紙機", "打孔機", "裝訂機", "膠裝機", "護貝機", "護貝"]
 PERIPHERAL_SUPPLY_TERMS = [
-    "耗材", "碳粉", "碳粉匣", "碳粉夾", "墨水", "墨水匣", "感光鼓", "轉寫帶", "色帶", "報表紙", "印表紙"
+    "碳粉", "碳粉匣", "碳粉夾", "墨水", "墨水匣", "感光鼓", "轉寫帶", "色帶", "報表紙", "印表紙", "影印紙", "列印紙", "列印耗材", "印表機耗材", "事務機耗材", "影印機耗材"
 ]
 PERIPHERAL_PRINTER_TERMS = [
     "印表機", "列印機", "雷射印表機", "點陣式印表機", "點矩陣印表機", "繪圖機", "大圖輸出機", "標籤機", "條碼機", "printer", "plotter"
 ]
 PERIPHERAL_SCANNER_TERMS = [
-    "掃描器", "掃描儀", "文件掃描", "高速掃描", "scanner"
+    "掃描器", "文件掃描", "高速掃描", "饋紙式掃描", "平台掃描", "scanner"
 ]
 NON_TARGET_TERM_GROUPS = {
     "information_equipment": ["資訊設備", "資訊設備類", "資訊器材", "資訊產品", "資通訊設備", "資通訊產品", "資訊通信設備", "電腦設備", "電腦及周邊", "電腦周邊", "資訊週邊", "電腦週邊", "資訊系統", "資訊網路設備"],
@@ -419,7 +419,7 @@ NON_TARGET_TERM_GROUPS = {
     "computer_or_software": ["電腦軟體", "個人電腦", "桌上型電腦", "筆記型電腦", "筆電", "平板電腦", "工作站", "瘦客戶機", "資訊科技教室", "電腦教室", "電腦及", "電腦與"],
     "surveillance_access": ["監視器", "監控設備", "監控系統", "監視系統", "CCTV", "攝影機", "網路攝影機", "IP Camera", "IP CAM", "數位錄影機", "影像錄影機", "DVR", "NVR", "門禁", "門禁系統", "門禁設備", "刷卡機", "讀卡機", "生物辨識", "人臉辨識", "人臉識別", "電子圍籬", "防盜系統", "入侵警報", "保全系統", "對講機", "影像對講", "車牌辨識", "停車場管理"],
     "it_endpoint": ["液晶螢幕", "電腦螢幕", "顯示器", "顯示設備", "觸控螢幕", "觸控顯示器", "互動式顯示器", "電子白板", "投影機", "投影設備", "視訊會議設備", "視訊會議系統", "LED 顯示", "電視牆"],
-    "medical_equipment": ["智慧藥櫃", "X光機", "Ｘ光機", "DR數位影像", "醫療設備", "診斷設備"],
+    "medical_equipment": ["智慧藥櫃", "X光機", "Ｘ光機", "DR數位影像", "醫療設備", "診斷設備", "超音波", "斷層", "骨質密度", "核磁共振", "MRI", "CT", "試劑", "醫療耗材", "救護耗材", "手術", "齒科", "牙科", "眼科", "純水機", "火化爐"],
     "construction_or_furniture": [
         "規劃設計監造", "設計監造", "監造技術服務", "輕鋼架", "收納櫃", "裝修工程",
         "室內裝修", "室內裝潢", "辦公空間改善", "地板", "地坪", "地磚", "地毯",
@@ -560,6 +560,10 @@ def classify_tender_relevance(item, detail=None):
     # 命中耗材、印表機、掃描器且無主機時，歸入 Stream 2
     # ==========================================
     supply_matched = _matched_terms(title, PERIPHERAL_SUPPLY_TERMS) or _matched_terms(detail_text, PERIPHERAL_SUPPLY_TERMS)
+    if not supply_matched and ("耗材" in title or "耗材" in detail_text):
+        combined = f"{title} {detail_text}"
+        if any(k in combined for k in ["印表", "列印", "影印", "事務", "電腦", "資訊", "辦公", "碳粉", "墨水", "色帶"]):
+            supply_matched = ["耗材"]
     printer_matched = _matched_terms(title, PERIPHERAL_PRINTER_TERMS)
     scanner_matched = _matched_terms(title, PERIPHERAL_SCANNER_TERMS) or _matched_terms(detail_text, PERIPHERAL_SCANNER_TERMS)
 
@@ -887,7 +891,9 @@ def is_past_deadline(deadline_value, today):
         return False
 
 
-def build_required_dates(mode, today, collection_days):
+def build_required_dates(mode, today, collection_days, backfill_days=None):
+    if backfill_days:
+        return [today - timedelta(days=i) for i in range(backfill_days)]
     if mode == "live":
         return [today, today - timedelta(days=1)]
     for days_ago in range(2, 61):
@@ -897,7 +903,7 @@ def build_required_dates(mode, today, collection_days):
     return []
 
 
-def main(mode="live"):
+def main(mode="live", backfill_days=None):
     if mode not in ("live", "maintenance"):
         raise ValueError(f"Unsupported update mode: {mode}")
     print(f"Starting tender updater in {mode} mode...")
@@ -949,7 +955,7 @@ def main(mode="live"):
 
     taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
     today = taipei_now.date()
-    required_dates = build_required_dates(mode, today, collection_days)
+    required_dates = build_required_dates(mode, today, collection_days, backfill_days=backfill_days)
 
     # The date endpoint returns the day's entire announcement set. Keep every
     # potentially relevant record so later classification rules can re-evaluate it.
@@ -1831,5 +1837,6 @@ def main(mode="live"):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Update tender intelligence data.")
     parser.add_argument("--mode", choices=("live", "maintenance"), default="live")
+    parser.add_argument("--backfill-days", type=int, default=None, help="Number of days to backfill")
     arguments = parser.parse_args()
-    main(arguments.mode)
+    main(arguments.mode, backfill_days=arguments.backfill_days)
