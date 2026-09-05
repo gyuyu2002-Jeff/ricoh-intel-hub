@@ -10,5 +10,64 @@
     "email": "gyuyu2002@gmail.com",
     "type": "welcome_test",
     "sent_at": "2026-09-05 17:13:41"
+  },
+  "welcome_huxen.ricoh@gmail.com": {
+    "email": "huxen.ricoh@gmail.com",
+    "type": "welcome_test",
+    "sent_at": "2026-09-05 18:30:13"
+  },
+  "huxen.ricoh@gmail.com_CGS115-01_公開徵求價單_2026-09-04": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "CGS115-01",
+    "title": "116-117年影印機租賃（內含裝機、運費、維修、印量張數價金計算）",
+    "sent_at": "2026-09-05 18:30:13"
+  },
+  "huxen.ricoh@gmail.com_UH150060_已決標_2026-08-20": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "UH150060",
+    "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
+    "sent_at": "2026-09-05 18:30:13"
+  },
+  "huxen.ricoh@gmail.com_115-033_正式開標_2026-08-07": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "115-033",
+    "title": "影印機租賃案",
+    "sent_at": "2026-09-05 18:30:13"
+  },
+  "hanjiunwu@eosasc.com.tw_CGS115-01_公開徵求價單_2026-09-04": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "CGS115-01",
+    "title": "116-117年影印機租賃（內含裝機、運費、維修、印量張數價金計算）",
+    "sent_at": "2026-09-05 18:30:13"
+  },
+  "hanjiunwu@eosasc.com.tw_UH150060_已決標_2026-08-20": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "UH150060",
+    "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
+    "sent_at": "2026-09-05 18:30:13"
+  },
+  "hanjiunwu@eosasc.com.tw_115-033_正式開標_2026-08-07": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "115-033",
+    "title": "影印機租賃案",
+    "sent_at": "2026-09-05 18:30:13"
+  },
+  "gyuyu2002@gmail.com_CGS115-01_公開徵求價單_2026-09-04": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "CGS115-01",
+    "title": "116-117年影印機租賃（內含裝機、運費、維修、印量張數價金計算）",
+    "sent_at": "2026-09-05 18:30:13"
+  },
+  "gyuyu2002@gmail.com_UH150060_已決標_2026-08-20": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "UH150060",
+    "title": "臺大醫療體系黑白及彩色影印機租賃單價合約1式",
+    "sent_at": "2026-09-05 18:30:13"
+  },
+  "gyuyu2002@gmail.com_115-033_正式開標_2026-08-07": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "115-033",
+    "title": "影印機租賃案",
+    "sent_at": "2026-09-05 18:30:13"
   }
 }
