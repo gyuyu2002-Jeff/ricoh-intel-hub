@@ -496,6 +496,8 @@ const TAIWAN_REGIONS: { region: string; cities: string[] }[] = [
   },
 ];
 
+const ALL_TAIWAN_CITIES = TAIWAN_REGIONS.flatMap((r) => r.cities);
+
 function SubscribeModal({
   isOpen,
   onClose,
@@ -517,42 +519,46 @@ function SubscribeModal({
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed.cities) && parsed.cities.length > 0) {
+          if (parsed.cities.includes("全台所有縣市") || parsed.cities.includes("全部")) {
+            return ALL_TAIWAN_CITIES;
+          }
           return parsed.cities;
         }
       }
     } catch {}
-    return ["全台所有縣市"];
+    return ALL_TAIWAN_CITIES;
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
   if (!isOpen) return null;
 
-  const isAllSelected = selectedCities.includes("全台所有縣市") || selectedCities.includes("全部");
+  const isAllSelected =
+    selectedCities.length === ALL_TAIWAN_CITIES.length &&
+    ALL_TAIWAN_CITIES.every((c) => selectedCities.includes(c));
 
   const toggleCity = (city: string) => {
-    if (city === "全台所有縣市" || city === "全部") {
-      setSelectedCities(["全台所有縣市"]);
-      return;
-    }
-    const cleanCurrent = isAllSelected ? [] : selectedCities;
-    if (cleanCurrent.includes(city)) {
-      const next = cleanCurrent.filter((c) => c !== city);
-      setSelectedCities(next.length === 0 ? ["全台所有縣市"] : next);
+    if (selectedCities.includes(city)) {
+      setSelectedCities(selectedCities.filter((c) => c !== city));
     } else {
-      setSelectedCities([...cleanCurrent, city]);
+      setSelectedCities([...selectedCities, city]);
+    }
+  };
+
+  const toggleAll = () => {
+    if (isAllSelected) {
+      setSelectedCities([]);
+    } else {
+      setSelectedCities(ALL_TAIWAN_CITIES);
     }
   };
 
   const toggleRegion = (cities: string[]) => {
-    const cleanCurrent = isAllSelected ? [] : selectedCities;
-    const allIncluded = cities.every((c) => cleanCurrent.includes(c));
+    const allIncluded = cities.every((c) => selectedCities.includes(c));
     if (allIncluded) {
-      const next = cleanCurrent.filter((c) => !cities.includes(c));
-      setSelectedCities(next.length === 0 ? ["全台所有縣市"] : next);
+      setSelectedCities(selectedCities.filter((c) => !cities.includes(c)));
     } else {
-      const merged = Array.from(new Set([...cleanCurrent, ...cities]));
-      setSelectedCities(merged);
+      setSelectedCities(Array.from(new Set([...selectedCities, ...cities])));
     }
   };
 
@@ -562,6 +568,12 @@ function SubscribeModal({
     if (!cleanEmail || !cleanEmail.includes("@")) {
       setStatus("error");
       setMessage("請輸入有效的 Email 地址。");
+      return;
+    }
+
+    if (selectedCities.length === 0) {
+      setStatus("error");
+      setMessage("請至少選擇一個關注縣市，或點選「全選全台 22 縣市」。");
       return;
     }
 
@@ -625,7 +637,7 @@ function SubscribeModal({
             <p>{message}</p>
             <div className="success-details">
               <div><span>通知信箱：</span><strong>{email}</strong></div>
-              <div><span>關注範圍：</span><strong>{isAllSelected ? "全台所有縣市（全台新案即時通報）" : selectedCities.join("、")}</strong></div>
+              <div><span>關注範圍：</span><strong>{isAllSelected ? "全台所有縣市（共 22 個縣市全數監控）" : `已選定 ${selectedCities.length} 個縣市（${selectedCities.join("、")}）`}</strong></div>
               <div><span>發件來源：</span><code>huxen.ricoh@gmail.com</code></div>
             </div>
             <button className="action-primary modal-action-btn" onClick={onClose}>完成並返回首頁</button>
@@ -650,25 +662,51 @@ function SubscribeModal({
             <div className="form-group">
               <div className="city-select-label-row">
                 <label>
-                  <MapPin size={14} /> 關注縣市（全台 22 縣市可複選，有新案時才通報）
+                  <MapPin size={14} /> 關注縣市（全台 22 縣市可複選）
                 </label>
-                <button
-                  type="button"
-                  className={`city-pill city-pill-all-master ${isAllSelected ? "active" : ""}`}
-                  onClick={() => toggleCity("全台所有縣市")}
-                >
-                  <span>✓ 全台所有縣市</span>
-                </button>
+                <div className="city-quick-actions">
+                  <button
+                    type="button"
+                    className={`city-pill city-pill-all-master ${isAllSelected ? "active" : ""}`}
+                    onClick={toggleAll}
+                    title={isAllSelected ? "點擊取消全選" : "點擊全選全台 22 縣市"}
+                  >
+                    <span>{isAllSelected ? "✓ 已全選全台 22 縣市" : "＋ 全選全台 22 縣市"}</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="clear-all-btn"
+                    onClick={() => setSelectedCities([])}
+                  >
+                    清空
+                  </button>
+                </div>
+              </div>
+
+              <div className={`subscribe-selection-badge ${isAllSelected ? "" : selectedCities.length > 0 ? "badge-partial" : "badge-empty"}`}>
+                <Check size={16} />
+                <span>
+                  {isAllSelected
+                    ? "✓ 已全選全台 22 縣市（下方全部標亮，各縣市新案皆會主動通知）"
+                    : selectedCities.length > 0
+                    ? `已選定 ${selectedCities.length} / 22 縣市：${selectedCities.join("、")}`
+                    : "尚未選取任何縣市，請點選欲關注的縣市或直接「全選全台」"}
+                </span>
               </div>
 
               <div className="subscribe-regions-container">
                 {TAIWAN_REGIONS.map(({ region, cities }) => {
-                  const cleanCurrent = isAllSelected ? [] : selectedCities;
-                  const regionAllSelected = !isAllSelected && cities.every((c) => cleanCurrent.includes(c));
+                  const regionAllSelected = cities.every((c) => selectedCities.includes(c));
+                  const regionSelectedCount = cities.filter((c) => selectedCities.includes(c)).length;
                   return (
                     <div key={region} className="subscribe-region-group">
                       <div className="subscribe-region-head">
-                        <span className="region-name">{region}</span>
+                        <div className="region-meta">
+                          <span className="region-name">{region}</span>
+                          <span className={`region-count-tag ${regionAllSelected ? "active" : ""}`}>
+                            {regionSelectedCount}/{cities.length}
+                          </span>
+                        </div>
                         <button
                           type="button"
                           className="region-toggle-btn"
@@ -679,7 +717,7 @@ function SubscribeModal({
                       </div>
                       <div className="subscribe-city-pills">
                         {cities.map((city) => {
-                          const isSelected = !isAllSelected && selectedCities.includes(city);
+                          const isSelected = selectedCities.includes(city);
                           return (
                             <button
                               type="button"
@@ -687,7 +725,7 @@ function SubscribeModal({
                               className={`city-pill ${isSelected ? "active" : ""}`}
                               onClick={() => toggleCity(city)}
                             >
-                              <span>{city}</span>
+                              <span>{isSelected ? "✓ " : ""}{city}</span>
                             </button>
                           );
                         })}
@@ -695,9 +733,6 @@ function SubscribeModal({
                     </div>
                   );
                 })}
-              </div>
-              <div className="selected-summary-hint">
-                目前選定範圍：<strong>{isAllSelected ? "全台所有縣市" : selectedCities.join("、")}</strong>
               </div>
             </div>
 

@@ -260,22 +260,33 @@
 .form-group { display: grid; gap: 8px; }
 .form-group label { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--deep); }
 .city-select-label-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.city-quick-actions { display: flex; align-items: center; gap: 8px; }
 .city-pill-all-master { min-height: 32px; padding: 0 13px; font-size: 12px; font-weight: 700; border-radius: 6px; }
+.clear-all-btn { background: transparent; border: 1px solid #d4dfd7; color: #697a70; border-radius: 6px; padding: 5px 10px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all .14s var(--ease); }
+.clear-all-btn:hover { background: #f0f4f1; color: var(--ink); border-color: #bdcebe; }
+
+.subscribe-selection-badge { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #eaf5ec; border: 1px solid #cce5d2; border-radius: 8px; color: #276239; font-size: 12px; font-weight: 600; line-height: 1.45; }
+.subscribe-selection-badge svg { flex: 0 0 auto; color: #276239; }
+.subscribe-selection-badge.badge-partial { background: #fdf5ec; border-color: #f6dcbe; color: #8e5018; }
+.subscribe-selection-badge.badge-partial svg { color: #8e5018; }
+.subscribe-selection-badge.badge-empty { background: #fdf0f1; border-color: #f8cfd3; color: #ab2132; }
+.subscribe-selection-badge.badge-empty svg { color: #ab2132; }
 
 .subscribe-input { width: 100%; height: 42px; padding: 0 14px; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 7px; font-size: 13px; outline: 0; transition: border-color .16s var(--ease), box-shadow .16s var(--ease); }
 .subscribe-input:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(201,45,63,.12); }
 
-.subscribe-regions-container { display: grid; gap: 12px; max-height: 240px; overflow-y: auto; padding: 12px; border: 1px solid #e1ebe3; border-radius: 8px; background: #fafbfa; }
+.subscribe-regions-container { display: grid; gap: 12px; max-height: 250px; overflow-y: auto; padding: 12px; border: 1px solid #e1ebe3; border-radius: 8px; background: #fafbfa; }
 .subscribe-region-group { display: grid; gap: 6px; }
 .subscribe-region-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 2px; border-bottom: 1px solid #ebf1ec; }
+.region-meta { display: flex; align-items: center; gap: 7px; }
 .region-name { font-size: 11px; font-weight: 700; color: #728178; letter-spacing: .03em; }
+.region-count-tag { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; background: #eef3ef; color: #5d6f65; }
+.region-count-tag.active { background: #fee2e4; color: var(--red); }
 .region-toggle-btn { background: transparent; border: 0; font-size: 11px; font-weight: 600; color: var(--deep); cursor: pointer; padding: 2px 6px; border-radius: 4px; transition: background .14s var(--ease); }
 .region-toggle-btn:hover { background: #e2ede5; color: var(--ink); }
 .subscribe-city-pills { display: flex; flex-wrap: wrap; gap: 6px; }
-.subscribe-city-pills .city-pill { min-height: 30px; padding: 0 11px; font-size: 12px; }
-
-.selected-summary-hint { font-size: 11px; color: #627368; line-height: 1.4; margin-top: 4px; }
-.selected-summary-hint strong { color: var(--red); }
+.subscribe-city-pills .city-pill { min-height: 31px; padding: 0 11px; font-size: 12px; font-weight: 600; }
+.subscribe-city-pills .city-pill.active { background: var(--red); color: #fff; border-color: var(--red-dark); box-shadow: 0 2px 8px rgba(201,45,63,.25); }
 
 .subscribe-notice { display: flex; align-items: flex-start; gap: 8px; padding: 11px 13px; background: #edf5f0; border-left: 3px solid var(--deep); border-radius: 6px; font-size: 11px; color: #3d5849; line-height: 1.55; }
 .subscribe-notice svg { flex: 0 0 auto; color: var(--red); margin-top: 2px; }
