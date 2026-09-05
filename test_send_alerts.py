@@ -56,6 +56,11 @@ class TestSendAlerts(unittest.TestCase):
         matching_all = match_tenders_for_subscriber(sub_all, self.sample_tenders, sent_logs={})
         self.assertEqual(len(matching_all), 2)
 
+        # Subscriber selected '全台所有縣市'
+        sub_all_tw = {"email": "user_tw@example.com", "cities": ["全台所有縣市"]}
+        matching_all_tw = match_tenders_for_subscriber(sub_all_tw, self.sample_tenders, sent_logs={})
+        self.assertEqual(len(matching_all_tw), 2)
+
     def test_deduplication_prevents_re_sending(self):
         sub = {"email": "user@example.com", "cities": ["高雄市"]}
         fp = generate_fingerprint("user@example.com", self.sample_tenders[0])

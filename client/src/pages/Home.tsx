@@ -477,14 +477,32 @@ function TenderCard({ tender }: { tender: Tender }) {
   );
 }
 
+const TAIWAN_REGIONS: { region: string; cities: string[] }[] = [
+  {
+    region: "北部地區",
+    cities: ["基隆市", "台北市", "新北市", "桃園市", "新竹市", "新竹縣", "宜蘭縣"],
+  },
+  {
+    region: "中部地區",
+    cities: ["苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣"],
+  },
+  {
+    region: "南部地區",
+    cities: ["嘉義市", "嘉義縣", "台南市", "高雄市", "屏東縣"],
+  },
+  {
+    region: "東部與離島",
+    cities: ["花蓮縣", "台東縣", "澎湖縣", "金門縣", "連江縣"],
+  },
+];
+
 function SubscribeModal({
   isOpen,
   onClose,
-  availableCities,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  availableCities: string[];
+  availableCities?: string[];
 }) {
   const [email, setEmail] = useState(() => {
     try {
@@ -496,30 +514,47 @@ function SubscribeModal({
   const [selectedCities, setSelectedCities] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem("ricoh_subscriber_info");
-      if (saved) return JSON.parse(saved).cities || ["全部"];
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed.cities) && parsed.cities.length > 0) {
+          return parsed.cities;
+        }
+      }
     } catch {}
-    return ["全部"];
+    return ["全台所有縣市"];
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
   if (!isOpen) return null;
 
+  const isAllSelected = selectedCities.includes("全台所有縣市") || selectedCities.includes("全部");
+
   const toggleCity = (city: string) => {
-    if (city === "全部") {
-      setSelectedCities(["全部"]);
+    if (city === "全台所有縣市" || city === "全部") {
+      setSelectedCities(["全台所有縣市"]);
       return;
     }
-    const withoutAll = selectedCities.filter((c) => c !== "全部");
-    if (withoutAll.includes(city)) {
-      const next = withoutAll.filter((c) => c !== city);
-      setSelectedCities(next.length === 0 ? ["全部"] : next);
+    const cleanCurrent = isAllSelected ? [] : selectedCities;
+    if (cleanCurrent.includes(city)) {
+      const next = cleanCurrent.filter((c) => c !== city);
+      setSelectedCities(next.length === 0 ? ["全台所有縣市"] : next);
     } else {
-      setSelectedCities([...withoutAll, city]);
+      setSelectedCities([...cleanCurrent, city]);
     }
   };
 
-  const isAllSelected = selectedCities.includes("全部");
+  const toggleRegion = (cities: string[]) => {
+    const cleanCurrent = isAllSelected ? [] : selectedCities;
+    const allIncluded = cities.every((c) => cleanCurrent.includes(c));
+    if (allIncluded) {
+      const next = cleanCurrent.filter((c) => !cities.includes(c));
+      setSelectedCities(next.length === 0 ? ["全台所有縣市"] : next);
+    } else {
+      const merged = Array.from(new Set([...cleanCurrent, ...cities]));
+      setSelectedCities(merged);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -535,7 +570,7 @@ function SubscribeModal({
 
     const payload = {
       email: cleanEmail,
-      cities: selectedCities,
+      cities: isAllSelected ? ["全台所有縣市"] : selectedCities,
       subscribed_at: new Date().toISOString(),
     };
 
@@ -571,11 +606,11 @@ function SubscribeModal({
         <div className="modal-header">
           <div className="modal-title-lockup">
             <span className="modal-icon-badge">
-              <Bell size={18} />
+              <Bell size={20} />
             </span>
             <div>
-              <h3>標案郵件訂閱快報</h3>
-              <p>選定關注縣市，新案件與公開徵求第一時間主動寄信通報</p>
+              <h3>相關地區標案通知我</h3>
+              <p>選定全台關注縣市，新案件與公開徵求第一時間主動寄信通報</p>
             </div>
           </div>
           <button className="icon-button modal-close-btn" onClick={onClose} aria-label="關閉">
@@ -586,11 +621,11 @@ function SubscribeModal({
         {status === "success" ? (
           <div className="subscribe-success-box">
             <div className="success-mark"><Check size={26} /></div>
-            <h4>訂閱登記成功</h4>
+            <h4>通知登記成功</h4>
             <p>{message}</p>
             <div className="success-details">
               <div><span>通知信箱：</span><strong>{email}</strong></div>
-              <div><span>關注範圍：</span><strong>{isAllSelected ? "全台所有縣市" : selectedCities.join("、")}</strong></div>
+              <div><span>關注範圍：</span><strong>{isAllSelected ? "全台所有縣市（全台新案即時通報）" : selectedCities.join("、")}</strong></div>
               <div><span>發件來源：</span><code>huxen.ricoh@gmail.com</code></div>
             </div>
             <button className="action-primary modal-action-btn" onClick={onClose}>完成並返回首頁</button>
@@ -613,30 +648,56 @@ function SubscribeModal({
             </div>
 
             <div className="form-group">
-              <label>
-                <MapPin size={14} /> 關注縣市（可複選，有新案時才通報）
-              </label>
-              <div className="subscribe-city-grid">
+              <div className="city-select-label-row">
+                <label>
+                  <MapPin size={14} /> 關注縣市（全台 22 縣市可複選，有新案時才通報）
+                </label>
                 <button
                   type="button"
-                  className={`city-pill ${isAllSelected ? "active" : ""}`}
-                  onClick={() => toggleCity("全部")}
+                  className={`city-pill city-pill-all-master ${isAllSelected ? "active" : ""}`}
+                  onClick={() => toggleCity("全台所有縣市")}
                 >
-                  <span>全台所有縣市</span>
+                  <span>✓ 全台所有縣市</span>
                 </button>
-                {availableCities.map((city) => {
-                  const selected = !isAllSelected && selectedCities.includes(city);
+              </div>
+
+              <div className="subscribe-regions-container">
+                {TAIWAN_REGIONS.map(({ region, cities }) => {
+                  const cleanCurrent = isAllSelected ? [] : selectedCities;
+                  const regionAllSelected = !isAllSelected && cities.every((c) => cleanCurrent.includes(c));
                   return (
-                    <button
-                      type="button"
-                      key={city}
-                      className={`city-pill ${selected ? "active" : ""}`}
-                      onClick={() => toggleCity(city)}
-                    >
-                      <span>{city}</span>
-                    </button>
+                    <div key={region} className="subscribe-region-group">
+                      <div className="subscribe-region-head">
+                        <span className="region-name">{region}</span>
+                        <button
+                          type="button"
+                          className="region-toggle-btn"
+                          onClick={() => toggleRegion(cities)}
+                        >
+                          {regionAllSelected ? "取消該區" : "全選該區"}
+                        </button>
+                      </div>
+                      <div className="subscribe-city-pills">
+                        {cities.map((city) => {
+                          const isSelected = !isAllSelected && selectedCities.includes(city);
+                          return (
+                            <button
+                              type="button"
+                              key={city}
+                              className={`city-pill ${isSelected ? "active" : ""}`}
+                              onClick={() => toggleCity(city)}
+                            >
+                              <span>{city}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
                   );
                 })}
+              </div>
+              <div className="selected-summary-hint">
+                目前選定範圍：<strong>{isAllSelected ? "全台所有縣市" : selectedCities.join("、")}</strong>
               </div>
             </div>
 
@@ -652,7 +713,8 @@ function SubscribeModal({
                 取消
               </button>
               <button type="submit" className="action-primary modal-submit-btn" disabled={status === "loading"}>
-                {status === "loading" ? "登記中..." : "確認訂閱通報"}
+                <Bell size={16} />
+                {status === "loading" ? "登記中..." : "相關地區標案通知我"}
               </button>
             </div>
           </form>
@@ -714,5 +776,165 @@ export default function Home() {
   if (loading) return <div className="app-shell loading-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div></div></div><span className="loading-top-note"><span className="loading-pulse" /> 讀取來源索引</span></header><main className="page-container"><SectionSkeleton /></main></div>;
   const dataUpdateCopy = dataSyncStatus === "warning" ? `最後成功更新：${dataUpdated}` : `資料更新：${dataUpdated}`;
   const dataUpdateTitle = dataSyncStatus === "warning" && dataSyncAttempt ? `最近一次同步嘗試：${dataSyncAttempt}；目前顯示最後成功更新資料。` : "標案資料集最後成功同步時間";
-  return <div className="app-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div></div></div><div className="topbar-actions"><button type="button" className="topbar-subscribe-btn" onClick={() => setSubscribeOpen(true)} title="登記 Email 訂閱關注縣市標案快報"><Bell size={14} /> 訂閱新案</button><a className="topbar-route" href="#/specs">設備比較平台</a><span className={`live-indicator ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}><span /> LIVE <em>{dataSyncStatus === "warning" ? `最後成功 ${dataUpdated}` : `資料更新 ${dataUpdated}`}</em></span><button className="icon-button" aria-label="列印工作區"><FileDown size={17} /></button></div></header><nav className="site-tabs" aria-label="網站主要分頁"><a className="site-tab active" href="#" aria-current="page"><span className="site-tab-index">01</span><span><strong>標案監控</strong><small>即時案件與縣市篩選</small></span></a><a className="site-tab" href="#/specs"><span className="site-tab-index">02</span><span><strong>設備比較平台</strong><small>七品牌 20／30／40 張</small></span></a></nav><main className="page-container"><div className="page-heading"><div><div className="eyebrow">互盛情報中樞 <span>/</span> 2026.08.14</div><h1>標案情報監控雷達</h1><p>先看今天該追的案，再回頭核對前次得標紀錄。</p></div><div className="heading-actions"><button type="button" className="outline-button highlight-subscribe-btn" onClick={() => setSubscribeOpen(true)}><Bell size={14} /> 訂閱縣市標案通知</button><span className={`update-note ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}><Database size={14} /><time>{dataUpdateCopy}</time></span><a className="outline-button" href="#/specs">進入設備比較平台</a><button className="outline-button"><FileDown size={15} /> 列印工作區</button></div></div><div className="tender-overview"><div className="overview-main"><div className="overview-kicker">TODAY'S OPPORTUNITY INDEX</div><div className="overview-number">{tenders.length}</div><div className="overview-copy"><strong>件進行中標案</strong><span>已完成縣市判定，依業務優先級重新排序</span></div></div><div className="overview-stat overview-awarded"><span>已決標案件</span><strong>{tenders.filter((tender) => tender.isAwarded).length}</strong><small>近期結果醒目追蹤</small></div><div className="overview-stat"><span>今日來源公告</span><strong>{tenders.length}</strong><small>目前資料集案件量</small></div><div className="overview-stat"><span>可比歷史資料</span><strong>{tenders.filter((tender) => tender.history.length >= 2).length}</strong><small>具可比歷史資料</small></div><div className="overview-stat overview-review"><span>待人工確認</span><strong className="red-text">{reviewTenders.length}</strong><small>不列入正式案件</small></div></div><div className="city-quick-filter" aria-label="縣市快速選擇"><div className="city-filter-heading"><div className="city-filter-title"><MapPin size={17} /><div><strong>縣市快速選擇</strong><span>先按地區縮小案件範圍，再搭配案件狀態篩選</span></div></div><div className="city-filter-meta"><span>{cityFilter === "全部縣市" ? "全台案件" : cityFilter}</span><small>{filteredTenders.length + filteredReviewTenders.length} 件符合目前條件</small></div></div><div className="city-pill-list" role="group" aria-label="標案縣市"><button type="button" aria-pressed={cityFilter === "全部縣市"} className={cityFilter === "全部縣市" ? "city-pill active" : "city-pill"} onClick={() => setCityFilter("全部縣市")}><span>全部縣市</span><strong>{tenders.length}</strong></button>{cityOptions.map(([city, count]) => <button type="button" aria-pressed={cityFilter === city} className={cityFilter === city ? "city-pill active" : "city-pill"} key={city} onClick={() => setCityFilter(city)}><span>{city}</span><strong>{count}</strong></button>)}</div></div><div className="workspace-toolbar"><div className="filter-intro"><Filter size={16} /><strong>案件檔案</strong><span>{filteredTenders.length} / {tenders.length} 顯示{searchQuery ? ` · 搜尋「${searchQuery}」` : ""}</span></div><div className="filter-tabs">{["全部案件", "3 日內"].map((item) => <button key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{item}</button>)}</div><label className="tender-search" htmlFor="tender-search"><Search size={15} /><input id="tender-search" type="search" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="搜尋案名、機關、案號或關鍵字" aria-label="搜尋標案" />{searchQuery && <button type="button" className="search-clear" onClick={() => setSearchQuery("")} aria-label="清除搜尋">×</button>}</label></div><section className="tender-section formal-section" aria-labelledby="formal-tenders-heading"><div className="tender-section-heading"><div><span className="section-kicker">FORMAL OPPORTUNITIES</span><h2 id="formal-tenders-heading">正式案件</h2><p>已確認為目標設備，且符合首頁日期與狀態保留規則。</p></div><strong>{filteredTenders.length} 件</strong></div><div className="tender-list">{filteredTenders.length > 0 ? filteredTenders.map((tender) => <TenderCard key={tender.job} tender={tender} />) : <div className="empty-state">目前沒有符合條件的正式案件。</div>}</div></section><section className="tender-section review-section" aria-labelledby="review-tenders-heading"><div className="tender-section-heading"><div><span className="section-kicker">REVIEW QUEUE</span><h2 id="review-tenders-heading">待確認案件</h2><p>可能相關但明細不足或設備範圍不明，需人工核對後才會進入正式案件。</p></div><strong>{filteredReviewTenders.length} 件</strong></div><div className="tender-list">{filteredReviewTenders.length > 0 ? filteredReviewTenders.map((tender) => <TenderCard key={`review-${tender.job}`} tender={tender} />) : <div className="empty-state">目前沒有待確認案件。</div>}</div></section></main><footer className="page-footer"><span>互盛情報中樞 / INTERNAL BUSINESS INTELLIGENCE</span><span>資料查核與同步：官方採購公告</span></footer><SubscribeModal isOpen={subscribeOpen} onClose={() => setSubscribeOpen(false)} availableCities={cityOptions.map(([c]) => c)} /></div>;
+  return (
+    <div className="app-shell">
+      <header className="topbar">
+        <div className="brand-lockup">
+          <Mark />
+          <div>
+            <div className="brand-title">互盛情報中樞</div>
+            <div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div>
+          </div>
+        </div>
+        <div className="topbar-actions">
+          <button
+            type="button"
+            className="topbar-subscribe-btn"
+            onClick={() => setSubscribeOpen(true)}
+            title="登記 Email 接收關注縣市新案與公開徵求通報"
+          >
+            <Bell size={15} /> 相關地區標案通知我
+          </button>
+          <a className="topbar-route" href="#/specs">設備比較平台</a>
+          <span className={`live-indicator ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}>
+            <span /> LIVE <em>{dataSyncStatus === "warning" ? `最後成功 ${dataUpdated}` : `資料更新 ${dataUpdated}`}</em>
+          </span>
+          <button className="icon-button" aria-label="列印工作區"><FileDown size={17} /></button>
+        </div>
+      </header>
+      <nav className="site-tabs" aria-label="網站主要分頁">
+        <a className="site-tab active" href="#" aria-current="page">
+          <span className="site-tab-index">01</span>
+          <span><strong>標案監控</strong><small>即時案件與縣市篩選</small></span>
+        </a>
+        <a className="site-tab" href="#/specs">
+          <span className="site-tab-index">02</span>
+          <span><strong>設備比較平台</strong><small>七品牌 20／30／40 張</small></span>
+        </a>
+      </nav>
+      <main className="page-container">
+        <div className="page-heading">
+          <div>
+            <div className="eyebrow">互盛情報中樞 <span>/</span> 2026.08.14</div>
+            <h1>標案情報監控雷達</h1>
+            <p>先看今天該追的案，再回頭核對前次得標紀錄。</p>
+          </div>
+          <div className="heading-actions">
+            <button
+              type="button"
+              className="primary-subscribe-btn"
+              onClick={() => setSubscribeOpen(true)}
+            >
+              <Bell size={18} /> 相關地區標案通知我
+            </button>
+            <span className={`update-note ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}>
+              <Database size={14} />
+              <time>{dataUpdateCopy}</time>
+            </span>
+            <a className="outline-button" href="#/specs">進入設備比較平台</a>
+            <button className="outline-button"><FileDown size={15} /> 列印工作區</button>
+          </div>
+        </div>
+
+        <div className="subscribe-promo-banner" onClick={() => setSubscribeOpen(true)} role="button" tabIndex={0}>
+          <div className="promo-banner-left">
+            <span className="promo-bell-icon"><Bell size={24} /></span>
+            <div className="promo-banner-text">
+              <div className="promo-banner-title">
+                相關地區標案通知我
+                <span className="promo-banner-pill">全台 22 縣市 Email 通報</span>
+              </div>
+              <p className="promo-banner-desc">
+                不想錯過所屬縣市的最新招標公告與公開徵求？登記信箱即享每日排程監控，指紋去重零漏信。
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            className="promo-banner-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSubscribeOpen(true);
+            }}
+          >
+            <Bell size={16} /> 相關地區標案通知我
+          </button>
+        </div>
+
+        <div className="tender-overview">
+          <div className="overview-main">
+            <div className="overview-kicker">TODAY'S OPPORTUNITY INDEX</div>
+            <div className="overview-number">{tenders.length}</div>
+            <div className="overview-copy"><strong>件進行中標案</strong><span>已完成縣市判定，依業務優先級重新排序</span></div>
+          </div>
+          <div className="overview-stat overview-awarded"><span>已決標案件</span><strong>{tenders.filter((tender) => tender.isAwarded).length}</strong><small>近期結果醒目追蹤</small></div>
+          <div className="overview-stat"><span>今日來源公告</span><strong>{tenders.length}</strong><small>目前資料集案件量</small></div>
+          <div className="overview-stat"><span>可比歷史資料</span><strong>{tenders.filter((tender) => tender.history.length >= 2).length}</strong><small>具可比歷史資料</small></div>
+          <div className="overview-stat overview-review"><span>待人工確認</span><strong className="red-text">{reviewTenders.length}</strong><small>不列入正式案件</small></div>
+        </div>
+
+        <div className="city-quick-filter" aria-label="縣市快速選擇">
+          <div className="city-filter-heading">
+            <div className="city-filter-title">
+              <MapPin size={17} />
+              <div><strong>縣市快速選擇</strong><span>先按地區縮小案件範圍，再搭配案件狀態篩選</span></div>
+            </div>
+            <div className="city-filter-meta">
+              <span>{cityFilter === "全部縣市" ? "全台案件" : cityFilter}</span>
+              <small>{filteredTenders.length + filteredReviewTenders.length} 件符合目前條件</small>
+            </div>
+          </div>
+          <div className="city-pill-list" role="group" aria-label="標案縣市">
+            <button type="button" aria-pressed={cityFilter === "全部縣市"} className={cityFilter === "全部縣市" ? "city-pill active" : "city-pill"} onClick={() => setCityFilter("全部縣市")}><span>全部縣市</span><strong>{tenders.length}</strong></button>
+            {cityOptions.map(([city, count]) => (
+              <button type="button" aria-pressed={cityFilter === city} className={cityFilter === city ? "city-pill active" : "city-pill"} key={city} onClick={() => setCityFilter(city)}>
+                <span>{city}</span><strong>{count}</strong>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="workspace-toolbar">
+          <div className="filter-intro">
+            <Filter size={16} /><strong>案件檔案</strong><span>{filteredTenders.length} / {tenders.length} 顯示{searchQuery ? ` · 搜尋「${searchQuery}」` : ""}</span>
+          </div>
+          <div className="filter-tabs">
+            {["全部案件", "3 日內"].map((item) => (
+              <button key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{item}</button>
+            ))}
+          </div>
+          <label className="tender-search" htmlFor="tender-search">
+            <Search size={15} />
+            <input id="tender-search" type="search" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="搜尋案名、機關、案號或關鍵字" aria-label="搜尋標案" />
+            {searchQuery && <button type="button" className="search-clear" onClick={() => setSearchQuery("")} aria-label="清除搜尋">×</button>}
+          </label>
+        </div>
+
+        <section className="tender-section formal-section" aria-labelledby="formal-tenders-heading">
+          <div className="tender-section-heading">
+            <div><span className="section-kicker">FORMAL OPPORTUNITIES</span><h2 id="formal-tenders-heading">正式案件</h2><p>已確認為目標設備，且符合首頁日期與狀態保留規則。</p></div>
+            <strong>{filteredTenders.length} 件</strong>
+          </div>
+          <div className="tender-list">
+            {filteredTenders.length > 0 ? filteredTenders.map((tender) => <TenderCard key={tender.job} tender={tender} />) : <div className="empty-state">目前沒有符合條件的正式案件。</div>}
+          </div>
+        </section>
+
+        <section className="tender-section review-section" aria-labelledby="review-tenders-heading">
+          <div className="tender-section-heading">
+            <div><span className="section-kicker">REVIEW QUEUE</span><h2 id="review-tenders-heading">待確認案件</h2><p>可能相關但明細不足或設備範圍不明，需人工核對後才會進入正式案件。</p></div>
+            <strong>{filteredReviewTenders.length} 件</strong>
+          </div>
+          <div className="tender-list">
+            {filteredReviewTenders.length > 0 ? filteredReviewTenders.map((tender) => <TenderCard key={`review-${tender.job}`} tender={tender} />) : <div className="empty-state">目前沒有待確認案件。</div>}
+          </div>
+        </section>
+      </main>
+      <footer className="page-footer">
+        <span>互盛情報中樞 / INTERNAL BUSINESS INTELLIGENCE</span>
+        <span>資料查核與同步：官方採購公告</span>
+      </footer>
+      <SubscribeModal isOpen={subscribeOpen} onClose={() => setSubscribeOpen(false)} />
+    </div>
+  );
 }

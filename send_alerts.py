@@ -101,7 +101,7 @@ def match_tenders_for_subscriber(subscriber, tenders, sent_logs):
 
     # '全部' or empty means all cities
     is_all_cities = not subscribed_cities or any(
-        c in ["全部", "全部縣市", "全台", "ALL"] for c in subscribed_cities
+        c in ["全部", "全部縣市", "全台", "全台所有縣市", "ALL"] for c in subscribed_cities
     )
 
     matching = []
