@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -33,6 +33,13 @@ jobs:
         env:
           GITHUB_PAGES: "true"
         run: npm run build
+      - name: Sync build output to repository root
+        run: |
+          cp -r dist/* .
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/
+          git diff --cached --quiet || (git commit -m "chore: sync built assets to root for GitHub Pages fallback [skip ci]" && git push)
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

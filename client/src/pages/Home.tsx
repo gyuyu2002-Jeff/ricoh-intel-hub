@@ -808,7 +808,7 @@ export default function Home() {
       .finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
   }, []);
-  if (loading) return <div className="app-shell loading-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div></div></div><span className="loading-top-note"><span className="loading-pulse" /> 讀取來源索引</span></header><main className="page-container"><SectionSkeleton /></main></div>;
+  if (loading) return <div className="app-shell loading-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 互盛情報中樞</div></div></div><span className="loading-top-note"><span className="loading-pulse" /> 讀取來源索引</span></header><main className="page-container"><SectionSkeleton /></main></div>;
   const dataUpdateCopy = dataSyncStatus === "warning" ? `最後成功更新：${dataUpdated}` : `資料更新：${dataUpdated}`;
   const dataUpdateTitle = dataSyncStatus === "warning" && dataSyncAttempt ? `最近一次同步嘗試：${dataSyncAttempt}；目前顯示最後成功更新資料。` : "標案資料集最後成功同步時間";
   return (
@@ -818,7 +818,7 @@ export default function Home() {
           <Mark />
           <div>
             <div className="brand-title">互盛情報中樞</div>
-            <div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 桃園業務情報</div>
+            <div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 互盛情報中樞</div>
           </div>
         </div>
         <div className="topbar-actions">
