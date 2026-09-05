@@ -73,6 +73,8 @@ type Tender = {
   terms: string[];
   sourceUrl: string;
   history: HistoryRow[];
+  stream?: "copier" | "peripherals";
+  subType?: "main" | "supplies" | "printer" | "scanner";
 };
 
 const fallbackTenders: Tender[] = [
@@ -168,9 +170,80 @@ const fallbackTenders: Tender[] = [
     next: "確認維護 SLA、服務據點與評選配分，再更新比較矩陣。",
     terms: ["多功能事務機", "維護", "租賃"],
     sourceUrl: "https://web.pcc.gov.tw/",
+    stream: "copier",
+    subType: "main",
     history: [
       ["2025-09-18", "114-083", "78.4%", "金儀 Konica Minolta", "https://web.pcc.gov.tw/", "事務機租賃", "新北市政府", "same_unit"],
       ["2024-09-12", "113-076", "81.1%", "佳能台灣", "https://web.pcc.gov.tw/", "事務機租賃", "新北市政府", "same_unit"],
+    ],
+  },
+  {
+    priority: "P1",
+    priorityLabel: "優先追蹤",
+    city: "台北市",
+    stage: "正式開標",
+    stageTone: "stage-blue",
+    isAwarded: false,
+    awardPrice: "未公開",
+    countdown: "距截止 12 天",
+    title: "115年度公務印表機原廠碳粉匣及耗材採購案",
+    job: "115-TP-082",
+    unit: "臺北市政府捷運工程局",
+    publish: "2026-08-11",
+    deadline: "2026-08-25",
+    budget: "NT$ 1,480,000",
+    discount: "86.5%",
+    samples: "近 3 年｜原廠耗材案｜3 筆",
+    reference: "NT$ 1,280,200",
+    competitor: "宏羚股份有限公司",
+    currentWinner: "宏羚股份有限公司",
+    previousWinner: "宏羚股份有限公司",
+    confidence: "高",
+    confidenceTone: "confidence-high",
+    scope: "同一機關",
+    summary: "年度原廠碳粉耗材合約採購，包含黑色與彩色高容量碳粉匣批次交貨。",
+    next: "核對原廠耗材型號清單與交期罰則，建立價格情境報價。",
+    terms: ["碳粉匣", "耗材", "原廠"],
+    sourceUrl: "https://web.pcc.gov.tw/",
+    stream: "peripherals",
+    subType: "supplies",
+    history: [
+      ["2025-08-15", "114-TP-071", "86.5%", "宏羚股份有限公司", "https://web.pcc.gov.tw/", "碳粉匣耗材採購", "臺北市政府捷運工程局", "same_unit"],
+      ["2024-08-12", "113-TP-065", "88.0%", "震旦行股份有限公司", "https://web.pcc.gov.tw/", "印表機耗材採購", "臺北市政府捷運工程局", "same_unit"],
+    ],
+  },
+  {
+    priority: "P2",
+    priorityLabel: "持續觀察",
+    city: "高雄市",
+    stage: "公開徵求價單",
+    stageTone: "stage-amber",
+    isAwarded: false,
+    awardPrice: "未公開",
+    countdown: "距截止 8 天",
+    title: "高速網路雷射印表機及文件掃描器設備購置",
+    job: "KS-115-09",
+    unit: "高雄市政府交通局",
+    publish: "2026-08-12",
+    deadline: "2026-08-22",
+    budget: "NT$ 960,000",
+    discount: "資料不足",
+    samples: "近 5 年僅 1 筆有效紀錄",
+    reference: "不產生價格推估",
+    competitor: "待人工確認",
+    currentWinner: "待人工確認",
+    previousWinner: "互盛股份有限公司",
+    confidence: "中",
+    confidenceTone: "confidence-mid",
+    scope: "同一機關",
+    summary: "早期需求規格徵詢中，汰換各科室老舊雷射印表機與高速饋紙掃描器。",
+    next: "拜訪機關承辦提供 RICOH 高速印表機與 PFU 掃描器型錄並提供規格建議。",
+    terms: ["雷射印表機", "文件掃描器", "購置"],
+    sourceUrl: "https://web.pcc.gov.tw/",
+    stream: "peripherals",
+    subType: "printer",
+    history: [
+      ["2023-09-20", "KS-112-14", "91.2%", "互盛股份有限公司", "https://web.pcc.gov.tw/", "印表機採購", "高雄市政府交通局", "same_unit"],
     ],
   },
 ];
@@ -191,6 +264,8 @@ type RawTender = {
   main_competitor?: string;
   tender_url?: string;
   stage?: string;
+  stream?: "copier" | "peripherals";
+  sub_type?: "main" | "supplies" | "printer" | "scanner";
   history_records?: Array<{
     award_date?: string;
     job_number?: string;
@@ -202,7 +277,14 @@ type RawTender = {
     title?: string;
     source_unit?: string;
   }>;
-  relevance?: { confidence?: string; score?: number; matched_terms?: string[]; reason?: string };
+  relevance?: {
+    confidence?: string;
+    score?: number;
+    matched_terms?: string[];
+    reason?: string;
+    stream?: "copier" | "peripherals";
+    sub_type?: "main" | "supplies" | "printer" | "scanner";
+  };
 };
 
 function formatDeadlineCountdown(deadline?: string) {
@@ -296,6 +378,8 @@ export function mapRawTender(raw: RawTender, isReview = false): Tender {
     terms: raw.relevance?.matched_terms?.slice(0, 4) ?? [],
     sourceUrl: raw.tender_url ?? "https://web.pcc.gov.tw/",
     history,
+    stream: raw.stream || (raw.relevance?.stream as "copier" | "peripherals") || "copier",
+    subType: raw.sub_type || (raw.relevance?.sub_type as "main" | "supplies" | "printer" | "scanner") || (raw.stream === "peripherals" ? "supplies" : "main"),
   };
 }
 
@@ -349,6 +433,13 @@ function TenderCard({ tender }: { tender: Tender }) {
         <div className="status-left">
           <Stamp tone={tender.priority === "P1" ? "stamp-red" : "stamp-ink"}>{tender.priority} · {tender.priorityLabel}</Stamp>
           <Stamp tone="stamp-sage">{tender.city}</Stamp>
+          {tender.stream === "peripherals" ? (
+            <Stamp tone="stamp-blue">
+              {tender.subType === "supplies" ? "🖨️ 碳粉耗材" : tender.subType === "printer" ? "🖨️ 印表設備" : tender.subType === "scanner" ? "📄 文件掃描" : "周邊商機"}
+            </Stamp>
+          ) : (
+            <Stamp tone="stamp-blue">🏢 事務機主機</Stamp>
+          )}
           <Stamp tone={tender.stageTone}>{tender.isReview ? "待人工確認" : tender.isAwarded ? "✓ 已決標" : isSolicitation ? "📢 公開徵求" : tender.stage}</Stamp>
         </div>
         <div className={`countdown ${tender.priority === "P1" ? "countdown-hot" : ""}`}><Clock3 size={14} />{tender.countdown}</div>
@@ -644,6 +735,18 @@ function SubscribeModal({
     } catch {}
     return ALL_TAIWAN_CITIES;
   });
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem("ricoh_subscriber_info");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed.categories) && parsed.categories.length > 0) {
+          return parsed.categories;
+        }
+      }
+    } catch {}
+    return ["copier", "peripherals"];
+  });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
   const [honeypot, setHoneypot] = useState("");
@@ -659,7 +762,7 @@ function SubscribeModal({
       setStatus("idle");
       setMessage("");
 
-      // 每次開啟彈窗時，重新載入本機已儲存的 Email 與關注縣市設定，方便同仁隨時勾選或變更
+      // 每次開啟彈窗時，重新載入本機已儲存的 Email、關注類別與關注縣市設定
       try {
         const saved = localStorage.getItem("ricoh_subscriber_info");
         if (saved) {
@@ -674,6 +777,9 @@ function SubscribeModal({
             } else {
               setSelectedCities(parsed.cities);
             }
+          }
+          if (Array.isArray(parsed.categories) && parsed.categories.length > 0) {
+            setSelectedCategories(parsed.categories);
           }
         }
       } catch {}
@@ -770,6 +876,12 @@ function SubscribeModal({
       return;
     }
 
+    if (selectedCategories.length === 0) {
+      setStatus("error");
+      setMessage("請至少勾選一種關注情報類別（事務機主機 或 周邊耗材）。");
+      return;
+    }
+
     if (selectedCities.length === 0) {
       setStatus("error");
       setMessage("請至少選擇一個關注縣市，或點選「全選全台 22 縣市」。");
@@ -782,6 +894,7 @@ function SubscribeModal({
     const payload = {
       email: cleanEmail,
       cities: isAllSelected ? ["全台所有縣市"] : selectedCities,
+      categories: selectedCategories,
       subscribed_at: new Date().toISOString(),
       hp_company_sec: honeypot,
     };
@@ -822,8 +935,8 @@ function SubscribeModal({
               <Bell size={20} />
             </span>
             <div>
-              <h3>{isAlreadyRegistered ? "變更通知地區設定" : "相關地區標案通知我"}</h3>
-              <p>{isAlreadyRegistered ? "已載入您目前的通知設定，可直接重新勾選縣市後儲存更新" : "選定全台關注縣市，新案件與公開徵求第一時間主動寄信通報"}</p>
+              <h3>{isAlreadyRegistered ? "變更通知設定" : "相關地區標案通知我"}</h3>
+              <p>{isAlreadyRegistered ? "已載入您目前的通知設定，可直接重新勾選類別與縣市後儲存更新" : "選定全台關注縣市與品項類別，新案件與公開徵求第一時間主動寄信通報"}</p>
             </div>
           </div>
           <button className="icon-button modal-close-btn" onClick={onClose} aria-label="關閉">
@@ -834,14 +947,15 @@ function SubscribeModal({
         {status === "success" ? (
           <div className="subscribe-success-box">
             <div className="success-mark"><Check size={26} /></div>
-            <h4>{isAlreadyRegistered ? "通知地區已成功更新 · 測試信已發送" : "通知設定成功 · 測試信已發送"}</h4>
+            <h4>{isAlreadyRegistered ? "通知設定已成功更新 · 測試信已發送" : "通知設定成功 · 測試信已發送"}</h4>
             <p>
               {isAlreadyRegistered
-                ? "您的通知範圍已成功更新！系統已同步寄送測試確認信至您的信箱，確保連通正常。"
+                ? "您的通知設定已成功更新！系統已同步寄送測試確認信至您的信箱，確保連通正常。"
                 : "系統已發送一封「收信功能測試信」至您的信箱，請立即前往查收，確認是否能順利接收標案情報！"}
             </p>
             <div className="success-details">
               <div><span>通知信箱：</span><strong>{email}</strong></div>
+              <div><span>關注類別：</span><strong>{selectedCategories.map((c) => c === "copier" ? "🏢 事務機主機" : "🖨️ 周邊耗材").join("、")}</strong></div>
               <div><span>關注範圍：</span><strong>{isAllSelected ? "全台所有縣市（共 22 個縣市全數監控）" : `已選定 ${selectedCities.length} 個縣市（${selectedCities.join("、")}）`}</strong></div>
               <div><span>發件來源：</span><code>huxen.ricoh@gmail.com</code></div>
             </div>
@@ -900,9 +1014,52 @@ function SubscribeModal({
               {isAlreadyRegistered && (
                 <div className="existing-subscriber-badge">
                   <Check size={13} />
-                  <span>已登記過此信箱，勾選下方縣市後送出即可完成變更。</span>
+                  <span>已登記過此信箱，勾選下方類別與縣市後送出即可完成變更。</span>
                 </div>
               )}
+            </div>
+
+            <div className="form-group">
+              <label>
+                <Printer size={14} /> 關注情報類別（可複選）
+              </label>
+              <div className="category-checkbox-group">
+                <label className={`category-check-card ${selectedCategories.includes("copier") ? "checked" : ""}`}>
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories.includes("copier")}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSelectedCategories([...selectedCategories, "copier"]);
+                      } else {
+                        setSelectedCategories(selectedCategories.filter((c) => c !== "copier"));
+                      }
+                    }}
+                  />
+                  <div className="category-check-info">
+                    <strong>🏢 事務機／複合機主機</strong>
+                    <span>影印機、複合機主機租賃、採購與長約案</span>
+                  </div>
+                </label>
+
+                <label className={`category-check-card ${selectedCategories.includes("peripherals") ? "checked" : ""}`}>
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories.includes("peripherals")}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSelectedCategories([...selectedCategories, "peripherals"]);
+                      } else {
+                        setSelectedCategories(selectedCategories.filter((c) => c !== "peripherals"));
+                      }
+                    }}
+                  />
+                  <div className="category-check-info">
+                    <strong>🖨️ 周邊耗材與設備</strong>
+                    <span>公部門碳粉匣、耗材、印表機、掃描器</span>
+                  </div>
+                </label>
+              </div>
             </div>
 
             <div className="form-group">
@@ -1025,9 +1182,10 @@ function SubscribeModal({
   );
 }
 
-export default function Home() {
+export default function Home({ stream = "copier" }: { stream?: "copier" | "peripherals" }) {
   const [filter, setFilter] = useState("全部案件");
   const [cityFilter, setCityFilter] = useState("全部縣市");
+  const [peripheralFilter, setPeripheralFilter] = useState<"all" | "supplies" | "printer" | "scanner">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [subscribeOpen, setSubscribeOpen] = useState(false);
@@ -1037,6 +1195,13 @@ export default function Home() {
   const [dataUpdated, setDataUpdated] = useState("待確認");
   const [dataSyncStatus, setDataSyncStatus] = useState<"loading" | "complete" | "warning" | "unknown">("loading");
   const [dataSyncAttempt, setDataSyncAttempt] = useState("");
+
+  useEffect(() => {
+    setPeripheralFilter("all");
+    setCityFilter("全部縣市");
+    setFilter("全部案件");
+    setSearchQuery("");
+  }, [stream]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -1064,26 +1229,55 @@ export default function Home() {
     }
   }, []);
 
+  const streamTenders = useMemo(() => {
+    return tenders.filter((t) => stream === "peripherals" ? t.stream === "peripherals" : t.stream !== "peripherals");
+  }, [tenders, stream]);
+
+  const streamReviewTenders = useMemo(() => {
+    return reviewTenders.filter((t) => stream === "peripherals" ? t.stream === "peripherals" : t.stream !== "peripherals");
+  }, [reviewTenders, stream]);
+
+  const peripheralCounts = useMemo(() => {
+    if (stream !== "peripherals") return { all: 0, supplies: 0, printer: 0, scanner: 0 };
+    return {
+      all: streamTenders.length,
+      supplies: streamTenders.filter((t) => t.subType === "supplies").length,
+      printer: streamTenders.filter((t) => t.subType === "printer").length,
+      scanner: streamTenders.filter((t) => t.subType === "scanner").length,
+    };
+  }, [stream, streamTenders]);
+
   const cityOptions = useMemo(() => {
     const counts = new Map<string, number>();
-    tenders.forEach(({ city }) => counts.set(city, (counts.get(city) ?? 0) + 1));
+    streamTenders.forEach(({ city }) => counts.set(city, (counts.get(city) ?? 0) + 1));
     return Array.from(counts.entries()).sort(([cityA, countA], [cityB, countB]) => countB - countA || cityA.localeCompare(cityB, "zh-Hant"));
-  }, [tenders]);
+  }, [streamTenders]);
+
   const matchesSearch = (tender: Tender, query: string) => {
     const normalized = query.trim().toLocaleLowerCase("zh-Hant");
     if (!normalized) return true;
     return [tender.title, tender.unit, tender.job, tender.city, tender.stage, tender.competitor, ...tender.terms].join(" ").toLocaleLowerCase("zh-Hant").includes(normalized);
   };
+
   const filteredTenders = useMemo(() => {
-    let next = tenders;
+    let next = streamTenders;
+    if (stream === "peripherals" && peripheralFilter !== "all") {
+      next = next.filter((tender) => tender.subType === peripheralFilter);
+    }
     if (filter === "3 日內") next = next.filter((tender) => tender.priority === "P1");
     if (cityFilter !== "全部縣市") next = next.filter((tender) => tender.city === cityFilter);
     return next.filter((tender) => matchesSearch(tender, searchQuery));
-  }, [cityFilter, filter, searchQuery, tenders]);
+  }, [cityFilter, filter, peripheralFilter, searchQuery, stream, streamTenders]);
+
   const filteredReviewTenders = useMemo(() => {
-    const byCity = cityFilter === "全部縣市" ? reviewTenders : reviewTenders.filter((tender) => tender.city === cityFilter);
+    let next = streamReviewTenders;
+    if (stream === "peripherals" && peripheralFilter !== "all") {
+      next = next.filter((tender) => tender.subType === peripheralFilter);
+    }
+    const byCity = cityFilter === "全部縣市" ? next : next.filter((tender) => tender.city === cityFilter);
     return byCity.filter((tender) => matchesSearch(tender, searchQuery));
-  }, [cityFilter, reviewTenders, searchQuery]);
+  }, [cityFilter, peripheralFilter, searchQuery, stream, streamReviewTenders]);
+
   useEffect(() => {
     let active = true;
     const dataUrl = new URL("data.json", document.baseURI).toString();
@@ -1123,13 +1317,17 @@ export default function Home() {
         </div>
       </header>
       <nav className="site-tabs" aria-label="網站主要分頁">
-        <a className="site-tab active" href="#" aria-current="page">
+        <a className={`site-tab ${stream === "copier" ? "active" : ""}`} href="#" aria-current={stream === "copier" ? "page" : undefined}>
           <span className="site-tab-index">01</span>
-          <span><strong>標案監控</strong><small>即時案件與縣市篩選</small></span>
+          <span><strong>標案監控</strong><small>事務機／複合機主機</small></span>
+        </a>
+        <a className={`site-tab ${stream === "peripherals" ? "active" : ""}`} href="#/peripherals" aria-current={stream === "peripherals" ? "page" : undefined}>
+          <span className="site-tab-index">02</span>
+          <span><strong>周邊耗材監控</strong><small>碳粉耗材／印表機／掃描器</small></span>
         </a>
         <a className="site-tab" href="#/specs">
-          <span className="site-tab-index">02</span>
-          <span><strong>設備比較平台</strong><small>七品牌 20／30／40 張</small></span>
+          <span className="site-tab-index">03</span>
+          <span><strong>設備規格比較平台</strong><small>7廠牌 20~60 張規格比較</small></span>
         </a>
       </nav>
       <main className="page-container">
@@ -1183,9 +1381,15 @@ export default function Home() {
 
         <div className="page-heading">
           <div>
-            <div className="eyebrow">互盛情報中樞 <span>/</span> 2026.08.14</div>
-            <h1>標案情報監控雷達</h1>
-            <p>先看今天該追的案，再回頭核對前次得標紀錄。</p>
+            <div className="eyebrow">
+              {stream === "peripherals" ? "互盛情報中樞 / 周邊設備與碳粉耗材商機" : "互盛情報中樞 / 事務機與複合機主機"}
+            </div>
+            <h1>{stream === "peripherals" ? "周邊耗材商機雷達" : "標案情報監控雷達"}</h1>
+            <p>
+              {stream === "peripherals"
+                ? "專注公部門碳粉匣、雷射/點陣印表機與高速掃描器採購商機，與主機完全分流。"
+                : "先看今天該追的案，再回頭核對前次得標紀錄。"}
+            </p>
           </div>
           <div className="heading-actions">
             <button
@@ -1205,15 +1409,76 @@ export default function Home() {
 
         <div className="tender-overview">
           <div className="overview-main">
-            <div className="overview-kicker">TODAY'S OPPORTUNITY INDEX</div>
-            <div className="overview-number">{tenders.length}</div>
-            <div className="overview-copy"><strong>件進行中標案</strong><span>已完成縣市判定，依業務優先級重新排序</span></div>
+            <div className="overview-kicker">
+              {stream === "peripherals" ? "PERIPHERAL OPPORTUNITY INDEX" : "TODAY'S OPPORTUNITY INDEX"}
+            </div>
+            <div className="overview-number">{streamTenders.length}</div>
+            <div className="overview-copy">
+              <strong>{stream === "peripherals" ? "件周邊耗材案件" : "件進行中標案"}</strong>
+              <span>
+                {stream === "peripherals"
+                  ? "涵蓋公部門碳粉耗材、印表設備與高速掃描器"
+                  : "已完成縣市判定，依業務優先級重新排序"}
+              </span>
+            </div>
           </div>
-          <div className="overview-stat overview-awarded"><span>已決標案件</span><strong>{tenders.filter((tender) => tender.isAwarded).length}</strong><small>近期結果醒目追蹤</small></div>
-          <div className="overview-stat"><span>今日來源公告</span><strong>{tenders.length}</strong><small>目前資料集案件量</small></div>
-          <div className="overview-stat"><span>可比歷史資料</span><strong>{tenders.filter((tender) => tender.history.length >= 2).length}</strong><small>具可比歷史資料</small></div>
-          <div className="overview-stat overview-review"><span>待人工確認</span><strong className="red-text">{reviewTenders.length}</strong><small>不列入正式案件</small></div>
+          <div className="overview-stat overview-awarded">
+            <span>已決標案件</span>
+            <strong>{streamTenders.filter((tender) => tender.isAwarded).length}</strong>
+            <small>近期結果醒目追蹤</small>
+          </div>
+          <div className="overview-stat">
+            <span>{stream === "peripherals" ? "周邊總案件量" : "今日來源公告"}</span>
+            <strong>{streamTenders.length}</strong>
+            <small>目前資料集案件量</small>
+          </div>
+          <div className="overview-stat">
+            <span>可比歷史資料</span>
+            <strong>{streamTenders.filter((tender) => tender.history.length >= 2).length}</strong>
+            <small>具可比歷史資料</small>
+          </div>
+          <div className="overview-stat overview-review">
+            <span>待人工確認</span>
+            <strong className="red-text">{streamReviewTenders.length}</strong>
+            <small>不列入正式案件</small>
+          </div>
         </div>
+
+        {stream === "peripherals" && (
+          <div className="peripheral-filter-row" aria-label="周邊品項快速分類">
+            <div className="peripheral-filter-title">
+              <Printer size={15} /> <span>品項快速分類：</span>
+            </div>
+            <button
+              type="button"
+              className={`peripheral-pill ${peripheralFilter === "all" ? "active" : ""}`}
+              onClick={() => setPeripheralFilter("all")}
+            >
+              全部周邊 ({peripheralCounts.all})
+            </button>
+            <button
+              type="button"
+              className={`peripheral-pill ${peripheralFilter === "supplies" ? "active" : ""}`}
+              onClick={() => setPeripheralFilter("supplies")}
+            >
+              🖨️ 碳粉耗材 ({peripheralCounts.supplies})
+            </button>
+            <button
+              type="button"
+              className={`peripheral-pill ${peripheralFilter === "printer" ? "active" : ""}`}
+              onClick={() => setPeripheralFilter("printer")}
+            >
+              🖨️ 雷射／點陣印表機 ({peripheralCounts.printer})
+            </button>
+            <button
+              type="button"
+              className={`peripheral-pill ${peripheralFilter === "scanner" ? "active" : ""}`}
+              onClick={() => setPeripheralFilter("scanner")}
+            >
+              📄 文件掃描器 ({peripheralCounts.scanner})
+            </button>
+          </div>
+        )}
 
         <div className="city-quick-filter" aria-label="縣市快速選擇">
           <div className="city-filter-heading">
@@ -1227,7 +1492,7 @@ export default function Home() {
             </div>
           </div>
           <div className="city-pill-list" role="group" aria-label="標案縣市">
-            <button type="button" aria-pressed={cityFilter === "全部縣市"} className={cityFilter === "全部縣市" ? "city-pill active" : "city-pill"} onClick={() => setCityFilter("全部縣市")}><span>全部縣市</span><strong>{tenders.length}</strong></button>
+            <button type="button" aria-pressed={cityFilter === "全部縣市"} className={cityFilter === "全部縣市" ? "city-pill active" : "city-pill"} onClick={() => setCityFilter("全部縣市")}><span>全部縣市</span><strong>{streamTenders.length}</strong></button>
             {cityOptions.map(([city, count]) => (
               <button type="button" aria-pressed={cityFilter === city} className={cityFilter === city ? "city-pill active" : "city-pill"} key={city} onClick={() => setCityFilter(city)}>
                 <span>{city}</span><strong>{count}</strong>
@@ -1238,7 +1503,7 @@ export default function Home() {
 
         <div className="workspace-toolbar">
           <div className="filter-intro">
-            <Filter size={16} /><strong>案件檔案</strong><span>{filteredTenders.length} / {tenders.length} 顯示{searchQuery ? ` · 搜尋「${searchQuery}」` : ""}</span>
+            <Filter size={16} /><strong>案件檔案</strong><span>{filteredTenders.length} / {streamTenders.length} 顯示{searchQuery ? ` · 搜尋「${searchQuery}」` : ""}</span>
           </div>
           <div className="filter-tabs">
             {["全部案件", "3 日內"].map((item) => (

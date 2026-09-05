@@ -60,6 +60,28 @@ class TestSendAlerts(unittest.TestCase):
         matching_all = match_tenders_for_subscriber(sub_all, self.sample_tenders, sent_logs={})
         self.assertEqual(len(matching_all), 2)
 
+    def test_category_matching_filters_correctly(self):
+        tenders_with_streams = [
+            {"job_number": "T1", "city": "台北市", "stream": "copier", "publish_date": "2026-09-05"},
+            {"job_number": "T2", "city": "台北市", "stream": "peripherals", "publish_date": "2026-09-05"},
+        ]
+        # Only wants copier
+        sub_copier = {"email": "copier@example.com", "cities": ["全部"], "categories": ["copier"]}
+        m_copier = match_tenders_for_subscriber(sub_copier, tenders_with_streams, {})
+        self.assertEqual(len(m_copier), 1)
+        self.assertEqual(m_copier[0]["job_number"], "T1")
+
+        # Only wants peripherals
+        sub_periph = {"email": "periph@example.com", "cities": ["全部"], "categories": ["peripherals"]}
+        m_periph = match_tenders_for_subscriber(sub_periph, tenders_with_streams, {})
+        self.assertEqual(len(m_periph), 1)
+        self.assertEqual(m_periph[0]["job_number"], "T2")
+
+        # Wants both
+        sub_both = {"email": "both@example.com", "cities": ["全部"], "categories": ["copier", "peripherals"]}
+        m_both = match_tenders_for_subscriber(sub_both, tenders_with_streams, {})
+        self.assertEqual(len(m_both), 2)
+
         # Subscriber selected '全台所有縣市'
         sub_all_tw = {"email": "user_tw@example.com", "cities": ["全台所有縣市"]}
         matching_all_tw = match_tenders_for_subscriber(sub_all_tw, self.sample_tenders, sent_logs={})

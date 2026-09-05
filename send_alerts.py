@@ -152,7 +152,7 @@ def generate_fingerprint(email, tender):
 
 def match_tenders_for_subscriber(subscriber, tenders, sent_logs):
     """
-    Filters tenders matching subscriber's cities that have not been sent yet.
+    Filters tenders matching subscriber's cities and categories that have not been sent yet.
     """
     norm_email = subscriber.get("email", "").strip().lower()
     if not norm_email or "@" not in norm_email:
@@ -167,10 +167,21 @@ def match_tenders_for_subscriber(subscriber, tenders, sent_logs):
         c in ["全部", "全部縣市", "全台", "全台所有縣市", "ALL"] for c in subscribed_cities
     )
 
+    # Subscribed categories (copier / peripherals): defaults to ['copier'] for backward compatibility
+    sub_categories = subscriber.get("categories", ["copier"])
+    if isinstance(sub_categories, str):
+        sub_categories = [c.strip() for c in sub_categories.split(",") if c.strip()]
+    if not sub_categories:
+        sub_categories = ["copier"]
+
     matching = []
     for tender in tenders:
         city = tender.get("city", "")
         if not is_all_cities and city not in subscribed_cities:
+            continue
+
+        tender_stream = tender.get("stream") or tender.get("relevance", {}).get("stream", "copier")
+        if tender_stream not in sub_categories:
             continue
 
         fingerprint = generate_fingerprint(norm_email, tender)
@@ -193,6 +204,20 @@ def build_email_html(subscriber_email, tenders, taipei_date_str):
         stage_badge_color = "#856404" if is_solicitation else "#0c5460"
         stage_text = "📢 公開徵求價單／企劃" if is_solicitation else t.get("stage", "標案公告")
 
+        stream = t.get("stream") or t.get("relevance", {}).get("stream", "copier")
+        sub_type = t.get("sub_type") or t.get("relevance", {}).get("sub_type", "main")
+        is_peripheral = stream == "peripherals"
+        stream_badge_bg = "#fef3c7" if is_peripheral else "#edf4ef"
+        stream_badge_color = "#92400e" if is_peripheral else "#2f5146"
+        stream_label = "🖨️ 周邊耗材" if is_peripheral else "🏢 事務主機"
+        if is_peripheral:
+            if sub_type == "supplies":
+                stream_label = "🖨️ 碳粉耗材"
+            elif sub_type == "printer":
+                stream_label = "🖨️ 印表設備"
+            elif sub_type == "scanner":
+                stream_label = "📄 文件掃描"
+
         budget_val = t.get("budget", "無公開數據")
         suggested_val = t.get("suggested_price", "資料不足")
         discount_val = t.get("avg_discount", "資料不足")
@@ -204,6 +229,7 @@ def build_email_html(subscriber_email, tenders, taipei_date_str):
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap;">
             <div>
               <span style="display:inline-block; background:#edf4ef; color:#2f5146; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">{t.get('city', '未知縣市')}</span>
+              <span style="display:inline-block; background:{stream_badge_bg}; color:{stream_badge_color}; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">{stream_label}</span>
               <span style="display:inline-block; background:{stage_badge_bg}; color:{stage_badge_color}; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px;">{stage_text}</span>
             </div>
             <span style="font-size:12px; color:#78857d; font-family:monospace;">案號 {t.get('job_number', '待查')}</span>

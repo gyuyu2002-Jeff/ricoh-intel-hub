@@ -130,7 +130,20 @@ export default function SpecComparison() {
           <a href="#" className="spec-return"><ArrowLeft size={15} /> 標案監控</a>
         </div>
       </header>
-      <nav className="site-tabs site-tabs-spec" aria-label="網站主要分頁"><a className="site-tab" href="#"><span className="site-tab-index">01</span><span><strong>標案監控</strong><small>即時案件與縣市篩選</small></span></a><a className="site-tab active" href="#/specs" aria-current="page"><span className="site-tab-index">02</span><span><strong>設備比較平台</strong><small>7廠牌 20~60 張規格比較</small></span></a></nav>
+      <nav className="site-tabs site-tabs-spec" aria-label="網站主要分頁">
+        <a className="site-tab" href="#">
+          <span className="site-tab-index">01</span>
+          <span><strong>標案監控</strong><small>事務機／複合機主機</small></span>
+        </a>
+        <a className="site-tab" href="#/peripherals">
+          <span className="site-tab-index">02</span>
+          <span><strong>周邊耗材監控</strong><small>碳粉耗材／印表機／掃描器</small></span>
+        </a>
+        <a className="site-tab active" href="#/specs" aria-current="page">
+          <span className="site-tab-index">03</span>
+          <span><strong>設備比較平台</strong><small>7廠牌 20~60 張規格比較</small></span>
+        </a>
+      </nav>
 
       <main className="spec-main">
         <section className="spec-hero" aria-labelledby="spec-title">

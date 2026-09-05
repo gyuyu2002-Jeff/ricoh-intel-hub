@@ -14,9 +14,13 @@ function Router() {
     window.addEventListener("hashchange", syncRoute);
     return () => window.removeEventListener("hashchange", syncRoute);
   }, []);
-  return (
-    hash === "#/specs" ? <SpecComparison /> : <Home />
-  );
+  if (hash === "#/specs") {
+    return <SpecComparison />;
+  }
+  if (hash === "#/peripherals") {
+    return <Home stream="peripherals" />;
+  }
+  return <Home stream="copier" />;
 }
 
 // NOTE: About Theme

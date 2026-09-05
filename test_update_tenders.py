@@ -111,10 +111,13 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
     def test_supplies_are_separated(self):
         result = classify_tender_relevance(announcement("影印機碳粉耗材採購"))
         self.assertEqual(result["category"], "supplies")
+        self.assertEqual(result["stream"], "peripherals")
+        self.assertEqual(result["status"], "included")
 
     def test_copier_rental_including_supplies_is_included(self):
         result = classify_tender_relevance(announcement("116-117年影印機(含安裝、運費、維修、耗材等計張費用)租賃案"))
         self.assertEqual(result["category"], "office_output_equipment")
+        self.assertEqual(result["stream"], "copier")
         self.assertEqual(result["status"], "included")
 
     def test_printing_service_is_not_equipment(self):
@@ -126,14 +129,14 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         self.assertEqual(result["category"], "specialized_printing")
         self.assertEqual(result["status"], "excluded")
 
-    def test_dot_matrix_printer_is_excluded(self):
+    def test_dot_matrix_printer_is_included_in_peripherals(self):
         result = classify_tender_relevance(announcement("點陣式印表機汰換"))
         self.assertEqual(result["category"], "dot_matrix_printer")
-        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["stream"], "peripherals")
+        self.assertEqual(result["status"], "included")
 
     def test_printer_maintenance_is_excluded(self):
         result = classify_tender_relevance(announcement("115年度個人電腦及印表機設備維護工作"))
-        self.assertEqual(result["category"], "printer_maintenance")
         self.assertEqual(result["status"], "excluded")
 
     def test_copier_maintenance_remains_in_scope(self):
@@ -229,16 +232,52 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
     def test_explicit_printer_in_mixed_it_purchase_is_excluded(self):
         result = classify_tender_relevance(announcement("電腦及雷射印表機採購案"))
         self.assertEqual(result["status"], "excluded")
-        self.assertEqual(result["category"], "printer_or_plotter")
 
-    def test_plotter_is_excluded(self):
+    def test_plotter_is_included_in_peripherals(self):
         result = classify_tender_relevance(announcement("大型繪圖機採購案"))
+        self.assertEqual(result["status"], "included")
+        self.assertEqual(result["stream"], "peripherals")
+        self.assertEqual(result["sub_type"], "printer")
+
+    def test_scanner_is_included_in_peripherals(self):
+        result = classify_tender_relevance(announcement("高速雙面文件掃描器採購案"))
+        self.assertEqual(result["status"], "included")
+        self.assertEqual(result["stream"], "peripherals")
+        self.assertEqual(result["sub_type"], "scanner")
+
+    def test_office_sundry_is_excluded(self):
+        result = classify_tender_relevance(announcement("公務用碎紙機採購案"))
         self.assertEqual(result["status"], "excluded")
-        self.assertEqual(result["category"], "printer_or_plotter")
+        self.assertEqual(result["category"], "office_sundry")
+
+    def test_binding_machine_is_excluded(self):
+        result = classify_tender_relevance(announcement("電動打孔裝訂機採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "office_sundry")
+
+    def test_laminator_is_excluded(self):
+        result = classify_tender_relevance(announcement("辦公室護貝機採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "office_sundry")
 
     def test_copier_and_printer_mixed_purchase_remains_in_scope(self):
         result = classify_tender_relevance(announcement("數位複合機及印表機採購案"))
         self.assertEqual(result["status"], "included")
+        self.assertEqual(result["stream"], "copier")
+
+    def test_mutual_exclusion_between_streams(self):
+        cases = [
+            ("多功能複合機租賃案", "copier"),
+            ("數位影印機採購", "copier"),
+            ("影印機碳粉耗材採購", "peripherals"),
+            ("A4彩色雷射印表機採購", "peripherals"),
+            ("高速文件掃描儀採購", "peripherals"),
+            ("點陣式印表機汰換", "peripherals"),
+        ]
+        for title, expected_stream in cases:
+            res = classify_tender_relevance(announcement(title))
+            self.assertEqual(res["status"], "included")
+            self.assertEqual(res["stream"], expected_stream)
 
     def test_contract_change_is_excluded(self):
         result = classify_tender_relevance(announcement("影印機租賃契約變更"))

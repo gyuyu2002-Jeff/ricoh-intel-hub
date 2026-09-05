@@ -401,10 +401,22 @@ OUT_OF_SCOPE_PRINTER_TERMS = [
 ]
 MAINTENANCE_TERMS = ["維護", "維修", "保養"]
 CONTRACT_CHANGE_TERMS = ["契約變更", "變更案", "後續擴充", "追加採購"]
+
+# 02 周邊耗材專區定義（零重疊互斥）
+EXCLUDED_SUNDRY_TERMS = ["碎紙機", "打孔機", "裝訂機", "膠裝機", "護貝機", "護貝"]
+PERIPHERAL_SUPPLY_TERMS = [
+    "耗材", "碳粉", "碳粉匣", "碳粉夾", "墨水", "墨水匣", "感光鼓", "轉寫帶", "色帶", "報表紙", "印表紙"
+]
+PERIPHERAL_PRINTER_TERMS = [
+    "印表機", "列印機", "雷射印表機", "點陣式印表機", "點矩陣印表機", "繪圖機", "大圖輸出機", "標籤機", "條碼機", "printer", "plotter"
+]
+PERIPHERAL_SCANNER_TERMS = [
+    "掃描器", "掃描儀", "文件掃描", "高速掃描", "scanner"
+]
 NON_TARGET_TERM_GROUPS = {
     "information_equipment": ["資訊設備", "資訊設備類", "資訊器材", "資訊產品", "資通訊設備", "資通訊產品", "資訊通信設備", "電腦設備", "電腦及周邊", "電腦周邊", "資訊週邊", "電腦週邊", "資訊系統", "資訊網路設備"],
     "network_or_server": ["機房", "交換器", "網路交換器", "無線網路", "無線基地台", "無線 AP", "Wi-Fi", "WiFi", "路由器", "防火牆", "負載平衡器", "網路設備", "網路管理", "網路監控", "網路佈線", "網路布線", "結構化佈線", "光纖網路", "伺服器", "儲存設備", "NAS", "SAN", "資通訊", "RFID", "課程管理平台", "電話交換機", "IP PBX", "閘道器"],
-    "computer_or_software": ["電腦軟體", "個人電腦", "桌上型電腦", "筆記型電腦", "筆電", "平板電腦", "工作站", "瘦客戶機", "資訊科技教室", "電腦教室"],
+    "computer_or_software": ["電腦軟體", "個人電腦", "桌上型電腦", "筆記型電腦", "筆電", "平板電腦", "工作站", "瘦客戶機", "資訊科技教室", "電腦教室", "電腦及", "電腦與"],
     "surveillance_access": ["監視器", "監控設備", "監控系統", "監視系統", "CCTV", "攝影機", "網路攝影機", "IP Camera", "IP CAM", "數位錄影機", "影像錄影機", "DVR", "NVR", "門禁", "門禁系統", "門禁設備", "刷卡機", "讀卡機", "生物辨識", "人臉辨識", "人臉識別", "電子圍籬", "防盜系統", "入侵警報", "保全系統", "對講機", "影像對講", "車牌辨識", "停車場管理"],
     "it_endpoint": ["液晶螢幕", "電腦螢幕", "顯示器", "顯示設備", "觸控螢幕", "觸控顯示器", "互動式顯示器", "電子白板", "投影機", "投影設備", "視訊會議設備", "視訊會議系統", "LED 顯示", "電視牆"],
     "medical_equipment": ["智慧藥櫃", "X光機", "Ｘ光機", "DR數位影像", "醫療設備", "診斷設備"],
@@ -463,37 +475,25 @@ def get_title_scope_exclusion(title):
             "category": "contract_change", "matched_terms": contract_change_terms,
             "reason": "契約變更或後續擴充不是新的投標機會"
         }
-    dot_matrix_terms = _matched_terms(title, DOT_MATRIX_PRINTER_TERMS)
-    if dot_matrix_terms:
+    sundry_terms = _matched_terms(title, EXCLUDED_SUNDRY_TERMS)
+    if sundry_terms:
         return {
             "status": "excluded", "confidence": "high", "score": -4,
-            "category": "dot_matrix_printer", "matched_terms": dot_matrix_terms,
-            "reason": "點陣式印表機不在追蹤範圍"
+            "category": "office_sundry", "matched_terms": sundry_terms,
+            "reason": "碎紙機、打孔裝訂機或護貝機不在追蹤範圍"
         }
-    printer_terms = _matched_terms(title, PRINTER_TERMS)
-    maintenance_terms = _matched_terms(title, MAINTENANCE_TERMS)
-    if printer_terms and maintenance_terms:
-        return {
-            "status": "excluded", "confidence": "high", "score": -4,
-            "category": "printer_maintenance",
-            "matched_terms": list(dict.fromkeys(printer_terms + maintenance_terms)),
-            "reason": "印表機維護、維修或保養不在追蹤範圍"
-        }
-    out_of_scope_printer_terms = _matched_terms(title, OUT_OF_SCOPE_PRINTER_TERMS)
-    copier_terms = _matched_terms(title, DIRECT_EQUIPMENT_TERMS)
     specialized_terms = _matched_terms(title, SPECIALIZED_PRINTING_TERMS)
-    if out_of_scope_printer_terms and not copier_terms and not specialized_terms:
+    if specialized_terms:
         return {
             "status": "excluded", "confidence": "high", "score": -4,
-            "category": "printer_or_plotter",
-            "matched_terms": out_of_scope_printer_terms,
-            "reason": "印表機、列印機或繪圖機不在追蹤範圍"
+            "category": "specialized_printing", "matched_terms": specialized_terms,
+            "reason": "3D 或特殊列印設備不在辦公輸出設備範圍"
         }
     return None
 
 
 def classify_tender_relevance(item, detail=None):
-    """Return an explainable high-recall classification for an announcement."""
+    """Return an explainable high-recall classification for an announcement across Copier and Peripherals streams."""
     brief = item.get("brief", {}) if isinstance(item, dict) else {}
     title = str(brief.get("title", "")).replace("臺", "台")
     category = str(brief.get("category", ""))
@@ -511,58 +511,110 @@ def classify_tender_relevance(item, detail=None):
             "status": "excluded", "confidence": "high", "score": -5,
             "category": information_category, "matched_terms": information_terms,
             "matched_fields": ["title" if _matched_terms(title, information_terms) else "detail"],
-            "reason": "含明確非影印機標的，依最高優先硬排除規則自標案監控汰除"
+            "reason": "含明確非目標標的，依最高優先硬排除規則自標案監控汰除"
         }
 
     machine_terms = _matched_terms(combined, MACHINE_TOOL_TERMS)
-    direct_title = _matched_terms(title, DIRECT_EQUIPMENT_TERMS)
-    direct_detail = _matched_terms(f"{category} {detail_text}", DIRECT_EQUIPMENT_TERMS)
-    broad_terms = _matched_terms(combined, BROAD_EQUIPMENT_TERMS)
-    detail_signals = _matched_terms(f"{category} {detail_text}", DETAIL_SIGNAL_TERMS)
-    contract_terms = _matched_terms(combined, CONTRACT_TERMS)
-    supply_terms = _matched_terms(title, SUPPLY_TERMS)
-    service_terms = _matched_terms(title, PRINT_SERVICE_TERMS)
-    specialized_terms = _matched_terms(title, SPECIALIZED_PRINTING_TERMS)
-
     if machine_terms:
         return {"status": "excluded", "confidence": "high", "score": -4, "category": "industrial_machine", "matched_terms": machine_terms, "reason": "工業機械誤判"}
-    is_machine_lease_or_contract = bool(direct_title and any(t in title for t in ["租賃", "租用", "開口契約", "計張", "保養", "全包"]))
-    if supply_terms and not is_machine_lease_or_contract:
-        return {"status": "excluded", "confidence": "high", "score": -3, "category": "supplies", "matched_terms": supply_terms, "reason": "耗材或零件"}
-    if service_terms and not direct_title:
-        return {"status": "excluded", "confidence": "high", "score": -3, "category": "printing_service", "matched_terms": service_terms, "reason": "純印務服務"}
-    if specialized_terms:
-        return {"status": "excluded", "confidence": "high", "score": -4, "category": "specialized_printing", "matched_terms": specialized_terms, "matched_fields": ["title"], "reason": "3D 或特殊列印設備不在辦公輸出設備範圍"}
 
-    non_target_category, non_target_terms = _non_target_match(f"{title} {category} {detail_text}")
-    if non_target_terms and not direct_title and not direct_detail:
+    service_terms = _matched_terms(title, PRINT_SERVICE_TERMS)
+    copier_title_terms = _matched_terms(title, DIRECT_EQUIPMENT_TERMS)
+    copier_detail_terms = _matched_terms(f"{category} {detail_text}", DIRECT_EQUIPMENT_TERMS)
+
+    if service_terms and not copier_title_terms and not _matched_terms(title, PERIPHERAL_PRINTER_TERMS):
+        return {"status": "excluded", "confidence": "high", "score": -3, "category": "printing_service", "matched_terms": service_terms, "reason": "純印務服務"}
+
+    # ==========================================
+    # Stream 1: 影印機 / 多功能複合機主機 (Copier)
+    # 最高優先判定：只要主體為事務機/複合機主機，必定屬於 Stream 1
+    # ==========================================
+    is_machine_lease_or_contract = bool(copier_title_terms and any(t in title for t in ["租賃", "租用", "開口契約", "計張", "保養", "全包"]))
+    has_pure_supplies_in_title = bool(_matched_terms(title, PERIPHERAL_SUPPLY_TERMS))
+
+    # 若標題包含「影印機碳粉耗材」且非租賃/計張契約，則屬於純耗材（歸入 Stream 2）
+    is_pure_supplies_tender = has_pure_supplies_in_title and not is_machine_lease_or_contract
+
+    if (copier_title_terms or copier_detail_terms) and not is_pure_supplies_tender:
+        score = (3 if copier_title_terms else 0) + (2 if copier_detail_terms else 0)
+        matched = list(dict.fromkeys(copier_title_terms + copier_detail_terms))
+        matched_fields = []
+        if copier_title_terms:
+            matched_fields.append("title")
+        if copier_detail_terms:
+            matched_fields.append("detail")
         return {
-            "status": "excluded", "confidence": "high", "score": -3,
-            "category": non_target_category, "matched_terms": non_target_terms,
-            "matched_fields": ["title" if _matched_terms(title, non_target_terms) else "detail"],
-            "reason": "明確屬於非辦公輸出設備"
+            "status": "included",
+            "confidence": "high" if copier_title_terms else "medium",
+            "score": score,
+            "category": "office_output_equipment",
+            "stream": "copier",
+            "sub_type": "main",
+            "matched_terms": matched,
+            "matched_fields": matched_fields,
+            "reason": "命中影印機/複合機主機設備或公告規格"
         }
 
-    score = (3 if direct_title else 0) + (2 if direct_detail else 0) + (1 if broad_terms else 0) + (1 if detail_signals else 0) + (1 if contract_terms else 0)
-    matched = list(dict.fromkeys(direct_title + direct_detail + broad_terms + detail_signals + contract_terms))
-    matched_fields = []
-    if direct_title or _matched_terms(title, BROAD_EQUIPMENT_TERMS):
-        matched_fields.append("title")
-    if category and (_matched_terms(category, DIRECT_EQUIPMENT_TERMS) or _matched_terms(category, BROAD_EQUIPMENT_TERMS)):
-        matched_fields.append("category")
-    if detail_text and (direct_detail or detail_signals):
-        matched_fields.append("detail")
+    # ==========================================
+    # Stream 2: 周邊耗材與印表機掃描器 (Peripherals)
+    # 命中耗材、印表機、掃描器且無主機時，歸入 Stream 2
+    # ==========================================
+    supply_matched = _matched_terms(title, PERIPHERAL_SUPPLY_TERMS) or _matched_terms(detail_text, PERIPHERAL_SUPPLY_TERMS)
+    printer_matched = _matched_terms(title, PERIPHERAL_PRINTER_TERMS)
+    scanner_matched = _matched_terms(title, PERIPHERAL_SCANNER_TERMS) or _matched_terms(detail_text, PERIPHERAL_SCANNER_TERMS)
 
-    if direct_title or direct_detail:
-        return {"status": "included", "confidence": "high" if direct_title else "medium", "score": score, "category": "office_output_equipment", "matched_terms": matched, "matched_fields": matched_fields, "reason": "命中設備名稱或公告規格"}
+    if is_pure_supplies_tender or supply_matched:
+        terms = list(dict.fromkeys((copier_title_terms if is_pure_supplies_tender else []) + supply_matched))
+        return {
+            "status": "included",
+            "confidence": "high",
+            "score": 3,
+            "category": "supplies",
+            "stream": "peripherals",
+            "sub_type": "supplies",
+            "matched_terms": terms,
+            "matched_fields": ["title"],
+            "reason": "命中耗材或碳粉標的"
+        }
+
+    if printer_matched:
+        category_name = "dot_matrix_printer" if any(t in title for t in ["點陣", "點矩陣"]) else "printer_or_plotter"
+        return {
+            "status": "included",
+            "confidence": "high",
+            "score": 3,
+            "category": category_name,
+            "stream": "peripherals",
+            "sub_type": "printer",
+            "matched_terms": printer_matched,
+            "matched_fields": ["title"],
+            "reason": "命中印表機或繪圖機標的"
+        }
+
+    if scanner_matched:
+        return {
+            "status": "included",
+            "confidence": "high",
+            "score": 3,
+            "category": "scanner",
+            "stream": "peripherals",
+            "sub_type": "scanner",
+            "matched_terms": scanner_matched,
+            "matched_fields": ["title"],
+            "reason": "命中文件掃描器設備標的"
+        }
+
+    # 廣義辦公設備或未命中
+    broad_terms = _matched_terms(combined, BROAD_EQUIPMENT_TERMS)
     if broad_terms:
         return {
-            "status": "excluded", "confidence": "high", "score": score,
-            "category": "broad_office_equipment", "matched_terms": matched,
-            "matched_fields": matched_fields,
-            "reason": "僅命中廣義辦公設備，未能明確確認為單純影印機或多功能事務機"
+            "status": "excluded", "confidence": "high", "score": 1,
+            "category": "broad_office_equipment", "matched_terms": broad_terms,
+            "matched_fields": ["title" if _matched_terms(title, broad_terms) else "detail"],
+            "reason": "僅命中廣義辦公設備，未能明確確認為事務主機或周邊耗材"
         }
-    return {"status": "excluded", "confidence": "high", "score": 0, "category": "unrelated", "matched_terms": [], "matched_fields": [], "reason": "未命中設備範圍"}
+
+    return {"status": "excluded", "confidence": "high", "score": 0, "category": "unrelated", "matched_terms": [], "matched_fields": [], "reason": "未命中設備或周邊耗材範圍"}
 
 
 def deduplicate_announcements(records):
@@ -1656,6 +1708,8 @@ def main(mode="live"):
             "stage": stage,
             "stage_color": stage_color,
             "duration_years": duration,
+            "stream": relevance.get("stream", "copier"),
+            "sub_type": relevance.get("sub_type", "main"),
             "relevance": relevance
         })
         
@@ -1688,7 +1742,13 @@ def main(mode="live"):
             or get_title_scope_exclusion(previous.get("title", ""))
         ):
             continue
-        processed_tenders.append(previous)
+        prev_stream = previous.get("stream") or previous.get("relevance", {}).get("stream", "copier")
+        prev_sub_type = previous.get("sub_type") or previous.get("relevance", {}).get("sub_type", "main")
+        processed_tenders.append({
+            **previous,
+            "stream": prev_stream,
+            "sub_type": prev_sub_type
+        })
         current_project_keys.add(previous_key)
     processed_tenders.sort(key=lambda tender: tender.get("publish_date", ""), reverse=True)
 
