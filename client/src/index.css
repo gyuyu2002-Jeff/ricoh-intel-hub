@@ -248,16 +248,40 @@
 .promo-banner-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 22px; white-space: nowrap; background: var(--red); color: #fff; border: 0; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all .16s var(--ease); box-shadow: 0 3px 12px rgba(201,45,63,.3); flex: 0 0 auto; }
 .promo-banner-btn:hover { background: var(--red-dark); transform: translateY(-1px); box-shadow: 0 5px 16px rgba(201,45,63,.42); }
 
-.subscribe-modal { position: relative; width: min(580px, calc(100% - 32px)); margin: auto; background: var(--paper); border: 1px solid var(--line); border-top: 4px solid var(--red); border-radius: 12px; padding: 26px 28px; box-shadow: var(--shadow); animation: fade-up .24s var(--ease); }
-.modal-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+.subscribe-modal {
+  position: relative;
+  width: min(580px, calc(100% - 24px));
+  max-height: min(90vh, 90dvh);
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--red);
+  border-radius: 12px;
+  padding: 22px 24px 16px;
+  box-shadow: var(--shadow);
+  animation: fade-up .24s var(--ease);
+  overflow: hidden;
+}
+.modal-header { flex: 0 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
 .modal-title-lockup { display: flex; align-items: flex-start; gap: 12px; }
 .modal-icon-badge { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; color: var(--red); background: #fff0f1; flex: 0 0 auto; margin-top: 2px; }
 .modal-title-lockup h3 { margin: 0 0 4px; font-size: 19px; font-weight: 700; color: var(--ink); }
 .modal-title-lockup p { margin: 0; font-size: 12px; color: #76847c; line-height: 1.5; }
 .modal-close-btn { width: 32px; height: 32px; flex: 0 0 auto; }
 
-.subscribe-form { display: grid; gap: 18px; }
-.form-group { display: grid; gap: 8px; }
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 6px;
+  padding-bottom: 6px;
+}
+.form-group { display: grid; gap: 8px; flex: 0 0 auto; }
 .form-group label { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--deep); }
 .city-select-label-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
 .city-quick-actions { display: flex; align-items: center; gap: 8px; }
@@ -265,7 +289,7 @@
 .clear-all-btn { background: transparent; border: 1px solid #d4dfd7; color: #697a70; border-radius: 6px; padding: 5px 10px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all .14s var(--ease); }
 .clear-all-btn:hover { background: #f0f4f1; color: var(--ink); border-color: #bdcebe; }
 
-.subscribe-selection-badge { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #eaf5ec; border: 1px solid #cce5d2; border-radius: 8px; color: #276239; font-size: 12px; font-weight: 600; line-height: 1.45; }
+.subscribe-selection-badge { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #eaf5ec; border: 1px solid #cce5d2; border-radius: 8px; color: #276239; font-size: 12px; font-weight: 600; line-height: 1.45; }
 .subscribe-selection-badge svg { flex: 0 0 auto; color: #276239; }
 .subscribe-selection-badge.badge-partial { background: #fdf5ec; border-color: #f6dcbe; color: #8e5018; }
 .subscribe-selection-badge.badge-partial svg { color: #8e5018; }
@@ -277,7 +301,7 @@
 .existing-subscriber-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #276239; font-weight: 600; padding: 4px 8px; background: #eaf5ec; border-radius: 5px; width: fit-content; }
 .existing-subscriber-badge svg { color: #276239; flex: 0 0 auto; }
 
-.subscribe-regions-container { display: grid; gap: 12px; max-height: 250px; overflow-y: auto; padding: 12px; border: 1px solid #e1ebe3; border-radius: 8px; background: #fafbfa; }
+.subscribe-regions-container { display: grid; gap: 10px; max-height: 150px; overflow-y: auto; padding: 10px; border: 1px solid #e1ebe3; border-radius: 8px; background: #fafbfa; }
 .subscribe-region-group { display: grid; gap: 6px; }
 .subscribe-region-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 2px; border-bottom: 1px solid #ebf1ec; }
 .region-meta { display: flex; align-items: center; gap: 7px; }
@@ -287,14 +311,140 @@
 .region-toggle-btn { background: transparent; border: 0; font-size: 11px; font-weight: 600; color: var(--deep); cursor: pointer; padding: 2px 6px; border-radius: 4px; transition: background .14s var(--ease); }
 .region-toggle-btn:hover { background: #e2ede5; color: var(--ink); }
 .subscribe-city-pills { display: flex; flex-wrap: wrap; gap: 6px; }
-.subscribe-city-pills .city-pill { min-height: 31px; padding: 0 11px; font-size: 12px; font-weight: 600; }
+.subscribe-city-pills .city-pill { min-height: 30px; padding: 0 10px; font-size: 12px; font-weight: 600; }
 .subscribe-city-pills .city-pill.active { background: var(--red); color: #fff; border-color: var(--red-dark); box-shadow: 0 2px 8px rgba(201,45,63,.25); }
 
-.subscribe-notice { display: flex; align-items: flex-start; gap: 8px; padding: 11px 13px; background: #edf5f0; border-left: 3px solid var(--deep); border-radius: 6px; font-size: 11px; color: #3d5849; line-height: 1.55; }
-.subscribe-notice svg { flex: 0 0 auto; color: var(--red); margin-top: 2px; }
-.subscribe-error-msg { padding: 9px 12px; background: #fff0f1; border: 1px solid #f1c7cc; border-radius: 6px; font-size: 11px; color: var(--red); font-weight: 600; }
+/* 方案 C：互盛專屬品牌圖形驗證樣式 */
+.brand-captcha-card {
+  background: #fbfcf8;
+  border: 1.5px solid #d4ded7;
+  border-radius: 10px;
+  padding: 12px 14px;
+  transition: all .2s var(--ease);
+  flex: 0 0 auto;
+}
+.brand-captcha-card.captcha-passed {
+  background: #edf6ef;
+  border-color: #689e78;
+}
+.captcha-success-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.captcha-success-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #235933;
+  font-size: 13px;
+  font-weight: 700;
+}
+.captcha-success-badge svg {
+  color: #235933;
+  flex: 0 0 auto;
+}
+.captcha-refresh-btn {
+  background: transparent;
+  border: 1px solid #b8d4c0;
+  border-radius: 6px;
+  padding: 4px 8px;
+  color: #3b6b4a;
+  cursor: pointer;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all .15s var(--ease);
+}
+.captcha-refresh-btn:hover {
+  background: #dbeee0;
+}
+.captcha-challenge-box {
+  display: grid;
+  gap: 8px;
+}
+.captcha-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--ink);
+}
+.captcha-header strong {
+  color: var(--red);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.captcha-shield-icon {
+  color: var(--deep);
+  flex: 0 0 auto;
+}
+.captcha-icons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.captcha-icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 4px;
+  background: #ffffff;
+  border: 1.5px solid #dbe4dc;
+  border-radius: 8px;
+  color: #3a4b41;
+  cursor: pointer;
+  transition: all .16s var(--ease);
+}
+.captcha-icon-btn span {
+  font-size: 11px;
+  font-weight: 600;
+}
+.captcha-icon-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+  background: #fff8f9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(201,45,63,.12);
+}
+.captcha-icon-btn:active {
+  transform: translateY(0);
+}
+.captcha-error-hint {
+  font-size: 11px;
+  color: var(--red);
+  font-weight: 600;
+  animation: shake .3s var(--ease);
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
 
-.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 6px; }
+.subscribe-notice { display: flex; align-items: flex-start; gap: 8px; padding: 9px 12px; background: #edf5f0; border-left: 3px solid var(--deep); border-radius: 6px; font-size: 11px; color: #3d5849; line-height: 1.5; flex: 0 0 auto; }
+.subscribe-notice svg { flex: 0 0 auto; color: var(--red); margin-top: 2px; }
+.subscribe-error-msg { padding: 9px 12px; background: #fff0f1; border: 1px solid #f1c7cc; border-radius: 6px; font-size: 11px; color: var(--red); font-weight: 600; flex: 0 0 auto; }
+
+/* 確保按鈕永遠粘貼置底，在 150% 甚至 200% 縮放下百分之百能看見並點擊 */
+.modal-actions {
+  position: sticky;
+  bottom: 0;
+  background: var(--paper);
+  padding: 10px 0 2px;
+  border-top: 1px solid #e5ede7;
+  z-index: 10;
+  margin-top: auto;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 .modal-submit-btn { min-height: 44px; padding: 0 24px; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
 
 .subscribe-success-box { display: grid; justify-items: center; text-align: center; gap: 10px; padding: 12px 6px; }

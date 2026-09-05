@@ -7,10 +7,13 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   BarChart3,
   Bell,
+  Car,
   Check,
   ChevronDown,
   ChevronRight,
+  Clock,
   Clock3,
+  Coffee,
   Database,
   ExternalLink,
   FileDown,
@@ -18,8 +21,11 @@ import {
   Mail,
   MapPin,
   MoreHorizontal,
+  Printer,
+  RotateCcw,
   Search,
   ShieldCheck,
+  Smartphone,
   Sparkles,
   X,
 } from "lucide-react";
@@ -500,6 +506,113 @@ const TAIWAN_REGIONS: { region: string; cities: string[] }[] = [
 const ALL_TAIWAN_CITIES = TAIWAN_REGIONS.flatMap((r) => r.cities);
 const ALLOWED_DOMAINS = ["eosasc.com.tw", "gmail.com"];
 
+type CaptchaCandidate = {
+  id: string;
+  name: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+};
+
+const CAPTCHA_POOL: CaptchaCandidate[] = [
+  { id: "printer", name: "多功能影印機", icon: Printer },
+  { id: "coffee", name: "熱咖啡杯", icon: Coffee },
+  { id: "car", name: "公務休旅車", icon: Car },
+  { id: "phone", name: "智慧型手機", icon: Smartphone },
+  { id: "clock", name: "數位時鐘", icon: Clock },
+];
+
+function BrandIconCaptcha({
+  isVerified,
+  onVerifySuccess,
+  onVerifyReset,
+}: {
+  isVerified: boolean;
+  onVerifySuccess: () => void;
+  onVerifyReset: () => void;
+}) {
+  const [options, setOptions] = useState<CaptchaCandidate[]>([]);
+  const [targetId, setTargetId] = useState<string>("printer");
+  const [errorHint, setErrorHint] = useState<string | null>(null);
+
+  const generateChallenge = () => {
+    const shuffled = [...CAPTCHA_POOL].sort(() => Math.random() - 0.5);
+    const chosen = shuffled.slice(0, 4);
+    const target = chosen[Math.floor(Math.random() * chosen.length)];
+    setOptions(chosen);
+    setTargetId(target.id);
+    setErrorHint(null);
+    onVerifyReset();
+  };
+
+  useEffect(() => {
+    generateChallenge();
+  }, []);
+
+  const handlePick = (picked: CaptchaCandidate) => {
+    if (picked.id === targetId) {
+      setErrorHint(null);
+      onVerifySuccess();
+    } else {
+      setErrorHint(`選取了「${picked.name}」，非指定圖示，已為您換題！`);
+      setTimeout(() => {
+        generateChallenge();
+      }, 700);
+    }
+  };
+
+  const target = options.find((o) => o.id === targetId) || options[0];
+  if (!target) return null;
+
+  return (
+    <div className={`brand-captcha-card ${isVerified ? "captcha-passed" : ""}`}>
+      {isVerified ? (
+        <div className="captcha-success-row">
+          <div className="captcha-success-badge">
+            <Check size={16} />
+            <span>✓ 人機安全驗證成功：已確認為本人操作</span>
+          </div>
+          <button
+            type="button"
+            className="captcha-refresh-btn"
+            onClick={generateChallenge}
+            title="更換驗證題目"
+          >
+            <RotateCcw size={12} />
+            <span>重新選題</span>
+          </button>
+        </div>
+      ) : (
+        <div className="captcha-challenge-box">
+          <div className="captcha-header">
+            <ShieldCheck size={16} className="captcha-shield-icon" />
+            <span>
+              人機安全驗證：請點選下方的<strong>【{target.name}】</strong>圖示
+            </span>
+          </div>
+
+          <div className="captcha-icons-grid">
+            {options.map((opt) => {
+              const IconComp = opt.icon;
+              return (
+                <button
+                  type="button"
+                  key={opt.id}
+                  className="captcha-icon-btn"
+                  onClick={() => handlePick(opt)}
+                >
+                  <IconComp size={22} />
+                  <span>{opt.name}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {errorHint && <div className="captcha-error-hint">✕ {errorHint}</div>}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SubscribeModal({
   isOpen,
   onClose,
@@ -831,48 +944,15 @@ function SubscribeModal({
               </div>
             </div>
 
-            {/* 真人互動驗證組件 */}
-            <div
-              className={`human-verify-card ${isHumanVerified ? "verified" : ""}`}
-              onClick={() => setIsHumanVerified(!isHumanVerified)}
-              style={{
-                background: isHumanVerified ? "#edf4ef" : "#fbfcf8",
-                border: isHumanVerified ? "1px solid #78a287" : "1px solid #d4ded7",
-                borderRadius: "8px",
-                padding: "12px 16px",
-                margin: "12px 0",
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                cursor: "pointer",
-                transition: "all 0.2s ease",
+            {/* 方案 C：互盛專屬品牌圖形點選驗證 */}
+            <BrandIconCaptcha
+              isVerified={isHumanVerified}
+              onVerifySuccess={() => {
+                setIsHumanVerified(true);
+                setMessage("");
               }}
-            >
-              <input
-                type="checkbox"
-                id="human-verify-check"
-                checked={isHumanVerified}
-                onChange={(e) => setIsHumanVerified(e.target.checked)}
-                style={{ width: "18px", height: "18px", accentColor: "#202825", cursor: "pointer" }}
-              />
-              <label
-                htmlFor="human-verify-check"
-                style={{
-                  fontSize: "13px",
-                  color: "#202825",
-                  cursor: "pointer",
-                  userSelect: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                }}
-              >
-                <ShieldCheck size={16} color={isHumanVerified ? "#2f5146" : "#78857d"} />
-                <span>
-                  <strong>人機安全驗證</strong>：我確認為震旦／互盛同仁或本人操作，非自動化爬蟲
-                </span>
-              </label>
-            </div>
+              onVerifyReset={() => setIsHumanVerified(false)}
+            />
 
             <div className="subscribe-notice">
               <Sparkles size={14} />
