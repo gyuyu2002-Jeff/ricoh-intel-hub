@@ -52,4 +52,36 @@ describe("已決標案件得標對照", () => {
     expect(tender.previousWinner).toBe("連續得標股份有限公司");
     expect(tender.history[0][0]).toBe("2025-08-10");
   });
+
+  it("歷史紀錄包含同體系不同分署時，前次得標優先判定同一機關之紀錄", () => {
+    const tender = mapRawTender({
+      stage: "公開徵求價單",
+      unit: "海洋委員會海巡署南部分署",
+      history_records: [
+        {
+          award_date: "2025-12-23",
+          job_number: "N115-002",
+          winner: "台灣佳能 (Canon)",
+          source_unit: "海洋委員會海巡署北部分署",
+          relation_scope: "same_parent_org",
+          source_url: "https://web.pcc.gov.tw/bdm1",
+        },
+        {
+          award_date: "2022-12-09",
+          job_number: "CGS112-007G1",
+          winner: "震旦 SHARP",
+          source_unit: "海洋委員會海巡署南部分署",
+          relation_scope: "same_unit",
+          source_url: "https://web.pcc.gov.tw/bdm2",
+        },
+      ],
+    });
+
+    expect(tender.previousWinner).toBe("震旦 SHARP");
+    expect(tender.history).toHaveLength(2);
+    expect(tender.history[0][4]).toBe("https://web.pcc.gov.tw/bdm1");
+    expect(tender.history[1][4]).toBe("https://web.pcc.gov.tw/bdm2");
+    expect(tender.history[0][6]).toBe("海洋委員會海巡署北部分署");
+    expect(tender.history[1][6]).toBe("海洋委員會海巡署南部分署");
+  });
 });

@@ -94,9 +94,9 @@ const fallbackTenders: Tender[] = [
     terms: ["影印機", "租賃"],
     sourceUrl: "https://web.pcc.gov.tw/",
     history: [
-      ["2024-08-05", "113-026", "83.8%", "宏羚股份有限公司"],
-      ["2023-08-01", "112-018", "81.2%", "金儀 Konica Minolta"],
-      ["2021-07-26", "110-021", "86.4%", "新印科技股份有限公司"],
+      ["2024-08-05", "113-026", "83.8%", "宏羚股份有限公司", "https://web.pcc.gov.tw/", "影印機租賃", "財政部臺北國稅局", "same_unit"],
+      ["2023-08-01", "112-018", "81.2%", "金儀 Konica Minolta", "https://web.pcc.gov.tw/", "影印機租賃", "財政部臺北國稅局", "same_unit"],
+      ["2021-07-26", "110-021", "86.4%", "新印科技股份有限公司", "https://web.pcc.gov.tw/", "影印機租賃", "財政部臺北國稅局", "same_unit"],
     ],
   },
   {
@@ -127,7 +127,7 @@ const fallbackTenders: Tender[] = [
     next: "先確認規格附件、租賃年限與預算揭露時間。",
     terms: ["影印機", "租賃", "長約"],
     sourceUrl: "https://web.pcc.gov.tw/",
-    history: [["2024-11-07", "I7313D053", "94.5%", "宏羚股份有限公司"]],
+    history: [["2024-11-07", "I7313D053", "94.5%", "宏羚股份有限公司", "https://web.pcc.gov.tw/", "影印機租賃", "台灣中油桃園煉油廠", "same_unit"]],
   },
   {
     priority: "P2",
@@ -158,8 +158,8 @@ const fallbackTenders: Tender[] = [
     terms: ["多功能事務機", "維護", "租賃"],
     sourceUrl: "https://web.pcc.gov.tw/",
     history: [
-      ["2025-09-18", "114-083", "78.4%", "金儀 Konica Minolta"],
-      ["2024-09-12", "113-076", "81.1%", "佳能台灣"],
+      ["2025-09-18", "114-083", "78.4%", "金儀 Konica Minolta", "https://web.pcc.gov.tw/", "事務機租賃", "新北市政府", "same_unit"],
+      ["2024-09-12", "113-076", "81.1%", "佳能台灣", "https://web.pcc.gov.tw/", "事務機租賃", "新北市政府", "same_unit"],
     ],
   },
 ];
@@ -189,6 +189,7 @@ type RawTender = {
     relation_scope?: string;
     source_url?: string;
     title?: string;
+    source_unit?: string;
   }>;
   relevance?: { confidence?: string; score?: number; matched_terms?: string[]; reason?: string };
 };
@@ -204,34 +205,54 @@ function formatDeadlineCountdown(deadline?: string) {
 }
 
 export function mapRawTender(raw: RawTender, isReview = false): Tender {
-  const history = [...(raw.history_records ?? [])]
-    .sort((a, b) => String(b.award_date ?? "").localeCompare(String(a.award_date ?? "")))
-    .map((record) => [
-      record.award_date ?? "待確認",
-      record.job_number ?? "歷史案件",
-      typeof record.discount_rate === "number" ? `${record.discount_rate}%` : "資料不足",
-      record.winner ?? "待人工確認",
-      record.source_url ?? "",
-      record.title ?? "",
-    ] as HistoryRow);
+  const sortedRecords = [...(raw.history_records ?? [])].sort((a, b) =>
+    String(b.award_date ?? "").localeCompare(String(a.award_date ?? ""))
+  );
+
+  const sameUnitRecord = sortedRecords.find((r) => r.relation_scope === "same_unit");
+  const primaryRecord = sameUnitRecord || sortedRecords[0];
+
+  const history = sortedRecords.map((record) => [
+    record.award_date ?? "待確認",
+    record.job_number ?? "歷史案件",
+    typeof record.discount_rate === "number" ? `${record.discount_rate}%` : "資料不足",
+    record.winner ?? "待人工確認",
+    record.source_url ?? "",
+    record.title ?? "",
+    record.source_unit ?? "",
+    record.relation_scope ?? (record.source_unit === raw.unit ? "same_unit" : "same_parent_org"),
+  ] as HistoryRow);
+  
   const confidence = raw.relevance?.confidence === "high" ? "高" : raw.relevance?.confidence === "medium" ? "中" : "待確認";
   const priority = raw.relevance?.score && raw.relevance.score >= 4 ? "P1" : "P2";
   const stage = isReview ? "待確認" : raw.stage ?? "狀態待確認";
   const isAwarded = stage === "已決標";
   const currentWinner = raw.main_competitor ?? (isAwarded ? "官方來源未列" : "待人工確認");
-  const previousWinner = history[0]?.[3] ?? (isAwarded ? "尚無可比前次紀錄" : currentWinner);
+  const previousWinner = primaryRecord?.winner ?? (isAwarded ? "尚無可比前次紀錄" : currentWinner);
   const stageTone = isReview ? "stage-review" : isAwarded ? "stage-awarded" : stage.includes("無法決標") ? "stage-failed" : stage.includes("公開") ? "stage-amber" : stage.includes("評選") ? "stage-dark" : "stage-blue";
-  const comparable = history.length > 0 ? `近 5 年｜可比紀錄 ${history.length} 筆` : "目前無完整可比紀錄";
+  
+  const sameUnitCount = sortedRecords.filter((r) => r.relation_scope === "same_unit").length;
+  const relatedCount = sortedRecords.filter((r) => r.relation_scope !== "same_unit").length;
+  const comparable = sameUnitCount > 0
+    ? `同機關 ${sameUnitCount} 筆${relatedCount > 0 ? ` · 同體系 ${relatedCount} 筆` : ""}`
+    : sortedRecords.length > 0
+    ? `近 5 年｜同體系 ${sortedRecords.length} 筆`
+    : "目前無完整可比紀錄";
+
   const summary = isAwarded
     ? history.length > 0
-      ? `本次由${currentWinner}得標；同機關可比前次得標廠商為${previousWinner}。`
+      ? `本次由${currentWinner}得標；${sameUnitRecord ? `同機關前次得標廠商為${sameUnitRecord.winner}` : `同體系參考前次為${previousWinner}`}。`
       : `本次由${currentWinner}得標；目前尚無同機關可比的前次得標紀錄。`
+    : sameUnitRecord
+    ? `${raw.unit ?? "本案機關"}前次租賃案由${sameUnitRecord.winner}得標（折率 ${sameUnitRecord.discount_rate}%）；全案計 ${history.length} 筆可比紀錄。`
     : history.length > 0
-    ? `${raw.unit ?? "本案機關"}過去有 ${history.length} 筆可比資料，前次由${previousWinner}得標。`
+    ? `${raw.unit ?? "本案機關"}尚無自身歷史，參考同體系 ${history.length} 筆資料，前次參考得標商為${previousWinner}。`
     : "目前尚無足夠歷史得標資料，先以公告規格與資格條件為主。";
+
   const next = stage.includes("公開")
     ? "先確認規格附件、預算揭露與投標資格，再安排客戶拜訪。"
     : "確認服務條件、評選配分與競品紀錄，再更新業務判讀。";
+
   return {
     priority,
     priorityLabel: priority === "P1" ? "優先追蹤" : "持續觀察",
@@ -258,7 +279,7 @@ export function mapRawTender(raw: RawTender, isReview = false): Tender {
     isReview,
     deadlineConfidence: raw.deadline_confidence ?? "unknown",
     publishConfidence: raw.publish_date_confidence ?? "unknown",
-    scope: history[0] ? (raw.history_records?.[0]?.relation_scope === "same_unit" ? "同一機關" : "跨機關") : "尚無歷史範圍",
+    scope: sameUnitCount > 0 ? "同一機關" : history.length > 0 ? "同體系機關" : "尚無歷史範圍",
     summary,
     next,
     terms: raw.relevance?.matched_terms?.slice(0, 4) ?? [],
@@ -359,7 +380,15 @@ function TenderCard({ tender }: { tender: Tender }) {
         </> : <>
           <Metric label="歷史折率中位數" value={tender.discount} note={tender.samples} />
           <Metric label={tender.reference.includes("不") ? "歷史優勢商" : "歷史參考價格"} value={tender.reference} note={tender.reference.includes("不") ? tender.competitor : "依中位折率推算｜僅供參考"} />
-          <Metric label="前次得標廠商" value={tender.previousWinner} note={latestHistory ? `${latestHistory[0]} · ${latestHistory[2]}` : "尚無歷史得標紀錄"} />
+          <Metric
+            label="前次得標廠商"
+            value={tender.previousWinner}
+            note={
+              latestHistory
+                ? `${(tender.history.find((r) => r[7] === "same_unit") || latestHistory)[0]} · ${(tender.history.find((r) => r[7] === "same_unit") || latestHistory)[2]} · ${(tender.history.find((r) => r[7] === "same_unit") || latestHistory)[7] === "same_unit" ? "同機關前次" : "同體系參考"}`
+                : "尚無歷史得標紀錄"
+            }
+          />
         </>}
       </div>
       <div className="decision-strip">
@@ -388,30 +417,56 @@ function TenderCard({ tender }: { tender: Tender }) {
             <Stamp tone="stamp-blue">{tender.history.length} 筆可比紀錄</Stamp>
           </div>
           <div className="history-list">
-            {tender.history.length === 0 ? <div className="empty-history">尚無同機關可比的前次得標紀錄。</div> : tender.history.map((row) => (
-              <div className="history-row" key={`${row[1]}-${row[0]}`}>
-                <span>{row[0]}</span>
-                <strong>{row[1]}</strong>
-                <span>{row[2]}</span>
-                <span>{row[3]}</span>
-                {row[4] ? (
-                  <a
-                    href={row[4]}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="history-link"
-                    title={`查看政府採購網官方決標原始公告 (${row[5] || row[1]})`}
-                  >
-                    原始決標 <ExternalLink size={11} />
-                  </a>
-                ) : (
-                  <span />
-                )}
-                <Stamp tone={row[3] === tender.previousWinner ? "stamp-red" : "stamp-green"}>{row[3] === tender.previousWinner ? "前次得標" : "歷史紀錄"}</Stamp>
-              </div>
-            ))}
+            {tender.history.length === 0 ? <div className="empty-history">尚無同機關可比的前次得標紀錄。</div> : tender.history.map((row) => {
+              const isSameUnit = row[7] === "same_unit";
+              const isPreviousWinner = row[3] === tender.previousWinner && isSameUnit;
+              const unitClean = (row[6] || "").replace("海洋委員會", "").replace("股份有限公司", "");
+              return (
+                <div className={`history-row ${isSameUnit ? "history-row-same-unit" : "history-row-related"}`} key={`${row[1]}-${row[0]}`}>
+                  <div className="history-col-date">
+                    <span>{row[0]}</span>
+                  </div>
+                  <div className="history-col-job">
+                    <strong>{row[1]}</strong>
+                    {unitClean && <small className="history-unit-badge" title={row[6]}>{unitClean}</small>}
+                  </div>
+                  <div className="history-col-rate">
+                    <span>{row[2]}</span>
+                  </div>
+                  <div className="history-col-winner">
+                    <span className="history-winner-name">{row[3]}</span>
+                    {row[5] && <small className="history-tender-title" title={row[5]}>{row[5]}</small>}
+                  </div>
+                  <div className="history-col-action">
+                    {row[4] ? (
+                      <a
+                        href={row[4]}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="history-link"
+                        title={`查看政府採購網官方決標原始公告 (${row[5] || row[1]})`}
+                      >
+                        原始決標 <ExternalLink size={11} />
+                      </a>
+                    ) : (
+                      <span className="history-no-link">官方紀錄</span>
+                    )}
+                  </div>
+                  <div className="history-col-stamp">
+                    <Stamp tone={isPreviousWinner ? "stamp-red" : isSameUnit ? "stamp-blue" : "stamp-green"}>
+                      {isPreviousWinner ? "同機關前次" : isSameUnit ? "同一機關" : "同體系參考"}
+                    </Stamp>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <div className="award-note"><span>判讀提示</span>{tender.isAwarded && <strong>本次得標廠商：{tender.currentWinner}</strong>}<strong>前次得標廠商：{tender.previousWinner}</strong><em>{tender.isAwarded ? "本次與前次資料分列；無歷史紀錄時不以本次得標者回填。" : "本欄為歷史資訊，不代表本案結果。"}</em></div>
+          <div className="award-note">
+            <span>判讀提示</span>
+            {tender.isAwarded && <strong>本次得標廠商：{tender.currentWinner}</strong>}
+            <strong>同機關前次得標：{tender.previousWinner}</strong>
+            <em>{tender.isAwarded ? "本次與前次資料分列；無歷史紀錄時不以本次得標者回填。" : "歷史清單若含同主管機關其他分署之案件，已標註「同體系參考」以資區隔。"}</em>
+          </div>
         </div>
       )}
     </article>
