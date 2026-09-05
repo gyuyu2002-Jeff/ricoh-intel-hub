@@ -235,16 +235,21 @@ def extract_dates(detail, publish_fallback_str):
                 except:
                     pass
                     
-    # 2. Look for Bidding Deadline (截止投標)
+    # 2. Look for Bidding Deadline (截止投標 / 公開徵求截止)
     for k, v in detail.items():
-        if ("截止" in k or "收件" in k) and ("投標" in k or "收件" in k) and "remind" not in k and v:
+        if ("截止" in k or "收件" in k or "徵求期間" in k or "公開徵求" in k) and "remind" not in k and v:
             val = str(v).strip()
+            for sep in ["至", "－", "-", "~", "～", "到"]:
+                if sep in val:
+                    val = val.split(sep)[-1].strip()
+                    break
             digits = re.findall(r'\d+', val)
             if len(digits) >= 3:
+                target_digits = digits[-3:] if len(digits) >= 6 else digits[:3]
                 try:
-                    roc_year = int(digits[0])
+                    roc_year = int(target_digits[0])
                     ad_year = roc_year + 1911 if roc_year < 1911 else roc_year
-                    deadline_date = f"{ad_year}-{int(digits[1]):02d}-{int(digits[2]):02d}"
+                    deadline_date = f"{ad_year}-{int(target_digits[1]):02d}-{int(target_digits[2]):02d}"
                     deadline_confidence = "verified"
                     break
                 except:
@@ -508,7 +513,8 @@ def classify_tender_relevance(item, detail=None):
 
     if machine_terms:
         return {"status": "excluded", "confidence": "high", "score": -4, "category": "industrial_machine", "matched_terms": machine_terms, "reason": "工業機械誤判"}
-    if supply_terms:
+    is_machine_lease_or_contract = bool(direct_title and any(t in title for t in ["租賃", "租用", "開口契約", "計張", "保養", "全包"]))
+    if supply_terms and not is_machine_lease_or_contract:
         return {"status": "excluded", "confidence": "high", "score": -3, "category": "supplies", "matched_terms": supply_terms, "reason": "耗材或零件"}
     if service_terms and not direct_title:
         return {"status": "excluded", "confidence": "high", "score": -3, "category": "printing_service", "matched_terms": service_terms, "reason": "純印務服務"}
@@ -890,7 +896,7 @@ def main(mode="live"):
         iso_date = scan_date.strftime("%Y-%m-%d")
         url = f"https://pcc-api.openfun.app/api/listbydate?date={compact_date}"
         day_data = fetch_json_with_retry(url, f"daily announcement census {iso_date}")
-        if day_data == {} and scan_date < today:
+        if day_data == {}:
             day_data = {"records": []}
         if not isinstance(day_data, dict) or not isinstance(day_data.get("records"), list):
             failed_dates.append(iso_date)
@@ -1366,7 +1372,7 @@ def main(mode="live"):
             continue
         
         if detail_data and detail_data.get("records"):
-            records = detail_data["records"]
+            records = sorted(detail_data["records"], key=lambda r: (str(r.get("date", "")), str(r.get("filename", ""))), reverse=True)
             merged_detail = {}
             for record_index, record in enumerate(records):
                 for key, value in record.get("detail", {}).items():
@@ -1552,14 +1558,19 @@ def main(mode="live"):
         publish_date_confidence = "unknown"
         deadline_confidence = "unknown"
         if detail_data and detail_data.get("records"):
-            for r in detail_data["records"]:
+            sorted_records = sorted(
+                detail_data["records"],
+                key=lambda r: (str(r.get("date", "")), str(r.get("filename", ""))),
+                reverse=True
+            )
+            for r in sorted_records:
                 r_detail = r.get("detail", {})
                 if r_detail:
                     p_date, d_date, p_confidence, d_confidence = extract_dates(r_detail, date_raw)
-                    if p_date:
+                    if p_date and not publish_date_str:
                         publish_date_str = p_date
                         publish_date_confidence = p_confidence
-                    if d_date:
+                    if d_date and not deadline_str:
                         deadline_str = d_date
                         deadline_confidence = d_confidence
                     if publish_date_str and deadline_str:

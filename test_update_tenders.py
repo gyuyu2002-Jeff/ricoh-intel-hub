@@ -112,6 +112,11 @@ class TenderRelevanceAdditionalTests(unittest.TestCase):
         result = classify_tender_relevance(announcement("影印機碳粉耗材採購"))
         self.assertEqual(result["category"], "supplies")
 
+    def test_copier_rental_including_supplies_is_included(self):
+        result = classify_tender_relevance(announcement("116-117年影印機(含安裝、運費、維修、耗材等計張費用)租賃案"))
+        self.assertEqual(result["category"], "office_output_equipment")
+        self.assertEqual(result["status"], "included")
+
     def test_printing_service_is_not_equipment(self):
         result = classify_tender_relevance(announcement("年度文宣印製及海報輸出服務"))
         self.assertEqual(result["category"], "printing_service")
