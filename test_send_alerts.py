@@ -5,7 +5,9 @@ from send_alerts import (
     match_tenders_for_subscriber,
     build_email_html,
     build_welcome_email_html,
-    send_welcome_email
+    send_welcome_email,
+    is_allowed_domain,
+    unsubscribe_email
 )
 
 
@@ -90,6 +92,26 @@ class TestSendAlerts(unittest.TestCase):
     def test_send_welcome_email_dry_run(self):
         res = send_welcome_email("test_dry@example.com", cities=["全部"], dry_run=True)
         self.assertTrue(res)
+
+    def test_domain_whitelisting(self):
+        self.assertTrue(is_allowed_domain("hanjiunwu@eosasc.com.tw"))
+        self.assertTrue(is_allowed_domain("huxen.ricoh@gmail.com"))
+        self.assertTrue(is_allowed_domain("USER@GMAIL.COM"))
+        # External or other domains must be blocked
+        self.assertFalse(is_allowed_domain("attacker@yahoo.com"))
+        self.assertFalse(is_allowed_domain("spammer@hotmail.com"))
+        self.assertFalse(is_allowed_domain("unknown@ricoh.com.tw"))
+        self.assertFalse(is_allowed_domain("invalid-email"))
+
+    def test_unsubscribe_link_in_emails(self):
+        alert_html = build_email_html("hanjiunwu@eosasc.com.tw", [self.sample_tenders[0]], "2026-09-05")
+        self.assertIn("立即取消訂閱", alert_html)
+        self.assertIn("action=unsubscribe", alert_html)
+        self.assertIn("email=hanjiunwu%40eosasc.com.tw", alert_html)
+
+        welcome_html = build_welcome_email_html("hanjiunwu@eosasc.com.tw", ["高雄市"])
+        self.assertIn("立即取消訂閱", welcome_html)
+        self.assertIn("action=unsubscribe", welcome_html)
 
 
 if __name__ == "__main__":

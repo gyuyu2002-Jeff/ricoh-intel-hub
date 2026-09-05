@@ -19,6 +19,7 @@ import {
   MapPin,
   MoreHorizontal,
   Search,
+  ShieldCheck,
   Sparkles,
   X,
 } from "lucide-react";
@@ -497,6 +498,7 @@ const TAIWAN_REGIONS: { region: string; cities: string[] }[] = [
 ];
 
 const ALL_TAIWAN_CITIES = TAIWAN_REGIONS.flatMap((r) => r.cities);
+const ALLOWED_DOMAINS = ["eosasc.com.tw", "gmail.com"];
 
 function SubscribeModal({
   isOpen,
@@ -531,6 +533,26 @@ function SubscribeModal({
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+  const [isHumanVerified, setIsHumanVerified] = useState(false);
+  const [cooldownSec, setCooldownSec] = useState(0);
+  const [openedAt, setOpenedAt] = useState(() => Date.now());
+
+  useEffect(() => {
+    if (isOpen) {
+      setOpenedAt(Date.now());
+      setIsHumanVerified(false);
+      setHoneypot("");
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (cooldownSec <= 0) return;
+    const timer = setInterval(() => {
+      setCooldownSec((prev) => Math.max(0, prev - 1));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [cooldownSec]);
 
   if (!isOpen) return null;
 
@@ -571,10 +593,46 @@ function SubscribeModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (cooldownSec > 0) {
+      setStatus("error");
+      setMessage(`請等待 ${cooldownSec} 秒冷卻時間後再嘗試送出。`);
+      return;
+    }
+
+    // 1. 蜜罐陷阱偵測 (Honeypot)
+    if (honeypot.trim()) {
+      setStatus("error");
+      setMessage("安全驗證失敗。");
+      return;
+    }
+
+    // 2. 表單填寫時間過快檢查 (< 1.5 秒判定為機器人)
+    if (Date.now() - openedAt < 1500) {
+      setStatus("error");
+      setMessage("填寫速度過快，請稍候再送出。");
+      return;
+    }
+
+    // 3. 人機安全驗證
+    if (!isHumanVerified) {
+      setStatus("error");
+      setMessage("請先勾選下方「🛡️ 人機安全驗證」，確認為本人操作。");
+      return;
+    }
+
     const cleanEmail = email.trim().toLowerCase();
     if (!cleanEmail || !cleanEmail.includes("@")) {
       setStatus("error");
       setMessage("請輸入有效的 Email 地址。");
+      return;
+    }
+
+    // 4. 嚴格限定網域白名單（只接受 @eosasc.com.tw 與 @gmail.com）
+    const domain = cleanEmail.split("@").pop() || "";
+    if (!ALLOWED_DOMAINS.includes(domain)) {
+      setStatus("error");
+      setMessage("為維護內部情報安全，目前僅接受 @eosasc.com.tw 或 @gmail.com 網域。");
       return;
     }
 
@@ -591,6 +649,7 @@ function SubscribeModal({
       email: cleanEmail,
       cities: isAllSelected ? ["全台所有縣市"] : selectedCities,
       subscribed_at: new Date().toISOString(),
+      hp_company_sec: honeypot,
     };
 
     try {
@@ -615,6 +674,7 @@ function SubscribeModal({
       }
     }
 
+    setCooldownSec(60);
     setStatus("success");
     setMessage("已完成登記！當關注縣市有新標案或公開徵求時，系統將自動寄發通知。");
   };
@@ -668,9 +728,24 @@ function SubscribeModal({
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="例如：name@ricoh.com.tw 或個人信箱"
+                placeholder="僅接受 @eosasc.com.tw 或 @gmail.com"
                 className="subscribe-input"
               />
+              <div style={{ fontSize: "11px", color: "#617369", marginTop: "4px" }}>
+                🔒 網域安全限制：僅接受 <code>@eosasc.com.tw</code> 或 <code>@gmail.com</code>。
+              </div>
+
+              {/* 蜜罐陷阱欄位：供惡意自動爬蟲誤填，正常同仁隱形不可見 */}
+              <input
+                type="text"
+                name="hp_company_sec"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
               {isAlreadyRegistered && (
                 <div className="existing-subscriber-badge">
                   <Check size={13} />
@@ -756,6 +831,49 @@ function SubscribeModal({
               </div>
             </div>
 
+            {/* 真人互動驗證組件 */}
+            <div
+              className={`human-verify-card ${isHumanVerified ? "verified" : ""}`}
+              onClick={() => setIsHumanVerified(!isHumanVerified)}
+              style={{
+                background: isHumanVerified ? "#edf4ef" : "#fbfcf8",
+                border: isHumanVerified ? "1px solid #78a287" : "1px solid #d4ded7",
+                borderRadius: "8px",
+                padding: "12px 16px",
+                margin: "12px 0",
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+              }}
+            >
+              <input
+                type="checkbox"
+                id="human-verify-check"
+                checked={isHumanVerified}
+                onChange={(e) => setIsHumanVerified(e.target.checked)}
+                style={{ width: "18px", height: "18px", accentColor: "#202825", cursor: "pointer" }}
+              />
+              <label
+                htmlFor="human-verify-check"
+                style={{
+                  fontSize: "13px",
+                  color: "#202825",
+                  cursor: "pointer",
+                  userSelect: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                }}
+              >
+                <ShieldCheck size={16} color={isHumanVerified ? "#2f5146" : "#78857d"} />
+                <span>
+                  <strong>人機安全驗證</strong>：我確認為震旦／互盛同仁或本人操作，非自動化爬蟲
+                </span>
+              </label>
+            </div>
+
             <div className="subscribe-notice">
               <Sparkles size={14} />
               <span>系統每日自動排程比對，新案件當日彙整發送，並具備<strong>指紋防重複機制</strong>，同一案件絕不重複發信。</span>
@@ -767,9 +885,19 @@ function SubscribeModal({
               <button type="button" className="outline-button" onClick={onClose}>
                 取消
               </button>
-              <button type="submit" className="action-primary modal-submit-btn" disabled={status === "loading"}>
+              <button
+                type="submit"
+                className="action-primary modal-submit-btn"
+                disabled={status === "loading" || cooldownSec > 0 || !isHumanVerified}
+              >
                 <Bell size={16} />
-                {status === "loading" ? "儲存中..." : isAlreadyRegistered ? "儲存並更新通知地區" : "相關地區標案通知我"}
+                {status === "loading"
+                  ? "儲存中..."
+                  : cooldownSec > 0
+                  ? `冷卻中 (${cooldownSec} 秒)`
+                  : isAlreadyRegistered
+                  ? "儲存並更新通知地區"
+                  : "相關地區標案通知我"}
               </button>
             </div>
           </form>
@@ -785,11 +913,39 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [subscribeOpen, setSubscribeOpen] = useState(false);
+  const [unsubscribedEmail, setUnsubscribedEmail] = useState<string | null>(null);
   const [tenders, setTenders] = useState<Tender[]>(fallbackTenders);
   const [reviewTenders, setReviewTenders] = useState<Tender[]>([]);
   const [dataUpdated, setDataUpdated] = useState("待確認");
   const [dataSyncStatus, setDataSyncStatus] = useState<"loading" | "complete" | "warning" | "unknown">("loading");
   const [dataSyncAttempt, setDataSyncAttempt] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("action") === "unsubscribe" && params.get("email")) {
+      const target = params.get("email")!.trim().toLowerCase();
+      setUnsubscribedEmail(target);
+      try {
+        const saved = localStorage.getItem("ricoh_subscriber_info");
+        if (saved && JSON.parse(saved).email.toLowerCase() === target) {
+          localStorage.removeItem("ricoh_subscriber_info");
+        }
+      } catch {}
+      const remoteUrl =
+        (window as any).RICOH_SUBSCRIBE_URL ||
+        localStorage.getItem("SUBSCRIBERS_URL") ||
+        "";
+      if (remoteUrl) {
+        fetch(remoteUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "unsubscribe", email: target }),
+          mode: "no-cors",
+        }).catch(() => {});
+      }
+    }
+  }, []);
+
   const cityOptions = useMemo(() => {
     const counts = new Map<string, number>();
     tenders.forEach(({ city }) => counts.set(city, (counts.get(city) ?? 0) + 1));
@@ -860,6 +1016,54 @@ export default function Home() {
         </a>
       </nav>
       <main className="page-container">
+        {unsubscribedEmail && (
+          <div
+            style={{
+              background: "#fef2f2",
+              border: "1px solid #fecaca",
+              borderLeft: "4px solid #dc2626",
+              borderRadius: "8px",
+              padding: "16px 20px",
+              marginBottom: "20px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "12px",
+            }}
+          >
+            <div>
+              <div style={{ fontWeight: 700, color: "#991b1b", fontSize: "14px", marginBottom: "4px" }}>
+                ✕ 已成功取消訂閱標案通知
+              </div>
+              <div style={{ fontSize: "13px", color: "#7f1d1d" }}>
+                信箱 <strong>{unsubscribedEmail}</strong> 已自通報名單中停用，往後將不再接收新標案通報信。若欲重新訂閱，隨時可點選右方按鈕。
+              </div>
+            </div>
+            <div style={{ display: "flex", gap: "8px" }}>
+              <button
+                type="button"
+                className="action-primary"
+                style={{ padding: "6px 14px", fontSize: "12px" }}
+                onClick={() => {
+                  setUnsubscribedEmail(null);
+                  setSubscribeOpen(true);
+                }}
+              >
+                重新訂閱
+              </button>
+              <button
+                type="button"
+                className="outline-button"
+                style={{ padding: "6px 12px", fontSize: "12px" }}
+                onClick={() => setUnsubscribedEmail(null)}
+              >
+                關閉
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="page-heading">
           <div>
             <div className="eyebrow">互盛情報中樞 <span>/</span> 2026.08.14</div>

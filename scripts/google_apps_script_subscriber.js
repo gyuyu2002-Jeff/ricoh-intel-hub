@@ -14,6 +14,14 @@
  * 7. 將該網址填入 GitHub 倉庫 Secrets 中的 `SUBSCRIBERS_URL`，同時填入前端設定。
  */
 
+var ALLOWED_DOMAINS = ["eosasc.com.tw", "gmail.com"];
+
+function isAllowedDomain(email) {
+  if (!email || email.indexOf("@") === -1) return false;
+  var domain = email.split("@").pop().toLowerCase().trim();
+  return ALLOWED_DOMAINS.indexOf(domain) !== -1;
+}
+
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -28,25 +36,57 @@ function doPost(e) {
       data = e.parameter;
     }
 
-    var email = (data.email || "").trim().toLowerCase();
-    var cities = Array.isArray(data.cities) ? data.cities.join(", ") : (data.cities || "全部");
-    var timestamp = Utilities.formatDate(new Date(), "Asia/Taipei", "yyyy-MM-dd HH:mm:ss");
-
-    if (!email || email.indexOf("@") === -1) {
-      return ContentService.createTextOutput(JSON.stringify({ status: "error", message: "請輸入有效的 Email" }))
+    // 1. 蜜罐陷阱 (Honeypot) 偵測：若機器人填寫了隱藏欄位，直接拒絕
+    if (data.hp_company_sec || data.hp_token || data.hp_code) {
+      return ContentService.createTextOutput(JSON.stringify({ status: "error", message: "安全校驗未通過。" }))
         .setMimeType(ContentService.MimeType.JSON);
     }
 
-    // 檢查是否已登記過，若有則更新所選縣市與時間
+    var action = (data.action || "").trim().toLowerCase();
+    var email = (data.email || "").trim().toLowerCase();
+
+    // 2. 取消訂閱處理 (Unsubscribe via POST)
+    if (action === "unsubscribe") {
+      if (!email || email.indexOf("@") === -1) {
+        return ContentService.createTextOutput(JSON.stringify({ status: "error", message: "請輸入有效的 Email" }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+      var rows = sheet.getDataRange().getValues();
+      for (var i = 1; i < rows.length; i++) {
+        if (String(rows[i][0]).trim().toLowerCase() === email) {
+          sheet.getRange(i + 1, 4).setValue("已停用 (使用者取消訂閱)");
+          return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "已成功取消訂閱！" }))
+            .setMimeType(ContentService.MimeType.JSON);
+        }
+      }
+      return ContentService.createTextOutput(JSON.stringify({ status: "error", message: "找不到該訂閱信箱" }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // 3. 網域白名單檢查：僅接受 @eosasc.com.tw 與 @gmail.com (以及 @ricoh.com.tw)
+    if (!isAllowedDomain(email)) {
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "error",
+        message: "為維護內部情報安全，目前僅開放 @eosasc.com.tw 與 @gmail.com 網域訂閱。"
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    var cities = Array.isArray(data.cities) ? data.cities.join(", ") : (data.cities || "全部");
+    var timestamp = Utilities.formatDate(new Date(), "Asia/Taipei", "yyyy-MM-dd HH:mm:ss");
+
+    // 檢查是否已登記過，若有則更新所選縣市與時間 (UPSERT 防重複)
     var rows = sheet.getDataRange().getValues();
     var foundIndex = -1;
+    var previousStatus = "";
     for (var i = 1; i < rows.length; i++) {
       if (String(rows[i][0]).trim().toLowerCase() === email) {
         foundIndex = i + 1;
+        previousStatus = String(rows[i][3] || "");
         break;
       }
     }
 
+    var isNewSubscriber = (foundIndex === -1);
     if (foundIndex > 0) {
       sheet.getRange(foundIndex, 2).setValue(cities);
       sheet.getRange(foundIndex, 3).setValue(timestamp);
@@ -66,7 +106,7 @@ function doPost(e) {
 
     return ContentService.createTextOutput(JSON.stringify({
       status: "success",
-      message: "訂閱登記成功！已寄送測試信件至您的信箱，請查收確認。",
+      message: "訂閱登記成功！已寄送測試確認信至您的信箱，請查收確認。",
       mail_sent: mailSuccess
     })).setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
@@ -78,16 +118,52 @@ function doPost(e) {
 function doGet(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var action = (e && e.parameter && e.parameter.action) ? e.parameter.action.toLowerCase() : "";
+    var targetEmail = (e && e.parameter && e.parameter.email) ? e.parameter.email.trim().toLowerCase() : "";
+
+    // 4. 一鍵取消訂閱網址點擊處理 (Web Unsubscribe Handler)
+    if (action === "unsubscribe" && targetEmail) {
+      var rows = sheet.getDataRange().getValues();
+      var found = false;
+      for (var i = 1; i < rows.length; i++) {
+        if (String(rows[i][0]).trim().toLowerCase() === targetEmail) {
+          sheet.getRange(i + 1, 4).setValue("已停用 (使用者取消訂閱)");
+          found = true;
+          break;
+        }
+      }
+
+      var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>已取消訂閱 - 互盛情報中樞</title>'
+        + '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+        + '<style>'
+        + 'body{margin:0;padding:40px 16px;background:#eef3ed;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#202825;display:flex;justify-content:center;}'
+        + '.box{background:#fbfcf8;border:1px solid #d4ded7;border-radius:12px;padding:36px;max-width:520px;text-align:center;box-shadow:0 10px 25px rgba(0,0,0,0.05);}'
+        + 'h2{color:#202825;margin:12px 0 8px;font-size:20px;}'
+        + 'p{color:#53605a;font-size:14px;line-height:1.6;margin:8px 0;}'
+        + '.badge{display:inline-block;background:#fee2e2;color:#991b1b;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:12px;}'
+        + '.btn{display:inline-block;margin-top:24px;background:#202825;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 24px;border-radius:6px;}'
+        + '</style></head><body>'
+        + '<div class="box">'
+        + '<div class="badge">✕ 已取消訂閱</div>'
+        + '<h2>互盛情報中樞 · 通知已停用</h2>'
+        + '<p>您的信箱 <strong>' + targetEmail + '</strong> 已成功自通報名單中移除，往後將不再接收標案情報信件。</p>'
+        + '<p>若日後業務需要重新開啟監控，可隨時前往首頁重新登記。</p>'
+        + '<a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" class="btn">返回 互盛情報中樞 首頁 ➜</a>'
+        + '</div></body></html>';
+
+      return HtmlService.createHtmlOutput(html);
+    }
+
+    // 預設 API 查詢名單邏輯
     var rows = sheet.getDataRange().getValues();
     var subscribers = [];
 
-    // 從第二列開始讀取資料 (跳過標題列)
     for (var i = 1; i < rows.length; i++) {
       var email = String(rows[i][0]).trim();
       var citiesRaw = String(rows[i][1]).trim();
       var status = String(rows[i][3] || "有效").trim();
 
-      if (email && email.indexOf("@") !== -1 && status.indexOf("停用") === -1) {
+      if (email && isAllowedDomain(email) && status.indexOf("停用") === -1 && status.indexOf("退訂") === -1) {
         var citiesList = citiesRaw ? citiesRaw.split(",").map(function(c) { return c.trim(); }) : ["全部"];
         subscribers.push({
           email: email,
@@ -110,6 +186,7 @@ function doGet(e) {
  */
 function sendWelcomeTestEmail(toEmail, citiesStr) {
   var subject = "【互盛情報中樞】通知設定成功測試信 · 標案監控已啟動";
+  var unsubLink = "https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?action=unsubscribe&email=" + encodeURIComponent(toEmail);
   var htmlBody = '<!DOCTYPE html><html><head><meta charset="utf-8"></head>'
     + '<body style="margin:0; padding:24px 12px; background:#eef3ed; font-family:\'Noto Sans TC\', -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif; color:#202825;">'
     + '<div style="max-width:640px; margin:0 auto; background:#fbfcf8; border:1px solid #d4ded7; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(38,61,52,0.06);">'
@@ -140,8 +217,10 @@ function sendWelcomeTestEmail(toEmail, citiesStr) {
     + '<a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" target="_blank" style="display:inline-block; background:#202825; color:#ffffff; font-size:13px; font-weight:700; padding:10px 24px; border-radius:6px; text-decoration:none;">前往 互盛情報中樞 完整看板 ➜</a>'
     + '</div>'
     + '</div>'
-    + '<div style="background:#f4f7f4; padding:16px 28px; font-size:11px; color:#849289; text-align:center; border-top:1px solid #e1e9e2;">'
-    + '此為互盛內部業務情報系統自動發送之設定確認信 · 若欲修改通知縣市，請隨時前往情報中樞更新。'
+    + '<div style="background:#f4f7f4; padding:16px 28px; font-size:11px; color:#849289; text-align:center; border-top:1px solid #e1e9e2; line-height:1.7;">'
+    + '發件信箱：huxen.ricoh@gmail.com · 此為互盛內部業務情報系統自動發送之設定確認信<br>'
+    + '若欲修改通知縣市，請前往 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" style="color:#2f5146; text-decoration:none; font-weight:700;">互盛情報中樞</a> 更新設定。<br>'
+    + '若不想再收到此情報信，請點擊 <a href="' + unsubLink + '" style="color:#c92d3f; text-decoration:underline;">[立即取消訂閱]</a>。'
     + '</div></div></body></html>';
 
   MailApp.sendEmail({

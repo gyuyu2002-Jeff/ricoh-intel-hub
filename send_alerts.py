@@ -45,12 +45,28 @@ def save_json_file(filepath, data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
+ALLOWED_DOMAINS = ["eosasc.com.tw", "gmail.com"]
+
+
+def is_allowed_domain(email):
+    """
+    Validates that email belongs strictly to permitted domains (@eosasc.com.tw, @gmail.com).
+    Strictly protects against external abuse and quota depletion.
+    """
+    if not email or "@" not in email:
+        return False
+    domain = email.strip().lower().split("@")[-1]
+    return domain in ALLOWED_DOMAINS
+
+
 def get_subscribers():
     """
     Fetch subscriber list.
     Prioritizes remote Google Apps Script / Sheet API if SUBSCRIBERS_URL is set,
     otherwise falls back to local subscribers.json.
+    Filters out unsubscribed users and non-whitelisted domains.
     """
+    raw_subscribers = []
     remote_url = os.environ.get("SUBSCRIBERS_URL", "").strip()
     if remote_url:
         try:
@@ -61,18 +77,51 @@ def get_subscribers():
             with urllib.request.urlopen(req, timeout=10) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
                 if isinstance(data, list):
-                    return data
-                if isinstance(data, dict) and "subscribers" in data:
-                    return data["subscribers"]
+                    raw_subscribers = data
+                elif isinstance(data, dict) and "subscribers" in data:
+                    raw_subscribers = data["subscribers"]
         except Exception as e:
             print(f"Notice: Failed to fetch remote subscribers ({e}). Falling back to local file.")
 
+    if not raw_subscribers:
+        local_data = load_json_file(SUBSCRIBERS_FILE, default_val=[])
+        if isinstance(local_data, list):
+            raw_subscribers = local_data
+        elif isinstance(local_data, dict):
+            raw_subscribers = local_data.get("subscribers", [])
+
+    valid_subscribers = []
+    for sub in raw_subscribers:
+        email = sub.get("email", "").strip().lower()
+        status = str(sub.get("status", "有效"))
+        if not is_allowed_domain(email):
+            continue
+        if "停用" in status or "退訂" in status:
+            continue
+        valid_subscribers.append(sub)
+
+    return valid_subscribers
+
+
+def unsubscribe_email(email):
+    """
+    Marks an email as unsubscribed in local subscribers.json.
+    """
+    email_clean = email.strip().lower()
     local_data = load_json_file(SUBSCRIBERS_FILE, default_val=[])
+    updated = False
     if isinstance(local_data, list):
-        return local_data
-    if isinstance(local_data, dict):
-        return local_data.get("subscribers", [])
-    return []
+        for sub in local_data:
+            if sub.get("email", "").strip().lower() == email_clean:
+                sub["status"] = "已停用 (使用者取消訂閱)"
+                sub["unsubscribed_at"] = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M:%S")
+                updated = True
+        if updated:
+            save_json_file(SUBSCRIBERS_FILE, local_data)
+            print(f"Subscriber {email_clean} has been marked as unsubscribed in {SUBSCRIBERS_FILE}.")
+            return True
+    print(f"Subscriber {email_clean} not found in local subscribers.json.")
+    return False
 
 
 def deduplicate_subscribers(subscribers):
@@ -83,7 +132,7 @@ def deduplicate_subscribers(subscribers):
     by_email = {}
     for sub in subscribers:
         email = sub.get("email", "").strip().lower()
-        if not email or "@" not in email:
+        if not is_allowed_domain(email):
             continue
         by_email[email] = sub
     return list(by_email.values())
@@ -223,9 +272,10 @@ def build_email_html(subscriber_email, tenders, taipei_date_str):
     </div>
 
     <!-- Footer -->
-    <div style="background:#f4f7f4; padding:16px 28px; font-size:11px; color:#849289; text-align:center; border-top:1px solid #e1e9e2;">
+    <div style="background:#f4f7f4; padding:16px 28px; font-size:11px; color:#849289; text-align:center; border-top:1px solid #e1e9e2; line-height:1.7;">
       發件信箱：huxen.ricoh@gmail.com · 此為互盛內部業務情報系統自動發送之快報<br>
-      若欲修改訂閱縣市或取消訂閱，請至 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" style="color:#c92d3f; text-decoration:none;">互盛情報中樞首頁</a> 點選「訂閱標案」進行更新。
+      若欲修改通知縣市，請至 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" style="color:#2f5146; text-decoration:none; font-weight:700;">互盛情報中樞首頁</a> 更新設定。<br>
+      若不想再收到此情報通報，請點擊 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?action=unsubscribe&amp;email={urllib.parse.quote(subscriber_email.strip().lower())}" style="color:#c92d3f; text-decoration:underline;">[立即取消訂閱]</a>。
     </div>
   </div>
 </body>
@@ -336,9 +386,10 @@ def build_welcome_email_html(subscriber_email, cities=None, sample_tenders=None)
     </div>
 
     <!-- Footer -->
-    <div style="background:#f4f7f4; padding:16px 28px; font-size:11px; color:#849289; text-align:center; border-top:1px solid #e1e9e2;">
+    <div style="background:#f4f7f4; padding:16px 28px; font-size:11px; color:#849289; text-align:center; border-top:1px solid #e1e9e2; line-height:1.7;">
       發件信箱：huxen.ricoh@gmail.com · 此為互盛內部業務情報系統自動發送之設定確認信<br>
-      若欲修改通知縣市，請隨時前往 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" style="color:#c92d3f; text-decoration:none;">互盛情報中樞</a> 點選「變更通知地區設定」即可直接更新。
+      若欲修改通知縣市，請前往 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" style="color:#2f5146; text-decoration:none; font-weight:700;">互盛情報中樞</a> 更新設定。<br>
+      若不想再收到此情報信，請點擊 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?action=unsubscribe&amp;email={urllib.parse.quote(subscriber_email.strip().lower())}" style="color:#c92d3f; text-decoration:underline;">[立即取消訂閱]</a>。
     </div>
   </div>
 </body>
@@ -532,7 +583,12 @@ if __name__ == "__main__":
     parser.add_argument("--dry-run", action="store_true", help="Simulate without actually sending emails or modifying sent_notifications.json")
     parser.add_argument("--test-email", type=str, help="Send a test alert email to a specific address")
     parser.add_argument("--send-welcome", type=str, help="Send a welcome test email to a specific address to verify mailbox reception")
+    parser.add_argument("--unsubscribe", type=str, help="Unsubscribe an email address from alert notifications")
     args = parser.parse_args()
+
+    if args.unsubscribe:
+        ok = unsubscribe_email(args.unsubscribe)
+        sys.exit(0 if ok else 1)
 
     dispatched = dispatch_alerts(dry_run=args.dry_run, test_email=args.test_email, send_welcome_to=args.send_welcome)
     print(f"Alert dispatch completed. Total subscribers notified: {dispatched}")
