@@ -1,0 +1,4 @@
+{
+  "_comment": "Registry of dispatched notifications to prevent duplicate alerts. Key format: email_job_stage_date",
+  "dispatched": {}
+}
