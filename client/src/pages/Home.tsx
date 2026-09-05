@@ -438,7 +438,7 @@ function TenderCard({ tender }: { tender: Tender }) {
               {tender.subType === "supplies" ? "🖨️ 碳粉耗材" : tender.subType === "printer" ? "🖨️ 印表設備" : tender.subType === "scanner" ? "📄 文件掃描" : "周邊商機"}
             </Stamp>
           ) : (
-            <Stamp tone="stamp-blue">🏢 事務機主機</Stamp>
+            <Stamp tone="stamp-blue">🏢 影印機主機</Stamp>
           )}
           <Stamp tone={tender.stageTone}>{tender.isReview ? "待人工確認" : tender.isAwarded ? "✓ 已決標" : isSolicitation ? "📢 公開徵求" : tender.stage}</Stamp>
         </div>
@@ -955,7 +955,7 @@ function SubscribeModal({
             </p>
             <div className="success-details">
               <div><span>通知信箱：</span><strong>{email}</strong></div>
-              <div><span>關注類別：</span><strong>{selectedCategories.map((c) => c === "copier" ? "🏢 事務機主機" : "🖨️ 周邊耗材").join("、")}</strong></div>
+              <div><span>關注類別：</span><strong>{selectedCategories.map((c) => c === "copier" ? "🏢 影印機案件監控" : "🖨️ 非影印機案件監控(周邊/耗材/印表機)").join("、")}</strong></div>
               <div><span>關注範圍：</span><strong>{isAllSelected ? "全台所有縣市（共 22 個縣市全數監控）" : `已選定 ${selectedCities.length} 個縣市（${selectedCities.join("、")}）`}</strong></div>
               <div><span>發件來源：</span><code>huxen.ricoh@gmail.com</code></div>
             </div>
@@ -1037,7 +1037,7 @@ function SubscribeModal({
                     }}
                   />
                   <div className="category-check-info">
-                    <strong>🏢 事務機／複合機主機</strong>
+                    <strong>🏢 影印機案件監控</strong>
                     <span>影印機、複合機主機租賃、採購與長約案</span>
                   </div>
                 </label>
@@ -1055,7 +1055,7 @@ function SubscribeModal({
                     }}
                   />
                   <div className="category-check-info">
-                    <strong>🖨️ 周邊耗材與設備</strong>
+                    <strong>🖨️ 非影印機案件監控 (周邊/耗材/印表機)</strong>
                     <span>公部門碳粉匣、耗材、印表機、掃描器</span>
                   </div>
                 </label>
@@ -1319,11 +1319,11 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "perip
       <nav className="site-tabs" aria-label="網站主要分頁">
         <a className={`site-tab ${stream === "copier" ? "active" : ""}`} href="#" aria-current={stream === "copier" ? "page" : undefined}>
           <span className="site-tab-index">01</span>
-          <span><strong>標案監控</strong><small>事務機／複合機主機</small></span>
+          <span><strong>影印機案件監控</strong><small>事務機／複合機主機</small></span>
         </a>
         <a className={`site-tab ${stream === "peripherals" ? "active" : ""}`} href="#/peripherals" aria-current={stream === "peripherals" ? "page" : undefined}>
           <span className="site-tab-index">02</span>
-          <span><strong>周邊耗材監控</strong><small>碳粉耗材／印表機／掃描器</small></span>
+          <span><strong>非影印機案件監控</strong><small>(周邊/耗材/印表機)</small></span>
         </a>
         <a className="site-tab" href="#/specs">
           <span className="site-tab-index">03</span>
@@ -1382,12 +1382,12 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "perip
         <div className="page-heading">
           <div>
             <div className="eyebrow">
-              {stream === "peripherals" ? "互盛情報中樞 / 周邊設備與碳粉耗材商機" : "互盛情報中樞 / 事務機與複合機主機"}
+              {stream === "peripherals" ? "互盛情報中樞 / 非影印機案件（周邊/耗材/印表機）" : "互盛情報中樞 / 影印機案件"}
             </div>
-            <h1>{stream === "peripherals" ? "周邊耗材商機雷達" : "標案情報監控雷達"}</h1>
+            <h1>{stream === "peripherals" ? "非影印機案件監控雷達" : "影印機案件監控雷達"}</h1>
             <p>
               {stream === "peripherals"
-                ? "專注公部門碳粉匣、雷射/點陣印表機與高速掃描器採購商機，與主機完全分流。"
+                ? "專注公部門周邊、耗材、印表機與高速掃描器採購商機，與影印機主機完全分流。"
                 : "先看今天該追的案，再回頭核對前次得標紀錄。"}
             </p>
           </div>
@@ -1414,10 +1414,10 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "perip
             </div>
             <div className="overview-number">{streamTenders.length}</div>
             <div className="overview-copy">
-              <strong>{stream === "peripherals" ? "件周邊耗材案件" : "件進行中標案"}</strong>
+              <strong>{stream === "peripherals" ? "件非影印機案件" : "件進行中標案"}</strong>
               <span>
                 {stream === "peripherals"
-                  ? "涵蓋公部門碳粉耗材、印表設備與高速掃描器"
+                  ? "涵蓋公部門周邊、耗材、印表機與高速掃描器"
                   : "已完成縣市判定，依業務優先級重新排序"}
               </span>
             </div>
@@ -1428,7 +1428,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "perip
             <small>近期結果醒目追蹤</small>
           </div>
           <div className="overview-stat">
-            <span>{stream === "peripherals" ? "周邊總案件量" : "今日來源公告"}</span>
+            <span>{stream === "peripherals" ? "非影印機總案件量" : "今日來源公告"}</span>
             <strong>{streamTenders.length}</strong>
             <small>目前資料集案件量</small>
           </div>

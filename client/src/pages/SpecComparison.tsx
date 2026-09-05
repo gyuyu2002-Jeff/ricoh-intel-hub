@@ -127,21 +127,21 @@ export default function SpecComparison() {
         </a>
         <div className="spec-topbar-side">
           <span><span className="spec-live-dot" /> VERIFIED DATASET</span>
-          <a href="#" className="spec-return"><ArrowLeft size={15} /> 標案監控</a>
+          <a href="#" className="spec-return"><ArrowLeft size={15} /> 影印機案件監控</a>
         </div>
       </header>
       <nav className="site-tabs site-tabs-spec" aria-label="網站主要分頁">
         <a className="site-tab" href="#">
           <span className="site-tab-index">01</span>
-          <span><strong>標案監控</strong><small>事務機／複合機主機</small></span>
+          <span><strong>影印機案件監控</strong><small>事務機／複合機主機</small></span>
         </a>
         <a className="site-tab" href="#/peripherals">
           <span className="site-tab-index">02</span>
-          <span><strong>周邊耗材監控</strong><small>碳粉耗材／印表機／掃描器</small></span>
+          <span><strong>非影印機案件監控</strong><small>(周邊/耗材/印表機)</small></span>
         </a>
         <a className="site-tab active" href="#/specs" aria-current="page">
           <span className="site-tab-index">03</span>
-          <span><strong>設備比較平台</strong><small>7廠牌 20~60 張規格比較</small></span>
+          <span><strong>設備規格比較平台</strong><small>7廠牌 20~60 張規格比較</small></span>
         </a>
       </nav>
 
