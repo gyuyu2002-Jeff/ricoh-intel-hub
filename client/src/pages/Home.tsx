@@ -1116,7 +1116,6 @@ export default function Home() {
           </div>
         </div>
         <div className="topbar-actions">
-          <a className="topbar-route" href="#/specs">設備比較平台</a>
           <span className={`live-indicator ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}>
             <span /> LIVE <em>{dataSyncStatus === "warning" ? `最後成功 ${dataUpdated}` : `資料更新 ${dataUpdated}`}</em>
           </span>
@@ -1200,7 +1199,6 @@ export default function Home() {
               <Database size={14} />
               <time>{dataUpdateCopy}</time>
             </span>
-            <a className="outline-button" href="#/specs">進入設備比較平台</a>
             <button className="outline-button"><FileDown size={15} /> 列印工作區</button>
           </div>
         </div>
