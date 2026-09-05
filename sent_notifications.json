@@ -1,4 +1,14 @@
 {
   "_comment": "Registry of dispatched notifications to prevent duplicate alerts. Key format: email_job_stage_date",
-  "dispatched": {}
+  "dispatched": {},
+  "welcome_hanjiunwu@eosasc.com.tw": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "type": "welcome_test",
+    "sent_at": "2026-09-05 17:13:35"
+  },
+  "welcome_gyuyu2002@gmail.com": {
+    "email": "gyuyu2002@gmail.com",
+    "type": "welcome_test",
+    "sent_at": "2026-09-05 17:13:41"
+  }
 }

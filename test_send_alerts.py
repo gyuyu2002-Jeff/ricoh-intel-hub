@@ -3,7 +3,9 @@ import unittest
 from send_alerts import (
     generate_fingerprint,
     match_tenders_for_subscriber,
-    build_email_html
+    build_email_html,
+    build_welcome_email_html,
+    send_welcome_email
 )
 
 
@@ -76,6 +78,18 @@ class TestSendAlerts(unittest.TestCase):
         self.assertIn("公開徵求", html)
         self.assertIn("https://web.pcc.gov.tw/cgs", html)
         self.assertIn("huxen.ricoh@gmail.com", html)
+
+    def test_build_welcome_email_html(self):
+        html = build_welcome_email_html("newuser@example.com", ["桃園市", "台北市"], self.sample_tenders)
+        self.assertIn("newuser@example.com", html)
+        self.assertIn("桃園市、台北市", html)
+        self.assertIn("互盛情報中樞 · 通知設定成功", html)
+        self.assertIn("huxen.ricoh@gmail.com", html)
+        self.assertIn("116-117年影印機租賃案", html)
+
+    def test_send_welcome_email_dry_run(self):
+        res = send_welcome_email("test_dry@example.com", cities=["全部"], dry_run=True)
+        self.assertTrue(res)
 
 
 if __name__ == "__main__":

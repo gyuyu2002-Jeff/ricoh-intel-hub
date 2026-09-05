@@ -640,12 +640,19 @@ function SubscribeModal({
         {status === "success" ? (
           <div className="subscribe-success-box">
             <div className="success-mark"><Check size={26} /></div>
-            <h4>{isAlreadyRegistered ? "通知地區已成功更新" : "通知登記成功"}</h4>
-            <p>{isAlreadyRegistered ? "您的通知範圍已更新！未來系統排程比對時，將直接依據您最新選定的地區發送情報信。" : message}</p>
+            <h4>{isAlreadyRegistered ? "通知地區已成功更新 · 測試信已發送" : "通知設定成功 · 測試信已發送"}</h4>
+            <p>
+              {isAlreadyRegistered
+                ? "您的通知範圍已成功更新！系統已同步寄送測試確認信至您的信箱，確保連通正常。"
+                : "系統已發送一封「收信功能測試信」至您的信箱，請立即前往查收，確認是否能順利接收標案情報！"}
+            </p>
             <div className="success-details">
               <div><span>通知信箱：</span><strong>{email}</strong></div>
               <div><span>關注範圍：</span><strong>{isAllSelected ? "全台所有縣市（共 22 個縣市全數監控）" : `已選定 ${selectedCities.length} 個縣市（${selectedCities.join("、")}）`}</strong></div>
               <div><span>發件來源：</span><code>huxen.ricoh@gmail.com</code></div>
+            </div>
+            <div style={{ background: "#fcfbf6", border: "1px solid #f1e9d2", borderRadius: "6px", padding: "10px 14px", marginTop: "14px", fontSize: "12px", color: "#7d6b38", textAlign: "left", lineHeight: "1.5" }}>
+              💡 <strong>收信小撇步：</strong>若未在收件匣看到測試信，請檢查「垃圾郵件」或「促銷內容」匣，並將 <code>huxen.ricoh@gmail.com</code> 新增至通訊錄。
             </div>
             <button className="action-primary modal-action-btn" onClick={onClose}>完成並返回首頁</button>
           </div>

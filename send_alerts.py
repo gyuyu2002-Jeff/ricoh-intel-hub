@@ -233,6 +233,148 @@ def build_email_html(subscriber_email, tenders, taipei_date_str):
     return html
 
 
+def build_welcome_email_html(subscriber_email, cities=None, sample_tenders=None):
+    """
+    Builds an onboarding/test confirmation email for newly registered or updated subscribers.
+    Matches the Neo-Editorial theme.
+    """
+    if cities is None:
+        cities = ["全部"]
+    if isinstance(cities, list):
+        is_all = not cities or any(c in ["全部", "全台", "全台所有縣市", "全部縣市", "ALL"] for c in cities)
+        cities_str = "全台所有縣市（22 縣市全數監控）" if is_all else "、".join(cities)
+    else:
+        cities_str = str(cities)
+
+    sample_section = ""
+    if sample_tenders:
+        sample_rows = ""
+        for t in sample_tenders[:2]:
+            tender_url = t.get("tender_url", "https://web.pcc.gov.tw/")
+            sample_rows += f"""
+            <div style="background:#ffffff; border:1px solid #d4ded7; border-left:3px solid #c92d3f; border-radius:6px; padding:12px 14px; margin-bottom:10px;">
+              <div style="font-size:11px; color:#53605a; margin-bottom:4px;">
+                <span style="background:#edf4ef; color:#2f5146; font-weight:700; padding:2px 6px; border-radius:3px; margin-right:4px;">{t.get('city', '未知')}</span>
+                <span>{t.get('unit', '')}</span> · 案號 {t.get('job_number', '')}
+              </div>
+              <div style="font-weight:700; font-size:13px; color:#202825; margin-bottom:4px;">
+                <a href="{tender_url}" target="_blank" style="color:#202825; text-decoration:none;">{t.get('title', '')}</a>
+              </div>
+              <div style="font-size:11px; color:#78857d;">預算金額：<strong>{t.get('budget', '未公開')}</strong> · 截止日期：<span style="color:#c92d3f; font-weight:700;">{t.get('deadline', '')}</span></div>
+            </div>
+            """
+        sample_section = f"""
+        <div style="margin-top:20px; padding-top:16px; border-top:1px dashed #d4ded7;">
+          <div style="font-size:12px; font-weight:700; color:#202825; margin-bottom:10px;">📋 目前最新監控標案範例：</div>
+          {sample_rows}
+        </div>
+        """
+
+    html = f"""<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>互盛情報中樞 - 通知設定成功（收信功能測試）</title>
+</head>
+<body style="margin:0; padding:24px 12px; background:#eef3ed; font-family:'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color:#202825;">
+  <div style="max-width:640px; margin:0 auto; background:#fbfcf8; border:1px solid #d4ded7; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(38,61,52,0.06);">
+    <!-- Header -->
+    <div style="background:#202825; color:#ffffff; padding:24px 28px; border-bottom:3px solid #c92d3f;">
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; color:#a3b2a8; text-transform:uppercase;">RICOH INTERNAL BUSINESS INTELLIGENCE</div>
+      <h1 style="margin:6px 0 4px; font-size:22px; font-weight:700; letter-spacing:-0.02em;">互盛情報中樞 · 通知設定成功</h1>
+      <div style="font-size:12px; color:#cdd8d1;">收信功能驗證測試 · 標案雷達已正式啟動</div>
+    </div>
+
+    <!-- Content -->
+    <div style="padding:24px 28px;">
+      <div style="background:#eaf2eb; border-left:4px solid #2f5146; border-radius:4px; padding:14px 16px; margin-bottom:20px;">
+        <div style="font-size:14px; font-weight:700; color:#2f5146; margin-bottom:4px;">🎉 信箱連通測試成功！</div>
+        <div style="font-size:12px; color:#3a584c; line-height:1.6;">
+          您好！收到此信代表您的信箱已順利與「互盛情報中樞」完成對接，往後每日比對到符合您關注縣市的影印機/事務機新標案或公開徵求時，系統將主動發送通報信給您。
+        </div>
+      </div>
+
+      <div style="background:#ffffff; border:1px solid #e2ece4; border-radius:8px; padding:18px 20px; margin-bottom:16px;">
+        <div style="font-size:13px; font-weight:700; color:#202825; margin-bottom:12px; border-bottom:1px solid #edf2ee; padding-bottom:8px;">
+          📌 您的訂閱監控設定
+        </div>
+        <table style="width:100%; font-size:12px; line-height:1.8; color:#4a5851;">
+          <tr>
+            <td style="width:90px; font-weight:700; color:#6b7c73;">通知信箱：</td>
+            <td><code style="background:#f4f7f4; padding:2px 6px; border-radius:4px; color:#202825; font-size:12px;">{subscriber_email}</code></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700; color:#6b7c73;">關注地區：</td>
+            <td><strong>{cities_str}</strong></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700; color:#6b7c73;">監控標的：</td>
+            <td>影印機、多功能複合機、耗材採購、租賃案、公開徵求</td>
+          </tr>
+          <tr>
+            <td style="font-weight:700; color:#6b7c73;">通報頻率：</td>
+            <td>每日自動排程多次巡檢比對，有新案即彙整通知（具指紋防重複機制）</td>
+          </tr>
+          <tr>
+            <td style="font-weight:700; color:#6b7c73;">發信來源：</td>
+            <td><code>huxen.ricoh@gmail.com</code></td>
+          </tr>
+        </table>
+      </div>
+
+      {sample_section}
+
+      <div style="background:#fcfbf6; border:1px solid #f1e9d2; border-radius:6px; padding:12px 16px; margin-top:16px; font-size:11px; color:#7d6b38; line-height:1.6;">
+        💡 <strong>防漏信提醒：</strong>若此信件位於「促銷內容」或「垃圾郵件」匣，請務必點選「非垃圾郵件」並將 <code>huxen.ricoh@gmail.com</code> 新增至通訊錄，以確保往後商機第一時間不漏接。
+      </div>
+
+      <div style="text-align:center; margin-top:24px; padding-top:16px; border-top:1px dashed #d4ded7;">
+        <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" target="_blank" style="display:inline-block; background:#202825; color:#ffffff; font-size:13px; font-weight:700; padding:10px 24px; border-radius:6px; text-decoration:none;">
+          前往 互盛情報中樞 完整看板 ➜
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="background:#f4f7f4; padding:16px 28px; font-size:11px; color:#849289; text-align:center; border-top:1px solid #e1e9e2;">
+      發件信箱：huxen.ricoh@gmail.com · 此為互盛內部業務情報系統自動發送之設定確認信<br>
+      若欲修改通知縣市，請隨時前往 <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" style="color:#c92d3f; text-decoration:none;">互盛情報中樞</a> 點選「變更通知地區設定」即可直接更新。
+    </div>
+  </div>
+</body>
+</html>"""
+    return html
+
+
+def send_welcome_email(email, cities=None, mail_user=None, mail_pass=None, sample_tenders=None, dry_run=False):
+    """
+    Dispatches onboarding/test confirmation email to verify inbox delivery.
+    """
+    if not mail_user:
+        mail_user = os.environ.get("MAIL_USERNAME", "huxen.ricoh@gmail.com").strip()
+    if not mail_pass:
+        mail_pass = os.environ.get("MAIL_PASSWORD", "").strip()
+
+    subject = "【互盛情報中樞】通知設定成功測試信 · 標案監控已啟動"
+    html_body = build_welcome_email_html(email, cities, sample_tenders)
+
+    if dry_run:
+        print(f"[DRY-RUN] Would send welcome test email to {email}")
+        return True
+
+    if not mail_pass:
+        print(f"Warning: MAIL_PASSWORD not set. Cannot send welcome test email to {email}.")
+        return False
+
+    try:
+        send_email_smtp(email, subject, html_body, mail_user, mail_pass)
+        print(f"Successfully delivered welcome test email to {email}.")
+        return True
+    except Exception as e:
+        print(f"Error sending welcome test email to {email}: {e}")
+        return False
+
+
 def send_email_smtp(to_email, subject, html_content, mail_user, mail_pass):
     """
     Sends an email using Gmail SMTP.
@@ -252,7 +394,7 @@ def send_email_smtp(to_email, subject, html_content, mail_user, mail_pass):
     server.quit()
 
 
-def dispatch_alerts(dry_run=False, test_email=None):
+def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
     mail_user = os.environ.get("MAIL_USERNAME", "huxen.ricoh@gmail.com").strip()
     mail_pass = os.environ.get("MAIL_PASSWORD", "").strip()
 
@@ -262,14 +404,35 @@ def dispatch_alerts(dry_run=False, test_email=None):
 
     data = load_json_file(DATA_FILE)
     tenders = data.get("tenders", [])
-    if not tenders:
-        print("No tenders found in data.json. Nothing to alert.")
-        return 0
-
     sent_logs = load_json_file(SENT_LOG_FILE, default_val={})
 
     taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
     taipei_date_str = taipei_now.strftime("%Y-%m-%d")
+
+    # If specifically requesting a welcome test email for a target address
+    if send_welcome_to:
+        print(f"Sending targeted welcome test email to {send_welcome_to}...")
+        success = send_welcome_email(
+            send_welcome_to,
+            cities=["全部"],
+            mail_user=mail_user,
+            mail_pass=mail_pass,
+            sample_tenders=tenders,
+            dry_run=dry_run
+        )
+        if success and not dry_run:
+            norm_email = send_welcome_to.strip().lower()
+            sent_logs[f"welcome_{norm_email}"] = {
+                "email": send_welcome_to,
+                "type": "welcome_test",
+                "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            save_json_file(SENT_LOG_FILE, sent_logs)
+        return 1 if success else 0
+
+    if not tenders:
+        print("No tenders found in data.json. Nothing to alert.")
+        return 0
 
     subscribers = get_subscribers()
     if test_email:
@@ -289,6 +452,35 @@ def dispatch_alerts(dry_run=False, test_email=None):
         email = sub.get("email", "").strip()
         if not email:
             continue
+
+        norm_email = email.lower()
+        welcome_key = f"welcome_{norm_email}"
+
+        # 1. 確保每位設定成功的使用者都先收到一封測試確認信，驗證信箱可正常收信
+        if welcome_key not in sent_logs and not test_email:
+            print(f"New subscriber detected ({email}). Sending welcome/test verification email...")
+            if dry_run:
+                print(f"[DRY-RUN] Would send welcome test email to {email}")
+                new_fingerprints[welcome_key] = {
+                    "email": email,
+                    "type": "welcome_test",
+                    "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S"),
+                    "dry_run": True
+                }
+            else:
+                success = send_welcome_email(
+                    email,
+                    cities=sub.get("cities", ["全部"]),
+                    mail_user=mail_user,
+                    mail_pass=mail_pass,
+                    sample_tenders=tenders
+                )
+                if success:
+                    new_fingerprints[welcome_key] = {
+                        "email": email,
+                        "type": "welcome_test",
+                        "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S")
+                    }
 
         matching_tenders = match_tenders_for_subscriber(sub, tenders, sent_logs)
         if not matching_tenders:
@@ -339,7 +531,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Send email alerts for Ricoh Intel Hub tenders.")
     parser.add_argument("--dry-run", action="store_true", help="Simulate without actually sending emails or modifying sent_notifications.json")
     parser.add_argument("--test-email", type=str, help="Send a test alert email to a specific address")
+    parser.add_argument("--send-welcome", type=str, help="Send a welcome test email to a specific address to verify mailbox reception")
     args = parser.parse_args()
 
-    dispatched = dispatch_alerts(dry_run=args.dry_run, test_email=args.test_email)
+    dispatched = dispatch_alerts(dry_run=args.dry_run, test_email=args.test_email, send_welcome_to=args.send_welcome)
     print(f"Alert dispatch completed. Total subscribers notified: {dispatched}")
