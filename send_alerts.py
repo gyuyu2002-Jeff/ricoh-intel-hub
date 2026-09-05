@@ -75,6 +75,20 @@ def get_subscribers():
     return []
 
 
+def deduplicate_subscribers(subscribers):
+    """
+    Deduplicates subscribers by email so that the latest registration/preference
+    for any given email takes effect, preventing duplicates.
+    """
+    by_email = {}
+    for sub in subscribers:
+        email = sub.get("email", "").strip().lower()
+        if not email or "@" not in email:
+            continue
+        by_email[email] = sub
+    return list(by_email.values())
+
+
 def generate_fingerprint(email, tender):
     """
     Create an immutable unique key for a notification to guarantee idempotency.
@@ -260,6 +274,8 @@ def dispatch_alerts(dry_run=False, test_email=None):
     subscribers = get_subscribers()
     if test_email:
         subscribers = [{"email": test_email, "cities": ["全部"]}]
+    else:
+        subscribers = deduplicate_subscribers(subscribers)
 
     if not subscribers:
         print("No subscribers configured. Add subscribers to subscribers.json or set SUBSCRIBERS_URL.")

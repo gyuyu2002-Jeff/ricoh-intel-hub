@@ -506,13 +506,14 @@ function SubscribeModal({
   onClose: () => void;
   availableCities?: string[];
 }) {
-  const [email, setEmail] = useState(() => {
+  const [savedEmail] = useState(() => {
     try {
       const saved = localStorage.getItem("ricoh_subscriber_info");
       if (saved) return JSON.parse(saved).email || "";
     } catch {}
     return "";
   });
+  const [email, setEmail] = useState(() => savedEmail);
   const [selectedCities, setSelectedCities] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem("ricoh_subscriber_info");
@@ -532,6 +533,12 @@ function SubscribeModal({
   const [message, setMessage] = useState("");
 
   if (!isOpen) return null;
+
+  const isAlreadyRegistered = Boolean(
+    email.trim() &&
+    savedEmail &&
+    email.trim().toLowerCase() === savedEmail.toLowerCase()
+  );
 
   const isAllSelected =
     selectedCities.length === ALL_TAIWAN_CITIES.length &&
@@ -621,8 +628,8 @@ function SubscribeModal({
               <Bell size={20} />
             </span>
             <div>
-              <h3>相關地區標案通知我</h3>
-              <p>選定全台關注縣市，新案件與公開徵求第一時間主動寄信通報</p>
+              <h3>{isAlreadyRegistered ? "變更通知地區設定" : "相關地區標案通知我"}</h3>
+              <p>{isAlreadyRegistered ? "已載入您目前的通知設定，可直接重新勾選縣市後儲存更新" : "選定全台關注縣市，新案件與公開徵求第一時間主動寄信通報"}</p>
             </div>
           </div>
           <button className="icon-button modal-close-btn" onClick={onClose} aria-label="關閉">
@@ -633,8 +640,8 @@ function SubscribeModal({
         {status === "success" ? (
           <div className="subscribe-success-box">
             <div className="success-mark"><Check size={26} /></div>
-            <h4>通知登記成功</h4>
-            <p>{message}</p>
+            <h4>{isAlreadyRegistered ? "通知地區已成功更新" : "通知登記成功"}</h4>
+            <p>{isAlreadyRegistered ? "您的通知範圍已更新！未來系統排程比對時，將直接依據您最新選定的地區發送情報信。" : message}</p>
             <div className="success-details">
               <div><span>通知信箱：</span><strong>{email}</strong></div>
               <div><span>關注範圍：</span><strong>{isAllSelected ? "全台所有縣市（共 22 個縣市全數監控）" : `已選定 ${selectedCities.length} 個縣市（${selectedCities.join("、")}）`}</strong></div>
@@ -657,6 +664,12 @@ function SubscribeModal({
                 placeholder="例如：name@ricoh.com.tw 或個人信箱"
                 className="subscribe-input"
               />
+              {isAlreadyRegistered && (
+                <div className="existing-subscriber-badge">
+                  <Check size={13} />
+                  <span>已登記過此信箱，勾選下方縣市後送出即可完成變更。</span>
+                </div>
+              )}
             </div>
 
             <div className="form-group">
@@ -749,7 +762,7 @@ function SubscribeModal({
               </button>
               <button type="submit" className="action-primary modal-submit-btn" disabled={status === "loading"}>
                 <Bell size={16} />
-                {status === "loading" ? "登記中..." : "相關地區標案通知我"}
+                {status === "loading" ? "儲存中..." : isAlreadyRegistered ? "儲存並更新通知地區" : "相關地區標案通知我"}
               </button>
             </div>
           </form>
@@ -822,14 +835,6 @@ export default function Home() {
           </div>
         </div>
         <div className="topbar-actions">
-          <button
-            type="button"
-            className="topbar-subscribe-btn"
-            onClick={() => setSubscribeOpen(true)}
-            title="登記 Email 接收關注縣市新案與公開徵求通報"
-          >
-            <Bell size={15} /> 相關地區標案通知我
-          </button>
           <a className="topbar-route" href="#/specs">設備比較平台</a>
           <span className={`live-indicator ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}>
             <span /> LIVE <em>{dataSyncStatus === "warning" ? `最後成功 ${dataUpdated}` : `資料更新 ${dataUpdated}`}</em>
@@ -869,31 +874,6 @@ export default function Home() {
             <a className="outline-button" href="#/specs">進入設備比較平台</a>
             <button className="outline-button"><FileDown size={15} /> 列印工作區</button>
           </div>
-        </div>
-
-        <div className="subscribe-promo-banner" onClick={() => setSubscribeOpen(true)} role="button" tabIndex={0}>
-          <div className="promo-banner-left">
-            <span className="promo-bell-icon"><Bell size={24} /></span>
-            <div className="promo-banner-text">
-              <div className="promo-banner-title">
-                相關地區標案通知我
-                <span className="promo-banner-pill">全台 22 縣市 Email 通報</span>
-              </div>
-              <p className="promo-banner-desc">
-                不想錯過所屬縣市的最新招標公告與公開徵求？登記信箱即享每日排程監控，指紋去重零漏信。
-              </p>
-            </div>
-          </div>
-          <button
-            type="button"
-            className="promo-banner-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              setSubscribeOpen(true);
-            }}
-          >
-            <Bell size={16} /> 相關地區標案通知我
-          </button>
         </div>
 
         <div className="tender-overview">

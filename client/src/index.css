@@ -274,6 +274,8 @@
 
 .subscribe-input { width: 100%; height: 42px; padding: 0 14px; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 7px; font-size: 13px; outline: 0; transition: border-color .16s var(--ease), box-shadow .16s var(--ease); }
 .subscribe-input:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(201,45,63,.12); }
+.existing-subscriber-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #276239; font-weight: 600; padding: 4px 8px; background: #eaf5ec; border-radius: 5px; width: fit-content; }
+.existing-subscriber-badge svg { color: #276239; flex: 0 0 auto; }
 
 .subscribe-regions-container { display: grid; gap: 12px; max-height: 250px; overflow-y: auto; padding: 12px; border: 1px solid #e1ebe3; border-radius: 8px; background: #fafbfa; }
 .subscribe-region-group { display: grid; gap: 6px; }
