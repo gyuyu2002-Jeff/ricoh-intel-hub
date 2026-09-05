@@ -140,6 +140,19 @@ def extract_budget_and_award(detail):
                     budget_val = int(digits[0])
                     break
                     
+    if budget_val == 0:
+        for k, v in detail.items():
+            if any(w in k for w in ["附加說明", "說明", "備註", "內容", "摘要"]) and v:
+                text = str(v).replace(",", "")
+                match_wan = re.search(r'(?:預算|預估|採購金額|需求費用|費用)[^\d萬]{0,15}(\d+(?:\.\d+)?)\s*萬', text)
+                if match_wan:
+                    budget_val = int(float(match_wan.group(1)) * 10000)
+                    break
+                match_digits = re.search(r'(?:預算|預估|採購金額|需求費用|費用)[^\d]{0,15}(\d{4,9})\s*元', text)
+                if match_digits:
+                    budget_val = int(match_digits.group(1))
+                    break
+                    
     if award_val == 0:
         for k, v in detail.items():
             if ("決標金額" in k or "中標金額" in k) and "remind" not in k:

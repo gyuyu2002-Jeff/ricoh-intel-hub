@@ -29,7 +29,7 @@ type TenderPayload = {
     latest_attempt_at?: string;
   };
 };
-type HistoryRow = [date: string, awardCode: string, rate: string, winner: string];
+type HistoryRow = [date: string, awardCode: string, rate: string, winner: string, sourceUrl?: string, title?: string];
 type Tender = {
   priority: string;
   priorityLabel: string;
@@ -187,6 +187,8 @@ type RawTender = {
     discount_rate?: number;
     winner?: string;
     relation_scope?: string;
+    source_url?: string;
+    title?: string;
   }>;
   relevance?: { confidence?: string; score?: number; matched_terms?: string[]; reason?: string };
 };
@@ -209,6 +211,8 @@ export function mapRawTender(raw: RawTender, isReview = false): Tender {
       record.job_number ?? "歷史案件",
       typeof record.discount_rate === "number" ? `${record.discount_rate}%` : "資料不足",
       record.winner ?? "待人工確認",
+      record.source_url ?? "",
+      record.title ?? "",
     ] as HistoryRow);
   const confidence = raw.relevance?.confidence === "high" ? "高" : raw.relevance?.confidence === "medium" ? "中" : "待確認";
   const priority = raw.relevance?.score && raw.relevance.score >= 4 ? "P1" : "P2";
@@ -306,17 +310,37 @@ function SectionSkeleton() {
 function TenderCard({ tender }: { tender: Tender }) {
   const [expanded, setExpanded] = useState(false);
   const latestHistory = tender.history[0];
+  const isSolicitation = tender.stage.includes("公開徵求") || tender.stage.includes("徵求");
   return (
     <article className={`tender-card ${tender.isAwarded ? "tender-card-awarded" : ""} ${tender.isReview ? "tender-card-review" : ""}`}>
       <div className="tender-status-bar">
         <div className="status-left">
           <Stamp tone={tender.priority === "P1" ? "stamp-red" : "stamp-ink"}>{tender.priority} · {tender.priorityLabel}</Stamp>
           <Stamp tone="stamp-sage">{tender.city}</Stamp>
-          <Stamp tone={tender.stageTone}>{tender.isReview ? "待人工確認" : tender.isAwarded ? "✓ 已決標" : tender.stage}</Stamp>
+          <Stamp tone={tender.stageTone}>{tender.isReview ? "待人工確認" : tender.isAwarded ? "✓ 已決標" : isSolicitation ? "📢 公開徵求" : tender.stage}</Stamp>
         </div>
         <div className={`countdown ${tender.priority === "P1" ? "countdown-hot" : ""}`}><Clock3 size={14} />{tender.countdown}</div>
       </div>
-      {tender.isAwarded && <div className="award-result-banner"><span className="award-result-mark">✓</span><div><strong>本案已決標</strong><span>本次得標廠商：{tender.currentWinner} · 決標金額：{tender.awardPrice}</span></div><span className="award-result-label">RESULT</span></div>}
+      {tender.isAwarded && (
+        <div className="award-result-banner">
+          <span className="award-result-mark">✓</span>
+          <div>
+            <strong>本案已決標</strong>
+            <span>本次得標廠商：{tender.currentWinner} · 決標金額：{tender.awardPrice}</span>
+          </div>
+          <span className="award-result-label">RESULT</span>
+        </div>
+      )}
+      {isSolicitation && (
+        <div className="solicitation-banner">
+          <span className="solicitation-mark">📢</span>
+          <div>
+            <strong>本案處於【公開徵求報價／企劃書】階段</strong>
+            <span>招標前訪價與規格徵詢中 · 請盡速聯繫機關提供 RICOH 產品型錄與參考報價</span>
+          </div>
+          <span className="solicitation-label">SOLICITATION</span>
+        </div>
+      )}
       <div className="tender-identity">
         <div>
           <div className="eyebrow">TENDER FILE <span>/</span> {tender.publish}</div>
@@ -365,8 +389,24 @@ function TenderCard({ tender }: { tender: Tender }) {
           </div>
           <div className="history-list">
             {tender.history.length === 0 ? <div className="empty-history">尚無同機關可比的前次得標紀錄。</div> : tender.history.map((row) => (
-              <div className="history-row" key={row[1]}>
-                <span>{row[0]}</span><strong>{row[1]}</strong><span>{row[2]}</span><span>{row[3]}</span>
+              <div className="history-row" key={`${row[1]}-${row[0]}`}>
+                <span>{row[0]}</span>
+                <strong>{row[1]}</strong>
+                <span>{row[2]}</span>
+                <span>{row[3]}</span>
+                {row[4] ? (
+                  <a
+                    href={row[4]}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="history-link"
+                    title={`查看政府採購網官方決標原始公告 (${row[5] || row[1]})`}
+                  >
+                    原始決標 <ExternalLink size={11} />
+                  </a>
+                ) : (
+                  <span />
+                )}
                 <Stamp tone={row[3] === tender.previousWinner ? "stamp-red" : "stamp-green"}>{row[3] === tender.previousWinner ? "前次得標" : "歷史紀錄"}</Stamp>
               </div>
             ))}

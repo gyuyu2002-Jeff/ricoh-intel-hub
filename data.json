@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-05 13:26",
+  "last_updated": "2026-09-05 15:34",
   "tenders": [
     {
       "city": "高雄市",
@@ -16,12 +16,12 @@
       "publish_date_confidence": "verified",
       "deadline": "2026-09-08",
       "deadline_confidence": "verified",
-      "budget": "無公開數據",
+      "budget": "NT$ 800,000",
       "award_price": "",
       "avg_discount": "83.2%",
       "discount_source": "近 5 年 4 筆同設備、同契約型態決標折扣中位數",
       "main_competitor": "台灣佳能 (Canon)",
-      "suggested_price": "資料不足",
+      "suggested_price": "NT$ 665,000",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 4,
@@ -398,7 +398,7 @@
     "today": "2026-09-05",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-05 13:26",
+    "latest_attempt_at": "2026-09-05 15:34",
     "source_records": 0,
     "candidate_records": 0,
     "review_records": 0,
@@ -835,14 +835,14 @@
       "source_records": 2403,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-05 13:25"
+      "checked_at": "2026-09-05 13:36"
     },
     "2026-09-05": {
       "status": "complete",
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-05 13:25"
+      "checked_at": "2026-09-05 13:36"
     }
   },
   "candidate_cache": [
