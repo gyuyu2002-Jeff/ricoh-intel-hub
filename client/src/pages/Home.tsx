@@ -915,7 +915,7 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cadence-pill cadence-pill-link"
-                  title={`點擊在新分頁查看政府採購網官方原始決標公告 (${h.date} · 案號 ${h.job_number || ""} · ${h.title || ""})`}
+                  title={`點擊在新分頁查看政府採購網官方決標公告 (${forecast.unit} · ${h.date} · 得標商：${h.winner} · 案號 ${h.job_number || ""} · ${h.title || ""})`}
                 >
                   {pillContent}
                 </a>
@@ -970,7 +970,7 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
               target="_blank"
               rel="noopener noreferrer"
               className="action-primary"
-              title="開啟政府採購網查看該案本期最新公告"
+              title={`開啟政府採購網查看【${forecast.unit}】本期最新公告 (${curStatus.stage})`}
             >
               <ExternalLink size={13} /> 查看本期公告 ({curStatus.stage}) ↗
             </a>
@@ -981,9 +981,9 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
               target="_blank"
               rel="noopener noreferrer"
               className={curStatus?.notice_url ? "action-secondary" : "action-primary"}
-              title={`開啟政府採購網查看前次官方決標公告 (${forecast.latest_award_date} · ${forecast.latest_winner})`}
+              title={`開啟政府採購網查看前次官方決標公告 (${forecast.unit} · ${forecast.latest_award_date} · 得標商：${forecast.latest_winner} · 案號 ${forecast.latest_job_number || ""})`}
             >
-              <ExternalLink size={13} /> 查看前次官方決標公告 ↗
+              <ExternalLink size={13} /> 查看前次官方決標 ({forecast.latest_winner.length > 6 ? forecast.latest_winner.slice(0, 6) + "…" : forecast.latest_winner}) ↗
             </a>
           )}
           <a
