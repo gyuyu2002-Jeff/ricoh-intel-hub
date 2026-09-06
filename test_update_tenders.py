@@ -431,10 +431,13 @@ class CopierForecastTests(unittest.TestCase):
         self.assertEqual(normalize_tender_series_title("113-115年影印機租賃案"), "影印機租賃案")
         self.assertEqual(normalize_tender_series_title("28台影印機租賃案"), "影印機租賃案")
         self.assertEqual(normalize_tender_series_title("114年度各里辦公處影印機租用案第1次招標"), "各里辦公處影印機租用案招標")
+        self.assertEqual(normalize_tender_series_title("114年至115年度數位式影印機租賃採購案"), "數位式影印機租賃採購案")
+        self.assertEqual(normalize_tender_series_title("總管理處數位式多功能影印機租賃共58台"), "總管理處數位式多功能影印機租賃")
 
     def test_parse_duration_months(self):
         from update_tenders import parse_duration_months
         self.assertEqual(parse_duration_months("113-115年影印機租賃案"), 36)
+        self.assertEqual(parse_duration_months("114年至115年度數位式影印機租賃採購案"), 24)
         self.assertEqual(parse_duration_months("二年期開口契約"), 24)
         self.assertEqual(parse_duration_months("1年期租約"), 12)
 
@@ -532,6 +535,39 @@ class CopierForecastTests(unittest.TestCase):
         self.assertIn("公開徵求", f["current_status"]["badge_label"])
         self.assertIn("PPW-999.xml", f["current_status"]["notice_url"])
         self.assertIn("【🔥 機關已啟動公開徵求】", f["action_suggestion"])
+
+    def test_cadence_regularization_and_smart_title(self):
+        from update_tenders import generate_copier_forecasts
+        base_date = date(2026, 9, 6)
+        # History: Two 2-year contracts with 25-month interval between award dates (e.g. Customs Administration)
+        history = [
+            {
+                "unit_id": "A.7.8",
+                "unit_name": "財政部關務署",
+                "title": "「113-115年影印機租賃」採購案",
+                "job_number": "IG113033",
+                "award_date": "2024-10-11",
+                "award_price": 2281600,
+                "winner": "國碩資訊科技有限公司"
+            },
+            {
+                "unit_id": "A.7.8",
+                "unit_name": "財政部關務署",
+                "title": "「111-113年影印機租賃」採購案",
+                "job_number": "IG111033",
+                "award_date": "2022-09-06",
+                "award_price": 2200000,
+                "winner": "國碩資訊科技有限公司"
+            }
+        ]
+        forecasts = generate_copier_forecasts(history, base_date=base_date, target_window_days=180)
+        self.assertEqual(len(forecasts), 1)
+        f = forecasts[0]
+        # Cadence should be regularized to standard 24 months (not 25)
+        self.assertEqual(f["cadence_months"], 24)
+        self.assertIn("歷史每 24 個月定期換約（2年約）", f["cadence_summary"])
+        # Predicted title should intelligently match the 2-year range pattern 115-117 (not 115-116)
+        self.assertEqual(f["predicted_title"], "115-117年「影印機租賃」採購案")
 
 
 if __name__ == "__main__":

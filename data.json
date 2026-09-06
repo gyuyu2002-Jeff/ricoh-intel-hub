@@ -6899,6 +6899,148 @@
   },
   "forecasted_tenders": [
     {
+      "id": "forecast-A.7.8-「影印機租賃」採購案-standard",
+      "unit_id": "A.7.8",
+      "unit": "財政部關務署",
+      "city": "台北市",
+      "series_title": "「影印機租賃」採購案",
+      "predicted_title": "115-117年「影印機租賃」採購案",
+      "latest_title": "「113-115年影印機租賃」採購案",
+      "latest_job_number": "IG113033",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241011&fn=BDM-1-70687939.xml",
+      "latest_award_date": "2024-10-11",
+      "latest_award_price": 2281600,
+      "latest_award_price_str": "NT$ 2,281,600",
+      "latest_winner": "國碩資訊科技有限公司",
+      "incumbent": {
+        "type": "competitor",
+        "name": "國碩資訊科技有限公司",
+        "brand": "國碩",
+        "label": "⚔️ 競品防守中：國碩（進攻目標）",
+        "badge_class": "bg-rose-950/60 border-rose-500/50 text-rose-400"
+      },
+      "predicted_date": "2026-08-27",
+      "predicted_month": "2026年08月",
+      "predicted_range": "2026年08月 ～ 09月",
+      "days_until": -10,
+      "countdown_label": "已屆招標期",
+      "cadence_months": 24,
+      "cadence_summary": "歷史每 24 個月定期換約（2年約）",
+      "history_count": 2,
+      "history_track": [
+        {
+          "index": 1,
+          "date": "2022-09-06",
+          "month": "2022-09",
+          "winner": "國碩資訊科技有限公司",
+          "award_price": 2200000,
+          "discount_rate": 91.7,
+          "job_number": "IG111033",
+          "title": "「111-113年影印機租賃」採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220906&fn=BDM-2-70073389.xml"
+        },
+        {
+          "index": 2,
+          "date": "2024-10-11",
+          "month": "2024-10",
+          "winner": "國碩資訊科技有限公司",
+          "award_price": 2281600,
+          "discount_rate": 95.1,
+          "job_number": "IG113033",
+          "title": "「113-115年影印機租賃」採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241011&fn=BDM-1-70687939.xml"
+        }
+      ],
+      "current_status": {
+        "status": "pending",
+        "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
+        "stage": "推估潛伏期",
+        "date": "",
+        "job_number": "",
+        "title": "",
+        "notice_url": "",
+        "action_note": ""
+      },
+      "expansion": {
+        "has_extension": false,
+        "type": "standard",
+        "badge_label": "🔴 常態期滿（依法重招）",
+        "notice": "本合約無擴充條款，期滿依法必須公開重新招標。"
+      },
+      "action_suggestion": "建議於 2026年08月 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
+    },
+    {
+      "id": "forecast-A.7.8.2-數位式影印機租賃採購案-standard",
+      "unit_id": "A.7.8.2",
+      "unit": "財政部關務署臺北關",
+      "city": "台北市",
+      "series_title": "數位式影印機租賃採購案",
+      "predicted_title": "115-116年數位式影印機租賃採購案",
+      "latest_title": "114年至115年度數位式影印機租賃採購案",
+      "latest_job_number": "113019",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241015&fn=BDM-1-70689873.xml",
+      "latest_award_date": "2024-10-15",
+      "latest_award_price": 1640554,
+      "latest_award_price_str": "NT$ 1,640,554",
+      "latest_winner": "知億有限公司",
+      "incumbent": {
+        "type": "competitor",
+        "name": "知億有限公司",
+        "brand": "知億有限公司",
+        "label": "⚔️ 競品防守中：知億有限公司（進攻目標）",
+        "badge_class": "bg-rose-950/60 border-rose-500/50 text-rose-400"
+      },
+      "predicted_date": "2026-08-31",
+      "predicted_month": "2026年08月",
+      "predicted_range": "2026年08月 ～ 09月",
+      "days_until": -6,
+      "countdown_label": "已屆招標期",
+      "cadence_months": 24,
+      "cadence_summary": "歷史每 24 個月定期換約（2年約）",
+      "history_count": 2,
+      "history_track": [
+        {
+          "index": 1,
+          "date": "2022-12-22",
+          "month": "2022-12",
+          "winner": "金儀 Konica Minolta",
+          "award_price": 1727679,
+          "discount_rate": 92.9,
+          "job_number": "111070",
+          "title": "112年至113年度數位式影印機租賃採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221222&fn=BDM-1-70182368.xml"
+        },
+        {
+          "index": 2,
+          "date": "2024-10-15",
+          "month": "2024-10",
+          "winner": "知億有限公司",
+          "award_price": 1640554,
+          "discount_rate": 93.0,
+          "job_number": "113019",
+          "title": "114年至115年度數位式影印機租賃採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241015&fn=BDM-1-70689873.xml"
+        }
+      ],
+      "current_status": {
+        "status": "pending",
+        "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
+        "stage": "推估潛伏期",
+        "date": "",
+        "job_number": "",
+        "title": "",
+        "notice_url": "",
+        "action_note": ""
+      },
+      "expansion": {
+        "has_extension": false,
+        "type": "standard",
+        "badge_label": "🔴 常態期滿（依法重招）",
+        "notice": "本合約無擴充條款，期滿依法必須公開重新招標。"
+      },
+      "action_suggestion": "建議於 2026年08月 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
+    },
+    {
       "id": "forecast-A.7.6-本局及各稽徵所租賃影印機-standard",
       "unit_id": "A.7.6",
       "unit": "財政部中區國稅局",
@@ -6915,8 +7057,8 @@
       "incumbent": {
         "type": "competitor",
         "name": "佳能國際股份有限公司",
-        "brand": "佳能國際",
-        "label": "⚔️ 競品防守中：佳能國際（進攻目標）",
+        "brand": "佳能",
+        "label": "⚔️ 競品防守中：佳能（進攻目標）",
         "badge_class": "bg-rose-950/60 border-rose-500/50 text-rose-400"
       },
       "predicted_date": "2026-09-02",
@@ -6997,7 +7139,7 @@
       "unit": "台灣中油股份有限公司煉製事業部桃園煉油廠",
       "city": "桃園市",
       "series_title": "影印機租賃長約",
-      "predicted_title": "115-116年影印機租賃長約",
+      "predicted_title": "115~116年影印機租賃長約",
       "latest_title": "114~115年度影印機租賃長約",
       "latest_job_number": "I7313D053",
       "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241107&fn=BDM-1-70708705.xml",
@@ -7052,67 +7194,78 @@
       "action_suggestion": "【🔥 機關已啟動公開徵求】機關於 2026-08-10 公告「115117年度影印機租賃長約」（案號 I7315D063），請即刻聯繫採購承辦提供理光型錄與參考規格！"
     },
     {
-      "id": "forecast-A.7.8-「影印機租賃」採購案-standard",
-      "unit_id": "A.7.8",
-      "unit": "財政部關務署",
+      "id": "forecast-3.13.31-總管理處數位式多功能影印機租賃-standard",
+      "unit_id": "3.13.31",
+      "unit": "台灣電力股份有限公司",
       "city": "台北市",
-      "series_title": "「影印機租賃」採購案",
-      "predicted_title": "115-116年「影印機租賃」採購案",
-      "latest_title": "「113-115年影印機租賃」採購案",
-      "latest_job_number": "IG113033",
-      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241011&fn=BDM-1-70687939.xml",
-      "latest_award_date": "2024-10-11",
-      "latest_award_price": 2281600,
-      "latest_award_price_str": "NT$ 2,281,600",
-      "latest_winner": "國碩資訊科技有限公司",
+      "series_title": "總管理處數位式多功能影印機租賃",
+      "predicted_title": "115-116年總管理處數位式多功能影印機租賃",
+      "latest_title": "總管理處數位式多功能影印機租賃共58台",
+      "latest_job_number": "0141100024-01",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241129&fn=BDM-2-70684119.xml",
+      "latest_award_date": "2024-11-29",
+      "latest_award_price": 525000,
+      "latest_award_price_str": "NT$ 525,000",
+      "latest_winner": "震旦 SHARP",
       "incumbent": {
         "type": "competitor",
-        "name": "國碩資訊科技有限公司",
-        "brand": "國碩",
-        "label": "⚔️ 競品防守中：國碩（進攻目標）",
+        "name": "震旦 SHARP",
+        "brand": "震旦",
+        "label": "⚔️ 競品防守中：震旦（進攻目標）",
         "badge_class": "bg-rose-950/60 border-rose-500/50 text-rose-400"
       },
-      "predicted_date": "2026-09-27",
-      "predicted_month": "2026年09月",
-      "predicted_range": "2026年09月 ～ 10月",
-      "days_until": 21,
-      "countdown_label": "倒數 21 天",
-      "cadence_months": 25,
-      "cadence_summary": "歷史每 25 個月定期換約（2年約）",
-      "history_count": 2,
+      "predicted_date": "2026-10-15",
+      "predicted_month": "2026年10月",
+      "predicted_range": "2026年10月 ～ 11月",
+      "days_until": 39,
+      "countdown_label": "倒數 39 天",
+      "cadence_months": 24,
+      "cadence_summary": "歷史每 24 個月定期換約（2年約）",
+      "history_count": 3,
       "history_track": [
         {
           "index": 1,
-          "date": "2022-09-06",
-          "month": "2022-09",
-          "winner": "國碩資訊科技有限公司",
-          "award_price": 2200000,
-          "discount_rate": 91.7,
-          "job_number": "IG111033",
-          "title": "「111-113年影印機租賃」採購案",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220906&fn=BDM-2-70073389.xml"
+          "date": "2022-08-15",
+          "month": "2022-08",
+          "winner": "震旦 SHARP",
+          "award_price": 5635980,
+          "discount_rate": 57.3,
+          "job_number": "0141100024",
+          "title": "總管理處數位式多功能影印機租賃共58台",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220815&fn=BDM-1-70063983.xml"
         },
         {
           "index": 2,
-          "date": "2024-10-11",
-          "month": "2024-10",
-          "winner": "國碩資訊科技有限公司",
-          "award_price": 2281600,
-          "discount_rate": 95.1,
-          "job_number": "IG113033",
-          "title": "「113-115年影印機租賃」採購案",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241011&fn=BDM-1-70687939.xml"
+          "date": "2024-11-26",
+          "month": "2024-11",
+          "winner": "震旦 SHARP",
+          "award_price": 3951098,
+          "discount_rate": 52.1,
+          "job_number": "0141300033",
+          "title": "總管理處數位式多功能影印機租賃共59台",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241126&fn=BDM-1-70724273.xml"
+        },
+        {
+          "index": 3,
+          "date": "2024-11-29",
+          "month": "2024-11",
+          "winner": "震旦 SHARP",
+          "award_price": 525000,
+          "discount_rate": 100.0,
+          "job_number": "0141100024-01",
+          "title": "總管理處數位式多功能影印機租賃共58台",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241129&fn=BDM-2-70684119.xml"
         }
       ],
       "current_status": {
-        "status": "pending",
-        "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
-        "stage": "推估潛伏期",
-        "date": "",
-        "job_number": "",
-        "title": "",
-        "notice_url": "",
-        "action_note": ""
+        "status": "solicitation",
+        "badge_label": "🔥 本案已啟動招標前置：公開徵求中",
+        "stage": "公開徵求",
+        "date": "2026-07-22",
+        "job_number": "TPC-014-1150721-01",
+        "title": "總管理處數位式多功能影印機租賃共61台",
+        "notice_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260722&fn=PPW-1-70109888.xml",
+        "action_note": "機關於 2026-07-22 發布「公開徵求廠商提供參考資料」（案號 TPC-014-1150721-01），正處於訪價與規格徵詢黃金期，請速送理光型錄與建議規格！"
       },
       "expansion": {
         "has_extension": false,
@@ -7120,7 +7273,7 @@
         "badge_label": "🔴 常態期滿（依法重招）",
         "notice": "本合約無擴充條款，期滿依法必須公開重新招標。"
       },
-      "action_suggestion": "建議於 2026年09月 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
+      "action_suggestion": "【🔥 機關已啟動公開徵求】機關於 2026-07-22 公告「總管理處數位式多功能影印機租賃共61台」（案號 TPC-014-1150721-01），請即刻聯繫採購承辦提供理光型錄與參考規格！"
     },
     {
       "id": "forecast-3.79.51.5-影印機租賃採購案-standard",
@@ -7312,88 +7465,6 @@
         "notice": "本合約無擴充條款，期滿依法必須公開重新招標。"
       },
       "action_suggestion": "建議於 2026年12月 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
-    },
-    {
-      "id": "forecast-3.13.31-總管理處數位式多功能影印機租賃共-standard",
-      "unit_id": "3.13.31",
-      "unit": "台灣電力股份有限公司",
-      "city": "台北市",
-      "series_title": "總管理處數位式多功能影印機租賃共",
-      "predicted_title": "116-117年總管理處數位式多功能影印機租賃共",
-      "latest_title": "總管理處數位式多功能影印機租賃共58台",
-      "latest_job_number": "0141100024-01",
-      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241129&fn=BDM-2-70684119.xml",
-      "latest_award_date": "2024-11-29",
-      "latest_award_price": 525000,
-      "latest_award_price_str": "NT$ 525,000",
-      "latest_winner": "震旦 SHARP",
-      "incumbent": {
-        "type": "competitor",
-        "name": "震旦 SHARP",
-        "brand": "震旦",
-        "label": "⚔️ 競品防守中：震旦（進攻目標）",
-        "badge_class": "bg-rose-950/60 border-rose-500/50 text-rose-400"
-      },
-      "predicted_date": "2027-01-14",
-      "predicted_month": "2027年01月",
-      "predicted_range": "2027年01月 ～ 02月",
-      "days_until": 130,
-      "countdown_label": "倒數 130 天",
-      "cadence_months": 27,
-      "cadence_summary": "歷史每 27 個月定期換約（2年約）",
-      "history_count": 3,
-      "history_track": [
-        {
-          "index": 1,
-          "date": "2022-08-15",
-          "month": "2022-08",
-          "winner": "震旦 SHARP",
-          "award_price": 5635980,
-          "discount_rate": 57.3,
-          "job_number": "0141100024",
-          "title": "總管理處數位式多功能影印機租賃共58台",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220815&fn=BDM-1-70063983.xml"
-        },
-        {
-          "index": 2,
-          "date": "2024-11-26",
-          "month": "2024-11",
-          "winner": "震旦 SHARP",
-          "award_price": 3951098,
-          "discount_rate": 52.1,
-          "job_number": "0141300033",
-          "title": "總管理處數位式多功能影印機租賃共59台",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241126&fn=BDM-1-70724273.xml"
-        },
-        {
-          "index": 3,
-          "date": "2024-11-29",
-          "month": "2024-11",
-          "winner": "震旦 SHARP",
-          "award_price": 525000,
-          "discount_rate": 100.0,
-          "job_number": "0141100024-01",
-          "title": "總管理處數位式多功能影印機租賃共58台",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241129&fn=BDM-2-70684119.xml"
-        }
-      ],
-      "current_status": {
-        "status": "solicitation",
-        "badge_label": "🔥 本案已啟動招標前置：公開徵求中",
-        "stage": "公開徵求",
-        "date": "2026-07-22",
-        "job_number": "TPC-014-1150721-01",
-        "title": "總管理處數位式多功能影印機租賃共61台",
-        "notice_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260722&fn=PPW-1-70109888.xml",
-        "action_note": "機關於 2026-07-22 發布「公開徵求廠商提供參考資料」（案號 TPC-014-1150721-01），正處於訪價與規格徵詢黃金期，請速送理光型錄與建議規格！"
-      },
-      "expansion": {
-        "has_extension": false,
-        "type": "standard",
-        "badge_label": "🔴 常態期滿（依法重招）",
-        "notice": "本合約無擴充條款，期滿依法必須公開重新招標。"
-      },
-      "action_suggestion": "【🔥 機關已啟動公開徵求】機關於 2026-07-22 公告「總管理處數位式多功能影印機租賃共61台」（案號 TPC-014-1150721-01），請即刻聯繫採購承辦提供理光型錄與參考規格！"
     },
     {
       "id": "forecast-3.79.62-事務機具採購-standard",

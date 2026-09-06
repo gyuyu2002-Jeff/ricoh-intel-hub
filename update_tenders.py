@@ -661,13 +661,14 @@ def normalize_tender_series_title(title):
     """Normalize a recurring tender title to its core series name by stripping years, quantities, and iterations."""
     t = str(title or "").replace("臺", "台")
     t = re.sub(r"[\(（][^\)）]*[\)）]", "", t)
-    t = re.sub(r"1\d{2}\s*[-~至到]\s*1\d{2}\s*(?:學?年(?:度)?)?", "", t)
+    t = re.sub(r"1\d{2}\s*(?:學?年(?:度)?)?\s*[-~至到]\s*1\d{2}\s*(?:學?年(?:度)?)?", "", t)
     t = re.sub(r"1\d{2}\s*(?:學?年(?:度)?)?", "", t)
-    t = re.sub(r"202\d\s*[-~至到]\s*202\d\s*(?:年)?", "", t)
+    t = re.sub(r"202\d\s*(?:年)?\s*[-~至到]\s*202\d\s*(?:年)?", "", t)
     t = re.sub(r"202\d\s*(?:年)?", "", t)
-    t = re.sub(r"\d+\s*[台部輛組套張支項式批]", "", t)
-    t = re.sub(r"[一二三四五六七八九十壹貳][台部輛組套張支項式批]", "", t)
+    t = re.sub(r"共?\s*\d+\s*[台部輛組套張支項式批]", "", t)
+    t = re.sub(r"共?\s*[一二三四五六七八九十壹貳][台部輛組套張支項式批]", "", t)
     t = re.sub(r"第[一二三四五六七八九十\d]+[次期]", "", t)
+    t = re.sub(r"共\s*$", "", t)
     t = re.sub(r"[\s\-_、，。]+", "", t)
     return t.strip()
 
@@ -675,7 +676,7 @@ def normalize_tender_series_title(title):
 def parse_duration_months(title, default_months=24):
     """Extract lease duration in months from tender title."""
     t = str(title or "")
-    m = re.search(r"(1\d{2})\s*[-~至到]\s*(1\d{2})", t)
+    m = re.search(r"(1\d{2})\s*(?:學?年(?:度)?)?\s*[-~至到]\s*(1\d{2})", t)
     if m:
         start_y = int(m.group(1))
         end_y = int(m.group(2))
@@ -796,9 +797,19 @@ def generate_copier_forecasts(history_records, base_date=None, target_window_day
                 pass
 
         latest_duration_months = parse_duration_months(latest.get("title", ""), default_months=24)
-        cadence_months = int(sorted(intervals)[len(intervals)//2]) if intervals else latest_duration_months
-        if cadence_months < 6:
-            cadence_months = latest_duration_months
+        raw_cadence = int(sorted(intervals)[len(intervals)//2]) if intervals else latest_duration_months
+        if raw_cadence < 6:
+            raw_cadence = latest_duration_months
+
+        # Regularize to standard government contract cadence (12, 24, 36, 48, 60 months)
+        # Taiwan government procurement contracts are structured in full-year increments (1年=12月, 2年=24月, 3年=36月...).
+        # Historical award dates often deviate by ±1-3 months due to bidding procedures and administrative buffers.
+        STANDARD_CADENCES = [12, 24, 36, 48, 60]
+        closest_cadence = min(STANDARD_CADENCES, key=lambda c: abs(c - raw_cadence))
+        if abs(closest_cadence - raw_cadence) <= 3:
+            cadence_months = closest_cadence
+        else:
+            cadence_months = raw_cadence
 
         has_ext = has_extension_clause(latest.get("title", "")) or has_extension_clause(json.dumps(latest, ensure_ascii=False))
 
@@ -968,7 +979,16 @@ def generate_copier_forecasts(history_records, base_date=None, target_window_day
 
                 pred_roc_year = t_date.year - 1911
                 next_years_count = max(1, cadence_months // 12)
-                if next_years_count >= 2:
+                latest_title_raw = latest.get("title", "")
+                m_span = re.search(r"(1\d{2})\s*([-~至到])\s*(1\d{2})", latest_title_raw)
+                if m_span:
+                    s_yr = int(m_span.group(1))
+                    e_yr = int(m_span.group(3))
+                    sep = m_span.group(2)
+                    yr_span = e_yr - s_yr
+                    pred_end_roc_year = pred_roc_year + max(1, yr_span)
+                    predicted_title = f"{pred_roc_year}{sep}{pred_end_roc_year}年{series}"
+                elif next_years_count >= 2:
                     predicted_title = f"{pred_roc_year}-{pred_roc_year + next_years_count - 1}年{series}"
                 else:
                     predicted_title = f"{pred_roc_year}年度{series}"
