@@ -344,10 +344,10 @@ def build_email_html(subscriber_email, tenders, taipei_date_str, forecasts=None)
         for fc in forecasts:
             incumbent_info = fc.get("incumbent", {})
             incumbent_type = incumbent_info.get("type", "other")
-            is_ricoh = incumbent_type == "ricoh"
+            is_husheng = incumbent_type in ["husheng", "ricoh"]
             is_comp = incumbent_type == "competitor"
-            inc_badge_bg = "#f0fdf4" if is_ricoh else "#fff1f2" if is_comp else "#f1f5f9"
-            inc_badge_color = "#15803d" if is_ricoh else "#be123c" if is_comp else "#475569"
+            inc_badge_bg = "#f0fdf4" if is_husheng else "#fff1f2" if is_comp else "#f1f5f9"
+            inc_badge_color = "#15803d" if is_husheng else "#be123c" if is_comp else "#475569"
             inc_badge_label = incumbent_info.get("label", "⚪ 廠商防守中")
 
             days = fc.get("days_until", 999)

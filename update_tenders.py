@@ -706,7 +706,12 @@ def has_extension_clause(text):
 
 
 def classify_incumbent(winner):
-    """Classify incumbent vendor for competitive attack vs Ricoh self-defense."""
+    """
+    Classify incumbent vendor: 互盛防守 (Husheng defense) vs 他牌進攻 (Competitor attack).
+    Note:
+    - 互盛防守條件為得標者為互盛（包含旗下所有互盛開頭的分公司）。
+    - 台灣理光屬於他牌（他牌進攻）。
+    """
     w = str(winner or "").strip()
     if not w or w in ["未公開", "待確認", "官方來源未列", "待人工確認"]:
         return {
@@ -717,19 +722,22 @@ def classify_incumbent(winner):
             "badge_class": "bg-slate-900 border-slate-700 text-slate-300"
         }
 
-    if any(k in w for k in ["理光", "RICOH", "Ricoh"]):
+    # 1. 互盛防守：得標者為互盛（包含旗下所有互盛開頭的分公司）
+    if "互盛" in w:
         return {
-            "type": "ricoh",
+            "type": "husheng",
             "name": w,
-            "brand": "台灣理光",
-            "label": "🛡️ 理光防守中（續約守護）",
+            "brand": "互盛",
+            "label": "🛡️ 互盛防守中（續約守護）",
             "badge_class": "bg-emerald-950/60 border-emerald-500/50 text-emerald-400"
         }
 
+    # 2. 他牌進攻：包含台灣理光、震旦、金儀、佳能、富士全錄等所有非互盛廠商（台灣理光屬於他牌）
     competitor_brands = [
-        "震旦", "富士軟片", "富士全錄", "全錄", "金儀", "互盛", "佳能", "Canon",
+        "台灣理光", "理光", "RICOH", "Ricoh",
+        "震旦", "富士軟片", "富士全錄", "全錄", "金儀", "佳能", "Canon",
         "夏普", "SHARP", "東芝", "TOSHIBA", "Konica", "KYOCERA", "京瓷",
-        "宏羚", "東磊", "新印", "精準國際", "國碩", "億雙"
+        "宏羚", "東磊", "新印", "精準國際", "國碩", "億雙", "優得", "知億"
     ]
     matched_brand = next((b for b in competitor_brands if b.lower() in w.lower()), None)
     brand_label = matched_brand or w
@@ -737,7 +745,7 @@ def classify_incumbent(winner):
         "type": "competitor",
         "name": w,
         "brand": brand_label,
-        "label": f"⚔️ 競品防守中：{brand_label}（進攻目標）",
+        "label": f"⚔️ 他牌進攻：{brand_label}（進攻目標）",
         "badge_class": "bg-rose-950/60 border-rose-500/50 text-rose-400"
     }
 
@@ -994,13 +1002,16 @@ def generate_copier_forecasts(history_records, base_date=None, target_window_day
                     predicted_title = f"{pred_roc_year}年度{series}"
 
                 if current_status["status"] == "solicitation":
-                    action_sugg = f"【🔥 機關已啟動公開徵求】機關於 {current_status['date']} 公告「{current_status['title']}」（案號 {current_status['job_number']}），請即刻聯繫採購承辦提供理光型錄與參考規格！"
+                    action_sugg = f"【🔥 機關已啟動公開徵求】機關於 {current_status['date']} 公告「{current_status['title']}」（案號 {current_status['job_number']}），請即刻聯繫採購承辦提供型錄與參考規格！"
                 elif current_status["status"] == "tender":
                     action_sugg = f"【🎯 機關已正式上架招標】案號 {current_status['job_number']} 已在 01 分頁進行中，請前往備標投標！"
                 elif current_status["status"] == "awarded":
                     action_sugg = f"【✓ 本案已完成決標】本年度合約已標出，列入下一合約週期持續追蹤。"
                 else:
-                    action_sugg = f"建議於 {t_date.strftime('%Y年%m月')} 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
+                    if incumbent.get("type") == "husheng":
+                        action_sugg = f"【🛡️ 互盛防守】目前為互盛履約中，建議於 {t_date.strftime('%Y年%m月')} 前完成客戶續約拜訪與新機汰舊升級提案，鞏固防守盤！"
+                    else:
+                        action_sugg = f"【⚔️ 他牌進攻】目前為他牌（{incumbent.get('brand')}）防守，建議於 {t_date.strftime('%Y年%m月')} 前完成採購與資訊組初訪，提供機種規格草案與 POC，爭取搶單先機！"
 
                 forecasts.append({
                     "id": f"forecast-{unit_id}-{series}-{cand['type']}",

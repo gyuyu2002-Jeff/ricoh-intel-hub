@@ -449,12 +449,34 @@ class CopierForecastTests(unittest.TestCase):
 
     def test_classify_incumbent(self):
         from update_tenders import classify_incumbent
-        ricoh = classify_incumbent("台灣理光股份有限公司")
-        self.assertEqual(ricoh["type"], "ricoh")
+        # 1. 互盛防守：得標者是互盛，包含旗下所有互盛開頭的分公司
+        husheng_main = classify_incumbent("互盛股份有限公司")
+        self.assertEqual(husheng_main["type"], "husheng")
+        self.assertIn("互盛防守", husheng_main["label"])
 
+        husheng_branch = classify_incumbent("互盛股份有限公司台北分公司")
+        self.assertEqual(husheng_branch["type"], "husheng")
+        self.assertIn("互盛防守", husheng_branch["label"])
+
+        # 2. 台灣理光屬於他牌（他牌進攻）
+        ricoh_tw = classify_incumbent("台灣理光股份有限公司")
+        self.assertEqual(ricoh_tw["type"], "competitor")
+        self.assertIn("他牌進攻", ricoh_tw["label"])
+
+        ricoh_short = classify_incumbent("理光")
+        self.assertEqual(ricoh_short["type"], "competitor")
+        self.assertIn("他牌進攻", ricoh_short["label"])
+
+        # 3. 其他競品品牌亦屬於他牌進攻
         competitor = classify_incumbent("震旦行股份有限公司")
         self.assertEqual(competitor["type"], "competitor")
         self.assertIn("震旦", competitor["brand"])
+        self.assertIn("他牌進攻", competitor["label"])
+
+        canon = classify_incumbent("台灣佳能資訊股份有限公司")
+        self.assertEqual(canon["type"], "competitor")
+        self.assertIn("佳能", canon["brand"])
+        self.assertIn("他牌進攻", canon["label"])
 
     def test_generate_copier_forecasts_with_dual_extension(self):
         from update_tenders import generate_copier_forecasts

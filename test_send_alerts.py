@@ -157,7 +157,7 @@ class TestSendAlerts(unittest.TestCase):
                 "latest_winner": "台灣佳能 (Canon)",
                 "incumbent": {
                     "type": "competitor",
-                    "label": "⚔️ 競品防守中：台灣佳能 (Canon)"
+                    "label": "⚔️ 他牌進攻：台灣佳能 (Canon)"
                 },
                 "predicted_month": "2026年09月",
                 "predicted_range": "2026年09月 ～ 10月",

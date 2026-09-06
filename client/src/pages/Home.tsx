@@ -71,7 +71,7 @@ export type ForecastedTender = {
   latest_award_price_str: string;
   latest_winner: string;
   incumbent: {
-    type: "competitor" | "ricoh" | "other";
+    type: "competitor" | "husheng" | "ricoh" | "other";
     name: string;
     brand: string;
     label: string;
@@ -332,7 +332,7 @@ const fallbackForecasts: ForecastedTender[] = [
       type: "competitor",
       name: "台灣佳能 (Canon)",
       brand: "佳能",
-      label: "⚔️ 競品防守中：佳能（進攻目標）",
+      label: "⚔️ 他牌進攻：佳能（進攻目標）",
       badge_class: "bg-rose-950/60 border-rose-500/50 text-rose-400",
     },
     predicted_date: "2026-09-02",
@@ -373,7 +373,7 @@ const fallbackForecasts: ForecastedTender[] = [
       type: "competitor",
       name: "宏羚股份有限公司",
       brand: "宏羚",
-      label: "⚔️ 競品防守中：宏羚（進攻目標）",
+      label: "⚔️ 他牌進攻：宏羚（進攻目標）",
       badge_class: "bg-rose-950/60 border-rose-500/50 text-rose-400",
     },
     predicted_date: "2026-09-23",
@@ -727,7 +727,7 @@ function TenderCard({ tender }: { tender: Tender }) {
 function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
   const [expanded, setExpanded] = useState(false);
   const isCompetitor = forecast.incumbent.type === "competitor";
-  const isRicoh = forecast.incumbent.type === "ricoh";
+  const isHusheng = forecast.incumbent.type === "husheng" || forecast.incumbent.type === "ricoh";
   const isUrgent = forecast.days_until <= 30;
   const isOverdue = forecast.days_until <= 0;
 
@@ -740,7 +740,7 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
     ? "competitor-defense"
     : isCompetitor
     ? "competitor-defense"
-    : isRicoh
+    : isHusheng
     ? "ricoh-defense"
     : "";
 
@@ -762,7 +762,7 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
               {isOverdue ? "🚨 已屆招標期" : `⏳ 倒數 ${forecast.days_until} 天`}
             </Stamp>
           )}
-          <Stamp tone={isCompetitor ? "stamp-red" : isRicoh ? "stamp-green" : "stamp-ink"}>
+          <Stamp tone={isCompetitor ? "stamp-red" : isHusheng ? "stamp-green" : "stamp-ink"}>
             {forecast.incumbent.label}
           </Stamp>
           <Stamp tone={forecast.expansion.has_extension ? "stamp-amber" : "stamp-ink"}>
@@ -833,7 +833,7 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
             <span className="job-code">機關代碼 {forecast.unit_id}</span>
           </div>
           <h3 style={{ margin: "8px 0 6px", fontSize: "24px", lineHeight: "1.35", fontWeight: 700 }}>
-            <span style={{ color: isSolicitation ? "#c2410c" : isCompetitor ? "#be123c" : isRicoh ? "#15803d" : "var(--deep)", fontWeight: 700, marginRight: "6px", fontSize: "20px" }}>
+            <span style={{ color: isSolicitation ? "#c2410c" : isCompetitor ? "#be123c" : isHusheng ? "#15803d" : "var(--deep)", fontWeight: 700, marginRight: "6px", fontSize: "20px" }}>
               {isSolicitation ? "【已啟動徵求】" : isTender ? "【已上架招標】" : "【推估上架】"}
             </span>
             {isSolicitation && curStatus?.title ? curStatus.title : forecast.predicted_title}
@@ -864,7 +864,7 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
         <Metric
           label="目前防守廠商"
           value={forecast.latest_winner}
-          note={isCompetitor ? "⚔️ 競品防守（重點搶單目標）" : isRicoh ? "🛡️ 理光防守（務必提早固防）" : "歷史得標商"}
+          note={isCompetitor ? "⚔️ 他牌進攻（重點搶單目標）" : isHusheng ? "🛡️ 互盛防守（務必提早固防）" : "歷史得標商"}
         />
       </div>
 
@@ -949,8 +949,8 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
         </div>
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <span style={{ fontSize: "12px", color: "#617369" }}>商機攻防定位</span>
-          <strong style={{ fontSize: "15px", color: isCompetitor ? "#be123c" : isRicoh ? "#15803d" : "var(--ink)", marginTop: "4px" }}>
-            {isCompetitor ? "⚔️ 競品防守中（切入進攻）" : isRicoh ? "🛡️ 理光防守中（提前防守）" : "⚪ 其他廠商防守"}
+          <strong style={{ fontSize: "15px", color: isCompetitor ? "#be123c" : isHusheng ? "#15803d" : "var(--ink)", marginTop: "4px" }}>
+            {isCompetitor ? "⚔️ 他牌進攻（切入進攻）" : isHusheng ? "🛡️ 互盛防守（提前固防）" : "⚪ 其他廠商防守"}
           </strong>
         </div>
       </div>
@@ -1753,7 +1753,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
   const [cityFilter, setCityFilter] = useState("全部縣市");
   const [peripheralFilter, setPeripheralFilter] = useState<"all" | "supplies" | "printer" | "scanner">("all");
   const [forecastDaysFilter, setForecastDaysFilter] = useState<"all" | "30" | "60" | "90" | "180">("all");
-  const [forecastIncumbentFilter, setForecastIncumbentFilter] = useState<"all" | "competitor" | "ricoh">("all");
+  const [forecastIncumbentFilter, setForecastIncumbentFilter] = useState<"all" | "competitor" | "husheng">("all");
   const [forecastExpansionFilter, setForecastExpansionFilter] = useState<"all" | "expansion" | "standard">("all");
   const [forecastStatusFilter, setForecastStatusFilter] = useState<"all" | "solicitation" | "pending">("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -1867,7 +1867,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
       if (forecastDaysFilter === "180" && fc.days_until > 180) return false;
 
       if (forecastIncumbentFilter === "competitor" && fc.incumbent.type !== "competitor") return false;
-      if (forecastIncumbentFilter === "ricoh" && fc.incumbent.type !== "ricoh") return false;
+      if (forecastIncumbentFilter === "husheng" && fc.incumbent.type !== "husheng" && (fc.incumbent as any).type !== "ricoh") return false;
 
       if (forecastExpansionFilter === "expansion" && !fc.expansion.has_extension) return false;
       if (forecastExpansionFilter === "standard" && fc.expansion.has_extension) return false;
@@ -2081,16 +2081,16 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                 </div>
               </div>
               <div className="overview-stat" style={{ borderLeftColor: "#e11d48" }}>
-                <span>⚔️ 競品防守（攻）</span>
+                <span>⚔️ 他牌進攻（攻）</span>
                 <strong style={{ color: "#e11d48" }}>
                   {forecastedTenders.filter((f) => f.incumbent.type === "competitor").length}
                 </strong>
                 <small>搶單換約先機</small>
               </div>
               <div className="overview-stat" style={{ borderLeftColor: "#16a34a" }}>
-                <span>🛡️ 理光防守（守）</span>
+                <span>🛡️ 互盛防守（守）</span>
                 <strong style={{ color: "#16a34a" }}>
-                  {forecastedTenders.filter((f) => f.incumbent.type === "ricoh").length}
+                  {forecastedTenders.filter((f) => f.incumbent.type === "husheng" || (f.incumbent as any).type === "ricoh").length}
                 </strong>
                 <small>提前續約防守</small>
               </div>
@@ -2202,14 +2202,14 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                   className={`peripheral-pill ${forecastIncumbentFilter === "competitor" ? "active" : ""}`}
                   onClick={() => setForecastIncumbentFilter("competitor")}
                 >
-                  ⚔️ 競品防守 ({forecastedTenders.filter((f) => f.incumbent.type === "competitor").length})
+                  ⚔️ 他牌進攻 ({forecastedTenders.filter((f) => f.incumbent.type === "competitor").length})
                 </button>
                 <button
                   type="button"
-                  className={`peripheral-pill ${forecastIncumbentFilter === "ricoh" ? "active" : ""}`}
-                  onClick={() => setForecastIncumbentFilter("ricoh")}
+                  className={`peripheral-pill ${forecastIncumbentFilter === "husheng" ? "active" : ""}`}
+                  onClick={() => setForecastIncumbentFilter("husheng")}
                 >
-                  🛡️ 理光防守 ({forecastedTenders.filter((f) => f.incumbent.type === "ricoh").length})
+                  🛡️ 互盛防守 ({forecastedTenders.filter((f) => f.incumbent.type === "husheng" || (f.incumbent as any).type === "ricoh").length})
                 </button>
               </div>
 
