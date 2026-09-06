@@ -783,8 +783,8 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
         <div className="solicitation-banner" style={{ margin: "14px 20px 0" }}>
           <span className="solicitation-mark">🔥</span>
           <div style={{ flex: 1 }}>
-            <strong style={{ fontSize: "13px" }}>【本案機關已啟動招標前置：公開徵求廠商提供參考資料】</strong>
-            <span style={{ fontSize: "12px", marginTop: "2px" }}>
+            <strong style={{ fontSize: "15px" }}>【本案機關已啟動招標前置：公開徵求廠商提供參考資料】</strong>
+            <span style={{ fontSize: "13px", marginTop: "2px" }}>
               機關於 {curStatus.date} 發布最新公告「{curStatus.title}」（案號 {curStatus.job_number}）· 正處於訪價與規格徵詢黃金期，請速送理光型錄！
             </span>
           </div>
@@ -794,9 +794,9 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
               target="_blank"
               rel="noopener noreferrer"
               className="action-primary"
-              style={{ padding: "6px 12px", fontSize: "12px", whiteSpace: "nowrap", textDecoration: "none" }}
+              style={{ padding: "8px 14px", fontSize: "13px", whiteSpace: "nowrap", textDecoration: "none" }}
             >
-              <ExternalLink size={13} /> 查看本案公開徵求公告 ↗
+              <ExternalLink size={14} /> 查看本案公開徵求公告 ↗
             </a>
           )}
         </div>
@@ -806,8 +806,8 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
         <div className="solicitation-banner" style={{ margin: "14px 20px 0", borderColor: "#bfdbfe", background: "#eff6ff" }}>
           <span className="solicitation-mark">🎯</span>
           <div style={{ flex: 1 }}>
-            <strong style={{ fontSize: "13px", color: "#1e40af" }}>【本案已正式上架招標中】</strong>
-            <span style={{ fontSize: "12px", color: "#1e3a8a", marginTop: "2px" }}>
+            <strong style={{ fontSize: "15px", color: "#1e40af" }}>【本案已正式上架招標中】</strong>
+            <span style={{ fontSize: "13px", color: "#1e3a8a", marginTop: "2px" }}>
               機關於 {curStatus.date} 公告「{curStatus.title}」（案號 {curStatus.job_number}）· 請前往 01 影印機案件監控備標投標！
             </span>
           </div>
@@ -817,9 +817,9 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
               target="_blank"
               rel="noopener noreferrer"
               className="action-primary"
-              style={{ padding: "6px 12px", fontSize: "12px", whiteSpace: "nowrap", textDecoration: "none" }}
+              style={{ padding: "8px 14px", fontSize: "13px", whiteSpace: "nowrap", textDecoration: "none" }}
             >
-              <ExternalLink size={13} /> 查看招標公告 ↗
+              <ExternalLink size={14} /> 查看招標公告 ↗
             </a>
           )}
         </div>
@@ -831,13 +831,13 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
             <span>發包機關：<strong>{forecast.unit}</strong></span>
             <span className="job-code">機關代碼 {forecast.unit_id}</span>
           </div>
-          <h3 style={{ margin: "8px 0 6px", fontSize: "20px" }}>
-            <span style={{ color: isSolicitation ? "#c2410c" : isCompetitor ? "#be123c" : isRicoh ? "#15803d" : "var(--deep)", fontWeight: 700, marginRight: "6px" }}>
+          <h3 style={{ margin: "8px 0 6px", fontSize: "24px", lineHeight: "1.35", fontWeight: 700 }}>
+            <span style={{ color: isSolicitation ? "#c2410c" : isCompetitor ? "#be123c" : isRicoh ? "#15803d" : "var(--deep)", fontWeight: 700, marginRight: "6px", fontSize: "20px" }}>
               {isSolicitation ? "【已啟動徵求】" : isTender ? "【已上架招標】" : "【推估上架】"}
             </span>
             {isSolicitation && curStatus?.title ? curStatus.title : forecast.predicted_title}
           </h3>
-          <div style={{ fontSize: "12px", color: "#617369", marginTop: "2px" }}>
+          <div style={{ fontSize: "14px", color: "#54645b", marginTop: "4px" }}>
             同機關同案名歷史依據：<strong>{forecast.latest_title}</strong>（歷年累計 {forecast.history_count} 次定期開標紀錄）
           </div>
         </div>
@@ -870,7 +870,7 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
       {forecast.expansion.has_extension && (
         <div className="forecast-expansion-alert">
           <div className="expansion-alert-head">
-            <Sparkles size={15} />
+            <Sparkles size={16} />
             <span>【擴充條款雙重提醒】{forecast.expansion.badge_label}</span>
           </div>
           <p>{forecast.expansion.notice}</p>
@@ -884,7 +884,7 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
             <button
               type="button"
               className="outline-button"
-              style={{ padding: "3px 8px", fontSize: "11px", height: "auto" }}
+              style={{ padding: "4px 10px", fontSize: "12px", height: "auto" }}
               onClick={() => setExpanded(!expanded)}
             >
               {expanded ? "收起履歷" : `展開完整 ${forecast.history_track.length} 次開標履歷`}
@@ -897,13 +897,13 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
                   <span>#{h.index}</span>
                   <strong>{h.month}</strong>
                   <span>{h.winner}</span>
-                  <span style={{ color: "#78857d" }}>
+                  <span style={{ color: "#617268", fontSize: "12px" }}>
                     ({typeof h.award_price === "number" ? `NT$${(h.award_price / 10000).toFixed(0)}萬` : h.award_price} · {h.discount_rate}%)
                   </span>
                   {h.source_url ? (
-                    <ExternalLink size={11} className="cadence-arrow" style={{ opacity: 0.8 }} />
+                    <ExternalLink size={12} className="cadence-arrow" style={{ opacity: 0.8 }} />
                   ) : (
-                    <ChevronRight size={12} className="cadence-arrow" />
+                    <ChevronRight size={13} className="cadence-arrow" />
                   )}
                 </>
               );
@@ -928,9 +928,9 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
               className={`cadence-pill ${isSolicitation ? "" : "predicted"}`}
               style={isSolicitation ? { background: "#fff7ed", borderColor: "#fed7aa", color: "#c2410c", fontWeight: 700 } : undefined}
             >
-              <Sparkles size={12} />
+              <Sparkles size={13} />
               <span>{isSolicitation ? `🔥 本期已公開徵求：${curStatus.date}` : `🔮 預估下次：${forecast.predicted_month}`}</span>
-              <span style={{ fontSize: "10px", opacity: 0.9 }}>（{isSolicitation ? `案號 ${curStatus.job_number}` : forecast.countdown_label}）</span>
+              <span style={{ fontSize: "12px", opacity: 0.9 }}>（{isSolicitation ? `案號 ${curStatus.job_number}` : forecast.countdown_label}）</span>
             </span>
           </div>
         </div>
@@ -939,16 +939,16 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
       <div className="decision-strip">
         <div className="decision-main">
           <div className="decision-label">
-            <Sparkles size={13} />
+            <Sparkles size={14} />
             <span>業務作戰攻防指引</span>
           </div>
-          <p style={{ fontWeight: 600, color: "#1e2923", margin: "6px 0" }}>
+          <p style={{ fontWeight: 600, color: "#1e2923", margin: "6px 0", fontSize: "15px", lineHeight: 1.7 }}>
             {forecast.action_suggestion}
           </p>
         </div>
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <span style={{ fontSize: "10px", color: "#8a978f" }}>商機攻防定位</span>
-          <strong style={{ fontSize: "13px", color: isCompetitor ? "#be123c" : isRicoh ? "#15803d" : "var(--ink)", marginTop: "4px" }}>
+          <span style={{ fontSize: "12px", color: "#617369" }}>商機攻防定位</span>
+          <strong style={{ fontSize: "15px", color: isCompetitor ? "#be123c" : isRicoh ? "#15803d" : "var(--ink)", marginTop: "4px" }}>
             {isCompetitor ? "⚔️ 競品防守中（切入進攻）" : isRicoh ? "🛡️ 理光防守中（提前防守）" : "⚪ 其他廠商防守"}
           </strong>
         </div>
