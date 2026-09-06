@@ -202,7 +202,66 @@ class TestSendAlerts(unittest.TestCase):
         self.assertIn("台灣佳能", html)
         self.assertIn("擴充條款提醒", html)
 
+    def test_forecast_closed_loop_solicitation_email_rendering(self):
+        sample_solicitation_forecast = [
+            {
+                "id": "forecast-3.13.50.48.1-115117年度影印機租賃長約-standard",
+                "unit_id": "3.13.50.48.1",
+                "unit": "台灣中油股份有限公司煉製事業部桃園煉油廠",
+                "city": "桃園市",
+                "predicted_title": "115117年度影印機租賃長約",
+                "latest_title": "112114年度影印機租賃長約",
+                "latest_job_number": "I7312C021",
+                "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/notice/redirectShowNotice?file=PPW-3-50000000",
+                "latest_award_price_str": "NT$ 6,500,000",
+                "latest_winner": "互盛股份有限公司",
+                "incumbent": {
+                    "type": "us",
+                    "label": "🛡️ 我方防守中：互盛 (Ricoh)"
+                },
+                "predicted_month": "2026年08月",
+                "predicted_range": "2026年08月 ～ 09月",
+                "days_until": -15,
+                "countdown_label": "已逾預估期 15 天",
+                "cadence_summary": "歷史每 36 個月定期換約",
+                "current_status": {
+                    "status": "solicitation",
+                    "stage": "公開徵求",
+                    "job_number": "I7315D063",
+                    "title": "115117年度影印機租賃長約",
+                    "date": "2026-08-10",
+                    "notice_url": "https://web.pcc.gov.tw/prkms/tender/common/notice/redirectShowNotice?file=PPW-1-70112048",
+                    "summary": "機關於 2026-08-10 發布「115117年度影印機租賃長約」公開徵求廠商提供參考資料（案號 I7315D063）"
+                },
+                "history_track": [
+                    {
+                        "date": "2023-11-20",
+                        "title": "112114年度影印機租賃長約",
+                        "job_number": "I7312C021",
+                        "amount": 6500000,
+                        "source_url": "https://web.pcc.gov.tw/prkms/tender/common/notice/redirectShowNotice?file=PPW-3-50000000"
+                    }
+                ],
+                "expansion": {
+                    "has_extension": False,
+                    "badge_label": "常態期滿",
+                    "notice": ""
+                },
+                "action_suggestion": "本案機關已啟動公開徵求廠商提供參考資料（案號 I7315D063），目前正處於規格與預算徵詢階段，請速提供理光新機型錄與效益方案。"
+            }
+        ]
+
+        html = build_email_html("user@example.com", [], "2026-09-06", forecasts=sample_solicitation_forecast)
+        self.assertIn("🔥 【本案已啟動招標前置：公開徵求中】", html)
+        self.assertIn("🔥 公開徵求中", html)
+        self.assertIn("查看本期公告 (公開徵求) ↗", html)
+        self.assertIn("查看前次官方決標公告 ↗", html)
+        self.assertIn("https://web.pcc.gov.tw/prkms/tender/common/notice/redirectShowNotice?file=PPW-1-70112048", html)
+        self.assertIn("https://web.pcc.gov.tw/prkms/tender/common/notice/redirectShowNotice?file=PPW-3-50000000", html)
+        self.assertIn("歷史開標履歷（可點擊查看各次決標）", html)
+
 
 if __name__ == "__main__":
     unittest.main()
+
 

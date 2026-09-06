@@ -681,15 +681,16 @@ def parse_duration_months(title, default_months=24):
         end_y = int(m.group(2))
         years = max(1, end_y - start_y + 1)
         return years * 12
-    if any(k in t for k in ["3年", "三年", "36個月", "36月"]):
+    # Ensure not matching ROC calendar year (e.g. 113年 or 115年)
+    if re.search(r"(?<!\d)3年|三年|36個?月", t):
         return 36
-    if any(k in t for k in ["2年", "二年", "24個月", "24月"]):
+    if re.search(r"(?<!\d)2年|二年|24個?月", t):
         return 24
-    if any(k in t for k in ["4年", "四年", "48個月"]):
+    if re.search(r"(?<!\d)4年|四年|48個?月", t):
         return 48
-    if any(k in t for k in ["1年", "一年", "12個月", "12月"]):
+    if re.search(r"(?<!\d)1年|一年|12個?月", t):
         return 12
-    if any(k in t for k in ["5年", "五年", "60個月"]):
+    if re.search(r"(?<!\d)5年|五年|60個?月", t):
         return 60
     return default_months
 
@@ -740,10 +741,11 @@ def classify_incumbent(winner):
     }
 
 
-def generate_copier_forecasts(history_records, base_date=None, target_window_days=180):
+def generate_copier_forecasts(history_records, base_date=None, target_window_days=180, active_tenders=None, candidate_cache=None):
     """
     Analyze up to the last 5 recurring tender dates for each agency + series title.
     Forecasts upcoming copier opportunities over the next 6 months with dual alerts for extension clauses.
+    Also links historical award records directly and cross-references active/recent announcements for closed-loop status.
     """
     if base_date is None:
         base_date = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).date()
@@ -824,6 +826,7 @@ def generate_copier_forecasts(history_records, base_date=None, target_window_day
         city_info = get_city_info(unit_name)
         incumbent = classify_incumbent(latest.get("winner"))
 
+        # Issue 1: Historical records with direct official links
         history_track = []
         for idx, rec in enumerate(top5):
             ad_date = rec.get("award_date", "")
@@ -834,9 +837,121 @@ def generate_copier_forecasts(history_records, base_date=None, target_window_day
                 "month": ad_month,
                 "winner": rec.get("winner", "待查"),
                 "award_price": rec.get("award_price"),
-                "discount_rate": rec.get("discount_rate")
+                "discount_rate": rec.get("discount_rate"),
+                "job_number": rec.get("job_number", ""),
+                "title": rec.get("title", ""),
+                "source_url": rec.get("source_url", "")
             })
         history_track.reverse()
+
+        # Issue 2: Option A Closed-loop current status detection
+        current_status = {
+            "status": "pending",
+            "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
+            "stage": "推估潛伏期",
+            "date": "",
+            "job_number": "",
+            "title": "",
+            "notice_url": "",
+            "action_note": ""
+        }
+
+        # Check active tenders first (formal stage on Tab 01)
+        if active_tenders:
+            for at in active_tenders:
+                if at.get("unit_id") == unit_id:
+                    at_title = at.get("title", "")
+                    if series in at_title or normalize_tender_series_title(at_title) == series:
+                        at_stage = at.get("stage", "")
+                        at_url = at.get("tender_url", "")
+                        at_job = at.get("job_number", "")
+                        at_date = at.get("publish_date", "")
+                        if "決標" in at_stage:
+                            current_status = {
+                                "status": "awarded",
+                                "badge_label": "✓ 本案本年度已決標",
+                                "stage": "已決標",
+                                "date": at_date,
+                                "job_number": at_job,
+                                "title": at_title,
+                                "notice_url": at_url,
+                                "action_note": f"本案已於 {at_date} 決標，目前合約已生效。"
+                            }
+                            break
+                        elif "公開徵求" in at_stage or "徵求" in at_stage:
+                            current_status = {
+                                "status": "solicitation",
+                                "badge_label": "🔥 本案已啟動招標前置：公開徵求中",
+                                "stage": "公開徵求",
+                                "date": at_date,
+                                "job_number": at_job,
+                                "title": at_title,
+                                "notice_url": at_url,
+                                "action_note": f"機關於 {at_date} 發布「公開徵求廠商提供參考資料」（案號 {at_job}），正處於訪價與規格徵詢黃金期，請速送理光型錄與建議規格！"
+                            }
+                            break
+                        else:
+                            current_status = {
+                                "status": "tender",
+                                "badge_label": "🎯 本案已正式上架招標中",
+                                "stage": at_stage or "公開招標",
+                                "date": at_date,
+                                "job_number": at_job,
+                                "title": at_title,
+                                "notice_url": at_url,
+                                "action_note": f"本案已在「01 影印機案件監控」正式上線招標（案號 {at_job}），請儘速備標投標！"
+                            }
+                            break
+
+        # If still pending, check candidate_cache (recent announcements like 公開徵求)
+        if current_status["status"] == "pending" and candidate_cache:
+            for cc in candidate_cache:
+                if cc.get("unit_id") == unit_id:
+                    cc_brief = cc.get("brief", {})
+                    cc_title = cc_brief.get("title", "")
+                    cc_type = cc_brief.get("type", "")
+                    if series in cc_title or normalize_tender_series_title(cc_title) == series:
+                        cc_date_raw = str(cc.get("date", ""))
+                        cc_fn = cc.get("filename", "")
+                        cc_job = cc.get("job_number", "")
+                        cc_date = f"{cc_date_raw[:4]}-{cc_date_raw[4:6]}-{cc_date_raw[6:8]}" if len(cc_date_raw) == 8 else cc_date_raw
+                        cc_url = f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={cc_date_raw}&fn={cc_fn}.xml"
+                        if "公開徵求" in cc_type or "徵求" in cc_type:
+                            current_status = {
+                                "status": "solicitation",
+                                "badge_label": "🔥 本案已啟動招標前置：公開徵求中",
+                                "stage": "公開徵求",
+                                "date": cc_date,
+                                "job_number": cc_job,
+                                "title": cc_title,
+                                "notice_url": cc_url,
+                                "action_note": f"機關於 {cc_date} 發布「公開徵求廠商提供參考資料」（案號 {cc_job}），正處於訪價與規格徵詢黃金期，請速送理光型錄與建議規格！"
+                            }
+                            break
+                        elif "決標" in cc_type:
+                            current_status = {
+                                "status": "awarded",
+                                "badge_label": "✓ 本案本年度已決標",
+                                "stage": "已決標",
+                                "date": cc_date,
+                                "job_number": cc_job,
+                                "title": cc_title,
+                                "notice_url": cc_url,
+                                "action_note": f"本案已於 {cc_date} 完成決標。"
+                            }
+                            break
+                        elif "招標" in cc_type:
+                            current_status = {
+                                "status": "tender",
+                                "badge_label": "🎯 本案已正式上架招標中",
+                                "stage": "公開招標",
+                                "date": cc_date,
+                                "job_number": cc_job,
+                                "title": cc_title,
+                                "notice_url": cc_url,
+                                "action_note": f"本案已於 {cc_date} 公開招標（案號 {cc_job}），請儘速備標投標！"
+                            }
+                            break
 
         for cand in candidates:
             t_date = cand["target_date"]
@@ -858,6 +973,15 @@ def generate_copier_forecasts(history_records, base_date=None, target_window_day
                 else:
                     predicted_title = f"{pred_roc_year}年度{series}"
 
+                if current_status["status"] == "solicitation":
+                    action_sugg = f"【🔥 機關已啟動公開徵求】機關於 {current_status['date']} 公告「{current_status['title']}」（案號 {current_status['job_number']}），請即刻聯繫採購承辦提供理光型錄與參考規格！"
+                elif current_status["status"] == "tender":
+                    action_sugg = f"【🎯 機關已正式上架招標】案號 {current_status['job_number']} 已在 01 分頁進行中，請前往備標投標！"
+                elif current_status["status"] == "awarded":
+                    action_sugg = f"【✓ 本案已完成決標】本年度合約已標出，列入下一合約週期持續追蹤。"
+                else:
+                    action_sugg = f"建議於 {t_date.strftime('%Y年%m月')} 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
+
                 forecasts.append({
                     "id": f"forecast-{unit_id}-{series}-{cand['type']}",
                     "unit_id": unit_id,
@@ -866,6 +990,8 @@ def generate_copier_forecasts(history_records, base_date=None, target_window_day
                     "series_title": series,
                     "predicted_title": predicted_title,
                     "latest_title": latest.get("title", ""),
+                    "latest_job_number": latest.get("job_number", ""),
+                    "latest_source_url": latest.get("source_url", ""),
                     "latest_award_date": latest_date_str,
                     "latest_award_price": price_val,
                     "latest_award_price_str": price_str,
@@ -880,13 +1006,14 @@ def generate_copier_forecasts(history_records, base_date=None, target_window_day
                     "cadence_summary": f"歷史每 {cadence_months} 個月定期換約（{next_years_count}年約）",
                     "history_count": len(records),
                     "history_track": history_track,
+                    "current_status": current_status,
                     "expansion": {
                         "has_extension": has_ext,
                         "type": cand["type"],
                         "badge_label": cand["badge_label"],
                         "notice": cand["notice"]
                     },
-                    "action_suggestion": f"建議於 {t_date.strftime('%Y年%m月')} 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
+                    "action_suggestion": action_sugg
                 })
 
     forecasts.sort(key=lambda x: x["days_until"])
@@ -2101,7 +2228,12 @@ def main(mode="live", backfill_days=None):
         "history_deep_refresh": history_deep_refresh
     }
     
-    output_data["forecasted_tenders"] = generate_copier_forecasts(output_data["history_cache"], base_date=today)
+    output_data["forecasted_tenders"] = generate_copier_forecasts(
+        output_data["history_cache"],
+        base_date=today,
+        active_tenders=processed_tenders,
+        candidate_cache=candidate_cache
+    )
     print(f"Generated {len(output_data['forecasted_tenders'])} forecasted copier tenders for the next 6 months.")
     
     with open(output_path, "w", encoding="utf-8") as f:

@@ -473,6 +473,67 @@ class CopierForecastTests(unittest.TestCase):
         types = [f["expansion"]["type"] for f in forecasts]
         self.assertIn("current_year_opportunity", types)
 
+    def test_forecast_history_links_and_latest_source(self):
+        from update_tenders import generate_copier_forecasts
+        base_date = date(2026, 9, 6)
+        history = [
+            {
+                "unit_id": "U002",
+                "unit_name": "測試機關",
+                "title": "113年度影印機租賃案",
+                "job_number": "JOB123",
+                "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241001&fn=BDM-123.xml",
+                "award_date": "2024-10-01",
+                "award_price": 1500000,
+                "winner": "宏羚股份有限公司",
+                "discount_rate": 90.0
+            }
+        ]
+        forecasts = generate_copier_forecasts(history, base_date=base_date, target_window_days=180)
+        self.assertEqual(len(forecasts), 1)
+        f = forecasts[0]
+        self.assertEqual(f["latest_source_url"], "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241001&fn=BDM-123.xml")
+        self.assertEqual(f["latest_job_number"], "JOB123")
+        self.assertEqual(len(f["history_track"]), 1)
+        self.assertEqual(f["history_track"][0]["source_url"], "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241001&fn=BDM-123.xml")
+
+    def test_forecast_detects_active_solicitation_in_candidate_cache(self):
+        from update_tenders import generate_copier_forecasts
+        base_date = date(2026, 9, 6)
+        history = [
+            {
+                "unit_id": "U003",
+                "unit_name": "中油桃園廠",
+                "title": "113年度影印機租賃案",
+                "job_number": "OLD001",
+                "source_url": "https://web.pcc.gov.tw/prkms/old.xml",
+                "award_date": "2024-10-01",
+                "award_price": 4000000,
+                "winner": "宏羚"
+            }
+        ]
+        candidate_cache = [
+            {
+                "unit_id": "U003",
+                "job_number": "NEW001",
+                "date": 20260810,
+                "filename": "PPW-999",
+                "brief": {
+                    "type": "公開徵求廠商提供參考資料公告",
+                    "title": "115年度影印機租賃案"
+                }
+            }
+        ]
+        forecasts = generate_copier_forecasts(history, base_date=base_date, candidate_cache=candidate_cache)
+        self.assertEqual(len(forecasts), 1)
+        f = forecasts[0]
+        self.assertEqual(f["current_status"]["status"], "solicitation")
+        self.assertEqual(f["current_status"]["job_number"], "NEW001")
+        self.assertIn("公開徵求", f["current_status"]["badge_label"])
+        self.assertIn("PPW-999.xml", f["current_status"]["notice_url"])
+        self.assertIn("【🔥 機關已啟動公開徵求】", f["action_suggestion"])
+
 
 if __name__ == "__main__":
     unittest.main()
+

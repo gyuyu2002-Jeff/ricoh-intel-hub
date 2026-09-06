@@ -588,6 +588,18 @@
   font-weight: 700;
   box-shadow: 0 1px 4px rgba(225, 29, 72, .12);
 }
+a.cadence-pill-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .16s ease;
+}
+a.cadence-pill-link:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+  box-shadow: 0 2px 6px rgba(29, 78, 216, .12);
+  transform: translateY(-1px);
+}
 .cadence-arrow {
   color: #94a3b8;
   font-size: 11px;

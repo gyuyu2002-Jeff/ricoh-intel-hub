@@ -6906,6 +6906,8 @@
       "series_title": "本局及各稽徵所租賃影印機",
       "predicted_title": "115-116年本局及各稽徵所租賃影印機",
       "latest_title": "本局及各稽徵所租賃影印機69台",
+      "latest_job_number": "113050",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241017&fn=BDM-1-70692749.xml",
       "latest_award_date": "2024-10-17",
       "latest_award_price": 4879149,
       "latest_award_price_str": "NT$ 4,879,149",
@@ -6932,7 +6934,10 @@
           "month": "2018-11",
           "winner": "冠碩科技有限公司",
           "award_price": 4811741,
-          "discount_rate": 55.0
+          "discount_rate": 55.0,
+          "job_number": "107055",
+          "title": "本局及各稽徵所租賃影印機65台",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20181121&fn=BDM-1-52613178.xml"
         },
         {
           "index": 2,
@@ -6940,7 +6945,10 @@
           "month": "2020-11",
           "winner": "震旦 SHARP",
           "award_price": 3275265,
-          "discount_rate": 43.3
+          "discount_rate": 43.3,
+          "job_number": "109054",
+          "title": "本局及各稽徵所租賃影印機69台",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20201113&fn=BDM-1-53239860.xml"
         },
         {
           "index": 3,
@@ -6948,7 +6956,10 @@
           "month": "2022-12",
           "winner": "台灣佳能 (Canon)",
           "award_price": 5200000,
-          "discount_rate": 74.4
+          "discount_rate": 74.4,
+          "job_number": "111058",
+          "title": "本局及各稽徵所租賃影印機69台",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221216&fn=BDM-1-70175905.xml"
         },
         {
           "index": 4,
@@ -6956,9 +6967,22 @@
           "month": "2024-10",
           "winner": "台灣佳能 (Canon)",
           "award_price": 4879149,
-          "discount_rate": 74.0
+          "discount_rate": 74.0,
+          "job_number": "113050",
+          "title": "本局及各稽徵所租賃影印機69台",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241017&fn=BDM-1-70692749.xml"
         }
       ],
+      "current_status": {
+        "status": "pending",
+        "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
+        "stage": "推估潛伏期",
+        "date": "",
+        "job_number": "",
+        "title": "",
+        "notice_url": "",
+        "action_note": ""
+      },
       "expansion": {
         "has_extension": false,
         "type": "standard",
@@ -6975,6 +6999,8 @@
       "series_title": "影印機租賃長約",
       "predicted_title": "115-116年影印機租賃長約",
       "latest_title": "114~115年度影印機租賃長約",
+      "latest_job_number": "I7313D053",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241107&fn=BDM-1-70708705.xml",
       "latest_award_date": "2024-11-07",
       "latest_award_price": 4723137,
       "latest_award_price_str": "NT$ 4,723,137",
@@ -7001,16 +7027,29 @@
           "month": "2024-11",
           "winner": "宏羚股份有限公司",
           "award_price": 4723137,
-          "discount_rate": 94.5
+          "discount_rate": 94.5,
+          "job_number": "I7313D053",
+          "title": "114~115年度影印機租賃長約",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241107&fn=BDM-1-70708705.xml"
         }
       ],
+      "current_status": {
+        "status": "solicitation",
+        "badge_label": "🔥 本案已啟動招標前置：公開徵求中",
+        "stage": "公開徵求",
+        "date": "2026-08-10",
+        "job_number": "I7315D063",
+        "title": "115117年度影印機租賃長約",
+        "notice_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260810&fn=PPW-1-70112048.xml",
+        "action_note": "機關於 2026-08-10 發布「公開徵求廠商提供參考資料」（案號 I7315D063），正處於訪價與規格徵詢黃金期，請速送理光型錄與建議規格！"
+      },
       "expansion": {
         "has_extension": false,
         "type": "standard",
         "badge_label": "🔴 常態期滿（依法重招）",
         "notice": "本合約無擴充條款，期滿依法必須公開重新招標。"
       },
-      "action_suggestion": "建議於 2026年09月 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
+      "action_suggestion": "【🔥 機關已啟動公開徵求】機關於 2026-08-10 公告「115117年度影印機租賃長約」（案號 I7315D063），請即刻聯繫採購承辦提供理光型錄與參考規格！"
     },
     {
       "id": "forecast-A.7.8-「影印機租賃」採購案-standard",
@@ -7020,6 +7059,8 @@
       "series_title": "「影印機租賃」採購案",
       "predicted_title": "115-116年「影印機租賃」採購案",
       "latest_title": "「113-115年影印機租賃」採購案",
+      "latest_job_number": "IG113033",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241011&fn=BDM-1-70687939.xml",
       "latest_award_date": "2024-10-11",
       "latest_award_price": 2281600,
       "latest_award_price_str": "NT$ 2,281,600",
@@ -7046,7 +7087,10 @@
           "month": "2022-09",
           "winner": "國碩資訊科技有限公司",
           "award_price": 2200000,
-          "discount_rate": 91.7
+          "discount_rate": 91.7,
+          "job_number": "IG111033",
+          "title": "「111-113年影印機租賃」採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220906&fn=BDM-2-70073389.xml"
         },
         {
           "index": 2,
@@ -7054,9 +7098,22 @@
           "month": "2024-10",
           "winner": "國碩資訊科技有限公司",
           "award_price": 2281600,
-          "discount_rate": 95.1
+          "discount_rate": 95.1,
+          "job_number": "IG113033",
+          "title": "「113-115年影印機租賃」採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241011&fn=BDM-1-70687939.xml"
         }
       ],
+      "current_status": {
+        "status": "pending",
+        "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
+        "stage": "推估潛伏期",
+        "date": "",
+        "job_number": "",
+        "title": "",
+        "notice_url": "",
+        "action_note": ""
+      },
       "expansion": {
         "has_extension": false,
         "type": "standard",
@@ -7073,6 +7130,8 @@
       "series_title": "影印機租賃採購案",
       "predicted_title": "115-116年影印機租賃採購案",
       "latest_title": "112年度影印機租賃採購案",
+      "latest_job_number": "FDPO11107-01",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA3NDI3MzU=",
       "latest_award_date": "2024-12-11",
       "latest_award_price": 486600,
       "latest_award_price_str": "NT$ 486,600",
@@ -7099,7 +7158,10 @@
           "month": "2022-12",
           "winner": "新印科技股份有限公司",
           "award_price": 5514792,
-          "discount_rate": 94.4
+          "discount_rate": 94.4,
+          "job_number": "FDPO11107",
+          "title": "112年度影印機租賃採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221219&fn=BDM-1-70177240.xml"
         },
         {
           "index": 2,
@@ -7107,9 +7169,22 @@
           "month": "2024-12",
           "winner": "新印科技股份有限公司",
           "award_price": 486600,
-          "discount_rate": 100.0
+          "discount_rate": 100.0,
+          "job_number": "FDPO11107-01",
+          "title": "112年度影印機租賃採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA3NDI3MzU="
         }
       ],
+      "current_status": {
+        "status": "pending",
+        "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
+        "stage": "推估潛伏期",
+        "date": "",
+        "job_number": "",
+        "title": "",
+        "notice_url": "",
+        "action_note": ""
+      },
       "expansion": {
         "has_extension": false,
         "type": "standard",
@@ -7126,6 +7201,8 @@
       "series_title": "新北市土城區各里影印機租賃",
       "predicted_title": "115-116年新北市土城區各里影印機租賃",
       "latest_title": "新北市土城區各里影印機租賃",
+      "latest_job_number": "11310C036",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA3NDgxNDE=",
       "latest_award_date": "2024-12-16",
       "latest_award_price": 993000,
       "latest_award_price_str": "NT$ 993,000",
@@ -7152,9 +7229,22 @@
           "month": "2024-12",
           "winner": "國碩資訊科技有限公司",
           "award_price": 993000,
-          "discount_rate": 89.6
+          "discount_rate": 89.6,
+          "job_number": "11310C036",
+          "title": "新北市土城區各里影印機租賃",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA3NDgxNDE="
         }
       ],
+      "current_status": {
+        "status": "pending",
+        "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
+        "stage": "推估潛伏期",
+        "date": "",
+        "job_number": "",
+        "title": "",
+        "notice_url": "",
+        "action_note": ""
+      },
       "expansion": {
         "has_extension": false,
         "type": "standard",
@@ -7164,6 +7254,66 @@
       "action_suggestion": "建議於 2026年11月 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
     },
     {
+      "id": "forecast-3.79.51.6-影印機租賃採購案-standard",
+      "unit_id": "3.79.51.6",
+      "unit": "臺北市政府捷運工程局第二區工程處",
+      "city": "台北市",
+      "series_title": "影印機租賃採購案",
+      "predicted_title": "115-116年影印機租賃採購案",
+      "latest_title": "114年度影印機租賃採購案",
+      "latest_job_number": "113KG005",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250123&fn=BDM-1-70793685.xml",
+      "latest_award_date": "2025-01-23",
+      "latest_award_price": 5195200,
+      "latest_award_price_str": "NT$ 5,195,200",
+      "latest_winner": "新印科技股份有限公司",
+      "incumbent": {
+        "type": "competitor",
+        "name": "新印科技股份有限公司",
+        "brand": "新印",
+        "label": "⚔️ 競品防守中：新印（進攻目標）",
+        "badge_class": "bg-rose-950/60 border-rose-500/50 text-rose-400"
+      },
+      "predicted_date": "2026-12-09",
+      "predicted_month": "2026年12月",
+      "predicted_range": "2026年12月 ～ 01月",
+      "days_until": 94,
+      "countdown_label": "倒數 94 天",
+      "cadence_months": 24,
+      "cadence_summary": "歷史每 24 個月定期換約（2年約）",
+      "history_count": 1,
+      "history_track": [
+        {
+          "index": 1,
+          "date": "2025-01-23",
+          "month": "2025-01",
+          "winner": "新印科技股份有限公司",
+          "award_price": 5195200,
+          "discount_rate": 96.0,
+          "job_number": "113KG005",
+          "title": "114年度影印機租賃採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250123&fn=BDM-1-70793685.xml"
+        }
+      ],
+      "current_status": {
+        "status": "pending",
+        "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
+        "stage": "推估潛伏期",
+        "date": "",
+        "job_number": "",
+        "title": "",
+        "notice_url": "",
+        "action_note": ""
+      },
+      "expansion": {
+        "has_extension": false,
+        "type": "standard",
+        "badge_label": "🔴 常態期滿（依法重招）",
+        "notice": "本合約無擴充條款，期滿依法必須公開重新招標。"
+      },
+      "action_suggestion": "建議於 2026年12月 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
+    },
+    {
       "id": "forecast-3.13.31-總管理處數位式多功能影印機租賃共-standard",
       "unit_id": "3.13.31",
       "unit": "台灣電力股份有限公司",
@@ -7171,6 +7321,8 @@
       "series_title": "總管理處數位式多功能影印機租賃共",
       "predicted_title": "116-117年總管理處數位式多功能影印機租賃共",
       "latest_title": "總管理處數位式多功能影印機租賃共58台",
+      "latest_job_number": "0141100024-01",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241129&fn=BDM-2-70684119.xml",
       "latest_award_date": "2024-11-29",
       "latest_award_price": 525000,
       "latest_award_price_str": "NT$ 525,000",
@@ -7197,7 +7349,10 @@
           "month": "2022-08",
           "winner": "震旦 SHARP",
           "award_price": 5635980,
-          "discount_rate": 57.3
+          "discount_rate": 57.3,
+          "job_number": "0141100024",
+          "title": "總管理處數位式多功能影印機租賃共58台",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220815&fn=BDM-1-70063983.xml"
         },
         {
           "index": 2,
@@ -7205,7 +7360,10 @@
           "month": "2024-11",
           "winner": "震旦 SHARP",
           "award_price": 3951098,
-          "discount_rate": 52.1
+          "discount_rate": 52.1,
+          "job_number": "0141300033",
+          "title": "總管理處數位式多功能影印機租賃共59台",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241126&fn=BDM-1-70724273.xml"
         },
         {
           "index": 3,
@@ -7213,16 +7371,29 @@
           "month": "2024-11",
           "winner": "震旦 SHARP",
           "award_price": 525000,
-          "discount_rate": 100.0
+          "discount_rate": 100.0,
+          "job_number": "0141100024-01",
+          "title": "總管理處數位式多功能影印機租賃共58台",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241129&fn=BDM-2-70684119.xml"
         }
       ],
+      "current_status": {
+        "status": "solicitation",
+        "badge_label": "🔥 本案已啟動招標前置：公開徵求中",
+        "stage": "公開徵求",
+        "date": "2026-07-22",
+        "job_number": "TPC-014-1150721-01",
+        "title": "總管理處數位式多功能影印機租賃共61台",
+        "notice_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260722&fn=PPW-1-70109888.xml",
+        "action_note": "機關於 2026-07-22 發布「公開徵求廠商提供參考資料」（案號 TPC-014-1150721-01），正處於訪價與規格徵詢黃金期，請速送理光型錄與建議規格！"
+      },
       "expansion": {
         "has_extension": false,
         "type": "standard",
         "badge_label": "🔴 常態期滿（依法重招）",
         "notice": "本合約無擴充條款，期滿依法必須公開重新招標。"
       },
-      "action_suggestion": "建議於 2027年01月 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
+      "action_suggestion": "【🔥 機關已啟動公開徵求】機關於 2026-07-22 公告「總管理處數位式多功能影印機租賃共61台」（案號 TPC-014-1150721-01），請即刻聯繫採購承辦提供理光型錄與參考規格！"
     },
     {
       "id": "forecast-3.79.62-事務機具採購-standard",
@@ -7232,6 +7403,8 @@
       "series_title": "事務機具採購",
       "predicted_title": "116年度事務機具採購",
       "latest_title": "事務機具採購",
+      "latest_job_number": "C15A00168",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260309&fn=BDM-1-71125716.xml",
       "latest_award_date": "2026-03-09",
       "latest_award_price": 629264,
       "latest_award_price_str": "NT$ 629,264",
@@ -7258,7 +7431,10 @@
           "month": "2022-03",
           "winner": "東馳企業有限公司",
           "award_price": 748860,
-          "discount_rate": 85.0
+          "discount_rate": 85.0,
+          "job_number": "C11A00193",
+          "title": "事務機具採購",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220328&fn=BDM-1-53683007.xml"
         },
         {
           "index": 2,
@@ -7266,7 +7442,10 @@
           "month": "2023-02",
           "winner": "東馳企業有限公司",
           "award_price": 961800,
-          "discount_rate": 85.0
+          "discount_rate": 85.0,
+          "job_number": "C12A00181",
+          "title": "事務機具採購",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20230218&fn=BDM-1-70233095.xml"
         },
         {
           "index": 3,
@@ -7274,7 +7453,10 @@
           "month": "2024-02",
           "winner": "東馳企業有限公司",
           "award_price": 911925,
-          "discount_rate": 94.8
+          "discount_rate": 94.8,
+          "job_number": "C13A00375",
+          "title": "事務機具採購",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240221&fn=BDM-1-70516591.xml"
         },
         {
           "index": 4,
@@ -7282,7 +7464,10 @@
           "month": "2025-02",
           "winner": "東馳企業有限公司",
           "award_price": 1147650,
-          "discount_rate": 99.0
+          "discount_rate": 99.0,
+          "job_number": "C14A00130",
+          "title": "事務機具採購",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250217&fn=BDM-1-70807040.xml"
         },
         {
           "index": 5,
@@ -7290,9 +7475,22 @@
           "month": "2026-03",
           "winner": "優得工業有限公司",
           "award_price": 629264,
-          "discount_rate": 91.8
+          "discount_rate": 91.8,
+          "job_number": "C15A00168",
+          "title": "事務機具採購",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260309&fn=BDM-1-71125716.xml"
         }
       ],
+      "current_status": {
+        "status": "pending",
+        "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
+        "stage": "推估潛伏期",
+        "date": "",
+        "job_number": "",
+        "title": "",
+        "notice_url": "",
+        "action_note": ""
+      },
       "expansion": {
         "has_extension": false,
         "type": "standard",
@@ -7309,6 +7507,8 @@
       "series_title": "彰化縣衛生局影印機租賃採購案",
       "predicted_title": "116年度彰化縣衛生局影印機租賃採購案",
       "latest_title": "彰化縣衛生局115年度影印機租賃採購案",
+      "latest_job_number": "1150223P",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260316&fn=BDM-1-71130645.xml",
       "latest_award_date": "2026-03-16",
       "latest_award_price": 1490676,
       "latest_award_price_str": "NT$ 1,490,676",
@@ -7335,7 +7535,10 @@
           "month": "2021-03",
           "winner": "震旦 SHARP",
           "award_price": 1083530,
-          "discount_rate": 57.5
+          "discount_rate": 57.5,
+          "job_number": "1100323",
+          "title": "彰化縣衛生局110年度影印機租賃採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20210324&fn=BDM-1-53359094.xml"
         },
         {
           "index": 2,
@@ -7343,7 +7546,10 @@
           "month": "2022-03",
           "winner": "震旦 SHARP",
           "award_price": 1059975,
-          "discount_rate": 56.2
+          "discount_rate": 56.2,
+          "job_number": "1110301-1",
+          "title": "彰化縣衛生局111年度影印機租賃採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220304&fn=BDM-1-53662544.xml"
         },
         {
           "index": 3,
@@ -7351,7 +7557,10 @@
           "month": "2023-03",
           "winner": "宏羚股份有限公司",
           "award_price": 1548247,
-          "discount_rate": 72.1
+          "discount_rate": 72.1,
+          "job_number": "1120214",
+          "title": "彰化縣衛生局112年度影印機租賃採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20230316&fn=BDM-1-70250300.xml"
         },
         {
           "index": 4,
@@ -7359,7 +7568,10 @@
           "month": "2024-03",
           "winner": "宏羚股份有限公司",
           "award_price": 1472373,
-          "discount_rate": 71.3
+          "discount_rate": 71.3,
+          "job_number": "1130312A",
+          "title": "彰化縣衛生局113年度影印機租賃採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240319&fn=BDM-1-70535225.xml"
         },
         {
           "index": 5,
@@ -7367,9 +7579,22 @@
           "month": "2026-03",
           "winner": "宏羚股份有限公司 (HONLYNN CO., LTD.)",
           "award_price": 1490676,
-          "discount_rate": 69.2
+          "discount_rate": 69.2,
+          "job_number": "1150223P",
+          "title": "彰化縣衛生局115年度影印機租賃採購案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260316&fn=BDM-1-71130645.xml"
         }
       ],
+      "current_status": {
+        "status": "pending",
+        "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
+        "stage": "推估潛伏期",
+        "date": "",
+        "job_number": "",
+        "title": "",
+        "notice_url": "",
+        "action_note": ""
+      },
       "expansion": {
         "has_extension": false,
         "type": "standard",
@@ -7386,6 +7611,8 @@
       "series_title": "台電台中區處影印機租賃案",
       "predicted_title": "116-117年台電台中區處影印機租賃案",
       "latest_title": "台電台中區處影印機租賃案",
+      "latest_job_number": "1051400012",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250416&fn=BDM-1-70853990.xml",
       "latest_award_date": "2025-04-16",
       "latest_award_price": 3103514,
       "latest_award_price_str": "NT$ 3,103,514",
@@ -7412,9 +7639,22 @@
           "month": "2025-04",
           "winner": "億雙企業有限公司",
           "award_price": 3103514,
-          "discount_rate": 81.1
+          "discount_rate": 81.1,
+          "job_number": "1051400012",
+          "title": "台電台中區處影印機租賃案",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250416&fn=BDM-1-70853990.xml"
         }
       ],
+      "current_status": {
+        "status": "pending",
+        "badge_label": "⏳ 尚未發布本期公告（潛伏期）",
+        "stage": "推估潛伏期",
+        "date": "",
+        "job_number": "",
+        "title": "",
+        "notice_url": "",
+        "action_note": ""
+      },
       "expansion": {
         "has_extension": false,
         "type": "standard",

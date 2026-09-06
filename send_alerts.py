@@ -358,26 +358,44 @@ def build_email_html(subscriber_email, tenders, taipei_date_str, forecasts=None)
             expansion_info = fc.get("expansion", {})
             has_ext = expansion_info.get("has_extension", False)
 
+            cur_status = fc.get("current_status", {})
+            is_solicitation = cur_status.get("status") == "solicitation"
+
             pcc_search_url = f"https://web.pcc.gov.tw/prkms/prms-viewTenderDetailClient.do?ds={fc.get('unit_id','')}"
 
-            # History track summary
+            # History track summary with direct links
             history_track_html = ""
             if fc.get("history_track"):
                 track_pills = []
                 for h in fc.get("history_track", []):
+                    pill_text = f"#{h.get('index')} {h.get('month')} · {h.get('winner')} (折率{h.get('discount_rate','-')}%)"
+                    if h.get("source_url"):
+                        track_pills.append(
+                            f"""<a href="{h.get('source_url')}" target="_blank" style="display:inline-block; background:#f4f7f4; border:1px solid #dce6de; color:#2f5146; text-decoration:none; padding:2px 6px; border-radius:4px; font-size:10px; margin:2px 4px 2px 0;">
+                                {pill_text} ↗
+                            </a>"""
+                        )
+                    else:
+                        track_pills.append(
+                            f"""<span style="display:inline-block; background:#f4f7f4; border:1px solid #dce6de; padding:2px 6px; border-radius:4px; font-size:10px; margin:2px 4px 2px 0;">
+                                {pill_text}
+                            </span>"""
+                        )
+                if is_solicitation:
                     track_pills.append(
-                        f"""<span style="display:inline-block; background:#f4f7f4; border:1px solid #dce6de; padding:2px 6px; border-radius:4px; font-size:10px; margin:2px 4px 2px 0;">
-                            #{h.get('index')} {h.get('month')} · {h.get('winner')} (折率{h.get('discount_rate','-')}%)
+                        f"""<span style="display:inline-block; background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; font-weight:700; padding:2px 6px; border-radius:4px; font-size:10px; margin:2px 4px 2px 0;">
+                            🔥 本期已公開徵求：{cur_status.get('date')}（案號 {cur_status.get('job_number')}）
                         </span>"""
                     )
-                track_pills.append(
-                    f"""<span style="display:inline-block; background:#fef2f2; border:1px solid #fecaca; color:#b91c1c; font-weight:700; padding:2px 6px; border-radius:4px; font-size:10px; margin:2px 4px 2px 0;">
-                        🔮 預估 #{len(fc.get('history_track',[]))+1} {fc.get('predicted_month')}
-                    </span>"""
-                )
+                else:
+                    track_pills.append(
+                        f"""<span style="display:inline-block; background:#fef2f2; border:1px solid #fecaca; color:#b91c1c; font-weight:700; padding:2px 6px; border-radius:4px; font-size:10px; margin:2px 4px 2px 0;">
+                            🔮 預估 #{len(fc.get('history_track',[]))+1} {fc.get('predicted_month')}
+                        </span>"""
+                    )
                 history_track_html = f"""
                 <div style="margin-top:8px; padding-top:8px; border-top:1px dashed #e2ece4; font-size:11px; color:#53605a;">
-                  <strong>歷史開標履歷：</strong><div style="margin-top:4px;">{''.join(track_pills)}</div>
+                  <strong>歷史開標履歷（可點擊查看各次決標）：</strong><div style="margin-top:4px;">{''.join(track_pills)}</div>
                 </div>
                 """
 
@@ -389,19 +407,40 @@ def build_email_html(subscriber_email, tenders, taipei_date_str, forecasts=None)
                 </div>
                 """
 
+            solicitation_banner_html = ""
+            if is_solicitation:
+                solicitation_banner_html = f"""
+                <div style="background:#fff7ed; border:1px solid #fed7aa; border-left:3px solid #ea580c; padding:8px 12px; border-radius:5px; margin-top:8px; font-size:11px; color:#c2410c; line-height:1.5;">
+                  <strong>🔥 【本案已啟動招標前置：公開徵求中】</strong> 機關於 {cur_status.get('date')} 發布「{cur_status.get('title')}」（案號 {cur_status.get('job_number')}），正處於訪價與規格徵詢黃金期，請速提供理光型錄！
+                </div>
+                """
+
+            status_badge_html = f"""<span style="display:inline-block; background:#fff7ed; color:#ea580c; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">🔥 公開徵求中</span>""" if is_solicitation else f"""<span style="display:inline-block; background:{countdown_bg}; color:{countdown_color}; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">⏳ {countdown_label}</span>"""
+
+            progress_label = "當前最新進度" if is_solicitation else "預計開標期"
+            cur_date = cur_status.get("date", "")
+            progress_value = f"🔥 公開徵求中 ({cur_date})" if is_solicitation else fc.get("predicted_range", "推估中")
+
+            action_buttons_html = ""
+            if cur_status.get("notice_url"):
+                action_buttons_html += f"""<a href="{cur_status.get('notice_url')}" target="_blank" style="display:inline-block; background:#ea580c; color:#ffffff; font-size:11px; font-weight:700; padding:6px 12px; border-radius:4px; text-decoration:none; margin-right:6px;">查看本期公告 ({cur_status.get('stage', '最新')}) ↗</a>"""
+            if fc.get("latest_source_url"):
+                action_buttons_html += f"""<a href="{fc.get('latest_source_url')}" target="_blank" style="display:inline-block; background:#2f5146; color:#ffffff; font-size:11px; font-weight:700; padding:6px 12px; border-radius:4px; text-decoration:none; margin-right:6px;">查看前次官方決標公告 ↗</a>"""
+            action_buttons_html += f"""<a href="{pcc_search_url}" target="_blank" style="display:inline-block; background:#f1f5f9; color:#475569; font-size:11px; font-weight:600; padding:6px 10px; border-radius:4px; text-decoration:none;">機關標案列表 ↗</a>"""
+
             forecasts_html += f"""
             <div style="background:#ffffff; border:1px solid #d4ded7; border-left:4px solid #2f5146; border-radius:8px; padding:18px 20px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
                 <div>
                   <span style="display:inline-block; background:#edf4ef; color:#2f5146; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">{fc.get('city', '全台')}</span>
-                  <span style="display:inline-block; background:{countdown_bg}; color:{countdown_color}; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">⏳ {countdown_label}</span>
+                  {status_badge_html}
                   <span style="display:inline-block; background:{inc_badge_bg}; color:{inc_badge_color}; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px;">{inc_badge_label}</span>
                 </div>
                 <span style="display:inline-block; background:#f1f5f9; color:#475569; font-size:10px; padding:2px 6px; border-radius:4px;">{expansion_info.get('badge_label', '常態期滿')}</span>
               </div>
 
               <h3 style="margin:6px 0 6px; font-size:16px; color:#202825; line-height:1.4;">
-                <span style="color:#2f5146; font-weight:700;">【推估】{fc.get('predicted_title', '')}</span>
+                <span style="color:#2f5146; font-weight:700;">{'【已啟動徵求】' if is_solicitation else '【推估】'}{cur_status.get('title') if is_solicitation and cur_status.get('title') else fc.get('predicted_title', '')}</span>
               </h3>
               <div style="font-size:12px; color:#53605a; margin-bottom:10px;">
                 <strong>發包機關：</strong>{fc.get('unit', '')} · <strong>前次案名：</strong>{fc.get('latest_title', '')}
@@ -410,8 +449,8 @@ def build_email_html(subscriber_email, tenders, taipei_date_str, forecasts=None)
               <table style="width:100%; border-collapse:collapse; background:#fbfcf8; border:1px solid #e2ece4; border-radius:6px; margin-bottom:8px; font-size:12px;">
                 <tr>
                   <td style="padding:8px 12px; border-right:1px solid #e2ece4; width:33%;">
-                    <div style="color:#8a968f; font-size:10px;">預計開標期</div>
-                    <div style="color:#2f5146; font-weight:700; font-size:14px; margin-top:2px;">{fc.get('predicted_range', '推估中')}</div>
+                    <div style="color:#8a968f; font-size:10px;">{progress_label}</div>
+                    <div style="color:#2f5146; font-weight:700; font-size:14px; margin-top:2px;">{progress_value}</div>
                   </td>
                   <td style="padding:8px 12px; border-right:1px solid #e2ece4; width:33%;">
                     <div style="color:#8a968f; font-size:10px;">前次決標總額</div>
@@ -424,11 +463,16 @@ def build_email_html(subscriber_email, tenders, taipei_date_str, forecasts=None)
                 </tr>
               </table>
 
+              {solicitation_banner_html}
               {ext_alert_html}
               {history_track_html}
 
               <div style="margin-top:10px; padding:8px 10px; background:#f4f8f5; border-radius:5px; font-size:11px; color:#2f5146; line-height:1.5;">
                 🎯 <strong>業務作戰指引：</strong>{fc.get('action_suggestion', '')}
+              </div>
+
+              <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:6px;">
+                {action_buttons_html}
               </div>
             </div>
             """

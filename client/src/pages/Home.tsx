@@ -39,6 +39,20 @@ export type HistoryTrackItem = {
   winner: string;
   award_price: number;
   discount_rate: number | string;
+  job_number?: string;
+  title?: string;
+  source_url?: string;
+};
+
+export type ForecastCurrentStatus = {
+  status: "pending" | "solicitation" | "tender" | "awarded";
+  badge_label: string;
+  stage: string;
+  date: string;
+  job_number: string;
+  title: string;
+  notice_url: string;
+  action_note: string;
 };
 
 export type ForecastedTender = {
@@ -49,6 +63,8 @@ export type ForecastedTender = {
   series_title: string;
   predicted_title: string;
   latest_title: string;
+  latest_job_number?: string;
+  latest_source_url?: string;
   latest_award_date: string;
   latest_award_price: number;
   latest_award_price_str: string;
@@ -69,9 +85,10 @@ export type ForecastedTender = {
   cadence_summary: string;
   history_count: number;
   history_track: HistoryTrackItem[];
+  current_status?: ForecastCurrentStatus;
   expansion: {
     has_extension: boolean;
-    type: "standard" | "expansion_dual_expiring" | "expansion_dual_extension";
+    type: string;
     badge_label: string;
     notice: string;
   };
@@ -713,7 +730,14 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
   const isUrgent = forecast.days_until <= 30;
   const isOverdue = forecast.days_until <= 0;
 
-  const cardBorderClass = isCompetitor
+  const curStatus = forecast.current_status;
+  const isSolicitation = curStatus?.status === "solicitation";
+  const isTender = curStatus?.status === "tender";
+  const isAwarded = curStatus?.status === "awarded";
+
+  const cardBorderClass = isSolicitation
+    ? "competitor-defense"
+    : isCompetitor
     ? "competitor-defense"
     : isRicoh
     ? "ricoh-defense"
@@ -726,9 +750,17 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
       <div className="tender-status-bar">
         <div className="status-left">
           <Stamp tone="stamp-sage">{forecast.city}</Stamp>
-          <Stamp tone={isOverdue ? "stamp-red" : isUrgent ? "stamp-amber" : "stamp-sage"}>
-            {isOverdue ? "🚨 已屆招標期" : `⏳ 倒數 ${forecast.days_until} 天`}
-          </Stamp>
+          {isSolicitation ? (
+            <Stamp tone="stamp-red">🔥 公開徵求中（案號 {curStatus.job_number}）</Stamp>
+          ) : isTender ? (
+            <Stamp tone="stamp-blue">🎯 正式招標中（案號 {curStatus.job_number}）</Stamp>
+          ) : isAwarded ? (
+            <Stamp tone="stamp-green">✓ 已決標</Stamp>
+          ) : (
+            <Stamp tone={isOverdue ? "stamp-red" : isUrgent ? "stamp-amber" : "stamp-sage"}>
+              {isOverdue ? "🚨 已屆招標期" : `⏳ 倒數 ${forecast.days_until} 天`}
+            </Stamp>
+          )}
           <Stamp tone={isCompetitor ? "stamp-red" : isRicoh ? "stamp-green" : "stamp-ink"}>
             {forecast.incumbent.label}
           </Stamp>
@@ -736,11 +768,62 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
             {forecast.expansion.badge_label}
           </Stamp>
         </div>
-        <div className={`countdown ${isUrgent ? "countdown-hot" : ""}`}>
+        <div className={`countdown ${isSolicitation || isUrgent ? "countdown-hot" : ""}`}>
           <Clock3 size={14} />
-          <span>{forecast.countdown_label} · 預估 {forecast.predicted_month}</span>
+          <span>
+            {isSolicitation
+              ? `🔥 機關已啟動 · ${curStatus.date} 公告`
+              : `${forecast.countdown_label} · 預估 ${forecast.predicted_month}`}
+          </span>
         </div>
       </div>
+
+      {/* Closed-loop Active Notice Banner */}
+      {isSolicitation && (
+        <div className="solicitation-banner" style={{ margin: "14px 20px 0" }}>
+          <span className="solicitation-mark">🔥</span>
+          <div style={{ flex: 1 }}>
+            <strong style={{ fontSize: "13px" }}>【本案機關已啟動招標前置：公開徵求廠商提供參考資料】</strong>
+            <span style={{ fontSize: "12px", marginTop: "2px" }}>
+              機關於 {curStatus.date} 發布最新公告「{curStatus.title}」（案號 {curStatus.job_number}）· 正處於訪價與規格徵詢黃金期，請速送理光型錄！
+            </span>
+          </div>
+          {curStatus.notice_url && (
+            <a
+              href={curStatus.notice_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="action-primary"
+              style={{ padding: "6px 12px", fontSize: "12px", whiteSpace: "nowrap", textDecoration: "none" }}
+            >
+              <ExternalLink size={13} /> 查看本案公開徵求公告 ↗
+            </a>
+          )}
+        </div>
+      )}
+
+      {isTender && (
+        <div className="solicitation-banner" style={{ margin: "14px 20px 0", borderColor: "#bfdbfe", background: "#eff6ff" }}>
+          <span className="solicitation-mark">🎯</span>
+          <div style={{ flex: 1 }}>
+            <strong style={{ fontSize: "13px", color: "#1e40af" }}>【本案已正式上架招標中】</strong>
+            <span style={{ fontSize: "12px", color: "#1e3a8a", marginTop: "2px" }}>
+              機關於 {curStatus.date} 公告「{curStatus.title}」（案號 {curStatus.job_number}）· 請前往 01 影印機案件監控備標投標！
+            </span>
+          </div>
+          {curStatus.notice_url && (
+            <a
+              href={curStatus.notice_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="action-primary"
+              style={{ padding: "6px 12px", fontSize: "12px", whiteSpace: "nowrap", textDecoration: "none" }}
+            >
+              <ExternalLink size={13} /> 查看招標公告 ↗
+            </a>
+          )}
+        </div>
+      )}
 
       <div className="tender-identity">
         <div>
@@ -749,10 +832,10 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
             <span className="job-code">機關代碼 {forecast.unit_id}</span>
           </div>
           <h3 style={{ margin: "8px 0 6px", fontSize: "20px" }}>
-            <span style={{ color: isCompetitor ? "#be123c" : isRicoh ? "#15803d" : "var(--deep)", fontWeight: 700, marginRight: "6px" }}>
-              【推估上架】
+            <span style={{ color: isSolicitation ? "#c2410c" : isCompetitor ? "#be123c" : isRicoh ? "#15803d" : "var(--deep)", fontWeight: 700, marginRight: "6px" }}>
+              {isSolicitation ? "【已啟動徵求】" : isTender ? "【已上架招標】" : "【推估上架】"}
             </span>
-            {forecast.predicted_title}
+            {isSolicitation && curStatus?.title ? curStatus.title : forecast.predicted_title}
           </h3>
           <div style={{ fontSize: "12px", color: "#617369", marginTop: "2px" }}>
             同機關同案名歷史依據：<strong>{forecast.latest_title}</strong>（歷年累計 {forecast.history_count} 次定期開標紀錄）
@@ -762,10 +845,10 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
 
       <div className="metric-grid" style={{ gridTemplateColumns: "repeat(4, minmax(0, 1fr))" }}>
         <Metric
-          label="預計開標／上架期"
-          value={forecast.predicted_range}
-          note="歷史開標規律演算"
-          alert={isUrgent}
+          label={isSolicitation ? "當前最新進度" : "預計開標／上架期"}
+          value={isSolicitation ? `🔥 公開徵求中 (${curStatus.date})` : isTender ? `🎯 招標中 (${curStatus.date})` : forecast.predicted_range}
+          note={isSolicitation ? `案號 ${curStatus.job_number}` : "歷史開標規律演算"}
+          alert={isSolicitation || isUrgent}
         />
         <Metric
           label="定期換約週期"
@@ -797,7 +880,7 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
       {forecast.history_track && forecast.history_track.length > 0 && (
         <div className="cadence-track-container">
           <div className="cadence-track-title">
-            <span>📋 歷史開標履歷軌跡（同機關同案名）</span>
+            <span>📋 歷史開標履歷軌跡（點擊各筆可直通該次官方決標公告）</span>
             <button
               type="button"
               className="outline-button"
@@ -808,19 +891,46 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
             </button>
           </div>
           <div className="cadence-track-flow">
-            {forecast.history_track.slice(expanded ? 0 : -3).map((h) => (
-              <span key={h.index} className="cadence-pill">
-                <span>#{h.index}</span>
-                <strong>{h.month}</strong>
-                <span>{h.winner}</span>
-                <span style={{ color: "#78857d" }}>({typeof h.award_price === "number" ? `NT$${(h.award_price / 10000).toFixed(0)}萬` : h.award_price} · {h.discount_rate}%)</span>
-                <ChevronRight size={12} className="cadence-arrow" />
-              </span>
-            ))}
-            <span className="cadence-pill predicted">
+            {forecast.history_track.slice(expanded ? 0 : -3).map((h) => {
+              const pillContent = (
+                <>
+                  <span>#{h.index}</span>
+                  <strong>{h.month}</strong>
+                  <span>{h.winner}</span>
+                  <span style={{ color: "#78857d" }}>
+                    ({typeof h.award_price === "number" ? `NT$${(h.award_price / 10000).toFixed(0)}萬` : h.award_price} · {h.discount_rate}%)
+                  </span>
+                  {h.source_url ? (
+                    <ExternalLink size={11} className="cadence-arrow" style={{ opacity: 0.8 }} />
+                  ) : (
+                    <ChevronRight size={12} className="cadence-arrow" />
+                  )}
+                </>
+              );
+              return h.source_url ? (
+                <a
+                  key={h.index}
+                  href={h.source_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cadence-pill cadence-pill-link"
+                  title={`點擊在新分頁查看政府採購網官方原始決標公告 (${h.date} · 案號 ${h.job_number || ""} · ${h.title || ""})`}
+                >
+                  {pillContent}
+                </a>
+              ) : (
+                <span key={h.index} className="cadence-pill">
+                  {pillContent}
+                </span>
+              );
+            })}
+            <span
+              className={`cadence-pill ${isSolicitation ? "" : "predicted"}`}
+              style={isSolicitation ? { background: "#fff7ed", borderColor: "#fed7aa", color: "#c2410c", fontWeight: 700 } : undefined}
+            >
               <Sparkles size={12} />
-              <span>🔮 預估下次：{forecast.predicted_month}</span>
-              <span style={{ fontSize: "10px", opacity: 0.9 }}>（{forecast.countdown_label}）</span>
+              <span>{isSolicitation ? `🔥 本期已公開徵求：${curStatus.date}` : `🔮 預估下次：${forecast.predicted_month}`}</span>
+              <span style={{ fontSize: "10px", opacity: 0.9 }}>（{isSolicitation ? `案號 ${curStatus.job_number}` : forecast.countdown_label}）</span>
             </span>
           </div>
         </div>
@@ -849,17 +959,40 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
           <span>影印機定期租賃</span>
           <span>同機關履歷推估</span>
           <span>{forecast.cadence_summary}</span>
+          {isSolicitation && <span style={{ color: "#c2410c", background: "#ffedd5", fontWeight: 700 }}>🔥 公開徵求中</span>}
           {forecast.expansion.has_extension && <span style={{ color: "#b45309", background: "#fef3c7" }}>含擴充條款</span>}
         </div>
         <div className="action-row">
+          {curStatus?.notice_url && (
+            <a
+              href={curStatus.notice_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="action-primary"
+              title="開啟政府採購網查看該案本期最新公告"
+            >
+              <ExternalLink size={13} /> 查看本期公告 ({curStatus.stage}) ↗
+            </a>
+          )}
+          {forecast.latest_source_url && (
+            <a
+              href={forecast.latest_source_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={curStatus?.notice_url ? "action-secondary" : "action-primary"}
+              title={`開啟政府採購網查看前次官方決標公告 (${forecast.latest_award_date} · ${forecast.latest_winner})`}
+            >
+              <ExternalLink size={13} /> 查看前次官方決標公告 ↗
+            </a>
+          )}
           <a
             href={pccSearchUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="action-primary"
+            className="action-secondary"
             title="開啟政府電子採購網查看該機關所有公開標案與歷史紀錄"
           >
-            <ExternalLink size={13} /> 前往採購網機關標案列表 ↗
+            機關標案清單 ↗
           </a>
         </div>
       </div>
@@ -1482,6 +1615,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
   const [forecastDaysFilter, setForecastDaysFilter] = useState<"all" | "30" | "60" | "90" | "180">("all");
   const [forecastIncumbentFilter, setForecastIncumbentFilter] = useState<"all" | "competitor" | "ricoh">("all");
   const [forecastExpansionFilter, setForecastExpansionFilter] = useState<"all" | "expansion" | "standard">("all");
+  const [forecastStatusFilter, setForecastStatusFilter] = useState<"all" | "solicitation" | "pending">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [subscribeOpen, setSubscribeOpen] = useState(false);
@@ -1500,6 +1634,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
     setForecastDaysFilter("all");
     setForecastIncumbentFilter("all");
     setForecastExpansionFilter("all");
+    setForecastStatusFilter("all");
     setSearchQuery("");
   }, [stream]);
 
@@ -1597,6 +1732,9 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
       if (forecastExpansionFilter === "expansion" && !fc.expansion.has_extension) return false;
       if (forecastExpansionFilter === "standard" && fc.expansion.has_extension) return false;
 
+      if (forecastStatusFilter === "solicitation" && fc.current_status?.status !== "solicitation") return false;
+      if (forecastStatusFilter === "pending" && fc.current_status?.status === "solicitation") return false;
+
       if (cityFilter !== "全部縣市" && fc.city !== cityFilter) return false;
 
       if (searchQuery.trim()) {
@@ -1604,6 +1742,9 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
         const text = [
           fc.predicted_title,
           fc.latest_title,
+          fc.latest_job_number || "",
+          fc.current_status?.title || "",
+          fc.current_status?.job_number || "",
           fc.unit,
           fc.city,
           fc.latest_winner,
@@ -1616,7 +1757,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
 
       return true;
     });
-  }, [forecastedTenders, forecastDaysFilter, forecastIncumbentFilter, forecastExpansionFilter, cityFilter, searchQuery]);
+  }, [forecastedTenders, forecastDaysFilter, forecastIncumbentFilter, forecastExpansionFilter, forecastStatusFilter, cityFilter, searchQuery]);
 
   useEffect(() => {
     let active = true;
@@ -1778,6 +1919,13 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                 </strong>
                 <small>高急迫性標案</small>
               </div>
+              <div className="overview-stat" style={{ borderLeftColor: "#ea580c" }}>
+                <span>🔥 已啟動公開徵求</span>
+                <strong style={{ color: "#ea580c" }}>
+                  {forecastedTenders.filter((f) => f.current_status?.status === "solicitation").length}
+                </strong>
+                <small>訪價規格進場黃金期</small>
+              </div>
               <div className="overview-stat" style={{ borderLeftColor: "#7c3aed" }}>
                 <span>⚡ 擴充條款提醒</span>
                 <strong style={{ color: "#7c3aed" }}>
@@ -1788,6 +1936,33 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
             </div>
 
             <div className="forecast-filter-bar" aria-label="推估條件篩選">
+              <div className="forecast-filter-group">
+                <span className="forecast-filter-label">
+                  <Database size={14} /> 招標進度：
+                </span>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastStatusFilter === "all" ? "active" : ""}`}
+                  onClick={() => setForecastStatusFilter("all")}
+                >
+                  全部
+                </button>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastStatusFilter === "solicitation" ? "active" : ""}`}
+                  onClick={() => setForecastStatusFilter("solicitation")}
+                >
+                  🔥 公開徵求中 ({forecastedTenders.filter((f) => f.current_status?.status === "solicitation").length})
+                </button>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastStatusFilter === "pending" ? "active" : ""}`}
+                  onClick={() => setForecastStatusFilter("pending")}
+                >
+                  ⏳ 尚待公告中 ({forecastedTenders.filter((f) => f.current_status?.status !== "solicitation").length})
+                </button>
+              </div>
+
               <div className="forecast-filter-group">
                 <span className="forecast-filter-label">
                   <Clock3 size={14} /> 時效倒數：
