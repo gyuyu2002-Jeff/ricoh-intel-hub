@@ -1779,7 +1779,6 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
     return () => { active = false; };
   }, []);
   if (loading) return <div className="app-shell loading-shell"><header className="topbar"><div className="brand-lockup"><Mark /><div><div className="brand-title">互盛情報中樞</div><div className="brand-subtitle">INTERNAL BUSINESS INTELLIGENCE <span>/</span> 互盛情報中樞</div></div></div><span className="loading-top-note"><span className="loading-pulse" /> 讀取來源索引</span></header><main className="page-container"><SectionSkeleton /></main></div>;
-  const dataUpdateCopy = dataSyncStatus === "warning" ? `最後成功更新：${dataUpdated}` : `資料更新：${dataUpdated}`;
   const dataUpdateTitle = dataSyncStatus === "warning" && dataSyncAttempt ? `最近一次同步嘗試：${dataSyncAttempt}；目前顯示最後成功更新資料。` : "標案資料集最後成功同步時間";
   return (
     <div className="app-shell">
@@ -1868,24 +1867,22 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                 <div className="eyebrow">
                   互盛情報中樞 / 推測未來上架案件 (六個月)
                 </div>
-                <h1>推測未來上架案件雷達</h1>
+                <div className="page-heading-title-row">
+                  <h1>推測未來上架案件雷達</h1>
+                  <button
+                    type="button"
+                    className="primary-subscribe-btn"
+                    onClick={() => setSubscribeOpen(true)}
+                  >
+                    <Bell size={18} /> 訂閱到期預警通知
+                  </button>
+                </div>
                 <p>
                   基於同機關同案名歷史前 5 次開標規律、得標合約期程與一年擴充條款，精準預估未來 6 個月即將到期之影印機標案，提前啟動攻防佈局。
                 </p>
               </div>
               <div className="heading-actions">
-                <button
-                  type="button"
-                  className="primary-subscribe-btn"
-                  onClick={() => setSubscribeOpen(true)}
-                >
-                  <Bell size={18} /> 訂閱到期預警通知
-                </button>
-                <span className={`update-note ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}>
-                  <Database size={14} />
-                  <time>{dataUpdateCopy}</time>
-                </span>
-                <button className="outline-button" onClick={() => window.print()}><FileDown size={15} /> 列印工作區</button>
+                <button type="button" className="outline-button" onClick={() => window.print()}><FileDown size={15} /> 列印工作區</button>
               </div>
             </div>
 
@@ -2141,22 +2138,20 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
             <div className="page-heading">
               <div>
                 <div className="eyebrow">互盛情報中樞 / 影印機案件</div>
-                <h1>影印機案件監控雷達</h1>
+                <div className="page-heading-title-row">
+                  <h1>影印機案件監控雷達</h1>
+                  <button
+                    type="button"
+                    className="primary-subscribe-btn"
+                    onClick={() => setSubscribeOpen(true)}
+                  >
+                    <Bell size={18} /> 相關地區標案通知我
+                  </button>
+                </div>
                 <p>先看今天該追的案，再回頭核對前次得標紀錄。</p>
               </div>
               <div className="heading-actions">
-                <button
-                  type="button"
-                  className="primary-subscribe-btn"
-                  onClick={() => setSubscribeOpen(true)}
-                >
-                  <Bell size={18} /> 相關地區標案通知我
-                </button>
-                <span className={`update-note ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}>
-                  <Database size={14} />
-                  <time>{dataUpdateCopy}</time>
-                </span>
-                <button className="outline-button"><FileDown size={15} /> 列印工作區</button>
+                <button type="button" className="outline-button" onClick={() => window.print()}><FileDown size={15} /> 列印工作區</button>
               </div>
             </div>
 
