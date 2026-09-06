@@ -10,6 +10,7 @@ import {
   Car,
   Check,
   ChevronDown,
+  ChevronLeft,
   ChevronRight,
   Clock,
   Clock3,
@@ -1607,6 +1608,159 @@ function SubscribeModal({
   );
 }
 
+function BrowserTipsBar() {
+  return (
+    <aside className="browser-tips-bar" role="region" aria-label="畫面縮放與翻頁操作提示">
+      <div className="tips-content">
+        <span className="tips-icon">💡</span>
+        <span className="tips-text">
+          <strong>操作小秘訣：</strong>
+          按住鍵盤 <kbd>Ctrl</kbd> 並推動「<strong>滑鼠滾輪</strong>」可自由放大／縮小畫面至最舒適大小；下方案件清單可點擊「<strong>◀ 上一頁</strong>」與「<strong>下一頁 ▶</strong>」進行左右翻頁閱覽。
+        </span>
+      </div>
+    </aside>
+  );
+}
+
+function PaginationControl({
+  currentPage,
+  totalPages,
+  totalCount,
+  pageSize,
+  onPageChange,
+  itemLabel = "案件",
+}: {
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  pageSize: number;
+  onPageChange: (page: number) => void;
+  itemLabel?: string;
+}) {
+  if (totalCount === 0 || totalPages <= 1) {
+    if (totalCount > 0) {
+      return (
+        <div className="pagination-wrapper single-page">
+          <span className="pagination-info">
+            顯示全部 <strong>{totalCount}</strong> 筆{itemLabel}（共 1 頁）
+          </span>
+        </div>
+      );
+    }
+    return null;
+  }
+
+  const startItem = (currentPage - 1) * pageSize + 1;
+  const endItem = Math.min(currentPage * pageSize, totalCount);
+
+  const pageNumbers: (number | string)[] = [];
+  if (totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
+  } else {
+    pageNumbers.push(1);
+    if (currentPage > 3) pageNumbers.push("...");
+    const start = Math.max(2, currentPage - 1);
+    const end = Math.min(totalPages - 1, currentPage + 1);
+    for (let i = start; i <= end; i++) pageNumbers.push(i);
+    if (currentPage < totalPages - 2) pageNumbers.push("...");
+    pageNumbers.push(totalPages);
+  }
+
+  return (
+    <nav className="pagination-wrapper" aria-label="案件分頁導航">
+      <div className="pagination-info">
+        顯示第 <strong>{startItem} - {endItem}</strong> 筆，共 <strong>{totalCount}</strong> 筆{itemLabel}
+      </div>
+
+      <div className="pagination-buttons">
+        <button
+          type="button"
+          className="pagination-nav-btn prev-btn"
+          disabled={currentPage <= 1}
+          onClick={() => onPageChange(currentPage - 1)}
+          aria-label="前往上一頁"
+        >
+          <ChevronLeft size={18} />
+          <span>上一頁</span>
+        </button>
+
+        <div className="pagination-numbers">
+          {pageNumbers.map((p, idx) =>
+            typeof p === "number" ? (
+              <button
+                key={p}
+                type="button"
+                className={`pagination-num-btn ${currentPage === p ? "active" : ""}`}
+                onClick={() => onPageChange(p)}
+                aria-current={currentPage === p ? "page" : undefined}
+                aria-label={`前往第 ${p} 頁`}
+              >
+                {p}
+              </button>
+            ) : (
+              <span key={`dots-${idx}`} className="pagination-ellipsis">…</span>
+            )
+          )}
+        </div>
+
+        <button
+          type="button"
+          className="pagination-nav-btn next-btn"
+          disabled={currentPage >= totalPages}
+          onClick={() => onPageChange(currentPage + 1)}
+          aria-label="前往下一頁"
+        >
+          <span>下一頁</span>
+          <ChevronRight size={18} />
+        </button>
+      </div>
+
+      <div className="pagination-page-badge">
+        第 <strong>{currentPage}</strong> / {totalPages} 頁
+      </div>
+    </nav>
+  );
+}
+
+function MiniPager({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}) {
+  if (totalPages <= 1) return null;
+  return (
+    <div className="mini-pager" role="navigation" aria-label="快速翻頁">
+      <button
+        type="button"
+        className="mini-pager-btn"
+        disabled={currentPage <= 1}
+        onClick={() => onPageChange(currentPage - 1)}
+        title="上一頁"
+        aria-label="上一頁"
+      >
+        <ChevronLeft size={16} />
+      </button>
+      <span className="mini-pager-text">
+        <strong>{currentPage}</strong> / {totalPages} 頁
+      </span>
+      <button
+        type="button"
+        className="mini-pager-btn"
+        disabled={currentPage >= totalPages}
+        onClick={() => onPageChange(currentPage + 1)}
+        title="下一頁"
+        aria-label="下一頁"
+      >
+        <ChevronRight size={16} />
+      </button>
+    </div>
+  );
+}
+
 export default function Home({ stream = "copier" }: { stream?: "copier" | "forecast" | "peripherals" }) {
   const isForecast = stream === "forecast" || stream === "peripherals";
   const [filter, setFilter] = useState("全部案件");
@@ -1759,6 +1913,52 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
     });
   }, [forecastedTenders, forecastDaysFilter, forecastIncumbentFilter, forecastExpansionFilter, forecastStatusFilter, cityFilter, searchQuery]);
 
+  const FORECAST_PAGE_SIZE = 4;
+  const TENDER_PAGE_SIZE = 4;
+
+  const [forecastPage, setForecastPage] = useState(1);
+  const [tenderPage, setTenderPage] = useState(1);
+
+  useEffect(() => {
+    setForecastPage(1);
+  }, [stream, forecastDaysFilter, forecastIncumbentFilter, forecastExpansionFilter, forecastStatusFilter, cityFilter, searchQuery]);
+
+  useEffect(() => {
+    setTenderPage(1);
+  }, [stream, filter, cityFilter, peripheralFilter, searchQuery]);
+
+  const totalForecastPages = Math.max(1, Math.ceil(filteredForecasts.length / FORECAST_PAGE_SIZE));
+  const validForecastPage = Math.min(forecastPage, totalForecastPages);
+  const paginatedForecasts = useMemo(() => {
+    const start = (validForecastPage - 1) * FORECAST_PAGE_SIZE;
+    return filteredForecasts.slice(start, start + FORECAST_PAGE_SIZE);
+  }, [filteredForecasts, validForecastPage]);
+
+  const totalTenderPages = Math.max(1, Math.ceil(filteredTenders.length / TENDER_PAGE_SIZE));
+  const validTenderPage = Math.min(tenderPage, totalTenderPages);
+  const paginatedTenders = useMemo(() => {
+    const start = (validTenderPage - 1) * TENDER_PAGE_SIZE;
+    return filteredTenders.slice(start, start + TENDER_PAGE_SIZE);
+  }, [filteredTenders, validTenderPage]);
+
+  const handleForecastPageChange = (newPage: number) => {
+    const target = Math.max(1, Math.min(newPage, totalForecastPages));
+    setForecastPage(target);
+    const el = document.getElementById("forecast-tenders-heading");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const handleTenderPageChange = (newPage: number) => {
+    const target = Math.max(1, Math.min(newPage, totalTenderPages));
+    setTenderPage(target);
+    const el = document.getElementById("formal-tenders-heading");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   useEffect(() => {
     let active = true;
     const dataUrl = new URL("data.json", document.baseURI).toString();
@@ -1794,7 +1994,6 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
           <span className={`live-indicator ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}>
             <span /> LIVE <em>{dataSyncStatus === "warning" ? `最後成功 ${dataUpdated}` : `資料更新 ${dataUpdated}`}</em>
           </span>
-          <button className="icon-button" aria-label="列印工作區"><FileDown size={17} /></button>
         </div>
       </header>
       <nav className="site-tabs" aria-label="網站主要分頁">
@@ -1859,6 +2058,8 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
             </div>
           </div>
         )}
+
+        <BrowserTipsBar />
 
         {isForecast ? (
           <>
@@ -2097,6 +2298,11 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                 <Filter size={16} /><strong>推估上架案件</strong>
                 <span>{filteredForecasts.length} / {forecastedTenders.length} 顯示{searchQuery ? ` · 搜尋「${searchQuery}」` : ""}</span>
               </div>
+              <MiniPager
+                currentPage={validForecastPage}
+                totalPages={totalForecastPages}
+                onPageChange={handleForecastPageChange}
+              />
               <label className="tender-search" htmlFor="tender-search" style={{ marginLeft: "auto" }}>
                 <Search size={15} />
                 <input
@@ -2120,17 +2326,25 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                   <h2 id="forecast-tenders-heading">推測未來上架影印機案件清單</h2>
                   <p>依預估到期開標倒數日排序，提供前五次開標履歷軌跡、前任防守廠商、合約預估金額與擴充條款作戰建議。</p>
                 </div>
-                <strong>{filteredForecasts.length} 件</strong>
+                <strong>{filteredForecasts.length} 件{totalForecastPages > 1 ? `（第 ${validForecastPage} / ${totalForecastPages} 頁）` : ""}</strong>
               </div>
-              <div className="tender-list">
-                {filteredForecasts.length > 0 ? (
-                  filteredForecasts.map((forecast) => (
+              <div key={`forecast-page-${validForecastPage}`} className="tender-list page-flip-animate">
+                {paginatedForecasts.length > 0 ? (
+                  paginatedForecasts.map((forecast) => (
                     <ForecastCard key={forecast.id} forecast={forecast} />
                   ))
                 ) : (
                   <div className="empty-state">目前沒有符合條件的推估案件。</div>
                 )}
               </div>
+              <PaginationControl
+                currentPage={validForecastPage}
+                totalPages={totalForecastPages}
+                totalCount={filteredForecasts.length}
+                pageSize={FORECAST_PAGE_SIZE}
+                onPageChange={handleForecastPageChange}
+                itemLabel="推估案件"
+              />
             </section>
           </>
         ) : (
@@ -2216,6 +2430,11 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                   <button key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{item}</button>
                 ))}
               </div>
+              <MiniPager
+                currentPage={validTenderPage}
+                totalPages={totalTenderPages}
+                onPageChange={handleTenderPageChange}
+              />
               <label className="tender-search" htmlFor="tender-search">
                 <Search size={15} />
                 <input id="tender-search" type="search" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="搜尋案名、機關、案號或關鍵字" aria-label="搜尋標案" />
@@ -2226,11 +2445,19 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
             <section className="tender-section formal-section" aria-labelledby="formal-tenders-heading">
               <div className="tender-section-heading">
                 <div><span className="section-kicker">FORMAL OPPORTUNITIES</span><h2 id="formal-tenders-heading">正式案件</h2><p>已確認為目標設備，且符合首頁日期與狀態保留規則。</p></div>
-                <strong>{filteredTenders.length} 件</strong>
+                <strong>{filteredTenders.length} 件{totalTenderPages > 1 ? `（第 ${validTenderPage} / ${totalTenderPages} 頁）` : ""}</strong>
               </div>
-              <div className="tender-list">
-                {filteredTenders.length > 0 ? filteredTenders.map((tender) => <TenderCard key={tender.job} tender={tender} />) : <div className="empty-state">目前沒有符合條件的正式案件。</div>}
+              <div key={`tender-page-${validTenderPage}`} className="tender-list page-flip-animate">
+                {paginatedTenders.length > 0 ? paginatedTenders.map((tender) => <TenderCard key={tender.job} tender={tender} />) : <div className="empty-state">目前沒有符合條件的正式案件。</div>}
               </div>
+              <PaginationControl
+                currentPage={validTenderPage}
+                totalPages={totalTenderPages}
+                totalCount={filteredTenders.length}
+                pageSize={TENDER_PAGE_SIZE}
+                onPageChange={handleTenderPageChange}
+                itemLabel="正式案件"
+              />
             </section>
 
             <section className="tender-section review-section" aria-labelledby="review-tenders-heading">
