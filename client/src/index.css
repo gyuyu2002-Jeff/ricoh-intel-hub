@@ -488,3 +488,135 @@
   .modal-actions button { width: 100%; }
   .category-checkbox-group { grid-template-columns: 1fr; }
 }
+
+/* Forecast 6-Month Copier Tenders Dashboard */
+.forecast-card {
+  position: relative;
+  background: rgba(252, 253, 249, .95);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--deep);
+  border-radius: 13px;
+  box-shadow: var(--soft-shadow);
+  overflow: hidden;
+  transition: box-shadow .22s var(--ease), transform .22s var(--ease);
+}
+.forecast-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+.forecast-card.competitor-defense {
+  border-left-color: #e11d48;
+}
+.forecast-card.ricoh-defense {
+  border-left-color: #16a34a;
+}
+.forecast-expansion-alert {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 15px 23px 0;
+  padding: 12px 14px;
+  background: linear-gradient(90deg, #fffbeb, #fffdf5);
+  border: 1px solid #fde68a;
+  border-left: 4px solid #d97706;
+  border-radius: 8px;
+  color: #92400e;
+}
+.expansion-alert-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.expansion-alert-tag {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: #fef3c7;
+  color: #78350f;
+  font-weight: 700;
+  margin-left: auto;
+}
+.forecast-expansion-alert p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.55;
+  color: #78350f;
+}
+.cadence-track-container {
+  margin: 15px 23px 0;
+  padding: 12px 14px;
+  background: #f8faf7;
+  border: 1px solid #e1ebe2;
+  border-radius: 8px;
+}
+.cadence-track-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #4a5851;
+}
+.cadence-track-flow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cadence-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  background: #ffffff;
+  border: 1px solid #dbe5dc;
+  border-radius: 5px;
+  font-size: 11px;
+  color: #3b4b42;
+}
+.cadence-pill strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+.cadence-pill.predicted {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(225, 29, 72, .12);
+}
+.cadence-arrow {
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 700;
+}
+.forecast-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 16px 0 20px;
+  padding: 14px 18px;
+  background: #f4f7f4;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.forecast-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.forecast-filter-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #53645b;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-right: 4px;
+}
+

@@ -135,9 +135,9 @@ export default function SpecComparison() {
           <span className="site-tab-index">01</span>
           <span><strong>影印機案件監控</strong><small>事務機／複合機主機</small></span>
         </a>
-        <a className="site-tab" href="#/peripherals">
+        <a className="site-tab" href="#/forecast">
           <span className="site-tab-index">02</span>
-          <span><strong>非影印機案件監控</strong><small>(周邊/耗材/印表機)</small></span>
+          <span><strong>推測未來上架案件(六個月)</strong><small>換約推估與擴充預警</small></span>
         </a>
         <a className="site-tab active" href="#/specs" aria-current="page">
           <span className="site-tab-index">03</span>

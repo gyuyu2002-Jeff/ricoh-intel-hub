@@ -425,5 +425,54 @@ class HistoryTitleQueryTests(unittest.TestCase):
         )
 
 
+class CopierForecastTests(unittest.TestCase):
+    def test_normalize_tender_series_title(self):
+        from update_tenders import normalize_tender_series_title
+        self.assertEqual(normalize_tender_series_title("113-115年影印機租賃案"), "影印機租賃案")
+        self.assertEqual(normalize_tender_series_title("28台影印機租賃案"), "影印機租賃案")
+        self.assertEqual(normalize_tender_series_title("114年度各里辦公處影印機租用案第1次招標"), "各里辦公處影印機租用案招標")
+
+    def test_parse_duration_months(self):
+        from update_tenders import parse_duration_months
+        self.assertEqual(parse_duration_months("113-115年影印機租賃案"), 36)
+        self.assertEqual(parse_duration_months("二年期開口契約"), 24)
+        self.assertEqual(parse_duration_months("1年期租約"), 12)
+
+    def test_has_extension_clause(self):
+        from update_tenders import has_extension_clause
+        self.assertTrue(has_extension_clause("111年度影印機租賃案(含擴充1年)"))
+        self.assertTrue(has_extension_clause("保留未來一年後續擴充權利"))
+        self.assertFalse(has_extension_clause("113年影印機租賃案"))
+
+    def test_classify_incumbent(self):
+        from update_tenders import classify_incumbent
+        ricoh = classify_incumbent("台灣理光股份有限公司")
+        self.assertEqual(ricoh["type"], "ricoh")
+
+        competitor = classify_incumbent("震旦行股份有限公司")
+        self.assertEqual(competitor["type"], "competitor")
+        self.assertIn("震旦", competitor["brand"])
+
+    def test_generate_copier_forecasts_with_dual_extension(self):
+        from update_tenders import generate_copier_forecasts
+        base_date = date(2026, 9, 6)
+        # History: 2 years contract from 2024-10-15 with 1-year extension
+        history = [
+            {
+                "unit_id": "U001",
+                "unit_name": "某地方法院",
+                "title": "113-114年影印機租賃(保留後續擴充一年)",
+                "award_date": "2024-10-15",
+                "award_price": 2000000,
+                "winner": "震旦 SHARP"
+            }
+        ]
+        forecasts = generate_copier_forecasts(history, base_date=base_date, target_window_days=180)
+        self.assertTrue(len(forecasts) >= 1)
+        # Should have current year opportunity
+        types = [f["expansion"]["type"] for f in forecasts]
+        self.assertIn("current_year_opportunity", types)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -41,7 +41,19 @@ INSTITUTION_CITY_MAP = {
     "東華大學": "花蓮縣", "慈濟": "花蓮縣", "宜蘭大學": "宜蘭縣", "台東大學": "台東縣", "臺灣東大學": "台東縣",
     "金門大學": "金門縣", "澎湖科技大學": "澎湖縣", "屏東科技大學": "屏東縣", "屏科大": "屏東縣", "屏東大學": "屏東縣",
     "彰化師範大學": "彰化縣", "大葉大學": "彰化縣", "雲林科技大學": "雲林縣", "虎尾科技大學": "雲林縣",
-    "中正大學": "嘉義縣", "嘉義大學": "嘉義市", "聯合大學": "苗栗縣", "暨南國際大學": "南投縣"
+    "中正大學": "嘉義縣", "嘉義大學": "嘉義市", "聯合大學": "苗栗縣", "暨南國際大學": "南投縣",
+    # Tax Bureaus & Customs
+    "中區國稅局": "台中市", "北區國稅局": "桃園市", "南區國稅局": "台南市", "高雄國稅局": "高雄市",
+    "台北國稅局": "台北市", "臺北國稅局": "台北市", "關務署": "台北市", "基隆關": "基隆市",
+    "台北關": "桃園市", "臺北關": "桃園市", "台中關": "台中市", "高雄關": "高雄市",
+    # Metros & Enterprises
+    "台北大眾捷運": "台北市", "臺北大眾捷運": "台北市", "台北捷運": "台北市", "臺北捷運": "台北市",
+    "桃園大眾捷運": "桃園市", "桃園捷運": "桃園市", "高雄捷運": "高雄市",
+    "桃園煉油廠": "桃園市", "大林煉油廠": "高雄市", "高雄煉油廠": "高雄市",
+    "台中區營業處": "台中市", "臺中區營業處": "台中市", "台中區處": "台中市", "臺中區處": "台中市",
+    "台北市區營業處": "台北市", "臺北市區營業處": "台北市", "台北市區處": "台北市", "臺北市區處": "台北市",
+    "北南區處": "新北市", "北西區處": "新北市", "北北區處": "台北市", "高雄區處": "高雄市",
+    "台電總處": "台北市", "台電總管理處": "台北市", "台灣電力股份有限公司": "台北市", "臺灣電力股份有限公司": "台北市"
 }
 
 def get_city_info(unit_name, detail_data=None):
@@ -639,6 +651,246 @@ def classify_tender_relevance(item, detail=None):
         }
 
     return {"status": "excluded", "confidence": "high", "score": 0, "category": "unrelated", "matched_terms": [], "matched_fields": [], "reason": "未命中設備或周邊耗材範圍"}
+
+
+# ==========================================
+# 03 影印機合約週期預測系統 (未來六個月商機推估)
+# ==========================================
+
+def normalize_tender_series_title(title):
+    """Normalize a recurring tender title to its core series name by stripping years, quantities, and iterations."""
+    t = str(title or "").replace("臺", "台")
+    t = re.sub(r"[\(（][^\)）]*[\)）]", "", t)
+    t = re.sub(r"1\d{2}\s*[-~至到]\s*1\d{2}\s*(?:學?年(?:度)?)?", "", t)
+    t = re.sub(r"1\d{2}\s*(?:學?年(?:度)?)?", "", t)
+    t = re.sub(r"202\d\s*[-~至到]\s*202\d\s*(?:年)?", "", t)
+    t = re.sub(r"202\d\s*(?:年)?", "", t)
+    t = re.sub(r"\d+\s*[台部輛組套張支項式批]", "", t)
+    t = re.sub(r"[一二三四五六七八九十壹貳][台部輛組套張支項式批]", "", t)
+    t = re.sub(r"第[一二三四五六七八九十\d]+[次期]", "", t)
+    t = re.sub(r"[\s\-_、，。]+", "", t)
+    return t.strip()
+
+
+def parse_duration_months(title, default_months=24):
+    """Extract lease duration in months from tender title."""
+    t = str(title or "")
+    m = re.search(r"(1\d{2})\s*[-~至到]\s*(1\d{2})", t)
+    if m:
+        start_y = int(m.group(1))
+        end_y = int(m.group(2))
+        years = max(1, end_y - start_y + 1)
+        return years * 12
+    if any(k in t for k in ["3年", "三年", "36個月", "36月"]):
+        return 36
+    if any(k in t for k in ["2年", "二年", "24個月", "24月"]):
+        return 24
+    if any(k in t for k in ["4年", "四年", "48個月"]):
+        return 48
+    if any(k in t for k in ["1年", "一年", "12個月", "12月"]):
+        return 12
+    if any(k in t for k in ["5年", "五年", "60個月"]):
+        return 60
+    return default_months
+
+
+def has_extension_clause(text):
+    """Detect if contract has option to extend for 1 year (保留未來一年擴充條款)."""
+    lowered = str(text or "").lower()
+    return any(k in lowered for k in [
+        "保留未來一年", "後續擴充一年", "後續擴充1年", "後續擴充一年期",
+        "擴充一年", "擴充1年", "擴充權利", "保留後續擴充", "後續擴充"
+    ])
+
+
+def classify_incumbent(winner):
+    """Classify incumbent vendor for competitive attack vs Ricoh self-defense."""
+    w = str(winner or "").strip()
+    if not w or w in ["未公開", "待確認", "官方來源未列", "待人工確認"]:
+        return {
+            "type": "other",
+            "name": "待查",
+            "brand": "待查",
+            "label": "現任廠商待查",
+            "badge_class": "bg-slate-900 border-slate-700 text-slate-300"
+        }
+
+    if any(k in w for k in ["理光", "RICOH", "Ricoh"]):
+        return {
+            "type": "ricoh",
+            "name": w,
+            "brand": "台灣理光",
+            "label": "🛡️ 理光防守中（續約守護）",
+            "badge_class": "bg-emerald-950/60 border-emerald-500/50 text-emerald-400"
+        }
+
+    competitor_brands = [
+        "震旦", "富士軟片", "富士全錄", "全錄", "金儀", "互盛", "佳能", "Canon",
+        "夏普", "SHARP", "東芝", "TOSHIBA", "Konica", "KYOCERA", "京瓷",
+        "宏羚", "東磊", "新印", "精準國際", "國碩", "億雙"
+    ]
+    matched_brand = next((b for b in competitor_brands if b.lower() in w.lower()), None)
+    brand_label = matched_brand or w
+    return {
+        "type": "competitor",
+        "name": w,
+        "brand": brand_label,
+        "label": f"⚔️ 競品防守中：{brand_label}（進攻目標）",
+        "badge_class": "bg-rose-950/60 border-rose-500/50 text-rose-400"
+    }
+
+
+def generate_copier_forecasts(history_records, base_date=None, target_window_days=180):
+    """
+    Analyze up to the last 5 recurring tender dates for each agency + series title.
+    Forecasts upcoming copier opportunities over the next 6 months with dual alerts for extension clauses.
+    """
+    if base_date is None:
+        base_date = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).date()
+    forecast_window_end = base_date + timedelta(days=target_window_days)
+
+    groups = {}
+    for r in history_records:
+        title = r.get("title", "")
+        unit_id = r.get("unit_id", "")
+        unit_name = r.get("unit_name", "")
+        if not unit_id or not title:
+            continue
+        # Strictly copier equipment
+        if not any(k in title for k in ["影印機", "複合機", "多功能機", "事務機"]):
+            continue
+        if any(k in title for k in ["碎紙機", "護貝機", "裝訂機", "色帶", "報表紙", "影印紙", "列印紙", "標籤", "印表機", "耗材", "墨水"]):
+            continue
+        series = normalize_tender_series_title(title)
+        if not series or len(series) < 3:
+            continue
+        key = (unit_id, unit_name, series)
+        groups.setdefault(key, []).append(r)
+
+    forecasts = []
+    seen_forecast_keys = set()
+
+    for (unit_id, unit_name, series), records in groups.items():
+        records.sort(key=lambda x: str(x.get("award_date", "")), reverse=True)
+        latest = records[0]
+        latest_date_str = latest.get("award_date", "")
+        if not latest_date_str:
+            continue
+        try:
+            latest_date = datetime.strptime(latest_date_str, "%Y-%m-%d").date()
+        except (ValueError, TypeError):
+            continue
+
+        top5 = records[:5]
+        intervals = []
+        for i in range(len(top5) - 1):
+            try:
+                d1 = datetime.strptime(top5[i]["award_date"], "%Y-%m-%d").date()
+                d2 = datetime.strptime(top5[i+1]["award_date"], "%Y-%m-%d").date()
+                m_diff = round((d1 - d2).days / 30.44)
+                if m_diff > 0:
+                    intervals.append(m_diff)
+            except (ValueError, TypeError):
+                pass
+
+        latest_duration_months = parse_duration_months(latest.get("title", ""), default_months=24)
+        cadence_months = int(sorted(intervals)[len(intervals)//2]) if intervals else latest_duration_months
+        if cadence_months < 6:
+            cadence_months = latest_duration_months
+
+        has_ext = has_extension_clause(latest.get("title", "")) or has_extension_clause(json.dumps(latest, ensure_ascii=False))
+
+        pred_days = cadence_months * 30.44
+        target_date_1 = latest_date + timedelta(days=int(pred_days) - 45) # Lead time 45 days
+
+        candidates = [
+            {
+                "type": "current_year_opportunity" if has_ext else "standard",
+                "target_date": target_date_1,
+                "badge_label": "⚠️ 含1年擴充條款（搶單時機）" if has_ext else "🔴 常態期滿（依法重招）",
+                "notice": "本合約載明保留未來向得標廠商後續擴充1年權利。建議提早進場提供理光新機 POC 與規格草案，促使機關不續約直接開新標。" if has_ext else "本合約無擴充條款，期滿依法必須公開重新招標。"
+            }
+        ]
+
+        if has_ext:
+            target_date_2 = target_date_1 + timedelta(days=365)
+            candidates.append({
+                "type": "expansion_limit_reached",
+                "target_date": target_date_2,
+                "badge_label": "🔴 擴充期滿終極招標（依法必開新標）",
+                "notice": "若機關今年已行使後續擴充，至下一年為法定後續擴充上限，依法不得再續約，100% 必定上網重招。"
+            })
+
+        city_info = get_city_info(unit_name)
+        incumbent = classify_incumbent(latest.get("winner"))
+
+        history_track = []
+        for idx, rec in enumerate(top5):
+            ad_date = rec.get("award_date", "")
+            ad_month = ad_date[:7] if len(ad_date) >= 7 else ad_date
+            history_track.append({
+                "index": len(top5) - idx,
+                "date": ad_date,
+                "month": ad_month,
+                "winner": rec.get("winner", "待查"),
+                "award_price": rec.get("award_price"),
+                "discount_rate": rec.get("discount_rate")
+            })
+        history_track.reverse()
+
+        for cand in candidates:
+            t_date = cand["target_date"]
+            if base_date - timedelta(days=30) <= t_date <= forecast_window_end:
+                days_until = (t_date - base_date).days
+                f_key = (unit_id, series, cand["type"])
+                if f_key in seen_forecast_keys:
+                    continue
+                seen_forecast_keys.add(f_key)
+
+                countdown_str = "已屆招標期" if days_until <= 0 else f"倒數 {days_until} 天"
+                price_val = latest.get("award_price")
+                price_str = f"NT$ {int(price_val):,}" if isinstance(price_val, (int, float)) and price_val > 0 else "未公開"
+
+                pred_roc_year = t_date.year - 1911
+                next_years_count = max(1, cadence_months // 12)
+                if next_years_count >= 2:
+                    predicted_title = f"{pred_roc_year}-{pred_roc_year + next_years_count - 1}年{series}"
+                else:
+                    predicted_title = f"{pred_roc_year}年度{series}"
+
+                forecasts.append({
+                    "id": f"forecast-{unit_id}-{series}-{cand['type']}",
+                    "unit_id": unit_id,
+                    "unit": unit_name,
+                    "city": city_info["city"],
+                    "series_title": series,
+                    "predicted_title": predicted_title,
+                    "latest_title": latest.get("title", ""),
+                    "latest_award_date": latest_date_str,
+                    "latest_award_price": price_val,
+                    "latest_award_price_str": price_str,
+                    "latest_winner": latest.get("winner", "待查"),
+                    "incumbent": incumbent,
+                    "predicted_date": t_date.strftime("%Y-%m-%d"),
+                    "predicted_month": t_date.strftime("%Y年%m月"),
+                    "predicted_range": f"{t_date.strftime('%Y年%m月')} ～ {(t_date + timedelta(days=30)).strftime('%m月')}",
+                    "days_until": days_until,
+                    "countdown_label": countdown_str,
+                    "cadence_months": cadence_months,
+                    "cadence_summary": f"歷史每 {cadence_months} 個月定期換約（{next_years_count}年約）",
+                    "history_count": len(records),
+                    "history_track": history_track,
+                    "expansion": {
+                        "has_extension": has_ext,
+                        "type": cand["type"],
+                        "badge_label": cand["badge_label"],
+                        "notice": cand["notice"]
+                    },
+                    "action_suggestion": f"建議於 {t_date.strftime('%Y年%m月')} 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。"
+                })
+
+    forecasts.sort(key=lambda x: x["days_until"])
+    return forecasts
 
 
 def deduplicate_announcements(records):
@@ -1848,6 +2100,9 @@ def main(mode="live", backfill_days=None):
         "history_unit_refresh": history_unit_refresh,
         "history_deep_refresh": history_deep_refresh
     }
+    
+    output_data["forecasted_tenders"] = generate_copier_forecasts(output_data["history_cache"], base_date=today)
+    print(f"Generated {len(output_data['forecasted_tenders'])} forecasted copier tenders for the next 6 months.")
     
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)

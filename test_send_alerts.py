@@ -142,6 +142,67 @@ class TestSendAlerts(unittest.TestCase):
         self.assertIn("action=unsubscribe", msg["List-Unsubscribe"])
         self.assertEqual(msg["List-Unsubscribe-Post"], "List-Unsubscribe=One-Click")
 
+    def test_forecast_matching_and_rendering(self):
+        from send_alerts import generate_forecast_fingerprint, match_forecasts_for_subscriber
+
+        sample_forecasts = [
+            {
+                "id": "forecast-A.7.6-影印機租賃-standard",
+                "unit_id": "A.7.6",
+                "unit": "財政部中區國稅局",
+                "city": "台中市",
+                "predicted_title": "115-116年本局及各稽徵所租賃影印機",
+                "latest_title": "本局及各稽徵所租賃影印機69台",
+                "latest_award_price_str": "NT$ 4,879,149",
+                "latest_winner": "台灣佳能 (Canon)",
+                "incumbent": {
+                    "type": "competitor",
+                    "label": "⚔️ 競品防守中：台灣佳能 (Canon)"
+                },
+                "predicted_month": "2026年09月",
+                "predicted_range": "2026年09月 ～ 10月",
+                "days_until": 15,
+                "countdown_label": "倒數 15 天",
+                "cadence_summary": "歷史每 24 個月定期換約",
+                "expansion": {
+                    "has_extension": True,
+                    "badge_label": "⚡ 含未來1年擴充 · 雙重提醒",
+                    "notice": "原合約即將到期，若未擴充依法重招。"
+                },
+                "action_suggestion": "建議提早拜訪資訊組。"
+            }
+        ]
+
+        # 1. Fingerprint is deterministic
+        fp1 = generate_forecast_fingerprint("user@example.com", sample_forecasts[0])
+        fp2 = generate_forecast_fingerprint("USER@EXAMPLE.COM ", sample_forecasts[0])
+        self.assertEqual(fp1, fp2)
+        self.assertIn("forecast", fp1)
+
+        # 2. Matching with subscriber categories
+        sub_forecast = {"email": "user@example.com", "cities": ["台中市"], "categories": ["forecast"]}
+        matched = match_forecasts_for_subscriber(sub_forecast, sample_forecasts, sent_logs={})
+        self.assertEqual(len(matched), 1)
+
+        # Deduplication works for forecasts
+        matched_dup = match_forecasts_for_subscriber(sub_forecast, sample_forecasts, sent_logs={fp1: True})
+        self.assertEqual(len(matched_dup), 0)
+
+        # City filter works for forecasts
+        sub_other_city = {"email": "user@example.com", "cities": ["高雄市"], "categories": ["forecast"]}
+        matched_other = match_forecasts_for_subscriber(sub_other_city, sample_forecasts, sent_logs={})
+        self.assertEqual(len(matched_other), 0)
+
+        # 3. HTML email rendering with both tenders and forecasts
+        html = build_email_html("user@example.com", [self.sample_tenders[0]], "2026-09-06", forecasts=sample_forecasts)
+        self.assertIn("本日最新公告與進行中案件", html)
+        self.assertIn("推測未來上架案件 · 未來 6 個月換約預警", html)
+        self.assertIn("115-116年本局及各稽徵所租賃影印機", html)
+        self.assertIn("財政部中區國稅局", html)
+        self.assertIn("台灣佳能", html)
+        self.assertIn("擴充條款提醒", html)
+
 
 if __name__ == "__main__":
     unittest.main()
+

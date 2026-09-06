@@ -150,6 +150,17 @@ def generate_fingerprint(email, tender):
     return f"{norm_email}_{job}_{stage}_{pub}"
 
 
+def generate_forecast_fingerprint(email, forecast):
+    """
+    Create an immutable unique key for a forecast notification.
+    Key structure: email : forecast_id : predicted_month
+    """
+    f_id = forecast.get("id", "unknown")
+    p_month = forecast.get("predicted_month", "unknown")
+    norm_email = email.strip().lower()
+    return f"{norm_email}_forecast_{f_id}_{p_month}"
+
+
 def match_tenders_for_subscriber(subscriber, tenders, sent_logs):
     """
     Filters tenders matching subscriber's cities and categories that have not been sent yet.
@@ -167,7 +178,7 @@ def match_tenders_for_subscriber(subscriber, tenders, sent_logs):
         c in ["全部", "全部縣市", "全台", "全台所有縣市", "ALL"] for c in subscribed_cities
     )
 
-    # Subscribed categories (copier / peripherals): defaults to ['copier'] for backward compatibility
+    # Subscribed categories (copier / forecast): defaults to ['copier'] for backward compatibility
     sub_categories = subscriber.get("categories", ["copier"])
     if isinstance(sub_categories, str):
         sub_categories = [c.strip() for c in sub_categories.split(",") if c.strip()]
@@ -193,79 +204,240 @@ def match_tenders_for_subscriber(subscriber, tenders, sent_logs):
     return matching
 
 
-def build_email_html(subscriber_email, tenders, taipei_date_str):
+def match_forecasts_for_subscriber(subscriber, forecasts, sent_logs):
+    """
+    Filters upcoming copier forecasts matching subscriber's cities and categories that have not been sent yet.
+    """
+    norm_email = subscriber.get("email", "").strip().lower()
+    if not norm_email or "@" not in norm_email:
+        return []
+
+    subscribed_cities = subscriber.get("cities", [])
+    if isinstance(subscribed_cities, str):
+        subscribed_cities = [c.strip() for c in subscribed_cities.split(",") if c.strip()]
+
+    is_all_cities = not subscribed_cities or any(
+        c in ["全部", "全部縣市", "全台", "全台所有縣市", "ALL"] for c in subscribed_cities
+    )
+
+    sub_categories = subscriber.get("categories", ["copier"])
+    if isinstance(sub_categories, str):
+        sub_categories = [c.strip() for c in sub_categories.split(",") if c.strip()]
+    if not sub_categories:
+        sub_categories = ["copier"]
+
+    # Support "forecast" or legacy "peripherals" preference
+    wants_forecast = ("forecast" in sub_categories) or ("peripherals" in sub_categories)
+    if not wants_forecast:
+        return []
+
+    matching = []
+    for fc in forecasts:
+        city = fc.get("city", "")
+        if not is_all_cities and city not in subscribed_cities:
+            continue
+
+        fingerprint = generate_forecast_fingerprint(norm_email, fc)
+        if fingerprint in sent_logs:
+            continue
+
+        matching.append(fc)
+
+    return matching
+
+
+def build_email_html(subscriber_email, tenders, taipei_date_str, forecasts=None):
     """
     Builds a Neo-Editorial HTML email matching the Ricoh Intel Hub theme.
+    Supports both active tenders and 6-month copier forecasts.
     """
+    if forecasts is None:
+        forecasts = []
+
+    # 1. Active tenders section
     items_html = ""
-    for t in tenders:
-        is_solicitation = "公開徵求" in t.get("stage", "") or "徵求" in t.get("stage", "")
-        stage_badge_bg = "#fff3cd" if is_solicitation else "#e8f4fd"
-        stage_badge_color = "#856404" if is_solicitation else "#0c5460"
-        stage_text = "📢 公開徵求價單／企劃" if is_solicitation else t.get("stage", "標案公告")
-
-        stream = t.get("stream") or t.get("relevance", {}).get("stream", "copier")
-        sub_type = t.get("sub_type") or t.get("relevance", {}).get("sub_type", "main")
-        is_peripheral = stream == "peripherals"
-        stream_badge_bg = "#fef3c7" if is_peripheral else "#edf4ef"
-        stream_badge_color = "#92400e" if is_peripheral else "#2f5146"
-        stream_label = "🖨️ 周邊耗材" if is_peripheral else "🏢 事務主機"
-        if is_peripheral:
-            if sub_type == "supplies":
-                stream_label = "🖨️ 碳粉耗材"
-            elif sub_type == "printer":
-                stream_label = "🖨️ 印表設備"
-            elif sub_type == "scanner":
-                stream_label = "📄 文件掃描"
-
-        budget_val = t.get("budget", "無公開數據")
-        suggested_val = t.get("suggested_price", "資料不足")
-        discount_val = t.get("avg_discount", "資料不足")
-        winner_val = t.get("main_competitor", "尚無數據")
-        tender_url = t.get("tender_url", "https://web.pcc.gov.tw/")
-
+    if tenders:
         items_html += f"""
-        <div style="background:#ffffff; border:1px solid #d4ded7; border-left:4px solid #c92d3f; border-radius:8px; padding:18px 20px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap;">
-            <div>
-              <span style="display:inline-block; background:#edf4ef; color:#2f5146; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">{t.get('city', '未知縣市')}</span>
-              <span style="display:inline-block; background:{stream_badge_bg}; color:{stream_badge_color}; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">{stream_label}</span>
-              <span style="display:inline-block; background:{stage_badge_bg}; color:{stage_badge_color}; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px;">{stage_text}</span>
-            </div>
-            <span style="font-size:12px; color:#78857d; font-family:monospace;">案號 {t.get('job_number', '待查')}</span>
-          </div>
-
-          <h3 style="margin:6px 0 10px; font-size:16px; color:#202825; line-height:1.4;">
-            <a href="{tender_url}" target="_blank" style="color:#202825; text-decoration:none; font-weight:700;">{t.get('title', '未命名標案')}</a>
-          </h3>
-
-          <div style="font-size:12px; color:#53605a; margin-bottom:12px;">
-            <strong>發包機關：</strong>{t.get('unit', '機關待確認')} · <strong>公告日期：</strong>{t.get('publish_date', '待查')} · <strong>截止收件：</strong><span style="color:#c92d3f; font-weight:700;">{t.get('deadline', '待確認')}</span>
-          </div>
-
-          <table style="width:100%; border-collapse:collapse; background:#fbfcf8; border:1px solid #e2ece4; border-radius:6px; margin-bottom:12px; font-size:12px;">
-            <tr>
-              <td style="padding:8px 12px; border-right:1px solid #e2ece4; width:33%;">
-                <div style="color:#8a968f; font-size:10px;">預算金額</div>
-                <div style="color:#202825; font-weight:700; font-size:14px; margin-top:2px;">{budget_val}</div>
-              </td>
-              <td style="padding:8px 12px; border-right:1px solid #e2ece4; width:33%;">
-                <div style="color:#8a968f; font-size:10px;">歷史折率中位數</div>
-                <div style="color:#202825; font-weight:700; font-size:14px; margin-top:2px;">{discount_val}</div>
-              </td>
-              <td style="padding:8px 12px; width:34%;">
-                <div style="color:#8a968f; font-size:10px;">推估行情參考價</div>
-                <div style="color:#c92d3f; font-weight:700; font-size:14px; margin-top:2px;">{suggested_val}</div>
-              </td>
-            </tr>
-          </table>
-
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-            <span style="font-size:11px; color:#78857d;">前次/優勢廠商：<strong>{winner_val}</strong></span>
-            <a href="{tender_url}" target="_blank" style="display:inline-block; background:#c92d3f; color:#ffffff; font-size:11px; font-weight:700; padding:6px 12px; border-radius:4px; text-decoration:none;">查看採購網官方公告 ↗</a>
-          </div>
+        <div style="margin-bottom:12px; padding-bottom:6px; border-bottom:2px solid #202825; display:flex; justify-content:space-between; align-items:center;">
+          <h2 style="margin:0; font-size:15px; color:#202825; font-weight:700;">🏢 本日最新公告與進行中案件（共 {len(tenders)} 筆）</h2>
+          <span style="font-size:11px; color:#78857d;">即時採購公告雷達</span>
         </div>
         """
+        for t in tenders:
+            is_solicitation = "公開徵求" in t.get("stage", "") or "徵求" in t.get("stage", "")
+            stage_badge_bg = "#fff3cd" if is_solicitation else "#e8f4fd"
+            stage_badge_color = "#856404" if is_solicitation else "#0c5460"
+            stage_text = "📢 公開徵求價單／企劃" if is_solicitation else t.get("stage", "標案公告")
+
+            stream = t.get("stream") or t.get("relevance", {}).get("stream", "copier")
+            sub_type = t.get("sub_type") or t.get("relevance", {}).get("sub_type", "main")
+            is_peripheral = stream == "peripherals"
+            stream_badge_bg = "#fef3c7" if is_peripheral else "#edf4ef"
+            stream_badge_color = "#92400e" if is_peripheral else "#2f5146"
+            stream_label = "🖨️ 周邊耗材" if is_peripheral else "🏢 影印機主機"
+            if is_peripheral:
+                if sub_type == "supplies":
+                    stream_label = "🖨️ 碳粉耗材"
+                elif sub_type == "printer":
+                    stream_label = "🖨️ 印表設備"
+                elif sub_type == "scanner":
+                    stream_label = "📄 文件掃描"
+
+            budget_val = t.get("budget", "無公開數據")
+            suggested_val = t.get("suggested_price", "資料不足")
+            discount_val = t.get("avg_discount", "資料不足")
+            winner_val = t.get("main_competitor", "尚無數據")
+            tender_url = t.get("tender_url", "https://web.pcc.gov.tw/")
+
+            items_html += f"""
+            <div style="background:#ffffff; border:1px solid #d4ded7; border-left:4px solid #c92d3f; border-radius:8px; padding:18px 20px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap;">
+                <div>
+                  <span style="display:inline-block; background:#edf4ef; color:#2f5146; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">{t.get('city', '未知縣市')}</span>
+                  <span style="display:inline-block; background:{stream_badge_bg}; color:{stream_badge_color}; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">{stream_label}</span>
+                  <span style="display:inline-block; background:{stage_badge_bg}; color:{stage_badge_color}; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px;">{stage_text}</span>
+                </div>
+                <span style="font-size:12px; color:#78857d; font-family:monospace;">案號 {t.get('job_number', '待查')}</span>
+              </div>
+
+              <h3 style="margin:6px 0 10px; font-size:16px; color:#202825; line-height:1.4;">
+                <a href="{tender_url}" target="_blank" style="color:#202825; text-decoration:none; font-weight:700;">{t.get('title', '未命名標案')}</a>
+              </h3>
+
+              <div style="font-size:12px; color:#53605a; margin-bottom:12px;">
+                <strong>發包機關：</strong>{t.get('unit', '機關待確認')} · <strong>公告日期：</strong>{t.get('publish_date', '待查')} · <strong>截止收件：</strong><span style="color:#c92d3f; font-weight:700;">{t.get('deadline', '待確認')}</span>
+              </div>
+
+              <table style="width:100%; border-collapse:collapse; background:#fbfcf8; border:1px solid #e2ece4; border-radius:6px; margin-bottom:12px; font-size:12px;">
+                <tr>
+                  <td style="padding:8px 12px; border-right:1px solid #e2ece4; width:33%;">
+                    <div style="color:#8a968f; font-size:10px;">預算金額</div>
+                    <div style="color:#202825; font-weight:700; font-size:14px; margin-top:2px;">{budget_val}</div>
+                  </td>
+                  <td style="padding:8px 12px; border-right:1px solid #e2ece4; width:33%;">
+                    <div style="color:#8a968f; font-size:10px;">歷史折率中位數</div>
+                    <div style="color:#202825; font-weight:700; font-size:14px; margin-top:2px;">{discount_val}</div>
+                  </td>
+                  <td style="padding:8px 12px; width:34%;">
+                    <div style="color:#8a968f; font-size:10px;">推估行情參考價</div>
+                    <div style="color:#c92d3f; font-weight:700; font-size:14px; margin-top:2px;">{suggested_val}</div>
+                  </td>
+                </tr>
+              </table>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                <span style="font-size:11px; color:#78857d;">前次/優勢廠商：<strong>{winner_val}</strong></span>
+                <a href="{tender_url}" target="_blank" style="display:inline-block; background:#c92d3f; color:#ffffff; font-size:11px; font-weight:700; padding:6px 12px; border-radius:4px; text-decoration:none;">查看採購網官方公告 ↗</a>
+              </div>
+            </div>
+            """
+
+    # 2. Upcoming forecasts section
+    forecasts_html = ""
+    if forecasts:
+        forecasts_html += f"""
+        <div style="margin:28px 0 12px; padding-bottom:6px; border-bottom:2px solid #2f5146; display:flex; justify-content:space-between; align-items:center;">
+          <h2 style="margin:0; font-size:15px; color:#2f5146; font-weight:700;">🔮 推測未來上架案件 · 未來 6 個月換約預警（共 {len(forecasts)} 筆）</h2>
+          <span style="font-size:11px; color:#78857d;">同機關同案名歷史規律推估</span>
+        </div>
+        """
+        for fc in forecasts:
+            incumbent_info = fc.get("incumbent", {})
+            incumbent_type = incumbent_info.get("type", "other")
+            is_ricoh = incumbent_type == "ricoh"
+            is_comp = incumbent_type == "competitor"
+            inc_badge_bg = "#f0fdf4" if is_ricoh else "#fff1f2" if is_comp else "#f1f5f9"
+            inc_badge_color = "#15803d" if is_ricoh else "#be123c" if is_comp else "#475569"
+            inc_badge_label = incumbent_info.get("label", "⚪ 廠商防守中")
+
+            days = fc.get("days_until", 999)
+            countdown_bg = "#fee2e2" if days <= 30 else "#fef3c7" if days <= 60 else "#edf4ef"
+            countdown_color = "#991b1b" if days <= 30 else "#92400e" if days <= 60 else "#2f5146"
+            countdown_label = fc.get("countdown_label", "推估換約")
+
+            expansion_info = fc.get("expansion", {})
+            has_ext = expansion_info.get("has_extension", False)
+
+            pcc_search_url = f"https://web.pcc.gov.tw/prkms/prms-viewTenderDetailClient.do?ds={fc.get('unit_id','')}"
+
+            # History track summary
+            history_track_html = ""
+            if fc.get("history_track"):
+                track_pills = []
+                for h in fc.get("history_track", []):
+                    track_pills.append(
+                        f"""<span style="display:inline-block; background:#f4f7f4; border:1px solid #dce6de; padding:2px 6px; border-radius:4px; font-size:10px; margin:2px 4px 2px 0;">
+                            #{h.get('index')} {h.get('month')} · {h.get('winner')} (折率{h.get('discount_rate','-')}%)
+                        </span>"""
+                    )
+                track_pills.append(
+                    f"""<span style="display:inline-block; background:#fef2f2; border:1px solid #fecaca; color:#b91c1c; font-weight:700; padding:2px 6px; border-radius:4px; font-size:10px; margin:2px 4px 2px 0;">
+                        🔮 預估 #{len(fc.get('history_track',[]))+1} {fc.get('predicted_month')}
+                    </span>"""
+                )
+                history_track_html = f"""
+                <div style="margin-top:8px; padding-top:8px; border-top:1px dashed #e2ece4; font-size:11px; color:#53605a;">
+                  <strong>歷史開標履歷：</strong><div style="margin-top:4px;">{''.join(track_pills)}</div>
+                </div>
+                """
+
+            ext_alert_html = ""
+            if has_ext:
+                ext_alert_html = f"""
+                <div style="background:#fffbeb; border:1px solid #fde68a; border-left:3px solid #d97706; padding:8px 12px; border-radius:5px; margin-top:8px; font-size:11px; color:#92400e; line-height:1.5;">
+                  <strong>⚡ 擴充條款提醒：</strong>{expansion_info.get('notice', '')}
+                </div>
+                """
+
+            forecasts_html += f"""
+            <div style="background:#ffffff; border:1px solid #d4ded7; border-left:4px solid #2f5146; border-radius:8px; padding:18px 20px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+                <div>
+                  <span style="display:inline-block; background:#edf4ef; color:#2f5146; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">{fc.get('city', '全台')}</span>
+                  <span style="display:inline-block; background:{countdown_bg}; color:{countdown_color}; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px; margin-right:6px;">⏳ {countdown_label}</span>
+                  <span style="display:inline-block; background:{inc_badge_bg}; color:{inc_badge_color}; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px;">{inc_badge_label}</span>
+                </div>
+                <span style="display:inline-block; background:#f1f5f9; color:#475569; font-size:10px; padding:2px 6px; border-radius:4px;">{expansion_info.get('badge_label', '常態期滿')}</span>
+              </div>
+
+              <h3 style="margin:6px 0 6px; font-size:16px; color:#202825; line-height:1.4;">
+                <span style="color:#2f5146; font-weight:700;">【推估】{fc.get('predicted_title', '')}</span>
+              </h3>
+              <div style="font-size:12px; color:#53605a; margin-bottom:10px;">
+                <strong>發包機關：</strong>{fc.get('unit', '')} · <strong>前次案名：</strong>{fc.get('latest_title', '')}
+              </div>
+
+              <table style="width:100%; border-collapse:collapse; background:#fbfcf8; border:1px solid #e2ece4; border-radius:6px; margin-bottom:8px; font-size:12px;">
+                <tr>
+                  <td style="padding:8px 12px; border-right:1px solid #e2ece4; width:33%;">
+                    <div style="color:#8a968f; font-size:10px;">預計開標期</div>
+                    <div style="color:#2f5146; font-weight:700; font-size:14px; margin-top:2px;">{fc.get('predicted_range', '推估中')}</div>
+                  </td>
+                  <td style="padding:8px 12px; border-right:1px solid #e2ece4; width:33%;">
+                    <div style="color:#8a968f; font-size:10px;">前次決標總額</div>
+                    <div style="color:#202825; font-weight:700; font-size:14px; margin-top:2px;">{fc.get('latest_award_price_str', '待查')}</div>
+                  </td>
+                  <td style="padding:8px 12px; width:34%;">
+                    <div style="color:#8a968f; font-size:10px;">換約週期規律</div>
+                    <div style="color:#202825; font-weight:700; font-size:13px; margin-top:2px;">{fc.get('cadence_summary', '定期換約')}</div>
+                  </td>
+                </tr>
+              </table>
+
+              {ext_alert_html}
+              {history_track_html}
+
+              <div style="margin-top:10px; padding:8px 10px; background:#f4f8f5; border-radius:5px; font-size:11px; color:#2f5146; line-height:1.5;">
+                🎯 <strong>業務作戰指引：</strong>{fc.get('action_suggestion', '')}
+              </div>
+            </div>
+            """
+    summary_parts = []
+    if tenders:
+        summary_parts.append(f"<strong>{len(tenders)}</strong> 筆關注新標案")
+    if forecasts:
+        summary_parts.append(f"<strong>{len(forecasts)}</strong> 筆未來換約預警")
+    summary_text = " · 本次為您偵測到 " + " 與 ".join(summary_parts) if summary_parts else ""
 
     html = f"""<!DOCTYPE html>
 <html>
@@ -279,16 +451,17 @@ def build_email_html(subscriber_email, tenders, taipei_date_str):
     <div style="background:#202825; color:#ffffff; padding:24px 28px; border-bottom:3px solid #c92d3f;">
       <div style="font-size:10px; font-weight:700; letter-spacing:0.12em; color:#a3b2a8; text-transform:uppercase;">RICOH INTERNAL BUSINESS INTELLIGENCE</div>
       <h1 style="margin:6px 0 4px; font-size:22px; font-weight:700; letter-spacing:-0.02em;">互盛情報中樞 · 標案監控通報</h1>
-      <div style="font-size:12px; color:#cdd8d1;">發送日期：{taipei_date_str} · 本次為您偵測到 <strong>{len(tenders)}</strong> 筆關注縣市新標案</div>
+      <div style="font-size:12px; color:#cdd8d1;">發送日期：{taipei_date_str}{summary_text}</div>
     </div>
 
     <!-- Content -->
     <div style="padding:24px 28px;">
       <div style="background:#eaf2eb; border-radius:6px; padding:12px 16px; margin-bottom:20px; font-size:12px; color:#2f5146; line-height:1.6;">
-        🔔 您好！系統依據您所訂閱之縣市條件，自動為您比對出今日最新公告與公開徵求之影印機/事務機採購標案。本信件已自動排除重複通報。
+        🔔 您好！系統依據您所訂閱之縣市與情報類別，自動為您比對出今日最新公告標案與未來 6 個月即將換約之影印機標案推估預警。本信件已自動排除重複通報。
       </div>
 
       {items_html}
+      {forecasts_html}
 
       <div style="text-align:center; margin-top:28px; padding-top:20px; border-top:1px dashed #d4ded7;">
         <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" target="_blank" style="display:inline-block; background:#202825; color:#ffffff; font-size:13px; font-weight:700; padding:10px 24px; border-radius:6px; text-decoration:none;">
@@ -304,7 +477,7 @@ def build_email_html(subscriber_email, tenders, taipei_date_str):
       </div>
       <div style="margin:14px 0 10px;">
         <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" target="_blank" style="display:inline-block; padding:8px 18px; margin:0 5px 6px; background:#ffffff; border:1px solid #c9d8ce; color:#2f5146; border-radius:6px; text-decoration:none; font-weight:700; font-size:12px;">
-          ⚙️ 變更通知縣市
+          ⚙️ 變更通知設定
         </a>
         <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?action=unsubscribe&amp;email={urllib.parse.quote(subscriber_email.strip().lower())}" target="_blank" style="display:inline-block; padding:8px 18px; margin:0 5px 6px; background:#fff1f2; border:1px solid #fecdd3; color:#be123c; border-radius:6px; text-decoration:none; font-weight:700; font-size:12px;">
           🚫 立即取消訂閱此信箱
@@ -320,7 +493,7 @@ def build_email_html(subscriber_email, tenders, taipei_date_str):
     return html
 
 
-def build_welcome_email_html(subscriber_email, cities=None, sample_tenders=None):
+def build_welcome_email_html(subscriber_email, cities=None, sample_tenders=None, categories=None, sample_forecasts=None):
     """
     Builds an onboarding/test confirmation email for newly registered or updated subscribers.
     Matches the Neo-Editorial theme.
@@ -333,26 +506,59 @@ def build_welcome_email_html(subscriber_email, cities=None, sample_tenders=None)
     else:
         cities_str = str(cities)
 
+    if categories is None:
+        categories = ["copier", "forecast"]
+    if isinstance(categories, str):
+        categories = [c.strip() for c in categories.split(",") if c.strip()]
+
+    category_labels = []
+    if "copier" in categories:
+        category_labels.append("🏢 影印機案件監控")
+    if "forecast" in categories or "peripherals" in categories:
+        category_labels.append("🔮 推測未來上架案件 (六個月)")
+    if not category_labels:
+        category_labels.append("🏢 影印機案件監控")
+    categories_str = "、".join(category_labels)
+
     sample_section = ""
-    if sample_tenders:
+    if sample_tenders or sample_forecasts:
         sample_rows = ""
-        for t in sample_tenders[:2]:
-            tender_url = t.get("tender_url", "https://web.pcc.gov.tw/")
-            sample_rows += f"""
-            <div style="background:#ffffff; border:1px solid #d4ded7; border-left:3px solid #c92d3f; border-radius:6px; padding:12px 14px; margin-bottom:10px;">
-              <div style="font-size:11px; color:#53605a; margin-bottom:4px;">
-                <span style="background:#edf4ef; color:#2f5146; font-weight:700; padding:2px 6px; border-radius:3px; margin-right:4px;">{t.get('city', '未知')}</span>
-                <span>{t.get('unit', '')}</span> · 案號 {t.get('job_number', '')}
-              </div>
-              <div style="font-weight:700; font-size:13px; color:#202825; margin-bottom:4px;">
-                <a href="{tender_url}" target="_blank" style="color:#202825; text-decoration:none;">{t.get('title', '')}</a>
-              </div>
-              <div style="font-size:11px; color:#78857d;">預算金額：<strong>{t.get('budget', '未公開')}</strong> · 截止日期：<span style="color:#c92d3f; font-weight:700;">{t.get('deadline', '')}</span></div>
-            </div>
-            """
+        if sample_tenders:
+            for t in sample_tenders[:2]:
+                tender_url = t.get("tender_url", "https://web.pcc.gov.tw/")
+                sample_rows += f"""
+                <div style="background:#ffffff; border:1px solid #d4ded7; border-left:3px solid #c92d3f; border-radius:6px; padding:12px 14px; margin-bottom:10px;">
+                  <div style="font-size:11px; color:#53605a; margin-bottom:4px;">
+                    <span style="background:#edf4ef; color:#2f5146; font-weight:700; padding:2px 6px; border-radius:3px; margin-right:4px;">{t.get('city', '未知')}</span>
+                    <span style="background:#e8f4fd; color:#0c5460; font-weight:700; padding:2px 6px; border-radius:3px; margin-right:4px;">即時標案</span>
+                    <span>{t.get('unit', '')}</span> · 案號 {t.get('job_number', '')}
+                  </div>
+                  <div style="font-weight:700; font-size:13px; color:#202825; margin-bottom:4px;">
+                    <a href="{tender_url}" target="_blank" style="color:#202825; text-decoration:none;">{t.get('title', '')}</a>
+                  </div>
+                  <div style="font-size:11px; color:#78857d;">預算金額：<strong>{t.get('budget', '未公開')}</strong> · 截止日期：<span style="color:#c92d3f; font-weight:700;">{t.get('deadline', '')}</span></div>
+                </div>
+                """
+        if sample_forecasts:
+            for fc in sample_forecasts[:2]:
+                sample_rows += f"""
+                <div style="background:#ffffff; border:1px solid #d4ded7; border-left:3px solid #2f5146; border-radius:6px; padding:12px 14px; margin-bottom:10px;">
+                  <div style="font-size:11px; color:#53605a; margin-bottom:4px;">
+                    <span style="background:#edf4ef; color:#2f5146; font-weight:700; padding:2px 6px; border-radius:3px; margin-right:4px;">{fc.get('city', '未知')}</span>
+                    <span style="background:#f0fdf4; color:#15803d; font-weight:700; padding:2px 6px; border-radius:3px; margin-right:4px;">🔮 推估換約</span>
+                    <span>{fc.get('unit', '')}</span>
+                  </div>
+                  <div style="font-weight:700; font-size:13px; color:#202825; margin-bottom:4px;">
+                    【推估】{fc.get('predicted_title', '')}
+                  </div>
+                  <div style="font-size:11px; color:#78857d;">
+                    預計開標期：<strong>{fc.get('predicted_range', '推估中')}</strong> · 前次得標商：<strong>{fc.get('latest_winner', '待查')}</strong>（{fc.get('cadence_summary', '')}）
+                  </div>
+                </div>
+                """
         sample_section = f"""
         <div style="margin-top:20px; padding-top:16px; border-top:1px dashed #d4ded7;">
-          <div style="font-size:12px; font-weight:700; color:#202825; margin-bottom:10px;">📋 目前最新監控標案範例：</div>
+          <div style="font-size:12px; font-weight:700; color:#202825; margin-bottom:10px;">📋 最新情報通報範例：</div>
           {sample_rows}
         </div>
         """
@@ -377,7 +583,7 @@ def build_welcome_email_html(subscriber_email, cities=None, sample_tenders=None)
       <div style="background:#eaf2eb; border-left:4px solid #2f5146; border-radius:4px; padding:14px 16px; margin-bottom:20px;">
         <div style="font-size:14px; font-weight:700; color:#2f5146; margin-bottom:4px;">🎉 信箱連通測試成功！</div>
         <div style="font-size:12px; color:#3a584c; line-height:1.6;">
-          您好！收到此信代表您的信箱已順利與「互盛情報中樞」完成對接，往後每日比對到符合您關注縣市的影印機/事務機新標案或公開徵求時，系統將主動發送通報信給您。
+          您好！收到此信代表您的信箱已順利與「互盛情報中樞」完成對接，往後每日比對到符合您關注縣市的影印機即時標案與未來 6 個月期滿換約推估時，系統將主動發送通報信給您。
         </div>
       </div>
 
@@ -395,8 +601,12 @@ def build_welcome_email_html(subscriber_email, cities=None, sample_tenders=None)
             <td><strong>{cities_str}</strong></td>
           </tr>
           <tr>
+            <td style="font-weight:700; color:#6b7c73;">關注項目：</td>
+            <td><strong>{categories_str}</strong></td>
+          </tr>
+          <tr>
             <td style="font-weight:700; color:#6b7c73;">監控標的：</td>
-            <td>影印機、多功能複合機、耗材採購、租賃案、公開徵求</td>
+            <td>影印機／複合機主機租賃採購、公開徵求、未來 6 個月期滿換約推估與擴充雙重提醒</td>
           </tr>
           <tr>
             <td style="font-weight:700; color:#6b7c73;">通報頻率：</td>
@@ -429,7 +639,7 @@ def build_welcome_email_html(subscriber_email, cities=None, sample_tenders=None)
       </div>
       <div style="margin:14px 0 10px;">
         <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" target="_blank" style="display:inline-block; padding:8px 18px; margin:0 5px 6px; background:#ffffff; border:1px solid #c9d8ce; color:#2f5146; border-radius:6px; text-decoration:none; font-weight:700; font-size:12px;">
-          ⚙️ 變更通知縣市
+          ⚙️ 變更通知設定
         </a>
         <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?action=unsubscribe&amp;email={urllib.parse.quote(subscriber_email.strip().lower())}" target="_blank" style="display:inline-block; padding:8px 18px; margin:0 5px 6px; background:#fff1f2; border:1px solid #fecdd3; color:#be123c; border-radius:6px; text-decoration:none; font-weight:700; font-size:12px;">
           🚫 立即取消訂閱此信箱
@@ -445,7 +655,7 @@ def build_welcome_email_html(subscriber_email, cities=None, sample_tenders=None)
     return html
 
 
-def send_welcome_email(email, cities=None, mail_user=None, mail_pass=None, sample_tenders=None, dry_run=False):
+def send_welcome_email(email, cities=None, mail_user=None, mail_pass=None, sample_tenders=None, categories=None, sample_forecasts=None, dry_run=False):
     """
     Dispatches onboarding/test confirmation email to verify inbox delivery.
     """
@@ -455,7 +665,7 @@ def send_welcome_email(email, cities=None, mail_user=None, mail_pass=None, sampl
         mail_pass = os.environ.get("MAIL_PASSWORD", "").strip()
 
     subject = "【互盛情報中樞】通知設定成功測試信 · 標案監控已啟動"
-    html_body = build_welcome_email_html(email, cities, sample_tenders)
+    html_body = build_welcome_email_html(email, cities=cities, sample_tenders=sample_tenders, categories=categories, sample_forecasts=sample_forecasts)
 
     if dry_run:
         print(f"[DRY-RUN] Would send welcome test email to {email}")
@@ -517,6 +727,7 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
 
     data = load_json_file(DATA_FILE)
     tenders = data.get("tenders", [])
+    forecasts = data.get("forecasted_tenders", [])
     sent_logs = load_json_file(SENT_LOG_FILE, default_val={})
 
     taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
@@ -531,6 +742,8 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
             mail_user=mail_user,
             mail_pass=mail_pass,
             sample_tenders=tenders,
+            categories=["copier", "forecast"],
+            sample_forecasts=forecasts,
             dry_run=dry_run
         )
         if success and not dry_run:
@@ -543,13 +756,13 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
             save_json_file(SENT_LOG_FILE, sent_logs)
         return 1 if success else 0
 
-    if not tenders:
-        print("No tenders found in data.json. Nothing to alert.")
+    if not tenders and not forecasts:
+        print("No tenders or forecasts found in data.json. Nothing to alert.")
         return 0
 
     subscribers = get_subscribers()
     if test_email:
-        subscribers = [{"email": test_email, "cities": ["全部"]}]
+        subscribers = [{"email": test_email, "cities": ["全部"], "categories": ["copier", "forecast"]}]
     else:
         subscribers = deduplicate_subscribers(subscribers)
 
@@ -557,7 +770,7 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
         print("No subscribers configured. Add subscribers to subscribers.json or set SUBSCRIBERS_URL.")
         return 0
 
-    print(f"Loaded {len(subscribers)} subscribers. Checking {len(tenders)} tenders...")
+    print(f"Loaded {len(subscribers)} subscribers. Checking {len(tenders)} tenders and {len(forecasts)} forecasts...")
     sent_count = 0
     new_fingerprints = {}
 
@@ -586,7 +799,9 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
                     cities=sub.get("cities", ["全部"]),
                     mail_user=mail_user,
                     mail_pass=mail_pass,
-                    sample_tenders=tenders
+                    sample_tenders=tenders,
+                    categories=sub.get("categories", ["copier", "forecast"]),
+                    sample_forecasts=forecasts
                 )
                 if success:
                     new_fingerprints[welcome_key] = {
@@ -596,13 +811,20 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
                     }
 
         matching_tenders = match_tenders_for_subscriber(sub, tenders, sent_logs)
-        if not matching_tenders:
+        matching_forecasts = match_forecasts_for_subscriber(sub, forecasts, sent_logs)
+        if not matching_tenders and not matching_forecasts:
             continue
 
-        subject = f"【互盛情報】今日新增 {len(matching_tenders)} 筆關注標案通報 ({taipei_date_str})"
-        html_body = build_email_html(email, matching_tenders, taipei_date_str)
+        if matching_tenders and matching_forecasts:
+            subject = f"【互盛情報】今日通報：{len(matching_tenders)} 筆新標案 · {len(matching_forecasts)} 筆換約預警 ({taipei_date_str})"
+        elif matching_tenders:
+            subject = f"【互盛情報】今日新增 {len(matching_tenders)} 筆關注標案通報 ({taipei_date_str})"
+        else:
+            subject = f"【互盛情報】未來換約預警：{len(matching_forecasts)} 筆推測上架標案 ({taipei_date_str})"
 
-        print(f"Sending alert to {email} ({len(matching_tenders)} tenders matching {sub.get('cities', '全部')})...")
+        html_body = build_email_html(email, matching_tenders, taipei_date_str, forecasts=matching_forecasts)
+
+        print(f"Sending alert to {email} ({len(matching_tenders)} tenders, {len(matching_forecasts)} forecasts matching {sub.get('cities', '全部')})...")
 
         if dry_run:
             print(f"[DRY-RUN] Would send email to {email} with subject: '{subject}'")
@@ -612,6 +834,15 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
                     "email": email,
                     "job_number": t.get("job_number"),
                     "title": t.get("title"),
+                    "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S"),
+                    "dry_run": True
+                }
+            for fc in matching_forecasts:
+                fp = generate_forecast_fingerprint(email, fc)
+                new_fingerprints[fp] = {
+                    "email": email,
+                    "forecast_id": fc.get("id"),
+                    "title": fc.get("predicted_title"),
                     "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S"),
                     "dry_run": True
                 }
@@ -625,6 +856,14 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
                         "email": email,
                         "job_number": t.get("job_number"),
                         "title": t.get("title"),
+                        "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S")
+                    }
+                for fc in matching_forecasts:
+                    fp = generate_forecast_fingerprint(email, fc)
+                    new_fingerprints[fp] = {
+                        "email": email,
+                        "forecast_id": fc.get("id"),
+                        "title": fc.get("predicted_title"),
                         "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S")
                     }
                 sent_count += 1

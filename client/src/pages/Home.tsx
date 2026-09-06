@@ -24,16 +24,65 @@ import {
   Printer,
   RotateCcw,
   Search,
+  ShieldAlert,
   ShieldCheck,
   Smartphone,
   Sparkles,
+  Target,
   X,
 } from "lucide-react";
+
+export type HistoryTrackItem = {
+  index: number;
+  date: string;
+  month: string;
+  winner: string;
+  award_price: number;
+  discount_rate: number | string;
+};
+
+export type ForecastedTender = {
+  id: string;
+  unit_id: string;
+  unit: string;
+  city: string;
+  series_title: string;
+  predicted_title: string;
+  latest_title: string;
+  latest_award_date: string;
+  latest_award_price: number;
+  latest_award_price_str: string;
+  latest_winner: string;
+  incumbent: {
+    type: "competitor" | "ricoh" | "other";
+    name: string;
+    brand: string;
+    label: string;
+    badge_class: string;
+  };
+  predicted_date: string;
+  predicted_month: string;
+  predicted_range: string;
+  days_until: number;
+  countdown_label: string;
+  cadence_months: number;
+  cadence_summary: string;
+  history_count: number;
+  history_track: HistoryTrackItem[];
+  expansion: {
+    has_extension: boolean;
+    type: "standard" | "expansion_dual_expiring" | "expansion_dual_extension";
+    badge_label: string;
+    notice: string;
+  };
+  action_suggestion: string;
+};
 
 type TenderPayload = {
   last_updated?: string;
   tenders?: RawTender[];
   review_candidates?: RawTender[];
+  forecasted_tenders?: ForecastedTender[];
   collection_status?: {
     status?: string;
     latest_attempt_status?: string;
@@ -245,6 +294,88 @@ const fallbackTenders: Tender[] = [
     history: [
       ["2023-09-20", "KS-112-14", "91.2%", "互盛股份有限公司", "https://web.pcc.gov.tw/", "印表機採購", "高雄市政府交通局", "same_unit"],
     ],
+  },
+];
+
+const fallbackForecasts: ForecastedTender[] = [
+  {
+    id: "forecast-A.7.6-本局及各稽徵所租賃影印機-standard",
+    unit_id: "A.7.6",
+    unit: "財政部中區國稅局",
+    city: "台中市",
+    series_title: "本局及各稽徵所租賃影印機",
+    predicted_title: "115-116年本局及各稽徵所租賃影印機",
+    latest_title: "本局及各稽徵所租賃影印機69台",
+    latest_award_date: "2024-10-17",
+    latest_award_price: 4879149,
+    latest_award_price_str: "NT$ 4,879,149",
+    latest_winner: "台灣佳能 (Canon)",
+    incumbent: {
+      type: "competitor",
+      name: "台灣佳能 (Canon)",
+      brand: "佳能",
+      label: "⚔️ 競品防守中：佳能（進攻目標）",
+      badge_class: "bg-rose-950/60 border-rose-500/50 text-rose-400",
+    },
+    predicted_date: "2026-09-02",
+    predicted_month: "2026年09月",
+    predicted_range: "2026年09月 ～ 10月",
+    days_until: -4,
+    countdown_label: "已屆招標期",
+    cadence_months: 24,
+    cadence_summary: "歷史每 24 個月定期換約（2年約）",
+    history_count: 4,
+    history_track: [
+      { index: 1, date: "2018-11-21", month: "2018-11", winner: "冠碩科技有限公司", award_price: 4811741, discount_rate: 55.0 },
+      { index: 2, date: "2020-11-13", month: "2020-11", winner: "震旦 SHARP", award_price: 3275265, discount_rate: 43.3 },
+      { index: 3, date: "2022-12-16", month: "2022-12", winner: "台灣佳能 (Canon)", award_price: 5200000, discount_rate: 74.4 },
+      { index: 4, date: "2024-10-17", month: "2024-10", winner: "台灣佳能 (Canon)", award_price: 4879149, discount_rate: 74.0 },
+    ],
+    expansion: {
+      has_extension: false,
+      type: "standard",
+      badge_label: "🔴 常態期滿（依法重招）",
+      notice: "本合約無擴充條款，期滿依法必須公開重新招標。",
+    },
+    action_suggestion: "建議於 2026年09月 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。",
+  },
+  {
+    id: "forecast-3.13.50.48.1-影印機租賃長約-standard",
+    unit_id: "3.13.50.48.1",
+    unit: "台灣中油股份有限公司煉製事業部桃園煉油廠",
+    city: "桃園市",
+    series_title: "影印機租賃長約",
+    predicted_title: "115-116年影印機租賃長約",
+    latest_title: "114~115年度影印機租賃長約",
+    latest_award_date: "2024-11-07",
+    latest_award_price: 4723137,
+    latest_award_price_str: "NT$ 4,723,137",
+    latest_winner: "宏羚股份有限公司",
+    incumbent: {
+      type: "competitor",
+      name: "宏羚股份有限公司",
+      brand: "宏羚",
+      label: "⚔️ 競品防守中：宏羚（進攻目標）",
+      badge_class: "bg-rose-950/60 border-rose-500/50 text-rose-400",
+    },
+    predicted_date: "2026-09-23",
+    predicted_month: "2026年09月",
+    predicted_range: "2026年09月 ～ 10月",
+    days_until: 17,
+    countdown_label: "倒數 17 天",
+    cadence_months: 24,
+    cadence_summary: "歷史每 24 個月定期換約（2年約）",
+    history_count: 1,
+    history_track: [
+      { index: 1, date: "2024-11-07", month: "2024-11", winner: "宏羚股份有限公司", award_price: 4723137, discount_rate: 94.5 },
+    ],
+    expansion: {
+      has_extension: false,
+      type: "standard",
+      badge_label: "🔴 常態期滿（依法重招）",
+      notice: "本合約無擴充條款，期滿依法必須公開重新招標。",
+    },
+    action_suggestion: "建議於 2026年09月 前完成採購與資訊組初訪，提供理光機種規格草案與 POC。",
   },
 ];
 
@@ -575,6 +706,167 @@ function TenderCard({ tender }: { tender: Tender }) {
   );
 }
 
+function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
+  const [expanded, setExpanded] = useState(false);
+  const isCompetitor = forecast.incumbent.type === "competitor";
+  const isRicoh = forecast.incumbent.type === "ricoh";
+  const isUrgent = forecast.days_until <= 30;
+  const isOverdue = forecast.days_until <= 0;
+
+  const cardBorderClass = isCompetitor
+    ? "competitor-defense"
+    : isRicoh
+    ? "ricoh-defense"
+    : "";
+
+  const pccSearchUrl = `https://web.pcc.gov.tw/prkms/prms-viewTenderDetailClient.do?ds=${encodeURIComponent(forecast.unit_id)}`;
+
+  return (
+    <article className={`forecast-card ${cardBorderClass}`}>
+      <div className="tender-status-bar">
+        <div className="status-left">
+          <Stamp tone="stamp-sage">{forecast.city}</Stamp>
+          <Stamp tone={isOverdue ? "stamp-red" : isUrgent ? "stamp-amber" : "stamp-sage"}>
+            {isOverdue ? "🚨 已屆招標期" : `⏳ 倒數 ${forecast.days_until} 天`}
+          </Stamp>
+          <Stamp tone={isCompetitor ? "stamp-red" : isRicoh ? "stamp-green" : "stamp-ink"}>
+            {forecast.incumbent.label}
+          </Stamp>
+          <Stamp tone={forecast.expansion.has_extension ? "stamp-amber" : "stamp-ink"}>
+            {forecast.expansion.badge_label}
+          </Stamp>
+        </div>
+        <div className={`countdown ${isUrgent ? "countdown-hot" : ""}`}>
+          <Clock3 size={14} />
+          <span>{forecast.countdown_label} · 預估 {forecast.predicted_month}</span>
+        </div>
+      </div>
+
+      <div className="tender-identity">
+        <div>
+          <div className="tender-meta">
+            <span>發包機關：<strong>{forecast.unit}</strong></span>
+            <span className="job-code">機關代碼 {forecast.unit_id}</span>
+          </div>
+          <h3 style={{ margin: "8px 0 6px", fontSize: "20px" }}>
+            <span style={{ color: isCompetitor ? "#be123c" : isRicoh ? "#15803d" : "var(--deep)", fontWeight: 700, marginRight: "6px" }}>
+              【推估上架】
+            </span>
+            {forecast.predicted_title}
+          </h3>
+          <div style={{ fontSize: "12px", color: "#617369", marginTop: "2px" }}>
+            同機關同案名歷史依據：<strong>{forecast.latest_title}</strong>（歷年累計 {forecast.history_count} 次定期開標紀錄）
+          </div>
+        </div>
+      </div>
+
+      <div className="metric-grid" style={{ gridTemplateColumns: "repeat(4, minmax(0, 1fr))" }}>
+        <Metric
+          label="預計開標／上架期"
+          value={forecast.predicted_range}
+          note="歷史開標規律演算"
+          alert={isUrgent}
+        />
+        <Metric
+          label="定期換約週期"
+          value={forecast.cadence_summary}
+          note={`平均約期 ${forecast.cadence_months} 個月`}
+        />
+        <Metric
+          label="前次決標總額"
+          value={forecast.latest_award_price_str}
+          note={`前次開標 ${forecast.latest_award_date}`}
+        />
+        <Metric
+          label="目前防守廠商"
+          value={forecast.latest_winner}
+          note={isCompetitor ? "⚔️ 競品防守（重點搶單目標）" : isRicoh ? "🛡️ 理光防守（務必提早固防）" : "歷史得標商"}
+        />
+      </div>
+
+      {forecast.expansion.has_extension && (
+        <div className="forecast-expansion-alert">
+          <div className="expansion-alert-head">
+            <Sparkles size={15} />
+            <span>【擴充條款雙重提醒】{forecast.expansion.badge_label}</span>
+          </div>
+          <p>{forecast.expansion.notice}</p>
+        </div>
+      )}
+
+      {forecast.history_track && forecast.history_track.length > 0 && (
+        <div className="cadence-track-container">
+          <div className="cadence-track-title">
+            <span>📋 歷史開標履歷軌跡（同機關同案名）</span>
+            <button
+              type="button"
+              className="outline-button"
+              style={{ padding: "3px 8px", fontSize: "11px", height: "auto" }}
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? "收起履歷" : `展開完整 ${forecast.history_track.length} 次開標履歷`}
+            </button>
+          </div>
+          <div className="cadence-track-flow">
+            {forecast.history_track.slice(expanded ? 0 : -3).map((h) => (
+              <span key={h.index} className="cadence-pill">
+                <span>#{h.index}</span>
+                <strong>{h.month}</strong>
+                <span>{h.winner}</span>
+                <span style={{ color: "#78857d" }}>({typeof h.award_price === "number" ? `NT$${(h.award_price / 10000).toFixed(0)}萬` : h.award_price} · {h.discount_rate}%)</span>
+                <ChevronRight size={12} className="cadence-arrow" />
+              </span>
+            ))}
+            <span className="cadence-pill predicted">
+              <Sparkles size={12} />
+              <span>🔮 預估下次：{forecast.predicted_month}</span>
+              <span style={{ fontSize: "10px", opacity: 0.9 }}>（{forecast.countdown_label}）</span>
+            </span>
+          </div>
+        </div>
+      )}
+
+      <div className="decision-strip">
+        <div className="decision-main">
+          <div className="decision-label">
+            <Sparkles size={13} />
+            <span>業務作戰攻防指引</span>
+          </div>
+          <p style={{ fontWeight: 600, color: "#1e2923", margin: "6px 0" }}>
+            {forecast.action_suggestion}
+          </p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          <span style={{ fontSize: "10px", color: "#8a978f" }}>商機攻防定位</span>
+          <strong style={{ fontSize: "13px", color: isCompetitor ? "#be123c" : isRicoh ? "#15803d" : "var(--ink)", marginTop: "4px" }}>
+            {isCompetitor ? "⚔️ 競品防守中（切入進攻）" : isRicoh ? "🛡️ 理光防守中（提前防守）" : "⚪ 其他廠商防守"}
+          </strong>
+        </div>
+      </div>
+
+      <div className="tender-footer">
+        <div className="term-list">
+          <span>影印機定期租賃</span>
+          <span>同機關履歷推估</span>
+          <span>{forecast.cadence_summary}</span>
+          {forecast.expansion.has_extension && <span style={{ color: "#b45309", background: "#fef3c7" }}>含擴充條款</span>}
+        </div>
+        <div className="action-row">
+          <a
+            href={pccSearchUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="action-primary"
+            title="開啟政府電子採購網查看該機關所有公開標案與歷史紀錄"
+          >
+            <ExternalLink size={13} /> 前往採購網機關標案列表 ↗
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 const TAIWAN_REGIONS: { region: string; cities: string[] }[] = [
   {
     region: "北部地區",
@@ -741,11 +1033,11 @@ function SubscribeModal({
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed.categories) && parsed.categories.length > 0) {
-          return parsed.categories;
+          return parsed.categories.map((c: string) => c === "peripherals" ? "forecast" : c);
         }
       }
     } catch {}
-    return ["copier", "peripherals"];
+    return ["copier", "forecast"];
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -779,7 +1071,7 @@ function SubscribeModal({
             }
           }
           if (Array.isArray(parsed.categories) && parsed.categories.length > 0) {
-            setSelectedCategories(parsed.categories);
+            setSelectedCategories(parsed.categories.map((c: string) => c === "peripherals" ? "forecast" : c));
           }
         }
       } catch {}
@@ -878,7 +1170,7 @@ function SubscribeModal({
 
     if (selectedCategories.length === 0) {
       setStatus("error");
-      setMessage("請至少勾選一種關注情報類別（事務機主機 或 周邊耗材）。");
+      setMessage("請至少勾選一種關注情報類別（影印機案件 或 推測未來上架案件）。");
       return;
     }
 
@@ -936,7 +1228,7 @@ function SubscribeModal({
             </span>
             <div>
               <h3>{isAlreadyRegistered ? "變更通知設定" : "相關地區標案通知我"}</h3>
-              <p>{isAlreadyRegistered ? "已載入您目前的通知設定，可直接重新勾選類別與縣市後儲存更新" : "選定全台關注縣市與品項類別，新案件與公開徵求第一時間主動寄信通報"}</p>
+              <p>{isAlreadyRegistered ? "已載入您目前的通知設定，可直接重新勾選類別與縣市後儲存更新" : "選定全台關注縣市與情報類別，新標案與未來換約預警第一時間主動寄信通報"}</p>
             </div>
           </div>
           <button className="icon-button modal-close-btn" onClick={onClose} aria-label="關閉">
@@ -955,7 +1247,7 @@ function SubscribeModal({
             </p>
             <div className="success-details">
               <div><span>通知信箱：</span><strong>{email}</strong></div>
-              <div><span>關注類別：</span><strong>{selectedCategories.map((c) => c === "copier" ? "🏢 影印機案件監控" : "🖨️ 非影印機案件監控(周邊/耗材/印表機)").join("、")}</strong></div>
+              <div><span>關注類別：</span><strong>{selectedCategories.map((c) => c === "copier" ? "🏢 影印機案件監控" : "🔮 推測未來上架案件(六個月)").join("、")}</strong></div>
               <div><span>關注範圍：</span><strong>{isAllSelected ? "全台所有縣市（共 22 個縣市全數監控）" : `已選定 ${selectedCities.length} 個縣市（${selectedCities.join("、")}）`}</strong></div>
               <div><span>發件來源：</span><code>huxen.ricoh@gmail.com</code></div>
             </div>
@@ -1042,21 +1334,21 @@ function SubscribeModal({
                   </div>
                 </label>
 
-                <label className={`category-check-card ${selectedCategories.includes("peripherals") ? "checked" : ""}`}>
+                <label className={`category-check-card ${selectedCategories.includes("forecast") ? "checked" : ""}`}>
                   <input
                     type="checkbox"
-                    checked={selectedCategories.includes("peripherals")}
+                    checked={selectedCategories.includes("forecast")}
                     onChange={(e) => {
                       if (e.target.checked) {
-                        setSelectedCategories([...selectedCategories, "peripherals"]);
+                        setSelectedCategories([...selectedCategories, "forecast"]);
                       } else {
-                        setSelectedCategories(selectedCategories.filter((c) => c !== "peripherals"));
+                        setSelectedCategories(selectedCategories.filter((c) => c !== "forecast"));
                       }
                     }}
                   />
                   <div className="category-check-info">
-                    <strong>🖨️ 非影印機案件監控 (周邊/耗材/印表機)</strong>
-                    <span>公部門碳粉匣、耗材、印表機、掃描器</span>
+                    <strong>🔮 推測未來上架案件 (六個月)</strong>
+                    <span>未來 6 個月到期換約推估、競品攻防與擴充預警</span>
                   </div>
                 </label>
               </div>
@@ -1182,16 +1474,21 @@ function SubscribeModal({
   );
 }
 
-export default function Home({ stream = "copier" }: { stream?: "copier" | "peripherals" }) {
+export default function Home({ stream = "copier" }: { stream?: "copier" | "forecast" | "peripherals" }) {
+  const isForecast = stream === "forecast" || stream === "peripherals";
   const [filter, setFilter] = useState("全部案件");
   const [cityFilter, setCityFilter] = useState("全部縣市");
   const [peripheralFilter, setPeripheralFilter] = useState<"all" | "supplies" | "printer" | "scanner">("all");
+  const [forecastDaysFilter, setForecastDaysFilter] = useState<"all" | "30" | "60" | "90" | "180">("all");
+  const [forecastIncumbentFilter, setForecastIncumbentFilter] = useState<"all" | "competitor" | "ricoh">("all");
+  const [forecastExpansionFilter, setForecastExpansionFilter] = useState<"all" | "expansion" | "standard">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [subscribeOpen, setSubscribeOpen] = useState(false);
   const [unsubscribedEmail, setUnsubscribedEmail] = useState<string | null>(null);
   const [tenders, setTenders] = useState<Tender[]>(fallbackTenders);
   const [reviewTenders, setReviewTenders] = useState<Tender[]>([]);
+  const [forecastedTenders, setForecastedTenders] = useState<ForecastedTender[]>(fallbackForecasts);
   const [dataUpdated, setDataUpdated] = useState("待確認");
   const [dataSyncStatus, setDataSyncStatus] = useState<"loading" | "complete" | "warning" | "unknown">("loading");
   const [dataSyncAttempt, setDataSyncAttempt] = useState("");
@@ -1200,6 +1497,9 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "perip
     setPeripheralFilter("all");
     setCityFilter("全部縣市");
     setFilter("全部案件");
+    setForecastDaysFilter("all");
+    setForecastIncumbentFilter("all");
+    setForecastExpansionFilter("all");
     setSearchQuery("");
   }, [stream]);
 
@@ -1253,6 +1553,12 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "perip
     return Array.from(counts.entries()).sort(([cityA, countA], [cityB, countB]) => countB - countA || cityA.localeCompare(cityB, "zh-Hant"));
   }, [streamTenders]);
 
+  const forecastCityOptions = useMemo(() => {
+    const counts = new Map<string, number>();
+    forecastedTenders.forEach(({ city }) => counts.set(city, (counts.get(city) ?? 0) + 1));
+    return Array.from(counts.entries()).sort(([cityA, countA], [cityB, countB]) => countB - countA || cityA.localeCompare(cityB, "zh-Hant"));
+  }, [forecastedTenders]);
+
   const matchesSearch = (tender: Tender, query: string) => {
     const normalized = query.trim().toLocaleLowerCase("zh-Hant");
     if (!normalized) return true;
@@ -1278,6 +1584,40 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "perip
     return byCity.filter((tender) => matchesSearch(tender, searchQuery));
   }, [cityFilter, peripheralFilter, searchQuery, stream, streamReviewTenders]);
 
+  const filteredForecasts = useMemo(() => {
+    return forecastedTenders.filter((fc) => {
+      if (forecastDaysFilter === "30" && fc.days_until > 30) return false;
+      if (forecastDaysFilter === "60" && fc.days_until > 60) return false;
+      if (forecastDaysFilter === "90" && fc.days_until > 90) return false;
+      if (forecastDaysFilter === "180" && fc.days_until > 180) return false;
+
+      if (forecastIncumbentFilter === "competitor" && fc.incumbent.type !== "competitor") return false;
+      if (forecastIncumbentFilter === "ricoh" && fc.incumbent.type !== "ricoh") return false;
+
+      if (forecastExpansionFilter === "expansion" && !fc.expansion.has_extension) return false;
+      if (forecastExpansionFilter === "standard" && fc.expansion.has_extension) return false;
+
+      if (cityFilter !== "全部縣市" && fc.city !== cityFilter) return false;
+
+      if (searchQuery.trim()) {
+        const q = searchQuery.trim().toLowerCase();
+        const text = [
+          fc.predicted_title,
+          fc.latest_title,
+          fc.unit,
+          fc.city,
+          fc.latest_winner,
+          fc.incumbent.name,
+          fc.incumbent.brand,
+          fc.action_suggestion,
+        ].join(" ").toLowerCase();
+        if (!text.includes(q)) return false;
+      }
+
+      return true;
+    });
+  }, [forecastedTenders, forecastDaysFilter, forecastIncumbentFilter, forecastExpansionFilter, cityFilter, searchQuery]);
+
   useEffect(() => {
     let active = true;
     const dataUrl = new URL("data.json", document.baseURI).toString();
@@ -1287,6 +1627,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "perip
         if (!active) return;
         if (Array.isArray(data.tenders) && data.tenders.length > 0) setTenders(data.tenders.map((raw) => mapRawTender(raw)));
         if (Array.isArray(data.review_candidates)) setReviewTenders(data.review_candidates.map((raw) => mapRawTender(raw, true)));
+        if (Array.isArray(data.forecasted_tenders) && data.forecasted_tenders.length > 0) setForecastedTenders(data.forecasted_tenders);
         if (data.last_updated) setDataUpdated(data.last_updated);
         const latestStatus = data.collection_status?.latest_attempt_status ?? data.collection_status?.status;
         setDataSyncAttempt(data.collection_status?.latest_attempt_at ?? "");
@@ -1321,9 +1662,9 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "perip
           <span className="site-tab-index">01</span>
           <span><strong>影印機案件監控</strong><small>事務機／複合機主機</small></span>
         </a>
-        <a className={`site-tab ${stream === "peripherals" ? "active" : ""}`} href="#/peripherals" aria-current={stream === "peripherals" ? "page" : undefined}>
+        <a className={`site-tab ${isForecast ? "active" : ""}`} href="#/forecast" aria-current={isForecast ? "page" : undefined}>
           <span className="site-tab-index">02</span>
-          <span><strong>非影印機案件監控</strong><small>(周邊/耗材/印表機)</small></span>
+          <span><strong>推測未來上架案件(六個月)</strong><small>AI 週期規律推估 & 擴充預警</small></span>
         </a>
         <a className="site-tab" href="#/specs">
           <span className="site-tab-index">03</span>
@@ -1379,163 +1720,360 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "perip
           </div>
         )}
 
-        <div className="page-heading">
-          <div>
-            <div className="eyebrow">
-              {stream === "peripherals" ? "互盛情報中樞 / 非影印機案件（周邊/耗材/印表機）" : "互盛情報中樞 / 影印機案件"}
+        {isForecast ? (
+          <>
+            <div className="page-heading">
+              <div>
+                <div className="eyebrow">
+                  互盛情報中樞 / 推測未來上架案件 (六個月)
+                </div>
+                <h1>推測未來上架案件雷達</h1>
+                <p>
+                  基於同機關同案名歷史前 5 次開標規律、得標合約期程與一年擴充條款，精準預估未來 6 個月即將到期之影印機標案，提前啟動攻防佈局。
+                </p>
+              </div>
+              <div className="heading-actions">
+                <button
+                  type="button"
+                  className="primary-subscribe-btn"
+                  onClick={() => setSubscribeOpen(true)}
+                >
+                  <Bell size={18} /> 訂閱到期預警通知
+                </button>
+                <span className={`update-note ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}>
+                  <Database size={14} />
+                  <time>{dataUpdateCopy}</time>
+                </span>
+                <button className="outline-button" onClick={() => window.print()}><FileDown size={15} /> 列印工作區</button>
+              </div>
             </div>
-            <h1>{stream === "peripherals" ? "非影印機案件監控雷達" : "影印機案件監控雷達"}</h1>
-            <p>
-              {stream === "peripherals"
-                ? "專注公部門周邊、耗材、印表機與高速掃描器採購商機，與影印機主機完全分流。"
-                : "先看今天該追的案，再回頭核對前次得標紀錄。"}
-            </p>
-          </div>
-          <div className="heading-actions">
-            <button
-              type="button"
-              className="primary-subscribe-btn"
-              onClick={() => setSubscribeOpen(true)}
-            >
-              <Bell size={18} /> 相關地區標案通知我
-            </button>
-            <span className={`update-note ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}>
-              <Database size={14} />
-              <time>{dataUpdateCopy}</time>
-            </span>
-            <button className="outline-button"><FileDown size={15} /> 列印工作區</button>
-          </div>
-        </div>
 
-        <div className="tender-overview">
-          <div className="overview-main">
-            <div className="overview-kicker">
-              {stream === "peripherals" ? "PERIPHERAL OPPORTUNITY INDEX" : "TODAY'S OPPORTUNITY INDEX"}
+            <div className="tender-overview">
+              <div className="overview-main">
+                <div className="overview-kicker">6-MONTH FORECAST RADAR</div>
+                <div className="overview-number">{forecastedTenders.length}</div>
+                <div className="overview-copy">
+                  <strong>件推估即將到期／上架案件</strong>
+                  <span>掌握前任得標者與合約終止點，搶佔招標前置規格綁定與客戶接觸先機</span>
+                </div>
+              </div>
+              <div className="overview-stat" style={{ borderLeftColor: "#e11d48" }}>
+                <span>⚔️ 競品防守（攻）</span>
+                <strong style={{ color: "#e11d48" }}>
+                  {forecastedTenders.filter((f) => f.incumbent.type === "competitor").length}
+                </strong>
+                <small>搶單換約先機</small>
+              </div>
+              <div className="overview-stat" style={{ borderLeftColor: "#16a34a" }}>
+                <span>🛡️ 理光防守（守）</span>
+                <strong style={{ color: "#16a34a" }}>
+                  {forecastedTenders.filter((f) => f.incumbent.type === "ricoh").length}
+                </strong>
+                <small>提前續約防守</small>
+              </div>
+              <div className="overview-stat" style={{ borderLeftColor: "#d97706" }}>
+                <span>⏳ 30 日內到期</span>
+                <strong style={{ color: "#d97706" }}>
+                  {forecastedTenders.filter((f) => f.days_until <= 30).length}
+                </strong>
+                <small>高急迫性標案</small>
+              </div>
+              <div className="overview-stat" style={{ borderLeftColor: "#7c3aed" }}>
+                <span>⚡ 擴充條款提醒</span>
+                <strong style={{ color: "#7c3aed" }}>
+                  {forecastedTenders.filter((f) => f.expansion.has_extension).length}
+                </strong>
+                <small>含雙軌擴充預警</small>
+              </div>
             </div>
-            <div className="overview-number">{streamTenders.length}</div>
-            <div className="overview-copy">
-              <strong>{stream === "peripherals" ? "件非影印機案件" : "件進行中標案"}</strong>
-              <span>
-                {stream === "peripherals"
-                  ? "涵蓋公部門周邊、耗材、印表機與高速掃描器"
-                  : "已完成縣市判定，依業務優先級重新排序"}
-              </span>
-            </div>
-          </div>
-          <div className="overview-stat overview-awarded">
-            <span>已決標案件</span>
-            <strong>{streamTenders.filter((tender) => tender.isAwarded).length}</strong>
-            <small>近期結果醒目追蹤</small>
-          </div>
-          <div className="overview-stat">
-            <span>{stream === "peripherals" ? "非影印機總案件量" : "今日來源公告"}</span>
-            <strong>{streamTenders.length}</strong>
-            <small>目前資料集案件量</small>
-          </div>
-          <div className="overview-stat">
-            <span>可比歷史資料</span>
-            <strong>{streamTenders.filter((tender) => tender.history.length >= 2).length}</strong>
-            <small>具可比歷史資料</small>
-          </div>
-          <div className="overview-stat overview-review">
-            <span>待人工確認</span>
-            <strong className="red-text">{streamReviewTenders.length}</strong>
-            <small>不列入正式案件</small>
-          </div>
-        </div>
 
-        {stream === "peripherals" && (
-          <div className="peripheral-filter-row" aria-label="周邊品項快速分類">
-            <div className="peripheral-filter-title">
-              <Printer size={15} /> <span>品項快速分類：</span>
+            <div className="forecast-filter-bar" aria-label="推估條件篩選">
+              <div className="forecast-filter-group">
+                <span className="forecast-filter-label">
+                  <Clock3 size={14} /> 時效倒數：
+                </span>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastDaysFilter === "all" ? "active" : ""}`}
+                  onClick={() => setForecastDaysFilter("all")}
+                >
+                  全部
+                </button>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastDaysFilter === "30" ? "active" : ""}`}
+                  onClick={() => setForecastDaysFilter("30")}
+                >
+                  ⏳ 30 日內 ({forecastedTenders.filter((f) => f.days_until <= 30).length})
+                </button>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastDaysFilter === "60" ? "active" : ""}`}
+                  onClick={() => setForecastDaysFilter("60")}
+                >
+                  60 日內 ({forecastedTenders.filter((f) => f.days_until <= 60).length})
+                </button>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastDaysFilter === "90" ? "active" : ""}`}
+                  onClick={() => setForecastDaysFilter("90")}
+                >
+                  90 日內 ({forecastedTenders.filter((f) => f.days_until <= 90).length})
+                </button>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastDaysFilter === "180" ? "active" : ""}`}
+                  onClick={() => setForecastDaysFilter("180")}
+                >
+                  半年內 ({forecastedTenders.filter((f) => f.days_until <= 180).length})
+                </button>
+              </div>
+
+              <div className="forecast-filter-group" style={{ marginLeft: "auto" }}>
+                <span className="forecast-filter-label">
+                  <Sparkles size={14} /> 攻防陣營：
+                </span>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastIncumbentFilter === "all" ? "active" : ""}`}
+                  onClick={() => setForecastIncumbentFilter("all")}
+                >
+                  全部
+                </button>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastIncumbentFilter === "competitor" ? "active" : ""}`}
+                  onClick={() => setForecastIncumbentFilter("competitor")}
+                >
+                  ⚔️ 競品防守 ({forecastedTenders.filter((f) => f.incumbent.type === "competitor").length})
+                </button>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastIncumbentFilter === "ricoh" ? "active" : ""}`}
+                  onClick={() => setForecastIncumbentFilter("ricoh")}
+                >
+                  🛡️ 理光防守 ({forecastedTenders.filter((f) => f.incumbent.type === "ricoh").length})
+                </button>
+              </div>
+
+              <div className="forecast-filter-group">
+                <span className="forecast-filter-label">
+                  <Filter size={14} /> 條款性質：
+                </span>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastExpansionFilter === "all" ? "active" : ""}`}
+                  onClick={() => setForecastExpansionFilter("all")}
+                >
+                  全部
+                </button>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastExpansionFilter === "expansion" ? "active" : ""}`}
+                  onClick={() => setForecastExpansionFilter("expansion")}
+                >
+                  ⚡ 含擴充條款 ({forecastedTenders.filter((f) => f.expansion.has_extension).length})
+                </button>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastExpansionFilter === "standard" ? "active" : ""}`}
+                  onClick={() => setForecastExpansionFilter("standard")}
+                >
+                  標準合約 ({forecastedTenders.filter((f) => !f.expansion.has_extension).length})
+                </button>
+              </div>
             </div>
-            <button
-              type="button"
-              className={`peripheral-pill ${peripheralFilter === "all" ? "active" : ""}`}
-              onClick={() => setPeripheralFilter("all")}
-            >
-              全部周邊 ({peripheralCounts.all})
-            </button>
-            <button
-              type="button"
-              className={`peripheral-pill ${peripheralFilter === "supplies" ? "active" : ""}`}
-              onClick={() => setPeripheralFilter("supplies")}
-            >
-              🖨️ 碳粉耗材 ({peripheralCounts.supplies})
-            </button>
-            <button
-              type="button"
-              className={`peripheral-pill ${peripheralFilter === "printer" ? "active" : ""}`}
-              onClick={() => setPeripheralFilter("printer")}
-            >
-              🖨️ 雷射／點陣印表機 ({peripheralCounts.printer})
-            </button>
-            <button
-              type="button"
-              className={`peripheral-pill ${peripheralFilter === "scanner" ? "active" : ""}`}
-              onClick={() => setPeripheralFilter("scanner")}
-            >
-              📄 文件掃描器 ({peripheralCounts.scanner})
-            </button>
-          </div>
+
+            <div className="city-quick-filter" aria-label="縣市快速選擇">
+              <div className="city-filter-heading">
+                <div className="city-filter-title">
+                  <MapPin size={17} />
+                  <div><strong>縣市快速選擇</strong><span>依機關所在縣市篩選推估案件</span></div>
+                </div>
+                <div className="city-filter-meta">
+                  <span>{cityFilter === "全部縣市" ? "全台案件" : cityFilter}</span>
+                  <small>{filteredForecasts.length} 件符合目前條件</small>
+                </div>
+              </div>
+              <div className="city-pill-list" role="group" aria-label="推估標案縣市">
+                <button
+                  type="button"
+                  aria-pressed={cityFilter === "全部縣市"}
+                  className={cityFilter === "全部縣市" ? "city-pill active" : "city-pill"}
+                  onClick={() => setCityFilter("全部縣市")}
+                >
+                  <span>全部縣市</span>
+                  <strong>{forecastedTenders.length}</strong>
+                </button>
+                {forecastCityOptions.map(([city, count]) => (
+                  <button
+                    type="button"
+                    aria-pressed={cityFilter === city}
+                    className={cityFilter === city ? "city-pill active" : "city-pill"}
+                    key={city}
+                    onClick={() => setCityFilter(city)}
+                  >
+                    <span>{city}</span>
+                    <strong>{count}</strong>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="workspace-toolbar">
+              <div className="filter-intro">
+                <Filter size={16} /><strong>推估上架案件</strong>
+                <span>{filteredForecasts.length} / {forecastedTenders.length} 顯示{searchQuery ? ` · 搜尋「${searchQuery}」` : ""}</span>
+              </div>
+              <label className="tender-search" htmlFor="tender-search" style={{ marginLeft: "auto" }}>
+                <Search size={15} />
+                <input
+                  id="tender-search"
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="搜尋機關、案名、得標廠商或關鍵字"
+                  aria-label="搜尋推估標案"
+                />
+                {searchQuery && (
+                  <button type="button" className="search-clear" onClick={() => setSearchQuery("")} aria-label="清除搜尋">×</button>
+                )}
+              </label>
+            </div>
+
+            <section className="tender-section formal-section" aria-labelledby="forecast-tenders-heading">
+              <div className="tender-section-heading">
+                <div>
+                  <span className="section-kicker">PREDICTED COPIER OPPORTUNITIES</span>
+                  <h2 id="forecast-tenders-heading">推測未來上架影印機案件清單</h2>
+                  <p>依預估到期開標倒數日排序，提供前五次開標履歷軌跡、前任防守廠商、合約預估金額與擴充條款作戰建議。</p>
+                </div>
+                <strong>{filteredForecasts.length} 件</strong>
+              </div>
+              <div className="tender-list">
+                {filteredForecasts.length > 0 ? (
+                  filteredForecasts.map((forecast) => (
+                    <ForecastCard key={forecast.id} forecast={forecast} />
+                  ))
+                ) : (
+                  <div className="empty-state">目前沒有符合條件的推估案件。</div>
+                )}
+              </div>
+            </section>
+          </>
+        ) : (
+          <>
+            <div className="page-heading">
+              <div>
+                <div className="eyebrow">互盛情報中樞 / 影印機案件</div>
+                <h1>影印機案件監控雷達</h1>
+                <p>先看今天該追的案，再回頭核對前次得標紀錄。</p>
+              </div>
+              <div className="heading-actions">
+                <button
+                  type="button"
+                  className="primary-subscribe-btn"
+                  onClick={() => setSubscribeOpen(true)}
+                >
+                  <Bell size={18} /> 相關地區標案通知我
+                </button>
+                <span className={`update-note ${dataSyncStatus === "warning" ? "data-update-warning" : ""}`} title={dataUpdateTitle}>
+                  <Database size={14} />
+                  <time>{dataUpdateCopy}</time>
+                </span>
+                <button className="outline-button"><FileDown size={15} /> 列印工作區</button>
+              </div>
+            </div>
+
+            <div className="tender-overview">
+              <div className="overview-main">
+                <div className="overview-kicker">TODAY'S OPPORTUNITY INDEX</div>
+                <div className="overview-number">{streamTenders.length}</div>
+                <div className="overview-copy">
+                  <strong>件進行中標案</strong>
+                  <span>已完成縣市判定，依業務優先級重新排序</span>
+                </div>
+              </div>
+              <div className="overview-stat overview-awarded">
+                <span>已決標案件</span>
+                <strong>{streamTenders.filter((tender) => tender.isAwarded).length}</strong>
+                <small>近期結果醒目追蹤</small>
+              </div>
+              <div className="overview-stat">
+                <span>今日來源公告</span>
+                <strong>{streamTenders.length}</strong>
+                <small>目前資料集案件量</small>
+              </div>
+              <div className="overview-stat">
+                <span>可比歷史資料</span>
+                <strong>{streamTenders.filter((tender) => tender.history.length >= 2).length}</strong>
+                <small>具可比歷史資料</small>
+              </div>
+              <div className="overview-stat overview-review">
+                <span>待人工確認</span>
+                <strong className="red-text">{streamReviewTenders.length}</strong>
+                <small>不列入正式案件</small>
+              </div>
+            </div>
+
+            <div className="city-quick-filter" aria-label="縣市快速選擇">
+              <div className="city-filter-heading">
+                <div className="city-filter-title">
+                  <MapPin size={17} />
+                  <div><strong>縣市快速選擇</strong><span>先按地區縮小案件範圍，再搭配案件狀態篩選</span></div>
+                </div>
+                <div className="city-filter-meta">
+                  <span>{cityFilter === "全部縣市" ? "全台案件" : cityFilter}</span>
+                  <small>{filteredTenders.length + filteredReviewTenders.length} 件符合目前條件</small>
+                </div>
+              </div>
+              <div className="city-pill-list" role="group" aria-label="標案縣市">
+                <button type="button" aria-pressed={cityFilter === "全部縣市"} className={cityFilter === "全部縣市" ? "city-pill active" : "city-pill"} onClick={() => setCityFilter("全部縣市")}><span>全部縣市</span><strong>{streamTenders.length}</strong></button>
+                {cityOptions.map(([city, count]) => (
+                  <button type="button" aria-pressed={cityFilter === city} className={cityFilter === city ? "city-pill active" : "city-pill"} key={city} onClick={() => setCityFilter(city)}>
+                    <span>{city}</span><strong>{count}</strong>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="workspace-toolbar">
+              <div className="filter-intro">
+                <Filter size={16} /><strong>案件檔案</strong><span>{filteredTenders.length} / {streamTenders.length} 顯示{searchQuery ? ` · 搜尋「${searchQuery}」` : ""}</span>
+              </div>
+              <div className="filter-tabs">
+                {["全部案件", "3 日內"].map((item) => (
+                  <button key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{item}</button>
+                ))}
+              </div>
+              <label className="tender-search" htmlFor="tender-search">
+                <Search size={15} />
+                <input id="tender-search" type="search" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="搜尋案名、機關、案號或關鍵字" aria-label="搜尋標案" />
+                {searchQuery && <button type="button" className="search-clear" onClick={() => setSearchQuery("")} aria-label="清除搜尋">×</button>}
+              </label>
+            </div>
+
+            <section className="tender-section formal-section" aria-labelledby="formal-tenders-heading">
+              <div className="tender-section-heading">
+                <div><span className="section-kicker">FORMAL OPPORTUNITIES</span><h2 id="formal-tenders-heading">正式案件</h2><p>已確認為目標設備，且符合首頁日期與狀態保留規則。</p></div>
+                <strong>{filteredTenders.length} 件</strong>
+              </div>
+              <div className="tender-list">
+                {filteredTenders.length > 0 ? filteredTenders.map((tender) => <TenderCard key={tender.job} tender={tender} />) : <div className="empty-state">目前沒有符合條件的正式案件。</div>}
+              </div>
+            </section>
+
+            <section className="tender-section review-section" aria-labelledby="review-tenders-heading">
+              <div className="tender-section-heading">
+                <div><span className="section-kicker">REVIEW QUEUE</span><h2 id="review-tenders-heading">待確認案件</h2><p>可能相關但明細不足或設備範圍不明，需人工核對後才會進入正式案件。</p></div>
+                <strong>{filteredReviewTenders.length} 件</strong>
+              </div>
+              <div className="tender-list">
+                {filteredReviewTenders.length > 0 ? filteredReviewTenders.map((tender) => <TenderCard key={`review-${tender.job}`} tender={tender} />) : <div className="empty-state">目前沒有待確認案件。</div>}
+              </div>
+            </section>
+          </>
         )}
-
-        <div className="city-quick-filter" aria-label="縣市快速選擇">
-          <div className="city-filter-heading">
-            <div className="city-filter-title">
-              <MapPin size={17} />
-              <div><strong>縣市快速選擇</strong><span>先按地區縮小案件範圍，再搭配案件狀態篩選</span></div>
-            </div>
-            <div className="city-filter-meta">
-              <span>{cityFilter === "全部縣市" ? "全台案件" : cityFilter}</span>
-              <small>{filteredTenders.length + filteredReviewTenders.length} 件符合目前條件</small>
-            </div>
-          </div>
-          <div className="city-pill-list" role="group" aria-label="標案縣市">
-            <button type="button" aria-pressed={cityFilter === "全部縣市"} className={cityFilter === "全部縣市" ? "city-pill active" : "city-pill"} onClick={() => setCityFilter("全部縣市")}><span>全部縣市</span><strong>{streamTenders.length}</strong></button>
-            {cityOptions.map(([city, count]) => (
-              <button type="button" aria-pressed={cityFilter === city} className={cityFilter === city ? "city-pill active" : "city-pill"} key={city} onClick={() => setCityFilter(city)}>
-                <span>{city}</span><strong>{count}</strong>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="workspace-toolbar">
-          <div className="filter-intro">
-            <Filter size={16} /><strong>案件檔案</strong><span>{filteredTenders.length} / {streamTenders.length} 顯示{searchQuery ? ` · 搜尋「${searchQuery}」` : ""}</span>
-          </div>
-          <div className="filter-tabs">
-            {["全部案件", "3 日內"].map((item) => (
-              <button key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{item}</button>
-            ))}
-          </div>
-          <label className="tender-search" htmlFor="tender-search">
-            <Search size={15} />
-            <input id="tender-search" type="search" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="搜尋案名、機關、案號或關鍵字" aria-label="搜尋標案" />
-            {searchQuery && <button type="button" className="search-clear" onClick={() => setSearchQuery("")} aria-label="清除搜尋">×</button>}
-          </label>
-        </div>
-
-        <section className="tender-section formal-section" aria-labelledby="formal-tenders-heading">
-          <div className="tender-section-heading">
-            <div><span className="section-kicker">FORMAL OPPORTUNITIES</span><h2 id="formal-tenders-heading">正式案件</h2><p>已確認為目標設備，且符合首頁日期與狀態保留規則。</p></div>
-            <strong>{filteredTenders.length} 件</strong>
-          </div>
-          <div className="tender-list">
-            {filteredTenders.length > 0 ? filteredTenders.map((tender) => <TenderCard key={tender.job} tender={tender} />) : <div className="empty-state">目前沒有符合條件的正式案件。</div>}
-          </div>
-        </section>
-
-        <section className="tender-section review-section" aria-labelledby="review-tenders-heading">
-          <div className="tender-section-heading">
-            <div><span className="section-kicker">REVIEW QUEUE</span><h2 id="review-tenders-heading">待確認案件</h2><p>可能相關但明細不足或設備範圍不明，需人工核對後才會進入正式案件。</p></div>
-            <strong>{filteredReviewTenders.length} 件</strong>
-          </div>
-          <div className="tender-list">
-            {filteredReviewTenders.length > 0 ? filteredReviewTenders.map((tender) => <TenderCard key={`review-${tender.job}`} tender={tender} />) : <div className="empty-state">目前沒有待確認案件。</div>}
-          </div>
-        </section>
       </main>
       <footer className="page-footer">
         <span>互盛情報中樞 / INTERNAL BUSINESS INTELLIGENCE</span>

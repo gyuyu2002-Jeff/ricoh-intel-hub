@@ -17,8 +17,8 @@ function Router() {
   if (hash === "#/specs") {
     return <SpecComparison />;
   }
-  if (hash === "#/peripherals") {
-    return <Home stream="peripherals" />;
+  if (hash === "#/forecast" || hash === "#/peripherals") {
+    return <Home stream="forecast" />;
   }
   return <Home stream="copier" />;
 }
