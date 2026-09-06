@@ -137,7 +137,7 @@ export default function SpecComparison() {
         </a>
         <a className="site-tab" href="#/forecast">
           <span className="site-tab-index">02</span>
-          <span><strong>推測未來上架案件(六個月)</strong><small>換約推估與擴充預警</small></span>
+          <span><strong>推測未來上架案件(六個月)</strong><small>依週期規律推估包含展延擴充一年條件</small></span>
         </a>
         <a className="site-tab active" href="#/specs" aria-current="page">
           <span className="site-tab-index">03</span>

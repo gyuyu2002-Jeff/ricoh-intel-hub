@@ -1664,7 +1664,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
         </a>
         <a className={`site-tab ${isForecast ? "active" : ""}`} href="#/forecast" aria-current={isForecast ? "page" : undefined}>
           <span className="site-tab-index">02</span>
-          <span><strong>推測未來上架案件(六個月)</strong><small>AI 週期規律推估 & 擴充預警</small></span>
+          <span><strong>推測未來上架案件(六個月)</strong><small>依週期規律推估包含展延擴充一年條件</small></span>
         </a>
         <a className="site-tab" href="#/specs">
           <span className="site-tab-index">03</span>
