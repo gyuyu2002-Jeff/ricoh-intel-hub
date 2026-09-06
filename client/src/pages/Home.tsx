@@ -1608,20 +1608,6 @@ function SubscribeModal({
   );
 }
 
-function BrowserTipsBar() {
-  return (
-    <aside className="browser-tips-bar" role="region" aria-label="畫面縮放與翻頁操作提示">
-      <div className="tips-content">
-        <span className="tips-icon">💡</span>
-        <span className="tips-text">
-          <strong>操作小秘訣：</strong>
-          按住鍵盤 <kbd>Ctrl</kbd> 並推動「<strong>滑鼠滾輪</strong>」可自由放大／縮小畫面至最舒適大小；下方案件清單可點擊「<strong>◀ 上一頁</strong>」與「<strong>下一頁 ▶</strong>」進行左右翻頁閱覽。
-        </span>
-      </div>
-    </aside>
-  );
-}
-
 function PaginationControl({
   currentPage,
   totalPages,
@@ -2058,8 +2044,6 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
             </div>
           </div>
         )}
-
-        <BrowserTipsBar />
 
         {isForecast ? (
           <>
