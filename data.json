@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-07 12:29",
+  "last_updated": "2026-09-07 20:22",
   "tenders": [
     {
       "city": "台北市",
@@ -616,6 +616,115 @@
       }
     },
     {
+      "city": "花蓮縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "花蓮縣(原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "115年行列式印表機汰換案",
+      "unit": "花蓮縣地方稅務局",
+      "unit_id": "3.76.55.13",
+      "job_number": "U11524",
+      "publish_date": "2026-09-07",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-21",
+      "deadline_confidence": "inferred",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
+      "main_competitor": "廣成資訊股份有限公司",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/nonAtm?pk=NzEyNzc0NTQ=",
+      "history_stats": [
+        {
+          "year": 2022,
+          "val": 96,
+          "type": "real",
+          "winner": "廣成資訊股份有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2022-12-26",
+          "year": 2022,
+          "title": "花蓮縣地方稅務局「111年行列式印表機汰換案」",
+          "job_number": "U11132",
+          "budget": 1365000,
+          "award_price": 1310000,
+          "discount_rate": 96.0,
+          "winner": "廣成資訊股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221226&fn=BDM-1-70187762.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.55.13",
+          "source_unit": "花蓮縣地方稅務局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2014-06-30",
+          "year": 2014,
+          "title": "花蓮縣地方稅務局「103年度系統印表機」財物採購案",
+          "job_number": "U10308",
+          "budget": 378000,
+          "award_price": 247000,
+          "discount_rate": 65.3,
+          "winner": "寰強科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20140630&fn=BDM-1-51291056.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.55.13",
+          "source_unit": "花蓮縣地方稅務局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2013-08-22",
+          "year": 2013,
+          "title": "花蓮縣地方稅務局「系統行列式印表機」採購案",
+          "job_number": "U10210",
+          "budget": 243372,
+          "award_price": 225000,
+          "discount_rate": 92.5,
+          "winner": "經緯智慧科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20130822&fn=BDM-1-51038994.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.55.13",
+          "source_unit": "花蓮縣地方稅務局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "printer",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
       "city": "高雄市",
       "city_source": "機關地址／開標地點",
       "city_confidence": "high",
@@ -1096,115 +1205,6 @@
       }
     },
     {
-      "city": "花蓮縣",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "花蓮縣(原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "115年行列式印表機汰換案",
-      "unit": "花蓮縣地方稅務局",
-      "unit_id": "3.76.55.13",
-      "job_number": "U11524",
-      "publish_date": "2026-08-25",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-09-07",
-      "deadline_confidence": "verified",
-      "budget": "NT$ 501,000",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
-      "main_competitor": "廣成資訊股份有限公司",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 1,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzMDkwNjA",
-      "history_stats": [
-        {
-          "year": 2022,
-          "val": 96,
-          "type": "real",
-          "winner": "廣成資訊股份有限公司"
-        }
-      ],
-      "history_records": [
-        {
-          "award_date": "2022-12-26",
-          "year": 2022,
-          "title": "花蓮縣地方稅務局「111年行列式印表機汰換案」",
-          "job_number": "U11132",
-          "budget": 1365000,
-          "award_price": 1310000,
-          "discount_rate": 96.0,
-          "winner": "廣成資訊股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221226&fn=BDM-1-70187762.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.76.55.13",
-          "source_unit": "花蓮縣地方稅務局",
-          "relation_scope": "same_unit",
-          "is_stale": false
-        },
-        {
-          "award_date": "2014-06-30",
-          "year": 2014,
-          "title": "花蓮縣地方稅務局「103年度系統印表機」財物採購案",
-          "job_number": "U10308",
-          "budget": 378000,
-          "award_price": 247000,
-          "discount_rate": 65.3,
-          "winner": "寰強科技有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20140630&fn=BDM-1-51291056.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.76.55.13",
-          "source_unit": "花蓮縣地方稅務局",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        },
-        {
-          "award_date": "2013-08-22",
-          "year": 2013,
-          "title": "花蓮縣地方稅務局「系統行列式印表機」採購案",
-          "job_number": "U10210",
-          "budget": 243372,
-          "award_price": 225000,
-          "discount_rate": 92.5,
-          "winner": "經緯智慧科技股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20130822&fn=BDM-1-51038994.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.76.55.13",
-          "source_unit": "花蓮縣地方稅務局",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        }
-      ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "printer",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "printer_or_plotter",
-        "stream": "peripherals",
-        "sub_type": "printer",
-        "matched_terms": [
-          "印表機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中印表機或繪圖機標的"
-      }
-    },
-    {
       "city": "台北市",
       "city_source": "履約地點",
       "city_confidence": "high",
@@ -1448,9 +1448,9 @@
     "today": "2026-09-07",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-07 12:29",
-    "source_records": 3025,
-    "candidate_records": 3,
+    "latest_attempt_at": "2026-09-07 20:22",
+    "source_records": 3096,
+    "candidate_records": 4,
     "review_records": 0,
     "successful_dates": [
       "2026-09-07",
@@ -1885,17 +1885,53 @@
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-07 12:27"
+      "checked_at": "2026-09-07 20:20"
     },
     "2026-09-07": {
       "status": "complete",
-      "source_records": 3025,
-      "candidate_records": 3,
+      "source_records": 3096,
+      "candidate_records": 4,
       "review_records": 0,
-      "checked_at": "2026-09-07 12:27"
+      "checked_at": "2026-09-07 20:20"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260907,
+      "filename": "anaa-71277454",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "115年行列式印表機汰換案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "U11524",
+      "unit_id": "3.76.55.13",
+      "unit_name": "花蓮縣地方稅務局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.55.13",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.55.13&job_number=U11524",
+      "unit_url": "/index/unit/3.76.55.13",
+      "url": "/index/case/3.76.55.13/U11524/20260907/anaa-71277454",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
     {
       "date": 20260907,
       "filename": "TIQ-1-71107584",
@@ -8647,6 +8683,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-07 12:29:25"
+    "updated_at": "2026-09-07 20:22:03"
   }
 }
