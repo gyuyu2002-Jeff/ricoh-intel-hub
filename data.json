@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-07 07:50",
+  "last_updated": "2026-09-07 12:29",
   "tenders": [
     {
       "city": "台北市",
@@ -1448,8 +1448,8 @@
     "today": "2026-09-07",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-07 07:50",
-    "source_records": 2976,
+    "latest_attempt_at": "2026-09-07 12:29",
+    "source_records": 3025,
     "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
@@ -1885,14 +1885,14 @@
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-07 07:48"
+      "checked_at": "2026-09-07 12:27"
     },
     "2026-09-07": {
       "status": "complete",
-      "source_records": 2976,
+      "source_records": 3025,
       "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-09-07 07:48"
+      "checked_at": "2026-09-07 12:27"
     }
   },
   "candidate_cache": [
@@ -4058,21 +4058,6 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
-      "unit_id": "A.7.3",
-      "unit_name": "財政部臺北國稅局",
-      "award_date": "2026-02-25",
-      "year": 2026,
-      "title": "115年租用個人電腦、彩色液晶螢幕及A4黑白雷射印表機案",
-      "job_number": "115-008",
-      "budget": 3221997,
-      "award_price": 2575600,
-      "discount_rate": 79.9,
-      "winner": "精準國際開發有限公司",
-      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260225&fn=BDM-1-71117120.xml",
-      "official_verified": true,
-      "verification_source": "政府電子採購網決標查詢"
-    },
-    {
       "unit_id": "3.15.83.1",
       "unit_name": "中華郵政股份有限公司臺北郵局",
       "award_date": "2026-02-25",
@@ -4084,6 +4069,21 @@
       "discount_rate": 99.7,
       "winner": "百通科技股份有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260225&fn=BDM-1-71116688.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.7.3",
+      "unit_name": "財政部臺北國稅局",
+      "award_date": "2026-02-25",
+      "year": 2026,
+      "title": "115年租用個人電腦、彩色液晶螢幕及A4黑白雷射印表機案",
+      "job_number": "115-008",
+      "budget": 3221997,
+      "award_price": 2575600,
+      "discount_rate": 79.9,
+      "winner": "精準國際開發有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260225&fn=BDM-1-71117120.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -4238,6 +4238,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.15.83.1",
+      "unit_name": "中華郵政股份有限公司臺北郵局",
+      "award_date": "2025-11-26",
+      "year": 2025,
+      "title": "購置高速噴墨印表機及周邊設備1套(含保固)與列印耗材",
+      "job_number": "1140995",
+      "budget": 46180000,
+      "award_price": 45450000,
+      "discount_rate": 98.4,
+      "winner": "百通科技股份有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251126&fn=BDM-1-71026986.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "A.7.32",
       "unit_name": "臺灣土地銀行股份有限公司",
       "award_date": "2025-11-26",
@@ -4255,15 +4270,15 @@
     {
       "unit_id": "3.15.83.1",
       "unit_name": "中華郵政股份有限公司臺北郵局",
-      "award_date": "2025-11-26",
+      "award_date": "2025-11-11",
       "year": 2025,
-      "title": "購置高速噴墨印表機及周邊設備1套(含保固)與列印耗材",
-      "job_number": "1140995",
-      "budget": 46180000,
-      "award_price": 45450000,
-      "discount_rate": 98.4,
+      "title": "Canon VS 4650 高速印表機(含周邊設備)供應列印耗材暨維護",
+      "job_number": "1140940",
+      "budget": 9612000,
+      "award_price": 9468000,
+      "discount_rate": 98.5,
       "winner": "百通科技股份有限公司",
-      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251126&fn=BDM-1-71026986.xml",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251111&fn=BDM-1-71013073.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -4279,21 +4294,6 @@
       "discount_rate": 86.7,
       "winner": "佳永商業機器有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251111&fn=BDM-1-71013182.xml",
-      "official_verified": true,
-      "verification_source": "政府電子採購網決標查詢"
-    },
-    {
-      "unit_id": "3.15.83.1",
-      "unit_name": "中華郵政股份有限公司臺北郵局",
-      "award_date": "2025-11-11",
-      "year": 2025,
-      "title": "Canon VS 4650 高速印表機(含周邊設備)供應列印耗材暨維護",
-      "job_number": "1140940",
-      "budget": 9612000,
-      "award_price": 9468000,
-      "discount_rate": 98.5,
-      "winner": "百通科技股份有限公司",
-      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251111&fn=BDM-1-71013073.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -8642,11 +8642,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 490,
-    "remaining": 10,
-    "usage_percent": 98.0,
-    "circuit_breaker_active": true,
-    "status_level": "circuit_breaker",
-    "updated_at": "2026-09-07 08:46:07"
+    "used_24h": 0,
+    "remaining": 500,
+    "usage_percent": 0.0,
+    "circuit_breaker_active": false,
+    "status_level": "normal",
+    "updated_at": "2026-09-07 12:29:25"
   }
 }
