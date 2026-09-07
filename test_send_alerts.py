@@ -260,6 +260,153 @@ class TestSendAlerts(unittest.TestCase):
         self.assertIn("https://web.pcc.gov.tw/prkms/tender/common/notice/redirectShowNotice?file=PPW-3-50000000", html)
         self.assertIn("歷史開標履歷（可點擊查看各次決標）", html)
 
+    def test_clean_and_count_rolling_deliveries(self):
+        from send_alerts import clean_and_count_rolling_deliveries, log_email_delivery
+        from datetime import datetime, timezone, timedelta
+
+        now = datetime(2026, 9, 7, 12, 0, 0, tzinfo=timezone(timedelta(hours=8)))
+        logs = {"_delivery_history": []}
+
+        # 100 within last 2 hours
+        for i in range(100):
+            t = now - timedelta(hours=2, minutes=i)
+            log_email_delivery(logs, f"user{i}@test.com", dry_run=False, now=t)
+
+        # 50 within last 20 hours (total 150 in 24h)
+        for i in range(50):
+            t = now - timedelta(hours=20, minutes=i)
+            log_email_delivery(logs, f"user_old{i}@test.com", dry_run=False, now=t)
+
+        # 20 dry-run within last 2 hours (should NOT be counted in active quota)
+        for i in range(20):
+            t = now - timedelta(hours=1, minutes=i)
+            log_email_delivery(logs, f"user_dry{i}@test.com", dry_run=True, now=t)
+
+        # 30 between 25h and 40h ago (in 48h retention, but out of 24h quota)
+        for i in range(30):
+            t = now - timedelta(hours=35, minutes=i)
+            log_email_delivery(logs, f"user_yesterday{i}@test.com", dry_run=False, now=t)
+
+        # 10 older than 50 hours (should be pruned)
+        for i in range(10):
+            t = now - timedelta(hours=55, minutes=i)
+            log_email_delivery(logs, f"ancient{i}@test.com", dry_run=False, now=t)
+
+        count_24h, oldest_in_24h = clean_and_count_rolling_deliveries(logs, now=now)
+        self.assertEqual(count_24h, 150)
+        self.assertIsNotNone(oldest_in_24h)
+        # History retained should be 100 + 50 + 20 + 30 = 200 (10 pruned)
+        self.assertEqual(len(logs["_delivery_history"]), 200)
+
+    def test_build_quota_alert_email_html_levels(self):
+        from send_alerts import build_quota_alert_email_html
+        from datetime import datetime, timezone, timedelta
+
+        oldest = datetime(2026, 9, 7, 2, 30, 0, tzinfo=timezone(timedelta(hours=8)))
+
+        # 1. Warning level
+        html_warn = build_quota_alert_email_html("gyuyu2002@gmail.com", 410, 500, "warning", oldest_ts=oldest, subscriber_count=5)
+        self.assertIn("gyuyu2002@gmail.com", html_warn)
+        self.assertIn("410 / 500", html_warn)
+        self.assertIn("82.0%", html_warn)
+        self.assertIn("警戒", html_warn)
+        self.assertIn("02:30", html_warn)
+
+        # 2. Critical level
+        html_crit = build_quota_alert_email_html("gyuyu2002@gmail.com", 460, 500, "critical", oldest_ts=oldest, subscriber_count=5)
+        self.assertIn("高危", html_crit)
+        self.assertIn("92.0%", html_crit)
+
+        # 3. Circuit breaker level
+        html_circuit = build_quota_alert_email_html("gyuyu2002@gmail.com", 488, 500, "circuit_breaker", oldest_ts=oldest, subscriber_count=5)
+        self.assertIn("熔斷", html_circuit)
+        self.assertIn("97.6%", html_circuit)
+        self.assertIn("主動暫停", html_circuit)
+
+    def test_check_and_alert_quota_escalation_and_throttling(self):
+        from send_alerts import (
+            check_and_alert_quota,
+            log_email_delivery,
+            GMAIL_DAILY_LIMIT,
+            QUOTA_WARN_THRESHOLD,
+            QUOTA_CRITICAL_THRESHOLD,
+            QUOTA_CIRCUIT_BREAKER
+        )
+        from datetime import datetime, timezone, timedelta
+
+        now = datetime(2026, 9, 7, 10, 0, 0, tzinfo=timezone(timedelta(hours=8)))
+        logs = {"_delivery_history": []}
+
+        # 1. Below threshold: 350 emails -> Normal, no alert
+        for i in range(350):
+            log_email_delivery(logs, f"u{i}@test.com", now=now - timedelta(hours=1))
+        alerted, level, count = check_and_alert_quota(logs, dry_run=True, now=now)
+        self.assertFalse(alerted)
+        self.assertEqual(level, "normal")
+        self.assertEqual(count, 350)
+
+        # 2. Reaches 405 (>= 400 Warning) -> Alert triggered
+        for i in range(55):
+            log_email_delivery(logs, f"u_warn{i}@test.com", now=now - timedelta(minutes=30))
+        alerted, level, count = check_and_alert_quota(logs, dry_run=True, now=now)
+        self.assertTrue(alerted)
+        self.assertEqual(level, "warning")
+        self.assertEqual(count, 405)
+
+        # 3. Same level 1 hour later (410 emails) -> Throttled by 12h cooldown
+        log_email_delivery(logs, "u_more@test.com", now=now + timedelta(hours=1))
+        alerted_throttle, level_throttle, count_throttle = check_and_alert_quota(
+            logs, dry_run=True, now=now + timedelta(hours=1)
+        )
+        self.assertFalse(alerted_throttle)
+        self.assertEqual(level_throttle, "warning")
+
+        # 4. Severity escalation to Critical (455 emails >= 450) -> Must trigger despite cooldown!
+        for i in range(45):
+            log_email_delivery(logs, f"u_crit{i}@test.com", now=now + timedelta(hours=1, minutes=10))
+        alerted_escalate, level_escalate, count_escalate = check_and_alert_quota(
+            logs, dry_run=True, now=now + timedelta(hours=1, minutes=15)
+        )
+        self.assertTrue(alerted_escalate)
+        self.assertEqual(level_escalate, "critical")
+        self.assertGreaterEqual(count_escalate, 450)
+
+        # 5. Severity escalation to Circuit Breaker (490 emails >= 485) -> Must trigger!
+        for i in range(40):
+            log_email_delivery(logs, f"u_circuit{i}@test.com", now=now + timedelta(hours=1, minutes=20))
+        alerted_cb, level_cb, count_cb = check_and_alert_quota(
+            logs, dry_run=True, now=now + timedelta(hours=1, minutes=25)
+        )
+        self.assertTrue(alerted_cb)
+        self.assertEqual(level_cb, "circuit_breaker")
+        self.assertGreaterEqual(count_cb, 485)
+
+    def test_circuit_breaker_halts_dispatch(self):
+        from send_alerts import (
+            dispatch_alerts,
+            log_email_delivery,
+            save_json_file,
+            load_json_file,
+            SENT_LOG_FILE,
+            QUOTA_CIRCUIT_BREAKER
+        )
+        from datetime import datetime, timezone, timedelta
+
+        # Setup sent_notifications with 490 sends (exceeds circuit breaker 485)
+        now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
+        test_logs = {"_delivery_history": []}
+        for i in range(QUOTA_CIRCUIT_BREAKER + 5):
+            log_email_delivery(test_logs, f"user{i}@test.com", now=now - timedelta(minutes=10))
+
+        backup = load_json_file(SENT_LOG_FILE, default_val={})
+        try:
+            save_json_file(SENT_LOG_FILE, test_logs)
+            dispatched = dispatch_alerts(dry_run=True)
+            # Circuit breaker must halt and notify 0 subscribers
+            self.assertEqual(dispatched, 0)
+        finally:
+            save_json_file(SENT_LOG_FILE, backup)
+
 
 if __name__ == "__main__":
     unittest.main()

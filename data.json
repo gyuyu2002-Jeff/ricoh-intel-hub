@@ -8639,5 +8639,14 @@
       },
       "action_suggestion": "【⚔️ 他牌進攻】目前為他牌（億雙）防守，建議於 2027年03月 前完成採購與資訊組初訪，提供機種規格草案與 POC，爭取搶單先機！"
     }
-  ]
+  ],
+  "email_quota_status": {
+    "limit": 500,
+    "used_24h": 490,
+    "remaining": 10,
+    "usage_percent": 98.0,
+    "circuit_breaker_active": true,
+    "status_level": "circuit_breaker",
+    "updated_at": "2026-09-07 08:46:07"
+  }
 }

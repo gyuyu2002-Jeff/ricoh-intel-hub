@@ -68,6 +68,7 @@ jobs:
           MAIL_USERNAME: ${{ secrets.MAIL_USERNAME || 'huxen.ricoh@gmail.com' }}
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
           SUBSCRIBERS_URL: ${{ secrets.SUBSCRIBERS_URL }}
+          ADMIN_NOTIFY_EMAIL: ${{ secrets.ADMIN_NOTIFY_EMAIL || 'gyuyu2002@gmail.com' }}
         run: python send_alerts.py
 
       - name: Commit and Push Changes

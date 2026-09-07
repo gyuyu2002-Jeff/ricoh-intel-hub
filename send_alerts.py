@@ -18,6 +18,16 @@ from datetime import datetime, timezone, timedelta
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+if sys.platform == "win32":
+    import io
+    try:
+        if hasattr(sys.stdout, "buffer"):
+            sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+        if hasattr(sys.stderr, "buffer"):
+            sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(SCRIPT_DIR, "data.json")
 SENT_LOG_FILE = os.path.join(SCRIPT_DIR, "sent_notifications.json")
@@ -46,6 +56,70 @@ def save_json_file(filepath, data):
 
 
 ALLOWED_DOMAINS = ["eosasc.com.tw", "gmail.com"]
+
+# Gmail Daily Sending Quota & Circuit Breaker Limits (Consumer Gmail @gmail.com)
+GMAIL_DAILY_LIMIT = 500
+QUOTA_WARN_THRESHOLD = 400          # 80%: 第一階段警示提醒
+QUOTA_CRITICAL_THRESHOLD = 450      # 90%: 第二階段高危告警
+QUOTA_CIRCUIT_BREAKER = 485         # 97%: 自動熔斷保護，停止批次推播保留底線
+DEFAULT_ADMIN_EMAIL = "gyuyu2002@gmail.com"
+
+
+def clean_and_count_rolling_deliveries(sent_logs, now=None, window_hours=24, prune_hours=48):
+    """
+    Cleans up delivery history entries older than prune_hours (default 48h)
+    and counts real deliveries dispatched within the rolling window_hours (default 24h).
+    Returns (count_24h, oldest_in_window_dt).
+    """
+    if now is None:
+        now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
+
+    cutoff = now - timedelta(hours=window_hours)
+    retention_cutoff = now - timedelta(hours=prune_hours)
+
+    history = sent_logs.get("_delivery_history", [])
+    valid_24h = []
+    retained_history = []
+
+    for item in history:
+        ts_str = item.get("sent_at", "")
+        if not ts_str:
+            continue
+        try:
+            if "T" in ts_str:
+                item_dt = datetime.fromisoformat(ts_str)
+                if item_dt.tzinfo is None:
+                    item_dt = item_dt.replace(tzinfo=timezone(timedelta(hours=8)))
+            else:
+                item_dt = datetime.strptime(ts_str, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone(timedelta(hours=8)))
+        except Exception:
+            continue
+
+        if item_dt >= retention_cutoff:
+            retained_history.append(item)
+        if item_dt >= cutoff and not item.get("dry_run", False):
+            valid_24h.append((item_dt, item))
+
+    sent_logs["_delivery_history"] = retained_history
+    oldest_in_window = min([dt for dt, _ in valid_24h]) if valid_24h else None
+    return len(valid_24h), oldest_in_window
+
+
+def log_email_delivery(sent_logs, recipient, delivery_type="digest", dry_run=False, now=None):
+    """
+    Appends an email delivery entry into _delivery_history in sent_logs.
+    """
+    if now is None:
+        now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
+    if "_delivery_history" not in sent_logs or not isinstance(sent_logs["_delivery_history"], list):
+        sent_logs["_delivery_history"] = []
+    entry = {
+        "sent_at": now.strftime("%Y-%m-%d %H:%M:%S"),
+        "recipient": recipient,
+        "type": delivery_type,
+        "dry_run": bool(dry_run)
+    }
+    sent_logs["_delivery_history"].append(entry)
 
 
 def is_allowed_domain(email):
@@ -728,7 +802,7 @@ def send_welcome_email(email, cities=None, mail_user=None, mail_pass=None, sampl
         return False
 
 
-def create_email_message(to_email, subject, html_content, mail_user):
+def create_email_message(to_email, subject, html_content, mail_user, extra_headers=None):
     """
     Constructs a MIMEMultipart email message with HTML content and RFC 8058 / RFC 2369 List-Unsubscribe headers.
     """
@@ -736,6 +810,10 @@ def create_email_message(to_email, subject, html_content, mail_user):
     msg["From"] = f"互盛情報中樞 <{mail_user}>"
     msg["To"] = to_email
     msg["Subject"] = subject
+
+    if extra_headers:
+        for k, v in extra_headers.items():
+            msg[k] = v
 
     # RFC 8058 / RFC 2369: Allows Gmail/Outlook/Apple Mail to render a native "Unsubscribe" button at the top
     unsub_url = f"https://gyuyu2002-jeff.github.io/ricoh-intel-hub/?action=unsubscribe&email={urllib.parse.quote(to_email.strip().lower())}"
@@ -746,11 +824,11 @@ def create_email_message(to_email, subject, html_content, mail_user):
     return msg
 
 
-def send_email_smtp(to_email, subject, html_content, mail_user, mail_pass):
+def send_email_smtp(to_email, subject, html_content, mail_user, mail_pass, extra_headers=None):
     """
     Sends an email using Gmail SMTP.
     """
-    msg = create_email_message(to_email, subject, html_content, mail_user)
+    msg = create_email_message(to_email, subject, html_content, mail_user, extra_headers=extra_headers)
 
     server = smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=20)
     server.ehlo()
@@ -761,7 +839,245 @@ def send_email_smtp(to_email, subject, html_content, mail_user, mail_pass):
     server.quit()
 
 
-def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
+def build_quota_alert_email_html(admin_email, sent_count, limit, level, oldest_ts=None, subscriber_count=0):
+    """
+    Generates a high-priority alert email notifying the administrator when Gmail sending quota approaches 500.
+    Supports 'warning' (80%), 'critical' (90%), and 'circuit_breaker' (97%) severity levels.
+    """
+    pct = round((sent_count / limit) * 100, 1)
+    remaining = max(0, limit - sent_count)
+    is_circuit = (level == "circuit_breaker")
+    is_critical = (level == "critical" or is_circuit)
+
+    if is_circuit:
+        theme_color = "#b91c1c"
+        theme_bg = "#fef2f2"
+        badge_text = "🚨 【緊急熔斷】配額已達 97% · 自動暫停推播保護"
+        title_text = "Gmail 每日發信配額已達 97% 熔斷保護啟動"
+        summary_desc = (
+            f"系統監控到目前的 Gmail 發信伺服器在<strong>過去 24 小時內已累計發出 {sent_count} 封郵件</strong>，"
+            f"已佔用每日上限（{limit} 封）的 <strong>{pct}%</strong>，目前<strong>僅剩 {remaining} 封</strong>安全可用額度！<br>"
+            f"為了避免觸發 Google 官方 24 小時強制鎖信懲罰（<code>550 5.4.5 Daily user-sending quota exceeded</code>），"
+            f"系統已<strong>主動暫停後續例行性推播</strong>，保留最後額度以確保管理通訊與系統狀態正常。"
+        )
+    elif is_critical:
+        theme_color = "#dc2626"
+        theme_bg = "#fef2f2"
+        badge_text = "🚨 【緊急】發信配額高危告警 (90%+)"
+        title_text = "Gmail 每日發信額度接近上限通知"
+        summary_desc = (
+            f"系統監控到目前的 Gmail 發信伺服器在<strong>過去 24 小時內已累計發出 {sent_count} 封郵件</strong>，"
+            f"已佔用每日上限（{limit} 封）的 <strong>{pct}%</strong>，目前<strong>僅剩 {remaining} 封</strong>安全可用額度！<br>"
+            f"請管理員留意發信量，若發送達到 {QUOTA_CIRCUIT_BREAKER} 封，系統將自動啟動安全熔斷保護。"
+        )
+    else:
+        theme_color = "#d97706"
+        theme_bg = "#fffbeb"
+        badge_text = "⚠️ 【注意】發信配額用量警戒 (80%+)"
+        title_text = "Gmail 每日發信額度用量警戒提醒"
+        summary_desc = (
+            f"系統監控到目前的 Gmail 發信伺服器在<strong>過去 24 小時內已累計發出 {sent_count} 封郵件</strong>，"
+            f"佔用每日上限（{limit} 封）的 <strong>{pct}%</strong>，目前剩餘 <strong>{remaining} 封</strong>額度。<br>"
+            f"目前系統運作正常，但發信量已進入 80% 警戒水位，特此先行通知您掌握狀況。"
+        )
+
+    reset_hint = ""
+    if oldest_ts:
+        reset_time = oldest_ts + timedelta(hours=24)
+        reset_hint = f"最舊一筆發送紀錄預計於 <strong>{reset_time.strftime('%H:%M')}</strong> 滿 24 小時釋出配額"
+    else:
+        reset_hint = "發信額度將隨時間滾動釋出"
+
+    return f"""<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0; padding:20px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:#f4f6f5; color:#1e2923;">
+  <div style="max-width:620px; margin:0 auto; background:#ffffff; border-radius:12px; border:1px solid #dbe4de; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.06);">
+    <div style="background:{theme_color}; padding:20px 24px; color:#ffffff;">
+      <span style="display:inline-block; background:rgba(255,255,255,0.22); font-size:12px; font-weight:700; padding:3px 10px; border-radius:12px; margin-bottom:8px;">{badge_text}</span>
+      <h1 style="margin:0; font-size:20px; font-weight:800; letter-spacing:0.02em;">{title_text}</h1>
+      <p style="margin:6px 0 0; font-size:13px; opacity:0.92;">互盛情報中樞 · 郵件推播系統健康監控告警</p>
+    </div>
+    <div style="padding:24px;">
+      <p style="font-size:15px; line-height:1.6; margin-top:0;">
+        親愛的情報中樞管理員（<strong>{admin_email}</strong>）您好：
+      </p>
+      <p style="font-size:14px; line-height:1.7; color:#334155;">
+        {summary_desc}
+      </p>
+      <div style="background:#f8faf9; border:1px solid #e2ece5; border-radius:8px; padding:16px; margin:20px 0;">
+        <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:700; margin-bottom:8px;">
+          <span>Gmail 24 小時額度消耗：{sent_count} / {limit} 封</span>
+          <span style="color:{theme_color};">{pct}%</span>
+        </div>
+        <div style="width:100%; height:12px; background:#e2e8f0; border-radius:6px; overflow:hidden;">
+          <div style="width:{min(100, pct)}%; height:100%; background:{theme_color};"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:11px; color:#64748b; margin-top:8px;">
+          <span>目前有效訂閱同仁：{subscriber_count} 位</span>
+          <span>{reset_hint}</span>
+        </div>
+      </div>
+      <div style="background:{theme_bg}; border:1px solid {theme_color}33; border-left:4px solid {theme_color}; border-radius:6px; padding:16px; margin-bottom:20px;">
+        <strong style="color:{theme_color}; font-size:14px;">💡 系統防護與建議因應對策：</strong>
+        <ol style="margin:8px 0 0 18px; padding:0; font-size:13px; color:#334155; line-height:1.75;">
+          <li><strong>自動熔斷保護</strong>：系統設有 485 封（97%）硬性熔斷機制，當接近極限時會自動停止大宗推播，絕不讓 Gmail 帳號被 Google 官方停權封鎖 24 小時。</li>
+          <li><strong>排程滾動釋放</strong>：Gmail 免費帳號以「滾動 24 小時」計算額度，稍早發送的信件滿 24 小時後將自動釋出新額度。</li>
+          <li><strong>升級 Google Workspace</strong>：若訂閱同仁或推播量持續增長，建議將發信信箱升級為企業版 Workspace，每日發信上限將由 500 封大幅提升至 <strong>2,000 封／天</strong>。</li>
+          <li><strong>串接專業發信服務</strong>：未來如需支援跨全省數千名同仁或客戶推播，可無縫串接 SendGrid 或 Amazon SES，徹底解除發信限額。</li>
+        </ol>
+      </div>
+      <div style="text-align:center; padding-top:12px; border-top:1px dashed #d4ded7;">
+        <a href="https://gyuyu2002-jeff.github.io/ricoh-intel-hub/" target="_blank" style="display:inline-block; background:#202825; color:#ffffff; font-size:13px; font-weight:700; padding:10px 24px; border-radius:6px; text-decoration:none;">
+          前往 互盛情報中樞 看板 ➜
+        </a>
+      </div>
+    </div>
+    <div style="background:#f4f7f4; padding:16px 24px; text-align:center; font-size:11px; color:#64748b; border-top:1px solid #e1e9e2;">
+      發信來源：<code>huxen.ricoh@gmail.com</code> · 監控接收信箱：<code>{admin_email}</code> · 此為系統自動健康通報
+    </div>
+  </div>
+</body>
+</html>"""
+
+
+def check_and_alert_quota(sent_logs, mail_user=None, mail_pass=None, dry_run=False, admin_email=None, subscriber_count=0, now=None, force=False):
+    """
+    Evaluates rolling 24h email delivery count against Gmail daily quota (500).
+    If thresholds (400=80%, 450=90%, 485=circuit_breaker) are reached,
+    dispatches high-priority alert email to admin (default: gyuyu2002@gmail.com).
+    Suppresses redundant notifications within a 12-hour cooldown unless severity escalates.
+    Returns (alerted: bool, level: str, sent_count: int).
+    """
+    if now is None:
+        now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
+    if not mail_user:
+        mail_user = os.environ.get("MAIL_USERNAME", "huxen.ricoh@gmail.com").strip()
+    if not mail_pass:
+        mail_pass = os.environ.get("MAIL_PASSWORD", "").strip()
+
+    target_admin = admin_email or os.environ.get("ADMIN_NOTIFY_EMAIL", DEFAULT_ADMIN_EMAIL).strip()
+
+    sent_count, oldest_ts = clean_and_count_rolling_deliveries(sent_logs, now=now)
+
+    if sent_count >= QUOTA_CIRCUIT_BREAKER:
+        level = "circuit_breaker"
+    elif sent_count >= QUOTA_CRITICAL_THRESHOLD:
+        level = "critical"
+    elif sent_count >= QUOTA_WARN_THRESHOLD:
+        level = "warning"
+    else:
+        level = "normal"
+
+    if level == "normal" and not force:
+        return False, level, sent_count
+
+    if force and level == "normal":
+        level = "warning"
+
+    # Cooldown & Escalation Check
+    level_rank = {"warning": 1, "critical": 2, "circuit_breaker": 3}
+    last_alert = sent_logs.get("_last_quota_alert", {})
+    last_level = last_alert.get("level", "")
+    last_ts_str = last_alert.get("sent_at", "")
+
+    if not force and last_ts_str:
+        try:
+            last_dt = datetime.strptime(last_ts_str, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone(timedelta(hours=8)))
+            # 12-hour cooldown for same or lower level
+            if (now - last_dt) < timedelta(hours=12):
+                if level_rank.get(level, 0) <= level_rank.get(last_level, 0):
+                    print(f"Quota alert ({level}, {sent_count}/{GMAIL_DAILY_LIMIT}) throttled: already alerted at {last_ts_str} ({last_level}).")
+                    return False, level, sent_count
+        except Exception:
+            pass
+
+    if level == "circuit_breaker":
+        subject = f"🚨【緊急熔斷】Gmail 發信配額已達 {sent_count}/{GMAIL_DAILY_LIMIT} 封！系統已自動暫停推播保護信箱"
+    elif level == "critical":
+        subject = f"🚨【高危告警】Gmail 發信配額已達 {sent_count}/{GMAIL_DAILY_LIMIT} 封 (90%)！請留意剩餘額度"
+    else:
+        subject = f"⚠️【用量警戒】Gmail 過去 24 小時已發出 {sent_count}/{GMAIL_DAILY_LIMIT} 封郵件 (80%)"
+
+    html_body = build_quota_alert_email_html(
+        target_admin,
+        sent_count,
+        GMAIL_DAILY_LIMIT,
+        level,
+        oldest_ts=oldest_ts,
+        subscriber_count=subscriber_count
+    )
+
+    now_str = now.strftime("%Y-%m-%d %H:%M:%S")
+
+    if dry_run:
+        print(f"[DRY-RUN] Would dispatch {level} quota alert to admin ({target_admin}): '{subject}'")
+        sent_logs["_last_quota_alert"] = {
+            "sent_at": now_str,
+            "level": level,
+            "sent_count": sent_count,
+            "dry_run": True
+        }
+        return True, level, sent_count
+
+    if not mail_pass:
+        print(f"Warning: MAIL_PASSWORD not set. Cannot dispatch quota alert email to {target_admin}.")
+        return False, level, sent_count
+
+    try:
+        send_email_smtp(
+            target_admin,
+            subject,
+            html_body,
+            mail_user,
+            mail_pass,
+            extra_headers={"X-Priority": "1", "Importance": "High"}
+        )
+        log_email_delivery(sent_logs, target_admin, delivery_type=f"quota_alert_{level}", dry_run=False, now=now)
+        sent_logs["_last_quota_alert"] = {
+            "sent_at": now_str,
+            "level": level,
+            "sent_count": sent_count,
+            "dry_run": False
+        }
+        print(f"Delivered {level} quota alert email to admin {target_admin} (sent: {sent_count}/{GMAIL_DAILY_LIMIT}).")
+        return True, level, sent_count
+    except Exception as e:
+        print(f"Failed to send quota alert to admin {target_admin}: {e}")
+        return False, level, sent_count
+
+
+def update_data_json_quota(data, sent_24h, now_dt):
+    """
+    Records email quota health status into data.json and client/public/data.json.
+    """
+    quota_status = {
+        "limit": GMAIL_DAILY_LIMIT,
+        "used_24h": sent_24h,
+        "remaining": max(0, GMAIL_DAILY_LIMIT - sent_24h),
+        "usage_percent": round((sent_24h / GMAIL_DAILY_LIMIT) * 100, 1),
+        "circuit_breaker_active": sent_24h >= QUOTA_CIRCUIT_BREAKER,
+        "status_level": (
+            "circuit_breaker" if sent_24h >= QUOTA_CIRCUIT_BREAKER
+            else ("critical" if sent_24h >= QUOTA_CRITICAL_THRESHOLD
+            else ("warning" if sent_24h >= QUOTA_WARN_THRESHOLD else "normal"))
+        ),
+        "updated_at": now_dt.strftime("%Y-%m-%d %H:%M:%S")
+    }
+    data["email_quota_status"] = quota_status
+    save_json_file(DATA_FILE, data)
+    client_data_file = os.path.join(SCRIPT_DIR, "client", "public", "data.json")
+    if os.path.exists(client_data_file):
+        try:
+            client_data = load_json_file(client_data_file, default_val={})
+            client_data["email_quota_status"] = quota_status
+            save_json_file(client_data_file, client_data)
+        except Exception as e:
+            print(f"Notice: Failed to update client/public/data.json quota status: {e}")
+    return quota_status
+
+
+def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None, check_quota_only=False, test_quota_alert=False):
     mail_user = os.environ.get("MAIL_USERNAME", "huxen.ricoh@gmail.com").strip()
     mail_pass = os.environ.get("MAIL_PASSWORD", "").strip()
 
@@ -777,6 +1093,48 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
     taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
     taipei_date_str = taipei_now.strftime("%Y-%m-%d")
 
+    # If testing quota alert specifically
+    if test_quota_alert:
+        admin_target = os.environ.get("ADMIN_NOTIFY_EMAIL", DEFAULT_ADMIN_EMAIL).strip()
+        print(f"Triggering test quota alert to admin ({admin_target})...")
+        alerted, level, count = check_and_alert_quota(
+            sent_logs,
+            mail_user=mail_user,
+            mail_pass=mail_pass,
+            dry_run=dry_run,
+            admin_email=admin_target,
+            subscriber_count=len(get_subscribers()),
+            now=taipei_now,
+            force=True
+        )
+        if not dry_run:
+            save_json_file(SENT_LOG_FILE, sent_logs)
+        print(f"Test quota alert completed (alerted={alerted}, level={level}, 24h_count={count}).")
+        return 1 if alerted else 0
+
+    # If checking quota health only
+    if check_quota_only:
+        count, oldest = clean_and_count_rolling_deliveries(sent_logs, now=taipei_now)
+        pct = round((count / GMAIL_DAILY_LIMIT) * 100, 1)
+        print("=== Gmail Daily Quota Health Check ===")
+        print(f"Rolling 24h Dispatched: {count} / {GMAIL_DAILY_LIMIT} ({pct}%)")
+        print(f"Remaining Headroom: {max(0, GMAIL_DAILY_LIMIT - count)} emails")
+        if oldest:
+            print(f"Oldest in 24h Window: {oldest.strftime('%Y-%m-%d %H:%M:%S')}")
+        alerted, level, _ = check_and_alert_quota(
+            sent_logs,
+            mail_user=mail_user,
+            mail_pass=mail_pass,
+            dry_run=dry_run,
+            subscriber_count=len(get_subscribers()),
+            now=taipei_now
+        )
+        update_data_json_quota(data, count, taipei_now)
+        if not dry_run:
+            save_json_file(SENT_LOG_FILE, sent_logs)
+        print(f"Status Level: {level.upper()} (Alert triggered: {alerted})")
+        return 0
+
     # If specifically requesting a welcome test email for a target address
     if send_welcome_to:
         print(f"Sending targeted welcome test email to {send_welcome_to}...")
@@ -790,18 +1148,27 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
             sample_forecasts=forecasts,
             dry_run=dry_run
         )
-        if success and not dry_run:
+        if success:
             norm_email = send_welcome_to.strip().lower()
             sent_logs[f"welcome_{norm_email}"] = {
                 "email": send_welcome_to,
                 "type": "welcome_test",
-                "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S")
+                "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S"),
+                "dry_run": dry_run
             }
-            save_json_file(SENT_LOG_FILE, sent_logs)
+            log_email_delivery(sent_logs, send_welcome_to, delivery_type="welcome_test", dry_run=dry_run, now=taipei_now)
+            count, _ = clean_and_count_rolling_deliveries(sent_logs, now=taipei_now)
+            update_data_json_quota(data, count, taipei_now)
+            if not dry_run:
+                save_json_file(SENT_LOG_FILE, sent_logs)
         return 1 if success else 0
 
     if not tenders and not forecasts:
         print("No tenders or forecasts found in data.json. Nothing to alert.")
+        count, _ = clean_and_count_rolling_deliveries(sent_logs, now=taipei_now)
+        update_data_json_quota(data, count, taipei_now)
+        if not dry_run:
+            save_json_file(SENT_LOG_FILE, sent_logs)
         return 0
 
     subscribers = get_subscribers()
@@ -812,9 +1179,25 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
 
     if not subscribers:
         print("No subscribers configured. Add subscribers to subscribers.json or set SUBSCRIBERS_URL.")
+        count, _ = clean_and_count_rolling_deliveries(sent_logs, now=taipei_now)
+        update_data_json_quota(data, count, taipei_now)
+        if not dry_run:
+            save_json_file(SENT_LOG_FILE, sent_logs)
         return 0
 
-    print(f"Loaded {len(subscribers)} subscribers. Checking {len(tenders)} tenders and {len(forecasts)} forecasts...")
+    # Initial Quota & Circuit Breaker Check before batch dispatches
+    initial_24h, _ = clean_and_count_rolling_deliveries(sent_logs, now=taipei_now)
+    if initial_24h >= QUOTA_CIRCUIT_BREAKER:
+        print(f"🛑 CIRCUIT BREAKER ACTIVE: 24h dispatches ({initial_24h}) >= {QUOTA_CIRCUIT_BREAKER}. Halting to protect Gmail account.")
+        check_and_alert_quota(sent_logs, mail_user=mail_user, mail_pass=mail_pass, dry_run=dry_run, subscriber_count=len(subscribers), now=taipei_now)
+        update_data_json_quota(data, initial_24h, taipei_now)
+        if not dry_run:
+            save_json_file(SENT_LOG_FILE, sent_logs)
+        return 0
+    elif initial_24h >= QUOTA_WARN_THRESHOLD:
+        check_and_alert_quota(sent_logs, mail_user=mail_user, mail_pass=mail_pass, dry_run=dry_run, subscriber_count=len(subscribers), now=taipei_now)
+
+    print(f"Loaded {len(subscribers)} subscribers. Checking {len(tenders)} tenders and {len(forecasts)} forecasts (24h sent so far: {initial_24h}/{GMAIL_DAILY_LIMIT})...")
     sent_count = 0
     new_fingerprints = {}
 
@@ -822,6 +1205,13 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
         email = sub.get("email", "").strip()
         if not email:
             continue
+
+        # In-loop Circuit Breaker check
+        curr_24h, _ = clean_and_count_rolling_deliveries(sent_logs, now=taipei_now)
+        if curr_24h >= QUOTA_CIRCUIT_BREAKER:
+            print(f"🛑 CIRCUIT BREAKER TRIGGERED during dispatch ({curr_24h}/{GMAIL_DAILY_LIMIT}). Halting immediately.")
+            check_and_alert_quota(sent_logs, mail_user=mail_user, mail_pass=mail_pass, dry_run=dry_run, subscriber_count=len(subscribers), now=taipei_now)
+            break
 
         norm_email = email.lower()
         welcome_key = f"welcome_{norm_email}"
@@ -837,6 +1227,7 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
                     "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S"),
                     "dry_run": True
                 }
+                log_email_delivery(sent_logs, email, delivery_type="welcome_test", dry_run=True, now=taipei_now)
             else:
                 success = send_welcome_email(
                     email,
@@ -853,6 +1244,8 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
                         "type": "welcome_test",
                         "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S")
                     }
+                    log_email_delivery(sent_logs, email, delivery_type="welcome_test", dry_run=False, now=taipei_now)
+                    check_and_alert_quota(sent_logs, mail_user=mail_user, mail_pass=mail_pass, dry_run=dry_run, subscriber_count=len(subscribers), now=taipei_now)
 
         matching_tenders = match_tenders_for_subscriber(sub, tenders, sent_logs)
         matching_forecasts = match_forecasts_for_subscriber(sub, forecasts, sent_logs)
@@ -891,6 +1284,7 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
                     "dry_run": True
                 }
             sent_count += 1
+            log_email_delivery(sent_logs, email, delivery_type="digest", dry_run=True, now=taipei_now)
         else:
             try:
                 send_email_smtp(email, subject, html_body, mail_user, mail_pass)
@@ -911,14 +1305,21 @@ def dispatch_alerts(dry_run=False, test_email=None, send_welcome_to=None):
                         "sent_at": taipei_now.strftime("%Y-%m-%d %H:%M:%S")
                     }
                 sent_count += 1
+                log_email_delivery(sent_logs, email, delivery_type="digest", dry_run=False, now=taipei_now)
+                check_and_alert_quota(sent_logs, mail_user=mail_user, mail_pass=mail_pass, dry_run=dry_run, subscriber_count=len(subscribers), now=taipei_now)
                 print(f"Successfully delivered alert to {email}.")
             except Exception as e:
                 print(f"Error sending to {email}: {e}")
+
+    final_24h, _ = clean_and_count_rolling_deliveries(sent_logs, now=taipei_now)
+    update_data_json_quota(data, final_24h, taipei_now)
 
     if not dry_run and new_fingerprints:
         sent_logs.update(new_fingerprints)
         save_json_file(SENT_LOG_FILE, sent_logs)
         print(f"Recorded {len(new_fingerprints)} new notification fingerprints in {SENT_LOG_FILE}.")
+    elif not dry_run:
+        save_json_file(SENT_LOG_FILE, sent_logs)
 
     return sent_count
 
@@ -929,11 +1330,20 @@ if __name__ == "__main__":
     parser.add_argument("--test-email", type=str, help="Send a test alert email to a specific address")
     parser.add_argument("--send-welcome", type=str, help="Send a welcome test email to a specific address to verify mailbox reception")
     parser.add_argument("--unsubscribe", type=str, help="Unsubscribe an email address from alert notifications")
+    parser.add_argument("--check-quota", action="store_true", help="Display rolling 24h Gmail quota usage and check alert status")
+    parser.add_argument("--test-quota-alert", action="store_true", help="Force send a test quota alert to admin email to verify template and delivery")
     args = parser.parse_args()
 
     if args.unsubscribe:
         ok = unsubscribe_email(args.unsubscribe)
         sys.exit(0 if ok else 1)
 
-    dispatched = dispatch_alerts(dry_run=args.dry_run, test_email=args.test_email, send_welcome_to=args.send_welcome)
-    print(f"Alert dispatch completed. Total subscribers notified: {dispatched}")
+    dispatched = dispatch_alerts(
+        dry_run=args.dry_run,
+        test_email=args.test_email,
+        send_welcome_to=args.send_welcome,
+        check_quota_only=args.check_quota,
+        test_quota_alert=args.test_quota_alert
+    )
+    if not args.check_quota and not args.test_quota_alert:
+        print(f"Alert dispatch completed. Total subscribers notified: {dispatched}")

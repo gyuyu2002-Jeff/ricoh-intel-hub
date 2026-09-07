@@ -95,19 +95,32 @@ function doPost(e) {
       sheet.appendRow([email, cities, timestamp, "有效"]);
     }
 
-    // 每筆設定成功的使用者都先寄一封測試確認信，確保信箱可正常接收情報通知
-    var mailSuccess = false;
+    // 檢查 Gmail 每日發信剩餘額度 (MailApp 每日配額防護)
+    var remainingQuota = 0;
     try {
-      sendWelcomeTestEmail(email, cities);
-      mailSuccess = true;
-    } catch (mailErr) {
-      Logger.log("Welcome email error: " + mailErr);
+      remainingQuota = MailApp.getRemainingDailyQuota();
+    } catch (qErr) {
+      remainingQuota = -1;
+    }
+
+    // 每筆設定成功的使用者都先寄一封測試確認信，確保信箱可正常接收情報通知（保留至少 10 封安全額度）
+    var mailSuccess = false;
+    if (remainingQuota > 10 || remainingQuota === -1) {
+      try {
+        sendWelcomeTestEmail(email, cities);
+        mailSuccess = true;
+      } catch (mailErr) {
+        Logger.log("Welcome email error: " + mailErr);
+      }
+    } else {
+      Logger.log("⚠️ MailApp 每日發信配額即將用罄（剩餘: " + remainingQuota + " 封），暫緩自動寄送測試信以保護配額。");
     }
 
     return ContentService.createTextOutput(JSON.stringify({
       status: "success",
-      message: "訂閱登記成功！已寄送測試確認信至您的信箱，請查收確認。",
-      mail_sent: mailSuccess
+      message: "訂閱登記成功！" + (mailSuccess ? "已寄送測試確認信至您的信箱，請查收確認。" : "標案監控已啟動。"),
+      mail_sent: mailSuccess,
+      remaining_quota: remainingQuota
     })).setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
     return ContentService.createTextOutput(JSON.stringify({ status: "error", message: err.toString() }))
