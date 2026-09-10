@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-10 08:10",
+  "last_updated": "2026-09-10 12:36",
   "tenders": [
     {
       "city": "台北市",
@@ -1367,8 +1367,8 @@
     "today": "2026-09-10",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-10 08:10",
-    "source_records": 2239,
+    "latest_attempt_at": "2026-09-10 12:36",
+    "source_records": 2300,
     "candidate_records": 1,
     "review_records": 0,
     "successful_dates": [
@@ -1804,14 +1804,14 @@
       "source_records": 2512,
       "candidate_records": 6,
       "review_records": 0,
-      "checked_at": "2026-09-10 08:07"
+      "checked_at": "2026-09-10 12:34"
     },
     "2026-09-10": {
       "status": "complete",
-      "source_records": 2239,
+      "source_records": 2300,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-10 08:07"
+      "checked_at": "2026-09-10 12:34"
     }
   },
   "candidate_cache": [
@@ -9141,6 +9141,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-10 08:10:42"
+    "updated_at": "2026-09-10 12:36:54"
   }
 }
