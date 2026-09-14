@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-14 05:01",
+  "last_updated": "2026-09-14 08:08",
   "tenders": [
     {
       "city": "台北市",
@@ -1449,13 +1449,13 @@
     "today": "2026-09-14",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-13 21:56",
-    "source_records": 0,
-    "candidate_records": 0,
+    "latest_attempt_at": "2026-09-14 08:08",
+    "source_records": 1669,
+    "candidate_records": 1,
     "review_records": 0,
     "successful_dates": [
-      "2026-09-13",
-      "2026-09-12"
+      "2026-09-14",
+      "2026-09-13"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -1886,10 +1886,53 @@
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-13 21:53"
+      "checked_at": "2026-09-14 08:06"
+    },
+    "2026-09-14": {
+      "status": "complete",
+      "source_records": 1669,
+      "candidate_records": 1,
+      "review_records": 0,
+      "checked_at": "2026-09-14 08:06"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260914,
+      "filename": "DTG-1-70015422",
+      "brief": {
+        "type": "招標文件公開閱覽公告資料公告",
+        "title": "租賃影印機",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "LP5-115036",
+      "unit_id": "A.7.31.1",
+      "unit_name": "臺灣銀行股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.31.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.31.1&job_number=LP5-115036",
+      "unit_url": "/index/unit/A.7.31.1",
+      "url": "/index/case/A.7.31.1/LP5-115036/20260914/DTG-1-70015422",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
     {
       "date": 20260911,
       "filename": "TIQ-1-71113375",
@@ -3742,41 +3785,6 @@
           "採購",
           "租賃",
           "開口契約"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中設備名稱或公告規格"
-      }
-    },
-    {
-      "date": 20260716,
-      "filename": "PPW-1-70109367",
-      "brief": {
-        "type": "公開徵求廠商提供參考資料公告",
-        "title": "租賃影印機",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "LP5-115036",
-      "unit_id": "A.7.31.1",
-      "unit_name": "臺灣銀行股份有限公司",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.31.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.31.1&job_number=LP5-115036",
-      "unit_url": "/index/unit/A.7.31.1",
-      "url": "/index/case/A.7.31.1/LP5-115036/20260716/PPW-1-70109367",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 4,
-        "category": "office_output_equipment",
-        "matched_terms": [
-          "影印機",
-          "租賃"
         ],
         "matched_fields": [
           "title"
@@ -9347,6 +9355,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-14 05:01:57"
+    "updated_at": "2026-09-14 08:08:38"
   }
 }
