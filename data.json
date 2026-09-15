@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-15 15:41",
+  "last_updated": "2026-09-15 21:30",
   "tenders": [
     {
       "city": "新北市",
@@ -1399,9 +1399,9 @@
     "today": "2026-09-15",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-15 15:41",
-    "source_records": 1885,
-    "candidate_records": 1,
+    "latest_attempt_at": "2026-09-15 21:30",
+    "source_records": 1967,
+    "candidate_records": 2,
     "review_records": 0,
     "successful_dates": [
       "2026-09-15",
@@ -1836,17 +1836,54 @@
       "source_records": 1795,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-15 15:38"
+      "checked_at": "2026-09-15 21:28"
     },
     "2026-09-15": {
       "status": "complete",
-      "source_records": 1885,
-      "candidate_records": 1,
+      "source_records": 1967,
+      "candidate_records": 2,
       "review_records": 0,
-      "checked_at": "2026-09-15 15:38"
+      "checked_at": "2026-09-15 21:28"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260915,
+      "filename": "anaa-71284589",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "115~118年印表機墨水匣採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "L1150706",
+      "unit_id": "A.21.100.41",
+      "unit_name": "衛生福利部新營醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.100.41",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.100.41&job_number=L1150706",
+      "unit_url": "/index/unit/A.21.100.41",
+      "url": "/index/case/A.21.100.41/L1150706/20260915/anaa-71284589",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "墨水",
+          "墨水匣"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
     {
       "date": 20260915,
       "filename": "PPW-1-70116236",
@@ -9403,6 +9440,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-15 15:41:09"
+    "updated_at": "2026-09-15 21:30:32"
   }
 }
