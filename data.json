@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-16 15:40",
+  "last_updated": "2026-09-16 21:29",
   "tenders": [
     {
       "city": "台南市",
@@ -1561,8 +1561,8 @@
     "today": "2026-09-16",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-16 15:40",
-    "source_records": 2614,
+    "latest_attempt_at": "2026-09-16 21:29",
+    "source_records": 2676,
     "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
@@ -1998,14 +1998,14 @@
       "source_records": 1968,
       "candidate_records": 2,
       "review_records": 0,
-      "checked_at": "2026-09-16 15:37"
+      "checked_at": "2026-09-16 21:26"
     },
     "2026-09-16": {
       "status": "complete",
-      "source_records": 2614,
+      "source_records": 2676,
       "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-09-16 15:37"
+      "checked_at": "2026-09-16 21:26"
     }
   },
   "candidate_cache": [
@@ -9808,6 +9808,6 @@
     "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-16 15:40:09"
+    "updated_at": "2026-09-16 21:29:28"
   }
 }
