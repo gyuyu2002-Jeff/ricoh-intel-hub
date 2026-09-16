@@ -1,6 +1,269 @@
 {
-  "last_updated": "2026-09-16 05:37",
+  "last_updated": "2026-09-16 08:16",
   "tenders": [
+    {
+      "city": "台南市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺南市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "115~118年印表機墨水匣採購案",
+      "unit": "衛生福利部新營醫院",
+      "unit_id": "A.21.100.41",
+      "job_number": "L1150706",
+      "publish_date": "2026-09-16",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-22",
+      "deadline_confidence": "verified",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
+      "main_competitor": "安禾資訊有限公司",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/nonAtm?pk=NzEyODQ1ODk=",
+      "history_stats": [
+        {
+          "year": 2023,
+          "val": 96,
+          "type": "real",
+          "winner": "安禾資訊有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2023-11-22",
+          "year": 2023,
+          "title": "112年度印表機墨水匣採購案",
+          "job_number": "A1120830",
+          "budget": 921600,
+          "award_price": 888300,
+          "discount_rate": 96.4,
+          "winner": "安禾資訊有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA0MzEzNjg=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.41",
+          "source_unit": "衛生福利部新營醫院",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2021-04-01",
+          "year": 2021,
+          "title": "109年度印表機碳粉(墨水)匣採購案",
+          "job_number": "L1091104",
+          "budget": 1646320,
+          "award_price": 882000,
+          "discount_rate": 53.6,
+          "winner": "翰鷹系統科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20210401&fn=BDM-2-53284149.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.41",
+          "source_unit": "衛生福利部新營醫院",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2018-11-29",
+          "year": 2018,
+          "title": "107年度印表機碳粉（墨水）匣採購案",
+          "job_number": "Y1071008",
+          "budget": 291200,
+          "award_price": 278880,
+          "discount_rate": 95.8,
+          "winner": "安禾資訊有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20181129&fn=BDM-1-52623756.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.41",
+          "source_unit": "衛生福利部新營醫院",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 4,
+      "stream": "peripherals",
+      "sub_type": "supplies",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "墨水",
+          "墨水匣"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "city": "台中市",
+      "city_source": "機關地址／開標地點",
+      "city_confidence": "high",
+      "city_raw_text": "404臺中市北區雙十路二段2號之1",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "高速掃描器1台",
+      "unit": "台灣自來水股份有限公司",
+      "unit_id": "3.13.52",
+      "job_number": "1150915",
+      "publish_date": "2026-09-16",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-24",
+      "deadline_confidence": "verified",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260916&fn=PPW-1-70116486.xml",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "公開徵求價單",
+      "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "scanner",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "scanner",
+        "stream": "peripherals",
+        "sub_type": "scanner",
+        "matched_terms": [
+          "掃描器",
+          "高速掃描"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中文件掃描器設備標的"
+      }
+    },
+    {
+      "city": "台中市",
+      "city_source": "機關地址／開標地點",
+      "city_confidence": "high",
+      "city_raw_text": "408臺中市南屯區黎明路2段501號",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "影印機租賃公開徵求共同供應契約廠商遴選會議",
+      "unit": "經濟部水利署",
+      "unit_id": "3.13.20",
+      "job_number": "LP5-114034",
+      "publish_date": "2026-09-16",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-21",
+      "deadline_confidence": "verified",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260916&fn=PPW-1-70116483.xml",
+      "history_stats": [],
+      "history_records": [
+        {
+          "award_date": "2015-04-21",
+          "year": 2015,
+          "title": "104年度經濟部水利署臺中辦公區14部影印機租賃",
+          "job_number": "A104004",
+          "budget": 5170000,
+          "award_price": 1605120,
+          "discount_rate": 31.0,
+          "winner": "金儀 Konica Minolta",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20150421&fn=BDM-1-51530479.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.13.20",
+          "source_unit": "經濟部水利署",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2014-08-21",
+          "year": 2014,
+          "title": "103年度經濟部水利署臺中辦公區影印機租賃",
+          "job_number": "A103008",
+          "budget": 3430000,
+          "award_price": 941760,
+          "discount_rate": 27.5,
+          "winner": "本公司 (互盛 RICOH)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20140821&fn=BDM-1-51335145.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.13.20",
+          "source_unit": "經濟部水利署",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2014-08-18",
+          "year": 2014,
+          "title": "103年經濟部水利署臺北辦公區影印機租賃",
+          "job_number": "B103008",
+          "budget": 1400000,
+          "award_price": 336000,
+          "discount_rate": 24.0,
+          "winner": "冠轍數位科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20140818&fn=BDM-1-51330931.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.13.20",
+          "source_unit": "經濟部水利署",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "公開徵求價單",
+      "stage_color": "bg-amber-950/45 border-amber-500/40 text-amber-400",
+      "duration_years": 3,
+      "stream": "copier",
+      "sub_type": "main",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
     {
       "city": "新北市",
       "city_source": "機關地址／開標地點",
@@ -1298,13 +1561,13 @@
     "today": "2026-09-16",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-15 22:31",
-    "source_records": 1968,
-    "candidate_records": 2,
+    "latest_attempt_at": "2026-09-16 08:16",
+    "source_records": 2497,
+    "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
-      "2026-09-15",
-      "2026-09-14"
+      "2026-09-16",
+      "2026-09-15"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -1735,10 +1998,128 @@
       "source_records": 1968,
       "candidate_records": 2,
       "review_records": 0,
-      "checked_at": "2026-09-15 22:29"
+      "checked_at": "2026-09-16 08:12"
+    },
+    "2026-09-16": {
+      "status": "complete",
+      "source_records": 2497,
+      "candidate_records": 3,
+      "review_records": 0,
+      "checked_at": "2026-09-16 08:12"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260916,
+      "filename": "TIQ-11-71116154",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115~118年印表機墨水匣採購案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "L1150706",
+      "unit_id": "A.21.100.41",
+      "unit_name": "衛生福利部新營醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.100.41",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.100.41&job_number=L1150706",
+      "unit_url": "/index/unit/A.21.100.41",
+      "url": "/index/case/A.21.100.41/L1150706/20260916/TIQ-11-71116154",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "墨水",
+          "墨水匣"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20260916,
+      "filename": "PPW-1-70116486",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "高速掃描器1台",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150915",
+      "unit_id": "3.13.52",
+      "unit_name": "台灣自來水股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.52",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.52&job_number=1150915",
+      "unit_url": "/index/unit/3.13.52",
+      "url": "/index/case/3.13.52/1150915/20260916/PPW-1-70116486",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "scanner",
+        "stream": "peripherals",
+        "sub_type": "scanner",
+        "matched_terms": [
+          "掃描器",
+          "高速掃描"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中文件掃描器設備標的"
+      }
+    },
+    {
+      "date": 20260916,
+      "filename": "PPW-1-70116483",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料公告",
+        "title": "影印機租賃公開徵求共同供應契約廠商遴選會議",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "LP5-114034",
+      "unit_id": "3.13.20",
+      "unit_name": "經濟部水利署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.20",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.20&job_number=LP5-114034",
+      "unit_url": "/index/unit/3.13.20",
+      "url": "/index/case/3.13.20/LP5-114034/20260916/PPW-1-70116483",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
     {
       "date": 20260915,
       "filename": "anaa-71284589",
@@ -5421,6 +5802,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "A.21.100.41",
+      "unit_name": "衛生福利部新營醫院",
+      "award_date": "2023-11-22",
+      "year": 2023,
+      "title": "112年度印表機墨水匣採購案",
+      "job_number": "A1120830",
+      "budget": 921600,
+      "award_price": 888300,
+      "discount_rate": 96.4,
+      "winner": "安禾資訊有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA0MzEzNjg=",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "A.7.6",
       "unit_name": "財政部中區國稅局",
       "award_date": "2023-11-21",
@@ -6411,6 +6807,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "A.21.100.41",
+      "unit_name": "衛生福利部新營醫院",
+      "award_date": "2021-04-01",
+      "year": 2021,
+      "title": "109年度印表機碳粉(墨水)匣採購案",
+      "job_number": "L1091104",
+      "budget": 1646320,
+      "award_price": 882000,
+      "discount_rate": 53.6,
+      "winner": "翰鷹系統科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20210401&fn=BDM-2-53284149.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "A.7.3",
       "unit_name": "財政部臺北國稅局",
       "award_date": "2021-03-30",
@@ -7131,6 +7542,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "A.21.100.41",
+      "unit_name": "衛生福利部新營醫院",
+      "award_date": "2018-11-29",
+      "year": 2018,
+      "title": "107年度印表機碳粉（墨水）匣採購案",
+      "job_number": "Y1071008",
+      "budget": 291200,
+      "award_price": 278880,
+      "discount_rate": 95.8,
+      "winner": "安禾資訊有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20181129&fn=BDM-1-52623756.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "A.7.6",
       "unit_name": "財政部中區國稅局",
       "award_date": "2018-11-21",
@@ -7731,6 +8157,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.13.20",
+      "unit_name": "經濟部水利署",
+      "award_date": "2015-04-21",
+      "year": 2015,
+      "title": "104年度經濟部水利署臺中辦公區14部影印機租賃",
+      "job_number": "A104004",
+      "budget": 5170000,
+      "award_price": 1605120,
+      "discount_rate": 31.0,
+      "winner": "金儀 Konica Minolta",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20150421&fn=BDM-1-51530479.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.95.13.3",
       "unit_name": "臺南市政府警察局交通警察大隊",
       "award_date": "2015-03-24",
@@ -7817,6 +8258,36 @@
       "discount_rate": 93.2,
       "winner": "大同股份有限公司高雄分公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20141024&fn=BDM-1-51384856.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.13.20",
+      "unit_name": "經濟部水利署",
+      "award_date": "2014-08-21",
+      "year": 2014,
+      "title": "103年度經濟部水利署臺中辦公區影印機租賃",
+      "job_number": "A103008",
+      "budget": 3430000,
+      "award_price": 941760,
+      "discount_rate": 27.5,
+      "winner": "本公司 (互盛 RICOH)",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20140821&fn=BDM-1-51335145.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.13.20",
+      "unit_name": "經濟部水利署",
+      "award_date": "2014-08-18",
+      "year": 2014,
+      "title": "103年經濟部水利署臺北辦公區影印機租賃",
+      "job_number": "B103008",
+      "budget": 1400000,
+      "award_price": 336000,
+      "discount_rate": 24.0,
+      "winner": "冠轍數位科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20140818&fn=BDM-1-51330931.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -8412,7 +8883,10 @@
     "17416729": "2026-09-16",
     "8.3": "2026-09-16",
     "3.97.14.4": "2026-09-16",
-    "A.5.5.2": "2026-09-16"
+    "A.5.5.2": "2026-09-16",
+    "A.21.100.41": "2026-09-16",
+    "3.13.52": "2026-09-16",
+    "3.13.20": "2026-09-16"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
@@ -8485,7 +8959,9 @@
     "3.5.10.100||unspecified|繪圖機電源供應器等2項": "2026-09-09",
     "8.3||purchase|資訊耗材用品採購案": "2026-09-10",
     "3.97.14.4|printer|rental|印表機租賃開口契約": "2026-09-11",
-    "A.5.5.2|printer|maintenance|印表機維護案": "2026-09-15"
+    "A.5.5.2|printer|maintenance|印表機維護案": "2026-09-15",
+    "A.21.100.41|printer|purchase|115~118年印表機墨水匣採購案": "2026-09-16",
+    "3.13.20|copier|rental|影印機租賃公開徵求共同供應契約廠商遴選會議": "2026-09-16"
   },
   "forecasted_tenders": [
     {
@@ -9327,11 +9803,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 0,
-    "remaining": 500,
-    "usage_percent": 0.0,
+    "used_24h": 3,
+    "remaining": 497,
+    "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-16 05:37:16"
+    "updated_at": "2026-09-16 08:16:03"
   }
 }
