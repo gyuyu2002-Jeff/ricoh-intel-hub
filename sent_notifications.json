@@ -88,6 +88,24 @@
       "recipient": "gyuyu2002@gmail.com",
       "type": "digest",
       "dry_run": false
+    },
+    {
+      "sent_at": "2026-09-17 05:32:30",
+      "recipient": "huxen.ricoh@gmail.com",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-09-17 05:32:30",
+      "recipient": "hanjiunwu@eosasc.com.tw",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-09-17 05:32:30",
+      "recipient": "gyuyu2002@gmail.com",
+      "type": "digest",
+      "dry_run": false
     }
   ],
   "huxen.ricoh@gmail.com_LP5-114034_公開徵求價單_2026-09-16": {
@@ -107,5 +125,23 @@
     "job_number": "LP5-114034",
     "title": "影印機租賃公開徵求共同供應契約廠商遴選會議",
     "sent_at": "2026-09-16 08:16:03"
+  },
+  "huxen.ricoh@gmail.com_LP5-114034_公開徵求價單_2026-09-17": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "LP5-114034",
+    "title": "影印機租賃公開徵求共同供應契約廠商遴選會議",
+    "sent_at": "2026-09-17 05:32:30"
+  },
+  "hanjiunwu@eosasc.com.tw_LP5-114034_公開徵求價單_2026-09-17": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "LP5-114034",
+    "title": "影印機租賃公開徵求共同供應契約廠商遴選會議",
+    "sent_at": "2026-09-17 05:32:30"
+  },
+  "gyuyu2002@gmail.com_LP5-114034_公開徵求價單_2026-09-17": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "LP5-114034",
+    "title": "影印機租賃公開徵求共同供應契約廠商遴選會議",
+    "sent_at": "2026-09-17 05:32:30"
   }
 }
