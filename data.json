@@ -1,6 +1,107 @@
 {
-  "last_updated": "2026-09-17 05:32",
+  "last_updated": "2026-09-17 08:26",
   "tenders": [
+    {
+      "city": "桃園市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "桃園市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "115年度A2尺寸繪圖機設備採購案",
+      "unit": "桃園市政府地政局",
+      "unit_id": "3.80.16",
+      "job_number": "LA000327",
+      "publish_date": "2026-09-17",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-21",
+      "deadline_confidence": "verified",
+      "budget": "NT$ 500,000",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzMjgyMDc",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "printer",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "繪圖機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "藥袋列印用碳粉匣二年單價開口契約",
+      "unit": "臺北榮民總醫院",
+      "unit_id": "3.32.80",
+      "job_number": "M11532B",
+      "publish_date": "2026-09-17",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-22",
+      "deadline_confidence": "verified",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260917&fn=NAI-1-71284994.xml",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "supplies",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "碳粉",
+          "碳粉匣"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
     {
       "city": "台中市",
       "city_source": "機關地址／開標地點",
@@ -101,57 +202,6 @@
           "title"
         ],
         "reason": "命中影印機/複合機主機設備或公告規格"
-      }
-    },
-    {
-      "city": "台北市",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "臺北市(非原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "藥袋列印用碳粉匣二年單價開口契約",
-      "unit": "臺北榮民總醫院",
-      "unit_id": "3.32.80",
-      "job_number": "M11532B",
-      "publish_date": "2026-09-17",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-09-22",
-      "deadline_confidence": "verified",
-      "budget": "無公開數據",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260917&fn=NAI-1-71284994.xml",
-      "history_stats": [],
-      "history_records": [],
-      "stage": "無法決標",
-      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "supplies",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "碳粉",
-          "碳粉匣"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
       }
     },
     {
@@ -1662,13 +1712,13 @@
     "today": "2026-09-17",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-16 22:24",
-    "source_records": 2676,
-    "candidate_records": 3,
+    "latest_attempt_at": "2026-09-17 08:26",
+    "source_records": 2197,
+    "candidate_records": 7,
     "review_records": 0,
     "successful_dates": [
-      "2026-09-16",
-      "2026-09-15"
+      "2026-09-17",
+      "2026-09-16"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -2096,13 +2146,318 @@
     },
     "2026-09-16": {
       "status": "complete",
-      "source_records": 2676,
+      "source_records": 2680,
       "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-09-16 22:22"
+      "checked_at": "2026-09-17 08:23"
+    },
+    "2026-09-17": {
+      "status": "complete",
+      "source_records": 2197,
+      "candidate_records": 7,
+      "review_records": 0,
+      "checked_at": "2026-09-17 08:23"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260917,
+      "filename": "ttd-71328207",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115年度A2尺寸繪圖機設備採購案",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "LA000327",
+      "unit_id": "3.80.16",
+      "unit_name": "桃園市政府地政局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.80.16",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.80.16&job_number=LA000327",
+      "unit_url": "/index/unit/3.80.16",
+      "url": "/index/case/3.80.16/LA000327/20260917/ttd-71328207",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "繪圖機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "date": 20260917,
+      "filename": "TIQ-1-71116401",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "藥袋列印用碳粉匣二年單價開口契約",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "M11532B",
+      "unit_id": "3.32.80",
+      "unit_name": "臺北榮民總醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.80",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.80&job_number=M11532B",
+      "unit_url": "/index/unit/3.32.80",
+      "url": "/index/case/3.32.80/M11532B/20260917/TIQ-1-71116401",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "碳粉",
+          "碳粉匣"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20260917,
+      "filename": "PPW-2-70116483",
+      "brief": {
+        "type": "公開徵求廠商提供參考資料更正公告",
+        "title": "影印機租賃公開徵求共同供應契約廠商遴選會議",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "LP5-114034",
+      "unit_id": "3.13.20",
+      "unit_name": "經濟部水利署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.20",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.20&job_number=LP5-114034",
+      "unit_url": "/index/unit/3.13.20",
+      "url": "/index/case/3.13.20/LP5-114034/20260917/PPW-2-70116483",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20260917,
+      "filename": "NAI-1-71284994",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "藥袋列印用碳粉匣二年單價開口契約",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "M11532B",
+      "unit_id": "3.32.80",
+      "unit_name": "臺北榮民總醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.80",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.80&job_number=M11532B",
+      "unit_url": "/index/unit/3.32.80",
+      "url": "/index/case/3.32.80/M11532B/20260917/NAI-1-71284994",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "碳粉",
+          "碳粉匣"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20260917,
+      "filename": "BDM-1-71285391",
+      "brief": {
+        "type": "決標公告",
+        "title": "藥袋印表機碳粉匣及墨水匣(提供儀器) (開口契約)",
+        "companies": {
+          "ids": [
+            "70400845"
+          ],
+          "names": [
+            "耀瑄科技股份有限公司"
+          ],
+          "id_key": {
+            "70400845": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "耀瑄科技股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "PTVGH-MP15904",
+      "unit_id": "A.51.4",
+      "unit_name": "屏東榮民總醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.51.4",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.51.4&job_number=PTVGH-MP15904",
+      "unit_url": "/index/unit/A.51.4",
+      "url": "/index/case/A.51.4/PTVGH-MP15904/20260917/BDM-1-71285391",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "碳粉",
+          "碳粉匣",
+          "墨水",
+          "墨水匣"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20260917,
+      "filename": "BDM-1-71285204",
+      "brief": {
+        "type": "決標公告",
+        "title": "新北市立聯合醫院「列印（印表機租賃）服務」採購案",
+        "companies": {
+          "ids": [
+            "24534791"
+          ],
+          "names": [
+            "德源資訊科技有限公司"
+          ],
+          "id_key": {
+            "24534791": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "德源資訊科技有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "A115-0808",
+      "unit_id": "3.82.14.1",
+      "unit_name": "新北市立聯合醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.82.14.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.82.14.1&job_number=A115-0808",
+      "unit_url": "/index/unit/3.82.14.1",
+      "url": "/index/case/3.82.14.1/A115-0808/20260917/BDM-1-71285204",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "date": 20260917,
+      "filename": "BDM-1-71284713",
+      "brief": {
+        "type": "決標公告",
+        "title": "影印機租賃",
+        "companies": {
+          "ids": [
+            "91000227"
+          ],
+          "names": [
+            "湛暘智能科技有限公司"
+          ],
+          "id_key": {
+            "91000227": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "湛暘智能科技有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "111PT0701-1",
+      "unit_id": "A.21.100.44",
+      "unit_name": "衛生福利部屏東醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.100.44",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.100.44&job_number=111PT0701-1",
+      "unit_url": "/index/unit/A.21.100.44",
+      "url": "/index/case/A.21.100.44/111PT0701-1/20260917/BDM-1-71284713",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
     {
       "date": 20260916,
       "filename": "TIQ-11-71116154",
@@ -2176,42 +2531,6 @@
           "title"
         ],
         "reason": "命中文件掃描器設備標的"
-      }
-    },
-    {
-      "date": 20260916,
-      "filename": "PPW-1-70116483",
-      "brief": {
-        "type": "公開徵求廠商提供參考資料公告",
-        "title": "影印機租賃公開徵求共同供應契約廠商遴選會議",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "LP5-114034",
-      "unit_id": "3.13.20",
-      "unit_name": "經濟部水利署",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.20",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.20&job_number=LP5-114034",
-      "unit_url": "/index/unit/3.13.20",
-      "url": "/index/case/3.13.20/LP5-114034/20260916/PPW-1-70116483",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "office_output_equipment",
-        "stream": "copier",
-        "sub_type": "main",
-        "matched_terms": [
-          "影印機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中影印機/複合機主機設備或公告規格"
       }
     },
     {
@@ -2780,45 +3099,6 @@
       }
     },
     {
-      "date": 20260909,
-      "filename": "NAI-1-71278296",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "藥袋印表機碳粉匣及墨水匣(提供儀器) (開口契約)",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "PTVGH-MP15904",
-      "unit_id": "A.51.4",
-      "unit_name": "屏東榮民總醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.51.4",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.51.4&job_number=PTVGH-MP15904",
-      "unit_url": "/index/unit/A.51.4",
-      "url": "/index/case/A.51.4/PTVGH-MP15904/20260909/NAI-1-71278296",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "碳粉",
-          "碳粉匣",
-          "墨水",
-          "墨水匣"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
       "date": 20260908,
       "filename": "TIQ-1-71109322",
       "brief": {
@@ -3002,42 +3282,6 @@
       }
     },
     {
-      "date": 20260907,
-      "filename": "NAI-1-71276049",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "新北市立聯合醫院「列印（印表機租賃）服務」採購案",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "A115-0808",
-      "unit_id": "3.82.14.1",
-      "unit_name": "新北市立聯合醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.82.14.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.82.14.1&job_number=A115-0808",
-      "unit_url": "/index/unit/3.82.14.1",
-      "url": "/index/case/3.82.14.1/A115-0808/20260907/NAI-1-71276049",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "printer_or_plotter",
-        "stream": "peripherals",
-        "sub_type": "printer",
-        "matched_terms": [
-          "印表機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中印表機或繪圖機標的"
-      }
-    },
-    {
       "date": 20260904,
       "filename": "PPW-1-70115152",
       "brief": {
@@ -3071,44 +3315,6 @@
           "title"
         ],
         "reason": "命中影印機/複合機主機設備或公告規格"
-      }
-    },
-    {
-      "date": 20260901,
-      "filename": "TIQ-1-71103843",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "藥袋列印用碳粉匣二年單價開口契約",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "M11532B",
-      "unit_id": "3.32.80",
-      "unit_name": "臺北榮民總醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.80",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.80&job_number=M11532B",
-      "unit_url": "/index/unit/3.32.80",
-      "url": "/index/case/3.32.80/M11532B/20260901/TIQ-1-71103843",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "碳粉",
-          "碳粉匣"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
       }
     },
     {
@@ -5146,21 +5352,6 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
-      "unit_id": "3.95.13.3",
-      "unit_name": "臺南市政府警察局交通警察大隊",
-      "award_date": "2025-10-17",
-      "year": 2025,
-      "title": "智慧型呼氣酒精測試器吹嘴、熱感式印表機紙捲採購案",
-      "job_number": "114U1014-01",
-      "budget": 750000,
-      "award_price": 712500,
-      "discount_rate": 95.0,
-      "winner": "御晨科技有限公司",
-      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251017&fn=BDM-1-70995345.xml",
-      "official_verified": true,
-      "verification_source": "政府電子採購網決標查詢"
-    },
-    {
       "unit_id": "A.51.4",
       "unit_name": "屏東榮民總醫院",
       "award_date": "2025-10-17",
@@ -5172,6 +5363,21 @@
       "discount_rate": 68.1,
       "winner": "郢晟實業有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251017&fn=BDM-1-70995591.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.95.13.3",
+      "unit_name": "臺南市政府警察局交通警察大隊",
+      "award_date": "2025-10-17",
+      "year": 2025,
+      "title": "智慧型呼氣酒精測試器吹嘴、熱感式印表機紙捲採購案",
+      "job_number": "114U1014-01",
+      "budget": 750000,
+      "award_price": 712500,
+      "discount_rate": 95.0,
+      "winner": "御晨科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251017&fn=BDM-1-70995345.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -9010,7 +9216,8 @@
     "A.5.5.2": "2026-09-17",
     "A.21.100.41": "2026-09-17",
     "3.13.52": "2026-09-17",
-    "3.13.20": "2026-09-17"
+    "3.13.20": "2026-09-17",
+    "3.80.16": "2026-09-17"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
@@ -9927,11 +10134,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 6,
-    "remaining": 494,
-    "usage_percent": 1.2,
+    "used_24h": 3,
+    "remaining": 497,
+    "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-17 05:32:30"
+    "updated_at": "2026-09-17 08:26:28"
   }
 }
