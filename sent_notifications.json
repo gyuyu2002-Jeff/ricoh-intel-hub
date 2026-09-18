@@ -106,6 +106,24 @@
       "recipient": "gyuyu2002@gmail.com",
       "type": "digest",
       "dry_run": false
+    },
+    {
+      "sent_at": "2026-09-18 08:12:42",
+      "recipient": "huxen.ricoh@gmail.com",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-09-18 08:12:42",
+      "recipient": "hanjiunwu@eosasc.com.tw",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-09-18 08:12:42",
+      "recipient": "gyuyu2002@gmail.com",
+      "type": "digest",
+      "dry_run": false
     }
   ],
   "huxen.ricoh@gmail.com_LP5-114034_公開徵求價單_2026-09-16": {
@@ -143,5 +161,41 @@
     "job_number": "LP5-114034",
     "title": "影印機租賃公開徵求共同供應契約廠商遴選會議",
     "sent_at": "2026-09-17 05:32:30"
+  },
+  "huxen.ricoh@gmail.com_1150917_正式開標_2026-09-18": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "1150917",
+    "title": "115學年度影印機租賃",
+    "sent_at": "2026-09-18 08:12:42"
+  },
+  "huxen.ricoh@gmail.com_0141500039_正式開標_2026-09-18": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "0141500039",
+    "title": "總管理處數位式多功能影印機租賃共61台",
+    "sent_at": "2026-09-18 08:12:42"
+  },
+  "hanjiunwu@eosasc.com.tw_1150917_正式開標_2026-09-18": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "1150917",
+    "title": "115學年度影印機租賃",
+    "sent_at": "2026-09-18 08:12:42"
+  },
+  "hanjiunwu@eosasc.com.tw_0141500039_正式開標_2026-09-18": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "0141500039",
+    "title": "總管理處數位式多功能影印機租賃共61台",
+    "sent_at": "2026-09-18 08:12:42"
+  },
+  "gyuyu2002@gmail.com_1150917_正式開標_2026-09-18": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "1150917",
+    "title": "115學年度影印機租賃",
+    "sent_at": "2026-09-18 08:12:42"
+  },
+  "gyuyu2002@gmail.com_0141500039_正式開標_2026-09-18": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "0141500039",
+    "title": "總管理處數位式多功能影印機租賃共61台",
+    "sent_at": "2026-09-18 08:12:42"
   }
 }

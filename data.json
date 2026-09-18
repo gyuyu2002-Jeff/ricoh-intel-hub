@@ -1,6 +1,220 @@
 {
-  "last_updated": "2026-09-18 05:37",
+  "last_updated": "2026-09-18 08:12",
   "tenders": [
+    {
+      "city": "苗栗縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "苗栗縣(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "115學年度影印機租賃",
+      "unit": "苗栗縣立新港國民中小學",
+      "unit_id": "3.76.45.96.38",
+      "job_number": "1150917",
+      "publish_date": "2026-09-18",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-23",
+      "deadline_confidence": "verified",
+      "budget": "NT$ 350,000",
+      "award_price": "",
+      "avg_discount": "72.2%",
+      "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
+      "main_competitor": "量群科技有限公司",
+      "suggested_price": "NT$ 252,000",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 2,
+        "discount_rate": 72.2
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzMzE2MTg",
+      "history_stats": [
+        {
+          "year": 2022,
+          "val": 73,
+          "type": "real",
+          "winner": "量群科技有限公司"
+        },
+        {
+          "year": 2024,
+          "val": 71,
+          "type": "real",
+          "winner": "量群科技有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2024-12-16",
+          "year": 2024,
+          "title": "113學年度影印機租賃",
+          "job_number": "1130923",
+          "budget": 362673,
+          "award_price": 257600,
+          "discount_rate": 71.0,
+          "winner": "量群科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA2OTE3MzA=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.45.96.38",
+          "source_unit": "苗栗縣立新港國民中小學",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2022-09-28",
+          "year": 2022,
+          "title": "111學年度影印機租賃",
+          "job_number": "1110920A",
+          "budget": 326900,
+          "award_price": 239900,
+          "discount_rate": 73.4,
+          "winner": "量群科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzAxMDE4MDU=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.45.96.38",
+          "source_unit": "苗栗縣立新港國民中小學",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2020-09-16",
+          "year": 2020,
+          "title": "109學年度影印機租賃",
+          "job_number": "1090831",
+          "budget": 289000,
+          "award_price": 197100,
+          "discount_rate": 68.2,
+          "winner": "量群科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTMxOTMyNjY=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.45.96.38",
+          "source_unit": "苗栗縣立新港國民中小學",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 3,
+      "stream": "copier",
+      "sub_type": "main",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
+      "tag": "重點攻堅",
+      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
+      "title": "總管理處數位式多功能影印機租賃共61台",
+      "unit": "台灣電力股份有限公司",
+      "unit_id": "3.13.31",
+      "job_number": "0141500039",
+      "publish_date": "2026-09-18",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-02",
+      "deadline_confidence": "verified",
+      "budget": "NT$ 6,447,000",
+      "award_price": "",
+      "avg_discount": "54.7%",
+      "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
+      "main_competitor": "震旦 SHARP",
+      "suggested_price": "NT$ 3,526,000",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 2,
+        "discount_rate": 54.7
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzMzA4MTk",
+      "history_stats": [
+        {
+          "year": 2022,
+          "val": 57,
+          "type": "real",
+          "winner": "震旦 SHARP"
+        },
+        {
+          "year": 2024,
+          "val": 52,
+          "type": "real",
+          "winner": "震旦 SHARP"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2024-11-26",
+          "year": 2024,
+          "title": "總管理處數位式多功能影印機租賃共59台",
+          "job_number": "0141300033",
+          "budget": 7581000,
+          "award_price": 3951098,
+          "discount_rate": 52.1,
+          "winner": "震旦 SHARP",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241126&fn=BDM-1-70724273.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.13.31",
+          "source_unit": "台灣電力股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2022-08-15",
+          "year": 2022,
+          "title": "總管理處數位式多功能影印機租賃共58台",
+          "job_number": "0141100024",
+          "budget": 9840600,
+          "award_price": 5635980,
+          "discount_rate": 57.3,
+          "winner": "震旦 SHARP",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220815&fn=BDM-1-70063983.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.13.31",
+          "source_unit": "台灣電力股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 3,
+      "stream": "copier",
+      "sub_type": "main",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機",
+          "多功能影印"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
     {
       "city": "桃園市",
       "city_source": "履約地點",
@@ -1712,13 +1926,13 @@
     "today": "2026-09-18",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-17 22:30",
-    "source_records": 2394,
-    "candidate_records": 7,
+    "latest_attempt_at": "2026-09-18 08:12",
+    "source_records": 2350,
+    "candidate_records": 2,
     "review_records": 0,
     "successful_dates": [
-      "2026-09-17",
-      "2026-09-16"
+      "2026-09-18",
+      "2026-09-17"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -2149,10 +2363,92 @@
       "source_records": 2394,
       "candidate_records": 7,
       "review_records": 0,
-      "checked_at": "2026-09-17 22:27"
+      "checked_at": "2026-09-18 08:09"
+    },
+    "2026-09-18": {
+      "status": "complete",
+      "source_records": 2350,
+      "candidate_records": 2,
+      "review_records": 0,
+      "checked_at": "2026-09-18 08:09"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260918,
+      "filename": "ttd-71331618",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "115學年度影印機租賃",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150917",
+      "unit_id": "3.76.45.96.38",
+      "unit_name": "苗栗縣立新港國民中小學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.45.96.38",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.45.96.38&job_number=1150917",
+      "unit_url": "/index/unit/3.76.45.96.38",
+      "url": "/index/case/3.76.45.96.38/1150917/20260918/ttd-71331618",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20260918,
+      "filename": "TIQ-1-71117547",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "總管理處數位式多功能影印機租賃共61台",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "0141500039",
+      "unit_id": "3.13.31",
+      "unit_name": "台灣電力股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.31",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.31&job_number=0141500039",
+      "unit_url": "/index/unit/3.13.31",
+      "url": "/index/case/3.13.31/0141500039/20260918/TIQ-1-71117547",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機",
+          "多功能影印"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
     {
       "date": 20260917,
       "filename": "ttd-71328207",
@@ -5645,6 +5941,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.76.45.96.38",
+      "unit_name": "苗栗縣立新港國民中小學",
+      "award_date": "2024-12-16",
+      "year": 2024,
+      "title": "113學年度影印機租賃",
+      "job_number": "1130923",
+      "budget": 362673,
+      "award_price": 257600,
+      "discount_rate": 71.0,
+      "winner": "量群科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA2OTE3MzA=",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.79.51.5",
       "unit_name": "臺北市政府捷運工程局第一區工程處",
       "award_date": "2024-12-11",
@@ -6575,6 +6886,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.76.45.96.38",
+      "unit_name": "苗栗縣立新港國民中小學",
+      "award_date": "2022-09-28",
+      "year": 2022,
+      "title": "111學年度影印機租賃",
+      "job_number": "1110920A",
+      "budget": 326900,
+      "award_price": 239900,
+      "discount_rate": 73.4,
+      "winner": "量群科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzAxMDE4MDU=",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.49.100.4",
       "unit_name": "高雄市選舉委員會",
       "award_date": "2022-09-20",
@@ -7396,6 +7722,21 @@
       "discount_rate": 98.5,
       "winner": "台灣奇茂資訊有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200925&fn=BDM-1-53200124.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.76.45.96.38",
+      "unit_name": "苗栗縣立新港國民中小學",
+      "award_date": "2020-09-16",
+      "year": 2020,
+      "title": "109學年度影印機租賃",
+      "job_number": "1090831",
+      "budget": 289000,
+      "award_price": 197100,
+      "discount_rate": 68.2,
+      "winner": "量群科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTMxOTMyNjY=",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -8570,6 +8911,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.76.45.96.38",
+      "unit_name": "苗栗縣立新港國民中小學",
+      "award_date": "2014-12-10",
+      "year": 2014,
+      "title": "新港國中小充實新建校舍之事務機設備採購",
+      "job_number": "1031128BB",
+      "budget": 487000,
+      "award_price": 352700,
+      "discount_rate": 72.4,
+      "winner": "後龍電腦資訊",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20141210&fn=BDM-1-51430439.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.49.100.4",
       "unit_name": "高雄市選舉委員會",
       "award_date": "2014-10-24",
@@ -9210,7 +9566,8 @@
     "A.21.100.41": "2026-09-18",
     "3.13.52": "2026-09-18",
     "3.13.20": "2026-09-18",
-    "3.80.16": "2026-09-18"
+    "3.80.16": "2026-09-18",
+    "3.76.45.96.38": "2026-09-18"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
@@ -9648,14 +10005,14 @@
         }
       ],
       "current_status": {
-        "status": "solicitation",
-        "badge_label": "🔥 本案已啟動招標前置：公開徵求中",
-        "stage": "公開徵求",
-        "date": "2026-07-22",
-        "job_number": "TPC-014-1150721-01",
+        "status": "tender",
+        "badge_label": "🎯 本案已正式上架招標中",
+        "stage": "正式開標",
+        "date": "2026-09-18",
+        "job_number": "0141500039",
         "title": "總管理處數位式多功能影印機租賃共61台",
-        "notice_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260722&fn=PPW-1-70109888.xml",
-        "action_note": "機關於 2026-07-22 發布「公開徵求廠商提供參考資料」（案號 TPC-014-1150721-01），正處於訪價與規格徵詢黃金期，請速送理光型錄與建議規格！"
+        "notice_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzMzA4MTk",
+        "action_note": "本案已在「01 影印機案件監控」正式上線招標（案號 0141500039），請儘速備標投標！"
       },
       "expansion": {
         "has_extension": false,
@@ -9663,7 +10020,7 @@
         "badge_label": "🔴 常態期滿（依法重招）",
         "notice": "本合約無擴充條款，期滿依法必須公開重新招標。"
       },
-      "action_suggestion": "【🔥 機關已啟動公開徵求】機關於 2026-07-22 公告「總管理處數位式多功能影印機租賃共61台」（案號 TPC-014-1150721-01），請即刻聯繫採購承辦提供型錄與參考規格！"
+      "action_suggestion": "【🎯 機關已正式上架招標】案號 0141500039 已在 01 分頁進行中，請前往備標投標！"
     },
     {
       "id": "forecast-3.79.51.5-影印機租賃採購案-standard",
@@ -9795,6 +10152,88 @@
         "notice": "本合約無擴充條款，期滿依法必須公開重新招標。"
       },
       "action_suggestion": "【⚔️ 他牌進攻】目前為他牌（國碩）防守，建議於 2026年11月 前完成採購與資訊組初訪，提供機種規格草案與 POC，爭取搶單先機！"
+    },
+    {
+      "id": "forecast-3.76.45.96.38-影印機租賃-standard",
+      "unit_id": "3.76.45.96.38",
+      "unit": "苗栗縣立新港國民中小學",
+      "city": "苗栗縣",
+      "series_title": "影印機租賃",
+      "predicted_title": "115-116年影印機租賃",
+      "latest_title": "113學年度影印機租賃",
+      "latest_job_number": "1130923",
+      "latest_source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA2OTE3MzA=",
+      "latest_award_date": "2024-12-16",
+      "latest_award_price": 257600,
+      "latest_award_price_str": "NT$ 257,600",
+      "latest_winner": "量群科技有限公司",
+      "incumbent": {
+        "type": "competitor",
+        "name": "量群科技有限公司",
+        "brand": "量群科技有限公司",
+        "label": "⚔️ 他牌進攻：量群科技有限公司（進攻目標）",
+        "badge_class": "bg-rose-950/60 border-rose-500/50 text-rose-400"
+      },
+      "predicted_date": "2026-11-01",
+      "predicted_month": "2026年11月",
+      "predicted_range": "2026年11月 ～ 12月",
+      "days_until": 44,
+      "countdown_label": "倒數 44 天",
+      "cadence_months": 24,
+      "cadence_summary": "歷史每 24 個月定期換約（2年約）",
+      "history_count": 3,
+      "history_track": [
+        {
+          "index": 1,
+          "date": "2020-09-16",
+          "month": "2020-09",
+          "winner": "量群科技有限公司",
+          "award_price": 197100,
+          "discount_rate": 68.2,
+          "job_number": "1090831",
+          "title": "109學年度影印機租賃",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTMxOTMyNjY="
+        },
+        {
+          "index": 2,
+          "date": "2022-09-28",
+          "month": "2022-09",
+          "winner": "量群科技有限公司",
+          "award_price": 239900,
+          "discount_rate": 73.4,
+          "job_number": "1110920A",
+          "title": "111學年度影印機租賃",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzAxMDE4MDU="
+        },
+        {
+          "index": 3,
+          "date": "2024-12-16",
+          "month": "2024-12",
+          "winner": "量群科技有限公司",
+          "award_price": 257600,
+          "discount_rate": 71.0,
+          "job_number": "1130923",
+          "title": "113學年度影印機租賃",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA2OTE3MzA="
+        }
+      ],
+      "current_status": {
+        "status": "tender",
+        "badge_label": "🎯 本案已正式上架招標中",
+        "stage": "正式開標",
+        "date": "2026-09-18",
+        "job_number": "1150917",
+        "title": "115學年度影印機租賃",
+        "notice_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzMzE2MTg",
+        "action_note": "本案已在「01 影印機案件監控」正式上線招標（案號 1150917），請儘速備標投標！"
+      },
+      "expansion": {
+        "has_extension": false,
+        "type": "standard",
+        "badge_label": "🔴 常態期滿（依法重招）",
+        "notice": "本合約無擴充條款，期滿依法必須公開重新招標。"
+      },
+      "action_suggestion": "【🎯 機關已正式上架招標】案號 1150917 已在 01 分頁進行中，請前往備標投標！"
     },
     {
       "id": "forecast-3.79.51.6-影印機租賃採購案-standard",
@@ -10127,11 +10566,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 0,
-    "remaining": 500,
-    "usage_percent": 0.0,
+    "used_24h": 3,
+    "remaining": 497,
+    "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-18 05:37:39"
+    "updated_at": "2026-09-18 08:12:42"
   }
 }
