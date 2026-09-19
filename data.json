@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-19 05:07",
+  "last_updated": "2026-09-19 08:16",
   "tenders": [
     {
       "city": "苗栗縣",
@@ -1642,13 +1642,13 @@
     "today": "2026-09-19",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-18 21:55",
-    "source_records": 2494,
-    "candidate_records": 2,
+    "latest_attempt_at": "2026-09-19 08:16",
+    "source_records": 0,
+    "candidate_records": 0,
     "review_records": 0,
     "successful_dates": [
-      "2026-09-18",
-      "2026-09-17"
+      "2026-09-19",
+      "2026-09-18"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -2076,10 +2076,17 @@
     },
     "2026-09-18": {
       "status": "complete",
-      "source_records": 2494,
+      "source_records": 2495,
       "candidate_records": 2,
       "review_records": 0,
-      "checked_at": "2026-09-18 21:52"
+      "checked_at": "2026-09-19 08:13"
+    },
+    "2026-09-19": {
+      "status": "complete",
+      "source_records": 0,
+      "candidate_records": 0,
+      "review_records": 0,
+      "checked_at": "2026-09-19 08:13"
     }
   },
   "candidate_cache": [
@@ -10215,11 +10222,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 3,
-    "remaining": 497,
-    "usage_percent": 0.6,
+    "used_24h": 0,
+    "remaining": 500,
+    "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-19 05:07:40"
+    "updated_at": "2026-09-19 08:16:36"
   }
 }
