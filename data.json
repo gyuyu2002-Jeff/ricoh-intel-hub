@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-19 15:20",
+  "last_updated": "2026-09-19 20:30",
   "tenders": [
     {
       "city": "苗栗縣",
@@ -1642,7 +1642,7 @@
     "today": "2026-09-19",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-19 15:20",
+    "latest_attempt_at": "2026-09-19 20:30",
     "source_records": 0,
     "candidate_records": 0,
     "review_records": 0,
@@ -2079,14 +2079,14 @@
       "source_records": 2495,
       "candidate_records": 2,
       "review_records": 0,
-      "checked_at": "2026-09-19 15:17"
+      "checked_at": "2026-09-19 20:27"
     },
     "2026-09-19": {
       "status": "complete",
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-19 15:17"
+      "checked_at": "2026-09-19 20:27"
     }
   },
   "candidate_cache": [
@@ -10227,6 +10227,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-19 15:20:01"
+    "updated_at": "2026-09-19 20:30:14"
   }
 }
