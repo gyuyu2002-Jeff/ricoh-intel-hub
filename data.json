@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-21 06:37",
+  "last_updated": "2026-09-21 08:13",
   "tenders": [
     {
       "city": "苗栗縣",
@@ -1642,13 +1642,13 @@
     "today": "2026-09-21",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-20 21:45",
-    "source_records": 0,
-    "candidate_records": 0,
+    "latest_attempt_at": "2026-09-21 08:13",
+    "source_records": 1668,
+    "candidate_records": 1,
     "review_records": 0,
     "successful_dates": [
-      "2026-09-20",
-      "2026-09-19"
+      "2026-09-21",
+      "2026-09-20"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -2079,10 +2079,107 @@
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-20 21:42"
+      "checked_at": "2026-09-21 08:10"
+    },
+    "2026-09-21": {
+      "status": "complete",
+      "source_records": 1668,
+      "candidate_records": 1,
+      "review_records": 0,
+      "checked_at": "2026-09-21 08:10"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260921,
+      "filename": "BDM-1-71287651",
+      "brief": {
+        "type": "決標公告",
+        "title": "整合郵務窗口熱轉印式印表機有背膠紙卷",
+        "companies": {
+          "ids": [
+            "94039345",
+            "22710103",
+            "23574540",
+            "36401991",
+            "28913512"
+          ],
+          "names": [
+            "伍合國際股份有限公司",
+            "久誼股份有限公司",
+            "巨川資訊用品股份有限公司",
+            "正隆股份有限公司大園紙品廠",
+            "精聯電子股份有限公司 (UNITECH ELECTRONICS CO., LTD.)",
+            "UNITECH ELECTRONICS CO., LTD."
+          ],
+          "id_key": {
+            "22710103": [
+              "投標廠商:投標廠商2:廠商代碼"
+            ],
+            "23574540": [
+              "投標廠商:投標廠商3:廠商代碼"
+            ],
+            "28913512": [
+              "投標廠商:投標廠商5:廠商代碼",
+              "英文公告:廠商代碼"
+            ],
+            "36401991": [
+              "投標廠商:投標廠商4:廠商代碼"
+            ],
+            "94039345": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "久誼股份有限公司": [
+              "投標廠商:投標廠商2:廠商名稱",
+              "決標品項:第1品項:未得標廠商1:未得標廠商"
+            ],
+            "UNITECH ELECTRONICS CO., LTD.": [
+              "英文公告:廠商名稱"
+            ],
+            "伍合國際股份有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ],
+            "巨川資訊用品股份有限公司": [
+              "投標廠商:投標廠商3:廠商名稱",
+              "決標品項:第1品項:未得標廠商2:未得標廠商"
+            ],
+            "正隆股份有限公司大園紙品廠": [
+              "投標廠商:投標廠商4:廠商名稱",
+              "決標品項:第1品項:未得標廠商3:未得標廠商"
+            ],
+            "精聯電子股份有限公司 (UNITECH ELECTRONICS CO., LTD.)": [
+              "投標廠商:投標廠商5:廠商名稱",
+              "決標品項:第1品項:未得標廠商4:未得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115-2-291",
+      "unit_id": "3.15.83",
+      "unit_name": "中華郵政股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83&job_number=115-2-291",
+      "unit_url": "/index/unit/3.15.83",
+      "url": "/index/case/3.15.83/115-2-291/20260921/BDM-1-71287651",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
     {
       "date": 20260918,
       "filename": "ttd-71331618",
@@ -10146,6 +10243,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-21 06:37:55"
+    "updated_at": "2026-09-21 08:13:42"
   }
 }
