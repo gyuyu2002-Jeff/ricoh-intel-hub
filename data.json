@@ -1,6 +1,240 @@
 {
-  "last_updated": "2026-09-22 02:17",
+  "last_updated": "2026-09-22 06:08",
   "tenders": [
+    {
+      "city": "高雄市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "高雄市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "115年地方公職人員選舉雷射印表機耗材",
+      "unit": "高雄市選舉委員會",
+      "unit_id": "3.49.100.4",
+      "job_number": "1151128-5",
+      "publish_date": "2026-09-22",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-06",
+      "deadline_confidence": "inferred",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "99.5%",
+      "discount_source": "近 5 年 2 筆同設備、同契約型態決標折扣中位數",
+      "main_competitor": "群曜數位科技股份有限公司 (ChyunYao Digitalization Technology INC.)",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 2,
+        "discount_rate": 99.5
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260922&fn=NAI-1-71288151.xml",
+      "history_stats": [
+        {
+          "year": 2022,
+          "val": 99,
+          "type": "real",
+          "winner": "大同股份有限公司高雄分公司"
+        },
+        {
+          "year": 2025,
+          "val": 99,
+          "type": "real",
+          "winner": "群曜數位科技股份有限公司 (ChyunYao Digitalization Technology INC.)"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2025-07-23",
+          "year": 2025,
+          "title": "114年全國性公民投票雷射印表機耗材",
+          "job_number": "1140823-8",
+          "budget": 2235750,
+          "award_price": 2229100,
+          "discount_rate": 99.7,
+          "winner": "群曜數位科技股份有限公司 (ChyunYao Digitalization Technology INC.)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250723&fn=BDM-1-70932837.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.49.100.4",
+          "source_unit": "高雄市選舉委員會",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2022-09-20",
+          "year": 2022,
+          "title": "111年地方公職人員選舉及憲法修正案之複決案雷射印表機耗材",
+          "job_number": "1110906",
+          "budget": 4633020,
+          "award_price": 4601000,
+          "discount_rate": 99.3,
+          "winner": "大同股份有限公司高雄分公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20220920&fn=BDM-2-70088100.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.49.100.4",
+          "source_unit": "高雄市選舉委員會",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2021-07-26",
+          "year": 2021,
+          "title": "110年全國性公民投票雷射印表機耗材",
+          "job_number": "1100722",
+          "budget": 2207450,
+          "award_price": 2200000,
+          "discount_rate": 99.7,
+          "winner": "大同股份有限公司高雄分公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20210726&fn=BDM-1-53462319.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.49.100.4",
+          "source_unit": "高雄市選舉委員會",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2020-07-27",
+          "year": 2020,
+          "title": "高雄市第3屆市長補選雷射印表機耗材",
+          "job_number": "1090717",
+          "budget": 2067900,
+          "award_price": 2059000,
+          "discount_rate": 99.6,
+          "winner": "大同股份有限公司高雄分公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200727&fn=BDM-1-53150046.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.49.100.4",
+          "source_unit": "高雄市選舉委員會",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2020-05-21",
+          "year": 2020,
+          "title": "高雄市第三屆市長罷免案雷射印表機耗材",
+          "job_number": "1090428-1",
+          "budget": 2290500,
+          "award_price": 2280000,
+          "discount_rate": 99.5,
+          "winner": "大同股份有限公司高雄分公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200521&fn=BDM-1-53094265.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.49.100.4",
+          "source_unit": "高雄市選舉委員會",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2019-12-03",
+          "year": 2019,
+          "title": "第15任總統副總統及第10屆立法委員選舉雷射印表機碳粉匣、感光鼓及輾壓加熱器",
+          "job_number": "1081103-1",
+          "budget": 2393400,
+          "award_price": 2360000,
+          "discount_rate": 98.6,
+          "winner": "大同股份有限公司高雄分公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20191203&fn=BDM-1-52940846.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.49.100.4",
+          "source_unit": "高雄市選舉委員會",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2018-11-06",
+          "year": 2018,
+          "title": "一、\t「107年全國性公民投票案」雷射印表機碳粉匣、感光鼓及加熱器模組",
+          "job_number": "1071020-1",
+          "budget": 1897248,
+          "award_price": 1837000,
+          "discount_rate": 96.8,
+          "winner": "大同股份有限公司高雄分公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20181106&fn=BDM-1-52597520.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.49.100.4",
+          "source_unit": "高雄市選舉委員會",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2018-10-12",
+          "year": 2018,
+          "title": "高雄市第3屆市長、市議員暨里長及第2屆山地原住民區長、區民代表選舉雷射印表機碳粉匣、感光鼓及加熱器模組",
+          "job_number": "1070908-1",
+          "budget": 2296672,
+          "award_price": 2170000,
+          "discount_rate": 94.5,
+          "winner": "大同股份有限公司高雄分公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20181012&fn=BDM-1-52575123.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.49.100.4",
+          "source_unit": "高雄市選舉委員會",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2015-12-08",
+          "year": 2015,
+          "title": "第14任總統、副總統及第9屆立法委員選舉雷射印表機用感光鼓、加熱器模組",
+          "job_number": "1041111",
+          "budget": 1925430,
+          "award_price": 1897600,
+          "discount_rate": 98.6,
+          "winner": "大同股份有限公司高雄分公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20151208&fn=BDM-1-51711616.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.49.100.4",
+          "source_unit": "高雄市選舉委員會",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2014-10-24",
+          "year": 2014,
+          "title": "高雄市第2屆市長、議員暨里長選舉及第1屆山地原住民區長、區民代表選舉雷射印表機用感光鼓、加熱器模組",
+          "job_number": "1031007",
+          "budget": 2146632,
+          "award_price": 2000000,
+          "discount_rate": 93.2,
+          "winner": "大同股份有限公司高雄分公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20141024&fn=BDM-1-51384856.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.49.100.4",
+          "source_unit": "高雄市選舉委員會",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "supplies",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "印表機耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
     {
       "city": "苗栗縣",
       "city_source": "履約地點",
@@ -1605,7 +1839,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-09-22 02:17",
+      "last_run_at": "2026-09-22 06:08",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -10156,6 +10390,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-22 02:17:55"
+    "updated_at": "2026-09-22 06:08:16"
   }
 }
