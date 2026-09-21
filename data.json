@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-22 00:06",
+  "last_updated": "2026-09-22 02:17",
   "tenders": [
     {
       "city": "苗栗縣",
@@ -1605,7 +1605,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-09-21 06:37",
+      "last_run_at": "2026-09-22 02:17",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -10156,6 +10156,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-22 00:06:02"
+    "updated_at": "2026-09-22 02:17:55"
   }
 }
