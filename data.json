@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-22 06:08",
+  "last_updated": "2026-09-22 08:47",
   "tenders": [
     {
       "city": "高雄市",
@@ -1826,9 +1826,9 @@
     "today": "2026-09-22",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-22 00:06",
-    "source_records": 0,
-    "candidate_records": 0,
+    "latest_attempt_at": "2026-09-22 08:47",
+    "source_records": 1795,
+    "candidate_records": 1,
     "review_records": 0,
     "successful_dates": [
       "2026-09-22",
@@ -2263,17 +2263,53 @@
       "source_records": 1782,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-22 00:01"
+      "checked_at": "2026-09-22 08:45"
     },
     "2026-09-22": {
       "status": "complete",
-      "source_records": 0,
-      "candidate_records": 0,
+      "source_records": 1795,
+      "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-22 00:01"
+      "checked_at": "2026-09-22 08:45"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260922,
+      "filename": "NAI-1-71288151",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "115年地方公職人員選舉雷射印表機耗材",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1151128-5",
+      "unit_id": "3.49.100.4",
+      "unit_name": "高雄市選舉委員會",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.49.100.4",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.49.100.4&job_number=1151128-5",
+      "unit_url": "/index/unit/3.49.100.4",
+      "url": "/index/case/3.49.100.4/1151128-5/20260922/NAI-1-71288151",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "印表機耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
     {
       "date": 20260921,
       "filename": "BDM-1-71287651",
@@ -10390,6 +10426,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-22 06:08:16"
+    "updated_at": "2026-09-22 08:47:45"
   }
 }
