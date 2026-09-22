@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-23 01:12",
+  "last_updated": "2026-09-23 05:34",
   "tenders": [
     {
       "city": "高雄市",
@@ -1629,7 +1629,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-09-23 01:12",
+      "last_run_at": "2026-09-23 05:34",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -10209,6 +10209,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-23 01:12:51"
+    "updated_at": "2026-09-23 05:34:58"
   }
 }
