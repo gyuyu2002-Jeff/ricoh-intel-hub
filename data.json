@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-23 21:38",
+  "last_updated": "2026-09-23 22:29",
   "tenders": [
     {
       "city": "高雄市",
@@ -1716,7 +1716,7 @@
     "today": "2026-09-23",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-23 21:38",
+    "latest_attempt_at": "2026-09-23 22:29",
     "source_records": 2932,
     "candidate_records": 2,
     "review_records": 0,
@@ -2153,14 +2153,14 @@
       "source_records": 2005,
       "candidate_records": 1,
       "review_records": 0,
-      "checked_at": "2026-09-23 21:35"
+      "checked_at": "2026-09-23 22:26"
     },
     "2026-09-23": {
       "status": "complete",
       "source_records": 2932,
       "candidate_records": 2,
       "review_records": 0,
-      "checked_at": "2026-09-23 21:35"
+      "checked_at": "2026-09-23 22:26"
     }
   },
   "candidate_cache": [
@@ -10440,6 +10440,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-23 21:38:02"
+    "updated_at": "2026-09-23 22:29:33"
   }
 }
