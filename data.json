@@ -1,6 +1,56 @@
 {
-  "last_updated": "2026-09-29 01:54",
+  "last_updated": "2026-09-29 03:48",
   "tenders": [
+    {
+      "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "115-117年單張式／連續式印表機列印藥袋張數採購案（附使用之印表機及相關耗材",
+      "unit": "臺北市立聯合醫院",
+      "unit_id": "3.79.14.14",
+      "job_number": "F115046",
+      "publish_date": "2026-09-29",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-05",
+      "deadline_confidence": "verified",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260929&fn=NAI-1-71292398.xml",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 3,
+      "stream": "peripherals",
+      "sub_type": "supplies",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
     {
       "city": "台北市",
       "city_source": "履約地點",
@@ -1610,7 +1660,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-09-28 05:32",
+      "last_run_at": "2026-09-29 03:48",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -10467,6 +10517,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-29 01:54:13"
+    "updated_at": "2026-09-29 03:48:53"
   }
 }
