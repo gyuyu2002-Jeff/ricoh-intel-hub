@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-29 08:30",
+  "last_updated": "2026-09-29 09:53",
   "tenders": [
     {
       "city": "台北市",
@@ -1647,9 +1647,9 @@
     "today": "2026-09-29",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-09-29 01:54",
-    "source_records": 207,
-    "candidate_records": 0,
+    "latest_attempt_at": "2026-09-29 09:53",
+    "source_records": 2010,
+    "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
       "2026-09-29",
@@ -2084,17 +2084,139 @@
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-09-29 01:49"
+      "checked_at": "2026-09-29 09:50"
     },
     "2026-09-29": {
       "status": "complete",
-      "source_records": 207,
-      "candidate_records": 0,
+      "source_records": 2010,
+      "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-09-29 01:49"
+      "checked_at": "2026-09-29 09:50"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20260929,
+      "filename": "TIQ-1-71123041",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "115-117年單張式／連續式印表機列印藥袋張數採購案（附使用之印表機及相關耗材",
+        "category": "財物類32-紙漿,紙及紙產品;印刷品及相關的商品",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "F115046",
+      "unit_id": "3.79.14.14",
+      "unit_name": "臺北市立聯合醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.14.14",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.14.14&job_number=F115046",
+      "unit_url": "/index/unit/3.79.14.14",
+      "url": "/index/case/3.79.14.14/F115046/20260929/TIQ-1-71123041",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20260929,
+      "filename": "NAI-1-71292398",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "115-117年單張式／連續式印表機列印藥袋張數採購案（附使用之印表機及相關耗材",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "F115046",
+      "unit_id": "3.79.14.14",
+      "unit_name": "臺北市立聯合醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.14.14",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.14.14&job_number=F115046",
+      "unit_url": "/index/unit/3.79.14.14",
+      "url": "/index/case/3.79.14.14/F115046/20260929/NAI-1-71292398",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20260929,
+      "filename": "BDM-1-71292150",
+      "brief": {
+        "type": "決標公告",
+        "title": "中央研究院院本部所屬單位影印機配件租賃",
+        "companies": {
+          "ids": [
+            "82843583"
+          ],
+          "names": [
+            "台灣富士軟片系統整合股份有限公司 (FUJIFILM BI System Integration Taiwan Co., Ltd.)"
+          ],
+          "id_key": {
+            "82843583": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "台灣富士軟片系統整合股份有限公司 (FUJIFILM BI System Integration Taiwan Co., Ltd.)": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115-M32",
+      "unit_id": "2.1",
+      "unit_name": "中央研究院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=2.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=2.1&job_number=115-M32",
+      "unit_url": "/index/unit/2.1",
+      "url": "/index/case/2.1/115-M32/20260929/BDM-1-71292150",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
     {
       "date": 20260924,
       "filename": "anaa-71291757",
@@ -3323,43 +3445,6 @@
           "title"
         ],
         "reason": "命中文件掃描器設備標的"
-      }
-    },
-    {
-      "date": 20260909,
-      "filename": "TIQ-1-71111090",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "115-117年單張式／連續式印表機列印藥袋張數採購案（附使用之印表機及相關耗材",
-        "category": "財物類32-紙漿,紙及紙產品;印刷品及相關的商品",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "F115046",
-      "unit_id": "3.79.14.14",
-      "unit_name": "臺北市立聯合醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.14.14",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.14.14&job_number=F115046",
-      "unit_url": "/index/unit/3.79.14.14",
-      "url": "/index/case/3.79.14.14/F115046/20260909/TIQ-1-71111090",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "耗材"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
       }
     },
     {
@@ -10517,6 +10602,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-29 08:30:33"
+    "updated_at": "2026-09-29 09:53:29"
   }
 }
