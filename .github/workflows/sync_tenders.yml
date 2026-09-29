@@ -18,11 +18,14 @@ on:
           - live
           - maintenance
 
+permissions:
+  contents: write # Allows pushing the updated data.json back to the repo
+  pages: write    # Allows uploading and deploying GitHub Pages
+  id-token: write # Allows OIDC token for GitHub Pages
+
 jobs:
   sync:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # Allows pushing the updated data.json back to the repo
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -71,10 +74,47 @@ jobs:
           ADMIN_NOTIFY_EMAIL: ${{ secrets.ADMIN_NOTIFY_EMAIL || 'gyuyu2002@gmail.com' }}
         run: python send_alerts.py
 
-      - name: Commit and Push Changes
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Sync live tender data into public assets
+        run: cp data.json client/public/data.json
+
+      - name: Build website
+        env:
+          GITHUB_PAGES: "true"
+        run: npm run build
+
+      - name: Sync build output to repository root
         run: |
+          cp -r dist/* .
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json sent_notifications.json subscribers.json
+          git add data.json client/public/data.json sent_notifications.json subscribers.json index.html assets/
           git diff --cached --quiet && git commit --allow-empty -m "Auto-sync $UPDATE_MODE: $(date -u +'%Y-%m-%d %H:%M UTC')" || git commit -m "Auto-sync $UPDATE_MODE: $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: sync
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

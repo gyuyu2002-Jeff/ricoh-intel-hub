@@ -1947,7 +1947,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
 
   useEffect(() => {
     let active = true;
-    const dataUrl = new URL("data.json", document.baseURI).toString();
+    const dataUrl = new URL(`data.json?_t=${Date.now()}`, document.baseURI).toString();
     fetch(dataUrl, { cache: "no-store" })
       .then((response) => response.ok ? response.json() as Promise<TenderPayload> : Promise.reject(new Error("data.json unavailable")))
       .then((data) => {

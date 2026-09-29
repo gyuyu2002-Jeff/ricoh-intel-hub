@@ -388,6 +388,7 @@ class TestSendAlerts(unittest.TestCase):
             save_json_file,
             load_json_file,
             SENT_LOG_FILE,
+            DATA_FILE,
             QUOTA_CIRCUIT_BREAKER
         )
         from datetime import datetime, timezone, timedelta
@@ -398,14 +399,16 @@ class TestSendAlerts(unittest.TestCase):
         for i in range(QUOTA_CIRCUIT_BREAKER + 5):
             log_email_delivery(test_logs, f"user{i}@test.com", now=now - timedelta(minutes=10))
 
-        backup = load_json_file(SENT_LOG_FILE, default_val={})
+        backup_sent = load_json_file(SENT_LOG_FILE, default_val={})
+        backup_data = load_json_file(DATA_FILE, default_val={})
         try:
             save_json_file(SENT_LOG_FILE, test_logs)
             dispatched = dispatch_alerts(dry_run=True)
             # Circuit breaker must halt and notify 0 subscribers
             self.assertEqual(dispatched, 0)
         finally:
-            save_json_file(SENT_LOG_FILE, backup)
+            save_json_file(SENT_LOG_FILE, backup_sent)
+            save_json_file(DATA_FILE, backup_data)
 
 
 if __name__ == "__main__":
