@@ -1,6 +1,57 @@
 {
-  "last_updated": "2026-09-30 00:12",
+  "last_updated": "2026-09-30 02:14",
   "tenders": [
+    {
+      "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "3D電腦全自動磨片機（含掃描器、定位機）",
+      "unit": "康寧學校財團法人康寧大學",
+      "unit_id": "17416729",
+      "job_number": "115334",
+      "publish_date": "2026-09-30",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-02",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/nonAtm?pk=NzEyOTQwMzc=",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "scanner",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "scanner",
+        "stream": "peripherals",
+        "sub_type": "scanner",
+        "matched_terms": [
+          "掃描器"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中文件掃描器設備標的"
+      }
+    },
     {
       "city": "台北市",
       "city_source": "履約地點",
@@ -50,57 +101,6 @@
           "title"
         ],
         "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "city": "台北市",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "臺北市(非原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "3D電腦全自動磨片機（含掃描器、定位機）",
-      "unit": "康寧學校財團法人康寧大學",
-      "unit_id": "17416729",
-      "job_number": "115334",
-      "publish_date": "2026-09-29",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-09-15",
-      "deadline_confidence": "verified",
-      "award_date": "",
-      "budget": "無公開數據",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/nonAtm?pk=NzEyOTQwMzc=",
-      "history_stats": [],
-      "history_records": [],
-      "stage": "無法決標",
-      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "scanner",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "scanner",
-        "stream": "peripherals",
-        "sub_type": "scanner",
-        "matched_terms": [
-          "掃描器"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中文件掃描器設備標的"
       }
     },
     {
@@ -1363,7 +1363,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-09-29 08:30",
+      "last_run_at": "2026-09-30 02:14",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -10323,6 +10323,6 @@
     "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-09-30 00:12:41"
+    "updated_at": "2026-09-30 02:14:16"
   }
 }
