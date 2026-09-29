@@ -107,7 +107,16 @@ type TenderPayload = {
     latest_attempt_at?: string;
   };
 };
-type HistoryRow = [date: string, awardCode: string, rate: string, winner: string, sourceUrl?: string, title?: string];
+type HistoryRow = [
+  date: string,
+  awardCode: string,
+  rate: string,
+  winner: string,
+  sourceUrl?: string,
+  title?: string,
+  sourceUnit?: string,
+  relationScope?: string
+];
 type Tender = {
   priority: string;
   priorityLabel: string;
@@ -116,6 +125,7 @@ type Tender = {
   stageTone: string;
   isAwarded: boolean;
   awardPrice: string;
+  awardDate?: string;
   countdown: string;
   title: string;
   job: string;
@@ -408,6 +418,7 @@ type RawTender = {
   deadline_confidence?: "verified" | "inferred" | "unknown" | string;
   budget?: string | number;
   award_price?: string | number;
+  award_date?: string;
   avg_discount?: string;
   suggested_price?: string;
   main_competitor?: string;
@@ -503,7 +514,8 @@ export function mapRawTender(raw: RawTender, isReview = false): Tender {
     stageTone,
     isAwarded,
     awardPrice: typeof raw.award_price === "number" ? `NT$ ${raw.award_price.toLocaleString("en-US")}` : raw.award_price ?? "未公開",
-    countdown: formatDeadlineCountdown(raw.deadline),
+    awardDate: raw.award_date,
+    countdown: isAwarded ? "已正式決標" : stage === "無法決標" ? "無法決標" : formatDeadlineCountdown(raw.deadline),
     title: raw.title ?? "未命名標案",
     job: raw.job_number ?? "待查",
     unit: raw.unit ?? "機關待確認",
@@ -622,7 +634,24 @@ function TenderCard({ tender }: { tender: Tender }) {
         <button className="icon-button" aria-label="更多案件操作"><MoreHorizontal size={18} /></button>
       </div>
       <div className="metric-grid">
-        <Metric label="截止日" value={tender.deadline} note={`${tender.stage} · ${tender.deadlineConfidence === "verified" ? "官方日期" : tender.deadlineConfidence === "inferred" ? "日期推估" : "日期待確認"}`} alert={tender.priority === "P1"} />
+        {tender.isAwarded ? (
+          <Metric
+            label="決標日期"
+            value={tender.awardDate || (tender.deadlineConfidence === "verified" ? `截標 ${tender.deadline}` : "已決標")}
+            note={
+              tender.awardDate && tender.deadline && tender.deadline !== "未公開" && tender.deadlineConfidence === "verified"
+                ? `原截標日 ${tender.deadline}`
+                : "官方決標公告"
+            }
+          />
+        ) : (
+          <Metric
+            label="截止日"
+            value={tender.deadline}
+            note={`${tender.stage} · ${tender.deadlineConfidence === "verified" ? "官方日期" : tender.deadlineConfidence === "inferred" ? "日期推估" : "日期待確認"}`}
+            alert={tender.priority === "P1"}
+          />
+        )}
         <Metric label={tender.isAwarded ? "決標金額" : "預算"} value={tender.isAwarded ? tender.awardPrice : tender.budget} note={tender.isAwarded ? "官方決標公告已提供" : tender.budget.includes("無") ? "附件／後續公告待確認" : "官方公告已提供"} />
         {tender.isAwarded ? <>
           <Metric label="本次得標廠商" value={tender.currentWinner} note="本次官方決標公告" />

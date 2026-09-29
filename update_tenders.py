@@ -239,7 +239,7 @@ def is_terminal_notice_type(notice_type):
     return status_text_contains(notice_type, FAILED_STATUS_TERMS + AWARD_NOTICE_TYPE_TERMS)
 
 
-def extract_dates(detail, publish_fallback_str):
+def extract_dates(detail, publish_fallback_str="", infer_deadline=True):
     publish_date = ""
     deadline_date = ""
     publish_confidence = "unknown"
@@ -289,7 +289,7 @@ def extract_dates(detail, publish_fallback_str):
             except:
                 pass
                 
-    if not deadline_date and publish_date:
+    if infer_deadline and not deadline_date and publish_date:
         deadline_confidence = "inferred"
         try:
             dt = datetime.strptime(publish_date, "%Y-%m-%d")
@@ -298,6 +298,37 @@ def extract_dates(detail, publish_fallback_str):
             pass
             
     return publish_date, deadline_date, publish_confidence, deadline_confidence
+
+
+def extract_award_date(detail, fallback_str=""):
+    for k, v in detail.items():
+        if "決標日" in k and "公告" not in k and "remind" not in k and v:
+            val = str(v).strip()
+            digits = re.findall(r'\d+', val)
+            if len(digits) >= 3:
+                try:
+                    roc_year = int(digits[0])
+                    ad_year = roc_year + 1911 if roc_year < 1911 else roc_year
+                    return f"{ad_year}-{int(digits[1]):02d}-{int(digits[2]):02d}"
+                except:
+                    pass
+    for k, v in detail.items():
+        if "決標日" in k and "remind" not in k and v:
+            val = str(v).strip()
+            digits = re.findall(r'\d+', val)
+            if len(digits) >= 3:
+                try:
+                    roc_year = int(digits[0])
+                    ad_year = roc_year + 1911 if roc_year < 1911 else roc_year
+                    return f"{ad_year}-{int(digits[1]):02d}-{int(digits[2]):02d}"
+                except:
+                    pass
+    if fallback_str and len(fallback_str) == 8:
+        try:
+            return datetime.strptime(fallback_str, "%Y%m%d").strftime("%Y-%m-%d")
+        except:
+            pass
+    return ""
 
 def extract_winning_competitor(detail):
     winner = ""
@@ -1889,6 +1920,7 @@ def main(mode="live", backfill_days=None):
             # Scan entire list to ensure successful awards take absolute precedence over historical failures
             award_record = None
             failed_record = None
+            actual_award_date = ""
             for r in records:
                 r_type = r.get("brief", {}).get("type", "")
                 r_detail = r.get("detail", {})
@@ -1910,6 +1942,7 @@ def main(mode="live", backfill_days=None):
                 detail_obj = failed_record.get("detail", {})
                 tender_url = detail_obj.get("url", "")
                 award_date_str = str(failed_record.get("date", ""))
+                actual_award_date = extract_award_date(detail_obj, award_date_str)
                 if award_date_str:
                     try:
                         # Check age (skip if older than 7 days)
@@ -1927,9 +1960,10 @@ def main(mode="live", backfill_days=None):
                 detail_obj = award_record.get("detail", {})
                 historical_winner = extract_winning_competitor(detail_obj)
                 real_budget, real_award = extract_budget_and_award(detail_obj)
+                award_date_str = str(award_record.get("date", ""))
+                actual_award_date = extract_award_date(detail_obj, award_date_str)
                 
                 # Check age of award notice (skip if older than 7 days to keep DB fresh)
-                award_date_str = str(award_record.get("date", ""))
                 if award_date_str:
                     try:
                         # Date format is typically YYYYMMDD
@@ -2067,7 +2101,7 @@ def main(mode="live", backfill_days=None):
             for r in sorted_records:
                 r_detail = r.get("detail", {})
                 if r_detail:
-                    p_date, d_date, p_confidence, d_confidence = extract_dates(r_detail, date_raw)
+                    p_date, d_date, p_confidence, d_confidence = extract_dates(r_detail, date_raw, infer_deadline=False)
                     if p_date and not publish_date_str:
                         publish_date_str = p_date
                         publish_date_confidence = p_confidence
@@ -2085,11 +2119,12 @@ def main(mode="live", backfill_days=None):
                 except:
                     pass
         if not deadline_str and publish_date_str:
-            try:
-                deadline_str = (datetime.strptime(publish_date_str, "%Y-%m-%d") + timedelta(days=14)).strftime("%Y-%m-%d")
-                deadline_confidence = "inferred"
-            except:
-                pass
+            if stage not in {"已決標", "無法決標"}:
+                try:
+                    deadline_str = (datetime.strptime(publish_date_str, "%Y-%m-%d") + timedelta(days=14)).strftime("%Y-%m-%d")
+                    deadline_confidence = "inferred"
+                except:
+                    pass
         if not deadline_str:
             deadline_str = "未公開"
             deadline_confidence = "unknown"
@@ -2127,6 +2162,7 @@ def main(mode="live", backfill_days=None):
             "publish_date_confidence": publish_date_confidence,
             "deadline": deadline_str,
             "deadline_confidence": deadline_confidence,
+            "award_date": actual_award_date if stage == "已決標" else "",
             "budget": budget_str,
             "award_price": award_price_str,
             "avg_discount": avg_discount_str,

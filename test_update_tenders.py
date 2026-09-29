@@ -12,6 +12,7 @@ from update_tenders import (
     is_award_notice,
     resolve_notice_status,
     extract_dates,
+    extract_award_date,
     is_terminal_notice_type,
     review_city_fields,
 )
@@ -77,6 +78,21 @@ class StatusAndDateConfidenceTests(unittest.TestCase):
     def test_invalid_dates_remain_unknown(self):
         result = extract_dates({"公告日期": "日期待確認", "截止投標": "尚未公告"}, "bad-date")
         self.assertEqual(result, ("", "", "unknown", "unknown"))
+
+    def test_extract_dates_with_infer_deadline_false_does_not_infer(self):
+        # When infer_deadline=False, a notice with only publish_date must not synthesize a +14d deadline
+        result = extract_dates({"公告日期": "115/09/18"}, "20260918", infer_deadline=False)
+        self.assertEqual(result, ("2026-09-18", "", "verified", "unknown"))
+
+    def test_extract_award_date_from_detail(self):
+        detail = {
+            "決標資料:決標日期": "115/09/24",
+            "決標資料:決標公告日期": "115/09/29",
+        }
+        self.assertEqual(extract_award_date(detail), "2026-09-24")
+
+    def test_extract_award_date_fallback(self):
+        self.assertEqual(extract_award_date({}, "20260929"), "2026-09-29")
 
 
 class TenderRelevanceTests(unittest.TestCase):
