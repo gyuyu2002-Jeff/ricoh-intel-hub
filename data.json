@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-01 00:14",
+  "last_updated": "2026-10-01 02:08",
   "tenders": [
     {
       "city": "未分類",
@@ -1582,7 +1582,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-09-30 06:33",
+      "last_run_at": "2026-10-01 02:08",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -10810,6 +10810,6 @@
     "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-01 00:14:55"
+    "updated_at": "2026-10-01 02:08:48"
   }
 }
