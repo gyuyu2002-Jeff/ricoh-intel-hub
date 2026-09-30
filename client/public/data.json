@@ -1,6 +1,58 @@
 {
-  "last_updated": "2026-10-01 02:08",
+  "last_updated": "2026-10-01 06:30",
   "tenders": [
+    {
+      "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "藥袋列印用碳粉匣二年單價開口契約",
+      "unit": "臺北榮民總醫院",
+      "unit_id": "3.32.80",
+      "job_number": "M11532B",
+      "publish_date": "2026-10-01",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-29",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261001&fn=NAI-1-71294725.xml",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "supplies",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "碳粉",
+          "碳粉匣"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
     {
       "city": "未分類",
       "city_source": "無法判定",
@@ -490,23 +542,23 @@
       "publish_date_confidence": "verified",
       "deadline": "2026-09-29",
       "deadline_confidence": "verified",
-      "award_date": "",
-      "budget": "無公開數據",
-      "award_price": "",
+      "award_date": "2026-09-30",
+      "budget": "NT$ 1,000,000",
+      "award_price": "NT$ 926,470",
       "avg_discount": "資料不足",
       "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
+      "main_competitor": "訊達電腦股份有限公司 (Dimension Computer Technology Co., Ltd.)",
       "suggested_price": "資料不足",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
         "record_count": 0,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260924&fn=NAI-1-71291244.xml",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261001&fn=BDM-1-71294621.xml",
       "history_stats": [],
       "history_records": [],
-      "stage": "無法決標",
-      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
       "duration_years": 1,
       "stream": "peripherals",
       "sub_type": "supplies",
@@ -570,58 +622,6 @@
         "sub_type": "supplies",
         "matched_terms": [
           "耗材"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "city": "台北市",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "臺北市(非原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "藥袋列印用碳粉匣二年單價開口契約",
-      "unit": "臺北榮民總醫院",
-      "unit_id": "3.32.80",
-      "job_number": "M11532B",
-      "publish_date": "2026-09-24",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-09-29",
-      "deadline_confidence": "verified",
-      "award_date": "",
-      "budget": "無公開數據",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260924&fn=NAI-1-71290913.xml",
-      "history_stats": [],
-      "history_records": [],
-      "stage": "無法決標",
-      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "supplies",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "碳粉",
-          "碳粉匣"
         ],
         "matched_fields": [
           "title"
@@ -1582,7 +1582,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-10-01 02:08",
+      "last_run_at": "2026-10-01 06:30",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -4800,6 +4800,21 @@
   ],
   "review_candidates": [],
   "history_cache": [
+    {
+      "unit_id": "8.3",
+      "unit_name": "國家安全局",
+      "award_date": "2026-10-01",
+      "year": 2026,
+      "title": "安訓中心115年度資訊耗材用品採購案",
+      "job_number": "115M13020427",
+      "budget": 1000000,
+      "award_price": 926470,
+      "discount_rate": 92.6,
+      "winner": "訊達電腦股份有限公司 (Dimension Computer Technology Co., Ltd.)",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261001&fn=BDM-1-71294621.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
     {
       "unit_id": "3.76.45.96.38",
       "unit_name": "苗栗縣立新港國民中小學",
@@ -10810,6 +10825,6 @@
     "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-01 02:08:48"
+    "updated_at": "2026-10-01 06:30:49"
   }
 }
