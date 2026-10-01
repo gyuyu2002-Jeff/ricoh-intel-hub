@@ -798,10 +798,12 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
             {forecast.expansion.badge_label}
           </Stamp>
         </div>
-        <div className={`countdown ${isSolicitation || isUrgent ? "countdown-hot" : ""}`}>
+        <div className={`countdown ${isSolicitation || isTender || isUrgent ? "countdown-hot" : ""}`}>
           <Clock3 size={14} />
           <span>
-            {isSolicitation
+            {isTender
+              ? `🎯 預測命中 · ${curStatus.date} 已正式開標`
+              : isSolicitation
               ? `🔥 機關已啟動 · ${curStatus.date} 公告`
               : `${forecast.countdown_label} · 預估 ${forecast.predicted_month}`}
           </span>
@@ -836,9 +838,9 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
         <div className="solicitation-banner" style={{ margin: "14px 20px 0", borderColor: "#bfdbfe", background: "#eff6ff" }}>
           <span className="solicitation-mark">🎯</span>
           <div style={{ flex: 1 }}>
-            <strong style={{ fontSize: "15px", color: "#1e40af" }}>【本案已正式上架招標中】</strong>
+            <strong style={{ fontSize: "15px", color: "#1e40af" }}>【🎯 預測精準命中：本案機關已正式上架招標】</strong>
             <span style={{ fontSize: "13px", color: "#1e3a8a", marginTop: "2px" }}>
-              機關於 {curStatus.date} 公告「{curStatus.title}」（案號 {curStatus.job_number}）· 請前往 01 影印機案件監控備標投標！
+              機關於 {curStatus.date} 如期公告「{curStatus.title}」（案號 {curStatus.job_number}）· 請前往 01 影印機案件監控備標投標！
             </span>
           </div>
           {curStatus.notice_url && (
@@ -849,7 +851,7 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
               className="action-primary"
               style={{ padding: "8px 14px", fontSize: "13px", whiteSpace: "nowrap", textDecoration: "none" }}
             >
-              <ExternalLink size={14} /> 查看招標公告 ↗
+              <ExternalLink size={14} /> 前往 01 查看招標公告 ↗
             </a>
           )}
         </div>
@@ -862,8 +864,8 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
             <span className="job-code">機關代碼 {forecast.unit_id}</span>
           </div>
           <h3 style={{ margin: "8px 0 6px", fontSize: "24px", lineHeight: "1.35", fontWeight: 700 }}>
-            <span style={{ color: isSolicitation ? "#c2410c" : isCompetitor ? "#be123c" : isHusheng ? "#15803d" : "var(--deep)", fontWeight: 700, marginRight: "6px", fontSize: "20px" }}>
-              {isSolicitation ? "【已啟動徵求】" : isTender ? "【已上架招標】" : "【推估上架】"}
+            <span style={{ color: isSolicitation ? "#c2410c" : isTender ? "#2563eb" : isCompetitor ? "#be123c" : isHusheng ? "#15803d" : "var(--deep)", fontWeight: 700, marginRight: "6px", fontSize: "20px" }}>
+              {isSolicitation ? "【已啟動徵求】" : isTender ? "【🎯 預測命中·已上架招標】" : "【推估上架】"}
             </span>
             {isSolicitation && curStatus?.title ? curStatus.title : forecast.predicted_title}
           </h3>
@@ -1410,7 +1412,7 @@ function SubscribeModal({
             </p>
             <div className="success-details">
               <div><span>通知信箱：</span><strong>{email}</strong></div>
-              <div><span>關注類別：</span><strong>{selectedCategories.map((c) => c === "copier" ? "🏢 影印機案件監控" : "🔮 推測未來上架案件(六個月)").join("、")}</strong></div>
+              <div><span>關注類別：</span><strong>{selectedCategories.map((c) => c === "copier" ? "🏢 影印機案件監控" : "🔮 未來半年到期換約預測").join("、")}</strong></div>
               <div><span>關注範圍：</span><strong>{isAllSelected ? "全台所有縣市（共 22 個縣市全數監控）" : `已選定 ${selectedCities.length} 個縣市（${selectedCities.join("、")}）`}</strong></div>
               <div><span>發件來源：</span><code>huxen.ricoh@gmail.com</code></div>
             </div>
@@ -1510,8 +1512,8 @@ function SubscribeModal({
                     }}
                   />
                   <div className="category-check-info">
-                    <strong>🔮 推測未來上架案件 (六個月)</strong>
-                    <span>未來 6 個月到期換約推估、競品攻防與擴充預警</span>
+                    <strong>🔮 未來半年到期換約預測</strong>
+                    <span>涵蓋未來 6 個月到期換約推估、競品攻防與擴充預警</span>
                   </div>
                 </label>
               </div>
@@ -1784,7 +1786,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
   const [forecastDaysFilter, setForecastDaysFilter] = useState<"all" | "30" | "60" | "90" | "180">("all");
   const [forecastIncumbentFilter, setForecastIncumbentFilter] = useState<"all" | "competitor" | "husheng">("all");
   const [forecastExpansionFilter, setForecastExpansionFilter] = useState<"all" | "expansion" | "standard">("all");
-  const [forecastStatusFilter, setForecastStatusFilter] = useState<"all" | "solicitation" | "pending">("all");
+  const [forecastStatusFilter, setForecastStatusFilter] = useState<"all" | "tender" | "solicitation" | "pending">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [subscribeOpen, setSubscribeOpen] = useState(false);
@@ -1901,8 +1903,9 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
       if (forecastExpansionFilter === "expansion" && !fc.expansion.has_extension) return false;
       if (forecastExpansionFilter === "standard" && fc.expansion.has_extension) return false;
 
+      if (forecastStatusFilter === "tender" && fc.current_status?.status !== "tender") return false;
       if (forecastStatusFilter === "solicitation" && fc.current_status?.status !== "solicitation") return false;
-      if (forecastStatusFilter === "pending" && fc.current_status?.status === "solicitation") return false;
+      if (forecastStatusFilter === "pending" && (fc.current_status?.status === "solicitation" || fc.current_status?.status === "tender")) return false;
 
       if (cityFilter !== "全部縣市" && fc.city !== cityFilter) return false;
 
@@ -2018,7 +2021,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
         </a>
         <a className={`site-tab ${isForecast ? "active" : ""}`} href="#/forecast" aria-current={isForecast ? "page" : undefined}>
           <span className="site-tab-index">02</span>
-          <span><strong>推測未來上架案件(六個月)</strong><small>依週期規律推估包含展延擴充一年條件</small></span>
+          <span><strong>未來半年到期預測</strong><small>涵蓋即日起半年內到期換約案件</small></span>
         </a>
         <a className="site-tab" href="#/specs">
           <span className="site-tab-index">03</span>
@@ -2079,10 +2082,10 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
             <div className="page-heading">
               <div>
                 <div className="eyebrow">
-                  互盛情報中樞 / 推測未來上架案件 (六個月)
+                  互盛情報中樞 / 未來半年到期換約預測雷達
                 </div>
                 <div className="page-heading-title-row">
-                  <h1>推測未來上架案件雷達</h1>
+                  <h1>未來半年到期換約預測雷達</h1>
                   <button
                     type="button"
                     className="primary-subscribe-btn"
@@ -2092,7 +2095,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                   </button>
                 </div>
                 <p>
-                  基於同機關同案名歷史前 5 次開標規律、得標合約期程與一年擴充條款，精準預估未來 6 個月即將到期之影印機標案，提前啟動攻防佈局。
+                  觀測即日起未來 6 個月內（包含本月即將到期、正在換約）之影印機標案。基於歷史定期開標規律演算，精準預估到期區間；若機關已正式公告開標，系統自動標記「預測命中」並連動至 01 即時監控。
                 </p>
               </div>
               <div className="heading-actions">
@@ -2156,7 +2159,14 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                   className={`peripheral-pill ${forecastStatusFilter === "all" ? "active" : ""}`}
                   onClick={() => setForecastStatusFilter("all")}
                 >
-                  全部
+                  全部 ({forecastedTenders.length})
+                </button>
+                <button
+                  type="button"
+                  className={`peripheral-pill ${forecastStatusFilter === "tender" ? "active" : ""}`}
+                  onClick={() => setForecastStatusFilter("tender")}
+                >
+                  🎯 正式招標中 ({forecastedTenders.filter((f) => f.current_status?.status === "tender").length})
                 </button>
                 <button
                   type="button"
@@ -2170,7 +2180,7 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                   className={`peripheral-pill ${forecastStatusFilter === "pending" ? "active" : ""}`}
                   onClick={() => setForecastStatusFilter("pending")}
                 >
-                  ⏳ 尚待公告中 ({forecastedTenders.filter((f) => f.current_status?.status !== "solicitation").length})
+                  ⏳ 尚未公告推估中 ({forecastedTenders.filter((f) => f.current_status?.status !== "solicitation" && f.current_status?.status !== "tender").length})
                 </button>
               </div>
 
@@ -2336,8 +2346,8 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
               <div className="tender-section-heading">
                 <div>
                   <span className="section-kicker">PREDICTED COPIER OPPORTUNITIES</span>
-                  <h2 id="forecast-tenders-heading">推測未來上架影印機案件清單</h2>
-                  <p>依預估到期開標倒數日排序，提供前五次開標履歷軌跡、前任防守廠商、合約預估金額與擴充條款作戰建議。</p>
+                  <h2 id="forecast-tenders-heading">未來半年到期換約案件清單</h2>
+                  <p>依預估到期開標倒數日排序，涵蓋即日起半年內定期換約案件。若案件已正式開標，系統即時標註「預測命中」並連動至 01 分頁。</p>
                 </div>
                 <strong>{filteredForecasts.length} 件{totalForecastPages > 1 ? `（第 ${validForecastPage} / ${totalForecastPages} 頁）` : ""}</strong>
               </div>
