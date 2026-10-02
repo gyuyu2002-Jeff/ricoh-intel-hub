@@ -1,6 +1,167 @@
 {
-  "last_updated": "2026-10-02 06:54",
+  "last_updated": "2026-10-02 09:41",
   "tenders": [
+    {
+      "city": "宜蘭縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "宜蘭縣(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "宜蘭縣政府環保局116年度租賃5台全新數位影印機（影印加列表加掃描）",
+      "unit": "宜蘭縣政府環境保護局",
+      "unit_id": "3.76.42.3.6",
+      "job_number": "115-09-29",
+      "publish_date": "2026-10-02",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-15",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 600,000",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
+      "main_competitor": "翔鶴事務儀器行",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNDE4NjI",
+      "history_stats": [
+        {
+          "year": 2024,
+          "val": 95,
+          "type": "real",
+          "winner": "翔鶴事務儀器行"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2024-01-09",
+          "year": 2024,
+          "title": "宜蘭縣政府環保局113年度租賃5台全新數位影印機（影印加列表加掃描）",
+          "job_number": "112-10-13",
+          "budget": 500000,
+          "award_price": 475000,
+          "discount_rate": 95.0,
+          "winner": "翔鶴事務儀器行",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240109&fn=BDM-1-70484189.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.42.3.6",
+          "source_unit": "宜蘭縣政府環境保護局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2020-12-30",
+          "year": 2020,
+          "title": "110年度租賃5台全新數位影印機（影印加列表加掃描）採購案",
+          "job_number": "109-09-25",
+          "budget": 500000,
+          "award_price": 308000,
+          "discount_rate": 61.6,
+          "winner": "翔鶴事務儀器行(獨資)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20201230&fn=BDM-1-53293872.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.42.3.6",
+          "source_unit": "宜蘭縣政府環境保護局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2019-01-21",
+          "year": 2019,
+          "title": "108年度租賃5台全新數位影印機(影印加列表加掃描)採購案",
+          "job_number": "107-12-04",
+          "budget": 350000,
+          "award_price": 172800,
+          "discount_rate": 49.4,
+          "winner": "翔鶴事務儀器行",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20190121&fn=BDM-1-52685829.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.42.3.6",
+          "source_unit": "宜蘭縣政府環境保護局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2018-01-10",
+          "year": 2018,
+          "title": "107年度租賃5台全新數位影印機(影印加列表加掃描)採購案",
+          "job_number": "106-11-09",
+          "budget": 350000,
+          "award_price": 144000,
+          "discount_rate": 41.1,
+          "winner": "凱翔事務儀器有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20180110&fn=BDM-1-52349063.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.42.3.6",
+          "source_unit": "宜蘭縣政府環境保護局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2015-01-12",
+          "year": 2015,
+          "title": "104年度租賃5台全新數位影印機（影印加列表）採購案",
+          "job_number": "103-11-19",
+          "budget": 500000,
+          "award_price": 158400,
+          "discount_rate": 31.7,
+          "winner": "言瑞開發科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20150112&fn=BDM-1-51467709.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.42.3.6",
+          "source_unit": "宜蘭縣政府環境保護局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2012-01-12",
+          "year": 2012,
+          "title": "宜蘭縣政府環保局101年度租賃5台全新數位影印機（影印加列表）採購案",
+          "job_number": "100-12-08",
+          "budget": 500000,
+          "award_price": 294000,
+          "discount_rate": 58.8,
+          "winner": "本公司 (互盛 RICOH)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20120112&fn=BDM-1-50602016.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.76.42.3.6",
+          "source_unit": "宜蘭縣政府環境保護局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 3,
+      "stream": "copier",
+      "sub_type": "main",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
     {
       "city": "苗栗縣",
       "city_source": "履約地點",
@@ -1578,9 +1739,9 @@
     "today": "2026-10-02",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-02 00:51",
-    "source_records": 0,
-    "candidate_records": 0,
+    "latest_attempt_at": "2026-10-02 09:41",
+    "source_records": 2824,
+    "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
       "2026-10-02",
@@ -2015,17 +2176,140 @@
       "source_records": 3107,
       "candidate_records": 4,
       "review_records": 0,
-      "checked_at": "2026-10-02 00:42"
+      "checked_at": "2026-10-02 09:37"
     },
     "2026-10-02": {
       "status": "complete",
-      "source_records": 0,
-      "candidate_records": 0,
+      "source_records": 2824,
+      "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-10-02 00:42"
+      "checked_at": "2026-10-02 09:37"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20261002,
+      "filename": "TIQ-1-71126727",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "宜蘭縣政府環保局116年度租賃5台全新數位影印機（影印加列表加掃描）",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-09-29",
+      "unit_id": "3.76.42.3.6",
+      "unit_name": "宜蘭縣政府環境保護局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.42.3.6",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.42.3.6&job_number=115-09-29",
+      "unit_url": "/index/unit/3.76.42.3.6",
+      "url": "/index/case/3.76.42.3.6/115-09-29/20261002/TIQ-1-71126727",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261002,
+      "filename": "NAI-1-71295804",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "3D 列印機乙項",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "PE15532P204",
+      "unit_id": "3.5.48",
+      "unit_name": "國防部海軍司令部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.5.48",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.5.48&job_number=PE15532P204",
+      "unit_url": "/index/unit/3.5.48",
+      "url": "/index/case/3.5.48/PE15532P204/20261002/NAI-1-71295804",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "列印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "date": 20261002,
+      "filename": "BDM-1-71296715",
+      "brief": {
+        "type": "決標公告",
+        "title": "115~118年印表機墨水匣採購案",
+        "companies": {
+          "ids": [
+            "54243095"
+          ],
+          "names": [
+            "安禾資訊有限公司"
+          ],
+          "id_key": {
+            "54243095": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "安禾資訊有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "L1150706",
+      "unit_id": "A.21.100.41",
+      "unit_name": "衛生福利部新營醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.100.41",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.100.41&job_number=L1150706",
+      "unit_url": "/index/unit/A.21.100.41",
+      "url": "/index/case/A.21.100.41/L1150706/20261002/BDM-1-71296715",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "墨水",
+          "墨水匣"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
     {
       "date": 20261001,
       "filename": "ttd-71339052",
@@ -3363,43 +3647,6 @@
           "title"
         ],
         "reason": "命中文件掃描器設備標的"
-      }
-    },
-    {
-      "date": 20260915,
-      "filename": "anaa-71284589",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "115~118年印表機墨水匣採購案",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "L1150706",
-      "unit_id": "A.21.100.41",
-      "unit_name": "衛生福利部新營醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.100.41",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.100.41&job_number=L1150706",
-      "unit_url": "/index/unit/A.21.100.41",
-      "url": "/index/case/A.21.100.41/L1150706/20260915/anaa-71284589",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "墨水",
-          "墨水匣"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
       }
     },
     {
@@ -6706,6 +6953,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.76.42.3.6",
+      "unit_name": "宜蘭縣政府環境保護局",
+      "award_date": "2024-01-09",
+      "year": 2024,
+      "title": "宜蘭縣政府環保局113年度租賃5台全新數位影印機（影印加列表加掃描）",
+      "job_number": "112-10-13",
+      "budget": 500000,
+      "award_price": 475000,
+      "discount_rate": 95.0,
+      "winner": "翔鶴事務儀器行",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240109&fn=BDM-1-70484189.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.97.13.3",
       "unit_name": "高雄市政府警察局交通警察大隊",
       "award_date": "2023-12-29",
@@ -7981,6 +8243,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.76.42.3.6",
+      "unit_name": "宜蘭縣政府環境保護局",
+      "award_date": "2020-12-30",
+      "year": 2020,
+      "title": "110年度租賃5台全新數位影印機（影印加列表加掃描）採購案",
+      "job_number": "109-09-25",
+      "budget": 500000,
+      "award_price": 308000,
+      "discount_rate": 61.6,
+      "winner": "翔鶴事務儀器行(獨資)",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20201230&fn=BDM-1-53293872.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "A.5.5.2",
       "unit_name": "國防部電訊發展室",
       "award_date": "2020-12-22",
@@ -8626,6 +8903,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.76.42.3.6",
+      "unit_name": "宜蘭縣政府環境保護局",
+      "award_date": "2019-01-21",
+      "year": 2019,
+      "title": "108年度租賃5台全新數位影印機(影印加列表加掃描)採購案",
+      "job_number": "107-12-04",
+      "budget": 350000,
+      "award_price": 172800,
+      "discount_rate": 49.4,
+      "winner": "翔鶴事務儀器行",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20190121&fn=BDM-1-52685829.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "76905934",
       "unit_name": "財團法人大學入學考試中心基金會",
       "award_date": "2018-12-27",
@@ -8922,6 +9214,21 @@
       "discount_rate": 95.9,
       "winner": "永豐紙業股份有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20180209&fn=BDM-1-52376345.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.76.42.3.6",
+      "unit_name": "宜蘭縣政府環境保護局",
+      "award_date": "2018-01-10",
+      "year": 2018,
+      "title": "107年度租賃5台全新數位影印機(影印加列表加掃描)採購案",
+      "job_number": "106-11-09",
+      "budget": 350000,
+      "award_price": 144000,
+      "discount_rate": 41.1,
+      "winner": "凱翔事務儀器有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20180110&fn=BDM-1-52349063.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -9346,6 +9653,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "3.76.42.3.6",
+      "unit_name": "宜蘭縣政府環境保護局",
+      "award_date": "2015-01-12",
+      "year": 2015,
+      "title": "104年度租賃5台全新數位影印機（影印加列表）採購案",
+      "job_number": "103-11-19",
+      "budget": 500000,
+      "award_price": 158400,
+      "discount_rate": 31.7,
+      "winner": "言瑞開發科技股份有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20150112&fn=BDM-1-51467709.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "A.21.100.75",
       "unit_name": "衛生福利部嘉南療養院",
       "award_date": "2014-12-26",
@@ -9642,6 +9964,21 @@
       "discount_rate": 88.8,
       "winner": "東馳企業有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20120312&fn=BDM-1-50636054.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "3.76.42.3.6",
+      "unit_name": "宜蘭縣政府環境保護局",
+      "award_date": "2012-01-12",
+      "year": 2012,
+      "title": "宜蘭縣政府環保局101年度租賃5台全新數位影印機（影印加列表）採購案",
+      "job_number": "100-12-08",
+      "budget": 500000,
+      "award_price": 294000,
+      "discount_rate": 58.8,
+      "winner": "本公司 (互盛 RICOH)",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20120112&fn=BDM-1-50602016.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -10101,7 +10438,8 @@
     "3.13.30.91": "2026-10-02",
     "3.13.30.92": "2026-10-02",
     "3.13.30.96": "2026-10-02",
-    "3.13.30.88": "2026-10-02"
+    "3.13.30.88": "2026-10-02",
+    "3.76.42.3.6": "2026-10-02"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
@@ -10181,7 +10519,8 @@
     "3.19|copier|rental|影印機租賃": "2026-09-30",
     "3.82.62|copier|rental|新北市泰山區公所影印機租賃": "2026-09-30",
     "3.13.30.95|office_machine|rental|畜殖事業部事務機租賃": "2026-09-30",
-    "3.13.50.50||unspecified|井測圖資掃描器 等1批等共1項": "2026-10-01"
+    "3.13.50.50||unspecified|井測圖資掃描器 等1批等共1項": "2026-10-01",
+    "3.76.42.3.6|copier|rental|租賃5台全新數位影印機（影印加列表加掃描）": "2026-10-02"
   },
   "forecasted_tenders": [
     {
@@ -10881,11 +11220,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 0,
-    "remaining": 500,
-    "usage_percent": 0.0,
+    "used_24h": 3,
+    "remaining": 497,
+    "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-02 06:54:56"
+    "updated_at": "2026-10-02 09:41:09"
   }
 }

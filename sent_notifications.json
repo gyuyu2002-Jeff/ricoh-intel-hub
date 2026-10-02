@@ -72,19 +72,19 @@
   },
   "_delivery_history": [
     {
-      "sent_at": "2026-09-30 09:22:42",
+      "sent_at": "2026-10-02 09:41:09",
       "recipient": "huxen.ricoh@gmail.com",
       "type": "digest",
       "dry_run": false
     },
     {
-      "sent_at": "2026-09-30 09:22:42",
+      "sent_at": "2026-10-02 09:41:09",
       "recipient": "hanjiunwu@eosasc.com.tw",
       "type": "digest",
       "dry_run": false
     },
     {
-      "sent_at": "2026-09-30 09:22:42",
+      "sent_at": "2026-10-02 09:41:09",
       "recipient": "gyuyu2002@gmail.com",
       "type": "digest",
       "dry_run": false
@@ -251,5 +251,23 @@
     "job_number": "AP1150930",
     "title": "畜殖事業部事務機租賃",
     "sent_at": "2026-09-30 09:22:42"
+  },
+  "huxen.ricoh@gmail.com_115-09-29_正式開標_2026-10-02": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "115-09-29",
+    "title": "宜蘭縣政府環保局116年度租賃5台全新數位影印機（影印加列表加掃描）",
+    "sent_at": "2026-10-02 09:41:09"
+  },
+  "hanjiunwu@eosasc.com.tw_115-09-29_正式開標_2026-10-02": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "115-09-29",
+    "title": "宜蘭縣政府環保局116年度租賃5台全新數位影印機（影印加列表加掃描）",
+    "sent_at": "2026-10-02 09:41:09"
+  },
+  "gyuyu2002@gmail.com_115-09-29_正式開標_2026-10-02": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "115-09-29",
+    "title": "宜蘭縣政府環保局116年度租賃5台全新數位影印機（影印加列表加掃描）",
+    "sent_at": "2026-10-02 09:41:09"
   }
 }
