@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-02 09:41",
+  "last_updated": "2026-10-02 16:27",
   "tenders": [
     {
       "city": "宜蘭縣",
@@ -1739,8 +1739,8 @@
     "today": "2026-10-02",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-02 09:41",
-    "source_records": 2824,
+    "latest_attempt_at": "2026-10-02 16:27",
+    "source_records": 2932,
     "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
@@ -2176,14 +2176,14 @@
       "source_records": 3107,
       "candidate_records": 4,
       "review_records": 0,
-      "checked_at": "2026-10-02 09:37"
+      "checked_at": "2026-10-02 16:24"
     },
     "2026-10-02": {
       "status": "complete",
-      "source_records": 2824,
+      "source_records": 2932,
       "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-10-02 09:37"
+      "checked_at": "2026-10-02 16:24"
     }
   },
   "candidate_cache": [
@@ -11225,6 +11225,6 @@
     "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-02 09:41:09"
+    "updated_at": "2026-10-02 16:27:50"
   }
 }
