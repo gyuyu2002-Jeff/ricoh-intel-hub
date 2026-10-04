@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-05 01:04",
+  "last_updated": "2026-10-05 05:47",
   "tenders": [
     {
       "city": "宜蘭縣",
@@ -1582,6 +1582,196 @@
         ],
         "reason": "命中耗材或碳粉標的"
       }
+    },
+    {
+      "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
+      "tag": "重點攻堅",
+      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
+      "title": "影印機租賃案",
+      "unit": "財政部臺北國稅局",
+      "unit_id": "A.7.3",
+      "job_number": "115-033",
+      "publish_date": "2026-08-07",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-09-07",
+      "deadline_confidence": "verified",
+      "award_date": "2026-10-01",
+      "budget": "NT$ 12,582,464",
+      "award_price": "NT$ 5,441,065",
+      "avg_discount": "67.6%",
+      "discount_source": "近 5 年 3 筆同設備、同契約型態決標折扣中位數",
+      "main_competitor": "台灣愛普生 (Epson)",
+      "suggested_price": "NT$ 8,505,000",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 3,
+        "discount_rate": 67.6
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261005&fn=BDM-1-71297443.xml",
+      "history_stats": [
+        {
+          "year": 2021,
+          "val": 100,
+          "type": "real",
+          "winner": "新印科技股份有限公司"
+        },
+        {
+          "year": 2023,
+          "val": 53,
+          "type": "real",
+          "winner": "金儀 Konica Minolta"
+        },
+        {
+          "year": 2024,
+          "val": 67,
+          "type": "real",
+          "winner": "宏羚股份有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2024-08-05",
+          "year": 2024,
+          "title": "28台影印機租賃案",
+          "job_number": "113-026",
+          "budget": 3875135,
+          "award_price": 2621415,
+          "discount_rate": 67.6,
+          "winner": "宏羚股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240805&fn=BDM-1-70641601.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2023-10-18",
+          "year": 2023,
+          "title": "113-115年影印機租賃案",
+          "job_number": "112-040",
+          "budget": 7283100,
+          "award_price": 3928460,
+          "discount_rate": 53.9,
+          "winner": "金儀 Konica Minolta",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20231018&fn=BDM-1-70402923.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2021-10-13",
+          "year": 2021,
+          "title": "23台數位式影印機租賃案",
+          "job_number": "107-027-2",
+          "budget": 5985,
+          "award_price": 5985,
+          "discount_rate": 100.0,
+          "winner": "新印科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20211013&fn=BDM-1-53524778.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2021-08-31",
+          "year": 2021,
+          "title": "23數位式影印機租賃案",
+          "job_number": "107-027-1",
+          "budget": 20000,
+          "award_price": 20000,
+          "discount_rate": 100.0,
+          "winner": "新印科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20210831&fn=BDM-1-53493033.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2021-07-23",
+          "year": 2021,
+          "title": "26台數位式影印機租賃案",
+          "job_number": "110-031",
+          "budget": 3600000,
+          "award_price": 2244000,
+          "discount_rate": 62.3,
+          "winner": "震旦 SHARP",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20210723&fn=BDM-1-53460970.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2020-11-04",
+          "year": 2020,
+          "title": "45台數位式影印機租賃案",
+          "job_number": "109-052",
+          "budget": 4147200,
+          "award_price": 2430000,
+          "discount_rate": 58.6,
+          "winner": "東磊資訊有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20201104&fn=BDM-1-53231063.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2020-07-20",
+          "year": 2020,
+          "title": "41台數位式影印機租賃案",
+          "job_number": "106-037-1",
+          "budget": 1080432,
+          "award_price": 1080432,
+          "discount_rate": 100.0,
+          "winner": "震旦 SHARP",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20200720&fn=BDM-1-53144945.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.7.3",
+          "source_unit": "財政部臺北國稅局",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "已決標",
+      "stage_color": "bg-emerald-950/45 border-emerald-500/40 text-emerald-400",
+      "duration_years": 3,
+      "stream": "copier",
+      "sub_type": "main",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
     }
   ],
   "collection_status": {
@@ -1601,7 +1791,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-10-05 01:04",
+      "last_run_at": "2026-10-05 05:47",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -4889,6 +5079,21 @@
   ],
   "review_candidates": [],
   "history_cache": [
+    {
+      "unit_id": "A.7.3",
+      "unit_name": "財政部臺北國稅局",
+      "award_date": "2026-10-05",
+      "year": 2026,
+      "title": "影印機租賃案",
+      "job_number": "115-033",
+      "budget": 12582464,
+      "award_price": 5441065,
+      "discount_rate": 43.2,
+      "winner": "台灣愛普生 (Epson)",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261005&fn=BDM-1-71297443.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
     {
       "unit_id": "A.21.100.41",
       "unit_name": "衛生福利部新營醫院",
@@ -10101,7 +10306,7 @@
     "3.97.16.28": "2026-10-05",
     "3.97.16.30": "2026-10-05",
     "3.97.16.24": "2026-10-05",
-    "3.97.16.29": "2026-10-04",
+    "3.97.16.29": "2026-10-05",
     "3.97.16.21": "2026-10-05",
     "3.97.16.20": "2026-10-05",
     "3.97.16.22": "2026-10-05",
@@ -10864,11 +11069,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 0,
-    "remaining": 500,
-    "usage_percent": 0.0,
+    "used_24h": 3,
+    "remaining": 497,
+    "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-05 01:04:50"
+    "updated_at": "2026-10-05 05:47:39"
   }
 }
