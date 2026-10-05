@@ -3,10 +3,6 @@ name: Deploy Website to GitHub Pages
 on:
   push:
     branches: [main]
-  workflow_run:
-    workflows: ["Daily Tender Sync"]
-    types:
-      - completed
   workflow_dispatch:
 
 permissions:
@@ -16,7 +12,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
