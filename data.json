@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-08 09:55",
+  "last_updated": "2026-10-08 16:55",
   "tenders": [
     {
       "city": "台北市",
@@ -1907,9 +1907,9 @@
     "today": "2026-10-08",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-08 09:55",
-    "source_records": 2809,
-    "candidate_records": 5,
+    "latest_attempt_at": "2026-10-08 16:55",
+    "source_records": 2976,
+    "candidate_records": 7,
     "review_records": 0,
     "successful_dates": [
       "2026-10-08",
@@ -2344,14 +2344,14 @@
       "source_records": 2843,
       "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-10-08 09:51"
+      "checked_at": "2026-10-08 16:51"
     },
     "2026-10-08": {
       "status": "complete",
-      "source_records": 2809,
-      "candidate_records": 5,
+      "source_records": 2976,
+      "candidate_records": 7,
       "review_records": 0,
-      "checked_at": "2026-10-08 09:51"
+      "checked_at": "2026-10-08 16:51"
     }
   },
   "candidate_cache": [
@@ -2385,6 +2385,104 @@
         "sub_type": "printer",
         "matched_terms": [
           "印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "date": 20261008,
+      "filename": "aaa-71302419",
+      "brief": {
+        "type": "決標公告",
+        "title": "五股職業訓練場訓練用印表機(3D)8臺",
+        "companies": {
+          "ids": [
+            "54288043"
+          ],
+          "names": [
+            "達億新創有限公司"
+          ],
+          "id_key": {
+            "54288043": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "達億新創有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "nwda1140246",
+      "unit_id": "A.17.2.1",
+      "unit_name": "勞動部勞動力發展署北基宜花金馬分署",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.17.2.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.17.2.1&job_number=nwda1140246",
+      "unit_url": "/index/unit/A.17.2.1",
+      "url": "/index/case/A.17.2.1/nwda1140246/20261008/aaa-71302419",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "date": 20261008,
+      "filename": "aaa-71302011",
+      "brief": {
+        "type": "決標公告",
+        "title": "優品自助繳費機、自助慢箋機及收據列印機(ABC台)維護合約",
+        "companies": {
+          "ids": [
+            "53520753"
+          ],
+          "names": [
+            "優品工業有限公司"
+          ],
+          "id_key": {
+            "53520753": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "優品工業有限公司": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "PTVGH-CP15932",
+      "unit_id": "A.51.4",
+      "unit_name": "屏東榮民總醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.51.4",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.51.4&job_number=PTVGH-CP15932",
+      "unit_url": "/index/unit/A.51.4",
+      "url": "/index/case/A.51.4/PTVGH-CP15932/20261008/aaa-71302011",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "列印機"
         ],
         "matched_fields": [
           "title"
@@ -5664,6 +5762,21 @@
   "review_candidates": [],
   "history_cache": [
     {
+      "unit_id": "A.51.4",
+      "unit_name": "屏東榮民總醫院",
+      "award_date": "2026-10-08",
+      "year": 2026,
+      "title": "優品自助繳費機、自助慢箋機及收據列印機(ABC台)維護合約",
+      "job_number": "PTVGH-CP15932",
+      "budget": 236349,
+      "award_price": 230000,
+      "discount_rate": 97.3,
+      "winner": "優品工業有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEzMDIwMTE=",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "A.7.3",
       "unit_name": "財政部臺北國稅局",
       "award_date": "2026-10-05",
@@ -8259,21 +8372,6 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
-      "unit_id": "A.7.4",
-      "unit_name": "財政部高雄國稅局",
-      "award_date": "2022-12-06",
-      "year": 2022,
-      "title": "影印機耗材採購案",
-      "job_number": "1110073",
-      "budget": 3935400,
-      "award_price": 3706100,
-      "discount_rate": 94.2,
-      "winner": "雄芝科技有限公司",
-      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221206&fn=BDM-1-70160852.xml",
-      "official_verified": true,
-      "verification_source": "政府電子採購網決標查詢"
-    },
-    {
       "unit_id": "3.79.13",
       "unit_name": "臺北市政府警察局",
       "award_date": "2022-12-06",
@@ -8285,6 +8383,21 @@
       "discount_rate": 98.0,
       "winner": "天梭科技股份有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzAxNjI5ODE=",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.7.4",
+      "unit_name": "財政部高雄國稅局",
+      "award_date": "2022-12-06",
+      "year": 2022,
+      "title": "影印機耗材採購案",
+      "job_number": "1110073",
+      "budget": 3935400,
+      "award_price": 3706100,
+      "discount_rate": 94.2,
+      "winner": "雄芝科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20221206&fn=BDM-1-70160852.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -12083,6 +12196,6 @@
     "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-08 09:55:52"
+    "updated_at": "2026-10-08 16:55:16"
   }
 }
