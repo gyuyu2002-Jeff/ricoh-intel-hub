@@ -88,6 +88,24 @@
       "recipient": "gyuyu2002@gmail.com",
       "type": "digest",
       "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-08 09:55:52",
+      "recipient": "huxen.ricoh@gmail.com",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-08 09:55:52",
+      "recipient": "hanjiunwu@eosasc.com.tw",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-08 09:55:52",
+      "recipient": "gyuyu2002@gmail.com",
+      "type": "digest",
+      "dry_run": false
     }
   ],
   "huxen.ricoh@gmail.com_LP5-114034_公開徵求價單_2026-09-16": {
@@ -323,5 +341,23 @@
     "job_number": "1150031",
     "title": "影印機原廠耗材採購案",
     "sent_at": "2026-10-07 09:32:28"
+  },
+  "huxen.ricoh@gmail.com_YG11505_正式開標_2026-10-08": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "YG11505",
+    "title": "116年度影印機租賃採購案",
+    "sent_at": "2026-10-08 09:55:52"
+  },
+  "hanjiunwu@eosasc.com.tw_YG11505_正式開標_2026-10-08": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "YG11505",
+    "title": "116年度影印機租賃採購案",
+    "sent_at": "2026-10-08 09:55:52"
+  },
+  "gyuyu2002@gmail.com_YG11505_正式開標_2026-10-08": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "YG11505",
+    "title": "116年度影印機租賃採購案",
+    "sent_at": "2026-10-08 09:55:52"
   }
 }
