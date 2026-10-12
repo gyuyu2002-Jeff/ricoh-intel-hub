@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-12 09:18",
+  "last_updated": "2026-10-12 17:08",
   "tenders": [
     {
       "city": "宜蘭縣",
@@ -1886,9 +1886,9 @@
     "today": "2026-10-12",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-12 09:18",
-    "source_records": 3524,
-    "candidate_records": 6,
+    "latest_attempt_at": "2026-10-12 17:08",
+    "source_records": 3628,
+    "candidate_records": 7,
     "review_records": 0,
     "successful_dates": [
       "2026-10-12",
@@ -2323,14 +2323,14 @@
       "source_records": 0,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-10-12 09:14"
+      "checked_at": "2026-10-12 17:05"
     },
     "2026-10-12": {
       "status": "complete",
-      "source_records": 3524,
-      "candidate_records": 6,
+      "source_records": 3628,
+      "candidate_records": 7,
       "review_records": 0,
-      "checked_at": "2026-10-12 09:14"
+      "checked_at": "2026-10-12 17:05"
     }
   },
   "candidate_cache": [
@@ -2364,6 +2364,42 @@
         "sub_type": "main",
         "matched_terms": [
           "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261012,
+      "filename": "anaa-71303577",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "「數位式多功能高速複合機綜合維護」採購案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "133-115-B226",
+      "unit_id": "A.7.31.1",
+      "unit_name": "臺灣銀行股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.31.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.31.1&job_number=133-115-B226",
+      "unit_url": "/index/unit/A.7.31.1",
+      "url": "/index/case/A.7.31.1/133-115-B226/20261012/anaa-71303577",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "複合機"
         ],
         "matched_fields": [
           "title"
@@ -12335,6 +12371,6 @@
     "usage_percent": 1.2,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-12 09:18:46"
+    "updated_at": "2026-10-12 17:08:52"
   }
 }
