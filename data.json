@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-14 01:19",
+  "last_updated": "2026-10-14 03:29",
   "tenders": [
     {
       "city": "南投縣",
@@ -71,6 +71,108 @@
       }
     },
     {
+      "city": "苗栗縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "苗栗縣(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "井測圖資掃描器 等1批等共1項",
+      "unit": "台灣中油股份有限公司探採事業部",
+      "unit_id": "3.13.50.50",
+      "job_number": "B0315Y070",
+      "publish_date": "2026-10-14",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-19",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261013&fn=NAI-2-71300142.xml",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "scanner",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "scanner",
+        "stream": "peripherals",
+        "sub_type": "scanner",
+        "matched_terms": [
+          "掃描器"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中文件掃描器設備標的"
+      }
+    },
+    {
+      "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "二維有線條碼掃描器等二項案",
+      "unit": "國防醫學大學",
+      "unit_id": "A.5.24",
+      "job_number": "HJ15486P349",
+      "publish_date": "2026-10-14",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-20",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261013&fn=NAI-1-71304074.xml",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "scanner",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "scanner",
+        "stream": "peripherals",
+        "sub_type": "scanner",
+        "matched_terms": [
+          "掃描器"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中文件掃描器設備標的"
+      }
+    },
+    {
       "city": "未分類",
       "city_source": "無法判定",
       "city_confidence": "low",
@@ -120,57 +222,6 @@
           "title"
         ],
         "reason": "命中影印機/複合機主機設備或公告規格"
-      }
-    },
-    {
-      "city": "台北市",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "臺北市(非原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "二維有線條碼掃描器等二項案",
-      "unit": "國防醫學大學",
-      "unit_id": "A.5.24",
-      "job_number": "HJ15486P349",
-      "publish_date": "2026-10-13",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-09-17",
-      "deadline_confidence": "verified",
-      "award_date": "",
-      "budget": "無公開數據",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261013&fn=NAI-1-71304074.xml",
-      "history_stats": [],
-      "history_records": [],
-      "stage": "無法決標",
-      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "scanner",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "scanner",
-        "stream": "peripherals",
-        "sub_type": "scanner",
-        "matched_terms": [
-          "掃描器"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中文件掃描器設備標的"
       }
     },
     {
@@ -990,57 +1041,6 @@
       }
     },
     {
-      "city": "苗栗縣",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "苗栗縣(非原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "井測圖資掃描器 等1批等共1項",
-      "unit": "台灣中油股份有限公司探採事業部",
-      "unit_id": "3.13.50.50",
-      "job_number": "B0315Y070",
-      "publish_date": "2026-10-07",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-10-05",
-      "deadline_confidence": "verified",
-      "award_date": "",
-      "budget": "無公開數據",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261013&fn=NAI-2-71300142.xml",
-      "history_stats": [],
-      "history_records": [],
-      "stage": "無法決標",
-      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "scanner",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "scanner",
-        "stream": "peripherals",
-        "sub_type": "scanner",
-        "matched_terms": [
-          "掃描器"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中文件掃描器設備標的"
-      }
-    },
-    {
       "city": "台北市",
       "city_source": "履約地點",
       "city_confidence": "high",
@@ -1752,7 +1752,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-10-13 05:24",
+      "last_run_at": "2026-10-14 03:29",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -11439,7 +11439,7 @@
     "A.47.1.4": "2026-10-14",
     "A.47.1.6": "2026-10-14",
     "A.47.1.7": "2026-10-14",
-    "A.47.1.2": "2026-10-13",
+    "A.47.1.2": "2026-10-14",
     "A.47.1.8": "2026-10-14",
     "A.47.1": "2026-10-14",
     "A.47.1.1": "2026-10-14",
@@ -11532,7 +11532,7 @@
     "3.13.30.14": "2026-10-14",
     "3.13.30.24": "2026-10-14",
     "3.13.30.21": "2026-10-14",
-    "3.13.30.27": "2026-10-13",
+    "3.13.30.27": "2026-10-14",
     "3.13.30.3": "2026-10-14",
     "3.13.30.32": "2026-10-14",
     "3.13.30.25": "2026-10-14",
@@ -12346,6 +12346,6 @@
     "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-14 01:19:52"
+    "updated_at": "2026-10-14 03:29:38"
   }
 }
