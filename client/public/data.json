@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-13 11:03",
+  "last_updated": "2026-10-13 19:45",
   "tenders": [
     {
       "city": "未分類",
@@ -1971,8 +1971,8 @@
     "today": "2026-10-13",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-13 11:03",
-    "source_records": 2012,
+    "latest_attempt_at": "2026-10-13 19:45",
+    "source_records": 2217,
     "candidate_records": 4,
     "review_records": 0,
     "successful_dates": [
@@ -2408,14 +2408,14 @@
       "source_records": 3667,
       "candidate_records": 7,
       "review_records": 0,
-      "checked_at": "2026-10-13 10:59"
+      "checked_at": "2026-10-13 19:41"
     },
     "2026-10-13": {
       "status": "complete",
-      "source_records": 2012,
+      "source_records": 2217,
       "candidate_records": 4,
       "review_records": 0,
-      "checked_at": "2026-10-13 10:59"
+      "checked_at": "2026-10-13 19:41"
     }
   },
   "candidate_cache": [
@@ -12559,6 +12559,6 @@
     "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-13 11:03:40"
+    "updated_at": "2026-10-13 19:45:00"
   }
 }
