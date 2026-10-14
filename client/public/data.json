@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-14 21:42",
+  "last_updated": "2026-10-14 22:44",
   "tenders": [
     {
       "city": "屏東縣",
@@ -1790,7 +1790,7 @@
     "today": "2026-10-14",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-14 21:42",
+    "latest_attempt_at": "2026-10-14 22:44",
     "source_records": 2963,
     "candidate_records": 4,
     "review_records": 0,
@@ -2227,14 +2227,14 @@
       "source_records": 2222,
       "candidate_records": 4,
       "review_records": 0,
-      "checked_at": "2026-10-14 21:38"
+      "checked_at": "2026-10-14 22:40"
     },
     "2026-10-14": {
       "status": "complete",
       "source_records": 2963,
       "candidate_records": 4,
       "review_records": 0,
-      "checked_at": "2026-10-14 21:38"
+      "checked_at": "2026-10-14 22:40"
     }
   },
   "candidate_cache": [
@@ -12429,6 +12429,6 @@
     "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-14 21:42:51"
+    "updated_at": "2026-10-14 22:44:45"
   }
 }
