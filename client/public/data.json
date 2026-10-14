@@ -1,75 +1,6 @@
 {
-  "last_updated": "2026-10-14 09:14",
+  "last_updated": "2026-10-14 15:34",
   "tenders": [
-    {
-      "city": "南投縣",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "city_raw_text": "南投縣(非原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "點陣印表機19台採購案",
-      "unit": "衛生福利部南投醫院",
-      "unit_id": "A.21.100.38",
-      "job_number": "115CAPEX-26",
-      "publish_date": "2026-10-14",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-10-28",
-      "deadline_confidence": "verified",
-      "award_date": "",
-      "budget": "無公開數據",
-      "award_price": "",
-      "avg_discount": "資料不足",
-      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
-      "main_competitor": "無公開數據",
-      "suggested_price": "資料不足",
-      "suggestion_basis": {
-        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 0,
-        "discount_rate": null
-      },
-      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNTI1OTg",
-      "history_stats": [],
-      "history_records": [
-        {
-          "award_date": "2017-09-26",
-          "year": 2017,
-          "title": "：106-108度墨水匣供應(廠商無償提供印表機)採購案",
-          "job_number": "106INK",
-          "budget": 3036000,
-          "award_price": 2706000,
-          "discount_rate": 89.1,
-          "winner": "安禾資訊有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170926&fn=BDM-1-52244685.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "A.21.100.38",
-          "source_unit": "衛生福利部南投醫院",
-          "relation_scope": "same_unit",
-          "is_stale": true
-        }
-      ],
-      "stage": "正式開標",
-      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
-      "duration_years": 1,
-      "stream": "peripherals",
-      "sub_type": "printer",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "dot_matrix_printer",
-        "stream": "peripherals",
-        "sub_type": "printer",
-        "matched_terms": [
-          "印表機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中印表機或繪圖機標的"
-      }
-    },
     {
       "city": "屏東縣",
       "city_source": "履約地點",
@@ -221,6 +152,75 @@
           "title"
         ],
         "reason": "命中文件掃描器設備標的"
+      }
+    },
+    {
+      "city": "南投縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "南投縣(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "點陣印表機19台採購案",
+      "unit": "衛生福利部南投醫院",
+      "unit_id": "A.21.100.38",
+      "job_number": "115CAPEX-26",
+      "publish_date": "2026-10-14",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-28",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNTI1OTg",
+      "history_stats": [],
+      "history_records": [
+        {
+          "award_date": "2017-09-26",
+          "year": 2017,
+          "title": "：106-108度墨水匣供應(廠商無償提供印表機)採購案",
+          "job_number": "106INK",
+          "budget": 3036000,
+          "award_price": 2706000,
+          "discount_rate": 89.1,
+          "winner": "安禾資訊有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170926&fn=BDM-1-52244685.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.21.100.38",
+          "source_unit": "衛生福利部南投醫院",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "printer",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "dot_matrix_printer",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
       }
     },
     {
@@ -1790,9 +1790,9 @@
     "today": "2026-10-14",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-14 09:14",
-    "source_records": 2751,
-    "candidate_records": 5,
+    "latest_attempt_at": "2026-10-14 15:34",
+    "source_records": 2888,
+    "candidate_records": 4,
     "review_records": 0,
     "successful_dates": [
       "2026-10-14",
@@ -2227,54 +2227,17 @@
       "source_records": 2222,
       "candidate_records": 4,
       "review_records": 0,
-      "checked_at": "2026-10-14 09:09"
+      "checked_at": "2026-10-14 15:29"
     },
     "2026-10-14": {
       "status": "complete",
-      "source_records": 2751,
-      "candidate_records": 5,
+      "source_records": 2888,
+      "candidate_records": 4,
       "review_records": 0,
-      "checked_at": "2026-10-14 09:09"
+      "checked_at": "2026-10-14 15:29"
     }
   },
   "candidate_cache": [
-    {
-      "date": 20261014,
-      "filename": "ttd-71352598",
-      "brief": {
-        "type": "公開取得報價單或企劃書公告",
-        "title": "點陣印表機19台採購案",
-        "category": "財物類481-醫療,外科及矯形設備",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115CAPEX-26",
-      "unit_id": "A.21.100.38",
-      "unit_name": "衛生福利部南投醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.100.38",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.100.38&job_number=115CAPEX-26",
-      "unit_url": "/index/unit/A.21.100.38",
-      "url": "/index/case/A.21.100.38/115CAPEX-26/20261014/ttd-71352598",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "dot_matrix_printer",
-        "stream": "peripherals",
-        "sub_type": "printer",
-        "matched_terms": [
-          "印表機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中印表機或繪圖機標的"
-      }
-    },
     {
       "date": 20261014,
       "filename": "ttd-71351210",
@@ -12466,6 +12429,6 @@
     "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-14 09:14:08"
+    "updated_at": "2026-10-14 15:34:04"
   }
 }
