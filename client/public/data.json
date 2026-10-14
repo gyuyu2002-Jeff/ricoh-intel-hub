@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-14 07:51",
+  "last_updated": "2026-10-14 09:14",
   "tenders": [
     {
       "city": "南投縣",
@@ -68,6 +68,57 @@
           "title"
         ],
         "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "city": "屏東縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "屏東縣(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "整合式自助服務系統多功能機3式",
+      "unit": "衛生福利部屏東醫院",
+      "unit_id": "A.21.100.44",
+      "job_number": "115PNTN14",
+      "publish_date": "2026-10-14",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-20",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 1,180,000",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNTE0NDA",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 1,
+      "stream": "copier",
+      "sub_type": "main",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "多功能機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
       }
     },
     {
@@ -1739,9 +1790,9 @@
     "today": "2026-10-14",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-14 01:19",
-    "source_records": 257,
-    "candidate_records": 2,
+    "latest_attempt_at": "2026-10-14 09:14",
+    "source_records": 2751,
+    "candidate_records": 5,
     "review_records": 0,
     "successful_dates": [
       "2026-10-14",
@@ -2176,14 +2227,14 @@
       "source_records": 2222,
       "candidate_records": 4,
       "review_records": 0,
-      "checked_at": "2026-10-14 01:08"
+      "checked_at": "2026-10-14 09:09"
     },
     "2026-10-14": {
       "status": "complete",
-      "source_records": 257,
-      "candidate_records": 2,
+      "source_records": 2751,
+      "candidate_records": 5,
       "review_records": 0,
-      "checked_at": "2026-10-14 01:08"
+      "checked_at": "2026-10-14 09:09"
     }
   },
   "candidate_cache": [
@@ -2259,6 +2310,117 @@
           "title"
         ],
         "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261014,
+      "filename": "TIQ-11-71134933",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "整合式自助服務系統多功能機3式",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115PNTN14",
+      "unit_id": "A.21.100.44",
+      "unit_name": "衛生福利部屏東醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.21.100.44",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.21.100.44&job_number=115PNTN14",
+      "unit_url": "/index/unit/A.21.100.44",
+      "url": "/index/case/A.21.100.44/115PNTN14/20261014/TIQ-11-71134933",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "多功能機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261014,
+      "filename": "TIQ-11-71134836",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "井測圖資掃描器 等1批等共1項",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "B0315Y070",
+      "unit_id": "3.13.50.50",
+      "unit_name": "台灣中油股份有限公司探採事業部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.50.50",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.50.50&job_number=B0315Y070",
+      "unit_url": "/index/unit/3.13.50.50",
+      "url": "/index/case/3.13.50.50/B0315Y070/20261014/TIQ-11-71134836",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "scanner",
+        "stream": "peripherals",
+        "sub_type": "scanner",
+        "matched_terms": [
+          "掃描器"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中文件掃描器設備標的"
+      }
+    },
+    {
+      "date": 20261014,
+      "filename": "TIQ-1-71135215",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "二維有線條碼掃描器等二項案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "HJ15486P349",
+      "unit_id": "A.5.24",
+      "unit_name": "國防醫學大學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.5.24",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.5.24&job_number=HJ15486P349",
+      "unit_url": "/index/unit/A.5.24",
+      "url": "/index/case/A.5.24/HJ15486P349/20261014/TIQ-1-71135215",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "scanner",
+        "stream": "peripherals",
+        "sub_type": "scanner",
+        "matched_terms": [
+          "掃描器"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中文件掃描器設備標的"
       }
     },
     {
@@ -3382,43 +3544,6 @@
           "title"
         ],
         "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "date": 20261001,
-      "filename": "TIQ-11-71124786",
-      "brief": {
-        "type": "公開取得報價單或企劃書公告",
-        "title": "井測圖資掃描器 等1批等共1項",
-        "category": "財物類452-計算機及其零件與配件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "B0315Y070",
-      "unit_id": "3.13.50.50",
-      "unit_name": "台灣中油股份有限公司探採事業部",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.50.50",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.50.50&job_number=B0315Y070",
-      "unit_url": "/index/unit/3.13.50.50",
-      "url": "/index/case/3.13.50.50/B0315Y070/20261001/TIQ-11-71124786",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "scanner",
-        "stream": "peripherals",
-        "sub_type": "scanner",
-        "matched_terms": [
-          "掃描器"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中文件掃描器設備標的"
       }
     },
     {
@@ -4649,43 +4774,6 @@
     },
     {
       "date": 20260911,
-      "filename": "TIQ-1-71113375",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "二維有線條碼掃描器等二項案",
-        "category": "財物類452-計算機及其零件與配件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "HJ15486P349",
-      "unit_id": "A.5.24",
-      "unit_name": "國防醫學大學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.5.24",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.5.24&job_number=HJ15486P349",
-      "unit_url": "/index/unit/A.5.24",
-      "url": "/index/case/A.5.24/HJ15486P349/20260911/TIQ-1-71113375",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "scanner",
-        "stream": "peripherals",
-        "sub_type": "scanner",
-        "matched_terms": [
-          "掃描器"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中文件掃描器設備標的"
-      }
-    },
-    {
-      "date": 20260911,
       "filename": "TIQ-1-71112845",
       "brief": {
         "type": "公開招標公告",
@@ -5841,6 +5929,21 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
+      "unit_id": "A.21.100.44",
+      "unit_name": "衛生福利部屏東醫院",
+      "award_date": "2026-09-17",
+      "year": 2026,
+      "title": "影印機租賃",
+      "job_number": "111PT0701-1",
+      "budget": 2247840,
+      "award_price": 2245556,
+      "discount_rate": 99.9,
+      "winner": "湛暘智能科技有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20260917&fn=BDM-1-71284713.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
       "unit_id": "3.9.20.1",
       "unit_name": "國立臺灣大學醫學院附設醫院",
       "award_date": "2026-09-01",
@@ -6932,6 +7035,21 @@
       "discount_rate": 72.6,
       "winner": "金儀 Konica Minolta",
       "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA5MjgyOTg=",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.21.100.44",
+      "unit_name": "衛生福利部屏東醫院",
+      "award_date": "2025-08-18",
+      "year": 2025,
+      "title": "印表機墨水匣採購案(含設備使用)",
+      "job_number": "PNTN11403",
+      "budget": 7545600,
+      "award_price": 7207560,
+      "discount_rate": 95.5,
+      "winner": "宏羚股份有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250818&fn=BDM-1-70951902.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -11568,7 +11686,8 @@
     "3.11": "2026-10-14",
     "3.79.13": "2026-10-14",
     "3.76.42.53": "2026-10-14",
-    "A.21.100.38": "2026-10-14"
+    "A.21.100.38": "2026-10-14",
+    "A.21.100.44": "2026-10-14"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
@@ -11652,7 +11771,8 @@
     "3.76.42.3.6|copier|rental|租賃5台全新數位影印機（影印加列表加掃描）": "2026-10-02",
     "3.32.80|printer|unspecified|黑白雷射印表機": "2026-10-06",
     "A.7.32|office_machine|rental|租賃多功能事務機五年期乙臺": "2026-10-13",
-    "A.21.100.38|printer|purchase|點陣印表機19台採購案": "2026-10-14"
+    "A.21.100.38|printer|purchase|點陣印表機19台採購案": "2026-10-14",
+    "A.21.100.44|copier|unspecified|整合式自助服務系統多功能機": "2026-10-14"
   },
   "forecasted_tenders": [
     {
@@ -12341,11 +12461,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 0,
-    "remaining": 500,
-    "usage_percent": 0.0,
+    "used_24h": 3,
+    "remaining": 497,
+    "usage_percent": 0.6,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-14 07:51:30"
+    "updated_at": "2026-10-14 09:14:08"
   }
 }

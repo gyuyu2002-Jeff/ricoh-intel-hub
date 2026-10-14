@@ -106,6 +106,24 @@
       "recipient": "gyuyu2002@gmail.com",
       "type": "digest",
       "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-14 09:14:08",
+      "recipient": "huxen.ricoh@gmail.com",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-14 09:14:08",
+      "recipient": "hanjiunwu@eosasc.com.tw",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-14 09:14:08",
+      "recipient": "gyuyu2002@gmail.com",
+      "type": "digest",
+      "dry_run": false
     }
   ],
   "huxen.ricoh@gmail.com_LP5-114034_公開徵求價單_2026-09-16": {
@@ -431,5 +449,23 @@
     "job_number": "LBOTNY-2026-14",
     "title": "租賃多功能事務機五年期乙臺",
     "sent_at": "2026-10-13 03:31:36"
+  },
+  "huxen.ricoh@gmail.com_115PNTN14_正式開標_2026-10-14": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "115PNTN14",
+    "title": "整合式自助服務系統多功能機3式",
+    "sent_at": "2026-10-14 09:14:08"
+  },
+  "hanjiunwu@eosasc.com.tw_115PNTN14_正式開標_2026-10-14": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "115PNTN14",
+    "title": "整合式自助服務系統多功能機3式",
+    "sent_at": "2026-10-14 09:14:08"
+  },
+  "gyuyu2002@gmail.com_115PNTN14_正式開標_2026-10-14": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "115PNTN14",
+    "title": "整合式自助服務系統多功能機3式",
+    "sent_at": "2026-10-14 09:14:08"
   }
 }
