@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-15 15:24",
+  "last_updated": "2026-10-15 21:25",
   "tenders": [
     {
       "city": "南投縣",
@@ -2010,8 +2010,8 @@
     "today": "2026-10-15",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-15 15:24",
-    "source_records": 2703,
+    "latest_attempt_at": "2026-10-15 21:25",
+    "source_records": 2765,
     "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
@@ -2447,14 +2447,14 @@
       "source_records": 2965,
       "candidate_records": 4,
       "review_records": 0,
-      "checked_at": "2026-10-15 15:20"
+      "checked_at": "2026-10-15 21:21"
     },
     "2026-10-15": {
       "status": "complete",
-      "source_records": 2703,
+      "source_records": 2765,
       "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-10-15 15:20"
+      "checked_at": "2026-10-15 21:21"
     }
   },
   "candidate_cache": [
@@ -12844,6 +12844,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-15 15:24:38"
+    "updated_at": "2026-10-15 21:25:22"
   }
 }
