@@ -1,6 +1,174 @@
 {
-  "last_updated": "2026-10-16 01:26",
+  "last_updated": "2026-10-16 05:39",
   "tenders": [
+    {
+      "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "116年度TSC藍芽印表機維護案",
+      "unit": "臺北市政府警察局",
+      "unit_id": "3.79.13",
+      "job_number": "116007",
+      "publish_date": "2026-10-16",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-13",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "98.0%",
+      "discount_source": "近 5 年 5 筆同設備、同契約型態決標折扣中位數",
+      "main_competitor": "精聯電子股份有限公司 (UNITECH ELECTRONICS CO., LTD.)",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 5,
+        "discount_rate": 98.0
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261016&fn=NAI-1-71307021.xml",
+      "history_stats": [
+        {
+          "year": 2022,
+          "val": 98,
+          "type": "real",
+          "winner": "天梭科技股份有限公司"
+        },
+        {
+          "year": 2023,
+          "val": 98,
+          "type": "real",
+          "winner": "天梭科技股份有限公司"
+        },
+        {
+          "year": 2025,
+          "val": 89,
+          "type": "real",
+          "winner": "精聯電子股份有限公司 (UNITECH ELECTRONICS CO., LTD.)"
+        },
+        {
+          "year": 2025,
+          "val": 97,
+          "type": "real",
+          "winner": "精聯電子股份有限公司 (UNITECH ELECTRONICS CO., LTD.)"
+        },
+        {
+          "year": 2025,
+          "val": 100,
+          "type": "real",
+          "winner": "精聯電子股份有限公司 (UNITECH ELECTRONICS CO., LTD.)"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2025-12-01",
+          "year": 2025,
+          "title": "115年度TSC藍芽印表機維護案",
+          "job_number": "115010",
+          "budget": 500000,
+          "award_price": 500000,
+          "discount_rate": 100.0,
+          "winner": "精聯電子股份有限公司 (UNITECH ELECTRONICS CO., LTD.)",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEwMzI1Njc=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.13",
+          "source_unit": "臺北市政府警察局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2025-05-05",
+          "year": 2025,
+          "title": "114年度交通違規舉發藍芽印表機維護案",
+          "job_number": "114089",
+          "budget": 200000,
+          "award_price": 195000,
+          "discount_rate": 97.5,
+          "winner": "精聯電子股份有限公司 (UNITECH ELECTRONICS CO., LTD.)",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA4NjkxOTI=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.13",
+          "source_unit": "臺北市政府警察局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2025-01-16",
+          "year": 2025,
+          "title": "114年度TSC藍芽印表機維護案",
+          "job_number": "114037",
+          "budget": 500000,
+          "award_price": 447200,
+          "discount_rate": 89.4,
+          "winner": "精聯電子股份有限公司 (UNITECH ELECTRONICS CO., LTD.)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250116&fn=BDM-1-70786690.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.13",
+          "source_unit": "臺北市政府警察局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2023-12-04",
+          "year": 2023,
+          "title": "113年度TSC藍芽印表機維護案",
+          "job_number": "113011",
+          "budget": 441340,
+          "award_price": 435000,
+          "discount_rate": 98.6,
+          "winner": "天梭科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA0NDIyMTg=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.13",
+          "source_unit": "臺北市政府警察局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2022-12-06",
+          "year": 2022,
+          "title": "112年度TSC藍芽印表機維護案",
+          "job_number": "11218",
+          "budget": 517458,
+          "award_price": 507108,
+          "discount_rate": 98.0,
+          "winner": "天梭科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzAxNjI5ODE=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.13",
+          "source_unit": "臺北市政府警察局",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        }
+      ],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "printer",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
     {
       "city": "南投縣",
       "city_source": "履約地點",
@@ -2023,7 +2191,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-10-16 01:26",
+      "last_run_at": "2026-10-16 05:39",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -11779,10 +11947,10 @@
     "3.79.51.15": "2026-10-16",
     "3.79.51.16": "2026-10-16",
     "3.79.51.32": "2026-10-16",
-    "3.79.51.22": "2026-10-15",
+    "3.79.51.22": "2026-10-16",
     "3.79.51.5": "2026-10-16",
     "3.9.20": "2026-10-16",
-    "3.9.20.11": "2026-10-15",
+    "3.9.20.11": "2026-10-16",
     "3.9.20.12": "2026-10-16",
     "3.9.20.13": "2026-10-16",
     "3.9.20.14": "2026-10-16",
@@ -11955,7 +12123,7 @@
     "3.97.16": "2026-10-16",
     "3.97.16.1": "2026-10-16",
     "3.97.16.23": "2026-10-16",
-    "3.97.16.28": "2026-10-15",
+    "3.97.16.28": "2026-10-16",
     "3.97.16.30": "2026-10-16",
     "3.97.16.24": "2026-10-16",
     "3.97.16.29": "2026-10-16",
@@ -12837,6 +13005,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-16 01:26:57"
+    "updated_at": "2026-10-16 05:39:53"
   }
 }
