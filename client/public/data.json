@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-15 08:33",
+  "last_updated": "2026-10-15 15:24",
   "tenders": [
     {
       "city": "南投縣",
@@ -2010,8 +2010,8 @@
     "today": "2026-10-15",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-15 08:33",
-    "source_records": 2590,
+    "latest_attempt_at": "2026-10-15 15:24",
+    "source_records": 2703,
     "candidate_records": 3,
     "review_records": 0,
     "successful_dates": [
@@ -2447,14 +2447,14 @@
       "source_records": 2965,
       "candidate_records": 4,
       "review_records": 0,
-      "checked_at": "2026-10-15 08:28"
+      "checked_at": "2026-10-15 15:20"
     },
     "2026-10-15": {
       "status": "complete",
-      "source_records": 2590,
+      "source_records": 2703,
       "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-10-15 08:28"
+      "checked_at": "2026-10-15 15:20"
     }
   },
   "candidate_cache": [
@@ -12839,11 +12839,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 3,
-    "remaining": 497,
-    "usage_percent": 0.6,
+    "used_24h": 0,
+    "remaining": 500,
+    "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-15 08:33:36"
+    "updated_at": "2026-10-15 15:24:38"
   }
 }
