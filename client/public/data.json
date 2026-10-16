@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-16 21:16",
+  "last_updated": "2026-10-16 22:21",
   "tenders": [
     {
       "city": "花蓮縣",
@@ -2288,8 +2288,8 @@
     "today": "2026-10-16",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-16 21:16",
-    "source_records": 2914,
+    "latest_attempt_at": "2026-10-16 22:21",
+    "source_records": 2915,
     "candidate_records": 2,
     "review_records": 0,
     "successful_dates": [
@@ -2725,14 +2725,14 @@
       "source_records": 2765,
       "candidate_records": 3,
       "review_records": 0,
-      "checked_at": "2026-10-16 21:11"
+      "checked_at": "2026-10-16 22:17"
     },
     "2026-10-16": {
       "status": "complete",
-      "source_records": 2914,
+      "source_records": 2915,
       "candidate_records": 2,
       "review_records": 0,
-      "checked_at": "2026-10-16 21:11"
+      "checked_at": "2026-10-16 22:17"
     }
   },
   "candidate_cache": [
@@ -13195,6 +13195,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-16 21:16:06"
+    "updated_at": "2026-10-16 22:21:28"
   }
 }
