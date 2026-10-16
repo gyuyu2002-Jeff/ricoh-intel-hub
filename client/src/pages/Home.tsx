@@ -1876,7 +1876,9 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
     if (stream === "peripherals" && peripheralFilter !== "all") {
       next = next.filter((tender) => tender.subType === peripheralFilter);
     }
-    if (filter === "3 日內") next = next.filter((tender) => tender.priority === "P1");
+    if (filter === "進行中") next = next.filter((tender) => !tender.isAwarded);
+    if (filter === "3 日內") next = next.filter((tender) => tender.priority === "P1" && !tender.isAwarded);
+    if (filter === "已決標") next = next.filter((tender) => tender.isAwarded);
     if (cityFilter !== "全部縣市") next = next.filter((tender) => tender.city === cityFilter);
     return next.filter((tender) => matchesSearch(tender, searchQuery));
   }, [cityFilter, filter, peripheralFilter, searchQuery, stream, streamTenders]);
@@ -2401,10 +2403,15 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                   <span>已完成縣市判定，依業務優先級重新排序</span>
                 </div>
               </div>
-              <div className="overview-stat overview-awarded">
+              <div
+                className={`overview-stat overview-awarded ${filter === "已決標" ? "active" : ""}`}
+                style={{ cursor: "pointer", transition: "all 0.2s" }}
+                onClick={() => setFilter(filter === "已決標" ? "全部案件" : "已決標")}
+                title="點擊切換查看已決標案件"
+              >
                 <span>已決標案件</span>
                 <strong>{streamTenders.filter((tender) => tender.isAwarded).length}</strong>
-                <small>近期結果醒目追蹤</small>
+                <small>{filter === "已決標" ? "✓ 篩選中（點擊還原）" : "點擊篩選近期結果"}</small>
               </div>
               <div className="overview-stat">
                 <span>今日來源公告</span>
@@ -2449,8 +2456,19 @@ export default function Home({ stream = "copier" }: { stream?: "copier" | "forec
                 <Filter size={16} /><strong>案件檔案</strong><span>{filteredTenders.length} / {streamTenders.length} 顯示{searchQuery ? ` · 搜尋「${searchQuery}」` : ""}</span>
               </div>
               <div className="filter-tabs">
-                {["全部案件", "3 日內"].map((item) => (
-                  <button key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{item}</button>
+                {[
+                  { label: "全部案件", count: streamTenders.length },
+                  { label: "進行中", count: streamTenders.filter((t) => !t.isAwarded).length },
+                  { label: "3 日內", count: streamTenders.filter((t) => t.priority === "P1" && !t.isAwarded).length },
+                  { label: "已決標", count: streamTenders.filter((t) => t.isAwarded).length },
+                ].map(({ label, count }) => (
+                  <button
+                    key={label}
+                    className={filter === label ? "active" : ""}
+                    onClick={() => setFilter(label)}
+                  >
+                    {label} ({count})
+                  </button>
                 ))}
               </div>
               <MiniPager
