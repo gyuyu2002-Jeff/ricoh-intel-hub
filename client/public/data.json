@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-17 21:18",
+  "last_updated": "2026-10-17 23:51",
   "tenders": [
     {
       "city": "花蓮縣",
@@ -2301,7 +2301,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-10-17 05:32",
+      "last_run_at": "2026-10-17 23:51",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -13195,6 +13195,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-17 21:18:12"
+    "updated_at": "2026-10-17 23:51:55"
   }
 }
