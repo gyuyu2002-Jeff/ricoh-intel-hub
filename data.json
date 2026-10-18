@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-19 00:14",
+  "last_updated": "2026-10-19 02:49",
   "tenders": [
     {
       "city": "花蓮縣",
@@ -2301,7 +2301,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-10-19 00:14",
+      "last_run_at": "2026-10-19 02:49",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -6407,6 +6407,21 @@
   ],
   "review_candidates": [],
   "history_cache": [
+    {
+      "unit_id": "3.49.100.4",
+      "unit_name": "高雄市選舉委員會",
+      "award_date": "2026-10-19",
+      "year": 2026,
+      "title": "115年地方公職人員選舉雷射印表機耗材",
+      "job_number": "1151006",
+      "budget": 2059760,
+      "award_price": 2046900,
+      "discount_rate": 99.4,
+      "winner": "群曜數位科技股份有限公司 (ChyunYao Digitalization Technology INC.)",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261019&fn=BDM-1-71308315.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
     {
       "unit_id": "3.32.80",
       "unit_name": "臺北榮民總醫院",
@@ -12248,7 +12263,7 @@
     "3.15.6.61": "2026-07-28",
     "3.15.6.88": "2026-07-28",
     "3.15.6.18": "2026-07-28",
-    "3.79.51": "2026-10-18",
+    "3.79.51": "2026-10-19",
     "3.79.5.36": "2026-07-28",
     "3.76.54": "2026-07-28",
     "3.97.6.34": "2026-07-28",
@@ -13188,6 +13203,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-19 00:14:26"
+    "updated_at": "2026-10-19 02:49:10"
   }
 }
