@@ -70,7 +70,26 @@
     "title": "影印機租賃案",
     "sent_at": "2026-09-05 18:30:13"
   },
-  "_delivery_history": [],
+  "_delivery_history": [
+    {
+      "sent_at": "2026-10-19 08:15:44",
+      "recipient": "huxen.ricoh@gmail.com",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-19 08:15:44",
+      "recipient": "hanjiunwu@eosasc.com.tw",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-19 08:15:44",
+      "recipient": "gyuyu2002@gmail.com",
+      "type": "digest",
+      "dry_run": false
+    }
+  ],
   "huxen.ricoh@gmail.com_LP5-114034_公開徵求價單_2026-09-16": {
     "email": "huxen.ricoh@gmail.com",
     "job_number": "LP5-114034",
@@ -412,5 +431,23 @@
     "job_number": "115PNTN14",
     "title": "整合式自助服務系統多功能機3式",
     "sent_at": "2026-10-14 09:14:08"
+  },
+  "huxen.ricoh@gmail.com_115037_公開徵求價單_2026-10-19": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "115037",
+    "title": "二手影印機租賃",
+    "sent_at": "2026-10-19 08:15:44"
+  },
+  "hanjiunwu@eosasc.com.tw_115037_公開徵求價單_2026-10-19": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "115037",
+    "title": "二手影印機租賃",
+    "sent_at": "2026-10-19 08:15:44"
+  },
+  "gyuyu2002@gmail.com_115037_公開徵求價單_2026-10-19": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "115037",
+    "title": "二手影印機租賃",
+    "sent_at": "2026-10-19 08:15:44"
   }
 }
