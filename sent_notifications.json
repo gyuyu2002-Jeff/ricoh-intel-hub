@@ -88,6 +88,24 @@
       "recipient": "gyuyu2002@gmail.com",
       "type": "digest",
       "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-20 00:49:38",
+      "recipient": "huxen.ricoh@gmail.com",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-20 00:49:38",
+      "recipient": "hanjiunwu@eosasc.com.tw",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-20 00:49:38",
+      "recipient": "gyuyu2002@gmail.com",
+      "type": "digest",
+      "dry_run": false
     }
   ],
   "huxen.ricoh@gmail.com_LP5-114034_公開徵求價單_2026-09-16": {
@@ -449,5 +467,23 @@
     "job_number": "115037",
     "title": "二手影印機租賃",
     "sent_at": "2026-10-19 08:15:44"
+  },
+  "huxen.ricoh@gmail.com_cfm1151020_正式開標_2026-10-20": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "cfm1151020",
+    "title": "116年至118年二手影印機租賃",
+    "sent_at": "2026-10-20 00:49:38"
+  },
+  "hanjiunwu@eosasc.com.tw_cfm1151020_正式開標_2026-10-20": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "cfm1151020",
+    "title": "116年至118年二手影印機租賃",
+    "sent_at": "2026-10-20 00:49:38"
+  },
+  "gyuyu2002@gmail.com_cfm1151020_正式開標_2026-10-20": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "cfm1151020",
+    "title": "116年至118年二手影印機租賃",
+    "sent_at": "2026-10-20 00:49:38"
   }
 }
