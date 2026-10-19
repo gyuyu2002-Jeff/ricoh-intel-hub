@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-20 02:51",
+  "last_updated": "2026-10-20 07:54",
   "tenders": [
     {
       "city": "台北市",
@@ -1733,7 +1733,7 @@
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
       "status": "complete",
-      "last_run_at": "2026-10-20 02:51",
+      "last_run_at": "2026-10-20 07:54",
       "backfill_dates": [],
       "failed_dates": []
     }
@@ -10604,21 +10604,6 @@
       "verification_source": "政府電子採購網決標查詢"
     },
     {
-      "unit_id": "A.7.5",
-      "unit_name": "財政部北區國稅局",
-      "award_date": "2019-10-18",
-      "year": 2019,
-      "title": "108年度KYOCERA雷射印表機耗材採購案",
-      "job_number": "108048",
-      "budget": 5675054,
-      "award_price": 5419676,
-      "discount_rate": 95.5,
-      "winner": "神通資訊科技股份有限公司",
-      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20191018&fn=BDM-1-52897942.xml",
-      "official_verified": true,
-      "verification_source": "政府電子採購網決標查詢"
-    },
-    {
       "unit_id": "3.82.9.3",
       "unit_name": "新北市三峽區龍埔國民小學",
       "award_date": "2019-10-18",
@@ -10630,6 +10615,21 @@
       "discount_rate": 93.6,
       "winner": "宏羚股份有限公司",
       "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20191018&fn=BDM-2-52892973.xml",
+      "official_verified": true,
+      "verification_source": "政府電子採購網決標查詢"
+    },
+    {
+      "unit_id": "A.7.5",
+      "unit_name": "財政部北區國稅局",
+      "award_date": "2019-10-18",
+      "year": 2019,
+      "title": "108年度KYOCERA雷射印表機耗材採購案",
+      "job_number": "108048",
+      "budget": 5675054,
+      "award_price": 5419676,
+      "discount_rate": 95.5,
+      "winner": "神通資訊科技股份有限公司",
+      "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20191018&fn=BDM-1-52897942.xml",
       "official_verified": true,
       "verification_source": "政府電子採購網決標查詢"
     },
@@ -13242,6 +13242,6 @@
     "usage_percent": 1.8,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-20 02:51:17"
+    "updated_at": "2026-10-20 07:54:42"
   }
 }
