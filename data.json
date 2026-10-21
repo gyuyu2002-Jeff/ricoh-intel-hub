@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-21 05:51",
+  "last_updated": "2026-10-21 08:38",
   "tenders": [
     {
       "city": "台北市",
@@ -50,6 +50,150 @@
           "title"
         ],
         "reason": "命中文件掃描器設備標的"
+      }
+    },
+    {
+      "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺北市(非原住民地區)",
+      "tag": "重點攻堅",
+      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
+      "title": "影印機租賃採購",
+      "unit": "臺北大眾捷運股份有限公司",
+      "unit_id": "3.79.62",
+      "job_number": "C15A00157",
+      "publish_date": "2026-10-21",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-29",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 10,621,800",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
+      "main_competitor": "富士軟片 (FUJIFILM)",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNTg4MzM",
+      "history_stats": [
+        {
+          "year": 2023,
+          "val": 81,
+          "type": "real",
+          "winner": "富士軟片 (FUJIFILM)"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2023-12-21",
+          "year": 2023,
+          "title": "影印機租賃採購",
+          "job_number": "C12A00174",
+          "budget": 9087750,
+          "award_price": 7400025,
+          "discount_rate": 81.4,
+          "winner": "富士軟片 (FUJIFILM)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20231221&fn=BDM-1-70462211.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.62",
+          "source_unit": "臺北大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2020-10-23",
+          "year": 2020,
+          "title": "影印機租賃採購",
+          "job_number": "C09A01262",
+          "budget": 16830000,
+          "award_price": 14136860,
+          "discount_rate": 84.0,
+          "winner": "富士軟片 (FUJIFILM)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20201023&fn=BDM-2-53221010.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.62",
+          "source_unit": "臺北大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2018-04-23",
+          "year": 2018,
+          "title": "影印機租賃採購",
+          "job_number": "C07A00334",
+          "budget": 15300000,
+          "award_price": 12695093,
+          "discount_rate": 83.0,
+          "winner": "富士軟片 (FUJIFILM)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20180423&fn=BDM-1-52427079.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.62",
+          "source_unit": "臺北大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2016-04-11",
+          "year": 2016,
+          "title": "影印機租賃採購",
+          "job_number": "C05A00041",
+          "budget": 17413320,
+          "award_price": 17200000,
+          "discount_rate": 98.8,
+          "winner": "和範股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20160411&fn=BDM-1-51816545.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.62",
+          "source_unit": "臺北大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2014-04-25",
+          "year": 2014,
+          "title": "影印機租賃採購",
+          "job_number": "C03A00065",
+          "budget": 17809415,
+          "award_price": 16454351,
+          "discount_rate": 92.4,
+          "winner": "富士軟片 (FUJIFILM)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20140425&fn=BDM-1-51237052.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.79.62",
+          "source_unit": "臺北大眾捷運股份有限公司",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 3,
+      "stream": "copier",
+      "sub_type": "main",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
       }
     },
     {
@@ -2343,13 +2487,13 @@
     "today": "2026-10-21",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-20 22:34",
-    "source_records": 2111,
-    "candidate_records": 7,
+    "latest_attempt_at": "2026-10-21 08:38",
+    "source_records": 2632,
+    "candidate_records": 11,
     "review_records": 0,
     "successful_dates": [
-      "2026-10-20",
-      "2026-10-19"
+      "2026-10-21",
+      "2026-10-20"
     ],
     "failed_dates": [],
     "backfill_remaining_days": 0,
@@ -2777,13 +2921,424 @@
     },
     "2026-10-20": {
       "status": "complete",
-      "source_records": 2111,
+      "source_records": 2114,
       "candidate_records": 7,
       "review_records": 0,
-      "checked_at": "2026-10-20 22:29"
+      "checked_at": "2026-10-21 08:33"
+    },
+    "2026-10-21": {
+      "status": "complete",
+      "source_records": 2632,
+      "candidate_records": 11,
+      "review_records": 0,
+      "checked_at": "2026-10-21 08:33"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20261021,
+      "filename": "TIQ-2-71130839",
+      "brief": {
+        "type": "公開招標更正公告",
+        "title": "租賃影印機",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "LP5-115036",
+      "unit_id": "A.7.31.1",
+      "unit_name": "臺灣銀行股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.31.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.31.1&job_number=LP5-115036",
+      "unit_url": "/index/unit/A.7.31.1",
+      "url": "/index/case/A.7.31.1/LP5-115036/20261021/TIQ-2-71130839",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261021,
+      "filename": "TIQ-1-71141168",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "二維有線條碼掃描器等二項案",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "HJ15486P349",
+      "unit_id": "A.5.24",
+      "unit_name": "國防醫學大學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.5.24",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.5.24&job_number=HJ15486P349",
+      "unit_url": "/index/unit/A.5.24",
+      "url": "/index/case/A.5.24/HJ15486P349/20261021/TIQ-1-71141168",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "scanner",
+        "stream": "peripherals",
+        "sub_type": "scanner",
+        "matched_terms": [
+          "掃描器"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中文件掃描器設備標的"
+      }
+    },
+    {
+      "date": 20261021,
+      "filename": "TIQ-1-71141089",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "影印機租賃採購",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "C15A00157",
+      "unit_id": "3.79.62",
+      "unit_name": "臺北大眾捷運股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.79.62",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.79.62&job_number=C15A00157",
+      "unit_url": "/index/unit/3.79.62",
+      "url": "/index/case/3.79.62/C15A00157/20261021/TIQ-1-71141089",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261021,
+      "filename": "TIQ-1-71141003",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "黑白雷射印表機",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115TC007-9Q",
+      "unit_id": "3.32.80",
+      "unit_name": "臺北榮民總醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.80",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.80&job_number=115TC007-9Q",
+      "unit_url": "/index/unit/3.32.80",
+      "url": "/index/case/3.32.80/115TC007-9Q/20261021/TIQ-1-71141003",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機",
+          "雷射印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "date": 20261021,
+      "filename": "TIQ-1-71140606",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "Canon VS 4650 高速印表機(含周邊設備)供應列印耗材暨維護",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150836",
+      "unit_id": "3.15.83.1",
+      "unit_name": "中華郵政股份有限公司臺北郵局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150836",
+      "unit_url": "/index/unit/3.15.83.1",
+      "url": "/index/case/3.15.83.1/1150836/20261021/TIQ-1-71140606",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "列印耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20261021,
+      "filename": "TIQ-1-71140533",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "Oce-4650 高速印表機(含周邊設備)供應列印耗材暨維護",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150794",
+      "unit_id": "3.15.83.1",
+      "unit_name": "中華郵政股份有限公司臺北郵局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150794",
+      "unit_url": "/index/unit/3.15.83.1",
+      "url": "/index/case/3.15.83.1/1150794/20261021/TIQ-1-71140533",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "列印耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20261021,
+      "filename": "NAI-1-71310622",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "二維有線條碼掃描器等二項案",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "HJ15486P349",
+      "unit_id": "A.5.24",
+      "unit_name": "國防醫學大學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.5.24",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.5.24&job_number=HJ15486P349",
+      "unit_url": "/index/unit/A.5.24",
+      "url": "/index/case/A.5.24/HJ15486P349/20261021/NAI-1-71310622",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "scanner",
+        "stream": "peripherals",
+        "sub_type": "scanner",
+        "matched_terms": [
+          "掃描器"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中文件掃描器設備標的"
+      }
+    },
+    {
+      "date": 20261021,
+      "filename": "NAI-1-71310424",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "黑白雷射印表機",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115TC007-9Q",
+      "unit_id": "3.32.80",
+      "unit_name": "臺北榮民總醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.80",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.80&job_number=115TC007-9Q",
+      "unit_url": "/index/unit/3.32.80",
+      "url": "/index/case/3.32.80/115TC007-9Q/20261021/NAI-1-71310424",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機",
+          "雷射印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "date": 20261021,
+      "filename": "NAI-1-71310252",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "Canon VS 4650 高速印表機(含周邊設備)供應列印耗材暨維護",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150836",
+      "unit_id": "3.15.83.1",
+      "unit_name": "中華郵政股份有限公司臺北郵局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150836",
+      "unit_url": "/index/unit/3.15.83.1",
+      "url": "/index/case/3.15.83.1/1150836/20261021/NAI-1-71310252",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "列印耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20261021,
+      "filename": "NAI-1-71310245",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "Oce-4650 高速印表機(含周邊設備)供應列印耗材暨維護",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150794",
+      "unit_id": "3.15.83.1",
+      "unit_name": "中華郵政股份有限公司臺北郵局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150794",
+      "unit_url": "/index/unit/3.15.83.1",
+      "url": "/index/case/3.15.83.1/1150794/20261021/NAI-1-71310245",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "列印耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20261021,
+      "filename": "NAI-1-71310146",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "3D 列印機乙項",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "PE15532P204",
+      "unit_id": "3.5.48",
+      "unit_name": "國防部海軍司令部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.5.48",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.5.48&job_number=PE15532P204",
+      "unit_url": "/index/unit/3.5.48",
+      "url": "/index/case/3.5.48/PE15532P204/20261021/NAI-1-71310146",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "列印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
     {
       "date": 20261020,
       "filename": "ttd-71357592",
@@ -3460,43 +4015,6 @@
       }
     },
     {
-      "date": 20261014,
-      "filename": "TIQ-1-71135215",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "二維有線條碼掃描器等二項案",
-        "category": "財物類452-計算機及其零件與配件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "HJ15486P349",
-      "unit_id": "A.5.24",
-      "unit_name": "國防醫學大學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.5.24",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.5.24&job_number=HJ15486P349",
-      "unit_url": "/index/unit/A.5.24",
-      "url": "/index/case/A.5.24/HJ15486P349/20261014/TIQ-1-71135215",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "scanner",
-        "stream": "peripherals",
-        "sub_type": "scanner",
-        "matched_terms": [
-          "掃描器"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中文件掃描器設備標的"
-      }
-    },
-    {
       "date": 20261013,
       "filename": "TIQ-11-71132364",
       "brief": {
@@ -3554,42 +4072,6 @@
       "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.50.50&job_number=B0315Y070",
       "unit_url": "/index/unit/3.13.50.50",
       "url": "/index/case/3.13.50.50/B0315Y070/20261013/NAI-2-71300142",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "scanner",
-        "stream": "peripherals",
-        "sub_type": "scanner",
-        "matched_terms": [
-          "掃描器"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中文件掃描器設備標的"
-      }
-    },
-    {
-      "date": 20261013,
-      "filename": "NAI-1-71304074",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "二維有線條碼掃描器等二項案",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "HJ15486P349",
-      "unit_id": "A.5.24",
-      "unit_name": "國防醫學大學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.5.24",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.5.24&job_number=HJ15486P349",
-      "unit_url": "/index/unit/A.5.24",
-      "url": "/index/case/A.5.24/HJ15486P349/20261013/NAI-1-71304074",
       "relevance": {
         "status": "included",
         "confidence": "high",
@@ -3803,42 +4285,6 @@
       }
     },
     {
-      "date": 20261012,
-      "filename": "NAI-1-71301968",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "3D 列印機乙項",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "PE15532P204",
-      "unit_id": "3.5.48",
-      "unit_name": "國防部海軍司令部",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.5.48",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.5.48&job_number=PE15532P204",
-      "unit_url": "/index/unit/3.5.48",
-      "url": "/index/case/3.5.48/PE15532P204/20261012/NAI-1-71301968",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "printer_or_plotter",
-        "stream": "peripherals",
-        "sub_type": "printer",
-        "matched_terms": [
-          "列印機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中印表機或繪圖機標的"
-      }
-    },
-    {
       "date": 20261008,
       "filename": "aaa-71302419",
       "brief": {
@@ -3934,43 +4380,6 @@
           "title"
         ],
         "reason": "命中印表機或繪圖機標的"
-      }
-    },
-    {
-      "date": 20261008,
-      "filename": "TIQ-1-71130839",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "租賃影印機",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "LP5-115036",
-      "unit_id": "A.7.31.1",
-      "unit_name": "臺灣銀行股份有限公司",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.31.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.31.1&job_number=LP5-115036",
-      "unit_url": "/index/unit/A.7.31.1",
-      "url": "/index/case/A.7.31.1/LP5-115036/20261008/TIQ-1-71130839",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "office_output_equipment",
-        "stream": "copier",
-        "sub_type": "main",
-        "matched_terms": [
-          "影印機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中影印機/複合機主機設備或公告規格"
       }
     },
     {
@@ -4239,44 +4648,6 @@
         "sub_type": "printer",
         "matched_terms": [
           "印表機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中印表機或繪圖機標的"
-      }
-    },
-    {
-      "date": 20261006,
-      "filename": "TIQ-1-71128683",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "黑白雷射印表機",
-        "category": "財物類452-計算機及其零件與配件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115TC007-9Q",
-      "unit_id": "3.32.80",
-      "unit_name": "臺北榮民總醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.80",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.80&job_number=115TC007-9Q",
-      "unit_url": "/index/unit/3.32.80",
-      "url": "/index/case/3.32.80/115TC007-9Q/20261006/TIQ-1-71128683",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "printer_or_plotter",
-        "stream": "peripherals",
-        "sub_type": "printer",
-        "matched_terms": [
-          "印表機",
-          "雷射印表機"
         ],
         "matched_fields": [
           "title"
@@ -6040,80 +6411,6 @@
           "title"
         ],
         "reason": "命中印表機或繪圖機標的"
-      }
-    },
-    {
-      "date": 20260907,
-      "filename": "TIQ-1-71107584",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "Canon VS 4650 高速印表機(含周邊設備)供應列印耗材暨維護",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "1150836",
-      "unit_id": "3.15.83.1",
-      "unit_name": "中華郵政股份有限公司臺北郵局",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150836",
-      "unit_url": "/index/unit/3.15.83.1",
-      "url": "/index/case/3.15.83.1/1150836/20260907/TIQ-1-71107584",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "列印耗材"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "date": 20260907,
-      "filename": "TIQ-1-71107576",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "Oce-4650 高速印表機(含周邊設備)供應列印耗材暨維護",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "1150794",
-      "unit_id": "3.15.83.1",
-      "unit_name": "中華郵政股份有限公司臺北郵局",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150794",
-      "unit_url": "/index/unit/3.15.83.1",
-      "url": "/index/case/3.15.83.1/1150794/20260907/TIQ-1-71107576",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "列印耗材"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
       }
     },
     {
@@ -12885,7 +13182,7 @@
     "05601093": "2026-09-05",
     "3.76.73.72": "2026-09-05",
     "3.5.11": "2026-07-28",
-    "3.79.62": "2026-08-31",
+    "3.79.62": "2026-10-21",
     "02717206": "2026-09-05",
     "3.92.1.67": "2026-07-28",
     "A.11.10.17": "2026-07-28",
@@ -14109,11 +14406,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 3,
-    "remaining": 497,
-    "usage_percent": 0.6,
+    "used_24h": 6,
+    "remaining": 494,
+    "usage_percent": 1.2,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-21 05:51:03"
+    "updated_at": "2026-10-21 08:38:28"
   }
 }
