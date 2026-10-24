@@ -2233,7 +2233,7 @@
     "today": "2026-10-24",
     "status": "complete",
     "latest_attempt_status": "failed",
-    "latest_attempt_at": "2026-10-24 08:33",
+    "latest_attempt_at": "2026-10-24 15:13",
     "source_records": 2599,
     "candidate_records": 3,
     "review_records": 0,
@@ -14283,11 +14283,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 3,
-    "remaining": 497,
-    "usage_percent": 0.6,
+    "used_24h": 0,
+    "remaining": 500,
+    "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-24 08:33:38"
+    "updated_at": "2026-10-24 15:13:08"
   }
 }
