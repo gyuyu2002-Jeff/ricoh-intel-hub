@@ -2233,7 +2233,7 @@
     "today": "2026-10-26",
     "status": "complete",
     "latest_attempt_status": "failed",
-    "latest_attempt_at": "2026-10-26 08:12",
+    "latest_attempt_at": "2026-10-26 15:43",
     "source_records": 2599,
     "candidate_records": 3,
     "review_records": 0,
@@ -14075,6 +14075,6 @@
     "usage_percent": 0.0,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-26 08:12:33"
+    "updated_at": "2026-10-26 15:43:06"
   }
 }
