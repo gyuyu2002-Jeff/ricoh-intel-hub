@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-28 06:32",
+  "last_updated": "2026-10-28 09:25",
   "tenders": [
     {
       "city": "苗栗縣",
@@ -194,6 +194,57 @@
       ],
       "stage": "無法決標",
       "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 3,
+      "stream": "copier",
+      "sub_type": "main",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "city": "雲林縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "雲林縣(非原住民地區)",
+      "tag": "重點攻堅",
+      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
+      "title": "116年影印機租賃1批",
+      "unit": "國立雲林科技大學",
+      "unit_id": "3.10.6",
+      "job_number": "LTG115019",
+      "publish_date": "2026-10-28",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-09",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 4,874,280",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNjMxMzQ",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
       "duration_years": 3,
       "stream": "copier",
       "sub_type": "main",
@@ -2025,17 +2076,16 @@
   "collection_status": {
     "today": "2026-10-28",
     "status": "complete",
-    "latest_attempt_status": "partial",
-    "latest_attempt_at": "2026-10-27 23:37",
-    "source_records": 603,
-    "candidate_records": 0,
+    "latest_attempt_status": "complete",
+    "latest_attempt_at": "2026-10-28 09:25",
+    "source_records": 2516,
+    "candidate_records": 5,
     "review_records": 0,
     "successful_dates": [
+      "2026-10-28",
       "2026-10-27"
     ],
-    "failed_dates": [
-      "2026-10-26"
-    ],
+    "failed_dates": [],
     "backfill_remaining_days": 3,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
@@ -2459,7 +2509,7 @@
       "source_records": 603,
       "candidate_records": 0,
       "review_records": 0,
-      "checked_at": "2026-10-27 23:33"
+      "checked_at": "2026-10-28 09:13"
     },
     "2026-10-26": {
       "status": "incomplete",
@@ -2467,9 +2517,213 @@
       "candidate_records": 0,
       "review_records": 0,
       "checked_at": "2026-10-28 06:27"
+    },
+    "2026-10-28": {
+      "status": "complete",
+      "source_records": 2516,
+      "candidate_records": 5,
+      "review_records": 0,
+      "checked_at": "2026-10-28 09:13"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20261028,
+      "filename": "TIQ-11-71144493",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "井測圖資掃描器 等1批等共1項",
+        "category": "財物類452-計算機及其零件與配件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "B0315Y070",
+      "unit_id": "3.13.50.50",
+      "unit_name": "台灣中油股份有限公司探採事業部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.50.50",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.50.50&job_number=B0315Y070",
+      "unit_url": "/index/unit/3.13.50.50",
+      "url": "/index/case/3.13.50.50/B0315Y070/20261028/TIQ-11-71144493",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "scanner",
+        "stream": "peripherals",
+        "sub_type": "scanner",
+        "matched_terms": [
+          "掃描器"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中文件掃描器設備標的"
+      }
+    },
+    {
+      "date": 20261028,
+      "filename": "TIQ-1-71144746",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "宜蘭縣政府環保局116年度租賃5台全新數位影印機（影印加列表加掃描）",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-09-29",
+      "unit_id": "3.76.42.3.6",
+      "unit_name": "宜蘭縣政府環境保護局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.42.3.6",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.42.3.6&job_number=115-09-29",
+      "unit_url": "/index/unit/3.76.42.3.6",
+      "url": "/index/case/3.76.42.3.6/115-09-29/20261028/TIQ-1-71144746",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261028,
+      "filename": "TIQ-1-71144699",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "116年影印機租賃1批",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "LTG115019",
+      "unit_id": "3.10.6",
+      "unit_name": "國立雲林科技大學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.10.6",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.10.6&job_number=LTG115019",
+      "unit_url": "/index/unit/3.10.6",
+      "url": "/index/case/3.10.6/LTG115019/20261028/TIQ-1-71144699",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261028,
+      "filename": "NAI-1-71314669",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "宜蘭縣政府環保局116年度租賃5台全新數位影印機（影印加列表加掃描）",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-09-29",
+      "unit_id": "3.76.42.3.6",
+      "unit_name": "宜蘭縣政府環境保護局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.42.3.6",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.42.3.6&job_number=115-09-29",
+      "unit_url": "/index/unit/3.76.42.3.6",
+      "url": "/index/case/3.76.42.3.6/115-09-29/20261028/NAI-1-71314669",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261028,
+      "filename": "BDM-1-71314134",
+      "brief": {
+        "type": "決標公告",
+        "title": "租賃多功能事務機五年期乙臺",
+        "companies": {
+          "ids": [
+            "U0059534"
+          ],
+          "names": [
+            "LONGWAVE TECHNOLOGIES L.I INC"
+          ],
+          "id_key": {
+            "U0059534": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "LONGWAVE TECHNOLOGIES L.I INC": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "LBOTNY-2026-14",
+      "unit_id": "A.7.32",
+      "unit_name": "臺灣土地銀行股份有限公司",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.7.32",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.7.32&job_number=LBOTNY-2026-14",
+      "unit_url": "/index/unit/A.7.32",
+      "url": "/index/case/A.7.32/LBOTNY-2026-14/20261028/BDM-1-71314134",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "多功能事務機",
+          "事務機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
     {
       "date": 20261023,
       "filename": "ttd-71362473",
@@ -3660,43 +3914,6 @@
       }
     },
     {
-      "date": 20261014,
-      "filename": "TIQ-11-71134836",
-      "brief": {
-        "type": "公開取得報價單或企劃書公告",
-        "title": "井測圖資掃描器 等1批等共1項",
-        "category": "財物類452-計算機及其零件與配件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "B0315Y070",
-      "unit_id": "3.13.50.50",
-      "unit_name": "台灣中油股份有限公司探採事業部",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.50.50",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.50.50&job_number=B0315Y070",
-      "unit_url": "/index/unit/3.13.50.50",
-      "url": "/index/case/3.13.50.50/B0315Y070/20261014/TIQ-11-71134836",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "scanner",
-        "stream": "peripherals",
-        "sub_type": "scanner",
-        "matched_terms": [
-          "掃描器"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中文件掃描器設備標的"
-      }
-    },
-    {
       "date": 20261013,
       "filename": "TIQ-11-71132364",
       "brief": {
@@ -3849,43 +4066,6 @@
         "sub_type": "main",
         "matched_terms": [
           "複合機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中影印機/複合機主機設備或公告規格"
-      }
-    },
-    {
-      "date": 20261012,
-      "filename": "TIQ-2-71126727",
-      "brief": {
-        "type": "公開招標更正公告",
-        "title": "宜蘭縣政府環保局116年度租賃5台全新數位影印機（影印加列表加掃描）",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115-09-29",
-      "unit_id": "3.76.42.3.6",
-      "unit_name": "宜蘭縣政府環境保護局",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.76.42.3.6",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.76.42.3.6&job_number=115-09-29",
-      "unit_url": "/index/unit/3.76.42.3.6",
-      "url": "/index/case/3.76.42.3.6/115-09-29/20261012/TIQ-2-71126727",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "office_output_equipment",
-        "stream": "copier",
-        "sub_type": "main",
-        "matched_terms": [
-          "影印機"
         ],
         "matched_fields": [
           "title"
@@ -12888,7 +13068,8 @@
     "A.7.5": "2026-10-28",
     "3.97.5.87": "2026-10-28",
     "3.7": "2026-10-28",
-    "3.49": "2026-10-28"
+    "3.49": "2026-10-28",
+    "3.10.6": "2026-10-28"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
@@ -12973,7 +13154,8 @@
     "3.32.80|printer|unspecified|黑白雷射印表機": "2026-10-06",
     "A.7.32|office_machine|rental|租賃多功能事務機五年期乙臺": "2026-10-13",
     "A.21.100.38|printer|purchase|點陣印表機19台採購案": "2026-10-14",
-    "A.21.100.44|copier|unspecified|整合式自助服務系統多功能機": "2026-10-14"
+    "A.21.100.44|copier|unspecified|整合式自助服務系統多功能機": "2026-10-14",
+    "3.10.6|copier|rental|影印機租賃": "2026-10-28"
   },
   "forecasted_tenders": [
     {
@@ -13733,11 +13915,11 @@
   ],
   "email_quota_status": {
     "limit": 500,
-    "used_24h": 3,
-    "remaining": 497,
-    "usage_percent": 0.6,
+    "used_24h": 6,
+    "remaining": 494,
+    "usage_percent": 1.2,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-28 06:32:53"
+    "updated_at": "2026-10-28 09:25:45"
   }
 }
