@@ -968,23 +968,25 @@ function ForecastCard({ forecast }: { forecast: ForecastedTender }) {
         </div>
       )}
 
-      <div className="decision-strip">
-        <div className="decision-main">
-          <div className="decision-label">
-            <Sparkles size={14} />
-            <span>業務作戰攻防指引</span>
+      {!isHusheng && forecast.action_suggestion && (
+        <div className="decision-strip">
+          <div className="decision-main">
+            <div className="decision-label">
+              <Sparkles size={14} />
+              <span>{isCompetitor ? "開標前置進攻建議" : "業務追蹤建議"}</span>
+            </div>
+            <p style={{ fontWeight: 600, color: "#1e2923", margin: "6px 0", fontSize: "15px", lineHeight: 1.7 }}>
+              {forecast.action_suggestion}
+            </p>
           </div>
-          <p style={{ fontWeight: 600, color: "#1e2923", margin: "6px 0", fontSize: "15px", lineHeight: 1.7 }}>
-            {forecast.action_suggestion}
-          </p>
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <span style={{ fontSize: "12px", color: "#617369" }}>商機定位</span>
+            <strong style={{ fontSize: "15px", color: isCompetitor ? "#be123c" : "var(--ink)", marginTop: "4px" }}>
+              {isCompetitor ? "⚔️ 他牌案件（爭取搶單）" : "⚪ 歷史案件追蹤"}
+            </strong>
+          </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <span style={{ fontSize: "12px", color: "#617369" }}>商機攻防定位</span>
-          <strong style={{ fontSize: "15px", color: isCompetitor ? "#be123c" : isHusheng ? "#15803d" : "var(--ink)", marginTop: "4px" }}>
-            {isCompetitor ? "⚔️ 他牌進攻（切入進攻）" : isHusheng ? "🛡️ 互盛防守（提前固防）" : "⚪ 其他廠商防守"}
-          </strong>
-        </div>
-      </div>
+      )}
 
       <div className="tender-footer">
         <div className="term-list">

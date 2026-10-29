@@ -89,21 +89,23 @@ function IndexMark() {
 // Spec comparison helpers: returns 1 if A is better, 2 if B is better, 0 if equal or indeterminate
 function parseRamValue(s?: string): number {
   if (!s) return 0;
-  const gb = s.match(/(\d+(?:\.\d+)?)\s*GB/i);
+  const clean = s.replace(/,/g, "");
+  const gb = clean.match(/(\d+(?:\.\d+)?)\s*GB/i);
   if (gb) return parseFloat(gb[1]) * 1024;
-  const mb = s.match(/([\d,]+)\s*MB/i);
-  if (mb) return parseFloat(mb[1].replace(/,/g, ""));
+  const mb = clean.match(/([\d]+)\s*MB/i);
+  if (mb) return parseFloat(mb[1]);
   return 0;
 }
 
 function parseStorageValue(s?: string): number {
   if (!s) return 0;
-  const tb = s.match(/(\d+(?:\.\d+)?)\s*TB/i);
-  const gb = s.match(/(\d+(?:\.\d+)?)\s*GB/i);
+  const clean = s.replace(/,/g, "");
+  const tb = clean.match(/(\d+(?:\.\d+)?)\s*TB/i);
+  const gb = clean.match(/(\d+(?:\.\d+)?)\s*GB/i);
   let score = 0;
   if (tb) score = parseFloat(tb[1]) * 1024;
   else if (gb) score = parseFloat(gb[1]);
-  if (/SSD/i.test(s)) score += 500;
+  if (/SSD/i.test(clean)) score += 500;
   return score;
 }
 
@@ -159,11 +161,12 @@ function parseMonthlyVolume(s?: string): number {
 
 function parseResolutionDpi(s?: string): number {
   if (!s) return 0;
-  const m = s.match(/(\d{3,4})\s*[x×]\s*(\d{3,4})/i);
+  const clean = s.replace(/,/g, "");
+  const m = clean.match(/(\d{3,4})\s*[x×*]\s*(\d{3,4})/i);
   if (m) {
     return parseInt(m[1], 10) * parseInt(m[2], 10);
   }
-  const single = s.match(/(\d{3,4})\s*dpi/i);
+  const single = clean.match(/(\d{3,4})\s*dpi/i);
   if (single) return parseInt(single[1], 10) * parseInt(single[1], 10);
   return 0;
 }
@@ -298,7 +301,7 @@ function CompareCard({
           <dd className={isBetter("storage") ? "spec-val-better" : ""}>
             {record.storage_standard}
             {isBetter("storage") && <span className="spec-val-better-badge">優勢</span>}
-            <small>選配：{record.storage_optional}</small>
+            {record.storage_optional && record.storage_optional !== "無" && record.storage_optional !== "-" && <small>選配：{record.storage_optional.replace(/^選配\s*/, "")}</small>}
           </dd>
         </div>
       </dl>
@@ -534,7 +537,7 @@ export default function SpecComparison() {
           </span>
         </a>
         <div className="spec-topbar-side">
-          <span><span className="spec-live-dot" /> VERIFIED DATASET · v2.5 (2026-10-29)</span>
+          <span><span className="spec-live-dot" /> VERIFIED DATASET · v2.6 (2026-10-29)</span>
           <a href="#" className="spec-return"><ArrowLeft size={15} /> 影印機案件監控</a>
         </div>
       </header>
@@ -562,7 +565,7 @@ export default function SpecComparison() {
               從原廠來源回看列印、掃描、送稿、紙張與資安；保留實際 A4 ppm、來源市場與標準／選配差異。
               <br />
               <span style={{ color: "var(--red)", fontWeight: 600, display: "inline-block", marginTop: "6px" }}>
-                【2026-10-29 v2.5 更新版】收錄 7 大主流品牌最新機型共 {allRecords.length} 款，全新支援「自由自選機型比較」與同品牌不同型號升級對照。
+                【2026-10-29 v2.6 更新版】收錄 7 大主流品牌最新機型共 {allRecords.length} 款，全新支援「自由自選機型比較」與同品牌不同型號升級對照。
               </span>
             </p>
             <div className="spec-hero-facts">
@@ -760,7 +763,7 @@ export default function SpecComparison() {
         <section className="spec-workbench" aria-labelledby="workbench-title">
           <div className="spec-section-heading">
             <div>
-              <div className="spec-kicker"><span>03</span> FILTERED DATASET · v2.5 更新版</div>
+              <div className="spec-kicker"><span>03</span> FILTERED DATASET · v2.6 更新版</div>
               <h2 id="workbench-title">瀏覽 7廠牌20~60張設備資料</h2>
               <p>選擇品牌、輸出類型與速度級距；每列皆可展開原始條件與官方來源，並可一鍵帶入上方進行比較。</p>
             </div>
@@ -897,7 +900,7 @@ export default function SpecComparison() {
       </main>
 
       <footer className="spec-footer">
-        <span>RIC0H INTEL HUB / 20–60 PPM PLATFORM · 版本：v2.5 (2026-10-29)</span>
+        <span>RIC0H INTEL HUB / 20–60 PPM PLATFORM · 版本：v2.6 (2026-10-29)</span>
         <span>最後查核更新日：{payload.checked_date} · 共收錄 {allRecords.length} 筆官方來源代表機型資料</span>
       </footer>
     </div>
