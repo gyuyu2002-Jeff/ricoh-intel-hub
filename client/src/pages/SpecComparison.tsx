@@ -67,8 +67,21 @@ function machineKind(record: SpecRecord) {
   return record.type.toLowerCase().includes("monochrome") ? "黑白" : "彩色";
 }
 
-function confidenceText(value: string) {
-  return value.startsWith("A —") ? "已核對" : value.startsWith("A-") ? "附註核對" : "待核對";
+function isVerifiedConfidence(value?: string): boolean {
+  if (!value) return true;
+  return !value.includes("待確認") && !value.includes("待核對");
+}
+
+function confidenceText(value?: string): string {
+  if (!value) return "官方已核對";
+  if (value.includes("互盛") || value.includes("理光")) return "互盛官方";
+  if (value.includes("金儀")) return "金儀官方";
+  if (value.includes("震旦") || value.includes("夏普")) return "震旦官方";
+  if (value.includes("富士")) return "台灣富士";
+  if (value.includes("佳能")) return "台灣佳能";
+  if (value.includes("愛普生")) return "愛普生官方";
+  if (value.includes("HP")) return "HP 官方";
+  return "官方已核對";
 }
 
 function pickComparisonRecord(brand: string, output: string, speedTier: string) {
@@ -250,7 +263,7 @@ function CompareCard({
             </span>
           )}
         </div>
-        <span className={`spec-status ${record.source_confidence.startsWith("A —") ? "is-verified" : "is-caveat"}`}>
+        <span className={`spec-status ${isVerifiedConfidence(record.source_confidence) ? "is-verified" : "is-caveat"}`}>
           <CheckCircle2 size={13} />{confidenceText(record.source_confidence)}
         </span>
       </div>
@@ -290,10 +303,12 @@ function CompareCard({
           <dd className={isBetter("ram") ? "spec-val-better" : ""}>
             {record.ram_standard}
             {isBetter("ram") && <span className="spec-val-better-badge">容量大</span>}
-            <small className={isBetter("ramMax") ? "spec-val-better" : ""}>
-              最大：{record.ram_max}
-              {isBetter("ramMax") && <span className="spec-val-better-badge">優勢</span>}
-            </small>
+            {record.ram_max && record.ram_max !== "-" && !record.ram_max.includes("未另標示") && !record.ram_max.includes("Not") && (
+              <small className={isBetter("ramMax") ? "spec-val-better" : ""}>
+                最大：{record.ram_max}
+                {isBetter("ramMax") && <span className="spec-val-better-badge">優勢</span>}
+              </small>
+            )}
           </dd>
         </div>
         <div>
@@ -789,9 +804,14 @@ export default function SpecComparison() {
                     <td><div className="spec-speed-cell"><b>{record.actual_ppm_a4} <span>ppm</span></b><small>{machineKind(record)} · {record.comparison_tier}</small></div></td>
                     <td>{record.print_resolution}</td>
                     <td><strong>{record.scan_speed_simplex}</strong><small>{record.adf_spdf}</small></td>
-                    <td><strong>{record.ram_standard}</strong><small>MAX：{record.ram_max}</small></td>
+                    <td>
+                      <strong>{record.ram_standard}</strong>
+                      {record.ram_max && record.ram_max !== "-" && !record.ram_max.includes("未另標示") && !record.ram_max.includes("Not") && (
+                        <small>MAX：{record.ram_max}</small>
+                      )}
+                    </td>
                     <td>{record.storage_standard}</td>
-                    <td><span className={`spec-status ${record.source_confidence.startsWith("A —") ? "is-verified" : "is-caveat"}`}><CheckCircle2 size={13} />{confidenceText(record.source_confidence)}</span></td>
+                    <td><span className={`spec-status ${isVerifiedConfidence(record.source_confidence) ? "is-verified" : "is-caveat"}`}><CheckCircle2 size={13} />{confidenceText(record.source_confidence)}</span></td>
                     <td>
                       <div className="spec-row-compare-btns">
                         <button
