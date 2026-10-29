@@ -263,9 +263,7 @@ function CompareCard({
             </span>
           )}
         </div>
-        <span className={`spec-status ${isVerifiedConfidence(record.source_confidence) ? "is-verified" : "is-caveat"}`}>
-          <CheckCircle2 size={13} />{confidenceText(record.source_confidence)}
-        </span>
+
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
         <h3>{record.model}</h3>
@@ -381,7 +379,7 @@ function CompareCard({
         </dl>
       </details>
       <div className="brand-compare-card-foot">
-        <span>{record.source_market}</span>
+        
         <div className="brand-compare-source-links">
           <a href={record.source_url} target="_blank" rel="noreferrer">原始規格 <ArrowUpRight size={14} /></a>
           {record.extended_source_url && record.extended_source_url !== record.source_url ? (
@@ -796,11 +794,11 @@ export default function SpecComparison() {
 
           <div className="spec-table-wrap" role="region" aria-label="品牌規格比較表" tabIndex={0}>
             <table className="spec-table">
-              <thead><tr><th>品牌／機型</th><th>類型與速度</th><th>列印解析度</th><th>掃描／送稿</th><th>記憶體</th><th>標準儲存</th><th>資料狀態</th><th>快速比較</th></tr></thead>
+              <thead><tr><th>品牌／機型</th><th>類型與速度</th><th>列印解析度</th><th>掃描／送稿</th><th>記憶體</th><th>標準儲存</th><th>快速比較</th></tr></thead>
               <tbody>
                 {filtered.map((record) => (
                   <tr key={`${record.brand}-${record.model}`} className={selected?.model === record.model ? "is-selected" : ""} onClick={() => setSelected(record)}>
-                    <td><div className="spec-model-cell"><span className="spec-brand-code">{record.brand}</span><strong>{record.model}</strong><small>[{record.source_market}]</small></div></td>
+                    <td><div className="spec-model-cell"><span className="spec-brand-code">{record.brand}</span><strong>{record.model}</strong></div></td>
                     <td><div className="spec-speed-cell"><b>{record.actual_ppm_a4} <span>ppm</span></b><small>{machineKind(record)} · {record.comparison_tier}</small></div></td>
                     <td>{record.print_resolution}</td>
                     <td><strong>{record.scan_speed_simplex}</strong><small>{record.adf_spdf}</small></td>
@@ -811,7 +809,7 @@ export default function SpecComparison() {
                       )}
                     </td>
                     <td>{record.storage_standard}</td>
-                    <td><span className={`spec-status ${isVerifiedConfidence(record.source_confidence) ? "is-verified" : "is-caveat"}`}><CheckCircle2 size={13} />{confidenceText(record.source_confidence)}</span></td>
+                    
                     <td>
                       <div className="spec-row-compare-btns">
                         <button
@@ -884,9 +882,7 @@ export default function SpecComparison() {
                   </button>
                 </div>
               </div>
-              <span className="spec-status is-verified">
-                <CheckCircle2 size={13} />{confidenceText(selected.source_confidence)}
-              </span>
+
             </div>
             <div className="spec-detail-grid">
               <div className="spec-detail-spec"><span>ACTUAL A4 SPEED</span><strong>{selected.actual_ppm_a4} <em>ppm</em></strong><small>{selected.comparison_tier}</small></div>
@@ -901,9 +897,9 @@ export default function SpecComparison() {
             </div>
             <div className="spec-source-note">
               <div>
-                <span>資料限制／核對註記與能耗說明</span>
-                <p>{selected.notes}</p>
-                {selected.extended_source_note ? <small>{selected.extended_source_note}</small> : null}
+                
+                
+                
                 <div style={{ marginTop: "10px", padding: "8px 12px", background: "rgba(255,255,255,0.65)", borderLeft: "3px solid #c8102e", fontSize: "11px", color: "#56615a", lineHeight: "1.6" }}>
                   <strong>【TEC 典型用電量測試簡述】</strong> 依經濟部節能標章與能源之星規範，模擬一週 7 天運轉（5天工作日列印/休眠動態耗電 ＋ 2天週末48小時休眠耗電），計算公式為 <code>TEC = (5 × 工作日耗電) + 週末耗電</code>（單位：度/週），數值越低越省電，為政府標案評核硬指標。
                 </div>
