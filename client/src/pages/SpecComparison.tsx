@@ -86,6 +86,295 @@ function IndexMark() {
   );
 }
 
+// Spec comparison helpers: returns 1 if A is better, 2 if B is better, 0 if equal or indeterminate
+function parseRamValue(s?: string): number {
+  if (!s) return 0;
+  const gb = s.match(/(\d+(?:\.\d+)?)\s*GB/i);
+  if (gb) return parseFloat(gb[1]) * 1024;
+  const mb = s.match(/([\d,]+)\s*MB/i);
+  if (mb) return parseFloat(mb[1].replace(/,/g, ""));
+  return 0;
+}
+
+function parseStorageValue(s?: string): number {
+  if (!s) return 0;
+  const tb = s.match(/(\d+(?:\.\d+)?)\s*TB/i);
+  const gb = s.match(/(\d+(?:\.\d+)?)\s*GB/i);
+  let score = 0;
+  if (tb) score = parseFloat(tb[1]) * 1024;
+  else if (gb) score = parseFloat(gb[1]);
+  if (/SSD/i.test(s)) score += 500;
+  return score;
+}
+
+function parseScanIpm(s?: string): number {
+  if (!s) return 0;
+  const matches = s.match(/\b(\d{2,3})\b/g);
+  if (matches) {
+    const nums = matches.map((m) => parseInt(m, 10)).filter((n) => n <= 400);
+    if (nums.length) return Math.max(...nums);
+  }
+  return 0;
+}
+
+function parseAdfSheets(s?: string): number {
+  if (!s) return 0;
+  const matches = s.match(/(\d+)\s*張/g);
+  if (matches) {
+    const nums = matches.map((m) => parseInt(m.replace(/\D/g, ""), 10));
+    if (nums.length) return Math.max(...nums);
+  }
+  return 0;
+}
+
+function parseFirstOutputSec(s?: string): number {
+  if (!s) return 999;
+  const matches = s.match(/(\d+(?:\.\d+)?)\s*秒/g);
+  if (matches) {
+    const nums = matches.map((m) => parseFloat(m.replace(/[^\d.]/g, "")));
+    if (nums.length) return Math.min(...nums);
+  }
+  return 999;
+}
+
+function parsePaperInput(s?: string): number {
+  if (!s) return 0;
+  const matches = s.match(/([\d,]+)\s*張/g);
+  if (matches) {
+    const nums = matches.map((m) => parseInt(m.replace(/[^\d]/g, ""), 10));
+    if (nums.length) return Math.max(...nums);
+  }
+  return 0;
+}
+
+function parseMonthlyVolume(s?: string): number {
+  if (!s) return 0;
+  const matches = s.match(/([\d,]+)\s*頁/g);
+  if (matches) {
+    const nums = matches.map((m) => parseInt(m.replace(/[^\d]/g, ""), 10));
+    if (nums.length) return Math.max(...nums);
+  }
+  return 0;
+}
+
+function parseResolutionDpi(s?: string): number {
+  if (!s) return 0;
+  const m = s.match(/(\d{3,4})\s*[x×]\s*(\d{3,4})/i);
+  if (m) {
+    return parseInt(m[1], 10) * parseInt(m[2], 10);
+  }
+  const single = s.match(/(\d{3,4})\s*dpi/i);
+  if (single) return parseInt(single[1], 10) * parseInt(single[1], 10);
+  return 0;
+}
+
+function cmpHigher(valA: number, valB: number): 0 | 1 | 2 {
+  if (valA > 0 && valB > 0) {
+    if (valA > valB) return 1;
+    if (valB > valA) return 2;
+  } else if (valA > 0 && valB <= 0) {
+    return 1;
+  } else if (valB > 0 && valA <= 0) {
+    return 2;
+  }
+  return 0;
+}
+
+function cmpLower(valA: number, valB: number): 0 | 1 | 2 {
+  if (valA > 0 && valB > 0 && valA < 900 && valB < 900) {
+    if (valA < valB) return 1;
+    if (valB < valA) return 2;
+  } else if (valA > 0 && valA < 900 && (valB <= 0 || valB >= 900)) {
+    return 1;
+  } else if (valB > 0 && valB < 900 && (valA <= 0 || valA >= 900)) {
+    return 2;
+  }
+  return 0;
+}
+
+interface SpecDiffMap {
+  ppm: 0 | 1 | 2;
+  resolution: 0 | 1 | 2;
+  ram: 0 | 1 | 2;
+  ramMax: 0 | 1 | 2;
+  storage: 0 | 1 | 2;
+  scanSimplex: 0 | 1 | 2;
+  scanDuplex: 0 | 1 | 2;
+  adf: 0 | 1 | 2;
+  scanRes: 0 | 1 | 2;
+  firstOutput: 0 | 1 | 2;
+  paper: 0 | 1 | 2;
+  monthly: 0 | 1 | 2;
+}
+
+function CompareCard({
+  side,
+  record,
+  allSideModels,
+  onModelChange,
+  specDiff,
+  advantageCount,
+}: {
+  side: "A" | "B";
+  record: SpecRecord | null;
+  allSideModels: SpecRecord[];
+  onModelChange: (model: string) => void;
+  specDiff: SpecDiffMap;
+  advantageCount: number;
+}) {
+  if (!record) {
+    return (
+      <article className="brand-compare-card brand-compare-empty">
+        <Info size={22} />
+        <h3>尚未選定機型 {side}</h3>
+        <p>請於選單中選取機型。</p>
+      </article>
+    );
+  }
+  const isBetter = (key: keyof SpecDiffMap) => (side === "A" ? specDiff[key] === 1 : specDiff[key] === 2);
+
+  return (
+    <article className="brand-compare-card" key={`${side}-${record.brand}-${record.model}`}>
+      <div className="brand-compare-card-head">
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <span className="spec-brand-code">{record.brand}</span>
+          <span className={`spec-badge-slot ${side === "B" ? "spec-badge-slot-b" : ""}`}>
+            設備 {side}
+          </span>
+          {advantageCount > 0 && (
+            <span className="spec-advantage-counter" title={`在此組比較中，設備 ${side} 在 ${advantageCount} 個規格項目中勝出`}>
+              ★ {advantageCount} 項優勢
+            </span>
+          )}
+        </div>
+        <span className={`spec-status ${record.source_confidence.startsWith("A —") ? "is-verified" : "is-caveat"}`}>
+          <CheckCircle2 size={13} />{confidenceText(record.source_confidence)}
+        </span>
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
+        <h3>{record.model}</h3>
+        <select
+          className="spec-card-inline-select"
+          value={record.model}
+          onChange={(e) => onModelChange(e.target.value)}
+          title="直接更換此卡片機型"
+        >
+          {allSideModels.map((m) => (
+            <option key={m.model} value={m.model}>
+              切換：{m.model} ({machineKind(m)} · {m.actual_ppm_a4} ppm)
+            </option>
+          ))}
+        </select>
+      </div>
+      <p>
+        {machineKind(record)} ·{" "}
+        <span className={isBetter("ppm") ? "spec-val-better" : ""}>
+          實際 {record.actual_ppm_a4} ppm
+          {isBetter("ppm") && <span className="spec-val-better-badge">較快</span>}
+        </span>{" "}
+        · {record.comparison_tier}
+      </p>
+      <dl className="brand-compare-fields">
+        <div>
+          <dt>列印解析度</dt>
+          <dd className={isBetter("resolution") ? "spec-val-better" : ""}>
+            {record.print_resolution}
+            {isBetter("resolution") && <span className="spec-val-better-badge">優勢</span>}
+          </dd>
+        </div>
+        <div>
+          <dt>記憶體</dt>
+          <dd className={isBetter("ram") ? "spec-val-better" : ""}>
+            {record.ram_standard}
+            {isBetter("ram") && <span className="spec-val-better-badge">容量大</span>}
+            <small className={isBetter("ramMax") ? "spec-val-better" : ""}>
+              最大：{record.ram_max}
+              {isBetter("ramMax") && <span className="spec-val-better-badge">優勢</span>}
+            </small>
+          </dd>
+        </div>
+        <div>
+          <dt>標準儲存</dt>
+          <dd className={isBetter("storage") ? "spec-val-better" : ""}>
+            {record.storage_standard}
+            {isBetter("storage") && <span className="spec-val-better-badge">優勢</span>}
+            <small>選配：{record.storage_optional}</small>
+          </dd>
+        </div>
+      </dl>
+      <details className="brand-compare-extended">
+        <summary>展開掃描、紙張與資安／雲端規格</summary>
+        <dl>
+          <div>
+            <dt>單面掃描</dt>
+            <dd className={isBetter("scanSimplex") ? "spec-val-better" : ""}>
+              {record.scan_speed_simplex}
+              {isBetter("scanSimplex") && <span className="spec-val-better-badge">較快</span>}
+            </dd>
+          </div>
+          <div>
+            <dt>雙面掃描</dt>
+            <dd className={isBetter("scanDuplex") ? "spec-val-better" : ""}>
+              {record.scan_speed_duplex}
+              {isBetter("scanDuplex") && <span className="spec-val-better-badge">較快</span>}
+            </dd>
+          </div>
+          <div>
+            <dt>ADF／SPDF</dt>
+            <dd className={isBetter("adf") ? "spec-val-better" : ""}>
+              {record.adf_spdf}
+              {isBetter("adf") && <span className="spec-val-better-badge">容量大</span>}
+            </dd>
+          </div>
+          <div>
+            <dt>掃描解析度</dt>
+            <dd className={isBetter("scanRes") ? "spec-val-better" : ""}>
+              {record.scan_resolution}
+              {isBetter("scanRes") && <span className="spec-val-better-badge">優勢</span>}
+            </dd>
+          </div>
+          <div>
+            <dt>雙面列印／首張輸出</dt>
+            <dd>
+              {record.duplex_print}
+              <small className={isBetter("firstOutput") ? "spec-val-better" : ""}>
+                {record.first_output}
+                {isBetter("firstOutput") && <span className="spec-val-better-badge">出紙快</span>}
+              </small>
+            </dd>
+          </div>
+          <div>
+            <dt>進紙／最大紙張</dt>
+            <dd className={isBetter("paper") ? "spec-val-better" : ""}>
+              {record.paper_input}
+              {isBetter("paper") && <span className="spec-val-better-badge">進紙多</span>}
+              <small>{record.max_paper_size}</small>
+            </dd>
+          </div>
+          <div>
+            <dt>月印量</dt>
+            <dd className={isBetter("monthly") ? "spec-val-better" : ""}>
+              {record.monthly_volume}
+              {isBetter("monthly") && <span className="spec-val-better-badge">負載高</span>}
+            </dd>
+          </div>
+          <div><dt>列印語言</dt><dd>{record.print_language}</dd></div>
+          <div><dt>資安與雲端掃描</dt><dd>{record.security_features}<small>{record.cloud_scan_features}</small></dd></div>
+        </dl>
+      </details>
+      <div className="brand-compare-card-foot">
+        <span>{record.source_market}</span>
+        <div className="brand-compare-source-links">
+          <a href={record.source_url} target="_blank" rel="noreferrer">原始規格 <ArrowUpRight size={14} /></a>
+          {record.extended_source_url && record.extended_source_url !== record.source_url ? (
+            <a href={record.extended_source_url} target="_blank" rel="noreferrer">第二層來源 <ArrowUpRight size={14} /></a>
+          ) : null}
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default function SpecComparison() {
   const [brand, setBrand] = useState("all");
   const [kind, setKind] = useState("all");
@@ -162,6 +451,43 @@ export default function SpecComparison() {
         ?? brandBModels[0]
         ?? null;
   }, [compareModelB, compareBrandB, brandBModels]);
+
+  // Compute spec superiority diff between Record A and Record B
+  const specDiff: SpecDiffMap = useMemo(() => {
+    if (!recordA || !recordB || recordA.model === recordB.model) {
+      return {
+        ppm: 0,
+        resolution: 0,
+        ram: 0,
+        ramMax: 0,
+        storage: 0,
+        scanSimplex: 0,
+        scanDuplex: 0,
+        adf: 0,
+        scanRes: 0,
+        firstOutput: 0,
+        paper: 0,
+        monthly: 0,
+      };
+    }
+    return {
+      ppm: cmpHigher(recordA.actual_ppm_a4 || 0, recordB.actual_ppm_a4 || 0),
+      resolution: cmpHigher(parseResolutionDpi(recordA.print_resolution), parseResolutionDpi(recordB.print_resolution)),
+      ram: cmpHigher(parseRamValue(recordA.ram_standard), parseRamValue(recordB.ram_standard)),
+      ramMax: cmpHigher(parseRamValue(recordA.ram_max), parseRamValue(recordB.ram_max)),
+      storage: cmpHigher(parseStorageValue(recordA.storage_standard), parseStorageValue(recordB.storage_standard)),
+      scanSimplex: cmpHigher(parseScanIpm(recordA.scan_speed_simplex), parseScanIpm(recordB.scan_speed_simplex)),
+      scanDuplex: cmpHigher(parseScanIpm(recordA.scan_speed_duplex), parseScanIpm(recordB.scan_speed_duplex)),
+      adf: cmpHigher(parseAdfSheets(recordA.adf_spdf), parseAdfSheets(recordB.adf_spdf)),
+      scanRes: cmpHigher(parseResolutionDpi(recordA.scan_resolution), parseResolutionDpi(recordB.scan_resolution)),
+      firstOutput: cmpLower(parseFirstOutputSec(recordA.first_output), parseFirstOutputSec(recordB.first_output)),
+      paper: cmpHigher(parsePaperInput(recordA.paper_input), parsePaperInput(recordB.paper_input)),
+      monthly: cmpHigher(parseMonthlyVolume(recordA.monthly_volume), parseMonthlyVolume(recordB.monthly_volume)),
+    };
+  }, [recordA, recordB]);
+
+  const aAdvantageCount = useMemo(() => Object.values(specDiff).filter((v) => v === 1).length, [specDiff]);
+  const bAdvantageCount = useMemo(() => Object.values(specDiff).filter((v) => v === 2).length, [specDiff]);
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("zh-Hant");
@@ -393,6 +719,11 @@ export default function SpecComparison() {
               </div>
               <span className="brand-compare-quick-hint">
                 💡 點選速度級距可自動帶入同級機型；亦可直接於上方「自選機型」自由指定任意型號。
+                {recordA && recordB && recordA.model !== recordB.model && (
+                  <span style={{ display: "block", marginTop: "4px", color: "#0b7a42", fontWeight: 700 }}>
+                    ✓ 兩機對照下，規格勝出項目將自動以【綠色粗體】標註（設備 A 勝出 {aAdvantageCount} 項 · 設備 B 勝出 {bAdvantageCount} 項）
+                  </span>
+                )}
               </span>
             </div>
           </div>
@@ -405,137 +736,22 @@ export default function SpecComparison() {
             </div>
           ) : (
             <div className="brand-compare-grid">
-              {/* Card A */}
-              {recordA ? (
-                <article className="brand-compare-card" key={`A-${recordA.brand}-${recordA.model}`}>
-                  <div className="brand-compare-card-head">
-                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                      <span className="spec-brand-code">{recordA.brand}</span>
-                      <span className="spec-badge-slot">設備 A</span>
-                    </div>
-                    <span className={`spec-status ${recordA.source_confidence.startsWith("A —") ? "is-verified" : "is-caveat"}`}>
-                      <CheckCircle2 size={13} />{confidenceText(recordA.source_confidence)}
-                    </span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
-                    <h3>{recordA.model}</h3>
-                    <select
-                      className="spec-card-inline-select"
-                      value={recordA.model}
-                      onChange={(e) => setCompareModelA(e.target.value)}
-                      title="直接更換此卡片機型"
-                    >
-                      {brandAModels.map((m) => (
-                        <option key={m.model} value={m.model}>
-                          切換：{m.model} ({machineKind(m)} · {m.actual_ppm_a4} ppm)
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <p>{machineKind(recordA)} · 實際 {recordA.actual_ppm_a4} ppm · {recordA.comparison_tier}</p>
-                  <dl className="brand-compare-fields">
-                    <div><dt>列印解析度</dt><dd>{recordA.print_resolution}</dd></div>
-                    <div><dt>記憶體</dt><dd>{recordA.ram_standard}<small>最大：{recordA.ram_max}</small></dd></div>
-                    <div><dt>標準儲存</dt><dd>{recordA.storage_standard}<small>選配：{recordA.storage_optional}</small></dd></div>
-                  </dl>
-                  <details className="brand-compare-extended">
-                    <summary>展開掃描、紙張與資安／雲端規格</summary>
-                    <dl>
-                      <div><dt>單面掃描</dt><dd>{recordA.scan_speed_simplex}</dd></div>
-                      <div><dt>雙面掃描</dt><dd>{recordA.scan_speed_duplex}</dd></div>
-                      <div><dt>ADF／SPDF</dt><dd>{recordA.adf_spdf}</dd></div>
-                      <div><dt>掃描解析度</dt><dd>{recordA.scan_resolution}</dd></div>
-                      <div><dt>雙面列印／首張輸出</dt><dd>{recordA.duplex_print}<small>{recordA.first_output}</small></dd></div>
-                      <div><dt>進紙／最大紙張</dt><dd>{recordA.paper_input}<small>{recordA.max_paper_size}</small></dd></div>
-                      <div><dt>月印量</dt><dd>{recordA.monthly_volume}</dd></div>
-                      <div><dt>列印語言</dt><dd>{recordA.print_language}</dd></div>
-                      <div><dt>資安與雲端掃描</dt><dd>{recordA.security_features}<small>{recordA.cloud_scan_features}</small></dd></div>
-                    </dl>
-                  </details>
-                  <div className="brand-compare-card-foot">
-                    <span>{recordA.source_market}</span>
-                    <div className="brand-compare-source-links">
-                      <a href={recordA.source_url} target="_blank" rel="noreferrer">原始規格 <ArrowUpRight size={14} /></a>
-                      {recordA.extended_source_url && recordA.extended_source_url !== recordA.source_url ? (
-                        <a href={recordA.extended_source_url} target="_blank" rel="noreferrer">第二層來源 <ArrowUpRight size={14} /></a>
-                      ) : null}
-                    </div>
-                  </div>
-                </article>
-              ) : (
-                <article className="brand-compare-card brand-compare-empty">
-                  <Info size={22} />
-                  <span className="spec-brand-code">{compareBrandA}</span>
-                  <h3>尚未選定機型 A</h3>
-                  <p>請於選單中選取機型。</p>
-                </article>
-              )}
-
-              {/* Card B */}
-              {recordB ? (
-                <article className="brand-compare-card" key={`B-${recordB.brand}-${recordB.model}`}>
-                  <div className="brand-compare-card-head">
-                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                      <span className="spec-brand-code">{recordB.brand}</span>
-                      <span className="spec-badge-slot spec-badge-slot-b">設備 B</span>
-                    </div>
-                    <span className={`spec-status ${recordB.source_confidence.startsWith("A —") ? "is-verified" : "is-caveat"}`}>
-                      <CheckCircle2 size={13} />{confidenceText(recordB.source_confidence)}
-                    </span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
-                    <h3>{recordB.model}</h3>
-                    <select
-                      className="spec-card-inline-select"
-                      value={recordB.model}
-                      onChange={(e) => setCompareModelB(e.target.value)}
-                      title="直接更換此卡片機型"
-                    >
-                      {brandBModels.map((m) => (
-                        <option key={m.model} value={m.model}>
-                          切換：{m.model} ({machineKind(m)} · {m.actual_ppm_a4} ppm)
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <p>{machineKind(recordB)} · 實際 {recordB.actual_ppm_a4} ppm · {recordB.comparison_tier}</p>
-                  <dl className="brand-compare-fields">
-                    <div><dt>列印解析度</dt><dd>{recordB.print_resolution}</dd></div>
-                    <div><dt>記憶體</dt><dd>{recordB.ram_standard}<small>最大：{recordB.ram_max}</small></dd></div>
-                    <div><dt>標準儲存</dt><dd>{recordB.storage_standard}<small>選配：{recordB.storage_optional}</small></dd></div>
-                  </dl>
-                  <details className="brand-compare-extended">
-                    <summary>展開掃描、紙張與資安／雲端規格</summary>
-                    <dl>
-                      <div><dt>單面掃描</dt><dd>{recordB.scan_speed_simplex}</dd></div>
-                      <div><dt>雙面掃描</dt><dd>{recordB.scan_speed_duplex}</dd></div>
-                      <div><dt>ADF／SPDF</dt><dd>{recordB.adf_spdf}</dd></div>
-                      <div><dt>掃描解析度</dt><dd>{recordB.scan_resolution}</dd></div>
-                      <div><dt>雙面列印／首張輸出</dt><dd>{recordB.duplex_print}<small>{recordB.first_output}</small></dd></div>
-                      <div><dt>進紙／最大紙張</dt><dd>{recordB.paper_input}<small>{recordB.max_paper_size}</small></dd></div>
-                      <div><dt>月印量</dt><dd>{recordB.monthly_volume}</dd></div>
-                      <div><dt>列印語言</dt><dd>{recordB.print_language}</dd></div>
-                      <div><dt>資安與雲端掃描</dt><dd>{recordB.security_features}<small>{recordB.cloud_scan_features}</small></dd></div>
-                    </dl>
-                  </details>
-                  <div className="brand-compare-card-foot">
-                    <span>{recordB.source_market}</span>
-                    <div className="brand-compare-source-links">
-                      <a href={recordB.source_url} target="_blank" rel="noreferrer">原始規格 <ArrowUpRight size={14} /></a>
-                      {recordB.extended_source_url && recordB.extended_source_url !== recordB.source_url ? (
-                        <a href={recordB.extended_source_url} target="_blank" rel="noreferrer">第二層來源 <ArrowUpRight size={14} /></a>
-                      ) : null}
-                    </div>
-                  </div>
-                </article>
-              ) : (
-                <article className="brand-compare-card brand-compare-empty">
-                  <Info size={22} />
-                  <span className="spec-brand-code">{compareBrandB}</span>
-                  <h3>尚未選定機型 B</h3>
-                  <p>請於選單中選取機型。</p>
-                </article>
-              )}
+              <CompareCard
+                side="A"
+                record={recordA}
+                allSideModels={brandAModels}
+                onModelChange={setCompareModelA}
+                specDiff={specDiff}
+                advantageCount={aAdvantageCount}
+              />
+              <CompareCard
+                side="B"
+                record={recordB}
+                allSideModels={brandBModels}
+                onModelChange={setCompareModelB}
+                specDiff={specDiff}
+                advantageCount={bAdvantageCount}
+              />
             </div>
           )}
         </section>
