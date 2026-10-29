@@ -2,19 +2,22 @@
  * Design system reminder: Specification dossier / Swiss archive.
  * This page prioritizes source traceability, actual ppm and configuration caveats.
  * Keep the warm-paper palette, signal-red index markers, mono technical data and low-radius surfaces.
- * The brand comparator uses matched output type and speed tier before rendering side-by-side source fields.
+ * The brand comparator supports both manual model self-selection and auto-matching by speed tier.
  */
 import { useMemo, useState } from "react";
 import {
   ArrowLeft,
   ArrowUpRight,
+  Award,
   CheckCircle2,
   ChevronDown,
+  Clock,
   FilterX,
   GitCompareArrows,
   Info,
   Search,
   SlidersHorizontal,
+  Zap,
 } from "lucide-react";
 import sourceData from "@/data/brand_spec_comparison.json";
 
@@ -50,7 +53,9 @@ type SpecRecord = {
 };
 
 type SpecPayload = {
+  title: string;
   checked_date: string;
+  version?: string;
   records: SpecRecord[];
 };
 
@@ -87,10 +92,76 @@ export default function SpecComparison() {
   const [tier, setTier] = useState("all");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<SpecRecord | null>(allRecords[0] ?? null);
+
+  // Side-by-side comparison states with full model self-selection
   const [compareBrandA, setCompareBrandA] = useState("RICOH");
-  const [compareBrandB, setCompareBrandB] = useState("Canon");
+  const [compareModelA, setCompareModelA] = useState("IM C3010");
+
+  const [compareBrandB, setCompareBrandB] = useState("Konica Minolta");
+  const [compareModelB, setCompareModelB] = useState("bizhub C251i");
+
   const [compareOutput, setCompareOutput] = useState("彩色");
   const [compareTier, setCompareTier] = useState("30");
+
+  // Models available for Side A and Side B based on chosen brands
+  const brandAModels = useMemo(() => {
+    return allRecords.filter((r) => r.brand === compareBrandA);
+  }, [compareBrandA]);
+
+  const brandBModels = useMemo(() => {
+    return allRecords.filter((r) => r.brand === compareBrandB);
+  }, [compareBrandB]);
+
+  // Handle Brand A change with auto-select
+  const handleBrandAChange = (newBrand: string) => {
+    setCompareBrandA(newBrand);
+    const matched = pickComparisonRecord(newBrand, compareOutput, compareTier);
+    const fallback = allRecords.find((r) => r.brand === newBrand);
+    setCompareModelA(matched?.model ?? fallback?.model ?? "");
+  };
+
+  // Handle Brand B change with auto-select
+  const handleBrandBChange = (newBrand: string) => {
+    setCompareBrandB(newBrand);
+    const matched = pickComparisonRecord(newBrand, compareOutput, compareTier);
+    const fallback = allRecords.find((r) => r.brand === newBrand);
+    setCompareModelB(matched?.model ?? fallback?.model ?? "");
+  };
+
+  // Quick Match by tier button / selects
+  const handleQuickMatch = (output: string, tierPpm: string) => {
+    setCompareOutput(output);
+    setCompareTier(tierPpm);
+    const matchA = pickComparisonRecord(compareBrandA, output, tierPpm);
+    if (matchA) setCompareModelA(matchA.model);
+    const matchB = pickComparisonRecord(compareBrandB, output, tierPpm);
+    if (matchB) setCompareModelB(matchB.model);
+  };
+
+  // Swap Left and Right
+  const handleSwap = () => {
+    const tempBrand = compareBrandA;
+    const tempModel = compareModelA;
+    setCompareBrandA(compareBrandB);
+    setCompareModelA(compareModelB);
+    setCompareBrandB(tempBrand);
+    setCompareModelB(tempModel);
+  };
+
+  // Find exact records
+  const recordA = useMemo(() => {
+    return allRecords.find((r) => r.model === compareModelA && r.brand === compareBrandA)
+        ?? allRecords.find((r) => r.model === compareModelA)
+        ?? brandAModels[0]
+        ?? null;
+  }, [compareModelA, compareBrandA, brandAModels]);
+
+  const recordB = useMemo(() => {
+    return allRecords.find((r) => r.model === compareModelB && r.brand === compareBrandB)
+        ?? allRecords.find((r) => r.model === compareModelB)
+        ?? brandBModels[0]
+        ?? null;
+  }, [compareModelB, compareBrandB, brandBModels]);
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("zh-Hant");
@@ -98,7 +169,23 @@ export default function SpecComparison() {
       const matchesBrand = brand === "all" || record.brand === brand;
       const matchesKind = kind === "all" || machineKind(record) === kind;
       const matchesTier = tier === "all" || record.comparison_tier.includes(`${tier} ppm`);
-      const text = [record.brand, record.model, record.type, record.source_market, record.comparison_tier, record.print_resolution, record.ram_standard, record.storage_standard, record.scan_speed_simplex, record.adf_spdf, record.paper_input, record.print_language, record.security_features, record.cloud_scan_features, record.notes].join(" ").toLocaleLowerCase("zh-Hant");
+      const text = [
+        record.brand,
+        record.model,
+        record.type,
+        record.source_market,
+        record.comparison_tier,
+        record.print_resolution,
+        record.ram_standard,
+        record.storage_standard,
+        record.scan_speed_simplex,
+        record.adf_spdf,
+        record.paper_input,
+        record.print_language,
+        record.security_features,
+        record.cloud_scan_features,
+        record.notes,
+      ].join(" ").toLocaleLowerCase("zh-Hant");
       return matchesBrand && matchesKind && matchesTier && (!normalized || text.includes(normalized));
     });
   }, [brand, kind, query, tier]);
@@ -109,11 +196,6 @@ export default function SpecComparison() {
     setTier("all");
     setQuery("");
   };
-
-  const comparisonRecords = useMemo(() => [
-    { brand: compareBrandA, record: pickComparisonRecord(compareBrandA, compareOutput, compareTier) },
-    { brand: compareBrandB, record: pickComparisonRecord(compareBrandB, compareOutput, compareTier) },
-  ], [compareBrandA, compareBrandB, compareOutput, compareTier]);
 
   return (
     <div className="spec-app-shell">
@@ -126,7 +208,7 @@ export default function SpecComparison() {
           </span>
         </a>
         <div className="spec-topbar-side">
-          <span><span className="spec-live-dot" /> VERIFIED DATASET</span>
+          <span><span className="spec-live-dot" /> VERIFIED DATASET · v2.5 (2026-10-29)</span>
           <a href="#" className="spec-return"><ArrowLeft size={15} /> 影印機案件監控</a>
         </div>
       </header>
@@ -141,20 +223,26 @@ export default function SpecComparison() {
         </a>
         <a className="site-tab active" href="#/specs" aria-current="page">
           <span className="site-tab-index">03</span>
-          <span><strong>設備規格比較平台</strong><small>7廠牌 20~60 張規格比較</small></span>
+          <span><strong>設備規格比較平台</strong><small>7廠牌 20~60 張規格比較 (v2.5)</small></span>
         </a>
       </nav>
 
       <main className="spec-main">
         <section className="spec-hero" aria-labelledby="spec-title">
           <div className="spec-hero-copy">
-            <div className="spec-kicker"><span>01</span> SPECIFICATION ARCHIVE / 已核對欄位</div>
+            <div className="spec-kicker"><span>01</span> SPECIFICATION ARCHIVE / 已核對欄位 · v2.5</div>
             <h1 id="spec-title">7廠牌20~60張<br /><em>規格比較平台</em></h1>
-            <p>從原廠來源回看列印、掃描、送稿、紙張與資安；保留實際 A4 ppm、來源市場與標準／選配差異。</p>
+            <p>
+              從原廠來源回看列印、掃描、送稿、紙張與資安；保留實際 A4 ppm、來源市場與標準／選配差異。
+              <br />
+              <span style={{ color: "var(--red)", fontWeight: 600, display: "inline-block", marginTop: "6px" }}>
+                【2026-10-29 v2.5 更新版】收錄 7 大主流品牌最新機型共 {allRecords.length} 款，全新支援「自由自選機型比較」與同品牌不同型號升級對照。
+              </span>
+            </p>
             <div className="spec-hero-facts">
               <div><strong>07</strong><span>指定品牌</span></div>
               <div><strong>{allRecords.length}</strong><span>代表機型</span></div>
-              <div><strong>13</strong><span>比較欄位</span></div>
+              <div><strong>v2.5</strong><span>2026-10-29</span></div>
             </div>
           </div>
           <div className="spec-hero-visual spec-hero-blueprint" aria-hidden="true">
@@ -165,58 +253,300 @@ export default function SpecComparison() {
           </div>
         </section>
 
-        <section className="brand-compare-panel" aria-labelledby="brand-compare-title">
+        <section className="spec-method-strip" aria-label="TEC 典型用電量測試規範">
+          <div>
+            <Zap size={20} />
+            <p>
+              <strong>TEC 典型用電量（度／週）</strong>
+              <span>依經濟部節能標章與能源之星標準，模擬設備一週（7天/168小時）之典型總耗電量。數值越低越省電。</span>
+            </p>
+          </div>
+          <div>
+            <Clock size={20} />
+            <p>
+              <strong>測試結構（Job Structure）</strong>
+              <span>5 天工作日按設備標稱速度定時執行列印與休眠轉換（量測動態作業耗電）；2 天週末維持 48 小時連續休眠或關機待機。</span>
+            </p>
+          </div>
+          <div>
+            <Award size={20} />
+            <p>
+              <strong>計算公式與招標標準</strong>
+              <span>
+                <code>TEC = (5 × 工作日耗電) + 週末耗電</code>。為政府共同供應契約、節能標章與 ESG 減碳採購之核心指標。
+                <a href="https://www.energylabel.org.tw/_admin/_upload/news/efficiency/99/file/%E8%83%BD%E6%BA%90%E4%B9%8B%E6%98%9F%E5%90%88%E6%A0%BC%E5%BD%B1%E5%83%8F%E8%A8%AD%E5%82%99%E4%B9%8B%E5%85%B8%E5%9E%8B%E7%94%A8%E9%9B%BB%E9%87%8F%E6%B8%AC%E8%A9%A6%E7%A8%8B%E5%BA%8F(TEC)[1].pdf" target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "3px", color: "#dfdcd1", marginLeft: "6px", textDecoration: "underline" }}>
+                  測試程序 PDF <ArrowUpRight size={11} />
+                </a>
+              </span>
+            </p>
+          </div>
+        </section>
+
+        {/* SECTION 02: Side-by-Side Comparison with Manual Model Selection */}
+        <section className="brand-compare-panel" id="brand-compare-panel" aria-labelledby="brand-compare-title">
           <div className="brand-compare-heading">
             <div>
-              <div className="spec-kicker"><span>02</span> SIDE-BY-SIDE COMPARISON</div>
-              <h2 id="brand-compare-title">選擇兩個品牌，直接對照同級設備</h2>
-              <p>比較卡會優先配對相同輸出類型與速度級距；實際 ppm、來源市場與未公開欄位仍保留原始資訊。</p>
+              <div className="spec-kicker"><span>02</span> SIDE-BY-SIDE COMPARISON · 支援自由自選機型</div>
+              <h2 id="brand-compare-title">自由自選機型，或依同級規格智能配對</h2>
+              <p>可直接指定欲比較的特定機型（支援跨品牌或同品牌不同型號升級對照）；亦可依輸出類型與速度級距一鍵自動配對。</p>
             </div>
             <GitCompareArrows size={28} aria-hidden="true" />
           </div>
 
-          <div className="brand-compare-controls" aria-label="品牌比較條件">
-            <label className="brand-compare-select"><span>品牌 A</span><select value={compareBrandA} onChange={(event) => setCompareBrandA(event.target.value)}>{allBrands.map((item) => <option key={item} value={item}>{item}</option>)}</select><ChevronDown size={14} /></label>
-            <label className="brand-compare-select"><span>品牌 B</span><select value={compareBrandB} onChange={(event) => setCompareBrandB(event.target.value)}>{allBrands.map((item) => <option key={item} value={item}>{item}</option>)}</select><ChevronDown size={14} /></label>
-            <label className="brand-compare-select"><span>輸出類型</span><select value={compareOutput} onChange={(event) => setCompareOutput(event.target.value)}><option value="彩色">彩色</option><option value="黑白">黑白</option></select><ChevronDown size={14} /></label>
-            <label className="brand-compare-select"><span>速度級距</span><select value={compareTier} onChange={(event) => setCompareTier(event.target.value)}><option value="20">20 ppm</option><option value="30">30 ppm</option><option value="40">40 ppm</option><option value="50">50 ppm</option><option value="60">60 ppm</option></select><ChevronDown size={14} /></label>
+          <div className="brand-compare-controls-wrap">
+            <div className="brand-compare-controls" aria-label="品牌與機型自選">
+              {/* Slot A */}
+              <div className="brand-compare-slot">
+                <div className="brand-compare-slot-header">
+                  <span className="spec-badge-slot">比較設備 A</span>
+                </div>
+                <div className="brand-compare-slot-inputs">
+                  <label className="brand-compare-select">
+                    <span>品牌 A</span>
+                    <select value={compareBrandA} onChange={(e) => handleBrandAChange(e.target.value)}>
+                      {allBrands.map((item) => <option key={item} value={item}>{item}</option>)}
+                    </select>
+                    <ChevronDown size={14} />
+                  </label>
+                  <label className="brand-compare-select">
+                    <span>自選機型 A</span>
+                    <select value={compareModelA} onChange={(e) => setCompareModelA(e.target.value)}>
+                      {brandAModels.map((m) => (
+                        <option key={m.model} value={m.model}>
+                          {m.model} ({machineKind(m)} · {m.actual_ppm_a4} ppm)
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown size={14} />
+                  </label>
+                </div>
+              </div>
+
+              {/* Swap Column */}
+              <div className="brand-compare-swap-col">
+                <button
+                  type="button"
+                  className="brand-compare-swap-btn"
+                  onClick={handleSwap}
+                  title="左右對調比較機型"
+                  aria-label="左右對調比較機型"
+                >
+                  <GitCompareArrows size={18} />
+                  <span>對調</span>
+                </button>
+              </div>
+
+              {/* Slot B */}
+              <div className="brand-compare-slot">
+                <div className="brand-compare-slot-header">
+                  <span className="spec-badge-slot spec-badge-slot-b">比較設備 B</span>
+                </div>
+                <div className="brand-compare-slot-inputs">
+                  <label className="brand-compare-select">
+                    <span>品牌 B</span>
+                    <select value={compareBrandB} onChange={(e) => handleBrandBChange(e.target.value)}>
+                      {allBrands.map((item) => <option key={item} value={item}>{item}</option>)}
+                    </select>
+                    <ChevronDown size={14} />
+                  </label>
+                  <label className="brand-compare-select">
+                    <span>自選機型 B</span>
+                    <select value={compareModelB} onChange={(e) => setCompareModelB(e.target.value)}>
+                      {brandBModels.map((m) => (
+                        <option key={m.model} value={m.model}>
+                          {m.model} ({machineKind(m)} · {m.actual_ppm_a4} ppm)
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown size={14} />
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Match Bar */}
+            <div className="brand-compare-quick-bar">
+              <div className="brand-compare-quick-group">
+                <span className="brand-compare-quick-title">
+                  <SlidersHorizontal size={14} /> 同級規格快速配對：
+                </span>
+                <label className="brand-compare-mini-select">
+                  <span>輸出</span>
+                  <select value={compareOutput} onChange={(e) => handleQuickMatch(e.target.value, compareTier)}>
+                    <option value="彩色">彩色</option>
+                    <option value="黑白">黑白</option>
+                  </select>
+                  <ChevronDown size={12} />
+                </label>
+                <div className="brand-compare-tier-pills">
+                  {["20", "30", "40", "50", "60"].map((tierNum) => (
+                    <button
+                      key={tierNum}
+                      type="button"
+                      className={`tier-pill-btn ${compareTier === tierNum ? "is-active" : ""}`}
+                      onClick={() => handleQuickMatch(compareOutput, tierNum)}
+                    >
+                      {tierNum} ppm
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <span className="brand-compare-quick-hint">
+                💡 點選速度級距可自動帶入同級機型；亦可直接於上方「自選機型」自由指定任意型號。
+              </span>
+            </div>
           </div>
 
-          {compareBrandA === compareBrandB ? <div className="brand-compare-notice"><Info size={17} />請選擇兩個不同品牌，才能進行並排比較。</div> : <div className="brand-compare-grid">
-            {comparisonRecords.map(({ brand: comparisonBrand, record }) => record ? <article className="brand-compare-card" key={comparisonBrand}>
-              <div className="brand-compare-card-head"><span className="spec-brand-code">{comparisonBrand}</span><span className={`spec-status ${record.source_confidence.startsWith("A —") ? "is-verified" : "is-caveat"}`}><CheckCircle2 size={13} />{confidenceText(record.source_confidence)}</span></div>
-              <h3>{record.model}</h3>
-              <p>{machineKind(record)} · 實際 {record.actual_ppm_a4} ppm · {record.comparison_tier}</p>
-              <dl className="brand-compare-fields">
-                <div><dt>列印解析度</dt><dd>{record.print_resolution}</dd></div>
-                <div><dt>記憶體</dt><dd>{record.ram_standard}<small>最大：{record.ram_max}</small></dd></div>
-                <div><dt>標準儲存</dt><dd>{record.storage_standard}<small>選配：{record.storage_optional}</small></dd></div>
-              </dl>
-              <details className="brand-compare-extended">
-                <summary>展開掃描、紙張與資安／雲端規格</summary>
-                <dl>
-                  <div><dt>單面掃描</dt><dd>{record.scan_speed_simplex}</dd></div>
-                  <div><dt>雙面掃描</dt><dd>{record.scan_speed_duplex}</dd></div>
-                  <div><dt>ADF／SPDF</dt><dd>{record.adf_spdf}</dd></div>
-                  <div><dt>掃描解析度</dt><dd>{record.scan_resolution}</dd></div>
-                  <div><dt>雙面列印／首張輸出</dt><dd>{record.duplex_print}<small>{record.first_output}</small></dd></div>
-                  <div><dt>進紙／最大紙張</dt><dd>{record.paper_input}<small>{record.max_paper_size}</small></dd></div>
-                  <div><dt>月印量</dt><dd>{record.monthly_volume}</dd></div>
-                  <div><dt>列印語言</dt><dd>{record.print_language}</dd></div>
-                  <div><dt>資安與雲端掃描</dt><dd>{record.security_features}<small>{record.cloud_scan_features}</small></dd></div>
-                </dl>
-              </details>
-              <div className="brand-compare-card-foot"><span>{record.source_market}</span><div className="brand-compare-source-links"><a href={record.source_url} target="_blank" rel="noreferrer">原始規格 <ArrowUpRight size={14} /></a>{record.extended_source_url && record.extended_source_url !== record.source_url ? <a href={record.extended_source_url} target="_blank" rel="noreferrer">第二層來源 <ArrowUpRight size={14} /></a> : null}</div></div>
-            </article> : <article className="brand-compare-card brand-compare-empty" key={comparisonBrand}><Info size={22} /><span className="spec-brand-code">{comparisonBrand}</span><h3>此條件沒有已核對代表型號</h3><p>目前資料未收錄 {compareOutput}／{compareTier} ppm 級距的官方代表機型。請調整輸出類型或速度級距。</p></article>)}
-          </div>}
+          {/* Cards or Notices */}
+          {recordA && recordB && recordA.model === recordB.model ? (
+            <div className="brand-compare-notice">
+              <Info size={17} />
+              左右兩側已選取相同機型 <strong>【{recordA.brand} {recordA.model}】</strong>。請於上方選單中切換不同機型以進行規格差異對照。
+            </div>
+          ) : (
+            <div className="brand-compare-grid">
+              {/* Card A */}
+              {recordA ? (
+                <article className="brand-compare-card" key={`A-${recordA.brand}-${recordA.model}`}>
+                  <div className="brand-compare-card-head">
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <span className="spec-brand-code">{recordA.brand}</span>
+                      <span className="spec-badge-slot">設備 A</span>
+                    </div>
+                    <span className={`spec-status ${recordA.source_confidence.startsWith("A —") ? "is-verified" : "is-caveat"}`}>
+                      <CheckCircle2 size={13} />{confidenceText(recordA.source_confidence)}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
+                    <h3>{recordA.model}</h3>
+                    <select
+                      className="spec-card-inline-select"
+                      value={recordA.model}
+                      onChange={(e) => setCompareModelA(e.target.value)}
+                      title="直接更換此卡片機型"
+                    >
+                      {brandAModels.map((m) => (
+                        <option key={m.model} value={m.model}>
+                          切換：{m.model} ({machineKind(m)} · {m.actual_ppm_a4} ppm)
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <p>{machineKind(recordA)} · 實際 {recordA.actual_ppm_a4} ppm · {recordA.comparison_tier}</p>
+                  <dl className="brand-compare-fields">
+                    <div><dt>列印解析度</dt><dd>{recordA.print_resolution}</dd></div>
+                    <div><dt>記憶體</dt><dd>{recordA.ram_standard}<small>最大：{recordA.ram_max}</small></dd></div>
+                    <div><dt>標準儲存</dt><dd>{recordA.storage_standard}<small>選配：{recordA.storage_optional}</small></dd></div>
+                  </dl>
+                  <details className="brand-compare-extended">
+                    <summary>展開掃描、紙張與資安／雲端規格</summary>
+                    <dl>
+                      <div><dt>單面掃描</dt><dd>{recordA.scan_speed_simplex}</dd></div>
+                      <div><dt>雙面掃描</dt><dd>{recordA.scan_speed_duplex}</dd></div>
+                      <div><dt>ADF／SPDF</dt><dd>{recordA.adf_spdf}</dd></div>
+                      <div><dt>掃描解析度</dt><dd>{recordA.scan_resolution}</dd></div>
+                      <div><dt>雙面列印／首張輸出</dt><dd>{recordA.duplex_print}<small>{recordA.first_output}</small></dd></div>
+                      <div><dt>進紙／最大紙張</dt><dd>{recordA.paper_input}<small>{recordA.max_paper_size}</small></dd></div>
+                      <div><dt>月印量</dt><dd>{recordA.monthly_volume}</dd></div>
+                      <div><dt>列印語言</dt><dd>{recordA.print_language}</dd></div>
+                      <div><dt>資安與雲端掃描</dt><dd>{recordA.security_features}<small>{recordA.cloud_scan_features}</small></dd></div>
+                    </dl>
+                  </details>
+                  <div className="brand-compare-card-foot">
+                    <span>{recordA.source_market}</span>
+                    <div className="brand-compare-source-links">
+                      <a href={recordA.source_url} target="_blank" rel="noreferrer">原始規格 <ArrowUpRight size={14} /></a>
+                      {recordA.extended_source_url && recordA.extended_source_url !== recordA.source_url ? (
+                        <a href={recordA.extended_source_url} target="_blank" rel="noreferrer">第二層來源 <ArrowUpRight size={14} /></a>
+                      ) : null}
+                    </div>
+                  </div>
+                </article>
+              ) : (
+                <article className="brand-compare-card brand-compare-empty">
+                  <Info size={22} />
+                  <span className="spec-brand-code">{compareBrandA}</span>
+                  <h3>尚未選定機型 A</h3>
+                  <p>請於選單中選取機型。</p>
+                </article>
+              )}
+
+              {/* Card B */}
+              {recordB ? (
+                <article className="brand-compare-card" key={`B-${recordB.brand}-${recordB.model}`}>
+                  <div className="brand-compare-card-head">
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <span className="spec-brand-code">{recordB.brand}</span>
+                      <span className="spec-badge-slot spec-badge-slot-b">設備 B</span>
+                    </div>
+                    <span className={`spec-status ${recordB.source_confidence.startsWith("A —") ? "is-verified" : "is-caveat"}`}>
+                      <CheckCircle2 size={13} />{confidenceText(recordB.source_confidence)}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "8px" }}>
+                    <h3>{recordB.model}</h3>
+                    <select
+                      className="spec-card-inline-select"
+                      value={recordB.model}
+                      onChange={(e) => setCompareModelB(e.target.value)}
+                      title="直接更換此卡片機型"
+                    >
+                      {brandBModels.map((m) => (
+                        <option key={m.model} value={m.model}>
+                          切換：{m.model} ({machineKind(m)} · {m.actual_ppm_a4} ppm)
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <p>{machineKind(recordB)} · 實際 {recordB.actual_ppm_a4} ppm · {recordB.comparison_tier}</p>
+                  <dl className="brand-compare-fields">
+                    <div><dt>列印解析度</dt><dd>{recordB.print_resolution}</dd></div>
+                    <div><dt>記憶體</dt><dd>{recordB.ram_standard}<small>最大：{recordB.ram_max}</small></dd></div>
+                    <div><dt>標準儲存</dt><dd>{recordB.storage_standard}<small>選配：{recordB.storage_optional}</small></dd></div>
+                  </dl>
+                  <details className="brand-compare-extended">
+                    <summary>展開掃描、紙張與資安／雲端規格</summary>
+                    <dl>
+                      <div><dt>單面掃描</dt><dd>{recordB.scan_speed_simplex}</dd></div>
+                      <div><dt>雙面掃描</dt><dd>{recordB.scan_speed_duplex}</dd></div>
+                      <div><dt>ADF／SPDF</dt><dd>{recordB.adf_spdf}</dd></div>
+                      <div><dt>掃描解析度</dt><dd>{recordB.scan_resolution}</dd></div>
+                      <div><dt>雙面列印／首張輸出</dt><dd>{recordB.duplex_print}<small>{recordB.first_output}</small></dd></div>
+                      <div><dt>進紙／最大紙張</dt><dd>{recordB.paper_input}<small>{recordB.max_paper_size}</small></dd></div>
+                      <div><dt>月印量</dt><dd>{recordB.monthly_volume}</dd></div>
+                      <div><dt>列印語言</dt><dd>{recordB.print_language}</dd></div>
+                      <div><dt>資安與雲端掃描</dt><dd>{recordB.security_features}<small>{recordB.cloud_scan_features}</small></dd></div>
+                    </dl>
+                  </details>
+                  <div className="brand-compare-card-foot">
+                    <span>{recordB.source_market}</span>
+                    <div className="brand-compare-source-links">
+                      <a href={recordB.source_url} target="_blank" rel="noreferrer">原始規格 <ArrowUpRight size={14} /></a>
+                      {recordB.extended_source_url && recordB.extended_source_url !== recordB.source_url ? (
+                        <a href={recordB.extended_source_url} target="_blank" rel="noreferrer">第二層來源 <ArrowUpRight size={14} /></a>
+                      ) : null}
+                    </div>
+                  </div>
+                </article>
+              ) : (
+                <article className="brand-compare-card brand-compare-empty">
+                  <Info size={22} />
+                  <span className="spec-brand-code">{compareBrandB}</span>
+                  <h3>尚未選定機型 B</h3>
+                  <p>請於選單中選取機型。</p>
+                </article>
+              )}
+            </div>
+          )}
         </section>
 
+        {/* SECTION 03: Filtered Dataset Table */}
         <section className="spec-workbench" aria-labelledby="workbench-title">
           <div className="spec-section-heading">
             <div>
-              <div className="spec-kicker"><span>03</span> FILTERED DATASET</div>
+              <div className="spec-kicker"><span>03</span> FILTERED DATASET · v2.5 更新版</div>
               <h2 id="workbench-title">瀏覽 7廠牌20~60張設備資料</h2>
-              <p>選擇品牌、輸出類型與速度級距；每列皆可展開原始條件與官方來源。</p>
+              <p>選擇品牌、輸出類型與速度級距；每列皆可展開原始條件與官方來源，並可一鍵帶入上方進行比較。</p>
             </div>
             <div className="spec-result-count"><strong>{filtered.length}</strong><span>/ {allRecords.length} 筆符合</span></div>
           </div>
@@ -232,7 +562,7 @@ export default function SpecComparison() {
 
           <div className="spec-table-wrap" role="region" aria-label="品牌規格比較表" tabIndex={0}>
             <table className="spec-table">
-              <thead><tr><th>品牌／機型</th><th>類型與速度</th><th>列印解析度</th><th>掃描／送稿</th><th>記憶體</th><th>標準儲存</th><th>資料狀態</th></tr></thead>
+              <thead><tr><th>品牌／機型</th><th>類型與速度</th><th>列印解析度</th><th>掃描／送稿</th><th>記憶體</th><th>標準儲存</th><th>資料狀態</th><th>快速比較</th></tr></thead>
               <tbody>
                 {filtered.map((record) => (
                   <tr key={`${record.brand}-${record.model}`} className={selected?.model === record.model ? "is-selected" : ""} onClick={() => setSelected(record)}>
@@ -243,6 +573,36 @@ export default function SpecComparison() {
                     <td><strong>{record.ram_standard}</strong><small>MAX：{record.ram_max}</small></td>
                     <td>{record.storage_standard}</td>
                     <td><span className={`spec-status ${record.source_confidence.startsWith("A —") ? "is-verified" : "is-caveat"}`}><CheckCircle2 size={13} />{confidenceText(record.source_confidence)}</span></td>
+                    <td>
+                      <div className="spec-row-compare-btns">
+                        <button
+                          type="button"
+                          className="spec-mini-compare-btn"
+                          title={`將 ${record.model} 設為比較機型 A`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setCompareBrandA(record.brand);
+                            setCompareModelA(record.model);
+                            document.getElementById("brand-compare-panel")?.scrollIntoView({ behavior: "smooth" });
+                          }}
+                        >
+                          設為 A
+                        </button>
+                        <button
+                          type="button"
+                          className="spec-mini-compare-btn spec-mini-compare-btn-b"
+                          title={`將 ${record.model} 設為比較機型 B`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setCompareBrandB(record.brand);
+                            setCompareModelB(record.model);
+                            document.getElementById("brand-compare-panel")?.scrollIntoView({ behavior: "smooth" });
+                          }}
+                        >
+                          設為 B
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -251,10 +611,44 @@ export default function SpecComparison() {
           </div>
         </section>
 
+        {/* SECTION 04: Detailed Model Inspection */}
         <section className="spec-detail-panel" aria-labelledby="detail-title">
           <div className="spec-detail-index"><span>04</span><div className="spec-index-rail" /></div>
           {selected ? <>
-            <div className="spec-detail-heading"><div><span className="spec-brand-code">{selected.brand} / MODEL FILE</span><h2 id="detail-title">{selected.model}</h2><p>{selected.type}</p></div><span className="spec-status is-verified"><CheckCircle2 size={13} />{confidenceText(selected.source_confidence)}</span></div>
+            <div className="spec-detail-heading">
+              <div>
+                <span className="spec-brand-code">{selected.brand} / MODEL FILE</span>
+                <h2 id="detail-title">{selected.model}</h2>
+                <p>{selected.type}</p>
+                <div className="spec-detail-actions">
+                  <button
+                    type="button"
+                    className="spec-btn-action"
+                    onClick={() => {
+                      setCompareBrandA(selected.brand);
+                      setCompareModelA(selected.model);
+                      document.getElementById("brand-compare-panel")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    <GitCompareArrows size={13} /> 帶入上方【比較機型 A】
+                  </button>
+                  <button
+                    type="button"
+                    className="spec-btn-action spec-btn-action-b"
+                    onClick={() => {
+                      setCompareBrandB(selected.brand);
+                      setCompareModelB(selected.model);
+                      document.getElementById("brand-compare-panel")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    <GitCompareArrows size={13} /> 帶入上方【比較機型 B】
+                  </button>
+                </div>
+              </div>
+              <span className="spec-status is-verified">
+                <CheckCircle2 size={13} />{confidenceText(selected.source_confidence)}
+              </span>
+            </div>
             <div className="spec-detail-grid">
               <div className="spec-detail-spec"><span>ACTUAL A4 SPEED</span><strong>{selected.actual_ppm_a4} <em>ppm</em></strong><small>{selected.comparison_tier}</small></div>
               <div className="spec-detail-spec"><span>PRINT RESOLUTION</span><strong>{selected.print_resolution}</strong></div>
@@ -266,13 +660,30 @@ export default function SpecComparison() {
               <section><h3>列印效能與紙張處理</h3><dl><div><dt>雙面列印</dt><dd>{selected.duplex_print}</dd></div><div><dt>首張輸出</dt><dd>{selected.first_output}</dd></div><div><dt>進紙容量</dt><dd>{selected.paper_input}</dd></div><div><dt>最大紙張</dt><dd>{selected.max_paper_size}</dd></div><div><dt>建議／最高月印量</dt><dd>{selected.monthly_volume}</dd></div></dl></section>
               <section><h3>列印語言、資安與雲端</h3><dl><div><dt>列印語言</dt><dd>{selected.print_language}</dd></div><div><dt>資安功能</dt><dd>{selected.security_features}</dd></div><div><dt>雲端／掃描流程</dt><dd>{selected.cloud_scan_features}</dd></div></dl></section>
             </div>
-            <div className="spec-source-note"><div><span>資料限制／核對註記</span><p>{selected.notes}</p>{selected.extended_source_note ? <small>{selected.extended_source_note}</small> : null}</div><div className="spec-source-links"><a href={selected.source_url} target="_blank" rel="noreferrer">原始規格來源 <ArrowUpRight size={15} /></a>{selected.extended_source_url && selected.extended_source_url !== selected.source_url ? <a href={selected.extended_source_url} target="_blank" rel="noreferrer">第二層官方來源 <ArrowUpRight size={15} /></a> : null}</div></div>
+            <div className="spec-source-note">
+              <div>
+                <span>資料限制／核對註記與能耗說明</span>
+                <p>{selected.notes}</p>
+                {selected.extended_source_note ? <small>{selected.extended_source_note}</small> : null}
+                <div style={{ marginTop: "10px", padding: "8px 12px", background: "rgba(255,255,255,0.65)", borderLeft: "3px solid #c8102e", fontSize: "11px", color: "#56615a", lineHeight: "1.6" }}>
+                  <strong>【TEC 典型用電量測試簡述】</strong> 依經濟部節能標章與能源之星規範，模擬一週 7 天運轉（5天工作日列印/休眠動態耗電 ＋ 2天週末48小時休眠耗電），計算公式為 <code>TEC = (5 × 工作日耗電) + 週末耗電</code>（單位：度/週），數值越低越省電，為政府標案評核硬指標。
+                </div>
+              </div>
+              <div className="spec-source-links">
+                <a href={selected.source_url} target="_blank" rel="noreferrer">原始規格來源 <ArrowUpRight size={15} /></a>
+                {selected.extended_source_url && selected.extended_source_url !== selected.source_url ? <a href={selected.extended_source_url} target="_blank" rel="noreferrer">第二層官方來源 <ArrowUpRight size={15} /></a> : null}
+                <a href="https://www.energylabel.org.tw/_admin/_upload/news/efficiency/99/file/%E8%83%BD%E6%BA%90%E4%B9%8B%E6%98%9F%E5%90%88%E6%A0%BC%E5%BD%B1%E5%83%8F%E8%A8%AD%E5%82%99%E4%B9%8B%E5%85%B8%E5%9E%8B%E7%94%A8%E9%9B%BB%E9%87%8F%E6%B8%AC%E8%A9%A6%E7%A8%8B%E5%BA%8F(TEC)[1].pdf" target="_blank" rel="noreferrer" style={{ color: "#2f6a55" }}>節能標章 TEC 程序 PDF <ArrowUpRight size={14} /></a>
+              </div>
+            </div>
           </> : <div className="spec-empty"><Info size={20} /><strong>請在上方表格選取一筆資料。</strong></div>}
         </section>
 
       </main>
 
-      <footer className="spec-footer"><span>RIC0H INTEL HUB / 20–60 PPM PLATFORM</span><span>查核日：{payload.checked_date} · {allRecords.length} 筆官方來源代表資料</span></footer>
+      <footer className="spec-footer">
+        <span>RIC0H INTEL HUB / 20–60 PPM PLATFORM · 版本：v2.5 (2026-10-29)</span>
+        <span>最後查核更新日：{payload.checked_date} · 共收錄 {allRecords.length} 筆官方來源代表機型資料</span>
+      </footer>
     </div>
   );
 }
