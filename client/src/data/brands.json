@@ -20,7 +20,7 @@
       "id": "konica-minolta",
       "name": "Konica Minolta",
       "checkedAt": "2026-10-29",
-      "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/",
+      "sourceUrl": "https://www.oa-world.com.tw/",
       "loaded": true
     },
     {
@@ -390,7 +390,7 @@
           "description": "Konica Minolta 官方產品頁 · 海外產品資訊",
           "status": "待確認",
           "checkedAt": "2026-08-14",
-          "url": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/"
+          "url": "https://www.oa-world.com.tw/"
         },
         {
           "title": "bizhub C360i 系列 Spec Sheet",
@@ -404,13 +404,13 @@
         "model": {
           "value": "bizhub C360i / C300i / C250i",
           "checkedAt": "2026-08-14",
-          "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/",
+          "sourceUrl": "https://www.oa-world.com.tw/",
           "sourceLabel": "官方產品頁"
         },
         "positioning": {
           "value": "i-Series；雲端工作流程與高效能多功能事務機",
           "checkedAt": "2026-08-14",
-          "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/",
+          "sourceUrl": "https://www.oa-world.com.tw/",
           "sourceLabel": "產品介紹"
         },
         "printSpeed": {
@@ -423,41 +423,41 @@
         "scanSpeed": {
           "value": "雙面掃描選項最高 200 ipm",
           "checkedAt": "2026-08-14",
-          "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/",
+          "sourceUrl": "https://www.oa-world.com.tw/",
           "sourceLabel": "Key Features"
         },
         "scanDestinations": {
           "value": "雲端掃描工作流程自動化；細項依部署確認",
           "status": "條件",
           "checkedAt": "2026-08-14",
-          "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/",
+          "sourceUrl": "https://www.oa-world.com.tw/",
           "sourceLabel": "產品介紹"
         },
         "transportSecurity": {
           "value": "官方頁提供 Protect and Secure 方向；協定細項需查型錄",
           "status": "待確認",
           "checkedAt": "2026-08-14",
-          "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/",
+          "sourceUrl": "https://www.oa-world.com.tw/",
           "sourceLabel": "產品特點"
         },
         "deviceSecurity": {
           "value": "標準 8 GB 記憶體與 256 GB SSD；安全功能依在地版本確認",
           "status": "待確認",
           "checkedAt": "2026-08-14",
-          "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/",
+          "sourceUrl": "https://www.oa-world.com.tw/",
           "sourceLabel": "產品介紹"
         },
         "cloudManagement": {
           "value": "True cloud scan workflow automation；面板與行動列印支援",
           "checkedAt": "2026-08-14",
-          "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/",
+          "sourceUrl": "https://www.oa-world.com.tw/",
           "sourceLabel": "Key Features"
         },
         "taiwanSuitability": {
           "value": "海外官方頁；台灣料號、供貨與 SLA 待確認",
           "status": "待確認",
           "checkedAt": "2026-08-14",
-          "sourceUrl": "https://kmbs.konicaminolta.us/products/multifunction/color-multi-function/bizhub-c360i-c300i-c250i/",
+          "sourceUrl": "https://www.oa-world.com.tw/",
           "sourceLabel": "海外官方產品頁"
         },
         "limitations": {
