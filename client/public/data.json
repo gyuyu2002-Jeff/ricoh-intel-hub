@@ -2468,8 +2468,8 @@
   "collection_status": {
     "today": "2026-10-30",
     "status": "complete",
-    "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-10-30 16:42",
+    "latest_attempt_status": "failed",
+    "latest_attempt_at": "2026-10-31 00:14",
     "source_records": 3369,
     "candidate_records": 14,
     "review_records": 0,
@@ -2477,7 +2477,9 @@
       "2026-10-30",
       "2026-10-29"
     ],
-    "failed_dates": [],
+    "failed_dates": [
+      "2026-10-31"
+    ],
     "backfill_remaining_days": 3,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
@@ -14754,6 +14756,6 @@
     "usage_percent": 1.8,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-30 16:42:11"
+    "updated_at": "2026-10-31 00:15:01"
   }
 }
