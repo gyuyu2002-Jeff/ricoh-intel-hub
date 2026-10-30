@@ -72,24 +72,6 @@
   },
   "_delivery_history": [
     {
-      "sent_at": "2026-10-28 06:32:53",
-      "recipient": "huxen.ricoh@gmail.com",
-      "type": "digest",
-      "dry_run": false
-    },
-    {
-      "sent_at": "2026-10-28 06:32:53",
-      "recipient": "hanjiunwu@eosasc.com.tw",
-      "type": "digest",
-      "dry_run": false
-    },
-    {
-      "sent_at": "2026-10-28 06:32:53",
-      "recipient": "gyuyu2002@gmail.com",
-      "type": "digest",
-      "dry_run": false
-    },
-    {
       "sent_at": "2026-10-28 09:25:45",
       "recipient": "huxen.ricoh@gmail.com",
       "type": "digest",
@@ -139,6 +121,24 @@
     },
     {
       "sent_at": "2026-10-30 02:51:13",
+      "recipient": "gyuyu2002@gmail.com",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-30 08:10:44",
+      "recipient": "huxen.ricoh@gmail.com",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-30 08:10:44",
+      "recipient": "hanjiunwu@eosasc.com.tw",
+      "type": "digest",
+      "dry_run": false
+    },
+    {
+      "sent_at": "2026-10-30 08:10:44",
       "recipient": "gyuyu2002@gmail.com",
       "type": "digest",
       "dry_run": false
@@ -701,5 +701,23 @@
     "job_number": "cfm1151020",
     "title": "116年至118年二手影印機租賃",
     "sent_at": "2026-10-30 02:51:13"
+  },
+  "huxen.ricoh@gmail.com_I7315D063_無法決標_2026-10-30": {
+    "email": "huxen.ricoh@gmail.com",
+    "job_number": "I7315D063",
+    "title": "116~117年度影印機租賃長約",
+    "sent_at": "2026-10-30 08:10:44"
+  },
+  "hanjiunwu@eosasc.com.tw_I7315D063_無法決標_2026-10-30": {
+    "email": "hanjiunwu@eosasc.com.tw",
+    "job_number": "I7315D063",
+    "title": "116~117年度影印機租賃長約",
+    "sent_at": "2026-10-30 08:10:44"
+  },
+  "gyuyu2002@gmail.com_I7315D063_無法決標_2026-10-30": {
+    "email": "gyuyu2002@gmail.com",
+    "job_number": "I7315D063",
+    "title": "116~117年度影印機租賃長約",
+    "sent_at": "2026-10-30 08:10:44"
   }
 }
