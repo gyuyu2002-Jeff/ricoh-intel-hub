@@ -1,6 +1,422 @@
 {
-  "last_updated": "2026-10-30 08:10",
+  "last_updated": "2026-10-30 10:08",
   "tenders": [
+    {
+      "city": "未分類",
+      "city_source": "無法判定",
+      "city_confidence": "low",
+      "city_raw_text": "駐外機構",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "領務組大型多功能事務機",
+      "unit": "駐外機構",
+      "unit_id": "A.3.3",
+      "job_number": "Copier1029",
+      "publish_date": "2026-10-30",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-04",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 320,900",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNjc3MzI",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 1,
+      "stream": "copier",
+      "sub_type": "main",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "多功能事務機",
+          "事務機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "city": "高雄市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "高雄市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "116年至118年二手影印機租賃",
+      "unit": "高雄市立前峰國民中學",
+      "unit_id": "3.97.5.87",
+      "job_number": "cfm1151020",
+      "publish_date": "2026-10-30",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-04",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
+      "main_competitor": "共帝企業有限公司",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/nonAtm?pk=NzEzMTgxMjQ=",
+      "history_stats": [
+        {
+          "year": 2025,
+          "val": 92,
+          "type": "real",
+          "winner": "共帝企業有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2025-09-11",
+          "year": 2025,
+          "title": "114年至115年二手影印機租賃",
+          "job_number": "11401010",
+          "budget": 261300,
+          "award_price": 241860,
+          "discount_rate": 92.6,
+          "winner": "共帝企業有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA5NzE1NzU=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.97.5.87",
+          "source_unit": "高雄市立前峰國民中學",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        }
+      ],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 3,
+      "stream": "copier",
+      "sub_type": "main",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "city": "新北市",
+      "city_source": "機關地址／開標地點",
+      "city_confidence": "high",
+      "city_raw_text": "244 新北市 林口區 湖北里1鄰湖子99號",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "印表機維護",
+      "unit": "國防部電訊發展室",
+      "unit_id": "A.5.5.2",
+      "job_number": "HP16012P012",
+      "publish_date": "2026-10-30",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-10",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 400,000",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
+      "main_competitor": "承元科技有限公司",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNjc0NDI",
+      "history_stats": [
+        {
+          "year": 2025,
+          "val": 61,
+          "type": "real",
+          "winner": "承元科技有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2025-11-05",
+          "year": 2025,
+          "title": "印表機維護",
+          "job_number": "HP15011P011",
+          "budget": 400000,
+          "award_price": 245800,
+          "discount_rate": 61.5,
+          "winner": "承元科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251105&fn=BDM-1-71008006.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.5.5.2",
+          "source_unit": "國防部電訊發展室",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        },
+        {
+          "award_date": "2020-12-22",
+          "year": 2020,
+          "title": "印表機維護",
+          "job_number": "HP10013P013",
+          "budget": 320000,
+          "award_price": 252800,
+          "discount_rate": 79.0,
+          "winner": "普林達股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20201222&fn=BDM-1-53282142.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.5.5.2",
+          "source_unit": "國防部電訊發展室",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        },
+        {
+          "award_date": "2017-09-12",
+          "year": 2017,
+          "title": "印表機維護",
+          "job_number": "HP07036P025",
+          "budget": 320000,
+          "award_price": 249600,
+          "discount_rate": 78.0,
+          "winner": "立和資訊有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170912&fn=BDM-1-52234310.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "A.5.5.2",
+          "source_unit": "國防部電訊發展室",
+          "relation_scope": "same_unit",
+          "is_stale": true
+        }
+      ],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "printer",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "city": "台中市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺中市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "Videojet電腦噴字機油墨耗材壹批",
+      "unit": "臺灣菸酒股份有限公司臺中酒廠",
+      "unit_id": "3.7.74.33",
+      "job_number": "115-0350-1-049",
+      "publish_date": "2026-10-30",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-16",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 779,578",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNjc0MTU",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "supplies",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "city": "台中市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "臺中市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "DOMINO電腦噴字機油墨耗材壹批",
+      "unit": "臺灣菸酒股份有限公司臺中酒廠",
+      "unit_id": "3.7.74.33",
+      "job_number": "115-0350-1-048",
+      "publish_date": "2026-10-30",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-16",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 513,135",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 0,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNjU5NjM",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
+      "duration_years": 1,
+      "stream": "peripherals",
+      "sub_type": "supplies",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "city": "桃園市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "city_raw_text": "桃園市(非原住民地區)",
+      "tag": "一般監控",
+      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
+      "title": "116~117年度影印機租賃長約",
+      "unit": "台灣中油股份有限公司煉製事業部桃園煉油廠",
+      "unit_id": "3.13.50.48.1",
+      "job_number": "I7315D063",
+      "publish_date": "2026-10-30",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-05",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "avg_discount": "資料不足",
+      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
+      "main_competitor": "宏羚股份有限公司",
+      "suggested_price": "資料不足",
+      "suggestion_basis": {
+        "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+        "record_count": 1,
+        "discount_rate": null
+      },
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261030&fn=NAI-1-71318588.xml",
+      "history_stats": [
+        {
+          "year": 2024,
+          "val": 94,
+          "type": "real",
+          "winner": "宏羚股份有限公司"
+        }
+      ],
+      "history_records": [
+        {
+          "award_date": "2024-11-07",
+          "year": 2024,
+          "title": "114~115年度影印機租賃長約",
+          "job_number": "I7313D053",
+          "budget": 4995902,
+          "award_price": 4723137,
+          "discount_rate": 94.5,
+          "winner": "宏羚股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241107&fn=BDM-1-70708705.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "source_unit_id": "3.13.50.48.1",
+          "source_unit": "台灣中油股份有限公司煉製事業部桃園煉油廠",
+          "relation_scope": "same_unit",
+          "is_stale": false
+        }
+      ],
+      "stage": "無法決標",
+      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "duration_years": 2,
+      "stream": "copier",
+      "sub_type": "main",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
     {
       "city": "台北市",
       "city_source": "履約地點",
@@ -568,62 +984,37 @@
       }
     },
     {
-      "city": "高雄市",
+      "city": "台南市",
       "city_source": "履約地點",
       "city_confidence": "high",
-      "city_raw_text": "高雄市(非原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "116年至118年二手影印機租賃",
-      "unit": "高雄市立前峰國民中學",
-      "unit_id": "3.97.5.87",
-      "job_number": "cfm1151020",
+      "city_raw_text": "臺南市(非原住民地區)",
+      "tag": "重點攻堅",
+      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
+      "title": "116-121長版大圖複印機租賃",
+      "unit": "國防部空軍司令部",
+      "unit_id": "3.5.49",
+      "job_number": "EV16029P029",
       "publish_date": "2026-10-30",
       "publish_date_confidence": "verified",
-      "deadline": "2026-11-04",
+      "deadline": "2026-11-09",
       "deadline_confidence": "verified",
       "award_date": "",
-      "budget": "無公開數據",
+      "budget": "NT$ 2,628,000",
       "award_price": "",
       "avg_discount": "資料不足",
-      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
-      "main_competitor": "共帝企業有限公司",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 1,
+        "record_count": 0,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/nonAtm?pk=NzEzMTgxMjQ=",
-      "history_stats": [
-        {
-          "year": 2025,
-          "val": 92,
-          "type": "real",
-          "winner": "共帝企業有限公司"
-        }
-      ],
-      "history_records": [
-        {
-          "award_date": "2025-09-11",
-          "year": 2025,
-          "title": "114年至115年二手影印機租賃",
-          "job_number": "11401010",
-          "budget": 261300,
-          "award_price": 241860,
-          "discount_rate": 92.6,
-          "winner": "共帝企業有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA5NzE1NzU=",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.97.5.87",
-          "source_unit": "高雄市立前峰國民中學",
-          "relation_scope": "same_unit",
-          "is_stale": false
-        }
-      ],
-      "stage": "無法決標",
-      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNTY2NjQ",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
       "duration_years": 3,
       "stream": "copier",
       "sub_type": "main",
@@ -635,7 +1026,7 @@
         "stream": "copier",
         "sub_type": "main",
         "matched_terms": [
-          "影印機"
+          "複印機"
         ],
         "matched_fields": [
           "title"
@@ -644,62 +1035,37 @@
       }
     },
     {
-      "city": "桃園市",
+      "city": "台南市",
       "city_source": "履約地點",
       "city_confidence": "high",
-      "city_raw_text": "桃園市(非原住民地區)",
-      "tag": "一般監控",
-      "tag_color": "bg-slate-900 border-slate-700 text-slate-400",
-      "title": "116~117年度影印機租賃長約",
-      "unit": "台灣中油股份有限公司煉製事業部桃園煉油廠",
-      "unit_id": "3.13.50.48.1",
-      "job_number": "I7315D063",
+      "city_raw_text": "臺南市(非原住民地區)",
+      "tag": "重點攻堅",
+      "tag_color": "bg-red-950/45 border-red-500/40 text-red-400",
+      "title": "116-117年數位複印機租賃",
+      "unit": "國防部空軍司令部",
+      "unit_id": "3.5.49",
+      "job_number": "EV16030P030",
       "publish_date": "2026-10-30",
       "publish_date_confidence": "verified",
-      "deadline": "2026-11-05",
+      "deadline": "2026-11-09",
       "deadline_confidence": "verified",
       "award_date": "",
-      "budget": "無公開數據",
+      "budget": "NT$ 4,980,000",
       "award_price": "",
       "avg_discount": "資料不足",
-      "discount_source": "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估",
-      "main_competitor": "宏羚股份有限公司",
+      "discount_source": "近 5 年查無同設備、同契約型態且具完整金額的決標",
+      "main_competitor": "無公開數據",
       "suggested_price": "資料不足",
       "suggestion_basis": {
         "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
-        "record_count": 1,
+        "record_count": 0,
         "discount_rate": null
       },
-      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261030&fn=NAI-1-71318588.xml",
-      "history_stats": [
-        {
-          "year": 2024,
-          "val": 94,
-          "type": "real",
-          "winner": "宏羚股份有限公司"
-        }
-      ],
-      "history_records": [
-        {
-          "award_date": "2024-11-07",
-          "year": 2024,
-          "title": "114~115年度影印機租賃長約",
-          "job_number": "I7313D053",
-          "budget": 4995902,
-          "award_price": 4723137,
-          "discount_rate": 94.5,
-          "winner": "宏羚股份有限公司",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241107&fn=BDM-1-70708705.xml",
-          "official_verified": true,
-          "verification_source": "政府電子採購網決標查詢",
-          "source_unit_id": "3.13.50.48.1",
-          "source_unit": "台灣中油股份有限公司煉製事業部桃園煉油廠",
-          "relation_scope": "same_unit",
-          "is_stale": false
-        }
-      ],
-      "stage": "無法決標",
-      "stage_color": "bg-rose-950/45 border-rose-500/40 text-rose-400",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNTY2MjY",
+      "history_stats": [],
+      "history_records": [],
+      "stage": "正式開標",
+      "stage_color": "bg-indigo-950/45 border-indigo-500/40 text-indigo-400",
       "duration_years": 2,
       "stream": "copier",
       "sub_type": "main",
@@ -711,7 +1077,7 @@
         "stream": "copier",
         "sub_type": "main",
         "matched_terms": [
-          "影印機"
+          "複印機"
         ],
         "matched_fields": [
           "title"
@@ -2102,18 +2468,16 @@
   "collection_status": {
     "today": "2026-10-30",
     "status": "complete",
-    "latest_attempt_status": "failed",
-    "latest_attempt_at": "2026-10-30 00:24",
-    "source_records": 3070,
-    "candidate_records": 1,
+    "latest_attempt_status": "complete",
+    "latest_attempt_at": "2026-10-30 10:08",
+    "source_records": 3244,
+    "candidate_records": 14,
     "review_records": 0,
     "successful_dates": [
-      "2026-10-29",
-      "2026-10-28"
+      "2026-10-30",
+      "2026-10-29"
     ],
-    "failed_dates": [
-      "2026-10-30"
-    ],
+    "failed_dates": [],
     "backfill_remaining_days": 3,
     "source": "政府電子採購網每日公告資料",
     "maintenance": {
@@ -2541,13 +2905,630 @@
     },
     "2026-10-29": {
       "status": "complete",
-      "source_records": 3070,
-      "candidate_records": 1,
+      "source_records": 3333,
+      "candidate_records": 2,
       "review_records": 0,
-      "checked_at": "2026-10-29 09:44"
+      "checked_at": "2026-10-30 09:53"
+    },
+    "2026-10-30": {
+      "status": "complete",
+      "source_records": 3244,
+      "candidate_records": 14,
+      "review_records": 0,
+      "checked_at": "2026-10-30 09:53"
     }
   },
   "candidate_cache": [
+    {
+      "date": 20261030,
+      "filename": "ttd-71367732",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "領務組大型多功能事務機",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "Copier1029",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "A.3.3",
+      "unit_name": "駐外機構",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.3.3",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.3.3&job_number=Copier1029",
+      "unit_url": "/index/unit/A.3.3",
+      "url": "/index/case/A.3.3/Copier1029/20261030/ttd-71367732",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "多功能事務機",
+          "事務機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "ttd-71366515",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "116年至118年二手影印機租賃",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "cfm1151020",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.97.5.87",
+      "unit_name": "高雄市立前峰國民中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.5.87",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.5.87&job_number=cfm1151020",
+      "unit_url": "/index/unit/3.97.5.87",
+      "url": "/index/case/3.97.5.87/cfm1151020/20261030/ttd-71366515",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "TIQ-11-71148382",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "印表機維護",
+        "category": "勞務類845-辦公室機器及設備(包括電腦)之維修服務",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "HP16012P012",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "A.5.5.2",
+      "unit_name": "國防部電訊發展室",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=A.5.5.2",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=A.5.5.2&job_number=HP16012P012",
+      "unit_url": "/index/unit/A.5.5.2",
+      "url": "/index/case/A.5.5.2/HP16012P012/20261030/TIQ-11-71148382",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "TIQ-11-71148355",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "Videojet電腦噴字機油墨耗材壹批",
+        "category": "財物類351-漆類、清漆及相關產品；繪畫用色料；墨水",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-0350-1-049",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.7.74.33",
+      "unit_name": "臺灣菸酒股份有限公司臺中酒廠",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.7.74.33",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.7.74.33&job_number=115-0350-1-049",
+      "unit_url": "/index/unit/3.7.74.33",
+      "url": "/index/case/3.7.74.33/115-0350-1-049/20261030/TIQ-11-71148355",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "TIQ-11-71147096",
+      "brief": {
+        "type": "公開取得報價單或企劃書公告",
+        "title": "DOMINO電腦噴字機油墨耗材壹批",
+        "category": "財物類351-漆類、清漆及相關產品；繪畫用色料；墨水",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "115-0350-1-048",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.7.74.33",
+      "unit_name": "臺灣菸酒股份有限公司臺中酒廠",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.7.74.33",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.7.74.33&job_number=115-0350-1-048",
+      "unit_url": "/index/unit/3.7.74.33",
+      "url": "/index/case/3.7.74.33/115-0350-1-048/20261030/TIQ-11-71147096",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "TIQ-1-71148057",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "116~117年度影印機租賃長約",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "I7315D063",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.13.50.48.1",
+      "unit_name": "台灣中油股份有限公司煉製事業部桃園煉油廠",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.50.48.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.50.48.1&job_number=I7315D063",
+      "unit_url": "/index/unit/3.13.50.48.1",
+      "url": "/index/case/3.13.50.48.1/I7315D063/20261030/TIQ-1-71148057",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "TIQ-1-71147790",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "Canon VS 4650 高速印表機(含周邊設備)供應列印耗材暨維護",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150836",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.15.83.1",
+      "unit_name": "中華郵政股份有限公司臺北郵局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150836",
+      "unit_url": "/index/unit/3.15.83.1",
+      "url": "/index/case/3.15.83.1/1150836/20261030/TIQ-1-71147790",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "列印耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "TIQ-1-71147743",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "Oce-4650 高速印表機(含周邊設備)供應列印耗材暨維護",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150794",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.15.83.1",
+      "unit_name": "中華郵政股份有限公司臺北郵局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150794",
+      "unit_url": "/index/unit/3.15.83.1",
+      "url": "/index/case/3.15.83.1/1150794/20261030/TIQ-1-71147743",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "列印耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "TIQ-1-71139293",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "116-121長版大圖複印機租賃",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "EV16029P029",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.5.49",
+      "unit_name": "國防部空軍司令部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.5.49",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.5.49&job_number=EV16029P029",
+      "unit_url": "/index/unit/3.5.49",
+      "url": "/index/case/3.5.49/EV16029P029/20261030/TIQ-1-71139293",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "複印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "TIQ-1-71139262",
+      "brief": {
+        "type": "公開招標公告",
+        "title": "116-117年數位複印機租賃",
+        "category": "財物類451-辦公室及會計機器，其零件及附件",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "EV16030P030",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.5.49",
+      "unit_name": "國防部空軍司令部",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.5.49",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.5.49&job_number=EV16030P030",
+      "unit_url": "/index/unit/3.5.49",
+      "url": "/index/case/3.5.49/EV16030P030/20261030/TIQ-1-71139262",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "複印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "NAI-1-71318588",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "116~117年度影印機租賃長約",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "I7315D063",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.13.50.48.1",
+      "unit_name": "台灣中油股份有限公司煉製事業部桃園煉油廠",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.50.48.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.50.48.1&job_number=I7315D063",
+      "unit_url": "/index/unit/3.13.50.48.1",
+      "url": "/index/case/3.13.50.48.1/I7315D063/20261030/NAI-1-71318588",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "NAI-1-71318267",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "Oce-4650 高速印表機(含周邊設備)供應列印耗材暨維護",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150794",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.15.83.1",
+      "unit_name": "中華郵政股份有限公司臺北郵局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150794",
+      "unit_url": "/index/unit/3.15.83.1",
+      "url": "/index/case/3.15.83.1/1150794/20261030/NAI-1-71318267",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "列印耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "NAI-1-71318261",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "Canon VS 4650 高速印表機(含周邊設備)供應列印耗材暨維護",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "1150836",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.15.83.1",
+      "unit_name": "中華郵政股份有限公司臺北郵局",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150836",
+      "unit_url": "/index/unit/3.15.83.1",
+      "url": "/index/case/3.15.83.1/1150836/20261030/NAI-1-71318261",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "supplies",
+        "stream": "peripherals",
+        "sub_type": "supplies",
+        "matched_terms": [
+          "列印耗材"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中耗材或碳粉標的"
+      }
+    },
+    {
+      "date": 20261030,
+      "filename": "BDM-1-71318826",
+      "brief": {
+        "type": "決標公告",
+        "title": "黑白雷射印表機",
+        "companies": {
+          "ids": [
+            "04822794"
+          ],
+          "names": [
+            "宏羚股份有限公司 (HONLYNN CO., LTD.)"
+          ],
+          "id_key": {
+            "04822794": [
+              "投標廠商:投標廠商1:廠商代碼"
+            ]
+          },
+          "name_key": {
+            "宏羚股份有限公司 (HONLYNN CO., LTD.)": [
+              "投標廠商:投標廠商1:廠商名稱",
+              "決標品項:第1品項:得標廠商1:得標廠商"
+            ]
+          }
+        }
+      },
+      "job_number": "115TC007-9Q",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.32.80",
+      "unit_name": "臺北榮民總醫院",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.80",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.80&job_number=115TC007-9Q",
+      "unit_url": "/index/unit/3.32.80",
+      "url": "/index/case/3.32.80/115TC007-9Q/20261030/BDM-1-71318826",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "printer_or_plotter",
+        "stream": "peripherals",
+        "sub_type": "printer",
+        "matched_terms": [
+          "印表機",
+          "雷射印表機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中印表機或繪圖機標的"
+      }
+    },
+    {
+      "date": 20261029,
+      "filename": "anaa-71318124",
+      "brief": {
+        "type": "無法決標公告",
+        "title": "116年至118年二手影印機租賃",
+        "companies": {
+          "ids": [],
+          "names": [],
+          "id_key": {},
+          "name_key": {}
+        }
+      },
+      "job_number": "cfm1151020",
+      "dept_name": null,
+      "award_amount": null,
+      "budget_amount": null,
+      "unit_id": "3.97.5.87",
+      "unit_name": "高雄市立前峰國民中學",
+      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.5.87",
+      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.5.87&job_number=cfm1151020",
+      "unit_url": "/index/unit/3.97.5.87",
+      "url": "/index/case/3.97.5.87/cfm1151020/20261029/anaa-71318124",
+      "relevance": {
+        "status": "included",
+        "confidence": "high",
+        "score": 3,
+        "category": "office_output_equipment",
+        "stream": "copier",
+        "sub_type": "main",
+        "matched_terms": [
+          "影印機"
+        ],
+        "matched_fields": [
+          "title"
+        ],
+        "reason": "命中影印機/複合機主機設備或公告規格"
+      }
+    },
     {
       "date": 20261029,
       "filename": "PPW-1-70121169",
@@ -3097,80 +4078,6 @@
     },
     {
       "date": 20261021,
-      "filename": "TIQ-1-71140606",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "Canon VS 4650 高速印表機(含周邊設備)供應列印耗材暨維護",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "1150836",
-      "unit_id": "3.15.83.1",
-      "unit_name": "中華郵政股份有限公司臺北郵局",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150836",
-      "unit_url": "/index/unit/3.15.83.1",
-      "url": "/index/case/3.15.83.1/1150836/20261021/TIQ-1-71140606",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "列印耗材"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "date": 20261021,
-      "filename": "TIQ-1-71140533",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "Oce-4650 高速印表機(含周邊設備)供應列印耗材暨維護",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "1150794",
-      "unit_id": "3.15.83.1",
-      "unit_name": "中華郵政股份有限公司臺北郵局",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150794",
-      "unit_url": "/index/unit/3.15.83.1",
-      "url": "/index/case/3.15.83.1/1150794/20261021/TIQ-1-71140533",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "列印耗材"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "date": 20261021,
       "filename": "NAI-1-71310622",
       "brief": {
         "type": "無法決標公告",
@@ -3203,115 +4110,6 @@
           "title"
         ],
         "reason": "命中文件掃描器設備標的"
-      }
-    },
-    {
-      "date": 20261021,
-      "filename": "NAI-1-71310424",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "黑白雷射印表機",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "115TC007-9Q",
-      "unit_id": "3.32.80",
-      "unit_name": "臺北榮民總醫院",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.32.80",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.32.80&job_number=115TC007-9Q",
-      "unit_url": "/index/unit/3.32.80",
-      "url": "/index/case/3.32.80/115TC007-9Q/20261021/NAI-1-71310424",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "printer_or_plotter",
-        "stream": "peripherals",
-        "sub_type": "printer",
-        "matched_terms": [
-          "印表機",
-          "雷射印表機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中印表機或繪圖機標的"
-      }
-    },
-    {
-      "date": 20261021,
-      "filename": "NAI-1-71310252",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "Canon VS 4650 高速印表機(含周邊設備)供應列印耗材暨維護",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "1150836",
-      "unit_id": "3.15.83.1",
-      "unit_name": "中華郵政股份有限公司臺北郵局",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150836",
-      "unit_url": "/index/unit/3.15.83.1",
-      "url": "/index/case/3.15.83.1/1150836/20261021/NAI-1-71310252",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "列印耗材"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
-      }
-    },
-    {
-      "date": 20261021,
-      "filename": "NAI-1-71310245",
-      "brief": {
-        "type": "無法決標公告",
-        "title": "Oce-4650 高速印表機(含周邊設備)供應列印耗材暨維護",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "1150794",
-      "unit_id": "3.15.83.1",
-      "unit_name": "中華郵政股份有限公司臺北郵局",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.15.83.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.15.83.1&job_number=1150794",
-      "unit_url": "/index/unit/3.15.83.1",
-      "url": "/index/case/3.15.83.1/1150794/20261021/NAI-1-71310245",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "supplies",
-        "stream": "peripherals",
-        "sub_type": "supplies",
-        "matched_terms": [
-          "列印耗材"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中耗材或碳粉標的"
       }
     },
     {
@@ -3385,43 +4183,6 @@
           "title"
         ],
         "reason": "命中印表機或繪圖機標的"
-      }
-    },
-    {
-      "date": 20261020,
-      "filename": "ttd-71357479",
-      "brief": {
-        "type": "公開取得報價單或企劃書公告",
-        "title": "116年至118年二手影印機租賃",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "cfm1151020",
-      "unit_id": "3.97.5.87",
-      "unit_name": "高雄市立前峰國民中學",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.97.5.87",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.97.5.87&job_number=cfm1151020",
-      "unit_url": "/index/unit/3.97.5.87",
-      "url": "/index/case/3.97.5.87/cfm1151020/20261020/ttd-71357479",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "office_output_equipment",
-        "stream": "copier",
-        "sub_type": "main",
-        "matched_terms": [
-          "影印機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中影印機/複合機主機設備或公告規格"
       }
     },
     {
@@ -4141,43 +4902,6 @@
         "sub_type": "main",
         "matched_terms": [
           "複合機"
-        ],
-        "matched_fields": [
-          "title"
-        ],
-        "reason": "命中影印機/複合機主機設備或公告規格"
-      }
-    },
-    {
-      "date": 20261012,
-      "filename": "TIQ-1-71132101",
-      "brief": {
-        "type": "公開招標公告",
-        "title": "116~117年度影印機租賃長約",
-        "category": "財物類451-辦公室及會計機器，其零件及附件",
-        "companies": {
-          "ids": [],
-          "names": [],
-          "id_key": {},
-          "name_key": {}
-        }
-      },
-      "job_number": "I7315D063",
-      "unit_id": "3.13.50.48.1",
-      "unit_name": "台灣中油股份有限公司煉製事業部桃園煉油廠",
-      "unit_api_url": "http://pcc-api.openfun.app/api/listbyunit?unit_id=3.13.50.48.1",
-      "tender_api_url": "http://pcc-api.openfun.app/api/tender?unit_id=3.13.50.48.1&job_number=I7315D063",
-      "unit_url": "/index/unit/3.13.50.48.1",
-      "url": "/index/case/3.13.50.48.1/I7315D063/20261012/TIQ-1-71132101",
-      "relevance": {
-        "status": "included",
-        "confidence": "high",
-        "score": 3,
-        "category": "office_output_equipment",
-        "stream": "copier",
-        "sub_type": "main",
-        "matched_terms": [
-          "影印機"
         ],
         "matched_fields": [
           "title"
@@ -13144,7 +13868,35 @@
     "3.97.5.87": "2026-10-30",
     "3.7": "2026-10-30",
     "3.49": "2026-10-30",
-    "3.10.6": "2026-10-30"
+    "3.10.6": "2026-10-30",
+    "A.3.3": "2026-10-30",
+    "3.7.74.33": "2026-10-30",
+    "3.7.74.34": "2026-10-30",
+    "3.7.74": "2026-10-30",
+    "3.7.74.37": "2026-10-30",
+    "3.7.74.5": "2026-10-30",
+    "3.7.74.36": "2026-10-30",
+    "3.7.74.42": "2026-10-30",
+    "3.7.74.35": "2026-10-30",
+    "3.7.74.22": "2026-10-30",
+    "3.7.74.32": "2026-10-30",
+    "3.7.74.27": "2026-10-30",
+    "3.7.74.20": "2026-10-30",
+    "3.7.74.38": "2026-10-30",
+    "3.7.74.43": "2026-10-30",
+    "3.7.74.9": "2026-10-30",
+    "3.7.74.3": "2026-10-30",
+    "3.7.74.1": "2026-10-30",
+    "3.7.74.41": "2026-10-30",
+    "3.7.74.39": "2026-10-30",
+    "3.7.74.44": "2026-10-30",
+    "3.7.74.11": "2026-10-30",
+    "3.7.74.7": "2026-10-30",
+    "3.7.74.31": "2026-10-30",
+    "3.7.74.25": "2026-10-30",
+    "3.7.74.2": "2026-10-30",
+    "3.7.74.40": "2026-10-30",
+    "3.7.74.8": "2026-10-30"
   },
   "history_deep_refresh": {
     "3.9.20.1|copier|rental": "2026-07-27",
@@ -13231,7 +13983,13 @@
     "A.21.100.38|printer|purchase|點陣印表機19台採購案": "2026-10-14",
     "A.21.100.44|copier|unspecified|整合式自助服務系統多功能機": "2026-10-14",
     "3.10.6|copier|rental|影印機租賃": "2026-10-28",
-    "3.13.31.24|copier|rental|租用複印機": "2026-10-29"
+    "3.13.31.24|copier|rental|租用複印機": "2026-10-29",
+    "A.3.3|office_machine|unspecified|領務組大型多功能事務機": "2026-10-30",
+    "A.5.5.2|printer|maintenance|印表機維護": "2026-10-30",
+    "3.7.74.33||unspecified|Videojet電腦噴字機油墨耗材壹批": "2026-10-30",
+    "3.7.74.33||unspecified|DOMINO電腦噴字機油墨耗材壹批": "2026-10-30",
+    "3.5.49|copier|rental|116-121長版大圖複印機租賃": "2026-10-30",
+    "3.5.49|copier|rental|116-117年數位複印機租賃": "2026-10-30"
   },
   "forecasted_tenders": [
     {
@@ -13996,6 +14754,6 @@
     "usage_percent": 1.8,
     "circuit_breaker_active": false,
     "status_level": "normal",
-    "updated_at": "2026-10-30 08:10:44"
+    "updated_at": "2026-10-30 10:08:29"
   }
 }
