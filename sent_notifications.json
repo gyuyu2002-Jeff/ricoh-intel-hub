@@ -72,24 +72,6 @@
   },
   "_delivery_history": [
     {
-      "sent_at": "2026-10-29 10:04:27",
-      "recipient": "huxen.ricoh@gmail.com",
-      "type": "digest",
-      "dry_run": false
-    },
-    {
-      "sent_at": "2026-10-29 10:04:27",
-      "recipient": "hanjiunwu@eosasc.com.tw",
-      "type": "digest",
-      "dry_run": false
-    },
-    {
-      "sent_at": "2026-10-29 10:04:27",
-      "recipient": "gyuyu2002@gmail.com",
-      "type": "digest",
-      "dry_run": false
-    },
-    {
       "sent_at": "2026-10-30 02:51:13",
       "recipient": "huxen.ricoh@gmail.com",
       "type": "digest",
