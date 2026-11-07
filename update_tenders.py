@@ -1,0 +1,2434 @@
+# -*- coding: utf-8 -*-
+import urllib.request
+import urllib.parse
+import argparse
+import json
+import re
+import html
+import ssl
+from datetime import datetime, timezone, timedelta
+import os
+import time
+from concurrent.futures import ThreadPoolExecutor
+
+OFFICIAL_AWARD_SEARCH_URL = "https://web.pcc.gov.tw/prkms/tender/common/agent/readTenderAgent"
+API_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/138.0 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.7",
+    "Referer": "https://pcc-api.openfun.app/"
+}
+OFFICIAL_SSL_CONTEXT = ssl.create_default_context()
+if hasattr(ssl, "VERIFY_X509_STRICT"):
+    OFFICIAL_SSL_CONTEXT.verify_flags &= ~ssl.VERIFY_X509_STRICT
+
+TARGET_MONITORED_UNITS = {
+    "43746562": "桃園市大園區農會",
+}
+
+INSTITUTION_CITY_MAP = {
+    # Hsinchu
+    "國家同步輻射": "新竹市", "同步輻射": "新竹市", "工研院": "新竹市", "工業技術研究院": "新竹市",
+    "清華大學": "新竹市", "陽明交通大學": "新竹市", "交通大學": "新竹市", "竹科": "新竹市", "新竹科學園區": "新竹市",
+    # Taoyuan
+    "中央大學": "桃園市", "長庚大學": "桃園市", "元智大學": "桃園市", "中原大學": "桃園市",
+    "桃園市大園區農會": "桃園市", "大園區農會": "桃園市",
+    # Taichung
+    "中興大學": "台中市", "東海大學": "台中市", "逢甲大學": "台中市", "台中教育大學": "台中市", "中科": "台中市",
+    # Tainan
+    "成功大學": "台南市", "台南大學": "台南市", "南科": "台南市",
+    # Kaohsiung
+    "中山大學": "高雄市", "高雄科技大學": "高雄市", "高科大": "高雄市", "高雄大學": "高雄市", "高雄醫學大學": "高雄市",
+    # Taipei / New Taipei
+    "台灣大學": "台北市", "臺灣大學": "台北市", "政治大學": "台北市", "師範大學": "台北市", "台北科技大學": "台北市", "台灣科技大學": "台北市",
+    "台北大學": "新北市", "輔仁大學": "新北市", "淡江大學": "新北市",
+    # Eastern / Counties
+    "東華大學": "花蓮縣", "慈濟": "花蓮縣", "宜蘭大學": "宜蘭縣", "台東大學": "台東縣", "臺灣東大學": "台東縣",
+    "金門大學": "金門縣", "澎湖科技大學": "澎湖縣", "屏東科技大學": "屏東縣", "屏科大": "屏東縣", "屏東大學": "屏東縣",
+    "彰化師範大學": "彰化縣", "大葉大學": "彰化縣", "雲林科技大學": "雲林縣", "虎尾科技大學": "雲林縣",
+    "中正大學": "嘉義縣", "嘉義大學": "嘉義市", "聯合大學": "苗栗縣", "暨南國際大學": "南投縣",
+    # Tax Bureaus & Customs
+    "中區國稅局": "台中市", "北區國稅局": "桃園市", "南區國稅局": "台南市", "高雄國稅局": "高雄市",
+    "台北國稅局": "台北市", "臺北國稅局": "台北市", "關務署": "台北市", "基隆關": "基隆市",
+    "台北關": "桃園市", "臺北關": "桃園市", "台中關": "台中市", "高雄關": "高雄市",
+    # Metros & Enterprises
+    "台北大眾捷運": "台北市", "臺北大眾捷運": "台北市", "台北捷運": "台北市", "臺北捷運": "台北市",
+    "桃園大眾捷運": "桃園市", "桃園捷運": "桃園市", "高雄捷運": "高雄市",
+    "桃園煉油廠": "桃園市", "大林煉油廠": "高雄市", "高雄煉油廠": "高雄市",
+    "台中區營業處": "台中市", "臺中區營業處": "台中市", "台中區處": "台中市", "臺中區處": "台中市",
+    "台北市區營業處": "台北市", "臺北市區營業處": "台北市", "台北市區處": "台北市", "臺北市區處": "台北市",
+    "北南區處": "新北市", "北西區處": "新北市", "北北區處": "台北市", "高雄區處": "高雄市",
+    "台電總處": "台北市", "台電總管理處": "台北市", "台灣電力股份有限公司": "台北市", "臺灣電力股份有限公司": "台北市"
+}
+
+def get_city_info(unit_name, detail_data=None):
+    """Resolve city and preserve the evidence used for the classification."""
+    cities = ["台北市", "新北市", "桃園市", "台中市", "台南市", "高雄市",
+              "基隆市", "新竹市", "嘉義市", "新竹縣", "苗栗縣", "彰化縣",
+              "南投縣", "雲林縣", "嘉義縣", "屏東縣", "宜蘭縣", "花蓮縣",
+              "台東縣", "澎湖縣", "金門縣", "連江縣"]
+
+    def match_city(value):
+        value = str(value or "").replace("臺", "台")
+        for city_name in cities:
+            if city_name.replace("臺", "台") in value:
+                return city_name
+        return None
+
+    def result(city, source, confidence, raw_text=""):
+        return {
+            "city": city,
+            "city_source": source,
+            "city_confidence": confidence,
+            "city_raw_text": str(raw_text or "")[:240]
+        }
+
+    # 1. Prefer execution location and address fields from the official detail.
+    if detail_data and isinstance(detail_data, dict):
+        records = detail_data.get("records", [])
+        for rec in records:
+            det = rec.get("detail", {})
+            for key, value in det.items():
+                if "履約地點" in key and value:
+                    city = match_city(value)
+                    if city:
+                        return result(city, "履約地點", "high", value)
+        for rec in records:
+            det = rec.get("detail", {})
+            for key, value in det.items():
+                if any(kw in key for kw in ["機關:地址", "機關地址", "地址", "開標地點", "收受投標文件地點"]) and value:
+                    city = match_city(value)
+                    if city:
+                        return result(city, "機關地址／開標地點", "high", value)
+
+    # 2. Check the procurement unit name directly.
+    normalized = (unit_name or "").replace("臺", "台")
+    city = match_city(normalized)
+    if city:
+        return result(city, "機關名稱", "high", unit_name)
+
+    # 3. Check known institutions / universities.
+    for institution, mapped_city in INSTITUTION_CITY_MAP.items():
+        if institution in normalized:
+            return result(mapped_city, "機關對照表", "medium", unit_name)
+
+    # Never silently classify an unknown unit as Taipei. Keep it visible for review.
+    return result("未分類", "無法判定", "low", unit_name)
+
+
+def get_city(unit_name, detail_data=None):
+    """Backward-compatible city-only helper."""
+    return get_city_info(unit_name, detail_data)["city"]
+
+
+def review_city_fields(unit_name, detail_data=None):
+    """Return normalized geographic metadata for review candidates."""
+    info = get_city_info(unit_name, detail_data)
+    return {
+        "city": info["city"],
+        "city_source": info["city_source"],
+        "city_confidence": info["city_confidence"],
+        "city_raw_text": info["city_raw_text"],
+    }
+
+def extract_budget_and_award(detail):
+    budget_val = 0
+    award_val = 0
+    
+    for k, v in detail.items():
+        if ("預算" in k or "採購金額" in k) and "金額" in k and "remind" not in k:
+            digits = re.findall(r'\d+', str(v).replace(',', ''))
+            if digits:
+                budget_val = int(digits[0])
+                break
+                
+    for k, v in detail.items():
+        if "決標" in k and "總決標金額" in k and "remind" not in k:
+            digits = re.findall(r'\d+', str(v).replace(',', ''))
+            if digits:
+                award_val = int(digits[0])
+                break
+                
+    if budget_val == 0:
+        for k, v in detail.items():
+            if ("預算" in k or "採購金額" in k) and "remind" not in k:
+                digits = re.findall(r'\d+', str(v).replace(',', ''))
+                if digits:
+                    budget_val = int(digits[0])
+                    break
+                    
+    if budget_val == 0:
+        for k, v in detail.items():
+            if any(w in k for w in ["附加說明", "說明", "備註", "內容", "摘要"]) and v:
+                text = str(v).replace(",", "")
+                match_wan = re.search(r'(?:預算|預估|採購金額|需求費用|費用)[^\d萬]{0,15}(\d+(?:\.\d+)?)\s*萬', text)
+                if match_wan:
+                    budget_val = int(float(match_wan.group(1)) * 10000)
+                    break
+                match_digits = re.search(r'(?:預算|預估|採購金額|需求費用|費用)[^\d]{0,15}(\d{4,9})\s*元', text)
+                if match_digits:
+                    budget_val = int(match_digits.group(1))
+                    break
+                    
+    if award_val == 0:
+        for k, v in detail.items():
+            if ("決標金額" in k or "中標金額" in k) and "remind" not in k:
+                digits = re.findall(r'\d+', str(v).replace(',', ''))
+                if digits:
+                    award_val = int(digits[0])
+                    break
+                    
+    return budget_val, award_val
+
+FAILED_STATUS_TERMS = [
+    "無法決標", "流標", "廢標", "未達法定家數", "無廠商投標", "無人投標",
+    "不予開標", "撤標", "撤案", "停止採購", "取消採購"
+]
+AWARD_NOTICE_TYPE_TERMS = ["決標公告", "決標結果公告"]
+AWARD_DETAIL_TERMS = ["得標廠商", "總決標金額", "決標金額", "決標日期"]
+
+
+def status_text_contains(text, terms):
+    normalized = str(text or "").replace("臺", "台")
+    return any(term in normalized for term in terms)
+
+
+def is_failed_notice(record):
+    """Recognize known failed/cancelled procurement notices and detail variants."""
+    if not isinstance(record, dict):
+        return False
+    brief = record.get("brief", {}) or {}
+    detail = record.get("detail", {}) or {}
+    detail_text = " ".join(f"{key} {value}" for key, value in detail.items())
+    return status_text_contains(brief.get("type", ""), FAILED_STATUS_TERMS) or status_text_contains(detail_text, FAILED_STATUS_TERMS)
+
+
+def is_award_notice(record):
+    """Recognize terminal award notices without mistaking tender configuration for an award.
+
+    A live tender normally includes a field such as ``決標方式``.  That describes the
+    selection method, not an outcome.  Therefore only a decision notice type or a
+    populated award-result field may mark the tender as awarded.
+    """
+    if not isinstance(record, dict):
+        return False
+    brief = record.get("brief", {}) or {}
+    detail = record.get("detail", {}) or {}
+    if status_text_contains(brief.get("type", ""), AWARD_NOTICE_TYPE_TERMS):
+        return True
+
+    for key, value in detail.items():
+        key_text = str(key)
+        value_text = str(value or "").strip()
+        if not value_text or value_text in {"無", "未公開", "否"}:
+            continue
+        if "是否得標" in key_text:
+            if value_text in {"是", "得標", "true", "True"}:
+                return True
+            continue
+        if status_text_contains(key_text, AWARD_DETAIL_TERMS):
+            return True
+    return False
+
+
+def resolve_notice_status(records):
+    """Award wins over failed notices when a tender has mixed lifecycle records."""
+    if any(is_award_notice(record) for record in records or []):
+        return "已決標"
+    if any(is_failed_notice(record) for record in records or []):
+        return "無法決標"
+    return ""
+
+
+def is_terminal_notice_type(notice_type):
+    return status_text_contains(notice_type, FAILED_STATUS_TERMS + AWARD_NOTICE_TYPE_TERMS)
+
+
+def extract_dates(detail, publish_fallback_str="", infer_deadline=True):
+    publish_date = ""
+    deadline_date = ""
+    publish_confidence = "unknown"
+    deadline_confidence = "unknown"
+    
+    # 1. Look for Notice Date (公告日期)
+    for k, v in detail.items():
+        if "公告日" in k and "remind" not in k and v:
+            val = str(v).strip()
+            digits = re.findall(r'\d+', val)
+            if len(digits) >= 3:
+                try:
+                    roc_year = int(digits[0])
+                    ad_year = roc_year + 1911 if roc_year < 1911 else roc_year
+                    publish_date = f"{ad_year}-{int(digits[1]):02d}-{int(digits[2]):02d}"
+                    publish_confidence = "verified"
+                    break
+                except:
+                    pass
+                    
+    # 2. Look for Bidding Deadline (截止投標 / 公開徵求截止)
+    for k, v in detail.items():
+        if ("截止" in k or "收件" in k or "徵求期間" in k or "公開徵求" in k) and "remind" not in k and v:
+            val = str(v).strip()
+            for sep in ["至", "－", "-", "~", "～", "到"]:
+                if sep in val:
+                    val = val.split(sep)[-1].strip()
+                    break
+            digits = re.findall(r'\d+', val)
+            if len(digits) >= 3:
+                target_digits = digits[-3:] if len(digits) >= 6 else digits[:3]
+                try:
+                    roc_year = int(target_digits[0])
+                    ad_year = roc_year + 1911 if roc_year < 1911 else roc_year
+                    deadline_date = f"{ad_year}-{int(target_digits[1]):02d}-{int(target_digits[2]):02d}"
+                    deadline_confidence = "verified"
+                    break
+                except:
+                    pass
+                    
+    if not publish_date and publish_fallback_str:
+        if len(publish_fallback_str) == 8:
+            try:
+                dt = datetime.strptime(publish_fallback_str, "%Y%m%d")
+                publish_date = dt.strftime("%Y-%m-%d")
+                publish_confidence = "inferred"
+            except:
+                pass
+                
+    if infer_deadline and not deadline_date and publish_date:
+        deadline_confidence = "inferred"
+        try:
+            dt = datetime.strptime(publish_date, "%Y-%m-%d")
+            deadline_date = (dt + timedelta(days=14)).strftime("%Y-%m-%d")
+        except:
+            pass
+            
+    return publish_date, deadline_date, publish_confidence, deadline_confidence
+
+
+def extract_award_date(detail, fallback_str=""):
+    for k, v in detail.items():
+        if "決標日" in k and "公告" not in k and "remind" not in k and v:
+            val = str(v).strip()
+            digits = re.findall(r'\d+', val)
+            if len(digits) >= 3:
+                try:
+                    roc_year = int(digits[0])
+                    ad_year = roc_year + 1911 if roc_year < 1911 else roc_year
+                    return f"{ad_year}-{int(digits[1]):02d}-{int(digits[2]):02d}"
+                except:
+                    pass
+    for k, v in detail.items():
+        if "決標日" in k and "remind" not in k and v:
+            val = str(v).strip()
+            digits = re.findall(r'\d+', val)
+            if len(digits) >= 3:
+                try:
+                    roc_year = int(digits[0])
+                    ad_year = roc_year + 1911 if roc_year < 1911 else roc_year
+                    return f"{ad_year}-{int(digits[1]):02d}-{int(digits[2]):02d}"
+                except:
+                    pass
+    if fallback_str and len(fallback_str) == 8:
+        try:
+            return datetime.strptime(fallback_str, "%Y%m%d").strftime("%Y-%m-%d")
+        except:
+            pass
+    return ""
+
+def extract_winning_competitor(detail):
+    winner = ""
+    companies = {}
+    for k, v in detail.items():
+        match_name = re.fullmatch(r'投標廠商:投標廠商(\d+):廠商名稱', k)
+        if match_name:
+            companies[match_name.group(1)] = str(v).strip()
+
+    for k, v in detail.items():
+        match_won = re.fullmatch(r'投標廠商:投標廠商(\d+):是否得標', k)
+        if match_won and str(v).strip() in ["是", "得標"]:
+            winner = companies.get(match_won.group(1), "")
+            if winner:
+                break
+
+    if not winner:
+        for k, v in detail.items():
+            if (k.endswith(":得標廠商") or k.endswith(":得標廠商名稱")) and v:
+                val = str(v).strip()
+                if val and len(val) > 2 and "中華民國" not in val:
+                    winner = val
+                    break
+                    
+    return winner
+
+def map_competitor_name(raw_name):
+    if not raw_name:
+        return ""
+    name = raw_name.replace(" ", "")
+    
+    if any(x in name for x in ["互盛", "理光", "RICOH", "Ricoh"]):
+        return "本公司 (互盛 RICOH)"
+        
+    if any(x in name for x in ["富士", "FUJIFILM", "Fujifilm", "全錄", "Xerox"]):
+        return "富士軟片 (FUJIFILM)"
+    if any(x in name for x in ["佳能", "Canon", "canon"]):
+        return "台灣佳能 (Canon)"
+    if any(x in name for x in ["金儀", "Konica", "Minolta", "美能達"]):
+        return "金儀 Konica Minolta"
+    if any(x in name for x in ["震旦", "SHARP", "Sharp", "夏普"]):
+        return "震旦 SHARP"
+    if any(x in name for x in ["京瓷", "Kyocera", "kyocera"]):
+        return "台灣京瓷 (Kyocera)"
+    if any(x in name for x in ["愛普生", "Epson", "epson"]):
+        return "台灣愛普生 (Epson)"
+    if any(x in name for x in ["惠普", "HP", "hp"]):
+        return "台灣惠普 (HP)"
+    if any(x in name for x in ["兄弟", "Brother", "brother"]):
+        return "台灣兄弟 (Brother)"
+        
+    return raw_name
+
+def parse_contract_duration(title):
+    title_norm = title.replace("臺", "台")
+    match_years = re.search(r'(\d+)\s*(?:~|至|-)\s*(\d+)\s*年', title_norm)
+    if match_years:
+        start_yr = int(match_years.group(1))
+        end_yr = int(match_years.group(2))
+        if start_yr < 125 and end_yr < 125 and end_yr >= start_yr:
+            return max(1, end_yr - start_yr + 1)
+            
+    match_months = re.search(r'(\d+)\s*(?:個)?月', title_norm)
+    if match_months:
+        months = int(match_months.group(1))
+        if not re.search(rf'{months}\s*月\s*\d+\s*日', title_norm):
+            return max(1, months // 12)
+            
+    match_num_years = re.search(r'(\d+)\s*年', title_norm)
+    if match_num_years:
+        val = int(match_num_years.group(1))
+        if 100 <= val <= 125:
+            matches = re.findall(r'(\d+)\s*年', title_norm)
+            for m in matches:
+                m_val = int(m)
+                if m_val < 10:
+                    return m_val
+        else:
+            if val < 10:
+                return val
+                
+    if "租" in title_norm:
+        return 3
+    return 1
+
+def is_relevant_equipment_title(title):
+    return classify_tender_relevance({"brief": {"title": title}})["status"] == "included"
+
+
+DIRECT_EQUIPMENT_TERMS = [
+    "影印機", "複印機", "複合機", "數位複合", "彩色複合機", "多功能機", "多功機",
+    "多功能複合機", "多功能事務機", "多功能影印", "事務機", "辦公事務機",
+    "MFP", "copier"
+]
+BROAD_EQUIPMENT_TERMS = [
+    "輸出設備", "列印設備", "文件輸出", "辦公設備", "辦公室設備", "事務設備", "資訊設備",
+    "電腦週邊", "資訊週邊", "辦公自動化", "文件處理設備", "圖文輸出", "輸出系統",
+    "列印系統", "文件管理", "列印管理"
+]
+DETAIL_SIGNAL_TERMS = [
+    "列印", "複印", "影印", "掃描", "傳真", "自動送稿", "網路列印", "雙面列印",
+    "每分鐘張數", "基本張數", "計張", "ppm", "cpm", "A3", "A4"
+]
+CONTRACT_TERMS = ["採購", "購置", "汰換", "更新", "租賃", "租用", "維護", "維修", "保養", "計張", "全包服務", "開口契約"]
+MACHINE_TOOL_TERMS = ["車銑複合機", "複合加工機", "車銑", "鑽銑", "CNC", "工具機", "機床", "機械科", "乾膜壓膜", "壓膜複合機"]
+SUPPLY_TERMS = ["耗材", "碳粉", "墨水", "色帶", "感光鼓", "轉寫帶", "零件"]
+PRINT_SERVICE_TERMS = ["印刷服務", "文宣印製", "海報輸出", "影印裝訂", "印刷品製作", "藍晒"]
+SPECIALIZED_PRINTING_TERMS = ["3D列印機", "3D印表機", "積層製造設備"]
+DOT_MATRIX_PRINTER_TERMS = ["點陣式印表機", "點矩陣印表機"]
+PRINTER_TERMS = ["印表機", "列印機", "printer"]
+OUT_OF_SCOPE_PRINTER_TERMS = [
+    "印表機", "列印機", "繪圖機", "大圖輸出機", "數位印刷機", "生產型印刷機", "printer", "plotter"
+]
+MAINTENANCE_TERMS = ["維護", "維修", "保養"]
+CONTRACT_CHANGE_TERMS = ["契約變更", "變更案", "後續擴充", "追加採購"]
+
+# 02 周邊耗材專區定義（零重疊互斥）
+EXCLUDED_SUNDRY_TERMS = ["碎紙機", "打孔機", "裝訂機", "膠裝機", "護貝機", "護貝"]
+EXCLUDED_PAPER_RIBBON_LABEL_TERMS = [
+    # 色帶
+    "色帶", "印表機色帶", "碳帶", "打卡色帶", "收銀機色帶",
+    # 紙張
+    "紙張", "影印紙", "列印紙", "報表紙", "印表紙", "電腦報表紙", "道林紙",
+    "過磅紙", "過磅專用列印紙", "傳真紙", "熱感紙", "熱感應紙", "紙捲", "發票紙", "印刷紙",
+    # 標籤
+    "標籤", "標籤機", "標籤帶", "標籤紙", "標籤貼紙", "標示帶", "標價機",
+    "條碼機", "條碼印表機", "條碼列印機", "條碼標籤", "標籤印表機", "標籤列印機"
+]
+PERIPHERAL_SUPPLY_TERMS = [
+    "碳粉", "碳粉匣", "碳粉夾", "墨水", "墨水匣", "感光鼓", "轉寫帶", "列印耗材", "印表機耗材", "事務機耗材", "影印機耗材"
+]
+PERIPHERAL_PRINTER_TERMS = [
+    "印表機", "列印機", "雷射印表機", "點陣式印表機", "點矩陣印表機", "繪圖機", "大圖輸出機", "printer", "plotter"
+]
+PERIPHERAL_SCANNER_TERMS = [
+    "掃描器", "文件掃描", "高速掃描", "饋紙式掃描", "平台掃描", "scanner"
+]
+NON_TARGET_TERM_GROUPS = {
+    "information_equipment": ["資訊設備", "資訊設備類", "資訊器材", "資訊產品", "資通訊設備", "資通訊產品", "資訊通信設備", "電腦設備", "電腦及周邊", "電腦周邊", "資訊週邊", "電腦週邊", "資訊系統", "資訊網路設備"],
+    "network_or_server": ["機房", "交換器", "網路交換器", "無線網路", "無線基地台", "無線 AP", "Wi-Fi", "WiFi", "路由器", "防火牆", "負載平衡器", "網路設備", "網路管理", "網路監控", "網路佈線", "網路布線", "結構化佈線", "光纖網路", "伺服器", "儲存設備", "NAS", "SAN", "資通訊", "RFID", "課程管理平台", "電話交換機", "IP PBX", "閘道器"],
+    "computer_or_software": ["電腦軟體", "個人電腦", "桌上型電腦", "筆記型電腦", "筆電", "平板電腦", "工作站", "瘦客戶機", "資訊科技教室", "電腦教室", "電腦及", "電腦與"],
+    "surveillance_access": ["監視器", "監控設備", "監控系統", "監視系統", "CCTV", "攝影機", "網路攝影機", "IP Camera", "IP CAM", "數位錄影機", "影像錄影機", "DVR", "NVR", "門禁", "門禁系統", "門禁設備", "刷卡機", "讀卡機", "生物辨識", "人臉辨識", "人臉識別", "電子圍籬", "防盜系統", "入侵警報", "保全系統", "對講機", "影像對講", "車牌辨識", "停車場管理"],
+    "it_endpoint": ["液晶螢幕", "電腦螢幕", "顯示器", "顯示設備", "觸控螢幕", "觸控顯示器", "互動式顯示器", "電子白板", "投影機", "投影設備", "視訊會議設備", "視訊會議系統", "LED 顯示", "電視牆"],
+    "medical_equipment": ["智慧藥櫃", "X光機", "Ｘ光機", "DR數位影像", "醫療設備", "診斷設備", "超音波", "斷層", "骨質密度", "核磁共振", "MRI", "CT", "試劑", "醫療耗材", "救護耗材", "手術", "齒科", "牙科", "眼科", "純水機", "火化爐"],
+    "construction_or_furniture": [
+        "規劃設計監造", "設計監造", "監造技術服務", "輕鋼架", "收納櫃", "裝修工程",
+        "室內裝修", "室內裝潢", "辦公空間改善", "地板", "地坪", "地磚", "地毯",
+        "塑膠地磚", "木地板", "PVC地板", "地板更新", "地板修繕", "隔間工程",
+        "土木工程", "建築工程", "水電工程", "油漆工程", "防水工程", "鋪設工程",
+        "辦公家具", "家具採購", "桌椅採購"
+    ],
+    "non_pure_scope": [
+        "搬遷", "搬運", "遷移", "報廢", "標售", "財物標售", "廢品",
+        "訂製", "訂做", "定製", "系統整合", "整合系統"
+    ],
+    "non_office_output": ["氣泡輸出設備", "水處理", "廣播設備", "音響設備", "城鎮韌性演習"],
+    "fitness_equipment": ["健身器材", "健身設備", "重訓器材", "腰部旋轉機", "高拉闊背訓練機"],
+}
+# Any named non-target category must win even when a title also mentions a copier.
+# The dashboard follows a strict single-target policy: mixed information, construction,
+# medical, security or unrelated-output procurements are not sales opportunities.
+HARD_NON_TARGET_CATEGORIES = set(NON_TARGET_TERM_GROUPS)
+RELEVANT_DETAIL_KEY_TERMS = [
+    "標案名稱", "標的名稱", "標的分類", "採購品項", "品項名稱", "品名",
+    "規格", "需求說明", "數量摘要", "工作內容", "附加說明"
+]
+
+
+def _matched_terms(text, terms):
+    lowered = str(text or "").lower()
+    return [term for term in terms if term.lower() in lowered]
+
+
+def _flatten_detail(detail):
+    if not isinstance(detail, dict):
+        return ""
+    relevant_values = []
+    for key, value in detail.items():
+        clean_key = re.sub(r"^\d+:", "", str(key))
+        if value is not None and any(term in clean_key for term in RELEVANT_DETAIL_KEY_TERMS):
+            relevant_values.append(f"{clean_key} {value}")
+    return " ".join(relevant_values)
+
+
+def _non_target_match(text):
+    for category, terms in NON_TARGET_TERM_GROUPS.items():
+        matched = _matched_terms(text, terms)
+        if matched:
+            return category, matched
+    return "", []
+
+
+def get_title_scope_exclusion(title):
+    for category, terms in (
+        ("industrial_machine", MACHINE_TOOL_TERMS),
+        ("fitness_equipment", NON_TARGET_TERM_GROUPS["fitness_equipment"]),
+    ):
+        matched = _matched_terms(title, terms)
+        if matched:
+            return {
+                "status": "excluded", "confidence": "high", "score": -4,
+                "category": category, "matched_terms": matched,
+                "reason": "工業機械或健身器材不是辦公輸出設備"
+            }
+    contract_change_terms = _matched_terms(title, CONTRACT_CHANGE_TERMS)
+    if contract_change_terms:
+        return {
+            "status": "excluded", "confidence": "high", "score": -4,
+            "category": "contract_change", "matched_terms": contract_change_terms,
+            "reason": "契約變更或後續擴充不是新的投標機會"
+        }
+    sundry_terms = _matched_terms(title, EXCLUDED_SUNDRY_TERMS)
+    if sundry_terms:
+        return {
+            "status": "excluded", "confidence": "high", "score": -4,
+            "category": "office_sundry", "matched_terms": sundry_terms,
+            "reason": "碎紙機、打孔裝訂機或護貝機不在追蹤範圍"
+        }
+    specialized_terms = _matched_terms(title, SPECIALIZED_PRINTING_TERMS)
+    if specialized_terms:
+        return {
+            "status": "excluded", "confidence": "high", "score": -4,
+            "category": "specialized_printing", "matched_terms": specialized_terms,
+            "reason": "3D 或特殊列印設備不在辦公輸出設備範圍"
+        }
+    copier_terms = _matched_terms(title, DIRECT_EQUIPMENT_TERMS)
+    is_copier_machine = copier_terms and any(t in title for t in ["租賃", "租用", "計張", "保養", "全包"])
+    if not is_copier_machine:
+        paper_ribbon_label_terms = _matched_terms(title, EXCLUDED_PAPER_RIBBON_LABEL_TERMS)
+        if paper_ribbon_label_terms:
+            return {
+                "status": "excluded", "confidence": "high", "score": -4,
+                "category": "excluded_paper_ribbon_label", "matched_terms": paper_ribbon_label_terms,
+                "reason": "色帶、紙張或標籤相關品項不在追蹤範圍"
+            }
+    return None
+
+
+def classify_tender_relevance(item, detail=None):
+    """Return an explainable high-recall classification for an announcement across Copier and Peripherals streams."""
+    brief = item.get("brief", {}) if isinstance(item, dict) else {}
+    title = str(brief.get("title", "")).replace("臺", "台")
+    category = str(brief.get("category", ""))
+    announcement_type = str(brief.get("type", ""))
+    detail_text = _flatten_detail(detail)
+    combined = f"{title} {category} {detail_text}"
+
+    # Check for designated target monitored units (e.g. 桃園市大園區農會 43746562)
+    unit_id = str(item.get("unit_id", "") or "") if isinstance(item, dict) else ""
+    unit_name = str(item.get("unit_name", "") or "") if isinstance(item, dict) else ""
+    if isinstance(detail, dict):
+        unit_id = unit_id or str(detail.get("標案內容:機關代碼") or "")
+        unit_name = unit_name or str(detail.get("標案內容:機關名稱") or "")
+
+    is_target_unit = (
+        unit_id in TARGET_MONITORED_UNITS
+        or any(t_name in unit_name for t_name in TARGET_MONITORED_UNITS.values())
+        or "大園區農會" in unit_name
+    )
+    if is_target_unit:
+        return {
+            "status": "included",
+            "confidence": "high",
+            "score": 5,
+            "category": "target_agency_procurement",
+            "stream": "copier",
+            "sub_type": "main",
+            "matched_terms": [unit_name or "桃園市大園區農會"],
+            "matched_fields": ["unit_name"],
+            "reason": f"命中指定重點監控機關（{unit_name or '桃園市大園區農會'}），依業務指示納入專案追蹤"
+        }
+
+    title_exclusion = get_title_scope_exclusion(f"{title} {announcement_type}")
+    if title_exclusion:
+        return title_exclusion
+
+    information_category, information_terms = _non_target_match(combined)
+    if information_category in HARD_NON_TARGET_CATEGORIES:
+        return {
+            "status": "excluded", "confidence": "high", "score": -5,
+            "category": information_category, "matched_terms": information_terms,
+            "matched_fields": ["title" if _matched_terms(title, information_terms) else "detail"],
+            "reason": "含明確非目標標的，依最高優先硬排除規則自標案監控汰除"
+        }
+
+    machine_terms = _matched_terms(combined, MACHINE_TOOL_TERMS)
+    if machine_terms:
+        return {"status": "excluded", "confidence": "high", "score": -4, "category": "industrial_machine", "matched_terms": machine_terms, "reason": "工業機械誤判"}
+
+    service_terms = _matched_terms(title, PRINT_SERVICE_TERMS)
+    copier_title_terms = _matched_terms(title, DIRECT_EQUIPMENT_TERMS)
+    copier_detail_terms = _matched_terms(f"{category} {detail_text}", DIRECT_EQUIPMENT_TERMS)
+
+    if service_terms and not copier_title_terms and not _matched_terms(title, PERIPHERAL_PRINTER_TERMS):
+        return {"status": "excluded", "confidence": "high", "score": -3, "category": "printing_service", "matched_terms": service_terms, "reason": "純印務服務"}
+
+    # ==========================================
+    # Stream 1: 影印機 / 多功能複合機主機 (Copier)
+    # 最高優先判定：只要主體為事務機/複合機主機，必定屬於 Stream 1
+    # ==========================================
+    is_machine_lease_or_contract = bool(copier_title_terms and any(t in title for t in ["租賃", "租用", "開口契約", "計張", "保養", "全包"]))
+    has_pure_supplies_in_title = bool(_matched_terms(title, PERIPHERAL_SUPPLY_TERMS))
+
+    # 若標題包含「影印機碳粉耗材」且非租賃/計張契約，則屬於純耗材（歸入 Stream 2）
+    is_pure_supplies_tender = has_pure_supplies_in_title and not is_machine_lease_or_contract
+
+    if (copier_title_terms or copier_detail_terms) and not is_pure_supplies_tender:
+        score = (3 if copier_title_terms else 0) + (2 if copier_detail_terms else 0)
+        matched = list(dict.fromkeys(copier_title_terms + copier_detail_terms))
+        matched_fields = []
+        if copier_title_terms:
+            matched_fields.append("title")
+        if copier_detail_terms:
+            matched_fields.append("detail")
+        return {
+            "status": "included",
+            "confidence": "high" if copier_title_terms else "medium",
+            "score": score,
+            "category": "office_output_equipment",
+            "stream": "copier",
+            "sub_type": "main",
+            "matched_terms": matched,
+            "matched_fields": matched_fields,
+            "reason": "命中影印機/複合機主機設備或公告規格"
+        }
+
+    # ==========================================
+    # Stream 2: 周邊耗材與印表機掃描器 (Peripherals)
+    # 命中耗材、印表機、掃描器且無主機時，歸入 Stream 2
+    # ==========================================
+    supply_matched = _matched_terms(title, PERIPHERAL_SUPPLY_TERMS) or _matched_terms(detail_text, PERIPHERAL_SUPPLY_TERMS)
+    if not supply_matched and ("耗材" in title or "耗材" in detail_text):
+        combined = f"{title} {detail_text}"
+        if any(k in combined for k in ["印表", "列印", "影印", "事務", "電腦", "資訊", "辦公", "碳粉", "墨水"]):
+            supply_matched = ["耗材"]
+    printer_matched = _matched_terms(title, PERIPHERAL_PRINTER_TERMS)
+    scanner_matched = _matched_terms(title, PERIPHERAL_SCANNER_TERMS) or _matched_terms(detail_text, PERIPHERAL_SCANNER_TERMS)
+
+    if is_pure_supplies_tender or supply_matched:
+        terms = list(dict.fromkeys((copier_title_terms if is_pure_supplies_tender else []) + supply_matched))
+        return {
+            "status": "included",
+            "confidence": "high",
+            "score": 3,
+            "category": "supplies",
+            "stream": "peripherals",
+            "sub_type": "supplies",
+            "matched_terms": terms,
+            "matched_fields": ["title"],
+            "reason": "命中耗材或碳粉標的"
+        }
+
+    if printer_matched:
+        category_name = "dot_matrix_printer" if any(t in title for t in ["點陣", "點矩陣"]) else "printer_or_plotter"
+        return {
+            "status": "included",
+            "confidence": "high",
+            "score": 3,
+            "category": category_name,
+            "stream": "peripherals",
+            "sub_type": "printer",
+            "matched_terms": printer_matched,
+            "matched_fields": ["title"],
+            "reason": "命中印表機或繪圖機標的"
+        }
+
+    if scanner_matched:
+        return {
+            "status": "included",
+            "confidence": "high",
+            "score": 3,
+            "category": "scanner",
+            "stream": "peripherals",
+            "sub_type": "scanner",
+            "matched_terms": scanner_matched,
+            "matched_fields": ["title"],
+            "reason": "命中文件掃描器設備標的"
+        }
+
+    # 廣義辦公設備或未命中
+    broad_terms = _matched_terms(combined, BROAD_EQUIPMENT_TERMS)
+    if broad_terms:
+        return {
+            "status": "excluded", "confidence": "high", "score": 1,
+            "category": "broad_office_equipment", "matched_terms": broad_terms,
+            "matched_fields": ["title" if _matched_terms(title, broad_terms) else "detail"],
+            "reason": "僅命中廣義辦公設備，未能明確確認為事務主機或周邊耗材"
+        }
+
+    return {"status": "excluded", "confidence": "high", "score": 0, "category": "unrelated", "matched_terms": [], "matched_fields": [], "reason": "未命中設備或周邊耗材範圍"}
+
+
+# ==========================================
+# 03 影印機合約週期預測系統 (未來六個月商機推估)
+# ==========================================
+
+def normalize_tender_series_title(title):
+    """Normalize a recurring tender title to its core series name by stripping years, quantities, and iterations."""
+    t = str(title or "").replace("臺", "台")
+    t = re.sub(r"[\(（][^\)）]*[\)）]", "", t)
+    t = re.sub(r"1\d{2}\s*(?:學?年(?:度)?)?\s*[-~至到]\s*1\d{2}\s*(?:學?年(?:度)?)?", "", t)
+    t = re.sub(r"1\d{2}\s*(?:學?年(?:度)?)?", "", t)
+    t = re.sub(r"202\d\s*(?:年)?\s*[-~至到]\s*202\d\s*(?:年)?", "", t)
+    t = re.sub(r"202\d\s*(?:年)?", "", t)
+    t = re.sub(r"共?\s*\d+\s*[台部輛組套張支項式批]", "", t)
+    t = re.sub(r"共?\s*[一二三四五六七八九十壹貳][台部輛組套張支項式批]", "", t)
+    t = re.sub(r"第[一二三四五六七八九十\d]+[次期]", "", t)
+    t = re.sub(r"共\s*$", "", t)
+    t = re.sub(r"[\s\-_、，。]+", "", t)
+    return t.strip()
+
+
+def parse_duration_months(title, default_months=24):
+    """Extract lease duration in months from tender title."""
+    t = str(title or "")
+    m = re.search(r"(1\d{2})\s*(?:學?年(?:度)?)?\s*[-~至到]\s*(1\d{2})", t)
+    if m:
+        start_y = int(m.group(1))
+        end_y = int(m.group(2))
+        years = max(1, end_y - start_y + 1)
+        return years * 12
+    # Ensure not matching ROC calendar year (e.g. 113年 or 115年)
+    if re.search(r"(?<!\d)3年|三年|36個?月", t):
+        return 36
+    if re.search(r"(?<!\d)2年|二年|24個?月", t):
+        return 24
+    if re.search(r"(?<!\d)4年|四年|48個?月", t):
+        return 48
+    if re.search(r"(?<!\d)1年|一年|12個?月", t):
+        return 12
+    if re.search(r"(?<!\d)5年|五年|60個?月", t):
+        return 60
+    return default_months
+
+
+def has_extension_clause(text):
+    """Detect an extension mention; this does not verify its term or whether it was exercised."""
+    lowered = str(text or "").lower()
+    return any(k in lowered for k in [
+        "保留未來一年", "後續擴充一年", "後續擴充1年", "後續擴充一年期",
+        "擴充一年", "擴充1年", "擴充權利", "保留後續擴充", "後續擴充"
+    ])
+
+
+def classify_incumbent(winner):
+    """
+    Classify incumbent vendor: 互盛防守 (Husheng defense) vs 他牌進攻 (Competitor attack).
+    Note:
+    - 互盛防守條件為得標者為互盛（包含旗下所有互盛開頭的分公司）。
+    - 台灣理光屬於他牌（他牌進攻）。
+    """
+    w = str(winner or "").strip()
+    if not w or w in ["未公開", "待確認", "官方來源未列", "待人工確認"]:
+        return {
+            "type": "other",
+            "name": "待查",
+            "brand": "待查",
+            "label": "現任廠商待查",
+            "badge_class": "bg-slate-900 border-slate-700 text-slate-300"
+        }
+
+    # 1. 互盛防守：得標者為互盛（包含旗下所有互盛開頭的分公司）
+    if "互盛" in w:
+        return {
+            "type": "husheng",
+            "name": w,
+            "brand": "互盛",
+            "label": "🛡️ 互盛防守中（續約守護）",
+            "badge_class": "bg-emerald-950/60 border-emerald-500/50 text-emerald-400"
+        }
+
+    # 2. 他牌進攻：包含台灣理光、震旦、金儀、佳能、富士全錄等所有非互盛廠商（台灣理光屬於他牌）
+    competitor_brands = [
+        "台灣理光", "理光", "RICOH", "Ricoh",
+        "震旦", "富士軟片", "富士全錄", "全錄", "金儀", "佳能", "Canon",
+        "夏普", "SHARP", "東芝", "TOSHIBA", "Konica", "KYOCERA", "京瓷",
+        "宏羚", "東磊", "新印", "精準國際", "國碩", "億雙", "優得", "知億"
+    ]
+    matched_brand = next((b for b in competitor_brands if b.lower() in w.lower()), None)
+    brand_label = matched_brand or w
+    return {
+        "type": "competitor",
+        "name": w,
+        "brand": brand_label,
+        "label": f"⚔️ 他牌進攻：{brand_label}（進攻目標）",
+        "badge_class": "bg-rose-950/60 border-rose-500/50 text-rose-400"
+    }
+
+
+def generate_copier_forecasts(history_records, base_date=None, target_window_days=180, active_tenders=None, candidate_cache=None):
+    """
+    Analyze up to the last 5 recurring tender dates for each agency + series title.
+    Forecasts upcoming copier opportunities over the next 6 months with dual alerts for extension clauses.
+    Also links historical award records directly and cross-references active/recent announcements for closed-loop status.
+    """
+    if base_date is None:
+        base_date = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).date()
+    forecast_window_end = base_date + timedelta(days=target_window_days)
+
+    groups = {}
+    for r in history_records:
+        title = r.get("title", "")
+        unit_id = r.get("unit_id", "")
+        unit_name = r.get("unit_name", "")
+        if not unit_id or not title:
+            continue
+        # Strictly copier equipment
+        if not any(k in title for k in ["影印機", "複合機", "多功能機", "事務機"]):
+            continue
+        if any(k in title for k in ["碎紙機", "護貝機", "裝訂機", "色帶", "報表紙", "影印紙", "列印紙", "標籤", "印表機", "耗材", "墨水"]):
+            continue
+        if _matched_terms(title, MACHINE_TOOL_TERMS) or _non_target_match(title)[0]:
+            continue
+        series = normalize_tender_series_title(title)
+        if not series or len(series) < 3:
+            continue
+        key = (unit_id, unit_name, series)
+        groups.setdefault(key, []).append(r)
+
+    forecasts = []
+    seen_forecast_keys = set()
+
+    for (unit_id, unit_name, series), records in groups.items():
+        records.sort(key=lambda x: str(x.get("award_date", "")), reverse=True)
+        latest = records[0]
+        latest_date_str = latest.get("award_date", "")
+        if not latest_date_str:
+            continue
+        try:
+            latest_date = datetime.strptime(latest_date_str, "%Y-%m-%d").date()
+        except (ValueError, TypeError):
+            continue
+
+        top5 = records[:5]
+        intervals = []
+        for i in range(len(top5) - 1):
+            try:
+                d1 = datetime.strptime(top5[i]["award_date"], "%Y-%m-%d").date()
+                d2 = datetime.strptime(top5[i+1]["award_date"], "%Y-%m-%d").date()
+                m_diff = round((d1 - d2).days / 30.44)
+                if m_diff > 0:
+                    intervals.append(m_diff)
+            except (ValueError, TypeError):
+                pass
+
+        title_duration_months = parse_duration_months(latest.get("title", ""), default_months=None)
+        latest_duration_months = title_duration_months or 24
+        raw_cadence = int(sorted(intervals)[len(intervals)//2]) if intervals else latest_duration_months
+        prediction_method = "historical_interval" if intervals and raw_cadence >= 6 else (
+            "title_duration" if title_duration_months else "default_assumption"
+        )
+        if raw_cadence < 6:
+            raw_cadence = latest_duration_months
+
+        # Round nearby observed intervals to full years as a forecasting heuristic,
+        # not as evidence of the actual contract duration or expiry date.
+        STANDARD_CADENCES = [12, 24, 36, 48, 60]
+        closest_cadence = min(STANDARD_CADENCES, key=lambda c: abs(c - raw_cadence))
+        if abs(closest_cadence - raw_cadence) <= 3:
+            cadence_months = closest_cadence
+        else:
+            cadence_months = raw_cadence
+
+        extension_text = latest.get("title", "")
+        has_ext = has_extension_clause(extension_text)
+        has_one_year_extension = has_ext and bool(re.search(
+            r"(?:後續)?擴充\s*(?:1|一)\s*年|保留未來一年", extension_text
+        ))
+
+        pred_days = cadence_months * 30.44
+        target_date_1 = latest_date + timedelta(days=int(pred_days) - 45) # Lead time 45 days
+
+        candidates = [
+            {
+                "type": "current_year_opportunity" if has_ext else "standard",
+                "target_date": target_date_1,
+                "badge_label": "公告案名提及後續擴充（待核對條款）" if has_ext else "週期推估（擴充條款待查）",
+                "notice": "歷史公告案名提及後續擴充；實際期限、是否行使及重新公告時間仍須查核原契約與最新公告。" if has_ext else "現有資料未確認擴充條款與履約期限，不能據此認定無擴充或必定重新招標。"
+            }
+        ]
+
+        if has_one_year_extension:
+            target_date_2 = target_date_1 + timedelta(days=365)
+            candidates.append({
+                "type": "expansion_limit_reached",
+                "target_date": target_date_2,
+                "badge_label": "假設行使一年擴充後的推估情境",
+                "notice": "僅依案名的一年擴充文字建立替代情境，未確認實際行使情形或法定上限；不代表屆時必定重新招標。"
+            })
+
+        city_info = get_city_info(unit_name)
+        incumbent = classify_incumbent(latest.get("winner"))
+
+        # Issue 1: Historical records with direct official links
+        history_track = []
+        for idx, rec in enumerate(top5):
+            ad_date = rec.get("award_date", "")
+            ad_month = ad_date[:7] if len(ad_date) >= 7 else ad_date
+            history_track.append({
+                "index": len(top5) - idx,
+                "date": ad_date,
+                "month": ad_month,
+                "winner": rec.get("winner", "待查"),
+                "award_price": rec.get("award_price"),
+                "discount_rate": rec.get("discount_rate"),
+                "job_number": rec.get("job_number", ""),
+                "title": rec.get("title", ""),
+                "source_url": rec.get("source_url", "")
+            })
+        history_track.reverse()
+
+        # Issue 2: Option A Closed-loop current status detection
+        current_status = {
+            "status": "pending",
+            "badge_label": "尚未在目前資料找到本期公告",
+            "stage": "待查核公告",
+            "date": "",
+            "job_number": "",
+            "title": "",
+            "notice_url": "",
+            "action_note": ""
+        }
+
+        # Check active tenders first (formal stage on Tab 01)
+        if active_tenders:
+            for at in active_tenders:
+                if at.get("unit_id") == unit_id:
+                    at_title = at.get("title", "")
+                    if series in at_title or normalize_tender_series_title(at_title) == series:
+                        at_stage = at.get("stage", "")
+                        at_url = at.get("tender_url", "")
+                        at_job = at.get("job_number", "")
+                        at_date = at.get("publish_date", "")
+                        if status_text_contains(at_stage, FAILED_STATUS_TERMS):
+                            current_status = {
+                                "status": "failed",
+                                "badge_label": "本期公告無法決標／已取消",
+                                "stage": at_stage,
+                                "date": at_date,
+                                "job_number": at_job,
+                                "title": at_title,
+                                "notice_url": at_url,
+                                "action_note": "本期公告未完成決標，是否重新招標須以後續官方公告為準。"
+                            }
+                            break
+                        elif at_stage == "已決標" or status_text_contains(at_stage, AWARD_NOTICE_TYPE_TERMS):
+                            current_status = {
+                                "status": "awarded",
+                                "badge_label": "✓ 本案本年度已決標",
+                                "stage": "已決標",
+                                "date": at_date,
+                                "job_number": at_job,
+                                "title": at_title,
+                                "notice_url": at_url,
+                                "action_note": f"資料中已有本案決標公告（公告日期 {at_date}），履約起訖仍須查核契約。"
+                            }
+                            break
+                        elif "公開徵求" in at_stage or "徵求" in at_stage:
+                            current_status = {
+                                "status": "solicitation",
+                                "badge_label": "🔥 本案已啟動招標前置：公開徵求中",
+                                "stage": "公開徵求",
+                                "date": at_date,
+                                "job_number": at_job,
+                                "title": at_title,
+                                "notice_url": at_url,
+                                "action_note": f"機關於 {at_date} 發布公開徵求公告（案號 {at_job}）；公告內容與期限請以官方來源為準。"
+                            }
+                            break
+                        else:
+                            current_status = {
+                                "status": "tender",
+                                "badge_label": "🎯 本案已正式上架招標中",
+                                "stage": at_stage or "公開招標",
+                                "date": at_date,
+                                "job_number": at_job,
+                                "title": at_title,
+                                "notice_url": at_url,
+                                "action_note": f"目前資料已收錄本期招標公告（案號 {at_job}），實際狀態與投標期限請查官方公告。"
+                            }
+                            break
+
+        # If still pending, check candidate_cache (recent announcements like 公開徵求)
+        if current_status["status"] == "pending" and candidate_cache:
+            for cc in candidate_cache:
+                if cc.get("unit_id") == unit_id:
+                    cc_brief = cc.get("brief", {})
+                    cc_title = cc_brief.get("title", "")
+                    cc_type = cc_brief.get("type", "")
+                    if series in cc_title or normalize_tender_series_title(cc_title) == series:
+                        cc_date_raw = str(cc.get("date", ""))
+                        cc_fn = cc.get("filename", "")
+                        cc_job = cc.get("job_number", "")
+                        cc_date = f"{cc_date_raw[:4]}-{cc_date_raw[4:6]}-{cc_date_raw[6:8]}" if len(cc_date_raw) == 8 else cc_date_raw
+                        cc_url = f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={cc_date_raw}&fn={cc_fn}.xml"
+                        if status_text_contains(cc_type, FAILED_STATUS_TERMS):
+                            current_status = {
+                                "status": "failed",
+                                "badge_label": "本期公告無法決標／已取消",
+                                "stage": cc_type,
+                                "date": cc_date,
+                                "job_number": cc_job,
+                                "title": cc_title,
+                                "notice_url": cc_url,
+                                "action_note": "本期公告未完成決標，是否重新招標須以後續官方公告為準。"
+                            }
+                            break
+                        elif "公開徵求" in cc_type or "徵求" in cc_type:
+                            current_status = {
+                                "status": "solicitation",
+                                "badge_label": "🔥 本案已啟動招標前置：公開徵求中",
+                                "stage": "公開徵求",
+                                "date": cc_date,
+                                "job_number": cc_job,
+                                "title": cc_title,
+                                "notice_url": cc_url,
+                                "action_note": f"機關於 {cc_date} 發布公開徵求公告（案號 {cc_job}）；公告內容與期限請以官方來源為準。"
+                            }
+                            break
+                        elif status_text_contains(cc_type, AWARD_NOTICE_TYPE_TERMS):
+                            current_status = {
+                                "status": "awarded",
+                                "badge_label": "✓ 本案本年度已決標",
+                                "stage": "已決標",
+                                "date": cc_date,
+                                "job_number": cc_job,
+                                "title": cc_title,
+                                "notice_url": cc_url,
+                                "action_note": f"本案已於 {cc_date} 完成決標。"
+                            }
+                            break
+                        elif "招標" in cc_type:
+                            current_status = {
+                                "status": "tender",
+                                "badge_label": "🎯 本案已正式上架招標中",
+                                "stage": "公開招標",
+                                "date": cc_date,
+                                "job_number": cc_job,
+                                "title": cc_title,
+                                "notice_url": cc_url,
+                                "action_note": f"本案於 {cc_date} 發布招標公告（案號 {cc_job}），實際狀態與投標期限請查官方公告。"
+                            }
+                            break
+
+        for cand in candidates:
+            t_date = cand["target_date"]
+            if base_date - timedelta(days=30) <= t_date <= forecast_window_end:
+                days_until = (t_date - base_date).days
+                f_key = (unit_id, series, cand["type"])
+                if f_key in seen_forecast_keys:
+                    continue
+                seen_forecast_keys.add(f_key)
+
+                countdown_str = "推估日期已過" if days_until <= 0 else f"距推估日期 {days_until} 天"
+                price_val = latest.get("award_price")
+                price_str = f"NT$ {int(price_val):,}" if isinstance(price_val, (int, float)) and price_val > 0 else "未公開"
+
+                pred_roc_year = t_date.year - 1911
+                next_years_count = max(1, cadence_months // 12)
+                latest_title_raw = latest.get("title", "")
+                m_span = re.search(r"(1\d{2})\s*([-~至到])\s*(1\d{2})", latest_title_raw)
+                if m_span:
+                    s_yr = int(m_span.group(1))
+                    e_yr = int(m_span.group(3))
+                    sep = m_span.group(2)
+                    yr_span = e_yr - s_yr
+                    pred_end_roc_year = pred_roc_year + max(1, yr_span)
+                    predicted_title = f"{pred_roc_year}{sep}{pred_end_roc_year}年{series}"
+                elif next_years_count >= 2:
+                    predicted_title = f"{pred_roc_year}-{pred_roc_year + next_years_count - 1}年{series}"
+                else:
+                    predicted_title = f"{pred_roc_year}年度{series}"
+
+                if current_status["status"] == "solicitation":
+                    action_sugg = f"【🔥 機關已啟動公開徵求】機關於 {current_status['date']} 公告「{current_status['title']}」（案號 {current_status['job_number']}），請即刻聯繫採購承辦提供型錄與參考規格！"
+                elif current_status["status"] == "tender":
+                    action_sugg = f"【🎯 機關已正式上架招標】案號 {current_status['job_number']} 已在 01 分頁進行中，請前往備標投標！"
+                elif current_status["status"] == "awarded":
+                    action_sugg = f"【✓ 本案已完成決標】本年度合約已標出，列入下一合約週期持續追蹤。"
+                elif current_status["status"] == "failed":
+                    action_sugg = "本期公告無法決標／已取消，後續是否重招仍待官方公告。"
+                else:
+                    if incumbent.get("type") == "husheng":
+                        action_sugg = f"【🛡️ 互盛防守】目前為互盛履約中，建議於 {t_date.strftime('%Y年%m月')} 前完成客戶續約拜訪與新機汰舊升級提案，鞏固防守盤！"
+                    else:
+                        action_sugg = f"【⚔️ 他牌進攻】目前為他牌（{incumbent.get('brand')}）防守，建議於 {t_date.strftime('%Y年%m月')} 前完成採購與資訊組初訪，提供機種規格草案與 POC，爭取搶單先機！"
+
+                forecasts.append({
+                    "id": f"forecast-{unit_id}-{series}-{cand['type']}",
+                    "unit_id": unit_id,
+                    "unit": unit_name,
+                    "city": city_info["city"],
+                    "series_title": series,
+                    "predicted_title": predicted_title,
+                    "latest_title": latest.get("title", ""),
+                    "latest_job_number": latest.get("job_number", ""),
+                    "latest_source_url": latest.get("source_url", ""),
+                    "latest_award_date": latest_date_str,
+                    "latest_award_price": price_val,
+                    "latest_award_price_str": price_str,
+                    "latest_winner": latest.get("winner", "待查"),
+                    "incumbent": incumbent,
+                    "predicted_date": t_date.strftime("%Y-%m-%d"),
+                    "predicted_month": t_date.strftime("%Y年%m月"),
+                    "predicted_range": f"{t_date.strftime('%Y年%m月')} ～ {(t_date + timedelta(days=30)).strftime('%Y年%m月')}",
+                    "predicted_range_start": t_date.isoformat(),
+                    "predicted_range_end": (t_date + timedelta(days=30)).isoformat(),
+                    "prediction_as_of": base_date.isoformat(),
+                    "prediction_basis": {
+                        "method": prediction_method,
+                        "source_count": len(top5),
+                        "lead_time_days": 45,
+                        "contract_end_verified": False,
+                    },
+                    "days_until": days_until,
+                    "countdown_label": countdown_str,
+                    "cadence_months": cadence_months,
+                    "cadence_summary": (
+                        f"依歷史決標間隔推估約 {cadence_months} 個月" if prediction_method == "historical_interval"
+                        else f"依案名年期推估約 {cadence_months} 個月" if prediction_method == "title_duration"
+                        else f"資料不足，暫以預設 {cadence_months} 個月推估"
+                    ),
+                    "history_count": len(records),
+                    "history_track": history_track,
+                    "current_status": current_status,
+                    "expansion": {
+                        "has_extension": has_ext,
+                        "status": "mentioned" if has_ext else "unknown",
+                        "type": cand["type"],
+                        "badge_label": cand["badge_label"],
+                        "notice": cand["notice"]
+                    },
+                    "action_suggestion": action_sugg
+                })
+
+    forecasts.sort(key=lambda x: x["days_until"])
+    return forecasts
+
+
+def deduplicate_announcements(records):
+    """Keep the newest announcement version for each agency and tender number."""
+    newest_first = sorted(
+        (record for record in records if isinstance(record, dict)),
+        key=lambda record: (str(record.get("date", "")), str(record.get("filename", ""))),
+        reverse=True
+    )
+    unique_records = []
+    seen = set()
+    for record in newest_first:
+        project_key = (record.get("unit_id", ""), record.get("job_number", ""))
+        announcement_type = str(record.get("brief", {}).get("type", ""))
+        lifecycle_bucket = "terminal" if is_terminal_notice_type(announcement_type) or is_failed_notice(record) else "active"
+        if not all(project_key):
+            project_key = (
+                record.get("unit_id", ""), record.get("job_number", ""),
+                str(record.get("date", "")), record.get("filename", "")
+            )
+        else:
+            project_key = (*project_key, lifecycle_bucket)
+        if project_key in seen:
+            continue
+        seen.add(project_key)
+        unique_records.append(record)
+    return unique_records
+
+def classify_equipment(title):
+    normalized = title.replace("臺", "台")
+    if any(word in normalized for word in ["點陣式印表機", "點矩陣印表機"]):
+        return "dot_matrix_printer"
+    if any(word in normalized for word in ["影印機", "複印機", "複合機", "多功能機"]):
+        return "copier"
+    if "印表機" in normalized:
+        mixed_it_words = ["電腦", "螢幕", "監視器", "軟體", "網路", "伺服器"]
+        return "mixed_it_equipment" if any(word in normalized for word in mixed_it_words) else "printer"
+    if "事務機" in normalized:
+        return "office_machine"
+    return ""
+
+def classify_contract(title):
+    if any(word in title for word in ["租賃", "租用", "出租"]):
+        return "rental"
+    if any(word in title for word in ["維護", "維修", "保養"]):
+        return "maintenance"
+    if any(word in title for word in ["採購", "購置", "汰換", "新購", "更新"]):
+        return "purchase"
+    return "unspecified"
+
+def is_comparable_history(current_title, history_title):
+    current_equipment = classify_equipment(current_title)
+    history_equipment = classify_equipment(history_title)
+    return (
+        bool(current_equipment)
+        and current_equipment == history_equipment
+        and classify_contract(current_title) == classify_contract(history_title)
+    )
+
+def history_scope_key(unit_id, title):
+    return (
+        f"{unit_id}|{classify_equipment(title)}|{classify_contract(title)}|"
+        f"{build_history_title_query(title)}"
+    )
+
+def build_history_title_query(title):
+    normalized = re.sub(r'[「」『』【】()]', '', title).strip()
+    normalized = re.sub(r'^\s*(?:民國\s*)?\d{2,3}\s*年(?:度)?\s*', '', normalized).strip()
+    year_suffix = re.split(r'(?:\d{2,3}(?:\s*[-~至]\s*\d{2,3})?\s*)?年度', normalized, maxsplit=1)
+    if len(year_suffix) > 1 and year_suffix[-1].strip():
+        normalized = year_suffix[-1].strip()
+    normalized = re.sub(r'\d+\s*(?:式|台|臺|部|組|套|批)$', '', normalized).strip()
+    return normalized
+
+def history_cutoff_date(years=5):
+    today = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).date()
+    try:
+        return today.replace(year=today.year - years)
+    except ValueError:
+        return today.replace(year=today.year - years, day=28)
+
+def is_recent_history(record, years=5):
+    try:
+        return datetime.strptime(record.get("award_date", ""), "%Y-%m-%d").date() >= history_cutoff_date(years)
+    except (TypeError, ValueError):
+        return False
+
+def exclude_contract_changes(records):
+    explicit_change_words = ["契約變更", "變更案", "後續擴充", "追加採購"]
+    base_records = {
+        record.get("job_number", ""): record
+        for record in records
+        if record.get("job_number")
+    }
+    filtered = []
+    for record in records:
+        title = record.get("title", "")
+        if any(word in title for word in explicit_change_words):
+            continue
+        variant_match = re.fullmatch(r'(.+)-\d+', record.get("job_number", ""))
+        if variant_match:
+            base_record = base_records.get(variant_match.group(1))
+            if base_record and is_comparable_history(title, base_record.get("title", "")):
+                continue
+        filtered.append(record)
+    return filtered
+
+def get_related_units(unit_id, unit_name, unit_map):
+    if not unit_id or "." not in unit_id or not isinstance(unit_map, dict):
+        return {}
+    parent_id = unit_id.rsplit(".", 1)[0]
+    parent_name = unit_map.get(parent_id, "")
+    normalized_unit = unit_name.replace("臺", "台")
+    normalized_parent = parent_name.replace("臺", "台")
+    if (
+        not parent_name
+        or not normalized_unit.startswith(normalized_parent)
+        or normalized_unit == normalized_parent
+        or normalized_parent.endswith(("政府", "行政院", "司法院", "監察院", "考試院", "立法院", "部"))
+    ):
+        return {}
+
+    parent_depth = parent_id.count(".")
+    return {
+        candidate_id: candidate_name
+        for candidate_id, candidate_name in unit_map.items()
+        if (
+            (candidate_id == parent_id or (
+                candidate_id.startswith(parent_id + ".")
+                and candidate_id.count(".") == parent_depth + 1
+            ))
+            and candidate_name.replace("臺", "台").startswith(normalized_parent)
+        )
+    }
+
+def looks_like_country(value):
+    country_names = ["美國", "新加坡", "日本", "德國", "英國", "中國", "加拿大", "法國", "澳大利亞", "韓國"]
+    return any(str(value).startswith(country) for country in country_names)
+
+def date_to_iso(raw_date):
+    value = str(raw_date or "")
+    if len(value) == 8:
+        try:
+            return datetime.strptime(value, "%Y%m%d").strftime("%Y-%m-%d")
+        except ValueError:
+            pass
+    return ""
+
+def median(values):
+    ordered = sorted(values)
+    middle = len(ordered) // 2
+    if len(ordered) % 2:
+        return ordered[middle]
+    return (ordered[middle - 1] + ordered[middle]) / 2
+
+def verify_official_award_notice(unit_id, job_number, award_date, max_retries=2):
+    if not unit_id or not job_number or len(award_date) < 4:
+        return False
+
+    year = award_date[:4]
+    params = {
+        "pageSize": "10",
+        "firstSearch": "false",
+        "isQuery": "true",
+        "isBinding": "N",
+        "isLogIn": "N",
+        "orgName": "",
+        "orgId": unit_id,
+        "tenderName": "",
+        "tenderId": job_number,
+        "tenderStatus": "TENDER_STATUS_1",
+        "tenderWay": "TENDER_WAY_ALL_DECLARATION",
+        "awardAnnounceStartDate": f"{year}/01/01",
+        "awardAnnounceEndDate": f"{year}/12/31",
+        "radProctrgCate": "",
+        "tenderRange": "",
+        "item": "",
+        "gottenVendorName": "",
+        "gottenVendorId": "",
+        "submitVendorName": "",
+        "submitVendorId": "",
+        "execLocation": "",
+        "priorityCate": "",
+        "radReConstruct": "",
+        "policyAdvocacy": "",
+        "isCpp": ""
+    }
+    query_url = f"{OFFICIAL_AWARD_SEARCH_URL}?{urllib.parse.urlencode(params)}"
+    request = urllib.request.Request(query_url, headers={"User-Agent": "Mozilla/5.0"})
+
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(request, timeout=30, context=OFFICIAL_SSL_CONTEXT) as response:
+                page = html.unescape(response.read().decode("utf-8", errors="replace"))
+            no_results = re.search(r'共有\s*<span[^>]*>\s*0\s*</span>\s*筆資料', page)
+            return not no_results and job_number in page
+        except Exception as error:
+            if attempt + 1 == max_retries:
+                print(f"Official award verification failed for {unit_id}/{job_number}: {error}")
+                return False
+            time.sleep(2)
+
+    return False
+
+def fetch_tender_detail_with_retry(unit_id, job_number, max_retries=3):
+    encoded_job = urllib.parse.quote(job_number)
+    detail_api_url = f"https://pcc-api.openfun.app/api/tender?unit_id={unit_id}&job_number={encoded_job}"
+    req_detail = urllib.request.Request(detail_api_url, headers=API_HEADERS)
+    
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(req_detail) as res_detail:
+                return json.loads(res_detail.read().decode('utf-8'))
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                wait_time = (attempt + 1) * 3
+                print(f"Received 429 Too Many Requests. Retrying in {wait_time} seconds (attempt {attempt+1}/{max_retries})...")
+                time.sleep(wait_time)
+            else:
+                print(f"HTTP Error {e.code} when fetching detail: {e}")
+                break
+        except Exception as e:
+            if attempt + 1 < max_retries:
+                wait_time = (attempt + 1) * 2
+                print(f"Detail request failed. Retrying in {wait_time} seconds: {e}")
+                time.sleep(wait_time)
+            else:
+                print(f"Error fetching detail after {max_retries} attempts: {e}")
+            
+    return None
+
+def fetch_json_with_retry(url, label, max_retries=5):
+    request = urllib.request.Request(url, headers=API_HEADERS)
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                payload = response.read().decode('utf-8')
+            try:
+                return json.loads(payload)
+            except json.JSONDecodeError:
+                # The source sometimes emits PHP warnings before a valid empty
+                # JSON object on dates with no announcements.
+                json_start = payload.rfind("\n{")
+                if json_start >= 0:
+                    return json.loads(payload[json_start + 1:])
+                raise
+        except urllib.error.HTTPError as error:
+            if error.code != 429 or attempt + 1 == max_retries:
+                print(f"{label} failed: {error}")
+                return None
+            wait_time = (attempt + 1) * 5
+            print(f"{label} rate limited. Retrying in {wait_time} seconds...")
+            time.sleep(wait_time)
+        except Exception as error:
+            if attempt + 1 == max_retries:
+                print(f"{label} failed after {max_retries} attempts: {error}")
+                return None
+            wait_time = (attempt + 1) * 3
+            print(f"{label} failed. Retrying in {wait_time} seconds: {error}")
+            time.sleep(wait_time)
+    return None
+
+def is_past_deadline(deadline_value, today):
+    """Return True only when a tender has a valid deadline before today."""
+    if not deadline_value or deadline_value in {"未公開", "待確認"}:
+        return False
+    try:
+        return datetime.strptime(str(deadline_value), "%Y-%m-%d").date() < today
+    except (TypeError, ValueError):
+        return False
+
+
+def build_required_dates(mode, today, collection_days, backfill_days=None):
+    if backfill_days:
+        return [today - timedelta(days=i) for i in range(backfill_days)]
+    if mode == "live":
+        return [today, today - timedelta(days=1)]
+    for days_ago in range(2, 61):
+        backfill_date = today - timedelta(days=days_ago)
+        if collection_days.get(backfill_date.strftime("%Y-%m-%d"), {}).get("status") != "complete":
+            return [backfill_date]
+    return []
+
+
+def get_data_path():
+    configured = os.environ.get("RICOH_DATA_FILE", "").strip()
+    if configured:
+        return os.path.abspath(configured)
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), "data.json")
+
+
+def main(mode="live", backfill_days=None):
+    if mode not in ("live", "maintenance"):
+        raise ValueError(f"Unsupported update mode: {mode}")
+    print(f"Starting tender updater in {mode} mode...")
+    output_path = get_data_path()
+    existing_data = {}
+    existing_history_by_unit = {}
+    history_unit_names = {}
+    history_unit_refresh = {}
+    history_deep_refresh = {}
+    candidate_cache = []
+    collection_days = {}
+    refresh_date = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).strftime("%Y-%m-%d")
+
+    try:
+        with open(output_path, "r", encoding="utf-8") as existing_file:
+            existing_data = json.load(existing_file)
+        history_unit_refresh = dict(existing_data.get("history_unit_refresh", {}))
+        history_deep_refresh = dict(existing_data.get("history_deep_refresh", {}))
+        candidate_cache = list(existing_data.get("candidate_cache", []))
+        collection_days = dict(existing_data.get("collection_days", {}))
+
+        cached_records = list(existing_data.get("history_cache", []))
+        for tender in existing_data.get("tenders", []):
+            unit_id = tender.get("unit_id", "")
+            unit_name = tender.get("unit", "")
+            for record in tender.get("history_records", []):
+                cached_records.append({
+                    "unit_id": record.get("source_unit_id", unit_id),
+                    "unit_name": record.get("source_unit", unit_name),
+                    **record
+                })
+
+        for cached in cached_records:
+            unit_id = cached.get("unit_id", "")
+            unit_name = cached.get("unit_name", "")
+            job_number = cached.get("job_number", "")
+            if not unit_id or not job_number or cached.get("official_verified") is not True:
+                continue
+            history_unit_names[unit_id] = unit_name
+            history_record = {
+                key: value for key, value in cached.items()
+                if key not in ("unit_id", "unit_name", "source_unit_id", "source_unit", "relation_scope", "is_stale")
+            }
+            existing_history_by_unit.setdefault(unit_id, {})[job_number] = history_record
+        print(f"Loaded {sum(len(records) for records in existing_history_by_unit.values())} verified cached histories.")
+    except (FileNotFoundError, json.JSONDecodeError) as error:
+        print(f"No usable history cache found: {error}")
+
+    taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
+    today = taipei_now.date()
+    required_dates = build_required_dates(mode, today, collection_days, backfill_days=backfill_days)
+
+    # The date endpoint returns the day's entire announcement set. Keep every
+    # potentially relevant record so later classification rules can re-evaluate it.
+    raw_active_tenders = list(candidate_cache)
+    successful_dates = []
+    failed_dates = []
+    for scan_date in required_dates:
+        compact_date = scan_date.strftime("%Y%m%d")
+        iso_date = scan_date.strftime("%Y-%m-%d")
+        url = f"https://pcc-api.openfun.app/api/listbydate?date={compact_date}"
+        day_data = fetch_json_with_retry(url, f"daily announcement census {iso_date}")
+        if day_data == {}:
+            day_data = {"records": []}
+        if not isinstance(day_data, dict) or not isinstance(day_data.get("records"), list):
+            failed_dates.append(iso_date)
+            if collection_days.get(iso_date, {}).get("status") != "complete":
+                collection_days[iso_date] = {
+                    "status": "incomplete", "source_records": 0, "candidate_records": 0,
+                    "review_records": 0, "checked_at": taipei_now.strftime("%Y-%m-%d %H:%M")
+                }
+            continue
+
+        day_records = day_data["records"]
+        day_candidates = []
+        for record in day_records:
+            classification = classify_tender_relevance(record)
+            if classification["status"] not in ("included", "review"):
+                continue
+            day_candidates.append({**record, "relevance": classification})
+        day_candidates = deduplicate_announcements(day_candidates)
+        review_count = sum(
+            1 for candidate in day_candidates
+            if candidate.get("relevance", {}).get("status") == "review"
+        )
+
+        raw_active_tenders = [record for record in raw_active_tenders if str(record.get("date", "")) != compact_date]
+        raw_active_tenders.extend(day_candidates)
+        collection_days[iso_date] = {
+            "status": "complete",
+            "source_records": len(day_records),
+            "candidate_records": len(day_candidates),
+            "review_records": review_count,
+            "checked_at": taipei_now.strftime("%Y-%m-%d %H:%M")
+        }
+        successful_dates.append(iso_date)
+        print(f"Census {iso_date}: {len(day_records)} announcements, {len(day_candidates)} equipment candidates, {review_count} need review.")
+        time.sleep(1)
+
+    # Actively scan target monitored units to guarantee immediate capture
+    cutoff_compact_60 = (today - timedelta(days=60)).strftime("%Y%m%d")
+    for t_unit_id, t_unit_name in TARGET_MONITORED_UNITS.items():
+        try:
+            url_target = f"https://pcc-api.openfun.app/api/listbyunit?unit_id={t_unit_id}&page=1"
+            target_data = fetch_json_with_retry(url_target, f"monitored target unit scan '{t_unit_name}' ({t_unit_id})")
+            if isinstance(target_data, dict) and isinstance(target_data.get("records"), list):
+                for u_rec in target_data["records"]:
+                    if str(u_rec.get("date", "")) >= cutoff_compact_60:
+                        classification = classify_tender_relevance(u_rec)
+                        if classification["status"] in ("included", "review"):
+                            raw_active_tenders.append({**u_rec, "relevance": classification})
+        except Exception as err:
+            print(f"Notice: Failed to scan monitored unit {t_unit_id}: {err}")
+
+    raw_active_tenders = deduplicate_announcements(raw_active_tenders)
+
+    cutoff_compact = (today - timedelta(days=60)).strftime("%Y%m%d")
+    raw_active_tenders = [record for record in raw_active_tenders if str(record.get("date", "")) >= cutoff_compact]
+    raw_active_tenders = [
+        record for record in raw_active_tenders
+        if classify_tender_relevance(record)["status"] in ("included", "review")
+    ]
+    raw_active_tenders = deduplicate_announcements(raw_active_tenders)
+    collection_days = {
+        day: summary for day, summary in collection_days.items()
+        if day >= (today - timedelta(days=60)).strftime("%Y-%m-%d")
+    }
+
+    today_iso = today.strftime("%Y-%m-%d")
+    if mode == "live" and today_iso in failed_dates:
+        print("Today's census failed. Preserving the last verified database and recording the failed attempt.")
+        existing_status = dict(existing_data.get("collection_status", {}))
+        existing_status.update({
+            "latest_attempt_status": "failed",
+            "latest_attempt_at": taipei_now.strftime("%Y-%m-%d %H:%M"),
+            "failed_dates": failed_dates
+        })
+        existing_data["collection_status"] = existing_status
+        with open(output_path, "w", encoding="utf-8") as output_file:
+            json.dump(existing_data, output_file, ensure_ascii=False, indent=2)
+        return
+        
+    # Filter and identify active tenders and their units
+    active_tenders = []
+    seen_active_projects = set()
+    active_units_dict = {}
+    review_candidates = []
+    prefetched_details = {}
+    
+    raw_active_sorted = sorted(
+        raw_active_tenders, 
+        key=lambda x: int(x.get("date", 0)) if isinstance(x, dict) and x.get("date") else 0, 
+        reverse=True
+    )
+    
+    for item in raw_active_sorted:
+        if not isinstance(item, dict):
+            continue
+            
+        filename = item.get("filename", "")
+        brief = item.get("brief", {})
+        title = brief.get("title", "") or ""
+        brief_type = brief.get("type", "") or ""
+        unit_name = item.get("unit_name", "") or ""
+        date_raw = str(item.get("date", ""))
+        unit_id = item.get("unit_id", "")
+        
+        # 1. STRICT ACTIVE FILTER: Exclude resolved/failed from active list
+        if is_terminal_notice_type(brief_type) or is_failed_notice(item):
+            continue
+            
+        # 2. Keep a rolling 60-day opportunity window.
+        if not date_raw.isdigit() or date_raw < cutoff_compact:
+            continue
+            
+        # 3. Skip Bank of Taiwan central procurement
+        if "\u81fa\u7063\u9280\u884c" in unit_name or "\u53f0\u7063\u9280\u884c" in unit_name:
+            continue
+            
+        # 4. Use an explainable multi-layer classification.
+        title_norm = title.replace("\u81fa", "\u53f0")
+        relevance = classify_tender_relevance(item)
+        item["relevance"] = relevance
+            
+        # 5. Skip duplicates
+        project_key = (unit_id, item.get("job_number", ""), date_raw, filename)
+        lifecycle_key = (unit_id, item.get("job_number", ""))
+        if lifecycle_key in seen_active_projects:
+            continue
+            
+        # 6. Keep definite matches and broad terms that still need detail inspection.
+        if relevance["status"] not in ("included", "review"):
+            continue
+
+        seen_active_projects.add(lifecycle_key)
+
+        if relevance["status"] == "review":
+            detail_data = fetch_tender_detail_with_retry(unit_id, item.get("job_number", ""))
+            merged_detail = {}
+            if detail_data and detail_data.get("records"):
+                for record_index, record in enumerate(detail_data["records"]):
+                    for key, value in record.get("detail", {}).items():
+                        merged_detail[f"{record_index}:{key}"] = value
+            detailed_relevance = classify_tender_relevance(item, merged_detail)
+            if detailed_relevance["status"] == "excluded":
+                continue
+            if not detail_data or not detail_data.get("records"):
+                review_city = review_city_fields(unit_name, None)
+                review_candidates.append({
+                    "date": date_to_iso(date_raw), "title": title, "unit": unit_name,
+                    **review_city,
+                    "unit_id": unit_id, "job_number": item.get("job_number", ""),
+                    "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
+                    "relevance": {**detailed_relevance, "reason": "政府公告明細暫時無法取得，等待下次自動查驗"}
+                })
+                continue
+            if detailed_relevance["status"] == "review":
+                review_publish, review_deadline, review_publish_confidence, review_deadline_confidence = extract_dates(merged_detail, date_raw)
+                review_candidates.append({
+                    "date": review_publish or date_to_iso(date_raw),
+                    "publish_date": review_publish or date_to_iso(date_raw),
+                    "publish_date_confidence": review_publish_confidence,
+                    "deadline": review_deadline or "未公開",
+                    "deadline_confidence": review_deadline_confidence,
+                    "title": title, "unit": unit_name,
+                    **review_city_fields(unit_name, detail_data),
+                    "unit_id": unit_id, "job_number": item.get("job_number", ""),
+                    "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
+                    "relevance": detailed_relevance
+                })
+                continue
+            relevance = detailed_relevance
+            item["relevance"] = relevance
+            prefetched_details[project_key] = detail_data
+            
+        active_tenders.append(item)
+        active_units_dict[unit_name] = unit_id
+        
+    print(f"Identified {len(active_tenders)} active/recent tenders from {len(active_units_dict)} units.")
+    
+    failed_history_units = []
+    queried_history_unit_ids = set()
+    unit_total_pages = {}
+
+    def fetch_unit_history(
+        h_unit_id,
+        h_unit,
+        comparable_titles=None,
+        recent_only=False,
+        request_delay=1,
+        start_page=1,
+        scan_all_pages=False,
+        deep_refresh_keys=None
+    ):
+        if not h_unit_id:
+            return []
+        queried_history_unit_ids.add(h_unit_id)
+        results = []
+        page = start_page
+        scan_completed = True
+        while True:
+            url_unit = f"https://pcc-api.openfun.app/api/listbyunit?unit_id={h_unit_id}&page={page}"
+            data_unit = fetch_json_with_retry(
+                url_unit,
+                f"listbyunit page {page} for '{h_unit}' ({h_unit_id})"
+            )
+            if data_unit is None:
+                failed_history_units.append(h_unit)
+                scan_completed = False
+                print(f"Keeping cached award history for '{h_unit}' and continuing.")
+                break
+
+            total_pages = max(1, int(data_unit.get("total_page", 1) or 1))
+            unit_total_pages[h_unit_id] = total_pages
+            for record in data_unit.get("records", []):
+                if not isinstance(record, dict):
+                    continue
+                brief = record.get("brief", {})
+                notice_type = brief.get("type", "")
+                if not is_award_notice(record) or is_failed_notice(record):
+                    continue
+                history_title = brief.get("title", "")
+                if not is_relevant_equipment_title(history_title):
+                    continue
+                if comparable_titles and not any(is_comparable_history(title, history_title) for title in comparable_titles):
+                    continue
+                if recent_only and str(record.get("date", "")) < history_cutoff_date().strftime("%Y%m%d"):
+                    continue
+                record["unit_name"] = h_unit
+                results.append(record)
+
+            if not scan_all_pages or page >= total_pages:
+                break
+            page += 1
+            time.sleep(request_delay)
+
+        if scan_completed:
+            history_unit_refresh[h_unit_id] = refresh_date
+            if scan_all_pages:
+                for scope_key in deep_refresh_keys or [h_unit_id]:
+                    history_deep_refresh[scope_key] = refresh_date
+        time.sleep(request_delay)
+        return results
+
+    def fetch_title_history(h_unit_id, h_unit, title):
+        query = build_history_title_query(title)
+        if len(query) < 6:
+            print(f"Skipped overly broad history title search '{query}' for '{h_unit}'.")
+            return [], False
+        results = []
+        page = 1
+        scan_completed = True
+        while True:
+            encoded_query = urllib.parse.quote(query)
+            url = f"https://pcc-api.openfun.app/api/searchbytitle?query={encoded_query}&page={page}"
+            data = fetch_json_with_retry(url, f"history title search '{query}' page {page}")
+            if data is None:
+                scan_completed = False
+                break
+            total_pages = max(1, int(data.get("total_pages", 1) or 1))
+            for record in data.get("records", []):
+                if not isinstance(record, dict) or record.get("unit_id") != h_unit_id:
+                    continue
+                brief = record.get("brief", {})
+                notice_type = brief.get("type", "")
+                history_title = brief.get("title", "")
+                if (
+                    not is_award_notice(record)
+                    or is_failed_notice(record)
+                    or not is_comparable_history(title, history_title)
+                ):
+                    continue
+                record["unit_name"] = h_unit
+                results.append(record)
+            if page >= total_pages:
+                break
+            if page >= 15:
+                print(f"Stopped broad history title search '{query}' after 15 pages; cached results were preserved.")
+                scan_completed = False
+                break
+            page += 1
+            time.sleep(1)
+        return results, scan_completed
+
+    history_pool = {
+        unit: list(existing_history_by_unit.get(unit_id, {}).values())
+        for unit, unit_id in active_units_dict.items()
+    }
+    seen_history_jobs = set()
+
+    def process_history_items(raw_items):
+        for h_item in sorted(raw_items, key=lambda item: int(item.get("date", 0)), reverse=True):
+            h_unit = h_item.get("unit_name", "")
+            h_unit_id = h_item.get("unit_id", "")
+            h_job = h_item.get("job_number", "")
+            job_key = (h_unit_id, h_job)
+            if not h_unit_id or not h_job or job_key in seen_history_jobs:
+                continue
+            seen_history_jobs.add(job_key)
+
+            cached_history = existing_history_by_unit.get(h_unit_id, {}).get(h_job)
+            if cached_history and not looks_like_country(cached_history.get("winner", "")):
+                continue
+
+            h_details = fetch_tender_detail_with_retry(h_unit_id, h_job)
+            if not h_details or not h_details.get("records"):
+                continue
+            award_records = [
+                record for record in h_details["records"]
+                if is_award_notice(record) and not is_failed_notice(record)
+            ]
+            if not award_records:
+                continue
+            h_award_record = max(award_records, key=lambda record: int(record.get("date", 0)))
+            h_detail_obj = h_award_record.get("detail", {})
+            h_budget, h_award = extract_budget_and_award(h_detail_obj)
+            if h_budget <= 0 or h_award <= 0:
+                continue
+
+            h_winner = extract_winning_competitor(h_detail_obj)
+            h_date = date_to_iso(h_award_record.get("date"))
+            if not verify_official_award_notice(h_unit_id, h_job, h_date):
+                print(f"Skipped unverified history: {h_unit} | {h_date} | {h_job}")
+                continue
+            discount_rate = (h_award / h_budget) * 100
+            history_record = {
+                "award_date": h_date,
+                "year": int(h_date[:4]) if h_date else None,
+                "title": h_award_record.get("brief", {}).get("title", h_item.get("brief", {}).get("title", "")),
+                "job_number": h_job,
+                "budget": h_budget,
+                "award_price": h_award,
+                "discount_rate": round(discount_rate, 1) if 0 < discount_rate <= 100 else None,
+                "winner": map_competitor_name(h_winner) if h_winner else "未公開",
+                "source_url": h_detail_obj.get("url", ""),
+                "official_verified": True,
+                "verification_source": "政府電子採購網決標查詢"
+            }
+            history_pool.setdefault(h_unit, [])
+            history_pool[h_unit] = [
+                record for record in history_pool[h_unit]
+                if record.get("job_number") != h_job
+            ]
+            history_pool[h_unit].append(history_record)
+            existing_history_by_unit.setdefault(h_unit_id, {})[h_job] = history_record
+            history_unit_names[h_unit_id] = h_unit
+            print(f"Saved verified history: {h_unit} | {h_date} | {h_job} | Budget {h_budget} | Award {h_award}")
+
+    print("Querying complete award history for all active agencies...")
+    direct_history_items = []
+    for h_unit, h_unit_id in active_units_dict.items():
+        direct_history_items.extend(fetch_unit_history(h_unit_id, h_unit))
+    process_history_items(direct_history_items)
+
+    titles_by_unit_id = {}
+    for item in active_tenders:
+        titles_by_unit_id.setdefault(item.get("unit_id", ""), []).append(item.get("brief", {}).get("title", ""))
+
+    deep_history_items = []
+    for h_unit, h_unit_id in active_units_dict.items():
+        if unit_total_pages.get(h_unit_id, 1) <= 1:
+            continue
+        missing_scope_titles = [
+            title for title in titles_by_unit_id.get(h_unit_id, [])
+            if history_scope_key(h_unit_id, title) not in history_deep_refresh
+        ]
+        if not missing_scope_titles:
+            continue
+        direct_records = exclude_contract_changes(list(existing_history_by_unit.get(h_unit_id, {}).values()))
+        needs_deep_scan = any(
+            len([
+                record for record in direct_records
+                if is_recent_history(record) and is_comparable_history(title, record.get("title", ""))
+            ]) < 2
+            for title in missing_scope_titles
+        )
+        if not needs_deep_scan:
+            continue
+        if unit_total_pages[h_unit_id] <= 15:
+            print(f"Scanning all {unit_total_pages[h_unit_id]} history pages for '{h_unit}'.")
+            deep_history_items.extend(fetch_unit_history(
+                h_unit_id,
+                h_unit,
+                comparable_titles=missing_scope_titles,
+                start_page=2,
+                scan_all_pages=True,
+                deep_refresh_keys=[history_scope_key(h_unit_id, title) for title in missing_scope_titles]
+            ))
+        else:
+            print(f"Using focused title history search for high-volume agency '{h_unit}'.")
+            for title in missing_scope_titles:
+                title_items, title_scan_completed = fetch_title_history(h_unit_id, h_unit, title)
+                deep_history_items.extend(title_items)
+                if title_scan_completed:
+                    history_deep_refresh[history_scope_key(h_unit_id, title)] = refresh_date
+    process_history_items(deep_history_items)
+
+    unit_map = fetch_json_with_retry("https://pcc-api.openfun.app/api/unit", "procurement unit directory") or {}
+    related_units_by_active_id = {}
+    hierarchy_units_to_fetch = {}
+
+    for h_unit, h_unit_id in active_units_dict.items():
+        direct_records = list(existing_history_by_unit.get(h_unit_id, {}).values())
+        needs_hierarchy = any(
+            len([
+                record for record in exclude_contract_changes(direct_records)
+                if is_recent_history(record) and is_comparable_history(title, record.get("title", ""))
+            ]) < 2
+            for title in titles_by_unit_id.get(h_unit_id, [])
+        )
+        if not needs_hierarchy:
+            continue
+        related_units = get_related_units(h_unit_id, h_unit, unit_map)
+        if not related_units:
+            continue
+        related_units_by_active_id[h_unit_id] = related_units
+        for related_id, related_name in related_units.items():
+            history_unit_names.setdefault(related_id, related_name)
+            if (
+                related_id not in queried_history_unit_ids
+                and history_unit_refresh.get(related_id) != refresh_date
+            ):
+                hierarchy_units_to_fetch[related_id] = related_name
+
+    if mode == "maintenance" and hierarchy_units_to_fetch:
+        print(f"Direct history was insufficient; checking {len(hierarchy_units_to_fetch)} related units.")
+        hierarchy_history_items = []
+        all_active_titles = [
+            item.get("brief", {}).get("title", "")
+            for item in active_tenders
+        ]
+        def fetch_related_unit(unit_item):
+            related_id, related_name = unit_item
+            return fetch_unit_history(
+                related_id,
+                related_name,
+                comparable_titles=all_active_titles,
+                recent_only=True,
+                request_delay=0.2
+            )
+
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            for related_items in executor.map(fetch_related_unit, hierarchy_units_to_fetch.items()):
+                hierarchy_history_items.extend(related_items)
+        process_history_items(hierarchy_history_items)
+
+    for records in history_pool.values():
+        records.sort(key=lambda record: record["award_date"], reverse=True)
+    if failed_history_units:
+        print(f"Deferred history refresh for {len(failed_history_units)} units; cached records were preserved.")
+                        
+    # Process, filter, and deduplicate active tenders
+    seen_ids = set()
+    seen_projects = set()
+    processed_tenders = []
+    previous_tenders_by_project = {
+        (tender.get("unit_id", ""), tender.get("job_number", "")): tender
+        for tender in existing_data.get("tenders", [])
+    }
+    
+    for item in active_tenders:
+        filename = item.get("filename", "")
+        brief = item.get("brief", {})
+        title = brief.get("title", "")
+        brief_type = brief.get("type", "")
+        unit_name = item.get("unit_name", "")
+        date_raw = str(item.get("date", ""))
+        unit_id = item.get("unit_id", "")
+        job_number = item.get("job_number", "")
+        project_key = (unit_id, job_number, date_raw, filename)
+        tender_id = project_key
+        
+        if tender_id in seen_ids:
+            continue
+            
+        detail_data = prefetched_details.get(project_key) or fetch_tender_detail_with_retry(unit_id, job_number)
+        tender_url = ""
+        real_budget = 0
+        real_award = 0
+        raw_winner = ""
+        stage = ""
+        relevance = item.get("relevance") or classify_tender_relevance(item)
+
+        previous_tender = previous_tenders_by_project.get((unit_id, job_number))
+        if detail_data is None and previous_tender:
+            if get_title_scope_exclusion(previous_tender.get("title", "")):
+                print(f"Excluded out-of-scope cached tender: {title}")
+                continue
+            processed_tenders.append(previous_tender)
+            seen_ids.add(tender_id)
+            seen_projects.add(project_key)
+            print(f"Detail unavailable; preserved previous verified record: {title}")
+            continue
+        
+        if detail_data and detail_data.get("records"):
+            records = sorted(detail_data["records"], key=lambda r: (str(r.get("date", "")), str(r.get("filename", ""))), reverse=True)
+            merged_detail = {}
+            for record_index, record in enumerate(records):
+                for key, value in record.get("detail", {}).items():
+                    merged_detail[f"{record_index}:{key}"] = value
+            detailed_relevance = classify_tender_relevance(item, merged_detail)
+            if relevance.get("status") == "review":
+                if detailed_relevance["status"] == "included":
+                    relevance = detailed_relevance
+                else:
+                    continue
+
+            # Check if this tender has already been resolved/awarded or failed
+            # Scan entire list to ensure successful awards take absolute precedence over historical failures
+            award_record = None
+            failed_record = None
+            actual_award_date = ""
+            for r in records:
+                r_type = r.get("brief", {}).get("type", "")
+                r_detail = r.get("detail", {})
+                is_failed = is_failed_notice(r)
+                is_award = is_award_notice(r)
+                if is_failed:
+                    if not failed_record:
+                        failed_record = r
+                elif is_award:
+                    if not award_record:
+                        award_record = r
+            
+            if award_record:
+                failed_record = None
+                
+            if failed_record:
+                # Bidding failed (流標/廢標)
+                stage = "無法決標"
+                detail_obj = failed_record.get("detail", {})
+                tender_url = detail_obj.get("url", "")
+                award_date_str = str(failed_record.get("date", ""))
+                actual_award_date = extract_award_date(detail_obj, award_date_str)
+                if award_date_str:
+                    try:
+                        # Check age (skip if older than 7 days)
+                        award_date = datetime.strptime(award_date_str, "%Y%m%d")
+                        taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).replace(tzinfo=None)
+                        delta = taipei_now - award_date
+                        if delta.days > 7:
+                            print(f"Skipping older failed tender: {title} (failed {delta.days} days ago)")
+                            continue
+                    except:
+                        pass
+                print(f"Failed tender found: {title} | Date: {award_date_str}")
+            elif award_record:
+                # Extract details from award notice
+                detail_obj = award_record.get("detail", {})
+                historical_winner = extract_winning_competitor(detail_obj)
+                real_budget, real_award = extract_budget_and_award(detail_obj)
+                award_date_str = str(award_record.get("date", ""))
+                actual_award_date = extract_award_date(detail_obj, award_date_str)
+                
+                # Check age of award notice (skip if older than 7 days to keep DB fresh)
+                if award_date_str:
+                    try:
+                        # Date format is typically YYYYMMDD
+                        award_date = datetime.strptime(award_date_str, "%Y%m%d")
+                        taipei_now = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).replace(tzinfo=None)
+                        delta = taipei_now - award_date
+                        if delta.days > 7:
+                            # Skip old resolved tenders to keep DB active
+                            print(f"Skipping older resolved tender: {title} (awarded {delta.days} days ago)")
+                            continue
+                    except:
+                        pass
+                
+                # This is a recently resolved tender, keep it in DB as "已決標"
+                stage = "已決標"
+                raw_winner = historical_winner
+                tender_url = detail_obj.get("url", "")
+                print(f"Recently resolved tender found: {title} | Winner: {raw_winner} | Date: {award_date_str}")
+            else:
+                # Active tender
+                # Get URL from the first record (newest active bulletin)
+                first_record = records[0]
+                detail_obj = first_record.get("detail", {})
+                tender_url = detail_obj.get("url", "")
+                if real_budget == 0:
+                    real_budget, _ = extract_budget_and_award(detail_obj)
+        elif relevance.get("status") == "review":
+            review_city = review_city_fields(unit_name, detail_data)
+            review_candidates.append({
+                "date": date_to_iso(date_raw), "title": title, "unit": unit_name,
+                **review_city,
+                "unit_id": unit_id, "job_number": job_number,
+                "tender_url": f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml",
+                "relevance": relevance
+            })
+            continue
+                
+        if tender_url:
+            if tender_url.startswith("http:"):
+                tender_url = "https:" + tender_url[5:]
+        else:
+            tender_url = f"https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds={date_raw}&fn={filename}.xml"
+            
+        seen_ids.add(tender_id)
+        seen_projects.add(project_key)
+        
+        # Resolve stage
+        if stage not in ["已決標", "無法決標"]:
+            if "\u516c\u958b\u5fb5\u6c42" in brief_type:
+                stage = "公開徵求價單"
+                stage_color = "bg-amber-950/45 border-amber-500/40 text-amber-400"
+            else:
+                stage = "正式開標"
+                stage_color = "bg-indigo-950/45 border-indigo-500/40 text-indigo-400"
+        else:
+            if stage == "已決標":
+                stage_color = "bg-emerald-950/45 border-emerald-500/40 text-emerald-400"
+            else:
+                stage_color = "bg-rose-950/45 border-rose-500/40 text-rose-400"
+            
+        # Determine budget and discount stats
+        final_budget_val = real_budget
+        
+        budget_str = f"NT$ {final_budget_val:,}" if final_budget_val > 0 else "無公開數據"
+        
+        duration = parse_contract_duration(title)
+
+        candidate_unit_ids = list(related_units_by_active_id.get(unit_id, {unit_id: unit_name}))
+        candidate_history_records = []
+        for source_unit_id in candidate_unit_ids:
+            for record in existing_history_by_unit.get(source_unit_id, {}).values():
+                if record.get("job_number") == job_number or not is_comparable_history(title, record.get("title", "")):
+                    continue
+                candidate_history_records.append({
+                    **record,
+                    "source_unit_id": source_unit_id,
+                    "source_unit": history_unit_names.get(source_unit_id, unit_name),
+                    "relation_scope": "same_unit" if source_unit_id == unit_id else "same_parent_org"
+                })
+        history_records = exclude_contract_changes(candidate_history_records)
+        for record in history_records:
+            record["is_stale"] = not is_recent_history(record)
+        history_records.sort(key=lambda record: record.get("award_date", ""), reverse=True)
+        history_records.sort(key=lambda record: record["is_stale"])
+        recent_history_records = [record for record in history_records if not record["is_stale"]]
+        usable_rates = [
+            record["discount_rate"] for record in recent_history_records
+            if record["discount_rate"] is not None and 50 <= record["discount_rate"] <= 100
+        ]
+        historical_median = median(usable_rates) if len(usable_rates) >= 2 else None
+        avg_discount_str = f"{historical_median:.1f}%" if historical_median is not None else "資料不足"
+        if len(usable_rates) >= 2:
+            discount_source = f"近 5 年 {len(usable_rates)} 筆同設備、同契約型態決標折扣中位數"
+        elif usable_rates:
+            discount_source = "近 5 年僅 1 筆有效可比資料；至少需 2 筆才推估"
+        else:
+            discount_source = "近 5 年查無同設備、同契約型態且具完整金額的決標"
+        if final_budget_val > 0 and historical_median is not None:
+            suggested_price_val = int(final_budget_val * historical_median / 100)
+            suggested_price_val = (suggested_price_val // 1000) * 1000
+            suggested_price_str = f"NT$ {suggested_price_val:,}"
+        else:
+            suggested_price_str = "資料不足"
+
+        history_stats = [
+            {
+                "year": record["year"],
+                "val": int(record["discount_rate"]) if record["discount_rate"] is not None else 0,
+                "type": "real",
+                "winner": record["winner"]
+            }
+            for record in reversed(recent_history_records)
+            if record["discount_rate"] is not None and 50 <= record["discount_rate"] <= 100
+        ]
+
+        if raw_winner:
+            main_competitor = map_competitor_name(raw_winner)
+        else:
+            main_competitor = next(
+                (record["winner"] for record in recent_history_records if record["winner"] != "未公開"),
+                "無公開數據"
+            )
+            
+        # Extract real publication date and bidding deadline from detail records
+        publish_date_str = ""
+        deadline_str = ""
+        publish_date_confidence = "unknown"
+        deadline_confidence = "unknown"
+        if detail_data and detail_data.get("records"):
+            sorted_records = sorted(
+                detail_data["records"],
+                key=lambda r: (str(r.get("date", "")), str(r.get("filename", ""))),
+                reverse=True
+            )
+            for r in sorted_records:
+                r_detail = r.get("detail", {})
+                if r_detail:
+                    p_date, d_date, p_confidence, d_confidence = extract_dates(r_detail, date_raw, infer_deadline=False)
+                    if p_date and not publish_date_str:
+                        publish_date_str = p_date
+                        publish_date_confidence = p_confidence
+                    if d_date and not deadline_str:
+                        deadline_str = d_date
+                        deadline_confidence = d_confidence
+                    if publish_date_str and deadline_str:
+                        break
+                        
+        if not publish_date_str:
+            if len(date_raw) == 8:
+                try:
+                    publish_date_str = datetime.strptime(date_raw, "%Y%m%d").strftime("%Y-%m-%d")
+                    publish_date_confidence = "inferred"
+                except:
+                    pass
+        if not deadline_str and publish_date_str:
+            if stage not in {"已決標", "無法決標"}:
+                try:
+                    deadline_str = (datetime.strptime(publish_date_str, "%Y-%m-%d") + timedelta(days=14)).strftime("%Y-%m-%d")
+                    deadline_confidence = "inferred"
+                except:
+                    pass
+        if not deadline_str:
+            deadline_str = "未公開"
+            deadline_confidence = "unknown"
+
+        # The homepage is an opportunity list, not a 60-day announcement archive.
+        # Keep recent outcomes separately, but remove unresolved tenders after bidding closes.
+        if stage not in {"已決標", "無法決標"} and is_past_deadline(deadline_str, today):
+            print(f"Skipping expired unresolved tender: {title} (deadline {deadline_str})")
+            continue
+            
+        city_info = get_city_info(unit_name, detail_data)
+        city = city_info["city"]
+        if unit_id in TARGET_MONITORED_UNITS or "大園區農會" in unit_name:
+            tag = "重點機關"
+            tag_color = "bg-red-950/45 border-red-500/40 text-red-400"
+        else:
+            tag = "重點攻堅" if final_budget_val >= 2500000 else "一般監控"
+            tag_color = "bg-red-950/45 border-red-500/40 text-red-400" if tag == "重點攻堅" else "bg-slate-900 border-slate-700 text-slate-400"
+        
+        award_price_str = ""
+        if real_award > 0:
+            if real_award < 2000 or (real_budget > 0 and (real_award / real_budget) < 0.02):
+                award_price_str = f"NT$ {real_award:,} (單價決標)"
+            else:
+                award_price_str = f"NT$ {real_award:,}"
+
+        processed_tenders.append({
+            "city": city,
+            "city_source": city_info["city_source"],
+            "city_confidence": city_info["city_confidence"],
+            "city_raw_text": city_info["city_raw_text"],
+            "tag": tag,
+            "tag_color": tag_color,
+            "title": title,
+            "unit": unit_name,
+            "unit_id": unit_id,
+            "job_number": job_number,
+            "publish_date": publish_date_str,
+            "publish_date_confidence": publish_date_confidence,
+            "deadline": deadline_str,
+            "deadline_confidence": deadline_confidence,
+            "award_date": actual_award_date if stage == "已決標" else "",
+            "budget": budget_str,
+            "award_price": award_price_str,
+            "avg_discount": avg_discount_str,
+            "discount_source": discount_source,
+            "main_competitor": main_competitor,
+            "suggested_price": suggested_price_str,
+            "suggestion_basis": {
+                "method": "近5年同設備與同契約型態歷史決標折扣中位數（至少2筆）",
+                "record_count": len(usable_rates),
+                "discount_rate": round(historical_median, 1) if historical_median is not None else None
+            },
+            "tender_url": tender_url,
+            "history_stats": history_stats,
+            "history_records": history_records,
+            "stage": stage,
+            "stage_color": stage_color,
+            "duration_years": duration,
+            "stream": relevance.get("stream", "copier"),
+            "sub_type": relevance.get("sub_type", "main"),
+            "relevance": relevance
+        })
+        
+        print(f"Processed: {title} | Date: {date_raw} | Winner: {main_competitor} | Budget: {budget_str}")
+        
+        time.sleep(1.2)
+        
+    # Keep still-recent records from the previous successful run while the
+    # date-based backfill is being completed incrementally.
+    current_project_keys = {
+        (tender.get("unit_id", ""), tender.get("job_number", ""))
+        for tender in processed_tenders
+    }
+    reviewed_project_keys = {
+        (candidate.get("unit_id", ""), candidate.get("job_number", ""))
+        for candidate in review_candidates
+    }
+    cutoff_iso = (today - timedelta(days=60)).strftime("%Y-%m-%d")
+    for previous in existing_data.get("tenders", []):
+        previous_key = (previous.get("unit_id", ""), previous.get("job_number", ""))
+        if (
+            previous_key in current_project_keys
+            or previous_key in reviewed_project_keys
+            # Final outcomes are intentionally short-lived in the live list.
+            # Do not resurrect an old resolved/failed tender from existing_data
+            # after the crawler has already stopped returning it.
+            or previous.get("stage") in {"已決標", "無法決標"}
+            or is_past_deadline(previous.get("deadline", ""), today)
+            or (not previous.get("deadline") and previous.get("publish_date", "") < cutoff_iso)
+            or get_title_scope_exclusion(previous.get("title", ""))
+        ):
+            continue
+        prev_stream = previous.get("stream") or previous.get("relevance", {}).get("stream", "copier")
+        prev_sub_type = previous.get("sub_type") or previous.get("relevance", {}).get("sub_type", "main")
+        processed_tenders.append({
+            **previous,
+            "stream": prev_stream,
+            "sub_type": prev_sub_type
+        })
+        current_project_keys.add(previous_key)
+    processed_tenders.sort(key=lambda tender: tender.get("publish_date", ""), reverse=True)
+
+    candidate_by_id = {}
+    for candidate in raw_active_tenders:
+        candidate_id = (
+            candidate.get("unit_id", ""), candidate.get("job_number", ""),
+            str(candidate.get("date", "")), candidate.get("filename", "")
+        )
+        candidate_by_id[candidate_id] = candidate
+    candidate_cache = sorted(
+        candidate_by_id.values(), key=lambda candidate: str(candidate.get("date", "")), reverse=True
+    )
+
+    backfill_remaining = sum(
+        1 for days_ago in range(2, 61)
+        if collection_days.get((today - timedelta(days=days_ago)).strftime("%Y-%m-%d"), {}).get("status") != "complete"
+    )
+    today_summary = collection_days.get(today.strftime("%Y-%m-%d"), {})
+
+    # Force last_updated to be in Taipei Time (UTC+8) regardless of runner timezone
+    taipei_time = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))
+    last_updated_str = taipei_time.strftime("%Y-%m-%d %H:%M")
+
+    previous_collection_status = dict(existing_data.get("collection_status", {}))
+    collection_status = {
+        **previous_collection_status,
+        "today": today.strftime("%Y-%m-%d"),
+        "status": today_summary.get("status", previous_collection_status.get("status", "incomplete")),
+        "source_records": today_summary.get("source_records", previous_collection_status.get("source_records", 0)),
+        "candidate_records": today_summary.get("candidate_records", previous_collection_status.get("candidate_records", 0)),
+        "review_records": len(review_candidates),
+        "backfill_remaining_days": backfill_remaining,
+        "source": "政府電子採購網每日公告資料"
+    }
+    if mode == "live":
+        collection_status.update({
+            "latest_attempt_status": "complete" if not failed_dates else "partial",
+            "latest_attempt_at": last_updated_str,
+            "successful_dates": successful_dates,
+            "failed_dates": failed_dates
+        })
+    else:
+        collection_status["maintenance"] = {
+            "status": "complete" if not failed_dates else "partial",
+            "last_run_at": last_updated_str,
+            "backfill_dates": successful_dates,
+            "failed_dates": failed_dates
+        }
+    
+    output_data = {
+        "last_updated": last_updated_str,
+        "tenders": processed_tenders,
+        "collection_status": collection_status,
+        "collection_days": collection_days,
+        "candidate_cache": candidate_cache,
+        "review_candidates": review_candidates,
+        "history_cache": sorted(
+            [
+                {
+                    "unit_id": unit_id,
+                    "unit_name": history_unit_names.get(unit_id, ""),
+                    **record
+                }
+                for unit_id, records in existing_history_by_unit.items()
+                for record in records.values()
+            ],
+            key=lambda record: record.get("award_date", ""),
+            reverse=True
+        ),
+        "history_unit_refresh": history_unit_refresh,
+        "history_deep_refresh": history_deep_refresh
+    }
+    
+    output_data["forecasted_tenders"] = generate_copier_forecasts(
+        output_data["history_cache"],
+        base_date=today,
+        active_tenders=processed_tenders,
+        candidate_cache=candidate_cache
+    )
+    print(f"Generated {len(output_data['forecasted_tenders'])} forecasted copier tenders for the next 6 months.")
+    
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(output_data, f, ensure_ascii=False, indent=2)
+        
+    print(f"Successfully updated database. Saved {len(processed_tenders)} tenders to {output_path}")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Update tender intelligence data.")
+    parser.add_argument("--mode", choices=("live", "maintenance"), default="live")
+    parser.add_argument("--backfill-days", type=int, default=None, help="Number of days to backfill")
+    arguments = parser.parse_args()
+    main(arguments.mode, backfill_days=arguments.backfill_days)

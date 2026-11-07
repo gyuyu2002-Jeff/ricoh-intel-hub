@@ -1,0 +1,726 @@
+import unittest
+import os
+from unittest.mock import patch
+from datetime import date, timedelta
+
+from update_tenders import (
+    build_required_dates,
+    build_history_title_query,
+    classify_tender_relevance,
+    deduplicate_announcements,
+    get_city_info,
+    is_past_deadline,
+    is_failed_notice,
+    is_award_notice,
+    resolve_notice_status,
+    extract_dates,
+    extract_award_date,
+    is_terminal_notice_type,
+    review_city_fields,
+    get_data_path,
+)
+
+
+def announcement(title, category=""):
+    return {"brief": {"title": title, "category": category}}
+
+
+class DeadlineRetentionTests(unittest.TestCase):
+    def test_expired_tender_is_not_active(self):
+        self.assertTrue(is_past_deadline("2026-07-16", date(2026, 8, 20)))
+
+    def test_today_deadline_remains_active(self):
+        self.assertFalse(is_past_deadline("2026-08-20", date(2026, 8, 20)))
+
+    def test_unknown_deadline_is_not_assumed_expired(self):
+        self.assertFalse(is_past_deadline("未公開", date(2026, 8, 20)))
+
+
+class StatusAndDateConfidenceTests(unittest.TestCase):
+    def test_failed_status_variants_are_detected(self):
+        for phrase in ["流標", "廢標", "未達法定家數", "無廠商投標", "無人投標", "不予開標", "撤標", "撤案", "停止採購", "取消採購"]:
+            with self.subTest(phrase=phrase):
+                self.assertTrue(is_failed_notice({"brief": {"type": phrase}}))
+
+    def test_failed_status_can_be_found_in_detail_value(self):
+        self.assertTrue(is_failed_notice({"brief": {}, "detail": {"開標結果": "本案無廠商投標，流標"}}))
+
+    def test_award_wins_over_failed_notice(self):
+        records = [
+            {"brief": {"type": "廢標"}},
+            {"brief": {"type": "決標公告"}, "detail": {"得標廠商": "測試公司"}},
+        ]
+        self.assertEqual(resolve_notice_status(records), "已決標")
+
+    def test_award_method_in_live_notice_is_not_an_award(self):
+        live_notice = {
+            "brief": {"type": "公開取得報價單或企劃書公告"},
+            "detail": {
+                "招標資料:決標方式": "參考最有利標精神",
+                "領投開標:截止投標": "115/09/01 09:30",
+            },
+        }
+        self.assertFalse(is_award_notice(live_notice))
+        self.assertEqual(resolve_notice_status([live_notice]), "")
+
+    def test_populated_award_result_detail_is_an_award(self):
+        award_notice = {"brief": {}, "detail": {"決標結果:得標廠商": "測試公司"}}
+        self.assertTrue(is_award_notice(award_notice))
+
+    def test_failed_status_wins_when_no_award_exists(self):
+        self.assertEqual(resolve_notice_status([{"brief": {"type": "撤案公告"}}]), "無法決標")
+
+    def test_verified_dates_are_marked_verified(self):
+        result = extract_dates({"公告日期": "115/08/20", "截止投標": "115/08/27"}, "20260820")
+        self.assertEqual(result, ("2026-08-20", "2026-08-27", "verified", "verified"))
+
+    def test_publish_fallback_and_deadline_are_marked_inferred(self):
+        result = extract_dates({}, "20260820")
+        self.assertEqual(result, ("2026-08-20", "2026-09-03", "inferred", "inferred"))
+
+    def test_invalid_dates_remain_unknown(self):
+        result = extract_dates({"公告日期": "日期待確認", "截止投標": "尚未公告"}, "bad-date")
+        self.assertEqual(result, ("", "", "unknown", "unknown"))
+
+    def test_extract_dates_with_infer_deadline_false_does_not_infer(self):
+        # When infer_deadline=False, a notice with only publish_date must not synthesize a +14d deadline
+        result = extract_dates({"公告日期": "115/09/18"}, "20260918", infer_deadline=False)
+        self.assertEqual(result, ("2026-09-18", "", "verified", "unknown"))
+
+    def test_extract_award_date_from_detail(self):
+        detail = {
+            "決標資料:決標日期": "115/09/24",
+            "決標資料:決標公告日期": "115/09/29",
+        }
+        self.assertEqual(extract_award_date(detail), "2026-09-24")
+
+    def test_extract_award_date_fallback(self):
+        self.assertEqual(extract_award_date({}, "20260929"), "2026-09-29")
+
+
+class TenderRelevanceTests(unittest.TestCase):
+    def test_direct_equipment_is_included(self):
+        result = classify_tender_relevance(announcement("多功能事務機租賃案"))
+        self.assertEqual(result["status"], "included")
+        self.assertIn("多功能事務機", result["matched_terms"])
+
+    def test_broad_title_waits_for_detail(self):
+        result = classify_tender_relevance(announcement("辦公室設備更新採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "broad_office_equipment")
+
+
+class TenderRelevanceAdditionalTests(unittest.TestCase):
+    def test_procurement_word_alone_is_not_a_candidate(self):
+        result = classify_tender_relevance(announcement("校舍修繕採購案"))
+        self.assertEqual(result["status"], "excluded")
+
+    def test_broad_title_can_be_confirmed_by_specification(self):
+        result = classify_tender_relevance(
+            announcement("辦公室設備更新採購案"),
+            {"規格": "數位複合機，A3 彩色列印、掃描及自動送稿，每分鐘 30 張"}
+        )
+        self.assertEqual(result["status"], "included")
+        self.assertIn("detail", result["matched_fields"])
+
+    def test_machine_tool_is_excluded(self):
+        result = classify_tender_relevance(announcement("CNC 車銑複合機採購案"))
+        self.assertEqual(result["category"], "industrial_machine")
+
+    def test_dry_film_and_fitness_equipment_are_not_copiers(self):
+        for title in [
+            "乾膜壓膜複合機採購案",
+            "乾膜壓膜複合機、腰部旋轉機和高拉闊背訓練機等9件",
+            "影印機及健身器材採購案",
+        ]:
+            with self.subTest(title=title):
+                result = classify_tender_relevance(announcement(title))
+                self.assertEqual(result["status"], "excluded")
+                self.assertIn(result["category"], {"industrial_machine", "fitness_equipment"})
+
+    def test_previous_dry_film_tender_fails_carry_forward_scope_check(self):
+        from update_tenders import get_title_scope_exclusion
+        result = get_title_scope_exclusion("乾膜壓膜複合機、腰部旋轉機和高拉闊背訓練機等9件")
+        self.assertEqual(result["status"], "excluded")
+
+    def test_supplies_are_separated(self):
+        result = classify_tender_relevance(announcement("影印機碳粉耗材採購"))
+        self.assertEqual(result["category"], "supplies")
+        self.assertEqual(result["stream"], "peripherals")
+        self.assertEqual(result["status"], "included")
+
+    def test_copier_rental_including_supplies_is_included(self):
+        result = classify_tender_relevance(announcement("116-117年影印機(含安裝、運費、維修、耗材等計張費用)租賃案"))
+        self.assertEqual(result["category"], "office_output_equipment")
+        self.assertEqual(result["stream"], "copier")
+        self.assertEqual(result["status"], "included")
+
+    def test_printing_service_is_not_equipment(self):
+        result = classify_tender_relevance(announcement("年度文宣印製及海報輸出服務"))
+        self.assertEqual(result["category"], "printing_service")
+
+    def test_3d_printer_is_excluded(self):
+        result = classify_tender_relevance(announcement("3D列印機乙項"))
+        self.assertEqual(result["category"], "specialized_printing")
+        self.assertEqual(result["status"], "excluded")
+
+    def test_dot_matrix_printer_is_included_in_peripherals(self):
+        result = classify_tender_relevance(announcement("點陣式印表機汰換"))
+        self.assertEqual(result["category"], "dot_matrix_printer")
+        self.assertEqual(result["stream"], "peripherals")
+        self.assertEqual(result["status"], "included")
+
+    def test_printer_maintenance_is_excluded(self):
+        result = classify_tender_relevance(announcement("115年度個人電腦及印表機設備維護工作"))
+        self.assertEqual(result["status"], "excluded")
+
+    def test_copier_maintenance_remains_in_scope(self):
+        result = classify_tender_relevance(announcement("數位影印機維護案"))
+        self.assertEqual(result["status"], "included")
+
+    def test_information_equipment_is_always_excluded_even_with_contact_fax(self):
+        result = classify_tender_relevance(
+            announcement("資訊設備採購案"),
+            {"機關資料:傳真號碼": "02-12345678", "其他:申訴受理單位": "電話及傳真"}
+        )
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "information_equipment")
+        self.assertIn("資訊設備", result["matched_terms"])
+
+    def test_network_equipment_is_excluded(self):
+        result = classify_tender_relevance(announcement("無線網路資訊設備壹式"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "information_equipment")
+
+    def test_information_equipment_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("資訊設備及影印機採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "information_equipment")
+
+    def test_flooring_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("影印機租賃及辦公室地板更新工程"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "construction_or_furniture")
+
+    def test_construction_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("多功能事務機採購暨室內裝修工程"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "construction_or_furniture")
+
+    def test_relocation_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("影印機搬遷及辦公設備整備案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "non_pure_scope")
+
+    def test_scrap_sale_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("報廢影印機及事務設備財物標售案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "non_pure_scope")
+
+    def test_system_integration_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("多功能事務機及系統整合採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "non_pure_scope")
+
+    def test_broad_office_equipment_without_copier_is_excluded(self):
+        result = classify_tender_relevance(announcement("多功能辦公室設備採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "broad_office_equipment")
+
+    def test_copier_rental_with_floor_number_remains_in_scope(self):
+        result = classify_tender_relevance(announcement("一樓行政室數位影印機租賃案"))
+        self.assertEqual(result["status"], "included")
+
+    def test_surveillance_equipment_overrides_copier_keyword(self):
+        result = classify_tender_relevance(announcement("監視器及影印機採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "surveillance_access")
+
+    def test_access_control_system_is_excluded(self):
+        result = classify_tender_relevance(announcement("新廳舍門禁系統及人臉辨識設備採購"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "surveillance_access")
+
+    def test_network_endpoint_is_excluded(self):
+        result = classify_tender_relevance(announcement("無線基地台、網路交換器及伺服器採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "network_or_server")
+
+    def test_display_equipment_is_excluded(self):
+        result = classify_tender_relevance(announcement("互動式顯示器及電子白板採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "it_endpoint")
+
+    def test_copier_only_remains_in_scope_after_information_exclusion(self):
+        result = classify_tender_relevance(announcement("數位影印機租賃案"))
+        self.assertEqual(result["status"], "included")
+
+    def test_network_printing_feature_does_not_exclude_copier(self):
+        result = classify_tender_relevance(announcement("具網路列印與掃描功能之多功能事務機租賃案"))
+        self.assertEqual(result["status"], "included")
+
+    def test_medical_equipment_is_excluded(self):
+        result = classify_tender_relevance(announcement("衛生所辦公設備—智慧藥櫃"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "medical_equipment")
+
+    def test_explicit_printer_in_mixed_it_purchase_is_excluded(self):
+        result = classify_tender_relevance(announcement("電腦及雷射印表機採購案"))
+        self.assertEqual(result["status"], "excluded")
+
+    def test_plotter_is_included_in_peripherals(self):
+        result = classify_tender_relevance(announcement("大型繪圖機採購案"))
+        self.assertEqual(result["status"], "included")
+        self.assertEqual(result["stream"], "peripherals")
+        self.assertEqual(result["sub_type"], "printer")
+
+    def test_scanner_is_included_in_peripherals(self):
+        result = classify_tender_relevance(announcement("高速雙面文件掃描器採購案"))
+        self.assertEqual(result["status"], "included")
+        self.assertEqual(result["stream"], "peripherals")
+        self.assertEqual(result["sub_type"], "scanner")
+
+    def test_office_sundry_is_excluded(self):
+        result = classify_tender_relevance(announcement("公務用碎紙機採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "office_sundry")
+
+    def test_binding_machine_is_excluded(self):
+        result = classify_tender_relevance(announcement("電動打孔裝訂機採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "office_sundry")
+
+    def test_laminator_is_excluded(self):
+        result = classify_tender_relevance(announcement("辦公室護貝機採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "office_sundry")
+
+    def test_ribbon_is_excluded(self):
+        result = classify_tender_relevance(announcement("印表機色帶採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_paper_is_excluded(self):
+        result = classify_tender_relevance(announcement("A5影印紙80磅兩年開口契約"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_report_paper_is_excluded(self):
+        result = classify_tender_relevance(announcement("報表紙及非碳薪金表採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_printer_paper_roll_is_excluded(self):
+        result = classify_tender_relevance(announcement("藍芽印表機專用列印紙捲採購案"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_label_machine_is_excluded(self):
+        result = classify_tender_relevance(announcement("工業用標籤機"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_label_tape_is_excluded(self):
+        result = classify_tender_relevance(announcement("工業用管路標示帶及色帶"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_copier_rental_with_paper_remains_copier(self):
+        result = classify_tender_relevance(announcement("116-117年影印機租賃（內含裝機、運費、維修、紙張）"))
+        self.assertEqual(result["status"], "included")
+        self.assertEqual(result["stream"], "copier")
+
+    def test_pure_paper_with_copier_word_is_excluded(self):
+        result = classify_tender_relevance(announcement("影印機用影印紙採購"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "excluded_paper_ribbon_label")
+
+    def test_copier_and_printer_mixed_purchase_remains_in_scope(self):
+        result = classify_tender_relevance(announcement("數位複合機及印表機採購案"))
+        self.assertEqual(result["status"], "included")
+        self.assertEqual(result["stream"], "copier")
+
+    def test_mutual_exclusion_between_streams(self):
+        cases = [
+            ("多功能複合機租賃案", "copier"),
+            ("數位影印機採購", "copier"),
+            ("影印機碳粉耗材採購", "peripherals"),
+            ("A4彩色雷射印表機採購", "peripherals"),
+            ("高速文件掃描儀採購", "peripherals"),
+            ("點陣式印表機汰換", "peripherals"),
+        ]
+        for title, expected_stream in cases:
+            res = classify_tender_relevance(announcement(title))
+            self.assertEqual(res["status"], "included")
+            self.assertEqual(res["stream"], expected_stream)
+
+    def test_contract_change_is_excluded(self):
+        result = classify_tender_relevance(announcement("影印機租賃契約變更"))
+        self.assertEqual(result["status"], "excluded")
+        self.assertEqual(result["category"], "contract_change")
+
+    def test_duplicate_corrections_keep_newest_announcement(self):
+        records = [
+            {"unit_id": "1", "job_number": "A", "date": "20260728", "filename": "old"},
+            {"unit_id": "1", "job_number": "A", "date": "20260729", "filename": "new"},
+        ]
+        result = deduplicate_announcements(records)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["filename"], "new")
+
+    def test_terminal_variants_are_filtered_before_active_processing(self):
+        for phrase in ["流標公告", "廢標公告", "撤案公告", "無廠商投標結果", "決標公告"]:
+            with self.subTest(phrase=phrase):
+                self.assertTrue(is_terminal_notice_type(phrase))
+
+    def test_full_lifecycle_keeps_active_and_terminal_buckets_separate(self):
+        records = [
+            {"unit_id": "1", "job_number": "A", "date": "20260801", "filename": "active", "brief": {"type": "招標公告"}},
+            {"unit_id": "1", "job_number": "A", "date": "20260802", "filename": "failed", "brief": {"type": "流標公告"}},
+            {"unit_id": "1", "job_number": "A", "date": "20260803", "filename": "rebid", "brief": {"type": "重新招標公告"}},
+            {"unit_id": "1", "job_number": "A", "date": "20260804", "filename": "award", "brief": {"type": "決標公告"}},
+        ]
+        result = deduplicate_announcements(records)
+        self.assertEqual({row["filename"] for row in result}, {"rebid", "award"})
+
+
+class CityClassificationTests(unittest.TestCase):
+    def test_county_from_unit_name_is_preserved(self):
+        result = get_city_info("花蓮縣政府")
+        self.assertEqual(result["city"], "花蓮縣")
+        self.assertEqual(result["city_source"], "機關名稱")
+        self.assertEqual(result["city_confidence"], "high")
+
+    def test_city_from_execution_location_is_high_confidence(self):
+        result = get_city_info(
+            "某地方機關",
+            {"records": [{"detail": {"履約地點": "嘉義市東區"}}]}
+        )
+        self.assertEqual(result["city"], "嘉義市")
+        self.assertEqual(result["city_source"], "履約地點")
+
+    def test_unknown_unit_is_not_silently_assigned_to_taipei(self):
+        result = get_city_info("某某地方機關")
+        self.assertEqual(result["city"], "未分類")
+        self.assertEqual(result["city_confidence"], "low")
+
+    def test_all_22_counties_and_cities_are_resolvable(self):
+        cities = ["台北市", "新北市", "桃園市", "台中市", "台南市", "高雄市", "基隆市", "新竹市", "嘉義市", "新竹縣", "苗栗縣", "彰化縣", "南投縣", "雲林縣", "嘉義縣", "屏東縣", "宜蘭縣", "花蓮縣", "台東縣", "澎湖縣", "金門縣", "連江縣"]
+        for city in cities:
+            with self.subTest(city=city):
+                self.assertEqual(get_city_info(f"{city}政府")["city"], city)
+
+    def test_review_city_fields_preserve_location_evidence(self):
+        result = review_city_fields("某地方機關", {"records": [{"detail": {"履約地點": "花蓮縣壽豐鄉"}}]})
+        self.assertEqual(result["city"], "花蓮縣")
+        self.assertEqual(result["city_source"], "履約地點")
+        self.assertEqual(result["city_confidence"], "high")
+        self.assertIn("花蓮縣", result["city_raw_text"])
+
+
+class UpdateModeTests(unittest.TestCase):
+    def test_private_data_path_is_used_when_configured(self):
+        with patch.dict(os.environ, {"RICOH_DATA_FILE": ".private-state/data.json"}):
+            self.assertEqual(get_data_path(), os.path.abspath(".private-state/data.json"))
+
+    def test_default_data_path_remains_next_to_script(self):
+        import update_tenders
+        with patch.dict(os.environ, {"RICOH_DATA_FILE": ""}):
+            self.assertEqual(
+                get_data_path(),
+                os.path.join(os.path.dirname(os.path.abspath(update_tenders.__file__)), "data.json"),
+            )
+
+    def test_live_mode_only_fetches_today_and_yesterday(self):
+        today = date(2026, 7, 28)
+        self.assertEqual(
+            build_required_dates("live", today, {}),
+            [today, today - timedelta(days=1)]
+        )
+
+    def test_maintenance_mode_fetches_one_missing_backfill_day(self):
+        today = date(2026, 7, 28)
+        collection_days = {
+            "2026-07-26": {"status": "complete"},
+            "2026-07-25": {"status": "incomplete"}
+        }
+        self.assertEqual(
+            build_required_dates("maintenance", today, collection_days),
+            [date(2026, 7, 25)]
+        )
+
+    def test_backfill_days_returns_explicit_range(self):
+        today = date(2026, 7, 28)
+        collection_days = {}
+        self.assertEqual(
+            build_required_dates("live", today, collection_days, backfill_days=3),
+            [date(2026, 7, 28), date(2026, 7, 27), date(2026, 7, 26)]
+        )
+
+
+class HistoryTitleQueryTests(unittest.TestCase):
+    def test_roc_year_prefix_is_removed_for_history_search(self):
+        self.assertEqual(
+            build_history_title_query("115年SHARP影印機計張維護開口契約"),
+            "SHARP影印機計張維護開口契約",
+        )
+
+    def test_roc_year_and_yearly_suffix_are_removed_for_history_search(self):
+        self.assertEqual(
+            build_history_title_query("115年度 SHARP影印機計張維護開口契約"),
+            "SHARP影印機計張維護開口契約",
+        )
+
+
+class CopierForecastTests(unittest.TestCase):
+    def test_single_record_forecast_discloses_default_and_unknown_extension(self):
+        from update_tenders import generate_copier_forecasts
+        forecasts = generate_copier_forecasts([
+            {"unit_id": "U004", "unit_name": "測試機關", "title": "影印機租賃案",
+             "award_date": "2024-10-01", "winner": "測試廠商"},
+        ], base_date=date(2026, 9, 6))
+        self.assertEqual(len(forecasts), 1)
+        forecast = forecasts[0]
+        self.assertEqual(forecast["prediction_basis"]["method"], "default_assumption")
+        self.assertFalse(forecast["prediction_basis"]["contract_end_verified"])
+        self.assertEqual(forecast["expansion"]["status"], "unknown")
+        self.assertIn("預設", forecast["cadence_summary"])
+        self.assertEqual(forecast["predicted_range_start"], forecast["predicted_date"])
+        self.assertGreater(forecast["predicted_range_end"], forecast["predicted_range_start"])
+        self.assertNotIn("依法", forecast["expansion"]["notice"])
+        self.assertNotIn("無擴充條款", forecast["expansion"]["notice"])
+
+    def test_unknown_extension_duration_does_not_invent_one_year_projection(self):
+        from update_tenders import generate_copier_forecasts
+        forecasts = generate_copier_forecasts([
+            {"unit_id": "U004", "unit_name": "測試機關", "title": "113-114年影印機租賃(保留後續擴充)",
+             "award_date": "2024-10-01", "winner": "測試廠商"},
+        ], base_date=date(2026, 9, 6), target_window_days=550)
+        self.assertEqual(len(forecasts), 1)
+        self.assertEqual(forecasts[0]["expansion"]["status"], "mentioned")
+
+    def test_failed_notice_is_not_forecast_as_awarded(self):
+        from update_tenders import generate_copier_forecasts
+        history = [{"unit_id": "U004", "unit_name": "測試機關", "title": "113-114年影印機租賃案",
+                    "award_date": "2024-10-01", "winner": "測試廠商"}]
+        active = [{"unit_id": "U004", "title": "115-116年影印機租賃案", "stage": "無法決標",
+                   "job_number": "NEW004", "publish_date": "2026-09-01"}]
+        forecasts = generate_copier_forecasts(history, base_date=date(2026, 9, 6), active_tenders=active)
+        self.assertEqual(forecasts[0]["current_status"]["status"], "failed")
+
+        cached = [{"unit_id": "U004", "brief": {"title": "115-116年影印機租賃案", "type": "無法決標公告"},
+                   "job_number": "NEW004", "date": "20260901", "filename": "FAILED004"}]
+        forecasts = generate_copier_forecasts(history, base_date=date(2026, 9, 6), candidate_cache=cached)
+        self.assertEqual(forecasts[0]["current_status"]["status"], "failed")
+
+    def test_industrial_history_does_not_generate_copier_forecast(self):
+        from update_tenders import generate_copier_forecasts
+        forecasts = generate_copier_forecasts([
+            {"unit_id": "U004", "unit_name": "測試機關", "title": "乾膜壓膜複合機採購案",
+             "award_date": "2024-10-01", "winner": "測試廠商"},
+        ], base_date=date(2026, 9, 6))
+        self.assertEqual(forecasts, [])
+
+    def test_normalize_tender_series_title(self):
+        from update_tenders import normalize_tender_series_title
+        self.assertEqual(normalize_tender_series_title("113-115年影印機租賃案"), "影印機租賃案")
+        self.assertEqual(normalize_tender_series_title("28台影印機租賃案"), "影印機租賃案")
+        self.assertEqual(normalize_tender_series_title("114年度各里辦公處影印機租用案第1次招標"), "各里辦公處影印機租用案招標")
+        self.assertEqual(normalize_tender_series_title("114年至115年度數位式影印機租賃採購案"), "數位式影印機租賃採購案")
+        self.assertEqual(normalize_tender_series_title("總管理處數位式多功能影印機租賃共58台"), "總管理處數位式多功能影印機租賃")
+
+    def test_parse_duration_months(self):
+        from update_tenders import parse_duration_months
+        self.assertEqual(parse_duration_months("113-115年影印機租賃案"), 36)
+        self.assertEqual(parse_duration_months("114年至115年度數位式影印機租賃採購案"), 24)
+        self.assertEqual(parse_duration_months("二年期開口契約"), 24)
+        self.assertEqual(parse_duration_months("1年期租約"), 12)
+
+    def test_has_extension_clause(self):
+        from update_tenders import has_extension_clause
+        self.assertTrue(has_extension_clause("111年度影印機租賃案(含擴充1年)"))
+        self.assertTrue(has_extension_clause("保留未來一年後續擴充權利"))
+        self.assertFalse(has_extension_clause("113年影印機租賃案"))
+
+    def test_classify_incumbent(self):
+        from update_tenders import classify_incumbent
+        # 1. 互盛防守：得標者是互盛，包含旗下所有互盛開頭的分公司
+        husheng_main = classify_incumbent("互盛股份有限公司")
+        self.assertEqual(husheng_main["type"], "husheng")
+        self.assertIn("互盛防守", husheng_main["label"])
+
+        husheng_branch = classify_incumbent("互盛股份有限公司台北分公司")
+        self.assertEqual(husheng_branch["type"], "husheng")
+        self.assertIn("互盛防守", husheng_branch["label"])
+
+        # 2. 台灣理光屬於他牌（他牌進攻）
+        ricoh_tw = classify_incumbent("台灣理光股份有限公司")
+        self.assertEqual(ricoh_tw["type"], "competitor")
+        self.assertIn("他牌進攻", ricoh_tw["label"])
+
+        ricoh_short = classify_incumbent("理光")
+        self.assertEqual(ricoh_short["type"], "competitor")
+        self.assertIn("他牌進攻", ricoh_short["label"])
+
+        # 3. 其他競品品牌亦屬於他牌進攻
+        competitor = classify_incumbent("震旦行股份有限公司")
+        self.assertEqual(competitor["type"], "competitor")
+        self.assertIn("震旦", competitor["brand"])
+        self.assertIn("他牌進攻", competitor["label"])
+
+        canon = classify_incumbent("台灣佳能資訊股份有限公司")
+        self.assertEqual(canon["type"], "competitor")
+        self.assertIn("佳能", canon["brand"])
+        self.assertIn("他牌進攻", canon["label"])
+
+    def test_generate_copier_forecasts_with_dual_extension(self):
+        from update_tenders import generate_copier_forecasts
+        base_date = date(2026, 9, 6)
+        # History: 2 years contract from 2024-10-15 with 1-year extension
+        history = [
+            {
+                "unit_id": "U001",
+                "unit_name": "某地方法院",
+                "title": "113-114年影印機租賃(保留後續擴充一年)",
+                "award_date": "2024-10-15",
+                "award_price": 2000000,
+                "winner": "震旦 SHARP"
+            }
+        ]
+        forecasts = generate_copier_forecasts(history, base_date=base_date, target_window_days=180)
+        self.assertTrue(len(forecasts) >= 1)
+        # Should have current year opportunity
+        types = [f["expansion"]["type"] for f in forecasts]
+        self.assertIn("current_year_opportunity", types)
+
+    def test_forecast_history_links_and_latest_source(self):
+        from update_tenders import generate_copier_forecasts
+        base_date = date(2026, 9, 6)
+        history = [
+            {
+                "unit_id": "U002",
+                "unit_name": "測試機關",
+                "title": "113年度影印機租賃案",
+                "job_number": "JOB123",
+                "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241001&fn=BDM-123.xml",
+                "award_date": "2024-10-01",
+                "award_price": 1500000,
+                "winner": "宏羚股份有限公司",
+                "discount_rate": 90.0
+            }
+        ]
+        forecasts = generate_copier_forecasts(history, base_date=base_date, target_window_days=180)
+        self.assertEqual(len(forecasts), 1)
+        f = forecasts[0]
+        self.assertEqual(f["latest_source_url"], "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241001&fn=BDM-123.xml")
+        self.assertEqual(f["latest_job_number"], "JOB123")
+        self.assertEqual(len(f["history_track"]), 1)
+        self.assertEqual(f["history_track"][0]["source_url"], "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241001&fn=BDM-123.xml")
+
+    def test_forecast_detects_active_solicitation_in_candidate_cache(self):
+        from update_tenders import generate_copier_forecasts
+        base_date = date(2026, 9, 6)
+        history = [
+            {
+                "unit_id": "U003",
+                "unit_name": "中油桃園廠",
+                "title": "113年度影印機租賃案",
+                "job_number": "OLD001",
+                "source_url": "https://web.pcc.gov.tw/prkms/old.xml",
+                "award_date": "2024-10-01",
+                "award_price": 4000000,
+                "winner": "宏羚"
+            }
+        ]
+        candidate_cache = [
+            {
+                "unit_id": "U003",
+                "job_number": "NEW001",
+                "date": 20260810,
+                "filename": "PPW-999",
+                "brief": {
+                    "type": "公開徵求廠商提供參考資料公告",
+                    "title": "115年度影印機租賃案"
+                }
+            }
+        ]
+        forecasts = generate_copier_forecasts(history, base_date=base_date, candidate_cache=candidate_cache)
+        self.assertEqual(len(forecasts), 1)
+        f = forecasts[0]
+        self.assertEqual(f["current_status"]["status"], "solicitation")
+        self.assertEqual(f["current_status"]["job_number"], "NEW001")
+        self.assertIn("公開徵求", f["current_status"]["badge_label"])
+        self.assertIn("PPW-999.xml", f["current_status"]["notice_url"])
+        self.assertIn("【🔥 機關已啟動公開徵求】", f["action_suggestion"])
+
+    def test_cadence_regularization_and_smart_title(self):
+        from update_tenders import generate_copier_forecasts
+        base_date = date(2026, 9, 6)
+        # History: Two 2-year contracts with 25-month interval between award dates (e.g. Customs Administration)
+        history = [
+            {
+                "unit_id": "A.7.8",
+                "unit_name": "財政部關務署",
+                "title": "「113-115年影印機租賃」採購案",
+                "job_number": "IG113033",
+                "award_date": "2024-10-11",
+                "award_price": 2281600,
+                "winner": "國碩資訊科技有限公司"
+            },
+            {
+                "unit_id": "A.7.8",
+                "unit_name": "財政部關務署",
+                "title": "「111-113年影印機租賃」採購案",
+                "job_number": "IG111033",
+                "award_date": "2022-09-06",
+                "award_price": 2200000,
+                "winner": "國碩資訊科技有限公司"
+            }
+        ]
+        forecasts = generate_copier_forecasts(history, base_date=base_date, target_window_days=180)
+        self.assertEqual(len(forecasts), 1)
+        f = forecasts[0]
+        # Cadence should be regularized to standard 24 months (not 25)
+        self.assertEqual(f["cadence_months"], 24)
+        self.assertIn("依歷史決標間隔推估約 24 個月", f["cadence_summary"])
+        self.assertEqual(f["prediction_basis"]["method"], "historical_interval")
+        # Predicted title should intelligently match the 2-year range pattern 115-117 (not 115-116)
+        self.assertEqual(f["predicted_title"], "115-117年「影印機租賃」採購案")
+
+
+class TargetMonitoredUnitTests(unittest.TestCase):
+    def test_target_monitored_unit_bypasses_hard_exclusion(self):
+        from update_tenders import classify_tender_relevance, get_city
+        # LED video wall and conference equipment from Dayuan Farmers Association (43746562)
+        item1 = {
+            "unit_id": "43746562",
+            "unit_name": "桃園市大園區農會",
+            "brief": {
+                "type": "公開徵求廠商提供參考資料公告",
+                "title": "115年度大園區農會「潮音辦事處農業推廣教室補助計畫」購置LED電視牆工程"
+            }
+        }
+        res1 = classify_tender_relevance(item1)
+        self.assertEqual(res1["status"], "included")
+        self.assertEqual(res1["category"], "target_agency_procurement")
+        self.assertEqual(res1["stream"], "copier")
+
+        item2 = {
+            "unit_id": "43746562",
+            "unit_name": "桃園市大園區農會",
+            "brief": {
+                "type": "公開徵求廠商提供參考資料公告",
+                "title": "115年度大園區農會「潮音辦事處農業推廣教室補助計畫」購置會議設備"
+            }
+        }
+        res2 = classify_tender_relevance(item2)
+        self.assertEqual(res2["status"], "included")
+        self.assertEqual(res2["stream"], "copier")
+
+        # City resolution
+        self.assertEqual(get_city("桃園市大園區農會"), "桃園市")
+
+
+if __name__ == "__main__":
+    unittest.main()
+
