@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-07 08:48",
+  "last_updated": "2026-11-08 02:36",
   "tenders": [
     {
       "city": "台北市",
@@ -2155,79 +2155,6 @@
   "review_candidates": [],
   "forecasted_tenders": [
     {
-      "id": "forecast-3.82.8.21-影印機租賃-standard",
-      "unit_id": "3.82.8.21",
-      "unit": "新北市新莊區思賢國民小學",
-      "city": "新北市",
-      "series_title": "影印機租賃",
-      "predicted_title": "115-116年影印機租賃",
-      "latest_title": "114年度影印機7台租賃",
-      "latest_job_number": "1131201-831",
-      "latest_source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA3MjMyNjU=",
-      "latest_award_date": "2024-11-22",
-      "latest_award_price": 245600,
-      "latest_award_price_str": "NT$ 245,600",
-      "latest_winner": "台灣佳能 (Canon)",
-      "predicted_date": "2026-10-08",
-      "predicted_month": "2026年10月",
-      "predicted_range": "2026年10月 ～ 2026年11月",
-      "predicted_range_start": "2026-10-08",
-      "predicted_range_end": "2026-11-07",
-      "prediction_as_of": "2026-11-07",
-      "cadence_months": 24,
-      "cadence_summary": "依歷史決標間隔推估約 24 個月",
-      "history_count": 3,
-      "history_track": [
-        {
-          "title": "110年度影印機7台租賃",
-          "job_number": "1091203-831",
-          "award_price": 144540,
-          "discount_rate": 66.0,
-          "winner": "台灣佳能 (Canon)",
-          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20201204&fn=BDM-1-53261581.xml",
-          "date": "2020-12-04",
-          "month": "2020-12",
-          "index": 1
-        },
-        {
-          "title": "112年度影印機7台租賃",
-          "job_number": "1111130-831",
-          "award_price": 247860,
-          "discount_rate": 100.0,
-          "winner": "台灣佳能 (Canon)",
-          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzAxNzQ2MDY=",
-          "date": "2022-12-14",
-          "month": "2022-12",
-          "index": 2
-        },
-        {
-          "title": "114年度影印機7台租賃",
-          "job_number": "1131201-831",
-          "award_price": 245600,
-          "discount_rate": 100.0,
-          "winner": "台灣佳能 (Canon)",
-          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA3MjMyNjU=",
-          "date": "2024-11-22",
-          "month": "2024-11",
-          "index": 3
-        }
-      ],
-      "current_status": {
-        "status": "tender",
-        "date": "2026-11-05",
-        "job_number": "1151112-831",
-        "notice_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNzM4MDA",
-        "stage": "正式開標",
-        "title": "116年度影印機7台租賃"
-      },
-      "prediction_basis": {
-        "method": "historical_interval",
-        "source_count": 3,
-        "lead_time_days": 45,
-        "contract_end_verified": false
-      }
-    },
-    {
       "id": "forecast-A.17.2.1-「北基宜花金馬分署影印機租賃案」-standard",
       "unit_id": "A.17.2.1",
       "unit": "勞動部勞動力發展署北基宜花金馬分署",
@@ -2246,7 +2173,7 @@
       "predicted_range": "2026年10月 ～ 2026年11月",
       "predicted_range_start": "2026-10-26",
       "predicted_range_end": "2026-11-25",
-      "prediction_as_of": "2026-11-07",
+      "prediction_as_of": "2026-11-08",
       "cadence_months": 24,
       "cadence_summary": "依案名年期推估約 24 個月",
       "history_count": 1,
@@ -2296,7 +2223,7 @@
       "predicted_range": "2026年10月 ～ 2026年11月",
       "predicted_range_start": "2026-10-27",
       "predicted_range_end": "2026-11-26",
-      "prediction_as_of": "2026-11-07",
+      "prediction_as_of": "2026-11-08",
       "cadence_months": 24,
       "cadence_summary": "依歷史決標間隔推估約 24 個月",
       "history_count": 2,
@@ -2357,7 +2284,7 @@
       "predicted_range": "2026年11月 ～ 2026年12月",
       "predicted_range_start": "2026-11-01",
       "predicted_range_end": "2026-12-01",
-      "prediction_as_of": "2026-11-07",
+      "prediction_as_of": "2026-11-08",
       "cadence_months": 24,
       "cadence_summary": "資料不足，暫以預設 24 個月推估",
       "history_count": 1,
@@ -2407,7 +2334,7 @@
       "predicted_range": "2026年11月 ～ 2026年12月",
       "predicted_range_start": "2026-11-04",
       "predicted_range_end": "2026-12-04",
-      "prediction_as_of": "2026-11-07",
+      "prediction_as_of": "2026-11-08",
       "cadence_months": 24,
       "cadence_summary": "資料不足，暫以預設 24 個月推估",
       "history_count": 1,
@@ -2457,7 +2384,7 @@
       "predicted_range": "2026年11月 ～ 2026年12月",
       "predicted_range_start": "2026-11-14",
       "predicted_range_end": "2026-12-14",
-      "prediction_as_of": "2026-11-07",
+      "prediction_as_of": "2026-11-08",
       "cadence_months": 12,
       "cadence_summary": "依歷史決標間隔推估約 12 個月",
       "history_count": 3,
@@ -2529,7 +2456,7 @@
       "predicted_range": "2026年12月 ～ 2027年01月",
       "predicted_range_start": "2026-12-09",
       "predicted_range_end": "2027-01-08",
-      "prediction_as_of": "2026-11-07",
+      "prediction_as_of": "2026-11-08",
       "cadence_months": 24,
       "cadence_summary": "資料不足，暫以預設 24 個月推估",
       "history_count": 1,
@@ -2579,7 +2506,7 @@
       "predicted_range": "2026年12月 ～ 2027年01月",
       "predicted_range_start": "2026-12-30",
       "predicted_range_end": "2027-01-29",
-      "prediction_as_of": "2026-11-07",
+      "prediction_as_of": "2026-11-08",
       "cadence_months": 24,
       "cadence_summary": "依歷史決標間隔推估約 24 個月",
       "history_count": 2,
@@ -2640,7 +2567,7 @@
       "predicted_range": "2027年01月 ～ 2027年02月",
       "predicted_range_start": "2027-01-23",
       "predicted_range_end": "2027-02-22",
-      "prediction_as_of": "2026-11-07",
+      "prediction_as_of": "2026-11-08",
       "cadence_months": 12,
       "cadence_summary": "依歷史決標間隔推估約 12 個月",
       "history_count": 21,
@@ -2734,7 +2661,7 @@
       "predicted_range": "2027年01月 ～ 2027年03月",
       "predicted_range_start": "2027-01-30",
       "predicted_range_end": "2027-03-01",
-      "prediction_as_of": "2026-11-07",
+      "prediction_as_of": "2026-11-08",
       "cadence_months": 12,
       "cadence_summary": "依歷史決標間隔推估約 12 個月",
       "history_count": 5,
@@ -2828,7 +2755,7 @@
       "predicted_range": "2027年03月 ～ 2027年04月",
       "predicted_range_start": "2027-03-02",
       "predicted_range_end": "2027-04-01",
-      "prediction_as_of": "2026-11-07",
+      "prediction_as_of": "2026-11-08",
       "cadence_months": 24,
       "cadence_summary": "資料不足，暫以預設 24 個月推估",
       "history_count": 1,
@@ -2861,7 +2788,7 @@
     }
   ],
   "collection_status": {
-    "today": "2026-11-07",
+    "today": "2026-11-08",
     "status": "complete",
     "latest_attempt_status": "failed",
     "latest_attempt_at": "2026-11-07 23:55",
@@ -2875,7 +2802,7 @@
     ],
     "maintenance": {
       "status": "partial",
-      "last_run_at": "2026-11-07 08:48"
+      "last_run_at": "2026-11-08 02:36"
     }
   }
 }
