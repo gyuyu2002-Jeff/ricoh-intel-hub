@@ -2791,15 +2791,15 @@
     "today": "2026-11-08",
     "status": "complete",
     "latest_attempt_status": "failed",
-    "latest_attempt_at": "2026-11-08 16:55",
+    "latest_attempt_at": "2026-11-09 00:21",
     "source": "政府電子採購網每日公告資料",
     "successful_dates": [
       "2026-11-06",
       "2026-11-05"
     ],
     "failed_dates": [
-      "2026-11-08",
-      "2026-11-07"
+      "2026-11-09",
+      "2026-11-08"
     ],
     "maintenance": {
       "status": "partial",
