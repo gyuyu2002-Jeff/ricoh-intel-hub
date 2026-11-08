@@ -1,6 +1,34 @@
 {
-  "last_updated": "2026-11-09 02:47",
+  "last_updated": "2026-11-09 06:55",
   "tenders": [
+    {
+      "city": "台北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "title": "115-117年單張式／連續式印表機列印藥袋張數採購案（附使用之印表機及相關耗材",
+      "unit": "臺北市立聯合醫院",
+      "unit_id": "3.79.14.14",
+      "job_number": "F115046",
+      "publish_date": "2026-11-09",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-16",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "stage": "無法決標",
+      "stream": "peripherals",
+      "sub_type": "supplies",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261109&fn=NAI-1-71325625.xml",
+      "history_records": [],
+      "relevance": {
+        "status": "included",
+        "category": "supplies",
+        "confidence": "high",
+        "stream": "peripherals",
+        "sub_type": "supplies"
+      }
+    },
     {
       "city": "台北市",
       "city_source": "履約地點",
@@ -2803,7 +2831,7 @@
     ],
     "maintenance": {
       "status": "partial",
-      "last_run_at": "2026-11-09 02:47"
+      "last_run_at": "2026-11-09 06:55"
     }
   }
 }
