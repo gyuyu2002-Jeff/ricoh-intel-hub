@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-08 06:45",
+  "last_updated": "2026-11-09 02:47",
   "tenders": [
     {
       "city": "台北市",
@@ -2173,7 +2173,7 @@
       "predicted_range": "2026年10月 ～ 2026年11月",
       "predicted_range_start": "2026-10-26",
       "predicted_range_end": "2026-11-25",
-      "prediction_as_of": "2026-11-08",
+      "prediction_as_of": "2026-11-09",
       "cadence_months": 24,
       "cadence_summary": "依案名年期推估約 24 個月",
       "history_count": 1,
@@ -2223,7 +2223,7 @@
       "predicted_range": "2026年10月 ～ 2026年11月",
       "predicted_range_start": "2026-10-27",
       "predicted_range_end": "2026-11-26",
-      "prediction_as_of": "2026-11-08",
+      "prediction_as_of": "2026-11-09",
       "cadence_months": 24,
       "cadence_summary": "依歷史決標間隔推估約 24 個月",
       "history_count": 2,
@@ -2284,7 +2284,7 @@
       "predicted_range": "2026年11月 ～ 2026年12月",
       "predicted_range_start": "2026-11-01",
       "predicted_range_end": "2026-12-01",
-      "prediction_as_of": "2026-11-08",
+      "prediction_as_of": "2026-11-09",
       "cadence_months": 24,
       "cadence_summary": "資料不足，暫以預設 24 個月推估",
       "history_count": 1,
@@ -2334,7 +2334,7 @@
       "predicted_range": "2026年11月 ～ 2026年12月",
       "predicted_range_start": "2026-11-04",
       "predicted_range_end": "2026-12-04",
-      "prediction_as_of": "2026-11-08",
+      "prediction_as_of": "2026-11-09",
       "cadence_months": 24,
       "cadence_summary": "資料不足，暫以預設 24 個月推估",
       "history_count": 1,
@@ -2384,7 +2384,7 @@
       "predicted_range": "2026年11月 ～ 2026年12月",
       "predicted_range_start": "2026-11-14",
       "predicted_range_end": "2026-12-14",
-      "prediction_as_of": "2026-11-08",
+      "prediction_as_of": "2026-11-09",
       "cadence_months": 12,
       "cadence_summary": "依歷史決標間隔推估約 12 個月",
       "history_count": 3,
@@ -2456,7 +2456,7 @@
       "predicted_range": "2026年12月 ～ 2027年01月",
       "predicted_range_start": "2026-12-09",
       "predicted_range_end": "2027-01-08",
-      "prediction_as_of": "2026-11-08",
+      "prediction_as_of": "2026-11-09",
       "cadence_months": 24,
       "cadence_summary": "資料不足，暫以預設 24 個月推估",
       "history_count": 1,
@@ -2506,7 +2506,7 @@
       "predicted_range": "2026年12月 ～ 2027年01月",
       "predicted_range_start": "2026-12-30",
       "predicted_range_end": "2027-01-29",
-      "prediction_as_of": "2026-11-08",
+      "prediction_as_of": "2026-11-09",
       "cadence_months": 24,
       "cadence_summary": "依歷史決標間隔推估約 24 個月",
       "history_count": 2,
@@ -2567,7 +2567,7 @@
       "predicted_range": "2027年01月 ～ 2027年02月",
       "predicted_range_start": "2027-01-23",
       "predicted_range_end": "2027-02-22",
-      "prediction_as_of": "2026-11-08",
+      "prediction_as_of": "2026-11-09",
       "cadence_months": 12,
       "cadence_summary": "依歷史決標間隔推估約 12 個月",
       "history_count": 21,
@@ -2661,7 +2661,7 @@
       "predicted_range": "2027年01月 ～ 2027年03月",
       "predicted_range_start": "2027-01-30",
       "predicted_range_end": "2027-03-01",
-      "prediction_as_of": "2026-11-08",
+      "prediction_as_of": "2026-11-09",
       "cadence_months": 12,
       "cadence_summary": "依歷史決標間隔推估約 12 個月",
       "history_count": 5,
@@ -2755,7 +2755,7 @@
       "predicted_range": "2027年03月 ～ 2027年04月",
       "predicted_range_start": "2027-03-02",
       "predicted_range_end": "2027-04-01",
-      "prediction_as_of": "2026-11-08",
+      "prediction_as_of": "2026-11-09",
       "cadence_months": 24,
       "cadence_summary": "資料不足，暫以預設 24 個月推估",
       "history_count": 1,
@@ -2788,7 +2788,7 @@
     }
   ],
   "collection_status": {
-    "today": "2026-11-08",
+    "today": "2026-11-09",
     "status": "complete",
     "latest_attempt_status": "failed",
     "latest_attempt_at": "2026-11-09 00:21",
@@ -2803,7 +2803,7 @@
     ],
     "maintenance": {
       "status": "partial",
-      "last_run_at": "2026-11-08 06:45"
+      "last_run_at": "2026-11-09 02:47"
     }
   }
 }
