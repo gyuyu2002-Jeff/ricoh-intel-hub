@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-12 01:35",
+  "last_updated": "2026-11-12 04:05",
   "tenders": [
     {
       "city": "花蓮縣",
@@ -27,6 +27,132 @@
         "confidence": "high",
         "stream": "peripherals",
         "sub_type": "supplies"
+      }
+    },
+    {
+      "city": "新北市",
+      "city_source": "機關地址／開標地點",
+      "city_confidence": "high",
+      "title": "印表機維護",
+      "unit": "國防部電訊發展室",
+      "unit_id": "A.5.5.2",
+      "job_number": "HP16012P012",
+      "publish_date": "2026-11-12",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-10",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "stage": "無法決標",
+      "stream": "peripherals",
+      "sub_type": "printer",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261112&fn=NAI-1-71329159.xml",
+      "history_records": [
+        {
+          "award_date": "2025-11-05",
+          "year": 2025,
+          "title": "印表機維護",
+          "job_number": "HP15011P011",
+          "budget": 400000,
+          "award_price": 245800,
+          "discount_rate": 61.5,
+          "winner": "承元科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251105&fn=BDM-1-71008006.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部電訊發展室",
+          "source_unit_id": "A.5.5.2",
+          "is_stale": false
+        },
+        {
+          "award_date": "2020-12-22",
+          "year": 2020,
+          "title": "印表機維護",
+          "job_number": "HP10013P013",
+          "budget": 320000,
+          "award_price": 252800,
+          "discount_rate": 79.0,
+          "winner": "普林達股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20201222&fn=BDM-1-53282142.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部電訊發展室",
+          "source_unit_id": "A.5.5.2",
+          "is_stale": true
+        },
+        {
+          "award_date": "2017-09-12",
+          "year": 2017,
+          "title": "印表機維護",
+          "job_number": "HP07036P025",
+          "budget": 320000,
+          "award_price": 249600,
+          "discount_rate": 78.0,
+          "winner": "立和資訊有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170912&fn=BDM-1-52234310.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部電訊發展室",
+          "source_unit_id": "A.5.5.2",
+          "is_stale": true
+        }
+      ],
+      "relevance": {
+        "status": "included",
+        "category": "printer_or_plotter",
+        "confidence": "high",
+        "stream": "peripherals",
+        "sub_type": "printer"
+      }
+    },
+    {
+      "city": "雲林縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "title": "116年影印機租賃1批",
+      "unit": "國立雲林科技大學",
+      "unit_id": "3.10.6",
+      "job_number": "LTG115019",
+      "publish_date": "2026-11-12",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-16",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "stage": "無法決標",
+      "stream": "copier",
+      "sub_type": "main",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261112&fn=NAI-1-71329798.xml",
+      "history_records": [
+        {
+          "award_date": "2024-11-19",
+          "year": 2024,
+          "title": "114年影印機租賃1批",
+          "job_number": "LTG113006",
+          "budget": 3978000,
+          "award_price": 3795600,
+          "discount_rate": 95.4,
+          "winner": "明傳事務機器有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241119&fn=BDM-1-70717356.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國立雲林科技大學",
+          "source_unit_id": "3.10.6",
+          "is_stale": false
+        }
+      ],
+      "relevance": {
+        "status": "included",
+        "category": "office_output_equipment",
+        "confidence": "high",
+        "stream": "copier",
+        "sub_type": "main"
       }
     },
     {
@@ -2117,6 +2243,121 @@
         "stream": "peripherals",
         "sub_type": "printer"
       }
+    },
+    {
+      "city": "高雄市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "title": "115年印表機租賃(開口契約)",
+      "unit": "高雄市立凱旋醫院",
+      "unit_id": "3.97.14.4",
+      "job_number": "KSPH1152037",
+      "publish_date": "2026-10-06",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-10-13",
+      "deadline_confidence": "verified",
+      "award_date": "2026-10-14",
+      "budget": "NT$ 5,183,646",
+      "award_price": "NT$ 4,453,466",
+      "stage": "已決標",
+      "stream": "peripherals",
+      "sub_type": "printer",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261112&fn=BDM-1-71330087.xml",
+      "winner": "鴻瀚資訊有限公司",
+      "history_records": [
+        {
+          "award_date": "2026-11-04",
+          "year": 2026,
+          "title": "藥袋印表機租賃",
+          "job_number": "KSPH1152048",
+          "budget": 934800,
+          "award_price": 668382,
+          "discount_rate": 71.5,
+          "winner": "新鉅峰國際科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEzMjMyODQ=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "高雄市立凱旋醫院",
+          "source_unit_id": "3.97.14.4",
+          "is_stale": false
+        },
+        {
+          "award_date": "2024-02-01",
+          "year": 2024,
+          "title": "印表機租賃(開口契約)",
+          "job_number": "KSPH1122032",
+          "budget": 3974770,
+          "award_price": 3902585,
+          "discount_rate": 98.2,
+          "winner": "鴻瀚資訊有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20240201&fn=BDM-1-70504556.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "高雄市立凱旋醫院",
+          "source_unit_id": "3.97.14.4",
+          "is_stale": false
+        },
+        {
+          "award_date": "2022-07-21",
+          "year": 2022,
+          "title": "條碼藥袋印表機租賃",
+          "job_number": "KMKS111225",
+          "budget": 630000,
+          "award_price": 472500,
+          "discount_rate": 75.0,
+          "winner": "百國科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzAwNDQzMDA=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "高雄市立凱旋醫院",
+          "source_unit_id": "3.97.14.4",
+          "is_stale": false
+        },
+        {
+          "award_date": "2018-01-05",
+          "year": 2018,
+          "title": "雷射印表機租賃",
+          "job_number": "KMKS106218",
+          "budget": 1538112,
+          "award_price": 1178500,
+          "discount_rate": 76.6,
+          "winner": "百國科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20180105&fn=BDM-1-52346317.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "高雄市立凱旋醫院",
+          "source_unit_id": "3.97.14.4",
+          "is_stale": true
+        },
+        {
+          "award_date": "2013-07-22",
+          "year": 2013,
+          "title": "租賃研究機器設備-雷射印表機",
+          "job_number": "1020630",
+          "budget": 133800,
+          "award_price": 123000,
+          "discount_rate": 91.9,
+          "winner": "百國科技股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTEwMTY3MDE=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "高雄市立凱旋醫院",
+          "source_unit_id": "3.97.14.4",
+          "is_stale": true
+        }
+      ],
+      "relevance": {
+        "status": "included",
+        "category": "printer_or_plotter",
+        "confidence": "high",
+        "stream": "peripherals",
+        "sub_type": "printer"
+      }
     }
   ],
   "review_candidates": [],
@@ -2891,7 +3132,7 @@
     "failed_dates": [],
     "maintenance": {
       "status": "partial",
-      "last_run_at": "2026-11-11 08:51"
+      "last_run_at": "2026-11-12 04:05"
     }
   }
 }
