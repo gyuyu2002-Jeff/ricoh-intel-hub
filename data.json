@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-12 04:05",
+  "last_updated": "2026-11-12 10:04",
   "tenders": [
     {
       "city": "花蓮縣",
@@ -3132,7 +3132,7 @@
     "failed_dates": [],
     "maintenance": {
       "status": "partial",
-      "last_run_at": "2026-11-12 04:05"
+      "last_run_at": "2026-11-12 10:04"
     }
   }
 }
