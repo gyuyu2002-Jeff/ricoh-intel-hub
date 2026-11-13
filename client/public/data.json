@@ -3809,14 +3809,16 @@
   "collection_status": {
     "today": "2026-11-13",
     "status": "complete",
-    "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-11-13 20:13",
+    "latest_attempt_status": "failed",
+    "latest_attempt_at": "2026-11-14 01:23",
     "source": "政府電子採購網每日公告資料",
     "successful_dates": [
       "2026-11-13",
       "2026-11-12"
     ],
-    "failed_dates": [],
+    "failed_dates": [
+      "2026-11-14"
+    ],
     "maintenance": {
       "status": "partial",
       "last_run_at": "2026-11-13 09:25"
