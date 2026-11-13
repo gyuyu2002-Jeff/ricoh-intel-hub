@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-13 09:25",
+  "last_updated": "2026-11-13 10:43",
   "tenders": [
     {
       "city": "南投縣",
@@ -42,6 +42,34 @@
       "relevance": {
         "status": "included",
         "category": "dot_matrix_printer",
+        "confidence": "high",
+        "stream": "peripherals",
+        "sub_type": "printer"
+      }
+    },
+    {
+      "city": "花蓮縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "title": "繪圖機輸出耗材",
+      "unit": "國防部空軍司令部",
+      "unit_id": "3.5.49",
+      "job_number": "EQ16009P024",
+      "publish_date": "2026-11-13",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-24",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 508,800",
+      "award_price": "",
+      "stage": "公開徵求價單",
+      "stream": "peripherals",
+      "sub_type": "printer",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzODMxNTE",
+      "history_records": [],
+      "relevance": {
+        "status": "included",
+        "category": "printer_or_plotter",
         "confidence": "high",
         "stream": "peripherals",
         "sub_type": "printer"
@@ -239,6 +267,69 @@
         "confidence": "high",
         "stream": "peripherals",
         "sub_type": "printer"
+      }
+    },
+    {
+      "city": "台中市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "title": "彩色複印機租賃服務(含彩色複印機2台)",
+      "unit": "國防部軍備局生產製造中心",
+      "unit_id": "3.5.10.100",
+      "job_number": "JH15108P078",
+      "publish_date": "2026-11-13",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-26",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 14,960,000",
+      "award_price": "",
+      "stage": "正式開標",
+      "stream": "copier",
+      "sub_type": "main",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzNzk4Mjc",
+      "history_records": [
+        {
+          "award_date": "2024-11-12",
+          "year": 2024,
+          "title": "彩色複印機租賃服務(含彩色複印機4台)",
+          "job_number": "JH13059P062",
+          "budget": 2525000,
+          "award_price": 1890000,
+          "discount_rate": 74.9,
+          "winner": "互盛（RICOH）",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20241112&fn=BDM-1-70711800.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部軍備局生產製造中心",
+          "source_unit_id": "3.5.10.100",
+          "is_stale": false
+        },
+        {
+          "award_date": "2021-10-01",
+          "year": 2021,
+          "title": "彩色複印機租賃服務(含彩色複印機3台)",
+          "job_number": "JH11013P005",
+          "budget": 11409500,
+          "award_price": 6746250,
+          "discount_rate": 59.1,
+          "winner": "富士軟片 (FUJIFILM)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20211001&fn=BDM-1-53517680.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部軍備局生產製造中心",
+          "source_unit_id": "3.5.10.100",
+          "is_stale": true
+        }
+      ],
+      "relevance": {
+        "status": "included",
+        "category": "office_output_equipment",
+        "confidence": "high",
+        "stream": "copier",
+        "sub_type": "main"
       }
     },
     {
@@ -3719,7 +3810,7 @@
     "today": "2026-11-13",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-11-13 01:52",
+    "latest_attempt_at": "2026-11-13 10:43",
     "source": "政府電子採購網每日公告資料",
     "successful_dates": [
       "2026-11-13",
