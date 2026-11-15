@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-16 00:45",
+  "last_updated": "2026-11-16 03:19",
   "tenders": [
     {
       "city": "苗栗縣",
@@ -27,6 +27,34 @@
         "confidence": "high",
         "stream": "copier",
         "sub_type": "main"
+      }
+    },
+    {
+      "city": "花蓮縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "title": "繪圖機輸出耗材",
+      "unit": "國防部空軍司令部",
+      "unit_id": "3.5.49",
+      "job_number": "EQ16009P024",
+      "publish_date": "2026-11-16",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-24",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 508,800",
+      "award_price": "",
+      "stage": "公開徵求價單",
+      "stream": "peripherals",
+      "sub_type": "printer",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzODMxNTE",
+      "history_records": [],
+      "relevance": {
+        "status": "included",
+        "category": "printer_or_plotter",
+        "confidence": "high",
+        "stream": "peripherals",
+        "sub_type": "printer"
       }
     },
     {
@@ -70,34 +98,6 @@
       "relevance": {
         "status": "included",
         "category": "dot_matrix_printer",
-        "confidence": "high",
-        "stream": "peripherals",
-        "sub_type": "printer"
-      }
-    },
-    {
-      "city": "花蓮縣",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "title": "繪圖機輸出耗材",
-      "unit": "國防部空軍司令部",
-      "unit_id": "3.5.49",
-      "job_number": "EQ16009P024",
-      "publish_date": "2026-11-13",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-11-24",
-      "deadline_confidence": "verified",
-      "award_date": "",
-      "budget": "NT$ 508,800",
-      "award_price": "",
-      "stage": "公開徵求價單",
-      "stream": "peripherals",
-      "sub_type": "printer",
-      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzODMxNTE",
-      "history_records": [],
-      "relevance": {
-        "status": "included",
-        "category": "printer_or_plotter",
         "confidence": "high",
         "stream": "peripherals",
         "sub_type": "printer"
@@ -3100,7 +3100,7 @@
     "failed_dates": [],
     "maintenance": {
       "status": "partial",
-      "last_run_at": "2026-11-15 06:46"
+      "last_run_at": "2026-11-16 03:19"
     }
   }
 }
