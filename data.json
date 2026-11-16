@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-16 03:19",
+  "last_updated": "2026-11-16 08:13",
   "tenders": [
     {
       "city": "苗栗縣",
@@ -3100,7 +3100,7 @@
     "failed_dates": [],
     "maintenance": {
       "status": "partial",
-      "last_run_at": "2026-11-16 03:19"
+      "last_run_at": "2026-11-16 08:13"
     }
   }
 }
