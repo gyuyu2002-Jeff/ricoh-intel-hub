@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-17 04:02",
+  "last_updated": "2026-11-17 06:40",
   "tenders": [
     {
       "city": "高雄市",
@@ -4015,7 +4015,7 @@
     "failed_dates": [],
     "maintenance": {
       "status": "partial",
-      "last_run_at": "2026-11-16 08:13"
+      "last_run_at": "2026-11-17 06:40"
     }
   }
 }
