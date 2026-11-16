@@ -12,6 +12,14 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 OFFICIAL_AWARD_SEARCH_URL = "https://web.pcc.gov.tw/prkms/tender/common/agent/readTenderAgent"
+OFFICIAL_PCC_BASE_URL = "https://web.pcc.gov.tw"
+EQUIPMENT_SEARCH_KEYWORDS = {
+    "copier": ["影印機", "複印機", "複合機", "多功能機"],
+    "office_machine": ["事務機"],
+    "printer": ["印表機"],
+    "mixed_it_equipment": ["印表機"],
+    "dot_matrix_printer": ["點陣式印表機", "點矩陣印表機"],
+}
 API_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/138.0 Safari/537.36",
     "Accept": "application/json, text/plain, */*",
@@ -1375,6 +1383,354 @@ def verify_official_award_notice(unit_id, job_number, award_date, max_retries=2)
 
     return False
 
+
+def parse_roc_date_to_iso(raw_value):
+    digits = re.findall(r'\d+', str(raw_value or ""))
+    if len(digits) < 3:
+        return ""
+    try:
+        year = int(digits[0])
+        ad_year = year + 1911 if year < 1911 else year
+        parsed = datetime(ad_year, int(digits[1]), int(digits[2]))
+        return parsed.strftime("%Y-%m-%d")
+    except ValueError:
+        return ""
+
+
+def parse_official_amount(raw_value):
+    text = str(raw_value or "").replace(",", "").strip()
+    if not text:
+        return 0
+    match = re.search(r'(\d+)\s*元', text)
+    if match:
+        return int(match.group(1))
+    digits = re.findall(r'\d+', text)
+    return int(digits[0]) if digits else 0
+
+
+def fetch_official_html(url, label, max_retries=2):
+    request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(request, timeout=30, context=OFFICIAL_SSL_CONTEXT) as response:
+                return html.unescape(response.read().decode("utf-8", errors="replace")), response.geturl()
+        except Exception as error:
+            if attempt + 1 == max_retries:
+                print(f"Official PCC fetch failed ({label}): {error}")
+                return None, ""
+            time.sleep(2)
+    return None, ""
+
+
+def _clean_html_text(fragment):
+    text = re.sub(r'<[^>]+>', ' ', str(fragment or ""))
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+def parse_official_award_list_page(page_html):
+    if not page_html:
+        return None, []
+    total_match = re.search(r'共有\s*<span[^>]*>\s*([\d,]+)\s*</span>\s*筆資料', page_html)
+    total_count = int(total_match.group(1).replace(",", "")) if total_match else None
+
+    tbody_match = re.search(r'<tbody[^>]*>(.*?)</tbody>', page_html, re.S | re.I)
+    if not tbody_match:
+        return total_count, []
+
+    rows = []
+    for tr_html in re.findall(r'<tr[^>]*>(.*?)</tr>', tbody_match.group(1), re.S | re.I):
+        tds = re.findall(r'<td[^>]*>(.*?)</td>', tr_html, re.S | re.I)
+        if len(tds) < 10:
+            continue
+
+        job_part = tds[2].split("<br")[0]
+        job_text = _clean_html_text(job_part)
+        job_number = re.sub(r'\s*\([^)]*公告[^)]*\)\s*', '', job_text).strip()
+        if job_number:
+            job_number = job_number.split()[0]
+
+        title_match = re.search(r'pageCode2Img\("((?:[^"\\]|\\.)*)"\)', tds[2])
+        if title_match:
+            title = title_match.group(1).replace('\\"', '"').strip()
+        else:
+            attr_title = re.search(r'<a[^>]*title="([^"]+)"', tds[2])
+            title = attr_title.group(1).strip() if attr_title else _clean_html_text(tds[2].split("<br", 1)[-1])
+
+        href_match = re.search(r'href="([^"]+)"', tds[2]) or re.search(r'href="([^"]+)"', tds[9])
+        href = href_match.group(1).strip() if href_match else ""
+
+        announce_date = parse_roc_date_to_iso(_clean_html_text(tds[5]))
+        award_col = _clean_html_text(tds[7])
+        fail_col = _clean_html_text(tds[8])
+        if not award_col or (fail_col and not award_col):
+            continue
+        if not job_number or not title or not href:
+            continue
+
+        rows.append({
+            "job_number": job_number,
+            "title": title,
+            "href": href,
+            "announce_date": announce_date,
+        })
+    return total_count, rows
+
+
+def parse_official_award_detail_html(detail_html, source_url="", fallback_job_number="", fallback_title=""):
+    if not detail_html:
+        return None
+
+    cleaned = re.sub(r'<script\b[^>]*>.*?</script>', '', detail_html, flags=re.S | re.I)
+    cleaned = re.sub(r'<style\b[^>]*>.*?</style>', '', cleaned, flags=re.S | re.I)
+
+    job_number = ""
+    title = ""
+    notice_category = ""
+    budget = 0
+    total_award = 0
+    fallback_award = 0
+    award_date = ""
+    award_announce_date = ""
+    bidder_winners = []
+    item_winners = []
+
+    current_bidder_name = ""
+    in_bidder_block = False
+    in_item_winner_block = False
+
+    for tr_html in re.findall(r'<tr[^>]*>(.*?)</tr>', cleaned, re.S | re.I):
+        cells = [_clean_html_text(cell) for cell in re.findall(r'<(?:th|td)[^>]*>(.*?)</(?:th|td)>', tr_html, re.S | re.I)]
+        if not cells:
+            continue
+        label = cells[0]
+        value = cells[1] if len(cells) > 1 else ""
+
+        if label == "標案案號" and not job_number and value:
+            job_number = value
+        elif label == "標案名稱" and not title and value:
+            title = value
+        elif label == "決標資料類別" and value:
+            notice_category = value
+            if "無法決標" in notice_category and "決標公告" not in notice_category:
+                return None
+        elif label == "預算金額" and budget == 0:
+            budget = parse_official_amount(value)
+        elif label == "總決標金額" and total_award == 0:
+            total_award = parse_official_amount(value)
+        elif label == "決標金額" and fallback_award == 0:
+            fallback_award = parse_official_amount(value)
+        elif label == "決標日期" and not award_date:
+            award_date = parse_roc_date_to_iso(value)
+        elif label == "決標公告日期" and not award_announce_date:
+            award_announce_date = parse_roc_date_to_iso(value)
+
+        if re.fullmatch(r'投標廠商\d+', label):
+            in_bidder_block = True
+            in_item_winner_block = False
+            current_bidder_name = ""
+            continue
+        if re.fullmatch(r'得標廠商\d+', label):
+            in_item_winner_block = True
+            in_bidder_block = False
+            continue
+        if re.fullmatch(r'未得標廠商\d+', label) or label in {"簽約廠商", "決標資料", "決標品項"}:
+            in_bidder_block = False
+            in_item_winner_block = False
+            current_bidder_name = ""
+            continue
+
+        if in_bidder_block:
+            if label == "廠商名稱" and value:
+                current_bidder_name = value
+            elif label == "是否得標" and value in {"是", "得標"} and current_bidder_name:
+                if "中華民國" not in current_bidder_name and not looks_like_country(current_bidder_name):
+                    bidder_winners.append(current_bidder_name)
+        elif in_item_winner_block:
+            if label in {"得標廠商", "得標廠商名稱"} and value:
+                if "中華民國" not in value and not looks_like_country(value):
+                    item_winners.append(value)
+
+    award_price = total_award or fallback_award
+    final_award_date = award_date or award_announce_date
+    final_job = job_number or fallback_job_number
+    final_title = title or fallback_title
+    if budget <= 0 or award_price <= 0 or not final_award_date or not final_job or not final_title:
+        return None
+
+    winner_raw = bidder_winners[0] if bidder_winners else (item_winners[0] if item_winners else "")
+    full_source_url = source_url
+    if full_source_url.startswith("/"):
+        full_source_url = f"{OFFICIAL_PCC_BASE_URL}{full_source_url}"
+    elif full_source_url.startswith("http:"):
+        full_source_url = "https:" + full_source_url[5:]
+
+    discount_rate = (award_price / budget) * 100
+    return {
+        "award_date": final_award_date,
+        "year": int(final_award_date[:4]),
+        "title": final_title,
+        "job_number": final_job,
+        "budget": budget,
+        "award_price": award_price,
+        "discount_rate": round(discount_rate, 1) if 0 < discount_rate <= 100 else None,
+        "winner": map_competitor_name(winner_raw) if winner_raw else "未公開",
+        "source_url": full_source_url,
+        "official_verified": True,
+        "verification_source": "政府電子採購網決標資料查詢",
+    }
+
+
+def should_run_official_fallback(mode, last_refresh_str, today, max_age_days=7):
+    if not last_refresh_str:
+        return True
+    if mode != "maintenance":
+        return False
+    try:
+        refreshed_date = datetime.strptime(str(last_refresh_str), "%Y-%m-%d").date()
+    except (TypeError, ValueError):
+        return True
+    return (today - refreshed_date).days >= max_age_days
+
+
+def _build_official_award_search_url(unit_id, start_date, end_date, page=1, page_size=100, tender_name=""):
+    params = {
+        "pageSize": str(page_size),
+        "firstSearch": "false",
+        "isQuery": "true",
+        "isBinding": "N",
+        "isLogIn": "N",
+        "orgName": "",
+        "orgId": unit_id,
+        "tenderName": tender_name,
+        "tenderId": "",
+        "tenderStatus": "TENDER_STATUS_1",
+        "tenderWay": "TENDER_WAY_ALL_DECLARATION",
+        "awardAnnounceStartDate": start_date.strftime("%Y/%m/%d"),
+        "awardAnnounceEndDate": end_date.strftime("%Y/%m/%d"),
+        "radProctrgCate": "",
+        "tenderRange": "",
+        "item": "",
+        "gottenVendorName": "",
+        "gottenVendorId": "",
+        "submitVendorName": "",
+        "submitVendorId": "",
+        "execLocation": "",
+        "priorityCate": "",
+        "radReConstruct": "",
+        "policyAdvocacy": "",
+        "isCpp": "",
+        "d-16396-p": str(page),
+    }
+    return f"{OFFICIAL_AWARD_SEARCH_URL}?{urllib.parse.urlencode(params)}"
+
+
+def fetch_official_unit_history(unit_id, unit_name, comparable_titles, existing_jobs=None, today=None, request_delay=0.3):
+    if not unit_id or not comparable_titles:
+        return [], True
+
+    needed_keywords = []
+    for title in comparable_titles:
+        equip = classify_equipment(title)
+        for keyword in EQUIPMENT_SEARCH_KEYWORDS.get(equip, []):
+            if keyword not in needed_keywords:
+                needed_keywords.append(keyword)
+    if not needed_keywords:
+        return [], True
+
+    if today is None:
+        today = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8))).date()
+    try:
+        cutoff = today.replace(year=today.year - 5)
+    except ValueError:
+        cutoff = today.replace(year=today.year - 5, day=28)
+
+    existing_jobs = set(existing_jobs or ())
+    explicit_change_words = ("契約變更", "變更案", "後續擴充", "追加採購")
+    candidate_by_job = {}
+    scan_completed = True
+
+    def collect_comparable_rows(rows):
+        for row in rows:
+            row_title = row.get("title", "")
+            row_job = row.get("job_number", "")
+            if not row_job or not row_title:
+                continue
+            if any(word in row_title for word in explicit_change_words):
+                continue
+            if not is_relevant_equipment_title(row_title):
+                continue
+            if not any(is_comparable_history(active_title, row_title) for active_title in comparable_titles):
+                continue
+            previous = candidate_by_job.get(row_job)
+            if not previous or row.get("announce_date", "") > previous.get("announce_date", ""):
+                candidate_by_job[row_job] = row
+
+    for year in range(today.year, cutoff.year - 1, -1):
+        start_date = cutoff if year == cutoff.year else datetime(year, 1, 1).date()
+        end_date = today if year == today.year else datetime(year, 12, 31).date()
+        if start_date > end_date:
+            continue
+
+        list_url = _build_official_award_search_url(unit_id, start_date, end_date, page=1, page_size=100)
+        page_html, _ = fetch_official_html(list_url, f"{unit_name} {year} p1")
+        if page_html is None:
+            scan_completed = False
+            continue
+        total_count, rows = parse_official_award_list_page(page_html)
+        if total_count == 0:
+            time.sleep(request_delay)
+            continue
+
+        if total_count is not None and total_count <= 200:
+            collect_comparable_rows(rows)
+            if total_count > 100:
+                time.sleep(request_delay)
+                page2_url = _build_official_award_search_url(unit_id, start_date, end_date, page=2, page_size=100)
+                page2_html, _ = fetch_official_html(page2_url, f"{unit_name} {year} p2")
+                if page2_html is None:
+                    scan_completed = False
+                else:
+                    _, rows2 = parse_official_award_list_page(page2_html)
+                    collect_comparable_rows(rows2)
+        else:
+            for keyword in needed_keywords:
+                for page in range(1, 6):
+                    time.sleep(request_delay)
+                    kw_url = _build_official_award_search_url(
+                        unit_id, start_date, end_date, page=page, page_size=100, tender_name=keyword
+                    )
+                    kw_html, _ = fetch_official_html(kw_url, f"{unit_name} {year} kw={keyword} p{page}")
+                    if kw_html is None:
+                        scan_completed = False
+                        break
+                    kw_total, kw_rows = parse_official_award_list_page(kw_html)
+                    collect_comparable_rows(kw_rows)
+                    if kw_total is None or page * 100 >= kw_total:
+                        break
+        time.sleep(request_delay)
+
+    parsed_records = []
+    for row in sorted(candidate_by_job.values(), key=lambda r: r.get("announce_date", ""), reverse=True):
+        if row["job_number"] in existing_jobs:
+            continue
+        href = row["href"]
+        detail_url = f"{OFFICIAL_PCC_BASE_URL}{href}" if href.startswith("/") else href
+        detail_html, _ = fetch_official_html(detail_url, f"{unit_name} {row['job_number']}")
+        if detail_html is None:
+            scan_completed = False
+            continue
+        parsed = parse_official_award_detail_html(
+            detail_html,
+            source_url=detail_url,
+            fallback_job_number=row["job_number"],
+            fallback_title=row["title"],
+        )
+        if parsed:
+            parsed_records.append(parsed)
+        time.sleep(request_delay)
+
+    return parsed_records, scan_completed
+
 def fetch_tender_detail_with_retry(unit_id, job_number, max_retries=3):
     encoded_job = urllib.parse.quote(job_number)
     detail_api_url = f"https://pcc-api.openfun.app/api/tender?unit_id={unit_id}&job_number={encoded_job}"
@@ -1919,6 +2275,51 @@ def main(mode="live", backfill_days=None):
                 if title_scan_completed:
                     history_deep_refresh[history_scope_key(h_unit_id, title)] = refresh_date
     process_history_items(deep_history_items)
+
+    for h_unit, h_unit_id in active_units_dict.items():
+        direct_records = exclude_contract_changes(list(existing_history_by_unit.get(h_unit_id, {}).values()))
+        titles_needing_official = []
+        for title in titles_by_unit_id.get(h_unit_id, []):
+            if not classify_equipment(title):
+                continue
+            official_key = f"official|{history_scope_key(h_unit_id, title)}"
+            if not should_run_official_fallback(mode, history_deep_refresh.get(official_key), today):
+                continue
+            comparable_count = len([
+                record for record in direct_records
+                if is_recent_history(record) and is_comparable_history(title, record.get("title", ""))
+            ])
+            if comparable_count < 2:
+                titles_needing_official.append(title)
+        if not titles_needing_official:
+            continue
+
+        print(f"Checking official web.pcc.gov.tw award records for '{h_unit}' ({h_unit_id})...")
+        existing_jobs = {
+            job for job, rec in existing_history_by_unit.get(h_unit_id, {}).items()
+            if not looks_like_country(rec.get("winner", ""))
+        }
+        official_records, scan_completed = fetch_official_unit_history(
+            h_unit_id, h_unit, titles_needing_official, existing_jobs=existing_jobs, today=today
+        )
+        for history_record in official_records:
+            h_job = history_record["job_number"]
+            history_pool.setdefault(h_unit, [])
+            history_pool[h_unit] = [
+                record for record in history_pool[h_unit]
+                if record.get("job_number") != h_job
+            ]
+            history_pool[h_unit].append(history_record)
+            existing_history_by_unit.setdefault(h_unit_id, {})[h_job] = history_record
+            history_unit_names[h_unit_id] = h_unit
+            print(
+                f"Saved official web.pcc.gov.tw history: {h_unit} | "
+                f"{history_record['award_date']} | {h_job} | "
+                f"Budget {history_record['budget']} | Award {history_record['award_price']}"
+            )
+        if scan_completed:
+            for title in titles_needing_official:
+                history_deep_refresh[f"official|{history_scope_key(h_unit_id, title)}"] = refresh_date
 
     unit_map = fetch_json_with_retry("https://pcc-api.openfun.app/api/unit", "procurement unit directory") or {}
     related_units_by_active_id = {}

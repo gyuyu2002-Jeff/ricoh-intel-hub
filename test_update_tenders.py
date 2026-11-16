@@ -721,6 +721,138 @@ class TargetMonitoredUnitTests(unittest.TestCase):
         self.assertEqual(get_city("桃園市大園區農會"), "桃園市")
 
 
+class OfficialPccAwardFallbackTests(unittest.TestCase):
+    def test_parse_roc_date_to_iso(self):
+        from update_tenders import parse_roc_date_to_iso
+        self.assertEqual(parse_roc_date_to_iso("114/11/25"), "2025-11-25")
+        self.assertEqual(parse_roc_date_to_iso("2025/11/25"), "2025-11-25")
+        self.assertEqual(parse_roc_date_to_iso("114/02/30"), "")
+        self.assertEqual(parse_roc_date_to_iso(""), "")
+
+    def test_parse_official_award_list_page_extracts_titles_and_skips_failed_rows(self):
+        from update_tenders import parse_official_award_list_page
+        sample_html = """
+        <div class="page" id="displaytagBannerDiv"><span id="pagebanner">共有<span class="red"> 1,066 </span>筆資料</span></div>
+        <tbody>
+          <tr>
+            <td>1</td><td>苗栗縣頭份市公所</td>
+            <td>115b001\r\n\t(更正公告)<br>
+              <a href="/prkms/urlSelector/common/atm?pk=NzEwMjY3MTQ=" title="115年度影印機租賃">
+                <span id="1"><script>var hw = Geps3.CNS.pageCode2Img("115年度影印機租賃");</script></span>
+              </a>
+            </td>
+            <td>公開取得報價單或企劃書</td><td>財物類</td><td>114/11/25</td><td>580,000</td>
+            <td><a href="/prkms/urlSelector/common/atm?pk=NzEwMjY3MTQ=">001</a></td><td></td><td>檢視</td>
+          </tr>
+          <tr>
+            <td>2</td><td>苗栗縣頭份市公所</td>
+            <td>115b999<br>
+              <a href="/prkms/urlSelector/common/atm?pk=FAILED=" title="115年度影印機租賃(流標)">
+                <span id="2"><script>var hw = Geps3.CNS.pageCode2Img("115年度影印機租賃(流標)");</script></span>
+              </a>
+            </td>
+            <td>公開招標</td><td>財物類</td><td>114/11/20</td><td></td>
+            <td></td><td>001</td><td>檢視</td>
+          </tr>
+        </tbody>
+        """
+        total, rows = parse_official_award_list_page(sample_html)
+        self.assertEqual(total, 1066)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["job_number"], "115b001")
+        self.assertEqual(rows[0]["title"], "115年度影印機租賃")
+        self.assertEqual(rows[0]["announce_date"], "2025-11-25")
+        self.assertEqual(rows[0]["href"], "/prkms/urlSelector/common/atm?pk=NzEwMjY3MTQ=")
+
+    def test_parse_official_award_detail_html_handles_periodic_report_and_ignores_script_noise(self):
+        from update_tenders import parse_official_award_detail_html
+        detail_html = """
+        <script>var msg = '無法決標公告';</script>
+        <table>
+          <tr><th>標案案號</th><td>115b001</td></tr>
+          <tr><th>標案名稱</th><td>115年度影印機租賃</td></tr>
+          <tr><th>決標資料類別</th><td>定期彙送</td></tr>
+          <tr><th>預算金額是否公開</th><td>是</td></tr>
+          <tr><th>預算金額</th><td>755,810元 柒拾伍萬伍仟捌佰壹拾元</td></tr>
+          <tr><td>投標廠商1</td><td></td></tr>
+          <tr><td>廠商名稱</td><td>互盛股份有限公司苗栗分公司</td></tr>
+          <tr><td>是否得標</td><td>是</td></tr>
+          <tr><td>投標廠商2</td><td></td></tr>
+          <tr><td>廠商名稱</td><td>金儀股份有限公司</td></tr>
+          <tr><td>是否得標</td><td>否</td></tr>
+          <tr><td>決標日期</td><td>114/11/25</td></tr>
+          <tr><td>總決標金額</td><td>580,000元 伍拾捌萬元</td></tr>
+        </table>
+        """
+        parsed = parse_official_award_detail_html(
+            detail_html, source_url="/prkms/urlSelector/common/atm?pk=NzEwMjY3MTQ="
+        )
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["award_date"], "2025-11-25")
+        self.assertEqual(parsed["year"], 2025)
+        self.assertEqual(parsed["budget"], 755810)
+        self.assertEqual(parsed["award_price"], 580000)
+        self.assertEqual(parsed["discount_rate"], 76.7)
+        self.assertEqual(parsed["winner"], "本公司 (互盛 RICOH)")
+        self.assertEqual(parsed["source_url"], "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEwMjY3MTQ=")
+        self.assertTrue(parsed["official_verified"])
+
+    def test_parse_official_award_detail_html_skips_undisclosed_budget_or_failed_notice(self):
+        from update_tenders import parse_official_award_detail_html
+        undisclosed_html = """
+        <table>
+          <tr><th>標案案號</th><td>A1</td></tr>
+          <tr><th>標案名稱</th><td>115年度影印機租賃</td></tr>
+          <tr><th>決標資料類別</th><td>決標公告</td></tr>
+          <tr><th>預算金額是否公開</th><td>否</td></tr>
+          <tr><td>決標日期</td><td>114/11/25</td></tr>
+          <tr><td>總決標金額</td><td>580,000元</td></tr>
+        </table>
+        """
+        self.assertIsNone(parse_official_award_detail_html(undisclosed_html))
+
+        failed_html = """
+        <table>
+          <tr><th>標案案號</th><td>A2</td></tr>
+          <tr><th>標案名稱</th><td>115年度影印機租賃</td></tr>
+          <tr><th>決標資料類別</th><td>無法決標公告</td></tr>
+          <tr><th>預算金額</th><td>500,000元</td></tr>
+        </table>
+        """
+        self.assertIsNone(parse_official_award_detail_html(failed_html))
+
+    def test_should_run_official_fallback_respects_mode_and_age(self):
+        from update_tenders import should_run_official_fallback
+        today = date(2026, 11, 16)
+        self.assertTrue(should_run_official_fallback("live", "", today))
+        self.assertFalse(should_run_official_fallback("live", "2026-11-01", today))
+        self.assertFalse(should_run_official_fallback("maintenance", "2026-11-12", today))
+        self.assertTrue(should_run_official_fallback("maintenance", "2026-11-09", today))
+
+    def test_fetch_official_unit_history_uses_annual_windows_and_stays_empty_when_zero(self):
+        from update_tenders import fetch_official_unit_history
+        empty_list = '<div class="page" id="displaytagBannerDiv"><span id="pagebanner">共有<span class="red"> 0 </span>筆資料</span></div>'
+        seen_urls = []
+
+        def fake_fetch(url, label, max_retries=2):
+            seen_urls.append(url)
+            return empty_list, url
+
+        with patch("update_tenders.fetch_official_html", side_effect=fake_fetch), patch("update_tenders.time.sleep"):
+            records, completed = fetch_official_unit_history(
+                "3.76.45.69",
+                "苗栗縣頭份市公所",
+                ["116年度影印機租賃"],
+                today=date(2026, 11, 16),
+                request_delay=0,
+            )
+        self.assertEqual(records, [])
+        self.assertTrue(completed)
+        # Must cap current year endDate at today (2026/11/16), never future 2026/12/31
+        self.assertTrue(any("awardAnnounceEndDate=2026%2F11%2F16" in u for u in seen_urls))
+        self.assertFalse(any("awardAnnounceEndDate=2026%2F12%2F31" in u for u in seen_urls))
+
+
 if __name__ == "__main__":
     unittest.main()
 
