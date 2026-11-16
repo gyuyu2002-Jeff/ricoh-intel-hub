@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-16 15:48",
+  "last_updated": "2026-11-16 17:39",
   "tenders": [
     {
       "city": "苗栗縣",
@@ -1950,6 +1950,87 @@
       }
     },
     {
+      "city": "新北市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "title": "116年度影印機7台租賃",
+      "unit": "新北市新莊區思賢國民小學",
+      "unit_id": "3.82.8.21",
+      "job_number": "1151112-831",
+      "publish_date": "2026-11-05",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-11",
+      "deadline_confidence": "verified",
+      "award_date": "2026-11-16",
+      "budget": "NT$ 246,550",
+      "award_price": "NT$ 246,550",
+      "stage": "已決標",
+      "stream": "copier",
+      "sub_type": "main",
+      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEzMzM0OTY=",
+      "winner": "台灣佳能 (Canon)",
+      "history_records": [
+        {
+          "award_date": "2024-11-22",
+          "year": 2024,
+          "title": "114年度影印機7台租賃",
+          "job_number": "1131201-831",
+          "budget": 245600,
+          "award_price": 245600,
+          "discount_rate": 100.0,
+          "winner": "台灣佳能 (Canon)",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA3MjMyNjU=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "新北市新莊區思賢國民小學",
+          "source_unit_id": "3.82.8.21",
+          "is_stale": false
+        },
+        {
+          "award_date": "2022-12-14",
+          "year": 2022,
+          "title": "112年度影印機7台租賃",
+          "job_number": "1111130-831",
+          "budget": 247860,
+          "award_price": 247860,
+          "discount_rate": 100.0,
+          "winner": "台灣佳能 (Canon)",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzAxNzQ2MDY=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "新北市新莊區思賢國民小學",
+          "source_unit_id": "3.82.8.21",
+          "is_stale": false
+        },
+        {
+          "award_date": "2020-12-04",
+          "year": 2020,
+          "title": "110年度影印機7台租賃",
+          "job_number": "1091203-831",
+          "budget": 219000,
+          "award_price": 144540,
+          "discount_rate": 66.0,
+          "winner": "台灣佳能 (Canon)",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20201204&fn=BDM-1-53261581.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "新北市新莊區思賢國民小學",
+          "source_unit_id": "3.82.8.21",
+          "is_stale": true
+        }
+      ],
+      "relevance": {
+        "status": "included",
+        "category": "office_output_equipment",
+        "confidence": "high",
+        "stream": "copier",
+        "sub_type": "main"
+      }
+    },
+    {
       "city": "高雄市",
       "city_source": "履約地點",
       "city_confidence": "high",
@@ -3319,7 +3400,7 @@
     "today": "2026-11-16",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-11-16 15:48",
+    "latest_attempt_at": "2026-11-16 17:39",
     "source": "政府電子採購網每日公告資料",
     "successful_dates": [
       "2026-11-16",
