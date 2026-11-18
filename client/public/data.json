@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-18 05:26",
+  "last_updated": "2026-11-18 11:48",
   "tenders": [
     {
       "city": "台中市",
@@ -79,6 +79,62 @@
         "confidence": "high",
         "stream": "copier",
         "sub_type": "main"
+      }
+    },
+    {
+      "city": "花蓮縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "title": "繪圖機輸出耗材",
+      "unit": "國防部空軍司令部",
+      "unit_id": "3.5.49",
+      "job_number": "EQ16009P024",
+      "publish_date": "2026-11-18",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-24",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 508,800",
+      "award_price": "",
+      "stage": "公開徵求價單",
+      "stream": "peripherals",
+      "sub_type": "printer",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzODMxNTE",
+      "history_records": [],
+      "relevance": {
+        "status": "included",
+        "category": "printer_or_plotter",
+        "confidence": "high",
+        "stream": "peripherals",
+        "sub_type": "printer"
+      }
+    },
+    {
+      "city": "桃園市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "title": "116年度勞動部技能檢定電腦類耗材開口契約",
+      "unit": "萬能學校財團法人萬能科技大學",
+      "unit_id": "3.10.90.92",
+      "job_number": "115-VNU-D010",
+      "publish_date": "2026-11-18",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-24",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "NT$ 1,373,628",
+      "award_price": "",
+      "stage": "正式開標",
+      "stream": "peripherals",
+      "sub_type": "supplies",
+      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzODM0MjU",
+      "history_records": [],
+      "relevance": {
+        "status": "included",
+        "category": "supplies",
+        "confidence": "high",
+        "stream": "peripherals",
+        "sub_type": "supplies"
       }
     },
     {
@@ -227,34 +283,6 @@
         "confidence": "high",
         "stream": "copier",
         "sub_type": "main"
-      }
-    },
-    {
-      "city": "花蓮縣",
-      "city_source": "履約地點",
-      "city_confidence": "high",
-      "title": "繪圖機輸出耗材",
-      "unit": "國防部空軍司令部",
-      "unit_id": "3.5.49",
-      "job_number": "EQ16009P024",
-      "publish_date": "2026-11-18",
-      "publish_date_confidence": "verified",
-      "deadline": "2026-11-24",
-      "deadline_confidence": "verified",
-      "award_date": "",
-      "budget": "NT$ 508,800",
-      "award_price": "",
-      "stage": "公開徵求價單",
-      "stream": "peripherals",
-      "sub_type": "printer",
-      "tender_url": "https://web.pcc.gov.tw/tps/QueryTender/query/searchTenderDetail?pkPmsMain=NzEzODMxNTE",
-      "history_records": [],
-      "relevance": {
-        "status": "included",
-        "category": "printer_or_plotter",
-        "confidence": "high",
-        "stream": "peripherals",
-        "sub_type": "printer"
       }
     },
     {
@@ -4130,7 +4158,7 @@
     "today": "2026-11-18",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-11-18 02:54",
+    "latest_attempt_at": "2026-11-18 11:48",
     "source": "政府電子採購網每日公告資料",
     "successful_dates": [
       "2026-11-18",
