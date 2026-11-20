@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-20 11:14",
+  "last_updated": "2026-11-20 20:55",
   "tenders": [
     {
       "city": "桃園市",
@@ -311,6 +311,86 @@
       "sub_type": "printer",
       "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261120&fn=PPW-1-70123849.xml",
       "history_records": [],
+      "relevance": {
+        "status": "included",
+        "category": "printer_or_plotter",
+        "confidence": "high",
+        "stream": "peripherals",
+        "sub_type": "printer"
+      }
+    },
+    {
+      "city": "新北市",
+      "city_source": "機關地址／開標地點",
+      "city_confidence": "high",
+      "title": "印表機維護",
+      "unit": "國防部電訊發展室",
+      "unit_id": "A.5.5.2",
+      "job_number": "HP16012P012",
+      "publish_date": "2026-11-20",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-19",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "stage": "無法決標",
+      "stream": "peripherals",
+      "sub_type": "printer",
+      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/nonAtm?pk=NzEzMzkzMDQ=",
+      "history_records": [
+        {
+          "award_date": "2025-11-05",
+          "year": 2025,
+          "title": "印表機維護",
+          "job_number": "HP15011P011",
+          "budget": 400000,
+          "award_price": 245800,
+          "discount_rate": 61.5,
+          "winner": "承元科技有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20251105&fn=BDM-1-71008006.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部電訊發展室",
+          "source_unit_id": "A.5.5.2",
+          "is_stale": false
+        },
+        {
+          "award_date": "2020-12-22",
+          "year": 2020,
+          "title": "印表機維護",
+          "job_number": "HP10013P013",
+          "budget": 320000,
+          "award_price": 252800,
+          "discount_rate": 79.0,
+          "winner": "普林達股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20201222&fn=BDM-1-53282142.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部電訊發展室",
+          "source_unit_id": "A.5.5.2",
+          "is_stale": true
+        },
+        {
+          "award_date": "2017-09-12",
+          "year": 2017,
+          "title": "印表機維護",
+          "job_number": "HP07036P025",
+          "budget": 320000,
+          "award_price": 249600,
+          "discount_rate": 78.0,
+          "winner": "立和資訊有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20170912&fn=BDM-1-52234310.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部電訊發展室",
+          "source_unit_id": "A.5.5.2",
+          "is_stale": true
+        }
+      ],
       "relevance": {
         "status": "included",
         "category": "printer_or_plotter",
@@ -4251,7 +4331,7 @@
     "today": "2026-11-20",
     "status": "complete",
     "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-11-20 11:14",
+    "latest_attempt_at": "2026-11-20 20:55",
     "source": "政府電子採購網每日公告資料",
     "successful_dates": [
       "2026-11-20",
