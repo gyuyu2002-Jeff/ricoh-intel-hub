@@ -4330,14 +4330,16 @@
   "collection_status": {
     "today": "2026-11-20",
     "status": "complete",
-    "latest_attempt_status": "complete",
-    "latest_attempt_at": "2026-11-20 20:55",
+    "latest_attempt_status": "failed",
+    "latest_attempt_at": "2026-11-21 02:01",
     "source": "政府電子採購網每日公告資料",
     "successful_dates": [
       "2026-11-20",
       "2026-11-19"
     ],
-    "failed_dates": [],
+    "failed_dates": [
+      "2026-11-21"
+    ],
     "maintenance": {
       "status": "partial",
       "last_run_at": "2026-11-20 05:08"
