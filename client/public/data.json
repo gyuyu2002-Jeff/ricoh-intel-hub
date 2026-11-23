@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-23 09:08",
+  "last_updated": "2026-11-23 10:48",
   "tenders": [
     {
       "city": "台北市",
@@ -4231,7 +4231,7 @@
     "today": "2026-11-23",
     "status": "complete",
     "latest_attempt_status": "partial",
-    "latest_attempt_at": "2026-11-23 01:33",
+    "latest_attempt_at": "2026-11-23 10:48",
     "source": "政府電子採購網每日公告資料",
     "successful_dates": [
       "2026-11-23"
