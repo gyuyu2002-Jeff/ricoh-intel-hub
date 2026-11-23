@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-23 10:48",
+  "last_updated": "2026-11-23 22:38",
   "tenders": [
     {
       "city": "台北市",
@@ -2160,6 +2160,35 @@
       }
     },
     {
+      "city": "花蓮縣",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "title": "A3四合一彩色高速噴墨複合機原廠墨水匣耗材採購案",
+      "unit": "內政部國家公園署太魯閣國家公園管理處",
+      "unit_id": "A.1.3.4",
+      "job_number": "1169007",
+      "publish_date": "2026-11-12",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-19",
+      "deadline_confidence": "verified",
+      "award_date": "2026-11-19",
+      "budget": "NT$ 347,800",
+      "award_price": "NT$ 342,000",
+      "stage": "已決標",
+      "stream": "peripherals",
+      "sub_type": "supplies",
+      "tender_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEzNDAwMzk=",
+      "winner": "瑋辰企業社",
+      "history_records": [],
+      "relevance": {
+        "status": "included",
+        "category": "supplies",
+        "confidence": "high",
+        "stream": "peripherals",
+        "sub_type": "supplies"
+      }
+    },
+    {
       "city": "台北市",
       "city_source": "履約地點",
       "city_confidence": "high",
@@ -4231,7 +4260,7 @@
     "today": "2026-11-23",
     "status": "complete",
     "latest_attempt_status": "partial",
-    "latest_attempt_at": "2026-11-23 10:48",
+    "latest_attempt_at": "2026-11-23 22:38",
     "source": "政府電子採購網每日公告資料",
     "successful_dates": [
       "2026-11-23"
