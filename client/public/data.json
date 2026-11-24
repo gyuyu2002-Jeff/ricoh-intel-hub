@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-25 04:32",
+  "last_updated": "2026-11-25 06:56",
   "tenders": [
     {
       "city": "台北市",
@@ -4369,7 +4369,7 @@
     "failed_dates": [],
     "maintenance": {
       "status": "partial",
-      "last_run_at": "2026-11-24 08:26"
+      "last_run_at": "2026-11-25 06:56"
     }
   }
 }
