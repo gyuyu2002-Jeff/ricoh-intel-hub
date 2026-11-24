@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-24 05:50",
+  "last_updated": "2026-11-24 08:26",
   "tenders": [
     {
       "city": "桃園市",
@@ -39,6 +39,23 @@
           "is_stale": false
         },
         {
+          "award_date": "2025-02-12",
+          "year": 2025,
+          "title": "本大隊各單位處理交通事故案件租賃彩色影印機勞務採購案",
+          "job_number": "114traffic018",
+          "budget": 8400000,
+          "award_price": 6829920,
+          "discount_rate": 81.3,
+          "winner": "金儀 Konica Minolta",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20250212&fn=BDM-1-70803817.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_parent_org",
+          "source_unit": "桃園市政府警察局交通警察大隊",
+          "source_unit_id": "3.80.13.3",
+          "is_stale": false
+        },
+        {
           "award_date": "2023-12-27",
           "year": 2023,
           "title": "113年度影印機租賃",
@@ -53,6 +70,23 @@
           "relation_scope": "same_parent_org",
           "source_unit": "桃園市政府警察局大溪分局",
           "source_unit_id": "3.80.13.22",
+          "is_stale": false
+        },
+        {
+          "award_date": "2023-08-30",
+          "year": 2023,
+          "title": "本大隊各單位處理交通事故案件租賃彩色影印機勞務採購案",
+          "job_number": "112traffic031",
+          "budget": 7200000,
+          "award_price": 6687360,
+          "discount_rate": 92.9,
+          "winner": "金儀 Konica Minolta",
+          "source_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20230830&fn=BDM-1-70370928.xml",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標查詢",
+          "relation_scope": "same_parent_org",
+          "source_unit": "桃園市政府警察局交通警察大隊",
+          "source_unit_id": "3.80.13.3",
           "is_stale": false
         },
         {
@@ -4286,7 +4320,7 @@
     "failed_dates": [],
     "maintenance": {
       "status": "partial",
-      "last_run_at": "2026-11-23 09:08"
+      "last_run_at": "2026-11-24 08:26"
     }
   }
 }
