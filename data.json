@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-26 03:45",
+  "last_updated": "2026-11-26 06:10",
   "tenders": [
     {
       "city": "新北市",
@@ -351,7 +351,7 @@
       "unit": "衛生福利部",
       "unit_id": "A.21",
       "job_number": "M1608189",
-      "publish_date": "2026-11-25",
+      "publish_date": "2026-11-26",
       "publish_date_confidence": "verified",
       "deadline": "2026-12-08",
       "deadline_confidence": "verified",
@@ -753,6 +753,120 @@
           "source_unit": "衛生福利部",
           "source_unit_id": "A.21",
           "is_stale": true
+        }
+      ],
+      "relevance": {
+        "status": "included",
+        "category": "office_output_equipment",
+        "confidence": "high",
+        "stream": "copier",
+        "sub_type": "main"
+      }
+    },
+    {
+      "city": "台南市",
+      "city_source": "履約地點",
+      "city_confidence": "high",
+      "title": "116-121長版大圖複印機租賃",
+      "unit": "國防部空軍司令部",
+      "unit_id": "3.5.49",
+      "job_number": "EV16029P029",
+      "publish_date": "2026-11-26",
+      "publish_date_confidence": "verified",
+      "deadline": "2026-11-09",
+      "deadline_confidence": "verified",
+      "award_date": "",
+      "budget": "無公開數據",
+      "award_price": "",
+      "stage": "無法決標",
+      "stream": "copier",
+      "sub_type": "main",
+      "tender_url": "https://web.pcc.gov.tw/prkms/tender/common/noticeDate/redirectPublic?ds=20261126&fn=NAI-1-71343029.xml",
+      "history_records": [
+        {
+          "award_date": "2026-01-08",
+          "year": 2026,
+          "title": "影印機租賃案",
+          "job_number": "ES15050P050",
+          "budget": 2759690,
+          "award_price": 2014650,
+          "discount_rate": 73.0,
+          "winner": "沁興有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzEwODQwOTQ=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標資料查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部空軍司令部",
+          "source_unit_id": "3.5.49",
+          "is_stale": false
+        },
+        {
+          "award_date": "2025-06-17",
+          "year": 2025,
+          "title": "影印機租賃案",
+          "job_number": "ES14041P042",
+          "budget": 1379845,
+          "award_price": 1349952,
+          "discount_rate": 97.8,
+          "winner": "台灣佳能 (Canon)",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA5MDQ4NjE=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標資料查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部空軍司令部",
+          "source_unit_id": "3.5.49",
+          "is_stale": false
+        },
+        {
+          "award_date": "2024-12-24",
+          "year": 2024,
+          "title": "114-115 年數位複印機租賃",
+          "job_number": "EV14008P008",
+          "budget": 4980000,
+          "award_price": 2668500,
+          "discount_rate": 53.6,
+          "winner": "京能股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzA3ODQ3NDc=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標資料查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部空軍司令部",
+          "source_unit_id": "3.5.49",
+          "is_stale": false
+        },
+        {
+          "award_date": "2022-12-20",
+          "year": 2022,
+          "title": "112-113年數位複印機租賃案",
+          "job_number": "EV12037P",
+          "budget": 4980000,
+          "award_price": 2499000,
+          "discount_rate": 50.2,
+          "winner": "京能股份有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NzAxOTUxOTY=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標資料查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部空軍司令部",
+          "source_unit_id": "3.5.49",
+          "is_stale": false
+        },
+        {
+          "award_date": "2021-12-20",
+          "year": 2021,
+          "title": "111-113年度數位多功能複合影印機新機租賃案印",
+          "job_number": "EH11028P017",
+          "budget": 7776000,
+          "award_price": 4634568,
+          "discount_rate": 59.6,
+          "winner": "綠得資訊有限公司",
+          "source_url": "https://web.pcc.gov.tw/prkms/urlSelector/common/atm?pk=NTM2MTk4MjQ=",
+          "official_verified": true,
+          "verification_source": "政府電子採購網決標資料查詢",
+          "relation_scope": "same_unit",
+          "source_unit": "國防部空軍司令部",
+          "source_unit_id": "3.5.49",
+          "is_stale": false
         }
       ],
       "relevance": {
@@ -4243,7 +4357,7 @@
     "failed_dates": [],
     "maintenance": {
       "status": "partial",
-      "last_run_at": "2026-11-25 06:56"
+      "last_run_at": "2026-11-26 06:10"
     }
   }
 }
